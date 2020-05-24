@@ -19,7 +19,7 @@ if (NOT DEFINED USING_BUILD_UTILS)
 endif()
 
 if (NOT DEFINED BUILD_UTILS_DIR)
-    set(BUILD_UTILS_DIR ${EXTERNAL_PATH}/build_utils
+    set(BUILD_UTILS_DIR ${EXTERNAL_DIR}/build_utils
         CACHE PATH "build_utils Directory" FORCE)
 endif()
 
@@ -41,9 +41,13 @@ endif()
 
 if (USING_BUILD_UTILS)
     execute_process(COMMAND "${GIT_EXECUTABLE}" "fetch" "--tags" 
-        WORKING_DIRECTORY ${BUILD_UTILS_PATH})
+        WORKING_DIRECTORY ${BUILD_UTILS_DIR})
     execute_process(COMMAND "${GIT_EXECUTABLE}" "checkout" "${BUILD_UTILS_VERSION}" 
-        WORKING_DIRECTORY ${BUILD_UTILS_PATH})
+        WORKING_DIRECTORY ${BUILD_UTILS_DIR})
+    set(BUILD_UTILS_BASE_SOURCE_DIR ${BUILD_UTILS_DIR}/cmake CACHE PATH "..." FORCE)
+    add_subdirectory(${BUILD_UTILS_DIR}/cmake build_utils)
+    
+    unset(BUILD_UTILS_BASE_SOURCE_DIR)
 else()
     message(FATAL_ERROR "Build Not Defined")
 endif()
