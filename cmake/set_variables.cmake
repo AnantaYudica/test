@@ -21,7 +21,7 @@ function(set_variables)
     set(build_utils_prefix ${set_variables_BUILD_UTILS_PREFIX})
     set(compile_options ${set_variables_COMPILE_OPTIONS})
     
-    if (NOT DEFINED TEST_PREFIX)
+    if (DEFINED TEST_PREFIX)
         set(TEST_PREFIX ${prefix} CACHE INTERNAL "Test prefix" FORCE)
     else()
         set(TEST_PREFIX "" CACHE INTERNAL "Test prefix" FORCE)
