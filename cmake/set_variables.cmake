@@ -50,7 +50,6 @@ function(set_variables)
             CACHE PATH "test include directory" FORCE)
     endif()
 
-    src_dir
     unset(l_test_src_dir)
     if (NOT DEFINED ${TEST_PREFIX}TEST_SRC_DIR
         OR ("${EMPTY}${${TEST_PREFIX}TEST_SRC_DIR}" STREQUAL "${EMPTY}"))
