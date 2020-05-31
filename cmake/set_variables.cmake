@@ -34,6 +34,10 @@ function(set_variables)
             CACHE INTERNAL "test cmake source directory" FORCE)
     endif()
 
+    if (NOT IS_DIRECTORY ${TEST_CMAKE_BASE_SRC_DIR})
+        message(FATAL_ERROR "\"TEST_CMAKE_BASE_SRC_DIR\" is not directory")
+    endif()
+
     if (NOT DEFINED ${TEST_PREFIX}TEST_ENABLE_TESTING)
         set(${TEST_PREFIX}TEST_ENABLE_TESTING ${enable_testing} 
             CACHE BOOL "enable testing" FORCE)
@@ -52,9 +56,11 @@ function(set_variables)
         get_filename_component(l_test_include_dir "${${TEST_PREFIX}TEST_INCLUDE_DIR}" ABSOLUTE)
     endif()
 
-    if (DEFINED l_test_include_dir AND (IS_DIRECTORY ${l_test_include_dir}))
+    if (IS_DIRECTORY ${l_test_include_dir})
         set(${TEST_PREFIX}TEST_INCLUDE_DIR ${l_test_include_dir} 
             CACHE PATH "test include directory" FORCE)
+    else()
+        message(FATAL_ERROR "\"INCLUDE_DIR\" is not directory")
     endif()
 
     unset(l_test_src_dir)
@@ -70,9 +76,11 @@ function(set_variables)
         get_filename_component(l_test_src_dir "${${TEST_PREFIX}TEST_SRC_DIR}" ABSOLUTE)
     endif()
     
-    if (DEFINED l_test_src_dir AND (IS_DIRECTORY ${l_test_src_dir}))
+    if (IS_DIRECTORY ${l_test_src_dir})
         set(${TEST_PREFIX}TEST_SRC_DIR ${l_test_src_dir} 
             CACHE PATH "test source directory" FORCE)
+    else()
+        
     endif()
 
     unset(l_test_test_src_dir)
@@ -88,9 +96,11 @@ function(set_variables)
         get_filename_component(l_test_test_src_dir "${${TEST_PREFIX}TEST_TEST_SRC_DIR}" ABSOLUTE)
     endif()
     
-    if (DEFINED l_test_test_src_dir AND(IS_DIRECTORY ${l_test_test_src_dir}))
+    if (IS_DIRECTORY ${l_test_test_src_dir})
         set(${TEST_PREFIX}TEST_TEST_SRC_DIR ${l_test_test_src_dir} 
             CACHE PATH "test test source directory" FORCE)
+    else()
+        message(FATAL_ERROR "\"TEST_SRC_DIR\" is not directory")
     endif()
 
     unset(l_test_external_dir)
@@ -106,9 +116,11 @@ function(set_variables)
         get_filename_component(l_test_external_dir "${${TEST_PREFIX}TEST_EXTERNAL_DIR}" ABSOLUTE)
     endif()
 
-    if (DEFINED l_test_external_dir AND (IS_DIRECTORY ${l_test_external_dir}))
+    if (IS_DIRECTORY ${l_test_external_dir})
         set(${TEST_PREFIX}TEST_EXTERNAL_DIR ${l_test_external_dir} 
             CACHE PATH "test external directory" FORCE)
+    else()
+        message(FATAL_ERROR "\"EXTERNAL_DIR\" is not directory")
     endif()
 
     if (NOT DEFINED ${TEST_PREFIX}TEST_USING_BUILD_UTILS)
@@ -142,9 +154,11 @@ function(set_variables)
                 "${${TEST_PREFIX}TEST_BUILD_UTILS_DIR}" ABSOLUTE)
         endif()
 
-        if (DEFINED l_test_build_utils_dir AND (IS_DIRECTORY ${l_test_build_utils_dir}))
+        if (IS_DIRECTORY ${l_test_build_utils_dir})
             set(${TEST_PREFIX}TEST_BUILD_UTILS_DIR ${l_test_build_utils_dir} 
                 CACHE PATH "test build_utils directory" FORCE)
+        else()
+            message(FATAL_ERROR "\"BUILD_UTILS_DIR\" is not directory")
         endif()
 
         if (NOT DEFINED ${TEST_PREFIX}TEST_BUILD_UTILS_VERSION)
