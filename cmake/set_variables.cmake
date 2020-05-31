@@ -17,7 +17,6 @@ function(set_variables)
     set(build_utils_enable_testing ${set_variables_BUILD_UTILS_ENABLE_TESTING})
     set(build_utils_dir ${set_variables_BUILD_UTILS_DIR})
     set(build_utils_version ${set_variables_BUILD_UTILS_VERSION})
-    set(build_utils_prefix ${set_variables_BUILD_UTILS_PREFIX})
     set(compile_options ${set_variables_COMPILE_OPTIONS})
     
     if (DEFINED TEST_PREFIX)
@@ -162,10 +161,6 @@ function(set_variables)
             endif()
         endif()
 
-        if (NOT DEFINED ${TEST_PREFIX}TEST_BUILD_UTILS_PREFIX)
-            set(${TEST_PREFIX}TEST_BUILD_UTILS_PREFIX ${build_utils_prefix} 
-                CACHE STRING "build_utils prefix" FORCE)
-        endif()
     endif()
     
     if (NOT DEFINED ${TEST_PREFIX}TEST_COMPILE_OPTIONS)
