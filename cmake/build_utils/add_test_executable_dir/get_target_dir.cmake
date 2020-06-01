@@ -6,7 +6,7 @@ function(add_test_executable_dir_get_target_dir out_dir_name)
         "${one_options}" "ARGS" ${ARGN}) 
 
     set(dirname "${add_test_executable_dir_get_target_dir_DIRNAME}")
-    set(include_dir ${add_test_executable_dir_get_target_name_INCLUDE_DIR})
+    set(include_dir ${add_test_executable_dir_get_target_dir_INCLUDE_DIR})
 
     include_build_util(NAME upper_str 
         INCLUDE_DIR ${include_dir})
