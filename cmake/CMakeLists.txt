@@ -69,10 +69,11 @@ if (${TEST_PREFIX}TEST_USING_BUILD_UTILS)
         INCLUDE_DIR ${${BUILD_UTILS_PREFIX}BUILD_UTILS_INCLUDE_DIR})
 
     add_test_executable_dir(${${TEST_PREFIX}TEST_TEST_SRC_DIR}
-        RECURSIVE PREFIX "Test" SRC_EXT "cpp" SRC_TAG "main"
+        RECURSIVE PREFIX "${TEST_PREFIX}Test" SRC_EXT "cpp" SRC_TAG "main"
         GET_TARGET_NAME ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_name.cmake
         GET_TARGET_DIR ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_dir.cmake
         LIST_INCLUDE_DIR_ARG PUBLIC ${${TEST_PREFIX}TEST_INCLUDE_DIR}
+        LIST_PROPERTY_ARG PUBLIC PROPERTY FOLDER ${TEST_PREFIX}Test
         INCLUDE_DIR ${${BUILD_UTILS_PREFIX}BUILD_UTILS_INCLUDE_DIR})
 
     unset(BUILD_UTILS_BASE_SOURCE_DIR CACHE)
