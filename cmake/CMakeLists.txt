@@ -91,7 +91,7 @@ if (${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
         GET_TARGET_NAME ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_name.cmake
         GET_TARGET_DIR ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_dir.cmake
         LIST_INCLUDE_DIR_ARG PUBLIC ${${TEST_PREFIX_UPPER_}TEST_INCLUDE_DIR}
-        LIST_PROPERTY_ARG PUBLIC PROPERTY FOLDER ${TEST_PREFIX_UPPER_}Test
+        LIST_PROPERTY_ARG PUBLIC PROPERTY FOLDER ${l_target_prefix}
         INCLUDE_DIR ${${l_build_util_prefix_upper_}BUILD_UTILS_INCLUDE_DIR})
 
     unset(BUILD_UTILS_BASE_SOURCE_DIR CACHE)
