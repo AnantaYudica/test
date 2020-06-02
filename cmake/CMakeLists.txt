@@ -54,9 +54,21 @@ if (${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
         WORKING_DIRECTORY ${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR})
     execute_process(COMMAND "${GIT_EXECUTABLE}" "checkout" "${${TEST_PREFIX}TEST_BUILD_UTILS_VERSION}" 
         WORKING_DIRECTORY ${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR})
+
+    set(l_build_util_prefix "test")
+    if (NOT "${EMPTY}${TEST_PREFIX}" STREQUAL "${EMPTY}")
+        set(l_build_util_prefix "${TEST_PREFIX}_test")
+    endif()
+
+    string(TOUPPER "${l_build_util_prefix}" l_build_util_prefix_upper)
+    set(l_build_util_prefix_upper_ "")
+    if (NOT "${EMPTY}${l_build_util_prefix_upper}" STREQUAL "${EMPTY}")
+        set(l_build_util_prefix_upper_ "${l_build_util_prefix_upper}_")
+    endif()
+
     set(BUILD_UTILS_CMAKE_BASE_SRC_DIR ${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR}/cmake 
         CACHE INTERNAL "..." FORCE)
-    set(BUILD_UTILS_PREFIX ${TEST_PREFIX}TEST
+    set(BUILD_UTILS_PREFIX ${l_build_util_prefix}
         CACHE INTERNAL "..." FORCE)
     add_subdirectory(${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR}/cmake build_utils)
 
@@ -69,9 +81,12 @@ if (${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
         GET_TARGET_DIR ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_dir.cmake
         LIST_INCLUDE_DIR_ARG PUBLIC ${${TEST_PREFIX_UPPER_}TEST_INCLUDE_DIR}
         LIST_PROPERTY_ARG PUBLIC PROPERTY FOLDER ${TEST_PREFIX_UPPER_}Test
-        INCLUDE_DIR ${${BUILD_UTILS_PREFIX}BUILD_UTILS_INCLUDE_DIR})
+        INCLUDE_DIR ${${l_build_util_prefix_upper_}BUILD_UTILS_INCLUDE_DIR})
 
     unset(BUILD_UTILS_BASE_SOURCE_DIR CACHE)
+    unset(l_build_util_prefix_upper_)
+    unset(l_build_util_prefix_upper)
+    unset(l_build_util_prefix)
 else()
     message(FATAL_ERROR "Build Not Defined")
 endif()
