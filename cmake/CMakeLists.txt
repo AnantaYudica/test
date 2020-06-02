@@ -52,7 +52,7 @@ endif()
 if (${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
     execute_process(COMMAND "${GIT_EXECUTABLE}" "fetch" "--tags" 
         WORKING_DIRECTORY ${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR})
-    execute_process(COMMAND "${GIT_EXECUTABLE}" "checkout" "${${TEST_PREFIX}TEST_BUILD_UTILS_VERSION}" 
+    execute_process(COMMAND "${GIT_EXECUTABLE}" "checkout" "${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_VERSION}" 
         WORKING_DIRECTORY ${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR})
 
     set(l_build_util_prefix "test")
