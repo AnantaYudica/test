@@ -24,11 +24,6 @@ endif()
 set(TEST_CMAKE_BASE_SRC_DIR ${l_base_cmake_src_dir} 
     CACHE INTERNAL "test cmake source directory" FORCE)
 
-unset(l_test_prefix)
-if (DEFINED TEST_PREFIX AND (NOT "${EMPTY}${TEST_PREFIX}" STREQUAL "${EMPTY}"))
-    set(l_test_prefix "${TEST_PREFIX}_")
-endif()
-
 if (NOT DEFINED TEST_USING_BUILD_UTILS)
     set(TEST_USING_BUILD_UTILS TRUE 
         CACHE BOOL "test using build-utils" FORCE)
@@ -36,7 +31,7 @@ endif()
 
 include(${TEST_CMAKE_BASE_SRC_DIR}/set_variables.cmake)
 
-set_variables(PREFIX ${l_test_prefix}
+set_variables(PREFIX ${TEST_PREFIX}
     USING_BUILD_UTILS ${TEST_USING_BUILD_UTILS}
     BUILD_UTILS_ENABLE_TESTING ${TEST_BUILD_UTILS_ENABLE_TESTING}
     ENABLE_TESTING ${TEST_ENABLE_TESTING}
@@ -54,26 +49,26 @@ if (NOT GIT_FOUND)
     message(FATAL_ERROR "Git not found")
 endif()
 
-if (${TEST_PREFIX}TEST_USING_BUILD_UTILS)
+if (${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
     execute_process(COMMAND "${GIT_EXECUTABLE}" "fetch" "--tags" 
-        WORKING_DIRECTORY ${${TEST_PREFIX}TEST_BUILD_UTILS_DIR})
+        WORKING_DIRECTORY ${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR})
     execute_process(COMMAND "${GIT_EXECUTABLE}" "checkout" "${${TEST_PREFIX}TEST_BUILD_UTILS_VERSION}" 
-        WORKING_DIRECTORY ${${TEST_PREFIX}TEST_BUILD_UTILS_DIR})
-    set(BUILD_UTILS_CMAKE_BASE_SRC_DIR ${${TEST_PREFIX}TEST_BUILD_UTILS_DIR}/cmake 
+        WORKING_DIRECTORY ${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR})
+    set(BUILD_UTILS_CMAKE_BASE_SRC_DIR ${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR}/cmake 
         CACHE INTERNAL "..." FORCE)
     set(BUILD_UTILS_PREFIX ${TEST_PREFIX}TEST
         CACHE INTERNAL "..." FORCE)
-    add_subdirectory(${${TEST_PREFIX}TEST_BUILD_UTILS_DIR}/cmake build_utils)
+    add_subdirectory(${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR}/cmake build_utils)
 
     include_build_util(NAME add_test_executable_dir 
         INCLUDE_DIR ${${BUILD_UTILS_PREFIX}BUILD_UTILS_INCLUDE_DIR})
 
-    add_test_executable_dir(${${TEST_PREFIX}TEST_TEST_SRC_DIR}
-        RECURSIVE PREFIX "${TEST_PREFIX}Test" SRC_EXT "cpp" SRC_TAG "main"
+    add_test_executable_dir(${${TEST_PREFIX_UPPER_}TEST_TEST_SRC_DIR}
+        RECURSIVE PREFIX "${TEST_PREFIX_UPPER_}Test" SRC_EXT "cpp" SRC_TAG "main"
         GET_TARGET_NAME ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_name.cmake
         GET_TARGET_DIR ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_dir.cmake
-        LIST_INCLUDE_DIR_ARG PUBLIC ${${TEST_PREFIX}TEST_INCLUDE_DIR}
-        LIST_PROPERTY_ARG PUBLIC PROPERTY FOLDER ${TEST_PREFIX}Test
+        LIST_INCLUDE_DIR_ARG PUBLIC ${${TEST_PREFIX_UPPER_}TEST_INCLUDE_DIR}
+        LIST_PROPERTY_ARG PUBLIC PROPERTY FOLDER ${TEST_PREFIX_UPPER_}Test
         INCLUDE_DIR ${${BUILD_UTILS_PREFIX}BUILD_UTILS_INCLUDE_DIR})
 
     unset(BUILD_UTILS_BASE_SOURCE_DIR CACHE)
