@@ -26,7 +26,7 @@ set(TEST_CMAKE_BASE_SRC_DIR ${l_base_cmake_src_dir}
 
 if (NOT DEFINED TEST_USING_BUILD_UTILS)
     set(TEST_USING_BUILD_UTILS TRUE 
-        CACHE BOOL "test using build-utils" FORCE)
+        CACHE INTERNAL "test using build-utils" FORCE)
 endif()
 
 include(${TEST_CMAKE_BASE_SRC_DIR}/set_variables.cmake)
@@ -70,40 +70,48 @@ if (${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
         CACHE INTERNAL "..." FORCE)
     set(BUILD_UTILS_PREFIX ${l_build_util_prefix}
         CACHE INTERNAL "..." FORCE)
+    set(BUILD_UTILS_ENABLE_TESTING ${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_ENABLE_TESTING}
+        CACHE INTERNAL "..." FORCE)
     add_subdirectory(${${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR}/cmake build_utils)
+        
+    if (${TEST_PREFIX_UPPER_}TEST_ENABLE_TESTING)
+        include_build_util(NAME upper_str 
+            INCLUDE_DIR ${${l_build_util_prefix_upper_}BUILD_UTILS_INCLUDE_DIR})
 
-    include_build_util(NAME upper_str 
-        INCLUDE_DIR ${${BUILD_UTILS_PREFIX}BUILD_UTILS_INCLUDE_DIR})
+        include_build_util(NAME add_test_executable_dir 
+            INCLUDE_DIR ${${l_build_util_prefix_upper_}BUILD_UTILS_INCLUDE_DIR})
 
-    include_build_util(NAME add_test_executable_dir 
-        INCLUDE_DIR ${${BUILD_UTILS_PREFIX}BUILD_UTILS_INCLUDE_DIR})
+        set(l_target_prefix "Test")
+        if (NOT "${EMPTY}${TEST_PREFIX}" STREQUAL "${EMPTY}")
+            string(TOLOWER "${TEST_PREFIX}" l_test_prefix_lower)
+            upper_str("${l_test_prefix_lower}${l_target_prefix}" l_target_prefix 
+                INDEX 0 LENGTH 1)
+            unset(l_test_prefix_lower)
+        endif()
 
-    set(l_target_prefix "Test")
-    if (NOT "${EMPTY}${TEST_PREFIX}" STREQUAL "${EMPTY}")
-        string(TOLOWER "${TEST_PREFIX}" l_test_prefix_lower)
-        upper_str("${l_test_prefix_lower}${l_target_prefix}" l_target_prefix 
-            INDEX 0 LENGTH 1)
-        unset(l_test_prefix_lower)
+        add_test_executable_dir(${${TEST_PREFIX_UPPER_}TEST_TEST_SRC_DIR}
+            RECURSIVE PREFIX "${l_target_prefix}" SRC_EXT "cpp" SRC_TAG "main"
+            GET_TARGET_NAME ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_name.cmake
+            GET_TARGET_DIR ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_dir.cmake
+            LIST_INCLUDE_DIR_ARG PUBLIC ${${TEST_PREFIX_UPPER_}TEST_INCLUDE_DIR}
+            LIST_PROPERTY_ARG PUBLIC PROPERTY FOLDER ${l_target_prefix}
+            INCLUDE_DIR ${${l_build_util_prefix_upper_}BUILD_UTILS_INCLUDE_DIR})
+
+        unset(BUILD_UTILS_BASE_SOURCE_DIR CACHE)
+        unset(l_build_util_prefix_upper_)
+        unset(l_build_util_prefix_upper)
+        unset(l_build_util_prefix)
+        unset(l_target_prefix)
     endif()
-
-    add_test_executable_dir(${${TEST_PREFIX_UPPER_}TEST_TEST_SRC_DIR}
-        RECURSIVE PREFIX "${l_target_prefix}" SRC_EXT "cpp" SRC_TAG "main"
-        GET_TARGET_NAME ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_name.cmake
-        GET_TARGET_DIR ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_dir.cmake
-        LIST_INCLUDE_DIR_ARG PUBLIC ${${TEST_PREFIX_UPPER_}TEST_INCLUDE_DIR}
-        LIST_PROPERTY_ARG PUBLIC PROPERTY FOLDER ${l_target_prefix}
-        INCLUDE_DIR ${${l_build_util_prefix_upper_}BUILD_UTILS_INCLUDE_DIR})
-
-    unset(BUILD_UTILS_BASE_SOURCE_DIR CACHE)
-    unset(l_build_util_prefix_upper_)
-    unset(l_build_util_prefix_upper)
-    unset(l_build_util_prefix)
-    unset(l_target_prefix)
 else()
     message(FATAL_ERROR "Build Not Defined")
 endif()
 
-enable_testing()
+if (${TEST_PREFIX_UPPER_}TEST_ENABLE_TESTING
+    OR(${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_ENABLE_TESTING ))
+    
+    enable_testing()
+endif()
 
 install (DIRECTORY ${PROJECT_SOURCE_DIR}/../include/ DESTINATION test/include)
 
