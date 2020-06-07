@@ -29,6 +29,12 @@ if (NOT DEFINED TEST_USING_BUILD_UTILS)
         CACHE INTERNAL "test using build-utils" FORCE)
 endif()
 
+if (NOT DEFINED TEST_COMPILE_OPTIONS)
+    if ("${EMPTY}${CMAKE_CXX_COMPILER_ID}" STREQUAL "${EMPTY}GNU")
+        set(TEST_COMPILE_OPTIONS "-std=c++11")
+    elseif("${EMPTY}${CMAKE_CXX_COMPILER_ID}" STREQUAL "${EMPTY}MSVC")
+    endif()
+endif()
 include(${TEST_CMAKE_BASE_SRC_DIR}/set_variables.cmake)
 
 set_variables(PREFIX ${TEST_PREFIX}
@@ -95,6 +101,7 @@ if (${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
             GET_TARGET_DIR ${TEST_CMAKE_BASE_SRC_DIR}/build_utils/add_test_executable_dir/get_target_dir.cmake
             LIST_INCLUDE_DIR_ARG PUBLIC ${${TEST_PREFIX_UPPER_}TEST_INCLUDE_DIR}
             LIST_PROPERTY_ARG PUBLIC PROPERTY FOLDER ${l_target_prefix}
+            LIST_COMPILE_OPTION_ARG ${${TEST_PREFIX_UPPER_}LIST_COMPILE_OPTION_ARG}
             INCLUDE_DIR ${${l_build_util_prefix_upper_}BUILD_UTILS_INCLUDE_DIR})
 
         unset(BUILD_UTILS_BASE_SOURCE_DIR CACHE)
