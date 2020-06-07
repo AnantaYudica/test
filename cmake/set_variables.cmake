@@ -189,10 +189,36 @@ function(set_variables)
         endif()
 
     endif()
-    
-    if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_COMPILE_OPTIONS)
+
+    get_property(test_compile_option_cache_type 
+        CACHE ${TEST_PREFIX_UPPER_}TEST_COMPILE_OPTIONS
+        PROPERTY TYPE)
+    if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_COMPILE_OPTIONS
+        OR("${EMPTY}${test_compile_option_cache_type}" STREQUAL "${EMPTY}")
+        OR("${EMPTY}${test_compile_option_cache_type}" STREQUAL "${EMPTY}INTERNAL"))
+
         set(${TEST_PREFIX_UPPER_}TEST_COMPILE_OPTIONS ${compile_options} 
             CACHE STRING "Compile options" FORCE)
     endif()
+
+    unset(list_compile_option_arg)
+    set(compile_options_elem_keyword "")
+    foreach(compile_options_elem ${${TEST_PREFIX_UPPER_}TEST_COMPILE_OPTIONS})
+        if ("${EMPTY}${compile_options_elem}" STREQUAL "${EMPTY}INTERFACE"
+            OR("${EMPTY}${compile_options_elem}" STREQUAL "${EMPTY}PUBLIC")
+            OR("${EMPTY}${compile_options_elem}" STREQUAL "${EMPTY}PRIVATE"))
+                set(compile_options_elem_keyword ${compile_options_elem})
+        else()
+            if ("${EMPTY}${compile_options_elem_keyword}" STREQUAL "${EMPTY}")
+                list(APPEND list_compile_option_arg "PUBLIC" ${compile_options_elem})
+            else()
+                list(APPEND list_compile_option_arg ${compile_options_elem_keyword} ${compile_options_elem})
+            endif()
+        endif()
+    endforeach(compile_options_elem)
+    set(${TEST_PREFIX_UPPER_}LIST_COMPILE_OPTION_ARG ${list_compile_option_arg}
+        CACHE INTERNAL "" FORCE)
+    unset(compile_options_elem_keyword)
+    unset(list_compile_option_arg)
 
 endfunction(set_variables)
