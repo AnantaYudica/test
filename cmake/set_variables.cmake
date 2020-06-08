@@ -202,7 +202,10 @@ function(set_variables)
                 endif()
             endif()
         endif()
-
+    else()
+        unset(${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_ENABLE_TESTING CACHE)
+        unset(${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR CACHE)
+        unset(${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_VERSION CACHE)
     endif()
 
     get_property(test_compile_option_cache_type 
