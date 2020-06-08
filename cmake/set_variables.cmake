@@ -143,7 +143,7 @@ function(set_variables)
     endif()
 
     get_property(test_using_build_utils_cache_type 
-        CACHE ${TEST_PREFIX_UPPER_}TEST_ENABLE_TESTING
+        CACHE ${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS
         PROPERTY TYPE)
     if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS
         OR(NOT "${EMPTY}${test_using_build_utils_cache_type}" STREQUAL "${EMPTY}BOOL"))
