@@ -205,6 +205,11 @@ function(set_variables)
                     set(${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_VERSION ${build_utils_VERSION} 
                         CACHE STRING "build utils version" FORCE)
                     unset(build_utils_VERSION CACHE)
+                else()
+                    string(CONCAT msg "\"${TEST_CMAKE_BASE_SRC_DIR}/build_utils_VERSION.cmake\" "
+                        "is not exist file")
+                    message(FATAL_ERROR ${msg})
+                    unset(msg)
                 endif()
             endif()
         endif()
