@@ -35,6 +35,13 @@ if (NOT DEFINED TEST_COMPILE_OPTIONS)
     elseif("${EMPTY}${CMAKE_CXX_COMPILER_ID}" STREQUAL "${EMPTY}MSVC")
     endif()
 endif()
+
+if(NOT DEFINED TEST_ENABLE_TESTING 
+    OR("${EMPTY}${TEST_ENABLE_TESTING}" STREQUAL "${EMPTY}"))
+
+    set(TEST_ENABLE_TESTING TRUE)
+endif()
+
 include(${TEST_CMAKE_BASE_SRC_DIR}/set_variables.cmake)
 
 set_variables(PREFIX ${TEST_PREFIX}
