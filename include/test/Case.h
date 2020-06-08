@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_CASE_H_
-#define BASIC_TEST_CASE_H_
+#ifndef TEST_CASE_H_
+#define TEST_CASE_H_
 
 #include "type/Parameter.h"
 #include "Variable.h"
@@ -128,4 +128,4 @@ void Case<TDerived, type::Parameter<TCaseIds...>>::
 
 } //!basic
 
-#endif //!BASIC_TEST_CASE_H_
+#endif //!TEST_CASE_H_

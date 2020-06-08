@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_MSG_BASE_H_
-#define BASIC_TEST_MSG_BASE_H_
+#ifndef TEST_MSG_BASE_H_
+#define TEST_MSG_BASE_H_
 
 #include "Format.h"
 #include "Argument.h"
@@ -183,4 +183,4 @@ TArgError Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
 
 } //!basic
 
-#endif //!BASIC_TEST_MSG_BASE_H_
+#endif //!TEST_MSG_BASE_H_

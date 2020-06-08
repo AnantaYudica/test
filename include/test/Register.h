@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_REGISTER_H_
-#define BASIC_TEST_REGISTER_H_
+#ifndef TEST_REGISTER_H_
+#define TEST_REGISTER_H_
 
 #include "reg/Base.h"
 
@@ -110,4 +110,4 @@ Register<TTest, TDerived> Make(TDerived* derived,
 
 } //!basic
 
-#endif //!BASIC_TEST_REGISTER_H_
+#endif //!TEST_REGISTER_H_

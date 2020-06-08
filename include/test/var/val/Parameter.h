@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAR_VAL_PARAMETER_H_
-#define BASIC_TEST_VAR_VAL_PARAMETER_H_
+#ifndef TEST_VAR_VAL_PARAMETER_H_
+#define TEST_VAR_VAL_PARAMETER_H_
 
 #include "../../Variable.h"
 
@@ -77,4 +77,4 @@ typename Variable<test::val::Parameter<TValuesArg...>,
 
 } //!basic
 
-#endif //!BASIC_TEST_VAR_VAL_PARAMETER_H_
+#endif //!TEST_VAR_VAL_PARAMETER_H_

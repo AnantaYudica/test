@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VARIABLE_H_
-#define BASIC_TEST_VARIABLE_H_
+#ifndef TEST_VARIABLE_H_
+#define TEST_VARIABLE_H_
 
 #include <utility>
 #include <type_traits>
@@ -72,4 +72,4 @@ Variable<TArg, TArgs...>& Variable<TArg, TArgs...>::
 
 } //!basic
 
-#endif //!BASIC_TEST_VARIABLE_H_
+#endif //!TEST_VARIABLE_H_

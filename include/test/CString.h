@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_CSTRING_H_
-#define BASIC_TEST_CSTRING_H_
+#ifndef TEST_CSTRING_H_
+#define TEST_CSTRING_H_
 
 #include <cstddef>
 #include <cstring>
@@ -283,4 +283,4 @@ const std::size_t& CString<const TChar>::Size() const
 
 } //!basic
 
-#endif //!BASIC_TEST_CSTRING_H_
+#endif //!TEST_CSTRING_H_

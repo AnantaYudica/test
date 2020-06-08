@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_PARAM_NAME_H_
-#define BASIC_TEST_TYPE_PARAM_NAME_H_
+#ifndef TEST_TYPE_PARAM_NAME_H_
+#define TEST_TYPE_PARAM_NAME_H_
 
 #include "../Parameter.h"
 #include "../Name.h"
@@ -116,4 +116,4 @@ test::CString<TChar> Name<type::Parameter<TArg, TArgs...>>::CStr()
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_PARAM_NAME_H_
+#endif //!TEST_TYPE_PARAM_NAME_H_

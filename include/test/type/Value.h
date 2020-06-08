@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_VALUE_H_
-#define BASIC_TEST_TYPE_VALUE_H_
+#ifndef TEST_TYPE_VALUE_H_
+#define TEST_TYPE_VALUE_H_
 
 namespace basic
 {
@@ -37,5 +37,5 @@ constexpr typename Value<T, ValueT>::ConstGetType
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_VALUE_H_
+#endif //!TEST_TYPE_VALUE_H_
 

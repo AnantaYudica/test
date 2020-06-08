@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_MSG_FORMAT_H_
-#define BASIC_TEST_MSG_FORMAT_H_
+#ifndef TEST_MSG_FORMAT_H_
+#define TEST_MSG_FORMAT_H_
 
 #include "../CString.h"
 #include "../cstr/Format.h"
@@ -156,4 +156,4 @@ bool Format<TChar>::IsEmpty() const
 
 } //!basic
 
-#endif //!BASIC_TEST_MSG_FORMAT_H_
+#endif //!TEST_MSG_FORMAT_H_

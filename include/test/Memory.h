@@ -1,22 +1,22 @@
-#ifndef BASIC_TEST_MEMORY_H_
-#define BASIC_TEST_MEMORY_H_
+#ifndef TEST_MEMORY_H_
+#define TEST_MEMORY_H_
 
-#ifdef USING_BASIC_TEST_MEMORY
+#ifdef USING_TEST_MEMORY
 
-#ifndef BASIC_TEST_MEMORY_INIT_BLOCK_SIZE
-#define BASIC_TEST_MEMORY_INIT_BLOCK_SIZE 10
-#endif //!BASIC_TEST_MEMORY_INIT_BLOCK_SIZE
+#ifndef TEST_MEMORY_INIT_BLOCK_SIZE
+#define TEST_MEMORY_INIT_BLOCK_SIZE 10
+#endif //!TEST_MEMORY_INIT_BLOCK_SIZE
 
-#ifndef BASIC_TEST_MEMORY_MULTIPLY_BLOCK_SIZE
-#define BASIC_TEST_MEMORY_MULTIPLY_BLOCK_SIZE 10
-#endif //!BASIC_TEST_MEMORY_MULTIPLY_BLOCK_SIZE
+#ifndef TEST_MEMORY_MULTIPLY_BLOCK_SIZE
+#define TEST_MEMORY_MULTIPLY_BLOCK_SIZE 10
+#endif //!TEST_MEMORY_MULTIPLY_BLOCK_SIZE
 
-#ifndef BASIC_TEST_MEMORY_DEBUG_ALLOC
-#define BASIC_TEST_MEMORY_DEBUG_ALLOC 0
-#endif //!BASIC_TEST_MEMORY_DEBUG_ALLOC
-#ifndef BASIC_TEST_MEMORY_DEBUG_DEALLOC
-#define BASIC_TEST_MEMORY_DEBUG_DEALLOC 0
-#endif //!BASIC_TEST_MEMORY_DEBUG_DEALLOC
+#ifndef TEST_MEMORY_DEBUG_ALLOC
+#define TEST_MEMORY_DEBUG_ALLOC 0
+#endif //!TEST_MEMORY_DEBUG_ALLOC
+#ifndef TEST_MEMORY_DEBUG_DEALLOC
+#define TEST_MEMORY_DEBUG_DEALLOC 0
+#endif //!TEST_MEMORY_DEBUG_DEALLOC
 
 #include "Output.h"
 #include "mem/Block.h"
@@ -61,7 +61,7 @@ public:
 template<typename Tout>
 Memory<Tout>::Memory(Tout& output) :
     m_blocks(nullptr),
-    m_blocksLength(BASIC_TEST_MEMORY_INIT_BLOCK_SIZE),
+    m_blocksLength(TEST_MEMORY_INIT_BLOCK_SIZE),
     m_blocksSize(0),
     m_output(&output)
 {
@@ -135,7 +135,7 @@ void Memory<Tout>::ReallocationBlock()
 #ifdef _WIN32
         auto old_length = m_blocksLength;
 #endif
-        m_blocksLength *= BASIC_TEST_MEMORY_MULTIPLY_BLOCK_SIZE;
+        m_blocksLength *= TEST_MEMORY_MULTIPLY_BLOCK_SIZE;
         m_blocks = (mem::Block*)std::realloc(m_blocks,
             m_blocksLength * sizeof(mem::Block));
         assert(m_blocks != NULL);
@@ -155,7 +155,7 @@ void Memory<Tout>::AppendBlock(mem::Block& b)
     assert(m_output != NULL);
     if (!HasRegister(b.Pointer()))
     {
-#if BASIC_TEST_MEMORY_DEBUG_ALLOC
+#if TEST_MEMORY_DEBUG_ALLOC
         m_output->Debug("alloc-memory {addr : %p, size : %zu bytes}\n",
                 b.Pointer(), b.Size());
 #endif
@@ -205,7 +205,7 @@ void Memory<Tout>::Unregister(void * p)
             iReplace = i;
             if (found)
             {
-#if BASIC_TEST_MEMORY_DEBUG_DEALLOC
+#if TEST_MEMORY_DEBUG_DEALLOC
                 m_output->Debug("dealloc-memory {addr : %p, "
                     "size : %zu bytes}\n", (m_blocks + i)->Pointer(),
                     (m_blocks + i)->Size());
@@ -237,6 +237,6 @@ bool Memory<Tout>::HasRegister(void * p)
 
 } //!basic
 
-#endif //!USING_BASIC_TEST_MEMORY
+#endif //!USING_TEST_MEMORY
 
-#endif //!BASIC_TEST_MEMORY_H_
+#endif //!TEST_MEMORY_H_

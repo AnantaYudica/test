@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_BASE_H_
-#define BASIC_TEST_BASE_H_
+#ifndef TEST_BASE_H_
+#define TEST_BASE_H_
 
 #include <utility>
 
@@ -118,4 +118,4 @@ void Base<TCases, TVariable, TVariables...>::Run()
 
 } //!basic
 
-#endif //!BASIC_TEST_BASE_H_
+#endif //!TEST_BASE_H_

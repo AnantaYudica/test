@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_REG_BASE_H_
-#define BASIC_TEST_REG_BASE_H_
+#ifndef TEST_REG_BASE_H_
+#define TEST_REG_BASE_H_
 
 #include <cstddef>
 
@@ -40,4 +40,4 @@ inline Base::~Base()
 
 } //!basic
 
-#endif //!BASIC_TEST_REG_BASE_H_
+#endif //!TEST_REG_BASE_H_

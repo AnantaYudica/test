@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_PARAM_FILLER_H_
-#define BASIC_TEST_TYPE_PARAM_FILLER_H_
+#ifndef TEST_TYPE_PARAM_FILLER_H_
+#define TEST_TYPE_PARAM_FILLER_H_
 
 #include "../Parameter.h"
 
@@ -34,4 +34,4 @@ public:
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_PARAM_FILLER_H_
+#endif //!TEST_TYPE_PARAM_FILLER_H_

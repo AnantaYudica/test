@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAL_SEQUENCE_H_
-#define BASIC_TEST_VAL_SEQUENCE_H_
+#ifndef TEST_VAL_SEQUENCE_H_
+#define TEST_VAL_SEQUENCE_H_
 
 #include "../type/val/seq/Make.h"
 #include "../type/val/seq/formula/Arithmetic.h"
@@ -178,4 +178,4 @@ Sequence<T, 0>& Sequence<T, 0>::operator=(Sequence<T, 0>&& mov)
 
 }//!basic
 
-#endif //!BASIC_TEST_VAL_SEQUENCE_H_
+#endif //!TEST_VAL_SEQUENCE_H_

@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TRACE_H_
-#define BASIC_TEST_TRACE_H_
+#ifndef TEST_TRACE_H_
+#define TEST_TRACE_H_
 
 #include <cstddef>
 
@@ -21,4 +21,4 @@ struct Trace
 
 } //!basic
 
-#endif //!BASIC_TEST_TRACE_H_
+#endif //!TEST_TRACE_H_

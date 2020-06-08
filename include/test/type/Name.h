@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_NAME_H_
-#define BASIC_TEST_TYPE_NAME_H_
+#ifndef TEST_TYPE_NAME_H_
+#define TEST_TYPE_NAME_H_
 
 #include "../CString.h"
 
@@ -29,4 +29,4 @@ struct Name
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_NAME_H_
+#endif //!TEST_TYPE_NAME_H_

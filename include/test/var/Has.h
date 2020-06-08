@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAR_HAS_H_
-#define BASIC_TEST_VAR_HAS_H_
+#ifndef TEST_VAR_HAS_H_
+#define TEST_VAR_HAS_H_
 
 #include "../Variable.h"
 #include "Definition.h"
@@ -57,4 +57,4 @@ public:
 
 } //!basic
 
-#endif //!BASIC_TEST_VAR_HAS_H_
+#endif //!TEST_VAR_HAS_H_

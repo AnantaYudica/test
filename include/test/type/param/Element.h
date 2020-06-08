@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_PARAM_ELEMENT_H_
-#define BASIC_TEST_TYPE_PARAM_ELEMENT_H_
+#ifndef TEST_TYPE_PARAM_ELEMENT_H_
+#define TEST_TYPE_PARAM_ELEMENT_H_
 
 #include "../Parameter.h"
 
@@ -53,4 +53,4 @@ struct Element<I, TTParam<TArg, TArgs...>>
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_PARAM_ELEMENT_H_
+#endif //!TEST_TYPE_PARAM_ELEMENT_H_

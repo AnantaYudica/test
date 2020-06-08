@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_MSG_ARG_TYPE_FUNCTION_H_
-#define BASIC_TEST_MSG_ARG_TYPE_FUNCTION_H_
+#ifndef TEST_MSG_ARG_TYPE_FUNCTION_H_
+#define TEST_MSG_ARG_TYPE_FUNCTION_H_
 
 #include "../../Argument.h"
 
@@ -270,4 +270,4 @@ typename Argument<TCaseId, arg::type::Function<I, TArgArgs...>, TArgs...>::
 
 } //!basic
 
-#endif //!BASIC_TEST_MSG_ARG_TYPE_FUNCTION_H_
+#endif //!TEST_MSG_ARG_TYPE_FUNCTION_H_

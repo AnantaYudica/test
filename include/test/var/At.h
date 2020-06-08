@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAR_AT_H_
-#define BASIC_TEST_VAR_AT_H_
+#ifndef TEST_VAR_AT_H_
+#define TEST_VAR_AT_H_
 
 #include "../Variable.h"
 #include "Definition.h"
@@ -35,4 +35,4 @@ const typename var::Definition<I, test::Variable<TArg, TArgs...>>::Type&
 
 } //!basic
 
-#endif //!BASIC_TEST_VAR_AT_H_
+#endif //!TEST_VAR_AT_H_

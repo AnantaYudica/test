@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAR_DEFINITION_H_
-#define BASIC_TEST_VAR_DEFINITION_H_
+#ifndef TEST_VAR_DEFINITION_H_
+#define TEST_VAR_DEFINITION_H_
 
 #include "../Variable.h"
 
@@ -41,4 +41,4 @@ struct Definition<0, test::Variable<TArgs...>>
 
 }//!basic
 
-#endif //!BASIC_TEST_VAR_DEFINITION_H_
+#endif //!TEST_VAR_DEFINITION_H_

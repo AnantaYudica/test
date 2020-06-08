@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_FUNCTION_H_
-#define BASIC_TEST_TYPE_FUNCTION_H_
+#ifndef TEST_TYPE_FUNCTION_H_
+#define TEST_TYPE_FUNCTION_H_
 
 #include <utility>
 
@@ -49,5 +49,5 @@ constexpr typename Function<TRet(TArgs...), Func>::ConstGetType
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_FUNCTION_H_
+#endif //!TEST_TYPE_FUNCTION_H_
 

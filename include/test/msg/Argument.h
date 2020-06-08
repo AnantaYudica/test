@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_MSG_ARGUMENT_H_
-#define BASIC_TEST_MSG_ARGUMENT_H_
+#ifndef TEST_MSG_ARGUMENT_H_
+#define TEST_MSG_ARGUMENT_H_
 
 #include "../Variable.h"
 #include "../var/Element.h"
@@ -197,4 +197,4 @@ TRet Argument<TCaseId, TArgs...>::Call(const type::Index<TCaseId, ICaseId>&,
 
 } //!basic
 
-#endif //!BASIC_TEST_MSG_ARGUMENT_H_
+#endif //!TEST_MSG_ARGUMENT_H_

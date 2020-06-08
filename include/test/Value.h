@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VALUE_H_
-#define BASIC_TEST_VALUE_H_
+#ifndef TEST_VALUE_H_
+#define TEST_VALUE_H_
 
 #include <utility>
 
@@ -79,4 +79,4 @@ typename Value<T>::ConstGetType Value<T>::Get() const
 
 }//!basic
 
-#endif //!BASIC_TEST_VALUE_H_
+#endif //!TEST_VALUE_H_

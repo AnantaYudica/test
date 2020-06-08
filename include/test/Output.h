@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_OUTPUT_H_
-#define BASIC_TEST_OUTPUT_H_
+#ifndef TEST_OUTPUT_H_
+#define TEST_OUTPUT_H_
 
 #include "Status.h"
 
@@ -187,4 +187,4 @@ void Output<Ts>::DebugEnable(bool debug_enable)
 
 } //!basic
 
-#endif //!BASIC_TEST_OUTPUT_H_
+#endif //!TEST_OUTPUT_H_

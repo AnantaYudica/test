@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_STATUS_H_
-#define BASIC_TEST_STATUS_H_
+#ifndef TEST_STATUS_H_
+#define TEST_STATUS_H_
 
 #include <cstdlib>
 #include <utility>
@@ -49,4 +49,4 @@ void Status::Error()
 
 } //!basic
 
-#endif //!BASIC_TEST_STATUS_H_
+#endif //!TEST_STATUS_H_

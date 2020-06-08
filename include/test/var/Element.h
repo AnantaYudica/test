@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAR_ELEMENT_H_
-#define BASIC_TEST_VAR_ELEMENT_H_
+#ifndef TEST_VAR_ELEMENT_H_
+#define TEST_VAR_ELEMENT_H_
 
 #include "../Variable.h"
 
@@ -35,4 +35,4 @@ struct Element<0, test::Variable<TArg, TArgs...>>
 
 } //!basic
 
-#endif //!BASIC_TEST_VAR_ELEMENT_H_
+#endif //!TEST_VAR_ELEMENT_H_

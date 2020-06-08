@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_MESSAGE_H_
-#define BASIC_TEST_MESSAGE_H_
+#ifndef TEST_MESSAGE_H_
+#define TEST_MESSAGE_H_
 
 #include "Variable.h"
 #include "var/Value.h"
@@ -121,4 +121,4 @@ void Message<TTest, TDerived>::Error(const test::type::Index<TCaseId,
 
 } //!basic
 
-#endif //!BASIC_TEST_MESSAGE_H_
+#endif //!TEST_MESSAGE_H_

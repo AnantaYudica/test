@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_INDEX_H_
-#define BASIC_TEST_TYPE_INDEX_H_
+#ifndef TEST_TYPE_INDEX_H_
+#define TEST_TYPE_INDEX_H_
 
 #include <cstddef>
 
@@ -23,4 +23,4 @@ struct Index
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_INDEX_H_
+#endif //!TEST_TYPE_INDEX_H_

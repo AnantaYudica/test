@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAR_VALUE_H_
-#define BASIC_TEST_VAR_VALUE_H_
+#ifndef TEST_VAR_VALUE_H_
+#define TEST_VAR_VALUE_H_
 
 #include "../Variable.h"
 
@@ -69,4 +69,4 @@ typename Variable<test::Value<TArg>, TArgs...>::ConstGetType
 
 } //!basic
 
-#endif //!BASIC_TEST_VAR_VALUE_H_
+#endif //!TEST_VAR_VALUE_H_

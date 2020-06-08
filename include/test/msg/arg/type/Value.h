@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_MSG_ARG_TYPE_VALUE_H_
-#define BASIC_TEST_MSG_ARG_TYPE_VALUE_H_
+#ifndef TEST_MSG_ARG_TYPE_VALUE_H_
+#define TEST_MSG_ARG_TYPE_VALUE_H_
 
 #include "../../Argument.h"
 
@@ -259,4 +259,4 @@ typename Argument<TCaseId, arg::type::Value<I>, TArgs...>::
 
 } //!basic
 
-#endif //!BASIC_TEST_MSG_ARG_TYPE_VALUE_H_
+#endif //!TEST_MSG_ARG_TYPE_VALUE_H_

@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_OUT_ARGUMENT_H_
-#define BASIC_TEST_OUT_ARGUMENT_H_
+#ifndef TEST_OUT_ARGUMENT_H_
+#define TEST_OUT_ARGUMENT_H_
 
 #include <type_traits>
 
@@ -35,4 +35,4 @@ T&& Argument<T>::Value(typename std::remove_reference<T>::type && val)
 
 } //!basic
 
-#endif //!BASIC_TEST_OUT_ARGUMENT_H_
+#endif //!TEST_OUT_ARGUMENT_H_

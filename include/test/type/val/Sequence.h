@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_VAL_SEQUENCE_H_
-#define BASIC_TEST_TYPE_VAL_SEQUENCE_H_
+#ifndef TEST_TYPE_VAL_SEQUENCE_H_
+#define TEST_TYPE_VAL_SEQUENCE_H_
 
 #include <utility>
 #include <type_traits>
@@ -64,5 +64,5 @@ constexpr typename std::enable_if<I != 0,
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_VAL_SEQUENCE_H_
+#endif //!TEST_TYPE_VAL_SEQUENCE_H_
 

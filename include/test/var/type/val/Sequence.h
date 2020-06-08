@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAR_TYPE_VAL_SEQUENCE_H_
-#define BASIC_TEST_VAR_TYPE_VAL_SEQUENCE_H_
+#ifndef TEST_VAR_TYPE_VAL_SEQUENCE_H_
+#define TEST_VAR_TYPE_VAL_SEQUENCE_H_
 
 #include "../../../Variable.h"
 
@@ -64,4 +64,4 @@ typename Variable<test::type::val::Sequence<TArg, TArgValues...>, TArgs...>::
 } //!basic
 
 
-#endif //!BASIC_TEST_VAR_TYPE_VAL_SEQUENCE_H_
+#endif //!TEST_VAR_TYPE_VAL_SEQUENCE_H_

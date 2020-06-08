@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAL_PARAMETER_H_
-#define BASIC_TEST_VAL_PARAMETER_H_
+#ifndef TEST_VAL_PARAMETER_H_
+#define TEST_VAL_PARAMETER_H_
 
 #include "../type/Parameter.h"
 #include "../type/param/Element.h"
@@ -355,4 +355,4 @@ const typename std::enable_if<I != 0, typename test::type::param::
 }//!basic
 
 
-#endif //!BASIC_TEST_VAL_PARAMETER_H_
+#endif //!TEST_VAL_PARAMETER_H_

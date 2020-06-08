@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_CSTR_OUT_ARGUMENT_H_
-#define BASIC_TEST_CSTR_OUT_ARGUMENT_H_
+#ifndef TEST_CSTR_OUT_ARGUMENT_H_
+#define TEST_CSTR_OUT_ARGUMENT_H_
 
 #include "../../out/Argument.h"
 #include "../../CString.h"
@@ -46,4 +46,4 @@ const char* Argument<test::CString<TChar>>::
 
 } //!basic
 
-#endif //!BASIC_TEST_CSTR_OUT_ARGUMENT_H_
+#endif //!TEST_CSTR_OUT_ARGUMENT_H_

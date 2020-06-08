@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAL_FUNCTION_H_
-#define BASIC_TEST_VAL_FUNCTION_H_
+#ifndef TEST_VAL_FUNCTION_H_
+#define TEST_VAL_FUNCTION_H_
 
 #include <utility>
 
@@ -110,4 +110,4 @@ Function<TRet(TArgs...)>::operator bool() const
 
 } //!basic
 
-#endif //!BASIC_TEST_VAL_FUNCTION_H_
+#endif //!TEST_VAL_FUNCTION_H_

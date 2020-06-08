@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_PARAM_SIZE_H_
-#define BASIC_TEST_TYPE_PARAM_SIZE_H_
+#ifndef TEST_TYPE_PARAM_SIZE_H_
+#define TEST_TYPE_PARAM_SIZE_H_
 
 #include "../Parameter.h"
 
@@ -38,4 +38,4 @@ struct Size<TTParam<TArgs...>>
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_PARAM_SIZE_H_
+#endif //!TEST_TYPE_PARAM_SIZE_H_

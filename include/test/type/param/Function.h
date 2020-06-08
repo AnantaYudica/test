@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_PARAM_FUNCTION_H_
-#define BASIC_TEST_TYPE_PARAM_FUNCTION_H_
+#ifndef TEST_TYPE_PARAM_FUNCTION_H_
+#define TEST_TYPE_PARAM_FUNCTION_H_
 
 #include "../Parameter.h"
 
@@ -45,4 +45,4 @@ TRet Function<type::Parameter<TArgs...>>::
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_PARAM_FUNCTION_H_
+#endif //!TEST_TYPE_PARAM_FUNCTION_H_

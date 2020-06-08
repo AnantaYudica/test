@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_PARAMETER_H_
-#define BASIC_TEST_TYPE_PARAMETER_H_
+#ifndef TEST_TYPE_PARAMETER_H_
+#define TEST_TYPE_PARAMETER_H_
 
 namespace basic
 {
@@ -18,5 +18,5 @@ struct Parameter
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_PARAMETER_H_
+#endif //!TEST_TYPE_PARAMETER_H_
 

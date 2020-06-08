@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_VAR_VAL_FUNCTION_H_
-#define BASIC_TEST_VAR_VAL_FUNCTION_H_
+#ifndef TEST_VAR_VAL_FUNCTION_H_
+#define TEST_VAR_VAL_FUNCTION_H_
 
 #include "../../Variable.h"
 
@@ -79,4 +79,4 @@ typename Variable<test::val::Function<TRet(TArgsFunc...)>,
 
 } //!basic
 
-#endif //!BASIC_TEST_VAR_VAL_FUNCTION_H_
+#endif //!TEST_VAR_VAL_FUNCTION_H_

@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_CSTR_FORMAT_H_
-#define BASIC_TEST_CSTR_FORMAT_H_
+#ifndef TEST_CSTR_FORMAT_H_
+#define TEST_CSTR_FORMAT_H_
 
 #include "../CString.h"
 
@@ -35,5 +35,5 @@ test::CString<typename std::remove_const<TChar>::type>
 
 } //!basic
 
-#endif //!BASIC_TEST_CSTR_FORMAT_H_
+#endif //!TEST_CSTR_FORMAT_H_
 

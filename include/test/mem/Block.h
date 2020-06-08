@@ -1,7 +1,7 @@
-#ifndef BASIC_TEST_MEM_BLOCK_H_
-#define BASIC_TEST_MEM_BLOCK_H_
+#ifndef TEST_MEM_BLOCK_H_
+#define TEST_MEM_BLOCK_H_
 
-#ifdef USING_BASIC_TEST_MEMORY
+#ifdef USING_TEST_MEMORY
 
 #include <cstdlib>
 
@@ -91,6 +91,6 @@ public:
 
 } //!basic
 
-#endif //!USING_BASIC_TEST_MEMORY
+#endif //!USING_TEST_MEMORY
 
-#endif //!BASIC_TEST_MEM_BLOCK_H_
+#endif //!TEST_MEM_BLOCK_H_

@@ -1,5 +1,5 @@
-#ifndef BASIC_TEST_TYPE_VAL_SEQ_MAKE_H_
-#define BASIC_TEST_TYPE_VAL_SEQ_MAKE_H_
+#ifndef TEST_TYPE_VAL_SEQ_MAKE_H_
+#define TEST_TYPE_VAL_SEQ_MAKE_H_
 
 #include <utility>
 #include "../Sequence.h"
@@ -41,4 +41,4 @@ struct Make<TValue, FirstValue, 0, TFormula, Term, Values...>
 
 } //!basic
 
-#endif //!BASIC_TEST_TYPE_VAL_SEQUENCE_MAKE_H_
+#endif //!TEST_TYPE_VAL_SEQUENCE_MAKE_H_
