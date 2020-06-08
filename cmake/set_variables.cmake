@@ -162,10 +162,16 @@ function(set_variables)
 
     if (${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
 
-        if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_ENABLE_TESTING)
+        get_property(test_build_utils_enable_testing_cache_type 
+            CACHE ${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_ENABLE_TESTING
+            PROPERTY TYPE)
+        if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_ENABLE_TESTING
+            OR(NOT "${EMPTY}${test_build_utils_enable_testing_cache_type}" STREQUAL "${EMPTY}BOOL"))
+
             set(${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_ENABLE_TESTING ${build_utils_enable_testing}
                 CACHE BOOL "build utils enable testing" FORCE)
         endif()
+        unset(test_build_utils_enable_testing_cache_type)
 
         unset(l_test_build_utils_dir)
         if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_BUILD_UTILS_DIR
