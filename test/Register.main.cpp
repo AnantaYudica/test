@@ -1,6 +1,6 @@
-#define USING_BASIC_TEST_MEMORY
+#define USING_TEST_MEMORY
 #include "Test.h"
-BASIC_TEST_CONSTRUCT;
+TEST_CONSTRUCT;
 
 #include "test/Register.h"
 
@@ -38,7 +38,7 @@ public:
 
 Variable1<int, int> var1_1;
 
-basic::test::Register<BASIC_TEST, TestA<Variable1<int, int>>> 
+basic::test::Register<TEST, TestA<Variable1<int, int>>> 
     t1(new TestA<Variable1<int, int>>(var1_1), __FILE__, __LINE__);
 
 

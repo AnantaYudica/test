@@ -1,6 +1,6 @@
-#define USING_BASIC_TEST_MEMORY
+#define USING_TEST_MEMORY
 #include "Test.h"
-BASIC_TEST_CONSTRUCT;
+TEST_CONSTRUCT;
 
 #include "test/type/Value.h"
 

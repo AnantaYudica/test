@@ -1,6 +1,6 @@
-#define USING_BASIC_TEST_MEMORY
+#define USING_TEST_MEMORY
 #include "Test.h"
-BASIC_TEST_CONSTRUCT;
+TEST_CONSTRUCT;
 
 #include "test/CString.h"
 #include "test/cstr/Format.h"
@@ -26,7 +26,7 @@ struct basic::test::type::Name<A<TArgs...>>
     }
 };
 
-BASIC_TEST_TYPE_NAME("int", int);
+TEST_TYPE_NAME("int", int);
 
 int main()
 {

@@ -1,6 +1,6 @@
-#define USING_BASIC_TEST_MEMORY
+#define USING_TEST_MEMORY
 #include "Test.h"
-BASIC_TEST_CONSTRUCT;
+TEST_CONSTRUCT;
 
 #include "test/Register.h"
 
@@ -53,7 +53,7 @@ class TestA :
     public MessageBaseTestA2,
     public MessageBaseTestA3,
     public MessageBaseTestA4,
-    public basic::test::Message<BASIC_TEST, TestA>
+    public basic::test::Message<TEST, TestA>
 {
 public:
     using MessageBaseTestA1::Format;
@@ -70,7 +70,7 @@ public:
     using MessageBaseTestA4::Argument;
 public:
     TestA() :
-        basic::test::Message<BASIC_TEST, TestA>(*this)
+        basic::test::Message<TEST, TestA>(*this)
     {
         basic::test::msg::base::Info info;
         basic::test::msg::base::Debug debug;
@@ -105,7 +105,7 @@ public:
     }
 };
 
-BASIC_TEST_TYPE_NAME("int", int);
+TEST_TYPE_NAME("int", int);
 
 int main()
 {

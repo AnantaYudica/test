@@ -1,6 +1,6 @@
-#define USING_BASIC_TEST_MEMORY
+#define USING_TEST_MEMORY
 #include "Test.h"
-BASIC_TEST_CONSTRUCT;
+TEST_CONSTRUCT;
 
 #include "test/msg/Argument.h"
 #include "test/msg/arg/type/Name.h"
@@ -79,8 +79,8 @@ template<typename... TArgs>
 struct ParamA
 {};
 
-BASIC_TEST_TYPE_NAME("int", int);
-BASIC_TEST_TYPE_NAME("char", char);
+TEST_TYPE_NAME("int", int);
+TEST_TYPE_NAME("char", char);
 
 template<>
 struct basic::test::type::Name<A>

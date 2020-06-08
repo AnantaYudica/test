@@ -1,6 +1,6 @@
-#define USING_BASIC_TEST_MEMORY
+#define USING_TEST_MEMORY
 #include "Test.h"
-BASIC_TEST_CONSTRUCT;
+TEST_CONSTRUCT;
 
 #include "test/Variable.h"
 #include "test/msg/arg/type/Name.h"
@@ -114,7 +114,7 @@ public:
     }
 };
 
-BASIC_TEST_TYPE_NAME("int", int);
+TEST_TYPE_NAME("int", int);
 
 int main()
 {
