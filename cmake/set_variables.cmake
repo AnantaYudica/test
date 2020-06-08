@@ -51,10 +51,16 @@ function(set_variables)
         message(FATAL_ERROR "\"TEST_CMAKE_BASE_SRC_DIR\" is not directory")
     endif()
 
-    if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_ENABLE_TESTING)
+    get_property(test_enable_testing_cache_type 
+        CACHE ${TEST_PREFIX_UPPER_}TEST_ENABLE_TESTING
+        PROPERTY TYPE)
+    if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_ENABLE_TESTING
+        OR(NOT "${EMPTY}${test_enable_testing_cache_type}" STREQUAL "${EMPTY}BOOL"))
+
         set(${TEST_PREFIX_UPPER_}TEST_ENABLE_TESTING ${enable_testing} 
             CACHE BOOL "enable testing" FORCE)
     endif()
+    unset(test_enable_testing_cache_type)
 
     unset(l_test_include_dir)
     if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_INCLUDE_DIR
