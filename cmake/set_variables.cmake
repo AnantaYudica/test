@@ -150,10 +150,13 @@ function(set_variables)
 
         set(l_using_build_utils TRUE)
         if (NOT "${EMPTY}${using_build_utils}" STREQUAL "${EMPTY}")
-            set(l_using_build_utils ${using_build_utils})
+            if (NOT using_build_utils)
+                set(l_using_build_utils FALSE)
+            endif()
         endif()
         set(${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS
-            ${using_build_utils} CACHE BOOL "using build utils" FORCE)
+            ${l_using_build_utils} CACHE BOOL "using build utils" FORCE)
+        unset(l_using_build_utils)
     endif()
     unset(test_using_build_utils_cache_type)
 
