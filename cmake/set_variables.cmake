@@ -142,7 +142,12 @@ function(set_variables)
         message(FATAL_ERROR "\"EXTERNAL_DIR\" is not directory")
     endif()
 
-    if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
+    get_property(test_using_build_utils_cache_type 
+        CACHE ${TEST_PREFIX_UPPER_}TEST_ENABLE_TESTING
+        PROPERTY TYPE)
+    if (NOT DEFINED ${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS
+        OR(NOT "${EMPTY}${test_using_build_utils_cache_type}" STREQUAL "${EMPTY}BOOL"))
+
         set(l_using_build_utils TRUE)
         if (NOT "${EMPTY}${using_build_utils}" STREQUAL "${EMPTY}")
             set(l_using_build_utils ${using_build_utils})
@@ -150,6 +155,7 @@ function(set_variables)
         set(${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS
             ${using_build_utils} CACHE BOOL "using build utils" FORCE)
     endif()
+    unset(test_using_build_utils_cache_type)
 
     if (${TEST_PREFIX_UPPER_}TEST_USING_BUILD_UTILS)
 
