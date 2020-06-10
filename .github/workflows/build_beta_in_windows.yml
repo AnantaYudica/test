@@ -1,5 +1,5 @@
 
-name: beta-windows_Win32
+name: beta-windows
 
 on:
   push:
