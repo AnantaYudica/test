@@ -8,10 +8,10 @@ jobs:
   get_msbuild:
     runs-on: windows-latest
     outputs:
-      executable: ${{steps.set_executable.outputs.}}
+      executable: ${{steps.set_executable.outputs.executable}}
     steps:
       - id: set_executable
-        run: echo "::set-output name=matrix::$(vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
+        run: echo "::set-output name=executable::$(vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
   build_test:
     runs-on: windows-latest
     needs: get_msbuild
