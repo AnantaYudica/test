@@ -23,7 +23,7 @@ jobs:
 
     - name: Get MsBuild 
       run: echo "::add-path::$(vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
-      shell: powershell
+      shell: pwsh
 
     - name: Build
       run: msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86
