@@ -22,15 +22,15 @@ jobs:
       working-directory: ./.build
 
     - name: Get MsBuild 
-      run: $MsBuild = (vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
+      run: echo '::set-env name=MSBUILD::$(vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)'
       shell: powershell
 
     - name: Build
-      run: "& $MsBuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86"
+      run: echo "${MSBUILD} ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86"
       working-directory: ./.build
       shell: powershell
 
     - name: Test
-      run: "& $MsBuild RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=X86"
+      run: echo "${MSBUILD} RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=X86"
       working-directory: ./.build
       shell: powershell
