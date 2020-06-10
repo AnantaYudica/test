@@ -22,5 +22,11 @@ jobs:
         cd ./.build
         cmake ../cmake -G "Visual Studio 16 2019" -A Win32
 
-    - name: Build and Test
-      run: msbuild RUN_TESTS.vcxproj
+    - name: Get MsBuild  
+      run: $MsBuild = (vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
+
+    - name: Build
+      run: &$MsBuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86
+
+    - name: Test
+      run: &$MsBuild RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=X86
