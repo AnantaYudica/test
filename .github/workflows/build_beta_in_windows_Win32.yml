@@ -1,0 +1,25 @@
+
+name: beta-windows_Win32
+
+on:
+  push:
+    branches: [ beta ]
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: beta
+
+    - name: Create build directory
+      run: mkdir -p .build
+
+    - name: Generate project
+      run: |
+        cd ./.build
+        cmake ../cmake -G "Visual Studio 16 2019" -A Win32
+
+    - name: Build and Test
+      run: msbuild RUN_TESTS.vcxproj
