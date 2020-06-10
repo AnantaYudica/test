@@ -25,7 +25,7 @@ jobs:
       run: mkdir -p .build
 
     - name: Print get_msbuild outputs
-      run: echo ${{get_msbuild.outputs.executable}}
+      run: echo ${{needs.get_msbuild.outputs.executable}}
 
     - name: Generate project
       run: cmake ../cmake -G "Visual Studio 16 2019" -A Win32
