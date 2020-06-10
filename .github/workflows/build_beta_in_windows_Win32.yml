@@ -26,7 +26,7 @@ jobs:
       shell: powershell
 
     - name: Print MSBUILD
-      run: ehco "${MSBUILD}"
+      run: echo "${MSBUILD}"
 
     - name: Build
       run: echo "${MSBUILD} ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86"
