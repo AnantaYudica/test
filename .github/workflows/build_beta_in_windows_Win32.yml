@@ -21,9 +21,13 @@ jobs:
       run: cmake ../cmake -G "Visual Studio 16 2019" -A Win32
       working-directory: ./.build
 
-    - name: Get MsBuild 
-      run: echo "::add-path::$(vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
-      shell: pwsh
+    - name: Set PATH
+      run: ${env:PATH} += (vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe) | ""
+      shell: powershell
+
+    - name: Print PATH
+      run: echo ${env:PATH}
+      shell: powershell
 
     - name: Build
       run: msbuild ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86
