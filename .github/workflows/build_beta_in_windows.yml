@@ -5,9 +5,16 @@ on:
   push:
     branches: [ beta ]
 jobs:
-  build:
+  get_msbuild:
     runs-on: windows-latest
-
+    outputs:
+      executable: ${{steps.set_executable.outputs.}}
+    steps:
+      - id: set_executable
+        run: echo "::set-output name=matrix::$(vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
+  build_test:
+    runs-on: windows-latest
+    needs: get_msbuild
     steps:
     - uses: actions/checkout@v2
       with:
@@ -16,6 +23,9 @@ jobs:
 
     - name: Create build directory
       run: mkdir -p .build
+
+    - name: Print get_msbuild outputs
+      run: echo ${{get_msbuild.outputs.executable}}
 
     - name: Generate project
       run: cmake ../cmake -G "Visual Studio 16 2019" -A Win32
