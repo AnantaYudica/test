@@ -22,8 +22,11 @@ jobs:
       working-directory: ./.build
 
     - name: Get MsBuild 
-      run: echo "::set-env name=MSBUILD::$(echo \"vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe\")"
+      run: echo "::set-env name=MSBUILD::$(echo vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
       shell: powershell
+
+    - name: Print MSBUILD
+      run: ehco "${MSBUILD}"
 
     - name: Build
       run: echo "${MSBUILD} ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86"
