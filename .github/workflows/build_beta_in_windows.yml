@@ -31,7 +31,9 @@ jobs:
       if: ${{ matrix.compiler == 'MSVC' }}
 
     - name: Generate project
-      run: cmake ../cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
+      run: |
+        echo "${Env:Path}"
+        cmake ../cmake -G "MinGW Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' &&  matrix.platform == 'Win32'}}
 
