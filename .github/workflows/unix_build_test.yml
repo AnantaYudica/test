@@ -1,0 +1,43 @@
+
+name: Unix Build Test
+
+on:
+  push:
+    branches: [ beta ]
+jobs:
+  build_test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [GNU]
+        platform: [Win32, x64]
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: beta
+        submodules: true
+
+    - name: Create build directory
+      run: mkdir -p .build
+
+    - name: Generate project
+      run: cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
+      working-directory: ./.build
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'Win32' }}
+
+    - name: Generate project
+      run: cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m64
+      working-directory: ./.build
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x64' }}
+
+    - name: Build
+      run: make
+      working-directory: ./.build
+      if: ${{ matrix.compiler == 'GNU'}}
+
+    - name: Test
+      run: make test
+      working-directory: ./.build
+      if: ${{ matrix.compiler == 'GNU' }}
+
+
