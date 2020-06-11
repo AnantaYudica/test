@@ -21,7 +21,7 @@ jobs:
       run: mkdir -p .build
     
     - name: install gcc
-      run: sudo apt-get install -y --no-install-recommends ccache gcc-8.4 g++-8.4
+      run: sudo apt-get install -y --no-install-recommends ccache gcc-8 g++-8
       shell: bash
 
     - name: Generate project
