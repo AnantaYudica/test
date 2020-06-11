@@ -40,9 +40,9 @@ jobs:
 
     - name: Generate project
       run: |
-        export CC=/usr/bin/gcc-7
-        export CXX=/usr/bin/g++-7
-        cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32 -DCMAKE_EXE_LINKER_FLAGS=-m32
+        export CC=/usr/bin/x86_64-linux-gnu-gcc-7
+        export CXX=/usr/bin/x86_64-linux-gnu-g++-7
+        cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
