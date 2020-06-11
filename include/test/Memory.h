@@ -68,7 +68,7 @@ Memory<Tout>::Memory(Tout& output) :
     m_blocks = (mem::Block*)std::malloc(m_blocksLength * 
         sizeof(mem::Block));
     assert(m_blocks != NULL);
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
     for (std::size_t i = 0; i < m_blocksLength; ++i)
         memcpy((void*)(m_blocks + i), &mem::Block(), sizeof(mem::Block));
 #endif
@@ -132,14 +132,14 @@ void Memory<Tout>::ReallocationBlock()
     assert(m_output != NULL);
     if (m_blocksSize == m_blocksLength)
     {
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
         auto old_length = m_blocksLength;
 #endif
         m_blocksLength *= TEST_MEMORY_MULTIPLY_BLOCK_SIZE;
         m_blocks = (mem::Block*)std::realloc(m_blocks,
             m_blocksLength * sizeof(mem::Block));
         assert(m_blocks != NULL);
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
         for (std::size_t i = old_length; i < m_blocksLength; ++i)
             memcpy((void*)(m_blocks + i), &mem::Block(), sizeof(mem::Block));
 #endif

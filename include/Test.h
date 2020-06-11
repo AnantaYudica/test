@@ -403,7 +403,7 @@ void operator delete[]( void* p, const std::nothrow_t& tag )
     std::free(p);
 }
 
-#ifndef _WIN32
+#ifndef _MSC_BUILD 
 #define new(...) new(__VA_ARGS__, __FILE__, __LINE__)
 #endif
 

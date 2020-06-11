@@ -69,7 +69,7 @@ Output<Ts>::Output(Ts& status, const char* file_output) :
     m_debugEnable(true),
     m_status(&status)
 {
-#if ((defined(_WIN32) || defined(_WIN64)) && !defined(_CRT_SECURE_NO_WARNINGS))
+#if (defined(_MSC_BUILD) && !defined(_CRT_SECURE_NO_WARNINGS))
     fopen_s(&m_outputFile, file_output, "w"); 
 #else 
     m_outputFile = fopen(file_output, "w");
