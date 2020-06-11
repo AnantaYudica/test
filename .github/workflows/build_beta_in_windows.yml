@@ -32,12 +32,12 @@ jobs:
 
     - name: Build
       run: |
-        "${{steps.get_msbuild_executable.outputs.path}}" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86
+        & "${{steps.get_msbuild_executable.outputs.path}}" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86
       working-directory: ./.build
       shell: powershell
 
     - name: Test
       run: |
-        "${{steps.get_msbuild_executable.outputs.path}}" RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=X86
+        & "${{steps.get_msbuild_executable.outputs.path}}" RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=X86
       working-directory: ./.build
       shell: powershell
