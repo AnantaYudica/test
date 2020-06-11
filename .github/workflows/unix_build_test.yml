@@ -22,13 +22,17 @@ jobs:
     
     - name: Install Multi-architecture
       run: |
-        sudo apt install gcc-multilib
+        sudo dpkg --add-architecture i386
+        sudo apt-get update
+        sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+        ls /usr/bin
       shell: bash
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
     - name: Check dir
       run: |
         ls /usr/bin
+        ls /usr/lib32
       shell: bash
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
