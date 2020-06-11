@@ -26,6 +26,13 @@ jobs:
       shell: bash
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
+    - name: Check dir
+      run: |
+        ls /usr/bin
+        ls /usr/lib/i386-linux-gnu
+      shell: bash
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
+
     - name: Generate project
       run: |
         cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
