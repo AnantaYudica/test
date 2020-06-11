@@ -19,19 +19,20 @@ jobs:
 
     - name: Create build directory
       run: mkdir -p .build
+    
+    - name: install gcc
+      run: sudo apt-get install -y --no-install-recommends ccache gcc-8.4 g++-8.4
+      shell: bash
 
     - name: Generate project
       run: |
-        export CC=/usr/bin/gcc-8.4
-        export CXX=/usr/bin/g++-8.4
+        gcc --version
         cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
     - name: Generate project
       run: |
-        export CC=/usr/bin/gcc-8.4
-        export CXX=/usr/bin/g++-8.4
         cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m64
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x64' }}
