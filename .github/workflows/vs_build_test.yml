@@ -1,5 +1,5 @@
 
-name: beta-windows
+name: Visual Studio Build Test
 
 on:
   push:
