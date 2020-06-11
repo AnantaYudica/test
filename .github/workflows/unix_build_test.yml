@@ -38,9 +38,8 @@ jobs:
 
     - name: Generate project
       run: |
-        export CC=/usr/bin/gcc-7
-        export CXX=/usr/bin/g++-7
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/lib32
+        export CC=/usr/bin/gcc-8
+        export CXX=/usr/bin/g++-8
         cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
