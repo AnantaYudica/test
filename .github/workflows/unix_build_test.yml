@@ -22,13 +22,19 @@ jobs:
 
     - name: Generate project
       run: |
-        update-alternatives --query gcc
+        sudo update-alternatives --query gcc
+        export CC=/usr/bin/gcc-8.4
+        export CXX=/usr/bin/g++-8.4
         cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
     - name: Generate project
-      run: cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m64
+      run: |
+        sudo update-alternatives --query gcc
+        export CC=/usr/bin/gcc-8.4
+        export CXX=/usr/bin/g++-8.4
+        cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m64
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x64' }}
 
