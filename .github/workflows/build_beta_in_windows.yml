@@ -5,42 +5,39 @@ on:
   push:
     branches: [ beta ]
 jobs:
-  get_msbuild:
-    runs-on: windows-latest
-    outputs:
-      executable: ${{steps.set_executable.outputs.executable}}
-    steps:
-      - id: set_executable
-        run: echo "::set-output name=executable::$(vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
   build_test:
     runs-on: windows-latest
-    needs: get_msbuild
+    strategy:
+      matrix:
+        platform: [Win32]
     steps:
     - uses: actions/checkout@v2
       with:
         ref: beta
         submodules: true
 
+    - name: Get msbuild executable
+      id: get_msbuild_executable
+      run: echo "::set-output name=path::$(vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
+
     - name: Create build directory
       run: mkdir -p .build
 
     - name: Print get_msbuild outputs
-      run: echo ${{needs.get_msbuild.outputs.executable}}
+      run: echo "${{steps.get_msbuild_executable.outputs.path}}"
 
     - name: Generate project
-      run: cmake ../cmake -G "Visual Studio 16 2019" -A Win32
+      run: cmake ../cmake -G "Visual Studio 16 2019" -A ${{ matrix.platform }}
       working-directory: ./.build
 
     - name: Build
       run: |
-        $MSBUILD = (vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
-        & $MSBUILD ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86
+        "${{steps.get_msbuild_executable.outputs.path}}" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86
       working-directory: ./.build
       shell: powershell
 
     - name: Test
       run: |
-        $MSBUILD = (vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)
-        & $MSBUILD RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=X86
+        "${{steps.get_msbuild_executable.outputs.path}}" RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=X86
       working-directory: ./.build
       shell: powershell
