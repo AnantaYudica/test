@@ -20,13 +20,15 @@ jobs:
     - name: Create build directory
       run: mkdir -p .build
     
-    - name: check gcc
-      run: sudo update-alternatives --config gcc
+    - name: Install Multi-architecture
+      run: |
+        sudo dpkg --add-architecture i386
+        sudo apt-get update
+        sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
       shell: bash
 
     - name: Generate project
       run: |
-        gcc --version
         cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
