@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         compiler: [GNU]
-        platform: [Win32, x64]
+        platform: [x32, x64]
     steps:
     - uses: actions/checkout@v2
       with:
@@ -21,9 +21,11 @@ jobs:
       run: mkdir -p .build
 
     - name: Generate project
-      run: cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
+      run: |
+        update-alternatives --query gcc
+        cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
       working-directory: ./.build
-      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'Win32' }}
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
     - name: Generate project
       run: cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m64
