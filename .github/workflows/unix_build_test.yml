@@ -33,7 +33,7 @@ jobs:
       run: |
         ls /usr/bin
         ls /usr/lib32
-        ls usr/lib/gcc/x86_64-linux-gnu/7
+        ls /usr/lib/gcc/x86_64-linux-gnu/7
       shell: bash
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
