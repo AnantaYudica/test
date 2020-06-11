@@ -20,8 +20,8 @@ jobs:
     - name: Create build directory
       run: mkdir -p .build
     
-    - name: install gcc
-      run: sudo apt-get install -y --no-install-recommends ccache gcc-8 g++-8
+    - name: check gcc
+      run: sudo update-alternatives --config gcc
       shell: bash
 
     - name: Generate project
