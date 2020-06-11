@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         compiler: [MSVC]
-        platform: [Win32]
+        platform: [Win32, x64]
     steps:
     - uses: actions/checkout@v2
       with:
@@ -32,15 +32,29 @@ jobs:
 
     - name: Build
       run: |
-        & "${{steps.get_msbuild_executable.outputs.path}}" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=X86
+        & "${{steps.get_msbuild_executable.outputs.path}}" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x86
+      working-directory: ./.build
+      shell: powershell
+      if: ${{ matrix.compiler == 'MSVC' &&  matrix.platform == 'Win32'}}
+
+    - name: Build
+      run: |
+        & "${{steps.get_msbuild_executable.outputs.path}}" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
+      working-directory: ./.build
+      shell: powershell
+      if: ${{ matrix.compiler == 'MSVC' &&  matrix.platform == 'x64'}}
+
+    - name: Test
+      run: |
+        & "${{steps.get_msbuild_executable.outputs.path}}" RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=x86
       working-directory: ./.build
       shell: powershell
       if: ${{ matrix.compiler == 'MSVC' &&  matrix.platform == 'Win32'}}
 
     - name: Test
       run: |
-        & "${{steps.get_msbuild_executable.outputs.path}}" RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=X86
+        & "${{steps.get_msbuild_executable.outputs.path}}" RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=x64
       working-directory: ./.build
       shell: powershell
-      if: ${{ matrix.compiler == 'MSVC' &&  matrix.platform == 'Win32'}}
+      if: ${{ matrix.compiler == 'MSVC' &&  matrix.platform == 'x64'}}
 
