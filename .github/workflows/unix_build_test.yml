@@ -34,6 +34,7 @@ jobs:
         ls /usr/bin
         ls /usr/lib32
         ls /usr/lib/gcc/x86_64-linux-gnu/7
+        ls /usr/lib/gcc/x86_64-linux-gnu/7/x32
       shell: bash
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
@@ -41,7 +42,7 @@ jobs:
       run: |
         export CC=/usr/bin/gcc-7
         export CXX=/usr/bin/g++-7
-        cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
+        cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32 -DCMAKE_FIND_ROOT_PATH=/usr/lib32
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
