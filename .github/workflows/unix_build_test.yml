@@ -22,10 +22,9 @@ jobs:
     
     - name: Install Multi-architecture
       run: |
-        sudo dpkg --add-architecture i386
-        sudo apt-get update
-        sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
+        sudo apt install gcc-multilib
       shell: bash
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
     - name: Generate project
       run: |
