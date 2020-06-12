@@ -24,7 +24,7 @@ jobs:
       run: |
         set CC=C:/msys64/mingw32/bin/gcc.exe
         set CXX=C:/msys64/mingw32/bin/g++.exe
-        set PATH=C:\msys64\usr\bin;%PATH%
+        set PATH=C:\msys64\mingw32\bin;C:\msys64\usr\bin;%PATH%
         cmake ../cmake -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
       working-directory: ./.build
       shell: cmd
@@ -34,7 +34,7 @@ jobs:
       run: |
         set CC=C:/msys64/mingw64/bin/gcc.exe
         set CXX=C:/msys64/mingw64/bin/g++.exe
-        set PATH=C:\msys64\usr\bin;%PATH%
+        set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
         cmake ../cmake -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Debug
       working-directory: ./.build
       shell: cmd
