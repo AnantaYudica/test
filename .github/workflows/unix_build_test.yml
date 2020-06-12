@@ -29,12 +29,6 @@ jobs:
       shell: bash
       if: ${{ matrix.platform == 'x32' }}
 
-    - name: Check
-      run: |
-        ls /usr/bin
-      shell: bash
-      if: ${{ matrix.compiler == 'Clang' }}
-
     - name: Generate project
       run: |
         export CC=/usr/bin/gcc-7
@@ -59,14 +53,22 @@ jobs:
       working-directory: ./.build
       if: ${{ matrix.compiler == 'Clang' && matrix.platform == 'x32' }}
 
+    - name: Generate project
+      run: |
+        export CC=/usr/bin/clang-9
+        export CXX=/usr/bin/clang++-9
+        cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
+      working-directory: ./.build
+      if: ${{ matrix.compiler == 'Clang' && matrix.platform == 'x64' }}
+
     - name: Build
       run: make
       working-directory: ./.build
-      if: ${{ matrix.compiler == 'GNU'}}
+      if: ${{ matrix.compiler == 'GNU' || matrix.compiler == 'Clang'}}
 
     - name: Test
       run: make test
       working-directory: ./.build
-      if: ${{ matrix.compiler == 'GNU' }}
+      if: ${{ matrix.compiler == 'GNU' || matrix.compiler == 'Clang'}}
 
 
