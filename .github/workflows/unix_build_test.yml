@@ -31,7 +31,7 @@ jobs:
 
     - name: Check
       run: |
-        ls CC=/usr/bin
+        ls /usr/bin
       shell: bash
       if: ${{ matrix.compiler == 'Clang' }}
 
