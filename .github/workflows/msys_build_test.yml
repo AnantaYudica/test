@@ -42,19 +42,35 @@ jobs:
 
     - name: Build
       run: |
-        set PATH=C:\msys64\usr\bin;%PATH%
+        set PATH=C:\msys64\mingw32\bin;C:\msys64\usr\bin;%PATH%
         make
       working-directory: ./.build
       shell: cmd
-      if: ${{ matrix.compiler == 'GNU'}}
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
+      
+    - name: Build
+      run: |
+        set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
+        make
+      working-directory: ./.build
+      shell: cmd
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x64' }}
 
     - name: Test
       run: |
-        set PATH=C:\msys64\usr\bin;%PATH%
+        set PATH=C:\msys64\mingw32\bin;C:\msys64\usr\bin;%PATH%
         make test
       working-directory: ./.build
       shell: cmd
-      if: ${{ matrix.compiler == 'GNU' }}
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
+
+    - name: Test
+      run: |
+        set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
+        make test
+      working-directory: ./.build
+      shell: cmd
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x64' }}
 
 
 
