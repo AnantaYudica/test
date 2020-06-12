@@ -27,7 +27,7 @@ jobs:
         sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386
         sudo apt install gcc-multilib g++-multilib
       shell: bash
-      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
+      if: ${{ matrix.platform == 'x32' }}
 
     - name: Check
       run: |
