@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        compiler: [GNU]
+        compiler: [GNU, Clang]
         platform: [x32, x64]
     steps:
     - uses: actions/checkout@v2
@@ -29,14 +29,11 @@ jobs:
       shell: bash
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
 
-    - name: Check dir
+    - name: Check
       run: |
-        ls /usr/bin
-        ls /usr/lib32
-        ls /usr/lib/gcc/x86_64-linux-gnu/7
-        ls /usr/lib/gcc/x86_64-linux-gnu/7/x32
+        llc --version
       shell: bash
-      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
+      if: ${{ matrix.compiler == 'Clang' }}
 
     - name: Generate project
       run: |
@@ -53,6 +50,14 @@ jobs:
         cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug
       working-directory: ./.build
       if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x64' }}
+
+    - name: Generate project
+      run: |
+        export CC=/usr/bin/clang-9
+        export CXX=/usr/bin/clang++-9
+        cmake ../cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=--target=i686
+      working-directory: ./.build
+      if: ${{ matrix.compiler == 'Clang' && matrix.platform == 'x32' }}
 
     - name: Build
       run: make
