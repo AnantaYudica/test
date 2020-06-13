@@ -31,32 +31,32 @@ class ATest
 {
 public:
     template<typename... TArgs>
-    void Foo1(int, TArgs&&... args)
+    void Foo1(int, TArgs&&...)
     {
         printf("foo1(int, ...)\n");
     }
     template<typename TArg, typename... TArgs>
-    void Foo2(int, TArg&& arg, TArgs&&... args)
+    void Foo2(int, TArg&& arg, TArgs&&...)
     {
         printf("foo2(int, %s)\n", std::forward<TArg>(arg));
     }
     template<typename TArg, typename... TArgs>
-    void Foo3(int, TArg&& arg, TArgs&&... args)
+    void Foo3(int, TArg&& arg, TArgs&&...)
     {
         printf("foo3(int, %s)\n", std::forward<TArg>(arg));
     }
     template<typename TArg, typename... TArgs>
-    void Foo4(int, TArg&& arg, TArgs&&... args)
+    void Foo4(int, TArg&& arg, TArgs&&...)
     {
         printf("foo4(int, %d)\n", std::forward<TArg>(arg));
     }
     template<typename TArg, typename... TArgs>
-    void Foo4l(int, TArg&& arg, TArgs&&... args)
+    void Foo4l(int, TArg&& arg, TArgs&&...)
     {
         printf("foo4(int, %ld)\n", std::forward<TArg>(arg));
     }
     template<typename TArg, typename... TArgs>
-    void Foo4f(int, TArg&& arg, TArgs&&... args)
+    void Foo4f(int, TArg&& arg, TArgs&&...)
     {
         printf("foo4(int, %f)\n", std::forward<TArg>(arg));
     }

@@ -109,23 +109,23 @@ Parameter<TArgs...>::Parameter()
 {}
 
 template<typename... TArgs>
-Parameter<TArgs...>::Parameter(const Parameter<TArgs...>& cpy)
+Parameter<TArgs...>::Parameter(const Parameter<TArgs...>&)
 {}
 
 template<typename... TArgs>
-Parameter<TArgs...>::Parameter(Parameter<TArgs...>&& mov)
+Parameter<TArgs...>::Parameter(Parameter<TArgs...>&&)
 {}
 
 template<typename... TArgs>
 Parameter<TArgs...>& Parameter<TArgs...>::
-    operator=(const Parameter<TArgs...>& cpy)
+    operator=(const Parameter<TArgs...>&)
 {
     return *this;
 }
 
 template<typename... TArgs>
 Parameter<TArgs...>& Parameter<TArgs...>::
-    operator=(Parameter<TArgs...>&& mov)
+    operator=(Parameter<TArgs...>&&)
 {
     return *this;
 }

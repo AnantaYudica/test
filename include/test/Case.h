@@ -14,7 +14,7 @@ namespace case_
 {
 
 template<typename TDerived, typename... TVariableArgs>
-void Run(TDerived& d, Variable<TVariableArgs...>& var)
+void Run(TDerived&, Variable<TVariableArgs...>&)
 {}
 
 template<typename TDerived, typename... TVariableArgs, 

@@ -106,7 +106,7 @@ template<typename TCaseId, typename... TArgs>
 template<std::size_t ICaseId, typename TRet, typename TFuncMmbr, 
     typename TDerived, typename... TFuncMmbrArgs, typename... TVarArgs>
 TRet Argument<TCaseId, TArgs...>::Filler(TFuncMmbr func_mmbr, TDerived& d,
-    test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
+    test::Variable<TVarArgs...>&, TFuncMmbrArgs&&... args)
 {
     return (d.*func_mmbr)(std::forward<TFuncMmbrArgs>(args)...);
 }
@@ -115,7 +115,7 @@ template<typename TCaseId, typename... TArgs>
 template<std::size_t ICaseId, typename TRet, typename TFunc, 
     typename... TFuncArgs, typename... TVarArgs>
 TRet Argument<TCaseId, TArgs...>::Filler(TFunc func, 
-    test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
+    test::Variable<TVarArgs...>&, TFuncArgs&&... args)
 {
     return func(std::forward<TFuncArgs>(args)...);
 }

@@ -346,24 +346,6 @@ void* operator new[]( std::size_t sz, const char (&file)[N], const int& line)
 }
 
 template<std::size_t N>
-void* operator new (std::size_t sz, const std::nothrow_t& tag,
-    const char (&file)[N], const int& line)
-{
-    auto p = ::operator new(sz, tag);
-    TEST::GetInstance().Memory().Register(p, sz, file, line);
-    return p;
-}
-
-template<std::size_t N>
-void* operator new[]( std::size_t sz, const std::nothrow_t& tag,
-    const char (&file)[N], const int& line)
-{
-    auto p = ::operator new[](sz, tag);
-    TEST::GetInstance().Memory().Register(p, sz, file, line);
-    return p;
-}
-
-template<std::size_t N>
 void* operator new ( std::size_t sz, void* ptr,
     const char (&file)[N], const int& line)
 {
@@ -386,18 +368,6 @@ void operator delete(void* p) noexcept
 }
 
 void operator delete[](void* p) noexcept
-{
-    TEST::GetInstance().Memory().Unregister(p);
-    std::free(p);
-}
-
-void operator delete ( void* p, const std::nothrow_t& tag )
-{
-    TEST::GetInstance().Memory().Unregister(p);
-    std::free(p);
-}
-
-void operator delete[]( void* p, const std::nothrow_t& tag )
 {
     TEST::GetInstance().Memory().Unregister(p);
     std::free(p);

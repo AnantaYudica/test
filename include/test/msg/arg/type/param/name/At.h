@@ -254,13 +254,13 @@ template<typename TCaseId, std::size_t I, std::size_t IAt, typename... TArgs>
 #ifdef _MSC_BUILD 
 template<typename... TVarArgs, typename TGet>
 TGet Argument<TCaseId,arg::type::param::name::At<I, IAt>, TArgs...>::
-    Get(test::Variable<TVarArgs...>& var)
+    Get(test::Variable<TVarArgs...>&)
 #else
 template<typename... TVarArgs>
 typename Argument<TCaseId, arg::type::param::name::At<I, IAt>, TArgs...>::
     template GetType<test::Variable<TVarArgs...>> Argument<TCaseId, 
         arg::type::param::name::At<I, IAt>, TArgs...>::
-            Get(test::Variable<TVarArgs...>& var)
+            Get(test::Variable<TVarArgs...>&)
 #endif
 {
     return std::move(type::Name<typename test::type::param::Element<IAt, 
