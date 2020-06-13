@@ -35,25 +35,30 @@ public:
     {
         printf("foo1(int, ...)\n");
     }
-    template<typename... TArgs>
-    void Foo2(int, TArgs&&... args)
+    template<typename TArg, typename... TArgs>
+    void Foo2(int, TArg&& arg, TArgs&&... args)
     {
-        printf("foo2(int, %s)\n", std::forward<TArgs>(args)...);
+        printf("foo2(int, %s)\n", std::forward<TArg>(arg));
     }
-    template<typename... TArgs>
-    void Foo3(int, TArgs&&... args)
+    template<typename TArg, typename... TArgs>
+    void Foo3(int, TArg&& arg, TArgs&&... args)
     {
-        printf("foo3(int, %s)\n", std::forward<TArgs>(args)...);
+        printf("foo3(int, %s)\n", std::forward<TArg>(arg));
     }
-    template<typename... TArgs>
-    void Foo4(int, TArgs&&... args)
+    template<typename TArg, typename... TArgs>
+    void Foo4(int, TArg&& arg, TArgs&&... args)
     {
-        printf("foo4(int, %d)\n", std::forward<TArgs>(args)...);
+        printf("foo4(int, %d)\n", std::forward<TArg>(arg));
     }
-    template<typename... TArgs>
-    void Foo4f(int, TArgs&&... args)
+    template<typename TArg, typename... TArgs>
+    void Foo4l(int, TArg&& arg, TArgs&&... args)
     {
-        printf("foo4(int, %f)\n", std::forward<TArgs>(args)...);
+        printf("foo4(int, %ld)\n", std::forward<TArg>(arg));
+    }
+    template<typename TArg, typename... TArgs>
+    void Foo4f(int, TArg&& arg, TArgs&&... args)
+    {
+        printf("foo4(int, %f)\n", std::forward<TArg>(arg));
     }
     template<typename... TArgs>
     void Foo5(int, TArgs&&... args)
@@ -63,7 +68,7 @@ public:
     template<typename... TArgs>
     void Foo6(int, TArgs&&... args)
     {
-        printf("foo5(int, %d %f %d %f)\n", std::forward<TArgs>(args)...);
+        printf("foo5(int, %d %f %ld %f)\n", std::forward<TArgs>(args)...);
     }
     template<typename TChar>
     void Foo7(int, basic::test::CString<TChar>&& cstr)
@@ -121,7 +126,7 @@ int Foo2(int&& i)
 
 int Foo3(int&& i1, float&& f, long&& l, int&& i2)
 {
-    return printf("Print Foo3(i1 = %d, f = %f, l = %d, "
+    return printf("Print Foo3(i1 = %d, f = %f, l = %ld, "
         "i2 = %d)\n", i1, f, l, i2);
 }
 
@@ -228,7 +233,7 @@ int main()
     printf("get arg9 at 1 value from var9 : %d\n", arg9.Get<1>(var9));
     printf("get arg9 at 2 value from var9 : %d\n", arg9.Get<2>(var9));
     printf("get arg9 at 3 value from var9 : %d\n", arg9.Get<3>(var9));
-    arg9.Call<void>(&ATest::Foo4, a1, var9, 2);
+    arg9.Call<void>(&ATest::Foo5, a1, var9, 2);
     arg9.Call<int>(&Print, var9, 
         std::move("Print var value : %d %d %d %d\n"));
     
@@ -297,7 +302,7 @@ int main()
         
     printf("get arg14 value at 0 from var14  : %d\n", arg14.Get<0>(var14));
     printf("get arg14 value at 1 from var14  : %f\n", arg14.Get<1>(var14));
-    printf("get arg14 value at 2 from var14  : %d\n", arg14.Get<2>(var14));
+    printf("get arg14 value at 2 from var14  : %ld\n", arg14.Get<2>(var14));
     printf("get arg14 value at 3 from var14  : %f\n", arg14.Get<3>(var14));
     arg14.Call<void>(&ATest::Foo6, a1, var14, 2);
     arg14.Call<int>(&Print, var14, 
@@ -320,8 +325,8 @@ int main()
     arg14_0_1.Call<void>(&ATest::Foo4f, a1, var14, 2);
     arg14_0_1.Call<int>(&Print, var14, std::move("Print type value at 1 : %f\n"));
     
-    printf("get arg14_0_2 value from var14  : %d\n", arg14_0_2.Get(var14));
-    arg14_0_2.Call<void>(&ATest::Foo4, a1, var14, 2);
+    printf("get arg14_0_2 value from var14  : %ld\n", arg14_0_2.Get(var14));
+    arg14_0_2.Call<void>(&ATest::Foo4l, a1, var14, 2);
     arg14_0_2.Call<int>(&Print, var14, std::move("Print type value at 2 : %d\n"));
     
     printf("get arg14_0_3 value from var14  : %f\n", arg14_0_3.Get(var14));
