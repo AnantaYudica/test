@@ -133,9 +133,18 @@ void Memory<Tout>::ReallocationBlock()
     {
         const auto old_length = m_blocksLength;
         m_blocksLength *= TEST_MEMORY_MULTIPLY_BLOCK_SIZE;
-        m_blocks = (mem::Block*)std::realloc(m_blocks,
-            m_blocksLength * sizeof(mem::Block));
-        assert(m_blocks != NULL);
+        mem::Block* new_blocks = (mem::Block*)std::malloc(m_blocksLength * 
+            sizeof(mem::Block));
+        if (new_blocks == NULL)
+        {
+            m_output->Error("Error Realloc {from %zu, byte to %zu bytes}\n", 
+                old_length * sizeof(mem::Block), m_blocksLength * sizeof(mem::Block));
+            m_blocksLength = old_length;
+            return;
+        }
+        memcpy((void*) new_blocks, (void*) m_blocks, sizeof(mem::Block) * old_length);
+        free(m_blocks);
+        m_blocks = new_blocks;
         const auto && _default = mem::Block();
         for (std::size_t i = old_length; i < m_blocksLength; ++i)
             memcpy((void*)(m_blocks + i), (void*)&_default, sizeof(mem::Block));
