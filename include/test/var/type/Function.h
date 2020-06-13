@@ -16,7 +16,7 @@ class Variable<test::type::Function<TRet(TArgsFunc...), TPtrFunc>, TArgs...> :
     public Variable<TArgs...>
 {
 public:
-    typedef test::type::Function<TRet(TArgsFunc...), TPtrFunc>&& ConstGetType;
+    typedef test::type::Function<TRet(TArgsFunc...), TPtrFunc> ConstGetType;
 public:
     template<typename... TValArgs>
     Variable(TValArgs&&... val_args);

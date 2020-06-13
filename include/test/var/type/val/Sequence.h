@@ -15,7 +15,7 @@ class Variable<test::type::val::Sequence<TArg, TArgValues...>, TArgs...> :
     public Variable<TArgs...>
 {
 public:
-    typedef test::type::val::Sequence<TArg, TArgValues...>&& ConstGetType;
+    typedef test::type::val::Sequence<TArg, TArgValues...> ConstGetType;
 public:
     template<typename... TValArgs>
     Variable(TValArgs&&... val_args);
