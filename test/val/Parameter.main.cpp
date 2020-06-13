@@ -44,13 +44,13 @@ int main()
     paramVal0.Fill<void>(&PrintEmpty);
     paramVal0.Fill<void>(&A::PrintEmpty, a);
     paramVal0.Fill<void>(&A::PrintEmpty, &a);
-    A a0 = paramVal0.Fill<A>();
+    paramVal0.Fill<A>();
 
     ParamVal1 paramVal(1, "test", 3.14);
     paramVal.Fill<void>(&Print);
     paramVal.Fill<void>(&A::Print, a);
     paramVal.Fill<void>(&A::Print, &a);
-    A a1 = paramVal.Fill<A>();
+    paramVal.Fill<A>();
 
     printf("i = %d\n", paramVal.At<0>());
     printf("cstr = %s\n", paramVal.At<1>());
@@ -72,6 +72,9 @@ int main()
     printf("i = %d\n", cpyParamVal1.At<0>());
     printf("cstr = %s\n", cpyParamVal1.At<1>());
     printf("f = %f\n", cpyParamVal1.At<2>());
+    printf("cpy i = %d\n", cpyParamVal2.At<0>());
+    printf("cpy cstr = %s\n", cpyParamVal2.At<1>());
+    printf("cpy f = %f\n", cpyParamVal2.At<2>());
     
 
 }
