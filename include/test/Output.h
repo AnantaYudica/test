@@ -55,10 +55,10 @@ public:
 
 template<typename Ts>
 Output<Ts>::Output(Ts& status) :
-    m_outputFile(stdout),
     m_enable(true),
     m_infoEnable(true),
     m_debugEnable(true),
+    m_outputFile(stdout),
     m_status(&status)
 {}
 
@@ -67,6 +67,7 @@ Output<Ts>::Output(Ts& status, const char* file_output) :
     m_enable(true),
     m_infoEnable(true),
     m_debugEnable(true),
+    m_outputFile(NULL),
     m_status(&status)
 {
 #if (defined(_MSC_BUILD) && !defined(_CRT_SECURE_NO_WARNINGS))
@@ -79,10 +80,10 @@ Output<Ts>::Output(Ts& status, const char* file_output) :
 
 template<typename Ts>
 Output<Ts>::Output(Output<Ts>&& mov) :
-    m_outputFile(mov.m_outputFile),
     m_enable(mov.m_enable),
     m_infoEnable(mov.m_infoEnable),
     m_debugEnable(mov.m_debugEnable),
+    m_outputFile(mov.m_outputFile),
     m_status(NULL)
 {
     mov.m_outputFile = NULL;

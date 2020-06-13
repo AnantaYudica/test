@@ -53,11 +53,11 @@ private:
     static Test<Ts, To, Tmem>* ms_instance;
 private:
     bool m_initialized;
+    std::vector<test::reg::Base*>* m_list;
+    std::stack<test::Trace>* m_traces;
     StatusType m_status;
     OutputType m_output;
     MemoryType m_memory;
-    std::vector<test::reg::Base*>* m_list;
-    std::stack<test::Trace>* m_traces;
 private:
     Test();
     Test(const Test<Ts, To, Tmem>& cpy) = delete;
@@ -102,32 +102,32 @@ Test<Ts, To, Tmem>* Test<Ts, To, Tmem>::ms_instance;
 template<typename Ts, template<typename> class To,
     template<typename> class Tmem>
 Test<Ts, To, Tmem>::Test() :
-    m_status(),
-#ifdef TEST_OUTPUT_FILENAME_EMPTY
-    m_output(m_status),
-#else //!TEST_OUTPUT_FILENAME_EMPTY
-    m_output(m_status, TEST_OUTPUT_FILENAME),
-#endif
-#ifdef USING_TEST_MEMORY
-    m_memory(m_output),
-#endif //USING_TEST_MEMORY
+    m_initialized(true),
     m_list(NULL),
     m_traces(NULL),
-    m_initialized(true)
+    m_status(),
+#ifdef TEST_OUTPUT_FILENAME_EMPTY
+    m_output(m_status)
+#else //!TEST_OUTPUT_FILENAME_EMPTY
+    m_output(m_status, TEST_OUTPUT_FILENAME)
+#endif
+#ifdef USING_TEST_MEMORY
+    ,m_memory(m_output)
+#endif //USING_TEST_MEMORY
 {
 }
 
 template<typename Ts, template<typename> class To,
     template<typename> class Tmem>
 Test<Ts, To, Tmem>::Test(Test<Ts, To, Tmem>&& mov) :
-    m_status(std::move(mov.m_status)),
-    m_output(std::move(mov.m_output)),
-#ifdef USING_TEST_MEMORY
-    m_memory(std::move(mov.m_memory)),
-#endif //USING_TEST_MEMORY
+    m_initialized(true),
     m_list(std::move(mov.m_list)),
     m_traces(std::move(mov.m_traces)),
-    m_initialized(true)
+    m_status(std::move(mov.m_status)),
+    m_output(std::move(mov.m_output))
+#ifdef USING_TEST_MEMORY
+    ,m_memory(std::move(mov.m_memory))
+#endif //USING_TEST_MEMORY
 {
     m_output.Set(m_status);
 #ifdef USING_TEST_MEMORY
