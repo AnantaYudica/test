@@ -296,7 +296,7 @@ int main()
 
 
     basic::test::Variable<basic::test::val::Parameter<int, float, long, 
-        double>, char> var14(1, 3.14, 14, double(22/7.0));
+        double>, char> var14(1, 3.14f, 14, double(22/7.0));
     basic::test::msg::Argument<TestA1, basic::test::msg::arg::
         val::Parameter<0>> arg14;
         
@@ -335,7 +335,7 @@ int main()
 
     basic::test::Variable<basic::test::type::Function<int(int&&, float&&, 
         long&&, int&&), &Foo3>, basic::test::val::Parameter<int, float, long>,
-        basic::test::type::Value<int, 22>> var15(1, 3.14, 11);
+        basic::test::type::Value<int, 22>> var15(1, 3.14f, 11);
     basic::test::msg::Argument<TestA1, basic::test::msg::arg::type::
         Function<0, basic::test::msg::arg::val::Parameter<1>,
             basic::test::msg::arg::type::Value<2>>> arg15;
