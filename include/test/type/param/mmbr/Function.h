@@ -6,8 +6,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -271,7 +269,5 @@ TRet Function<type::Parameter<TArgs...>>::
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_PARAM_MMBR_FUNCTION_H_

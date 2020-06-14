@@ -3,8 +3,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 
@@ -115,7 +113,5 @@ void Base<TCases, TVariable, TVariables...>::Run()
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_BASE_H_

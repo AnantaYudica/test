@@ -11,8 +11,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace msg
@@ -256,7 +254,5 @@ typename Argument<TCaseId, arg::type::Value<I>, TArgs...>::
 } //!msg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MSG_ARG_TYPE_VALUE_H_

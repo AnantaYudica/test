@@ -5,8 +5,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -50,7 +48,5 @@ struct Element<I, TTParam<TArg, TArgs...>>
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_PARAM_ELEMENT_H_

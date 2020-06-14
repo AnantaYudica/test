@@ -18,8 +18,6 @@
 #include "arg/val/param/At.h"
 #include "arg/val/seq/At.h"
 
-namespace basic
-{
 namespace test
 {
 namespace msg
@@ -180,7 +178,5 @@ TArgError Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
 } //!msg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MSG_BASE_H_

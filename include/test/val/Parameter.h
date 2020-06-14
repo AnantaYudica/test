@@ -7,8 +7,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace val
@@ -351,8 +349,5 @@ const typename std::enable_if<I != 0, typename test::type::param::
 } //!val
 
 } //!test
-
-}//!basic
-
 
 #endif //!TEST_VAL_PARAMETER_H_

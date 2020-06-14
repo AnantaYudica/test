@@ -8,35 +8,35 @@ struct TestA3 {};
 struct TestA
 {
     template<typename T>
-    bool Result(const TestA1&, basic::test::Variable<T>&)
+    bool Result(const TestA1&, test::Variable<T>&)
     {
         std::cout << "Result TestA1" << std::endl;
         return true;
     }
     template<typename T>
-    bool Result(const TestA2&, basic::test::Variable<T>&)
+    bool Result(const TestA2&, test::Variable<T>&)
     {
         std::cout << "Result TestA2" << std::endl;
         return true;
     }
     template<typename T>
-    bool Result(const TestA3&, basic::test::Variable<T>&)
+    bool Result(const TestA3&, test::Variable<T>&)
     {
         std::cout << "Result TestA3" << std::endl;
         return false;
     }
     template<typename TCaseId, typename T>
-    void Info(const TCaseId&, basic::test::Variable<T>&)
+    void Info(const TCaseId&, test::Variable<T>&)
     {
         std::cout << "Info of TestA" << std::endl;
     }
     template<typename TCaseId, typename T>
-    void Debug(const TCaseId&, basic::test::Variable<T>&)
+    void Debug(const TCaseId&, test::Variable<T>&)
     {
         std::cout << "Debug of TestA" << std::endl;
     }
     template<typename TCaseId, typename T>
-    void Error(const TCaseId&, basic::test::Variable<T>&)
+    void Error(const TCaseId&, test::Variable<T>&)
     {
         std::cout << "Error of TestA" << std::endl;
     } 
@@ -45,12 +45,12 @@ struct TestA
 int main()
 {
     TestA ta;
-    basic::test::Variable<int> var1;
-    basic::test::Case<TestA, TestA1> c1(ta);
+    test::Variable<int> var1;
+    test::Case<TestA, TestA1> c1(ta);
     c1.Run(var1);
 
-    basic::test::Case<TestA, 
-        basic::test::type::Parameter<TestA1, TestA2, TestA3>> c2(ta);
+    test::Case<TestA, 
+        test::type::Parameter<TestA1, TestA2, TestA3>> c2(ta);
     c2.Run(var1);
     
     auto c3(c1);

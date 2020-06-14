@@ -12,8 +12,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace msg
@@ -262,7 +260,5 @@ typename Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
 } //!msg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MSG_ARG_VAL_PARAM_AT_H_

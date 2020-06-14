@@ -5,8 +5,6 @@
 
 #include "../../type/Function.h"
 
-namespace basic
-{
 namespace test
 {
 
@@ -64,8 +62,5 @@ typename Variable<test::type::Function<TRet(TArgsFunc...), TPtrFunc>,
 }
 
 } //!test
-
-} //!basic
-
 
 #endif //!TEST_VAR_TYPE_FUNCTION_H_

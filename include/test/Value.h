@@ -3,8 +3,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 
@@ -76,7 +74,5 @@ typename Value<T>::ConstGetType Value<T>::Get() const
 }
 
 } //!test
-
-}//!basic
 
 #endif //!TEST_VALUE_H_

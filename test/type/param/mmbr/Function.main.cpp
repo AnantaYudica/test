@@ -4,7 +4,7 @@
 
 #include <cstdio>
 
-typedef basic::test::type::Parameter<int, char, float> P1;
+typedef test::type::Parameter<int, char, float> P1;
 
 class A
 {
@@ -25,7 +25,7 @@ public:
 
 int main()
 {
-    typedef basic::test::type::param::mmbr::Function<P1> PF1;
+    typedef test::type::param::mmbr::Function<P1> PF1;
     A a;
     PF1::Call<void>(&A::Print1, a, 1,'a', 3.14f);
     PF1::Call<void>(&A::Print1, &a, 1,'a', 3.14f);

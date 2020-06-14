@@ -7,8 +7,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace cstr
@@ -32,8 +30,6 @@ test::CString<typename std::remove_const<TChar>::type>
 } //!cstr
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_CSTR_FORMAT_H_
 

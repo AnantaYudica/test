@@ -6,8 +6,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace case_
@@ -125,7 +123,5 @@ void Case<TDerived, type::Parameter<TCaseIds...>>::
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_CASE_H_

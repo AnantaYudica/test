@@ -5,8 +5,6 @@
 
 #include "../../type/Value.h"
 
-namespace basic
-{
 namespace test
 {
 
@@ -59,8 +57,5 @@ typename Variable<test::type::Value<TArg, TArgValue>, TArgs...>::ConstGetType
 }
 
 } //!test
-
-} //!basic
-
 
 #endif //!TEST_VAR_TYPE_VALUE_H_

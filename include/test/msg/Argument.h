@@ -8,8 +8,6 @@
 #include <cstddef>
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace msg
@@ -194,7 +192,5 @@ TRet Argument<TCaseId, TArgs...>::Call(const type::Index<TCaseId, ICaseId>&,
 } //!msg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MSG_ARGUMENT_H_

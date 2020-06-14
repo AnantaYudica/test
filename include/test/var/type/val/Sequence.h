@@ -5,8 +5,6 @@
 
 #include "../../../type/val/Sequence.h"
 
-namespace basic
-{
 namespace test
 {
 
@@ -60,8 +58,5 @@ typename Variable<test::type::val::Sequence<TArg, TArgValues...>, TArgs...>::
 }
 
 } //!test
-
-} //!basic
-
 
 #endif //!TEST_VAR_TYPE_VAL_SEQUENCE_H_

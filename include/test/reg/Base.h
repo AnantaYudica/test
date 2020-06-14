@@ -3,8 +3,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace reg
@@ -37,7 +35,5 @@ inline Base::~Base()
 } //!reg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_REG_BASE_H_

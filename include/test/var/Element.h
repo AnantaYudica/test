@@ -5,8 +5,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace var
@@ -32,7 +30,5 @@ struct Element<0, test::Variable<TArg, TArgs...>>
 } //!var
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_VAR_ELEMENT_H_

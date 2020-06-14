@@ -5,8 +5,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -35,7 +33,5 @@ struct Size<TTParam<TArgs...>>
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_PARAM_SIZE_H_

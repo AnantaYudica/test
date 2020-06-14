@@ -21,8 +21,6 @@
 #include "Output.h"
 #include "mem/Block.h"
 
-namespace basic
-{
 namespace test
 {
 
@@ -239,8 +237,6 @@ bool Memory<Tout>::HasRegister(void * p)
 }
 
 } //!test
-
-} //!basic
 
 #endif //!USING_TEST_MEMORY
 

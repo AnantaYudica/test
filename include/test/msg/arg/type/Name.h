@@ -10,8 +10,6 @@
 #include <cstddef>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace msg
@@ -262,7 +260,5 @@ typename Argument<TCaseId, arg::type::Name<I>, TArgs...>::
 } //!msg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MSG_ARG_TYPE_NAME_H_

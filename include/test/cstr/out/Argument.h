@@ -4,8 +4,6 @@
 #include "../../out/Argument.h"
 #include "../../CString.h"
 
-namespace basic
-{
 namespace test
 {
 namespace out
@@ -43,7 +41,5 @@ const char* Argument<test::CString<TChar>>::
 } //!out
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_CSTR_OUT_ARGUMENT_H_

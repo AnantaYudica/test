@@ -19,13 +19,13 @@ void Foo2(const int& i)
 
 int main()
 {
-    typedef basic::test::type::Function<int(), &Foo1> Function1;
+    typedef test::type::Function<int(), &Foo1> Function1;
     Function1 f1;
     printf("ret = %d\n", f1.Call());
 
     Function1::Pointer();
 
-    typedef basic::test::type::Function<decltype(Foo2), &Foo2> Function2;
+    typedef test::type::Function<decltype(Foo2), &Foo2> Function2;
     Function2 f2;
     f2.Call(4);
 }

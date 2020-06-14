@@ -4,8 +4,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -61,8 +59,6 @@ constexpr typename std::enable_if<I != 0,
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_VAL_SEQUENCE_H_
 

@@ -10,8 +10,6 @@
 #include "out/Argument.h"
 #include "cstr/out/Argument.h"
 
-namespace basic
-{
 namespace test
 {
 
@@ -185,7 +183,5 @@ void Output<Ts>::DebugEnable(bool debug_enable)
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_OUTPUT_H_

@@ -4,8 +4,8 @@
 
 int main()
 {
-    basic::test::Variable<> var1;
-    basic::test::Variable<int> var2;
-    basic::test::Variable<int, char> var3;
-    basic::test::Variable<int, char, float> var4;
+    test::Variable<> var1;
+    test::Variable<int> var2;
+    test::Variable<int, char> var3;
+    test::Variable<int, char, float> var4;
 }

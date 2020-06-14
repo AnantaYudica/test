@@ -5,8 +5,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -31,7 +29,5 @@ public:
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_PARAM_FILLER_H_

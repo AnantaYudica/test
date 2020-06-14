@@ -6,8 +6,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace var
@@ -32,7 +30,5 @@ const typename var::Definition<I, test::Variable<TArg, TArgs...>>::Type&
 } //!var
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_VAR_AT_H_

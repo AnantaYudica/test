@@ -10,8 +10,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace msg
@@ -153,7 +151,5 @@ bool Format<TChar>::IsEmpty() const
 } //!msg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MSG_FORMAT_H_

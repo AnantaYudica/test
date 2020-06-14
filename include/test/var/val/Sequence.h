@@ -7,8 +7,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace var
@@ -190,7 +188,5 @@ typename Variable<test::val::Sequence<TArg, S>, TArgs...>::ConstGetType
 #endif
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_VAR_VAL_SEQUENCE_H_

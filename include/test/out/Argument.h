@@ -3,8 +3,6 @@
 
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace out
@@ -32,7 +30,5 @@ T&& Argument<T>::Value(typename std::remove_reference<T>::type && val)
 } //!out
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_OUT_ARGUMENT_H_

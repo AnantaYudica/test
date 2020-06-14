@@ -16,8 +16,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 
@@ -118,7 +116,5 @@ void Message<TTest, TDerived>::Error(const test::type::Index<TCaseId,
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MESSAGE_H_

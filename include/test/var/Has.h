@@ -7,8 +7,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace var
@@ -54,7 +52,5 @@ public:
 } //!var
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_VAR_HAS_H_

@@ -23,8 +23,6 @@
 
 namespace _helper
 {
-namespace _basic
-{
 namespace _test
 {
 
@@ -33,16 +31,11 @@ struct Void1T {};
 
 } //!_test
 
-} //!_basic
-
 } //_helper
-
-namespace basic
-{
 
 template<typename Ts = test::Status, 
     template<typename> class To = test::Output, 
-    template<typename> class Tmem = _helper::_basic::_test::Void1T>
+    template<typename> class Tmem = _helper::_test::Void1T>
 class Test
 {
 public:
@@ -301,14 +294,12 @@ std::stack<test::Trace>& Test<Ts, To, Tmem>::Traces()
     return *m_traces;
 }
 
-} //!basic
-
 #ifndef TEST
 #ifdef USING_TEST_MEMORY
-#define TEST basic::Test<basic::test::Status,\
-    basic::test::Output, basic::test::Memory>
+#define TEST Test<test::Status,\
+    test::Output, test::Memory>
 #else //ELSE USING_TEST_MEMORY
-#define TEST basic::Test<basic::test::Status>
+#define TEST Test<test::Status>
 #endif //!USING_TEST_MEMORY
 #endif //!TEST
 
@@ -402,7 +393,7 @@ void operator delete[](void* p) noexcept
 
 #ifndef REGISTER_TEST
 #define REGISTER_TEST(Name, Test, ...) auto Name =\
-    std::move(basic::test::reg::Make<TEST>(Test,##__VA_ARGS__, \
+    std::move(test::reg::Make<TEST>(Test,##__VA_ARGS__, \
         __FILE__, __LINE__));
 #endif //!REGISTER_TEST
 
@@ -417,9 +408,9 @@ void operator delete[](void* p) noexcept
 
 #define TEST_TYPE_NAME(__NAME__, __TYPE__, ...)\
 template<>\
-struct basic::test::type::Name<__TYPE__,##__VA_ARGS__>\
+struct test::type::Name<__TYPE__,##__VA_ARGS__>\
 {\
-    static basic::test::CString<const char> CStr()\
+    static test::CString<const char> CStr()\
     {\
         static char _cstr[] = __NAME__;\
         return {_cstr};\

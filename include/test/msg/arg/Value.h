@@ -11,8 +11,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace msg
@@ -245,13 +243,11 @@ typename Argument<TCaseId, arg::Value<I>, TArgs...>::
         arg::Value<I>, TArgs...>::Get(test::Variable<TVarArgs...>& var)
 #endif
 {
-    return std::move(basic::test::var::At<I>(var).Get().Get());
+    return std::move(test::var::At<I>(var).Get().Get());
 }
 
 } //!msg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MSG_ARG_VALUE_H_

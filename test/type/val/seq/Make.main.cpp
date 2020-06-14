@@ -9,9 +9,9 @@ TEST_CONSTRUCT;
 
 int main()
 {
-    typedef basic::test::type::val::seq::formula::Arithmetic<int, int, 1>
+    typedef test::type::val::seq::formula::Arithmetic<int, int, 1>
         IncrementInt;
-    typedef typename basic::test::type::val::seq::Make<int, 0, 
+    typedef typename test::type::val::seq::Make<int, 0, 
         10, IncrementInt>::Type SequenceInt10;
 
     printf("[0] : %d\n", SequenceInt10{}.At<0>());

@@ -20,13 +20,13 @@ public:
 
 template<typename... TVariable>
 class TestA :
-    public basic::test::Base<Case1, TVariable...>
+    public test::Base<Case1, TVariable...>
 {
 private:
     Case1 m_case;
 public:
     TestA(TVariable&... vars) :
-        basic::test::Base<Case1, TVariable...>(m_case, vars...)
+        test::Base<Case1, TVariable...>(m_case, vars...)
     {}
     ~TestA() {}
 };

@@ -19,8 +19,8 @@ struct A<int ,char, float>
 
 int main()
 {
-    typedef basic::test::type::param::Filler<
-        basic::test::type::Parameter<int, char, float>> F1;
+    typedef test::type::param::Filler<
+        test::type::Parameter<int, char, float>> F1;
 
     F1::template Type<A>::Print();
 

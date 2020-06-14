@@ -4,8 +4,6 @@
 #include <utility>
 #include "../Sequence.h"
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -38,7 +36,5 @@ struct Make<TValue, FirstValue, 0, TFormula, Term, Values...>
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_VAL_SEQUENCE_MAKE_H_

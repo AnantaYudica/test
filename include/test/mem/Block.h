@@ -5,8 +5,6 @@
 
 #include <cstdlib>
 
-namespace basic
-{
 namespace test
 {
 namespace mem
@@ -88,8 +86,6 @@ public:
 } //!mem
 
 } //!test
-
-} //!basic
 
 #endif //!USING_TEST_MEMORY
 

@@ -10,8 +10,6 @@
 #include "../../../../CString.h"
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace msg
@@ -264,7 +262,5 @@ typename Argument<TCaseId, arg::type::param::Name<I>, TArgs...>::
 } //!msg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MSG_ARG_TYPE_PARAM_NAME_H_

@@ -7,8 +7,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 
@@ -76,7 +74,5 @@ typename Variable<test::val::Function<TRet(TArgsFunc...)>,
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_VAR_VAL_FUNCTION_H_

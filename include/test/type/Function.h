@@ -3,8 +3,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -46,8 +44,6 @@ constexpr typename Function<TRet(TArgs...), Func>::ConstGetType
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_FUNCTION_H_
 

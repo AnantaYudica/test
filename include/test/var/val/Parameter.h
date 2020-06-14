@@ -5,8 +5,6 @@
 
 #include "../../val/Parameter.h"
 
-namespace basic
-{
 namespace test
 {
 
@@ -74,7 +72,5 @@ typename Variable<test::val::Parameter<TValuesArg...>,
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_VAR_VAL_PARAMETER_H_

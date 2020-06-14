@@ -6,8 +6,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace val
@@ -175,7 +173,5 @@ Sequence<T, 0>& Sequence<T, 0>::operator=(Sequence<T, 0>&& mov)
 } //!val
 
 } //!test
-
-}//!basic
 
 #endif //!TEST_VAL_SEQUENCE_H_

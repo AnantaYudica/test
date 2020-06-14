@@ -3,8 +3,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -20,7 +18,5 @@ struct Index
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_INDEX_H_

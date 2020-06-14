@@ -4,8 +4,6 @@
 #include <cstdlib>
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 
@@ -46,7 +44,5 @@ void Status::Error()
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_STATUS_H_

@@ -4,7 +4,7 @@
 
 #include <cstdio>
 
-typedef basic::test::type::Parameter<int, char, float> P1;
+typedef test::type::Parameter<int, char, float> P1;
 
 void Print(int i, char c, float f)
 {
@@ -13,7 +13,7 @@ void Print(int i, char c, float f)
 
 int main()
 {
-    typedef basic::test::type::param::Function<P1> PF1;
+    typedef test::type::param::Function<P1> PF1;
 
     PF1::Call<void>(&Print, 1, 'a', 3.14f);
 
