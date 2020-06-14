@@ -5,10 +5,7 @@ on:
   push:
     branches: 
       - beta
-    tags:
-      - v*
-  release:
-    types: [published]
+      - 'release/**'
 jobs:
   build_test:
     runs-on: windows-latest
