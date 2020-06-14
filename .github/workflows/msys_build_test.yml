@@ -1,0 +1,76 @@
+
+name: MSYS Build Test
+
+on:
+  push:
+    branches: [ beta ]
+jobs:
+  build_test:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        compiler: [GNU]
+        platform: [x32, x64]
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: beta
+        submodules: true
+
+    - name: Create build directory
+      run: mkdir -p .build
+
+    - name: Generate project
+      run: |
+        set CC=C:/msys64/mingw32/bin/gcc.exe
+        set CXX=C:/msys64/mingw32/bin/g++.exe
+        set PATH=C:\msys64\mingw32\bin;C:\msys64\usr\bin;%PATH%
+        cmake ../cmake -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS=-m32
+      working-directory: ./.build
+      shell: cmd
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
+
+    - name: Generate project
+      run: |
+        set CC=C:/msys64/mingw64/bin/gcc.exe
+        set CXX=C:/msys64/mingw64/bin/g++.exe
+        set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
+        cmake ../cmake -G "MSYS Makefiles" -DCMAKE_BUILD_TYPE=Debug
+      working-directory: ./.build
+      shell: cmd
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x64' }}
+
+    - name: Build
+      run: |
+        set PATH=C:\msys64\mingw32\bin;C:\msys64\usr\bin;%PATH%
+        make
+      working-directory: ./.build
+      shell: cmd
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
+      
+    - name: Build
+      run: |
+        set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
+        make
+      working-directory: ./.build
+      shell: cmd
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x64' }}
+
+    - name: Test
+      run: |
+        set PATH=C:\msys64\mingw32\bin;C:\msys64\usr\bin;%PATH%
+        make test
+      working-directory: ./.build
+      shell: cmd
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x32' }}
+
+    - name: Test
+      run: |
+        set PATH=C:\msys64\mingw64\bin;C:\msys64\usr\bin;%PATH%
+        make test
+      working-directory: ./.build
+      shell: cmd
+      if: ${{ matrix.compiler == 'GNU' && matrix.platform == 'x64' }}
+
+
+

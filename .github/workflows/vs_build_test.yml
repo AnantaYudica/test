@@ -1,0 +1,60 @@
+
+name: Visual Studio Build Test
+
+on:
+  push:
+    branches: [ beta ]
+jobs:
+  build_test:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        compiler: [MSVC]
+        platform: [Win32, x64]
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: beta
+        submodules: true
+
+    - name: Get msbuild executable
+      id: get_msbuild_executable
+      run: echo "::set-output name=path::$(vswhere -latest -requires Microsoft.Component.MSBuild -find MSBuild\**\Bin\MSBuild.exe)"
+      if: ${{ matrix.compiler == 'MSVC' }}
+
+    - name: Create build directory
+      run: mkdir -p .build
+
+    - name: Generate project
+      run: cmake ../cmake -G "Visual Studio 16 2019" -A ${{ matrix.platform }}
+      working-directory: ./.build
+      if: ${{ matrix.compiler == 'MSVC' }}
+
+    - name: Build
+      run: |
+        & "${{steps.get_msbuild_executable.outputs.path}}" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x86
+      working-directory: ./.build
+      shell: powershell
+      if: ${{ matrix.compiler == 'MSVC' &&  matrix.platform == 'Win32'}}
+
+    - name: Build
+      run: |
+        & "${{steps.get_msbuild_executable.outputs.path}}" ALL_BUILD.vcxproj /p:Configuration=Debug /p:Platform=x64
+      working-directory: ./.build
+      shell: powershell
+      if: ${{ matrix.compiler == 'MSVC' &&  matrix.platform == 'x64'}}
+
+    - name: Test
+      run: |
+        & "${{steps.get_msbuild_executable.outputs.path}}" RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=x86
+      working-directory: ./.build
+      shell: powershell
+      if: ${{ matrix.compiler == 'MSVC' &&  matrix.platform == 'Win32'}}
+
+    - name: Test
+      run: |
+        & "${{steps.get_msbuild_executable.outputs.path}}" RUN_TESTS.vcxproj /p:Configuration=Debug /p:Platform=x64
+      working-directory: ./.build
+      shell: powershell
+      if: ${{ matrix.compiler == 'MSVC' &&  matrix.platform == 'x64'}}
+
