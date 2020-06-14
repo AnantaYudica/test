@@ -5,7 +5,9 @@ on:
   push:
     branches: 
       - beta
-      - 'release/**'
+      - master
+    tags:
+      - v*
 jobs:
   build_test:
     runs-on: windows-latest
