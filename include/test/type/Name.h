@@ -5,8 +5,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -26,7 +24,5 @@ struct Name
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_NAME_H_

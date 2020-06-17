@@ -3,8 +3,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
     
@@ -18,7 +16,5 @@ struct Trace
 };
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TRACE_H_

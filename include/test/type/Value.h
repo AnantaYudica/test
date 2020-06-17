@@ -1,8 +1,6 @@
 #ifndef TEST_TYPE_VALUE_H_
 #define TEST_TYPE_VALUE_H_
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -34,8 +32,6 @@ constexpr typename Value<T, ValueT>::ConstGetType
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_VALUE_H_
 

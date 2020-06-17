@@ -4,7 +4,7 @@
 
 int main()
 {
-    typedef basic::test::val::Sequence<int, 4> ValSeq4;
+    typedef test::val::Sequence<int, 4> ValSeq4;
     ValSeq4 seq1(1, 2, 3, 4);
     std::cout << "seq1 at 0 : " << seq1.At<0>() << std::endl; 
     std::cout << "seq1 at 1 : " << seq1.At<1>() << std::endl;

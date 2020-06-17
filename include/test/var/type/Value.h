@@ -5,8 +5,6 @@
 
 #include "../../type/Value.h"
 
-namespace basic
-{
 namespace test
 {
 
@@ -15,7 +13,7 @@ class Variable<test::type::Value<TArg, TArgValue>, TArgs...> :
     public Variable<TArgs...>
 {
 public:
-    typedef test::type::Value<TArg, TArgValue>&& ConstGetType;
+    typedef test::type::Value<TArg, TArgValue> ConstGetType;
 public:
     template<typename... TValArgs>
     Variable(TValArgs&&... val_args);
@@ -59,8 +57,5 @@ typename Variable<test::type::Value<TArg, TArgValue>, TArgs...>::ConstGetType
 }
 
 } //!test
-
-} //!basic
-
 
 #endif //!TEST_VAR_TYPE_VALUE_H_

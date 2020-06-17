@@ -9,9 +9,9 @@ TEST_CONSTRUCT;
 struct A {};
 
 template<>
-struct basic::test::type::Name<char>
+struct test::type::Name<char>
 {
-    static basic::test::CString<const char> CStr()
+    static test::CString<const char> CStr()
     {
         static char _char[] = "char";
         return {_char};
@@ -19,9 +19,9 @@ struct basic::test::type::Name<char>
 };
 
 template<>
-struct basic::test::type::Name<A>
+struct test::type::Name<A>
 {
-    static basic::test::CString<const char> CStr()
+    static test::CString<const char> CStr()
     {
         static char _A[] = "A";
         return {_A};
@@ -30,6 +30,6 @@ struct basic::test::type::Name<A>
 
 int main()
 {
-    printf("%s\n", *basic::test::type::Name<char>::CStr());
-    printf("%s\n", *basic::test::type::Name<A>::CStr());
+    printf("%s\n", *test::type::Name<char>::CStr());
+    printf("%s\n", *test::type::Name<A>::CStr());
 }

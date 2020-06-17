@@ -5,14 +5,12 @@
 
 #include <algorithm>
 
-namespace basic
-{
 namespace test
 {
 
 template<typename TTest, typename TDerived>
 class Register :
-    public basic::test::reg::Base
+    public test::reg::Base
 {
 private:
     TDerived* m_derived;
@@ -107,7 +105,5 @@ Register<TTest, TDerived> Make(TDerived* derived,
 } //!reg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_REGISTER_H_

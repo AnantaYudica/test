@@ -7,8 +7,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace cstr
@@ -22,7 +20,7 @@ test::CString<typename std::remove_const<TChar>::type>
     {
         auto* cstr = new typename std::remove_const<TChar>::type[size];
         int res = snprintf(cstr, size, format, std::forward<TArgs>(args)...);
-        if (res >= size || res < 0)
+        if (res < 0 || (std::size_t)res >= size)
             cstr[size - 1] = '\0';
         return {std::move(cstr), size};
     }
@@ -32,8 +30,6 @@ test::CString<typename std::remove_const<TChar>::type>
 } //!cstr
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_CSTR_FORMAT_H_
 

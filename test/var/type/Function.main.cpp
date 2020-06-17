@@ -11,11 +11,11 @@ void Foo1()
 
 int main()
 {
-    basic::test::Variable<basic::test::type::Function<void(), 
+    test::Variable<test::type::Function<void(), 
         &Foo1>> var1;
     var1.Get().Call();
-    basic::test::Variable<int, basic::test::type::
+    test::Variable<int, test::type::
         Function<void(), &Foo1>> var2;
-    basic::test::Variable<basic::test::type::Function<void(), &Foo1>, int,
-        basic::test::type::Function<void(), &Foo1>, char> var3;
+    test::Variable<test::type::Function<void(), &Foo1>, int,
+        test::type::Function<void(), &Foo1>, char> var3;
 }

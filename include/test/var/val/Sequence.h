@@ -7,8 +7,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace var
@@ -148,7 +146,7 @@ public:
     Variable<test::val::Sequence<TArg, S>, TArgs...>& 
         operator=(Variable<test::val::Sequence<TArg, S>, TArgs...>&&) = delete;
 public:
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
     GetType Get();
     ConstGetType Get() const;
 #else
@@ -173,7 +171,7 @@ Variable<test::val::Sequence<TArg, S>, TArgs...>&
     return *this;
 }
 
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
 template<typename TArg, std::size_t S, typename... TArgs>
 typename Variable<test::val::Sequence<TArg, S>, TArgs...>::GetType 
     Variable<test::val::Sequence<TArg, S>, TArgs...>::Get()
@@ -190,7 +188,5 @@ typename Variable<test::val::Sequence<TArg, S>, TArgs...>::ConstGetType
 #endif
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_VAR_VAL_SEQUENCE_H_

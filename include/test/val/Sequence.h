@@ -6,8 +6,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace val
@@ -106,7 +104,7 @@ Sequence<T, S>& Sequence<T, S>::operator=(Sequence<T, S>&& mov)
 }
 
 template<typename T, std::size_t S>
-Sequence<T, S>& Sequence<T, S>::Assign(const Sequence<T, S>& cpy, 
+Sequence<T, S>& Sequence<T, S>::Assign(const Sequence<T, S>&, 
     test::type::val::Sequence<std::size_t>)
 {
     return *this;
@@ -122,7 +120,7 @@ Sequence<T, S>& Sequence<T, S>::Assign(const Sequence<T, S>& cpy,
 }
 
 template<typename T, std::size_t S>
-Sequence<T, S>& Sequence<T, S>::Assign(Sequence<T, S>&& mov, 
+Sequence<T, S>& Sequence<T, S>::Assign(Sequence<T, S>&&, 
     test::type::val::Sequence<std::size_t>)
 {
     return *this;
@@ -175,7 +173,5 @@ Sequence<T, 0>& Sequence<T, 0>::operator=(Sequence<T, 0>&& mov)
 } //!val
 
 } //!test
-
-}//!basic
 
 #endif //!TEST_VAL_SEQUENCE_H_

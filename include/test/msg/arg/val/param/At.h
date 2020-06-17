@@ -12,8 +12,6 @@
 
 #include <cstddef>
 
-namespace basic
-{
 namespace test
 {
 namespace msg
@@ -69,7 +67,7 @@ protected:
     TRet Filler(TFunc func, test::Variable<TVarArgs...>& var, 
         TFuncArgs&&... args);
 public:
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
     template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
         typename... TVarArgs, typename TFuncMmbr = PointerFunctionMemberType<0,
         TRet, TDerived, test::Variable<TVarArgs...>, TFuncMmbrArgs...>>
@@ -82,7 +80,7 @@ public:
         test::Variable<TVarArgs...>, TFuncMmbrArgs...> func_mmbr, TDerived& d,
         test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args);
 #endif
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
     template<typename TRet, typename... TFuncArgs, typename... TVarArgs,
         typename TFunc = PointerFunctionType<0, TRet, test::Variable<TVarArgs...>,
         TFuncArgs...>>
@@ -95,7 +93,7 @@ public:
         TFuncArgs&&... args);
 #endif
 public:
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
     template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
         std::size_t ICaseId, typename... TVarArgs, typename TFuncMmbr = 
         PointerFunctionMemberType<ICaseId, TRet, TDerived,
@@ -112,7 +110,7 @@ public:
         TDerived& d, test::Variable<TVarArgs...>& var, 
         TFuncMmbrArgs&&... args);
 #endif
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
     template<typename TRet, typename... TFuncArgs, std::size_t ICaseId, 
         typename... TVarArgs, typename TFunc = PointerFunctionType<ICaseId,
         TRet, test::Variable<TVarArgs...>, TFuncArgs...>>
@@ -126,7 +124,7 @@ public:
         test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
 #endif
 public:
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
     template<typename... TVarArgs, typename TGet = typename Argument<TCaseId, 
         arg::val::param::At<I, IAt>, TArgs...>::template GetType<
         test::Variable<TVarArgs...>>>
@@ -166,7 +164,7 @@ TRet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
 }
 
 template<typename TCaseId, std::size_t I, std::size_t IAt, typename... TArgs>
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
 template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
     typename... TVarArgs, typename TFuncMmbr>
 TRet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
@@ -186,7 +184,7 @@ TRet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
 }
 
 template<typename TCaseId, std::size_t I, std::size_t IAt, typename... TArgs>
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
 template<typename TRet, typename... TFuncArgs, typename... TVarArgs,
     typename TFunc>
 TRet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
@@ -204,7 +202,7 @@ TRet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
 }
 
 template<typename TCaseId, std::size_t I, std::size_t IAt, typename... TArgs>
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
 template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
     std::size_t ICaseId, typename... TVarArgs, typename TFuncMmbr>
 TRet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
@@ -225,7 +223,7 @@ TRet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
 }
 
 template<typename TCaseId, std::size_t I, std::size_t IAt, typename... TArgs>
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
 template<typename TRet, typename... TFuncArgs, std::size_t ICaseId, 
     typename... TVarArgs, typename TFunc>
 TRet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
@@ -244,7 +242,7 @@ TRet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
 }
 
 template<typename TCaseId, std::size_t I, std::size_t IAt, typename... TArgs>
-#ifdef _WIN32
+#ifdef _MSC_BUILD 
 template<typename... TVarArgs, typename TGet>
 TGet Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
     Get(test::Variable<TVarArgs...>& var)
@@ -262,7 +260,5 @@ typename Argument<TCaseId, arg::val::param::At<I, IAt>, TArgs...>::
 } //!msg
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_MSG_ARG_VAL_PARAM_AT_H_

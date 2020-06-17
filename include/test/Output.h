@@ -10,8 +10,6 @@
 #include "out/Argument.h"
 #include "cstr/out/Argument.h"
 
-namespace basic
-{
 namespace test
 {
 
@@ -55,10 +53,10 @@ public:
 
 template<typename Ts>
 Output<Ts>::Output(Ts& status) :
-    m_outputFile(stdout),
     m_enable(true),
     m_infoEnable(true),
     m_debugEnable(true),
+    m_outputFile(stdout),
     m_status(&status)
 {}
 
@@ -67,9 +65,10 @@ Output<Ts>::Output(Ts& status, const char* file_output) :
     m_enable(true),
     m_infoEnable(true),
     m_debugEnable(true),
+    m_outputFile(NULL),
     m_status(&status)
 {
-#if ((defined(_WIN32) || defined(_WIN64)) && !defined(_CRT_SECURE_NO_WARNINGS))
+#if (defined(_MSC_BUILD) && !defined(_CRT_SECURE_NO_WARNINGS))
     fopen_s(&m_outputFile, file_output, "w"); 
 #else 
     m_outputFile = fopen(file_output, "w");
@@ -79,10 +78,10 @@ Output<Ts>::Output(Ts& status, const char* file_output) :
 
 template<typename Ts>
 Output<Ts>::Output(Output<Ts>&& mov) :
-    m_outputFile(mov.m_outputFile),
     m_enable(mov.m_enable),
     m_infoEnable(mov.m_infoEnable),
     m_debugEnable(mov.m_debugEnable),
+    m_outputFile(mov.m_outputFile),
     m_status(NULL)
 {
     mov.m_outputFile = NULL;
@@ -184,7 +183,5 @@ void Output<Ts>::DebugEnable(bool debug_enable)
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_OUTPUT_H_

@@ -3,8 +3,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace val
@@ -107,7 +105,5 @@ Function<TRet(TArgs...)>::operator bool() const
 } //!val
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_VAL_FUNCTION_H_

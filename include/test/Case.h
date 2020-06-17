@@ -6,15 +6,13 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace case_
 {
 
 template<typename TDerived, typename... TVariableArgs>
-void Run(TDerived& d, Variable<TVariableArgs...>& var)
+void Run(TDerived&, Variable<TVariableArgs...>&)
 {}
 
 template<typename TDerived, typename... TVariableArgs, 
@@ -125,7 +123,5 @@ void Case<TDerived, type::Parameter<TCaseIds...>>::
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_CASE_H_

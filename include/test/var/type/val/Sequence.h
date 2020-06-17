@@ -5,8 +5,6 @@
 
 #include "../../../type/val/Sequence.h"
 
-namespace basic
-{
 namespace test
 {
 
@@ -15,7 +13,7 @@ class Variable<test::type::val::Sequence<TArg, TArgValues...>, TArgs...> :
     public Variable<TArgs...>
 {
 public:
-    typedef test::type::val::Sequence<TArg, TArgValues...>&& ConstGetType;
+    typedef test::type::val::Sequence<TArg, TArgValues...> ConstGetType;
 public:
     template<typename... TValArgs>
     Variable(TValArgs&&... val_args);
@@ -60,8 +58,5 @@ typename Variable<test::type::val::Sequence<TArg, TArgValues...>, TArgs...>::
 }
 
 } //!test
-
-} //!basic
-
 
 #endif //!TEST_VAR_TYPE_VAL_SEQUENCE_H_

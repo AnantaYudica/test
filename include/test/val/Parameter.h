@@ -7,8 +7,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace val
@@ -38,7 +36,7 @@ protected:
         FillerFuncMmbr(TFuncMmbr func_mmbr, TDerived derived, 
             TValues&&... values);
     template<typename TRet, typename... TValues>
-    TRet&& FillerConstruct(TValues&&... values);
+    TRet FillerConstruct(TValues&&... values);
     template<typename TDerived, typename... TValues>
     void FillerConstruct(TDerived & placement, TValues&&... values);
 public:
@@ -47,7 +45,7 @@ public:
     template<typename TRet, typename TDerived, typename TFuncMmbr>
     TRet Fill(TFuncMmbr func_mmbr, TDerived derived);
     template<typename TDerived>
-    TDerived&& Fill();
+    TDerived Fill();
     template<typename TDerived>
     void Fill(TDerived & placement);
 };
@@ -75,7 +73,7 @@ protected:
     TRet FillerFuncMmbr(TFuncMmbr func_mmbr, TDerived derived, 
         TValues&&... values);
     template<typename TRet, typename... TValues>
-    TRet&& FillerConstruct(TValues&&... values);
+    TRet FillerConstruct(TValues&&... values);
     template<typename TDerived, typename... TValues>
     void FillerConstruct(TDerived & placement, TValues&&... values);
 public:
@@ -84,7 +82,7 @@ public:
     template<typename TRet, typename TDerived, typename TFuncMmbr>
     TRet Fill(TFuncMmbr func_mmbr, TDerived derived);
     template<typename TDerived>
-    TDerived&& Fill();
+    TDerived Fill();
     template<typename TDerived>
     void Fill(TDerived & placement);
 public:
@@ -109,23 +107,23 @@ Parameter<TArgs...>::Parameter()
 {}
 
 template<typename... TArgs>
-Parameter<TArgs...>::Parameter(const Parameter<TArgs...>& cpy)
+Parameter<TArgs...>::Parameter(const Parameter<TArgs...>&)
 {}
 
 template<typename... TArgs>
-Parameter<TArgs...>::Parameter(Parameter<TArgs...>&& mov)
+Parameter<TArgs...>::Parameter(Parameter<TArgs...>&&)
 {}
 
 template<typename... TArgs>
 Parameter<TArgs...>& Parameter<TArgs...>::
-    operator=(const Parameter<TArgs...>& cpy)
+    operator=(const Parameter<TArgs...>&)
 {
     return *this;
 }
 
 template<typename... TArgs>
 Parameter<TArgs...>& Parameter<TArgs...>::
-    operator=(Parameter<TArgs...>&& mov)
+    operator=(Parameter<TArgs...>&&)
 {
     return *this;
 }
@@ -159,7 +157,7 @@ typename std::enable_if<!std::is_pointer<TDerived>::value, TRet>::type
 
 template<typename... TArgs>
 template<typename TRet, typename... TValues>
-TRet&& Parameter<TArgs...>::FillerConstruct(TValues&&... values)
+TRet Parameter<TArgs...>::FillerConstruct(TValues&&... values)
 {
     return std::move(TRet{std::forward<TValues>(values)...});
 }
@@ -188,7 +186,7 @@ TRet Parameter<TArgs...>::Fill(TFuncMmbr func_mmbr, TDerived derived)
 
 template<typename... TArgs>
 template<typename TDerived>
-TDerived&& Parameter<TArgs...>::Fill()
+TDerived Parameter<TArgs...>::Fill()
 {
     return std::move(FillerConstruct<TDerived>());
 }
@@ -264,7 +262,7 @@ TRet Parameter<TArg, TArgs...>::
 
 template<typename TArg, typename... TArgs>
 template<typename TRet, typename... TValues>
-TRet&& Parameter<TArg, TArgs...>::
+TRet Parameter<TArg, TArgs...>::
     FillerConstruct(TValues&&... values)
 {
     return std::move(Parameter<TArgs...>::
@@ -298,7 +296,7 @@ TRet Parameter<TArg, TArgs...>::
 
 template<typename TArg, typename... TArgs>
 template<typename TDerived>
-TDerived&& Parameter<TArg, TArgs...>::Fill()
+TDerived Parameter<TArg, TArgs...>::Fill()
 {
     return std::move(FillerConstruct<TDerived>());
 }
@@ -351,8 +349,5 @@ const typename std::enable_if<I != 0, typename test::type::param::
 } //!val
 
 } //!test
-
-}//!basic
-
 
 #endif //!TEST_VAL_PARAMETER_H_

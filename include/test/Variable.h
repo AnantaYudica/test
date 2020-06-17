@@ -4,8 +4,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 
@@ -69,7 +67,5 @@ Variable<TArg, TArgs...>& Variable<TArg, TArgs...>::
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_VARIABLE_H_

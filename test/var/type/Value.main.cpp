@@ -6,9 +6,9 @@
 
 int main()
 {
-    basic::test::Variable<basic::test::type::Value<int, 4>> var1;
+    test::Variable<test::type::Value<int, 4>> var1;
     std::cout << "val : " << var1.Get().Get() << std::endl;
-    basic::test::Variable<int, basic::test::type::Value<int, 6>> var2;
-    basic::test::Variable<basic::test::type::Value<int, 1>, int,
-        basic::test::type::Value<int, 4>, char> var3;
+    test::Variable<int, test::type::Value<int, 6>> var2;
+    test::Variable<test::type::Value<int, 1>, int,
+        test::type::Value<int, 4>, char> var3;
 }

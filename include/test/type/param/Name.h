@@ -9,8 +9,6 @@
 #include <utility>
 #include <type_traits>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -113,7 +111,5 @@ test::CString<TChar> Name<type::Parameter<TArg, TArgs...>>::CStr()
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_PARAM_NAME_H_

@@ -4,8 +4,6 @@
 #include <cstddef>
 #include <cstring>
 
-namespace basic
-{
 namespace test
 {
 
@@ -280,7 +278,5 @@ const std::size_t& CString<const TChar>::Size() const
 }
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_CSTRING_H_

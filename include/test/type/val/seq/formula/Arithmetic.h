@@ -3,8 +3,6 @@
 
 #include <utility>
 
-namespace basic
-{
 namespace test
 {
 namespace type
@@ -39,7 +37,5 @@ constexpr TValue Arithmetic<TValue, TDiff, Diff>::
 } //!type
 
 } //!test
-
-} //!basic
 
 #endif //!TEST_TYPE_VAL_SEQ_FORMULA_ARITHMETIC_H_
