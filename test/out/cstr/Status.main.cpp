@@ -3,18 +3,6 @@
 #include <cassert>
 
 using namespace test::out::cstr;
-constexpr typename Status::ValueType Status::good;
-constexpr typename Status::ValueType Status::bad;
-constexpr typename Status::ValueType Status::require_initialize;
-constexpr typename Status::ValueType Status::require_allocation;
-constexpr typename Status::ValueType Status::require_reallocation;
-constexpr typename Status::ValueType Status::overflow_capacity;
-constexpr typename Status::ValueType Status::predict_failed; 
-constexpr typename Status::ValueType Status::allocation_failed;
-constexpr typename Status::ValueType Status::zero_allocation_failed;
-constexpr typename Status::ValueType Status::reallocation_failed;
-constexpr typename Status::ValueType Status::predict_reallocation_failed;
-constexpr typename Status::ValueType Status::copy_reallocation_failed;
 
 int main()
 {
