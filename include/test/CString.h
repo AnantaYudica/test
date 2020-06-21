@@ -76,7 +76,7 @@ template<typename TChar>
 template<std::size_t S>
 CString<TChar>::CString(const TChar(&cstr)[S]) :
     m_cstr(new TChar[S]),
-    m_size(S)
+    m_size(S - 1)
 {
     memcpy(m_cstr, cstr, S * sizeof(TChar));
 }
@@ -238,7 +238,7 @@ template<typename TChar>
 template<std::size_t S>
 CString<const TChar>::CString(const TChar(&cstr)[S]) :
     m_cstr(cstr),
-    m_size(S)
+    m_size(S - 1)
 {}
 
 template<typename TChar>
