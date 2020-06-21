@@ -32,6 +32,7 @@ public:
         reallocation_failed = bad | (0x05 << 3),
         predict_reallocation_failed = bad | (0x06 << 3),
         copy_reallocation_failed = bad | (0x07 << 3),
+        reallocation_overflow_capacity = bad | (0x08 << 3)
     };
 private:
     ValueType m_val;
