@@ -18,18 +18,21 @@ public:
 private:
     static constexpr ValueType require_mask = 0x07;
 public:
-    static constexpr ValueType good = 0;
-    static constexpr ValueType bad = 0x80;
-    static constexpr ValueType require_initialize = good | 0x01;
-    static constexpr ValueType require_allocation = good | 0x02;
-    static constexpr ValueType require_reallocation = good | 0x4;
-    static constexpr ValueType overflow_capacity = bad | (0x01 << 3);
-    static constexpr ValueType predict_failed = bad | (0x02 << 3);
-    static constexpr ValueType allocation_failed = bad | (0x03 << 3);
-    static constexpr ValueType zero_allocation_failed = bad | (0x04 << 3);
-    static constexpr ValueType reallocation_failed = bad | (0x05 << 3);
-    static constexpr ValueType predict_reallocation_failed = bad | (0x06 << 3);
-    static constexpr ValueType copy_reallocation_failed = bad | (0x07 << 3);
+    enum : ValueType
+    {
+        good = 0,
+        bad = 0x80,
+        require_initialize = good | 0x01,
+        require_allocation = good | 0x02,
+        require_reallocation = good | 0x4,
+        overflow_capacity = bad | (0x01 << 3),
+        predict_failed = bad | (0x02 << 3),
+        allocation_failed = bad | (0x03 << 3),
+        zero_allocation_failed = bad | (0x04 << 3),
+        reallocation_failed = bad | (0x05 << 3),
+        predict_reallocation_failed = bad | (0x06 << 3),
+        copy_reallocation_failed = bad | (0x07 << 3),
+    };
 private:
     ValueType m_val;
 public:
