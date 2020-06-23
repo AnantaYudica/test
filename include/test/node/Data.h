@@ -177,9 +177,7 @@ Data<T>::Data(const Data<T>& cpy) :
 template<typename T>
 Data<T>::Data(Data<T>&& mov) :
     m_data(std::move(mov))
-{
-    mov.m_next = nullptr; 
-}
+{}
 
 template<typename T>
 Data<T>& Data<T>::operator=(const Data<T>& cpy)
