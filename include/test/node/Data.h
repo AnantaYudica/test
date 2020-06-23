@@ -45,8 +45,8 @@ public:
     T& operator*();
     T operator*() const;
 public:
-    T& operator->();
-    T operator->() const;
+    T* operator->();
+    const T*const operator->() const;
 };
 
 template<typename T>
@@ -74,8 +74,8 @@ public:
     const T& operator*();
     T operator*() const;
 public:
-    const T& operator->();
-    T operator->() const;
+    const T* operator->();
+    const T*const operator->() const;
 };
 
 template<typename T>
@@ -107,8 +107,8 @@ public:
     T& operator*();
     T operator*() const;
 public:
-    T& operator->();
-    T operator->() const;
+    T* operator->();
+    const T*const operator->() const;
 };
 
 template<typename T>
@@ -140,8 +140,8 @@ public:
     const T& operator*();
     T operator*() const;
 public:
-    const T& operator->();
-    T operator->() const;
+    const T* operator->();
+    const T*const operator->() const;
 };
 
 template<typename T>
@@ -222,15 +222,15 @@ T Data<T>::operator*() const
 }
 
 template<typename T>
-T& Data<T>::operator->()
+T* Data<T>::operator->()
 {
-    return m_data;
+    return &m_data;
 }
 
 template<typename T>
-T Data<T>::operator->() const
+const T*const Data<T>::operator->() const
 {
-    return {m_data};
+    return &m_data;
 }
 
 template<typename T>
@@ -288,15 +288,15 @@ T Data<const T>::operator*() const
 }
 
 template<typename T>
-const T& Data<const T>::operator->()
+const T* Data<const T>::operator->()
 {
-    return m_data;
+    return &m_data;
 }
 
 template<typename T>
-T Data<const T>::operator->() const
+const T*const Data<const T>::operator->() const
 {
-    return {m_data};
+    return &m_data;
 }
 
 template<typename T>
@@ -396,19 +396,22 @@ T Data<T*>::operator*() const
 }
 
 template<typename T>
-T& Data<T*>::operator->()
+T* Data<T*>::operator->()
 {
     if (m_data == nullptr)
         m_data = new T();
-    return *m_data;
+    return m_data;
 }
 
 template<typename T>
-T Data<T*>::operator->() const
+const T*const Data<T*>::operator->() const
 {
     if (m_data == nullptr)
-        return {};
-    return {*m_data};
+    {
+        Data<T*>* pthis = const_cast<Data<T*>*>(this);
+        pthis->m_data = new T(); 
+    }
+    return m_data;
 }
 
 template<typename T>
@@ -505,18 +508,22 @@ T Data<const T*>::operator*() const
 }
 
 template<typename T>
-const T& Data<const T*>::operator->()
+const T* Data<const T*>::operator->()
 {
     if (m_data == nullptr)
         m_data = new const T();
-    return *m_data;
+    return m_data;
 }
+
 template<typename T>
-T Data<const T*>::operator->() const
+const T*const Data<const T*>::operator->() const
 {
     if (m_data == nullptr)
-        return {};
-    return {*m_data};
+    {
+        Data<T*>* pthis = const_cast<Data<T*>*>(this);
+        pthis->m_data = new const T(); 
+    }
+    return m_data;
 }
 
 } //!node
