@@ -471,7 +471,7 @@ Data<const T*>::~Data()
 
 template<typename T>
 Data<const T*>::Data(const Data<const T*>& cpy) :
-    m_data(new const T(cpy.m_data))
+    m_data(cpy.m_data != nullptr ? new const T(*(cpy.m_data)) : nullptr)
 {}
 
 template<typename T>
