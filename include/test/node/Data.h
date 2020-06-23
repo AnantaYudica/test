@@ -70,6 +70,8 @@ public:
 public:
     Data<const T>& operator=(const Data<const T>& cpy);
     Data<const T>& operator=(Data<const T>&& mov);
+    Data<const T>& operator=(const T& cpy);
+    Data<const T>& operator=(T&& mov);
 public:
     const T& operator*();
     T operator*() const;
@@ -262,13 +264,25 @@ Data<const T>::Data(Data<const T>&& mov) :
 {}
 
 template<typename T>
-Data<const T>& Data<const T>::operator=(const Data<const T>& cpy)
+Data<const T>& Data<const T>::operator=(const Data<const T>&)
 {
     return *this;
 }
 
 template<typename T>
-Data<const T>& Data<const T>::operator=(Data<const T>&& mov)
+Data<const T>& Data<const T>::operator=(Data<const T>&&)
+{
+    return *this;
+}
+
+template<typename T>
+Data<const T>& Data<const T>::operator=(const T&)
+{
+    return *this;
+}
+
+template<typename T>
+Data<const T>& Data<const T>::operator=(T&&)
 {
     return *this;
 }
