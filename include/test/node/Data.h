@@ -183,7 +183,7 @@ Data<T>::Data(const Data<T>& cpy) :
 
 template<typename T>
 Data<T>::Data(Data<T>&& mov) :
-    m_data(std::move(mov))
+    m_data(std::move(mov.m_data))
 {}
 
 template<typename T>
