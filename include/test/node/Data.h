@@ -151,6 +151,39 @@ public:
 };
 
 template<typename T>
+class Data<T*const>
+{
+public:
+    static_assert(!std::is_pointer<T>::value, "Not support multiple pointers type");
+    static_assert(!std::is_const<T>::value, "Not support const pointer type");
+    static_assert(!std::is_function<T>::value, "Not support pointer to function type");
+private:
+    T*const m_data;
+public:
+    Data();
+    Data(const T & set);
+    template<typename... TArgs, typename std::enable_if<
+        std::is_constructible<T, TArgs...>::value, int>::type = 0>
+    Data(TArgs && ... args);
+public:
+    ~Data();
+public:
+    Data(const Data<T*const>& cpy);
+    Data(Data<T*const>&& mov);
+public:
+    Data<T*const>& operator=(const Data<T*const>& cpy);
+    Data<T*const>& operator=(Data<T*const>&& mov);
+    Data<T*const>& operator=(const T& cpy);
+    Data<T*const>& operator=(T&& mov);
+public:
+    T& operator*();
+    T operator*() const;
+public:
+    T*const operator->();
+    const T*const operator->() const;
+};
+
+template<typename T>
 Data<T>::Data() :
     m_data()
 {}
@@ -566,6 +599,94 @@ const T*const Data<const T*>::operator->() const
         Data<const T*>* pthis = const_cast<Data<const T*>*>(this);
         pthis->m_data = new const T(); 
     }
+    return m_data;
+}
+
+template<typename T>
+Data<T*const>::Data() :
+    m_data(new T())
+{}
+
+template<typename T>
+Data<T*const>::Data(const T & set) :
+    m_data(new T(set))
+{}
+
+template<typename T>
+template<typename... TArgs, typename std::enable_if<
+    std::is_constructible<T, TArgs...>::value, int>::type>
+Data<T*const>::Data(TArgs && ... args) :
+    m_data(new T(std::forward<TArgs>(args)...))
+{}
+
+template<typename T>
+Data<T*const>::~Data()
+{
+    if (m_data != nullptr)
+    {
+        delete m_data;
+    } 
+}
+
+template<typename T>
+Data<T*const>::Data(const Data<T*const>& cpy) :
+    m_data(new T(*(cpy.m_data)))
+{}
+
+template<typename T>
+Data<T*const>::Data(Data<T*const>&& mov) :
+    m_data(new T(*(mov.m_data)))
+{}
+
+template<typename T>
+Data<T*const>& Data<T*const>::operator=(const Data<T*const>& cpy)
+{
+    *m_data = *(cpy.m_data);
+    return *this;
+}
+
+template<typename T>
+Data<T*const>& Data<T*const>::operator=(Data<T*const>&& mov)
+{
+    *m_data = std::move(*(mov.m_data));
+    return *this;
+}
+
+template<typename T>
+Data<T*const>& Data<T*const>::operator=(const T& cpy)
+{
+    *m_data = cpy;
+    return *this;
+}
+
+template<typename T>
+Data<T*const>& Data<T*const>::operator=(T&& mov)
+{
+    *m_data = std::move(mov);
+    return *this;
+}
+
+template<typename T>
+T& Data<T*const>::operator*()
+{
+    return *m_data;
+}
+
+template<typename T>
+T Data<T*const>::operator*() const
+{
+    return {*m_data};
+}
+
+template<typename T>
+T*const Data<T*const>::operator->()
+{
+    return m_data;
+}
+
+template<typename T>
+const T*const Data<T*const>::operator->() const
+{
     return m_data;
 }
 
