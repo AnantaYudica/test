@@ -361,10 +361,17 @@ Data<T*>::Data(Data<T*>&& mov) :
 template<typename T>
 Data<T*>& Data<T*>::operator=(const Data<T*>& cpy)
 {
-    if (m_data == nullptr)
-        m_data = new T(cpy.m_data);
+    if (m_data == nullptr && cpy.m_data == nullptr)
+        m_data = new T();
+    else if (m_data == nullptr && cpy.m_data != nullptr)
+        m_data = new T(*(cpy.m_data));
+    else if (cpy.m_data == nullptr)
+    {
+        delete m_data;
+        m_data = nullptr;
+    }
     else
-        *m_data = cpy.m_data;
+        *m_data = *(cpy.m_data);
     return *this;
 }
 
