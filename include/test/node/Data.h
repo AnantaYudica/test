@@ -29,7 +29,8 @@ public:
     Data();
     Data(const T & set);
     Data(T && set);
-    template<typename... TArgs>
+    template<typename... TArgs, typename std::enable_if<
+        std::is_constructible<T, TArgs...>::value, int>::type = 0>
     Data(TArgs && ... args);
 public:
     ~Data();
@@ -60,7 +61,8 @@ private:
 public:
     Data();
     Data(const T & set);
-    template<typename... TArgs>
+    template<typename... TArgs, typename std::enable_if<
+        std::is_constructible<T, TArgs...>::value, int>::type = 0>
     Data(TArgs && ... args);
 public:
     ~Data();
@@ -93,7 +95,8 @@ public:
     Data();
     Data(const T & set);
     Data(T && set);
-    template<typename... TArgs>
+    template<typename... TArgs, typename std::enable_if<
+        std::is_constructible<T, TArgs...>::value, int>::type = 0>
     Data(TArgs && ... args);
 public:
     ~Data();
@@ -126,7 +129,8 @@ public:
     Data();
     Data(const T & set);
     Data(T && set);
-    template<typename... TArgs>
+    template<typename... TArgs, typename std::enable_if<
+        std::is_constructible<T, TArgs...>::value, int>::type = 0>
     Data(TArgs && ... args);
 public:
     ~Data();
@@ -162,7 +166,8 @@ Data<T>::Data(T && set) :
 {}
 
 template<typename T>
-template<typename... TArgs>
+template<typename... TArgs, typename std::enable_if<
+    std::is_constructible<T, TArgs...>::value, int>::type>
 Data<T>::Data(TArgs &&... args) :
     m_data(std::forward<TArgs>(args)...)
 {}
@@ -244,7 +249,8 @@ Data<const T>::Data(const T & set) :
 {}
 
 template<typename T>
-template<typename... TArgs>
+template<typename... TArgs, typename std::enable_if<
+    std::is_constructible<T, TArgs...>::value, int>::type>
 Data<const T>::Data(TArgs && ... args) :
     m_data(std::forward<TArgs>(args)...)
 {}
@@ -327,7 +333,8 @@ Data<T*>::Data(T && set) :
 {}
 
 template<typename T>
-template<typename... TArgs>
+template<typename... TArgs, typename std::enable_if<
+    std::is_constructible<T, TArgs...>::value, int>::type>
 Data<T*>::Data(TArgs && ... args) :
     m_data(new T(std::forward<TArgs>(args)...))
 {}
@@ -442,7 +449,8 @@ Data<const T*>::Data(T && set) :
 {}
 
 template<typename T>
-template<typename... TArgs>
+template<typename... TArgs, typename std::enable_if<
+    std::is_constructible<T, TArgs...>::value, int>::type>
 Data<const T*>::Data(TArgs && ... args) :
     m_data(new const T(std::forward<TArgs>(args)...))
 {}
