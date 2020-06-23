@@ -342,8 +342,11 @@ Data<T*>::Data(TArgs && ... args) :
 template<typename T>
 Data<T*>::~Data()
 {
-    if (m_data) delete m_data;
-    m_data = nullptr;
+    if (m_data != nullptr) 
+    {
+        delete m_data;
+        m_data = nullptr;
+    }
 }
 
 template<typename T>
@@ -465,8 +468,11 @@ Data<const T*>::Data(TArgs && ... args) :
 template<typename T>
 Data<const T*>::~Data()
 {
-    if (m_data != nullptr) delete m_data;
-    m_data = nullptr;
+    if (m_data != nullptr) 
+    {
+        delete m_data;
+        m_data = nullptr;
+    }
 }
 
 template<typename T>
