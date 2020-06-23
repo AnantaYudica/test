@@ -557,7 +557,7 @@ const T*const Data<const T*>::operator->() const
 {
     if (m_data == nullptr)
     {
-        Data<T*>* pthis = const_cast<Data<T*>*>(this);
+        Data<const T*>* pthis = const_cast<Data<const T*>*>(this);
         pthis->m_data = new const T(); 
     }
     return m_data;
