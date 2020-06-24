@@ -471,7 +471,7 @@ int main()
             assert(cstack9_cpy.Top().val1 == 0);
         }
     }
-    printf("count : %d\n", count);
+    
     assert(count == 0);
 
     return 1;
