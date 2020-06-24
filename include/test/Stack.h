@@ -30,7 +30,6 @@ private:
     test::Node<T, 1> * m_head, * m_tail;
     test::node::Data<T> * m_default;
     SizeType m_size;
-    
 public:
     Stack();
 public:
@@ -102,12 +101,14 @@ void Stack<T>::_Clear(test::Node<T, 1> *& head,
     test::Node<T, 1> *& tail)
 {
     using namespace test::node;
-    while(head != tail)
+    while(head != nullptr)
     {
         auto curr = head;
         head = Link<link::next>(head);
         delete curr;
     }
+    head = nullptr;
+    tail = nullptr;
 }
 
 template<typename T>
