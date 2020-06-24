@@ -117,15 +117,17 @@ void ClearDLL(test::Node<Obj1, 2> *& head,
 int main()
 {
     test::Node<Obj1, 1> * head1 = nullptr, *tail1 = nullptr;
+    const test::Node<Obj1, 1> * chead1 = head1, * ctail1 = tail1;
     auto curr1 = AddSLL(head1, tail1, 1);
     {
         Obj1 obj = **head1;
         auto link = test::node::Link<test::node::link::next>(head1);
+        auto clink = test::node::Link<test::node::link::next>(chead1);
         assert(obj.val1 == 1);
         assert(curr1 == head1);
         assert(curr1 == tail1);
         assert(link == nullptr);
-        
+        assert(clink == nullptr);
     }
 
     curr1 = AddSLL(head1, tail1, 1, 1);
@@ -133,11 +135,15 @@ int main()
         Obj1 obj1_1 = **head1, obj1_2 = **tail1;
         auto link1 = test::node::Link<test::node::link::next>(head1);
         auto link2 = test::node::Link<test::node::link::next>(tail1);
+        auto clink1 = test::node::Link<test::node::link::next>(chead1);
+        auto clink2 = test::node::Link<test::node::link::next>(ctail1);
         assert(obj1_1.val1 == 1);
         assert(obj1_2.val1 == 2);
         assert(link1 == tail1);
         assert(tail1 == curr1);
         assert(link2 == nullptr);
+        assert(clink1 == ctail1);
+        assert(clink2 == nullptr);
     }
 
     curr1 = AddSLL(head1, tail1, (**head1));
@@ -146,6 +152,9 @@ int main()
         auto link1 = test::node::Link<test::node::link::next>(head1);
         auto link2 = test::node::Link<test::node::link::next>(link1);
         auto link3 = test::node::Link<test::node::link::next>(tail1);
+        auto clink1 = test::node::Link<test::node::link::next>(chead1);
+        auto clink2 = test::node::Link<test::node::link::next>(clink1);
+        auto clink3 = test::node::Link<test::node::link::next>(ctail1);
         Obj1 obj1_1 = **head1, 
             obj1_2 = **link1,
             obj1_3 = **tail1;
@@ -155,6 +164,8 @@ int main()
         assert(link2 == tail1);
         assert(tail1 == curr1);
         assert(link3 == nullptr);
+        assert(clink2 == ctail1);
+        assert(clink3 == nullptr);
     }
 
     curr1 = AddSLL(head1, tail1, 4);
@@ -163,6 +174,10 @@ int main()
         auto link2 = test::node::Link<test::node::link::next>(link1);
         auto link3 = test::node::Link<test::node::link::next>(link2);
         auto link4 = test::node::Link<test::node::link::next>(tail1);
+        auto clink1 = test::node::Link<test::node::link::next>(chead1);
+        auto clink2 = test::node::Link<test::node::link::next>(clink1);
+        auto clink3 = test::node::Link<test::node::link::next>(clink2);
+        auto clink4 = test::node::Link<test::node::link::next>(ctail1);
         Obj1 obj1_1 = **head1, 
             obj1_2 = **link1,
             obj1_3 = **link2,
@@ -174,21 +189,28 @@ int main()
         assert(link3 == tail1);
         assert(tail1 == curr1);
         assert(link4 == nullptr);
+        assert(clink3 == ctail1);
+        assert(clink4 == nullptr);
     }
 
     ClearSLL(head1, tail1);
     
     test::Node<Obj1, 2> * head2 = nullptr, *tail2 = nullptr;
+    const test::Node<Obj1, 2> * chead2 = head2, * ctail2 = tail2;
     auto curr2 = AddDLL(head2, tail2, 5);
     {
         auto link1_1 = test::node::Link<test::node::link::next>(head2);
         auto link1_2 = test::node::Link<test::node::link::prev>(head2);
+        auto clink1_1 = test::node::Link<test::node::link::next>(chead2);
+        auto clink1_2 = test::node::Link<test::node::link::prev>(chead2);
         Obj1 obj1_1 = **head2;
         assert(obj1_1.val1 == 5);
         assert(curr2 == head2);
         assert(curr2 == tail2);
         assert(link1_1 == nullptr);
         assert(link1_2 == nullptr);
+        assert(clink1_1 == nullptr);
+        assert(clink1_2 == nullptr);
     }
 
     curr2 = AddDLL(head2, tail2, 6);
@@ -197,6 +219,10 @@ int main()
         auto link1_2 = test::node::Link<test::node::link::prev>(head2);
         auto link2_1 = test::node::Link<test::node::link::next>(tail2);
         auto link2_2 = test::node::Link<test::node::link::prev>(tail2);
+        auto clink1_1 = test::node::Link<test::node::link::next>(chead2);
+        auto clink1_2 = test::node::Link<test::node::link::prev>(chead2);
+        auto clink2_1 = test::node::Link<test::node::link::next>(ctail2);
+        auto clink2_2 = test::node::Link<test::node::link::prev>(ctail2);
         Obj1 obj1_1 = **head2, obj1_2 = **tail2;
         assert(obj1_1.val1 == 5);
         assert(obj1_2.val1 == 6);
@@ -205,6 +231,10 @@ int main()
         assert(link1_2 == nullptr);
         assert(link2_1 == nullptr);
         assert(link2_2 == head2);
+        assert(clink1_1 == ctail2);
+        assert(clink1_2 == nullptr);
+        assert(clink2_1 == nullptr);
+        assert(clink2_2 == chead2);
     }
 
     curr2 = AddDLL(head2, tail2, **head2);
@@ -216,6 +246,12 @@ int main()
         auto link3_2 = test::node::Link<test::node::link::prev>(tail2);
         auto link2_1 = test::node::Link<test::node::link::next>(link1_1);
         auto link2_2 = test::node::Link<test::node::link::prev>(link3_2);
+        auto clink1_1 = test::node::Link<test::node::link::next>(chead2);
+        auto clink1_2 = test::node::Link<test::node::link::prev>(chead2);
+        auto clink3_1 = test::node::Link<test::node::link::next>(ctail2);
+        auto clink3_2 = test::node::Link<test::node::link::prev>(ctail2);
+        auto clink2_1 = test::node::Link<test::node::link::next>(clink1_1);
+        auto clink2_2 = test::node::Link<test::node::link::prev>(clink3_2);
         Obj1 obj1_1 = **head2, 
             obj1_2 = **link1_1,
             obj1_3 = **tail2;
@@ -229,6 +265,12 @@ int main()
         assert(link2_2 == head2);
         assert(link3_1 == nullptr);
         assert(link3_2 == link1_1);
+        assert(clink1_1 == clink3_2);
+        assert(clink1_2 == nullptr);
+        assert(clink2_1 == ctail2);
+        assert(clink2_2 == chead2);
+        assert(clink3_1 == nullptr);
+        assert(clink3_2 == clink1_1);
 
     }
 
@@ -242,6 +284,14 @@ int main()
         auto link2_1 = test::node::Link<test::node::link::next>(link1_1);
         auto link2_2 = test::node::Link<test::node::link::prev>(link3_2);
         auto link3_1 = test::node::Link<test::node::link::next>(link2_1);
+        auto clink1_1 = test::node::Link<test::node::link::next>(chead2);
+        auto clink1_2 = test::node::Link<test::node::link::prev>(chead2);
+        auto clink4_1 = test::node::Link<test::node::link::next>(ctail2);
+        auto clink4_2 = test::node::Link<test::node::link::prev>(ctail2);
+        auto clink3_2 = test::node::Link<test::node::link::prev>(clink4_2);
+        auto clink2_1 = test::node::Link<test::node::link::next>(clink1_1);
+        auto clink2_2 = test::node::Link<test::node::link::prev>(clink3_2);
+        auto clink3_1 = test::node::Link<test::node::link::next>(clink2_1);
         Obj1 obj1_1 = **head2, 
             obj1_2 = **link1_1,
             obj1_3 = **link4_2,
@@ -259,6 +309,14 @@ int main()
         assert(link3_2 == link1_1);
         assert(link4_1 == nullptr);
         assert(link4_2 == link2_1);
+        assert(clink1_1 == clink3_2);
+        assert(clink1_2 == nullptr);
+        assert(clink2_1 == clink4_2);
+        assert(clink2_2 == chead2);
+        assert(clink3_1 == ctail2);
+        assert(clink3_2 == clink1_1);
+        assert(clink4_1 == nullptr);
+        assert(clink4_2 == clink2_1);
 
     }
 
