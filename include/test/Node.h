@@ -34,6 +34,7 @@ public:
     Node<T, N, I>& operator=(T&& mov);
 public:
     Node<T, N, N - 1> * Link();
+    const Node<T, N, N - 1> * Link() const;
     void Link(Node<T, N, N - 1> * link);
 };
 
@@ -61,6 +62,7 @@ public:
     Node<T, N, 0>& operator=(T&& mov);
 public:
     Node<T, N, N - 1> * Link();
+    const Node<T, N, N - 1> * Link() const;
     void Link(Node<T, N, N - 1> * link);
 };
 
@@ -141,6 +143,12 @@ Node<T, N, I>& Node<T, N, I>::operator=(T&& mov)
 
 template<typename T, std::size_t N, std::size_t I>
 Node<T, N, N - 1> * Node<T, N, I>::Link()
+{
+    return m_link;
+}
+
+template<typename T, std::size_t N, std::size_t I>
+const Node<T, N, N - 1> * Node<T, N, I>::Link() const
 {
     return m_link;
 }
@@ -228,6 +236,12 @@ Node<T, N, 0>& Node<T, N, 0>::operator=(T&& mov)
 
 template<typename T, std::size_t N>
 Node<T, N, N - 1> * Node<T, N, 0>::Link()
+{
+    return m_link;
+}
+
+template<typename T, std::size_t N>
+const Node<T, N, N - 1> * Node<T, N, 0>::Link() const
 {
     return m_link;
 }
