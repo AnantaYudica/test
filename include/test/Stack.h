@@ -3,6 +3,7 @@
 
 #include "Node.h"
 #include "node/Link.h"
+#include "node/Data.h"
 
 #include <cstddef>
 
@@ -27,7 +28,9 @@ private:
         const test::Node<T, 1> * other_tail);
 private:
     test::Node<T, 1> * m_head, * m_tail;
+    test::node::Data<T> * m_default;
     SizeType m_size;
+    
 public:
     Stack();
 public:
@@ -124,6 +127,7 @@ template<typename T>
 Stack<T>::Stack() :
     m_head(nullptr),
     m_tail(nullptr),
+    m_default(nullptr),
     m_size(0)
 {}
 
@@ -131,6 +135,11 @@ template<typename T>
 Stack<T>::~Stack()
 {
     _Clear(m_head, m_tail);
+    if (m_default != nullptr)
+    {
+        delete m_default;
+        m_default = nullptr;
+    }
     m_size = 0;
 }
 
@@ -138,6 +147,7 @@ template<typename T>
 Stack<T>::Stack(const Stack<T>& cpy) :
     m_head(nullptr),
     m_tail(nullptr),
+    m_default(nullptr),
     m_size(cpy.m_size)
 {
     _Copy(m_head, m_tail, cpy.m_head, cpy.m_tail);
@@ -147,6 +157,7 @@ template<typename T>
 Stack<T>::Stack(Stack<T>&& mov) :
     m_head(mov.m_head),
     m_tail(mov.m_tail),
+    m_default(nullptr),
     m_size(mov.m_size)
 {
     mov.m_head = nullptr;
@@ -271,11 +282,13 @@ T Stack<T>::Pop()
 template<typename T>
 T& Stack<T>::Top()
 {
-    static T def;
     if (m_head == nullptr)
     {
-        def = T();
-        return def;
+        if (m_default == nullptr)
+            m_default = new test::node::Data<T>();
+        else
+            *m_default = std::move(T());
+        return **m_default;
     }
     return **m_head;
 }
