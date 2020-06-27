@@ -15,8 +15,12 @@ namespace base
 template<typename TStatus>
 class Interface
 {
+private:
+    TStatus m_status;
 protected:
-    inline Interface() = default;
+    Interface();
+    template<typename... TArgs>
+    Interface(TArgs &&... args);
 public:
     virtual ~Interface() = default;
 public:
@@ -24,10 +28,10 @@ public:
     Interface(Interface<TStatus> &&) = delete;
 public:
     Interface<TStatus>& operator=(const Interface<TStatus>&) = delete;
-    Interface& operator=(Interface<TStatus>&&) = delete;
+    Interface<TStatus>& operator=(Interface<TStatus>&&) = delete;
 protected:
-    virtual TStatus& GetStatus() = 0;
-    virtual TStatus GetStatus() const = 0;
+    TStatus& GetStatus();
+    TStatus GetStatus() const;
 public:
     virtual bool _BeginPrint() = 0;
     virtual void _EndPrint() = 0;
@@ -42,6 +46,29 @@ protected:
     virtual test::Guard<Interface<TStatus>> PutsGuard() = 0;
     virtual test::Guard<Interface<TStatus>> LastOutputGuard() = 0;
 };
+
+template<typename TStatus>
+Interface<TStatus>::Interface() :
+    m_status()
+{}
+
+template<typename TStatus>
+template<typename... TArgs>
+Interface<TStatus>::Interface(TArgs &&... args) :
+    m_status(std::forward<TArgs>(args)...)
+{}
+
+template<typename TStatus>
+TStatus& Interface<TStatus>::GetStatus()
+{
+    return m_status;
+}
+
+template<typename TStatus>
+TStatus Interface<TStatus>::GetStatus() const
+{
+    return {m_status};
+}
 
 } //!base
 
