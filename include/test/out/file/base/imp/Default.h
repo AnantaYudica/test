@@ -21,10 +21,9 @@ class Default : protected test::out::file::base::Interface<
 public:
     typedef test::out::file::Status<std::uint8_t> StatusType;
     typedef test::out::file::base::Interface<StatusType> BaseType;
-private:
-    StatusType m_status;
 protected:
-    inline Default() = default;
+    inline Default();
+    inline Default(const std::uint8_t& val);
 public:
     inline ~Default() = default;
 public:
@@ -33,9 +32,6 @@ public:
 public:
     Default& operator=(const Default&) = delete;
     Default& operator=(Default&&) = delete;
-protected:
-    inline StatusType& GetStatus() override final;
-    inline StatusType GetStatus() const override final;
 private:
     inline bool _BeginPrint() override final;
     inline void _EndPrint() override final;
@@ -54,15 +50,13 @@ protected:
         StatusType>> LastOutputGuard() override final;
 };
 
-inline typename Default::StatusType& Default::GetStatus()
-{
-    return m_status;
-}
+inline Default::Default() :
+    BaseType()
+{}
 
-inline typename Default::StatusType Default::GetStatus() const
-{
-    return {m_status};
-}
+inline Default::Default(const std::uint8_t& val) :
+    BaseType(val)
+{}
 
 inline bool Default::_BeginPrint()
 {
