@@ -29,14 +29,14 @@ protected:
     virtual TStatus& GetStatus() = 0;
     virtual TStatus GetStatus() const = 0;
 public:
-    virtual bool BeginPrint() = 0;
-    virtual void EndPrint() = 0;
+    virtual bool _BeginPrint() = 0;
+    virtual void _EndPrint() = 0;
 public:
-    virtual bool BeginPuts() = 0;
-    virtual void EndPuts() = 0;
+    virtual bool _BeginPuts() = 0;
+    virtual void _EndPuts() = 0;
 public:
-    virtual bool BeginLastOutput() = 0;
-    virtual void EndLastOutput() = 0;
+    virtual bool _BeginLastOutput() = 0;
+    virtual void _EndLastOutput() = 0;
 protected:
     virtual test::Guard<Interface<TStatus>> PrintGuard() = 0;
     virtual test::Guard<Interface<TStatus>> PutsGuard() = 0;

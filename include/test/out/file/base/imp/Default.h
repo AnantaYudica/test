@@ -34,24 +34,24 @@ public:
     Default& operator=(const Default&) = delete;
     Default& operator=(Default&&) = delete;
 protected:
-    inline StatusType& GetStatus();
-    inline StatusType GetStatus() const;
+    inline StatusType& GetStatus() override final;
+    inline StatusType GetStatus() const override final;
 private:
-    inline bool BeginPrint();
-    inline void EndPrint();
+    inline bool _BeginPrint() override final;
+    inline void _EndPrint() override final;
 private:
-    inline bool BeginPuts();
-    inline void EndPuts();
+    inline bool _BeginPuts() override final;
+    inline void _EndPuts() override final;
 private:
-    inline bool BeginLastOutput();
-    inline void EndLastOutput();
+    inline bool _BeginLastOutput() override final;
+    inline void _EndLastOutput() override final;
 protected:
     inline test::Guard<test::out::file::base::Interface<
-        StatusType>> PrintGuard();
+        StatusType>> PrintGuard() override final;
     inline test::Guard<test::out::file::base::Interface<
-        StatusType>> PutsGuard();
+        StatusType>> PutsGuard() override final;
     inline test::Guard<test::out::file::base::Interface<
-        StatusType>> LastOutputGuard();
+        StatusType>> LastOutputGuard() override final;
 };
 
 inline typename Default::StatusType& Default::GetStatus()
@@ -64,49 +64,49 @@ inline typename Default::StatusType Default::GetStatus() const
     return {m_status};
 }
 
-inline bool Default::BeginPrint()
+inline bool Default::_BeginPrint()
 {
     return true;
 }
 
-inline void Default::EndPrint()
+inline void Default::_EndPrint()
 {}
 
-inline bool Default::BeginPuts()
+inline bool Default::_BeginPuts()
 {
     return true;
 }
 
-inline void Default::EndPuts()
+inline void Default::_EndPuts()
 {}
 
-inline bool Default::BeginLastOutput()
+inline bool Default::_BeginLastOutput()
 {
     return true;
 }
 
-inline void Default::EndLastOutput()
+inline void Default::_EndLastOutput()
 {}
 
 inline test::Guard<test::out::file::base::Interface<
     typename Default::StatusType>> 
 Default::PrintGuard()
 {
-    return {this, &BaseType::BeginPrint, &BaseType::EndPrint};
+    return {this, &BaseType::_BeginPrint, &BaseType::_EndPrint};
 }
 
 inline test::Guard<test::out::file::base::Interface<
     typename Default::StatusType>> 
 Default::PutsGuard()
 {
-    return {this, &BaseType::BeginPuts, &BaseType::EndPuts};
+    return {this, &BaseType::_BeginPuts, &BaseType::_EndPuts};
 }
 
 inline test::Guard<test::out::file::base::Interface<
     typename Default::StatusType>> 
 Default::LastOutputGuard()
 {
-    return {this, &BaseType::BeginLastOutput, &BaseType::EndLastOutput};
+    return {this, &BaseType::_BeginLastOutput, &BaseType::_EndLastOutput};
 }
 
 } //!imp
