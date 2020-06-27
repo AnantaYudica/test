@@ -33,6 +33,18 @@ public:
     Default& operator=(const Default&) = delete;
     Default& operator=(Default&&) = delete;
 private:
+    inline bool _BeginInitialize() override final;
+    inline void _EndInitialize() override final;
+private:
+    inline bool _BeginMode() override final;
+    inline void _EndMode() override final;
+private:
+    inline bool _BeginSize() override final;
+    inline void _EndSize() override final;
+private:
+    inline bool _BeginFilename() override final;
+    inline void _EndFilename() override final;
+private:
     inline bool _BeginPrint() override final;
     inline void _EndPrint() override final;
 private:
@@ -42,6 +54,14 @@ private:
     inline bool _BeginLastOutput() override final;
     inline void _EndLastOutput() override final;
 protected:
+    inline test::Guard<test::out::file::base::Interface<
+        StatusType>> InitializeGuard() override final;
+    inline test::Guard<test::out::file::base::Interface<
+        StatusType>> ModeGuard() override final;
+    inline test::Guard<test::out::file::base::Interface<
+        StatusType>> SizeGuard() override final;
+    inline test::Guard<test::out::file::base::Interface<
+        StatusType>> FilenameGuard() override final;
     inline test::Guard<test::out::file::base::Interface<
         StatusType>> PrintGuard() override final;
     inline test::Guard<test::out::file::base::Interface<
@@ -56,6 +76,38 @@ inline Default::Default() :
 
 inline Default::Default(const std::uint8_t& val) :
     BaseType(val)
+{}
+
+inline bool Default::_BeginInitialize()
+{
+    return true;
+}
+
+inline void Default::_EndInitialize()
+{}
+
+inline bool Default::_BeginMode()
+{
+    return true;
+}
+
+inline void Default::_EndMode()
+{}
+
+inline bool Default::_BeginSize()
+{
+    return true;
+}
+
+inline void Default::_EndSize()
+{}
+
+inline bool Default::_BeginFilename()
+{
+    return true;
+}
+
+inline void Default::_EndFilename()
 {}
 
 inline bool Default::_BeginPrint()
@@ -81,6 +133,35 @@ inline bool Default::_BeginLastOutput()
 
 inline void Default::_EndLastOutput()
 {}
+
+inline test::Guard<test::out::file::base::Interface<
+    typename Default::StatusType>> 
+Default::InitializeGuard()
+{
+    return {this, &BaseType::_BeginInitialize, 
+        &BaseType::_EndInitialize};
+}
+
+inline test::Guard<test::out::file::base::Interface<
+    typename Default::StatusType>> 
+Default::ModeGuard()
+{
+    return {this, &BaseType::_BeginMode, &BaseType::_EndMode};
+}
+
+inline test::Guard<test::out::file::base::Interface<
+    typename Default::StatusType>> 
+Default::SizeGuard()
+{
+    return {this, &BaseType::_BeginSize, &BaseType::_EndSize};
+}
+
+inline test::Guard<test::out::file::base::Interface<
+    typename Default::StatusType>> 
+Default::FilenameGuard()
+{
+    return {this, &BaseType::_BeginFilename, &BaseType::_EndFilename};
+}
 
 inline test::Guard<test::out::file::base::Interface<
     typename Default::StatusType>> 
