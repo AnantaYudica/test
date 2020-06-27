@@ -51,8 +51,8 @@ private:
     inline bool _BeginPuts() override final;
     inline void _EndPuts() override final;
 private:
-    inline bool _BeginLastOutput() override final;
-    inline void _EndLastOutput() override final;
+    inline bool _BeginBuffer() override final;
+    inline void _EndBuffer() override final;
 protected:
     inline test::Guard<test::out::file::base::Interface<
         StatusType>> InitializeGuard() override final;
@@ -67,7 +67,7 @@ protected:
     inline test::Guard<test::out::file::base::Interface<
         StatusType>> PutsGuard() override final;
     inline test::Guard<test::out::file::base::Interface<
-        StatusType>> LastOutputGuard() override final;
+        StatusType>> BufferGuard() override final;
 };
 
 inline Default::Default() :
@@ -126,12 +126,12 @@ inline bool Default::_BeginPuts()
 inline void Default::_EndPuts()
 {}
 
-inline bool Default::_BeginLastOutput()
+inline bool Default::_BeginBuffer()
 {
     return true;
 }
 
-inline void Default::_EndLastOutput()
+inline void Default::_EndBuffer()
 {}
 
 inline test::Guard<test::out::file::base::Interface<
@@ -179,9 +179,9 @@ Default::PutsGuard()
 
 inline test::Guard<test::out::file::base::Interface<
     typename Default::StatusType>> 
-Default::LastOutputGuard()
+Default::BufferGuard()
 {
-    return {this, &BaseType::_BeginLastOutput, &BaseType::_EndLastOutput};
+    return {this, &BaseType::_BeginBuffer, &BaseType::_EndBuffer};
 }
 
 } //!imp

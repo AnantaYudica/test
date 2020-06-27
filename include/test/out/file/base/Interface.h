@@ -51,8 +51,8 @@ public:
     virtual bool _BeginPuts() = 0;
     virtual void _EndPuts() = 0;
 public:
-    virtual bool _BeginLastOutput() = 0;
-    virtual void _EndLastOutput() = 0;
+    virtual bool _BeginBuffer() = 0;
+    virtual void _EndBuffer() = 0;
 protected:
     virtual test::Guard<Interface<TStatus>> InitializeGuard() = 0;
     virtual test::Guard<Interface<TStatus>> ModeGuard() = 0;
@@ -60,7 +60,7 @@ protected:
     virtual test::Guard<Interface<TStatus>> FilenameGuard() = 0;
     virtual test::Guard<Interface<TStatus>> PrintGuard() = 0;
     virtual test::Guard<Interface<TStatus>> PutsGuard() = 0;
-    virtual test::Guard<Interface<TStatus>> LastOutputGuard() = 0;
+    virtual test::Guard<Interface<TStatus>> BufferGuard() = 0;
 };
 
 template<typename TStatus>
