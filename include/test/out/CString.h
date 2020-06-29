@@ -2,7 +2,6 @@
 #define TEST_OUT_CSTRING_H_
 
 #include "../CString.h"
-#include "../Output.h"
 #include "cstr/Status.h"
 
 #include <cstddef>
@@ -77,20 +76,13 @@ private:
 public:
     SizeType Puts(const TChar * cstr, const SizeType& size);
     SizeType Puts(const TChar * cstr);
-    template<SizeType S>
+    template<std::size_t S>
     SizeType Puts(const TChar(&cstr)[S]);
     SizeType Puts(const test::CString<TChar>& cstr);
     SizeType Puts(const test::CString<const TChar>& cstr);
     SizeType Puts(const CString<TChar>& cpy);
 public:
     test::CString<TChar> Get(); 
-public:
-    template<typename Ts>
-    test::Output<Ts>& Error(test::Output<Ts>& out) const;
-    template<typename Ts>
-    test::Output<Ts>& Info(test::Output<Ts>& out) const;
-    template<typename Ts>
-    test::Output<Ts>& Debug(test::Output<Ts>& out) const;
 public:
     bool IsGood() const;
     bool IsBad() const;
@@ -566,33 +558,6 @@ test::CString<TChar> CString<TChar>::Get()
     if (m_status.IsRequire() || m_status.IsBad()) return {""};
     return {m_cstr, m_size + 1};
 } 
-
-template<typename TChar>
-template<typename Ts>
-test::Output<Ts>& CString<TChar>::Error(test::Output<Ts>& out) const
-{
-    if (!m_status.IsRequire() || m_status.IsGood())
-        out.Error("%s", m_cstr);
-    return out;
-}
-
-template<typename TChar>
-template<typename Ts>
-test::Output<Ts>& CString<TChar>::Info(test::Output<Ts>& out) const
-{
-    if (!m_status.IsRequire() || m_status.IsGood())
-        out.Error("%s", m_cstr);
-    return out;
-}
-
-template<typename TChar>
-template<typename Ts>
-test::Output<Ts>& CString<TChar>::Debug(test::Output<Ts>& out) const
-{
-    if (!m_status.IsRequire() || m_status.IsGood())
-        out.Debug("%s", m_cstr);
-    return out;
-}
 
 template<typename TChar>
 bool CString<TChar>::IsGood() const
