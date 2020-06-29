@@ -47,7 +47,8 @@ public:
         print_output_failed = bad | (11 << bad_offset),
         print_buffer_overflow = bad | (12 << bad_offset),
         puts_output_failed = bad | (13 << bad_offset),
-        puts_buffer_overflow = bad | (14 << bad_offset)
+        puts_buffer_overflow = bad | (14 << bad_offset),
+        filename_size_overflow = bad | (15 << bad_offset)
     };
 private:
     ValueType m_val;
