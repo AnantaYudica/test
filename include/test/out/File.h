@@ -99,6 +99,8 @@ public:
 public:
     test::CString<char> Filename() const;
 protected:
+    SizeType VPrint(const char * format, va_list var_args) 
+        __attribute__ ((__format__ (__printf__, 3, 0)));;
     SizeType Print(const char * format, ...) __ATTRIBUTE__((format(printf, 2, 3)));
 protected:
     SizeType Puts(const TChar * cstr, const SizeType& size);
@@ -450,19 +452,17 @@ test::CString<char> File<TChar, MinimumBuffer, MaximumBuffer>::Filename() const
 
 template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
 typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
-File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
+File<TChar, MinimumBuffer, MaximumBuffer>::VPrint(const char * format, 
+    va_list var_args)
 {
     if (!Initialize()) return 0;
 
     auto guard = BaseType::PrintGuard();
     if(!guard) return 0;
-
+    
     auto& status = GetStatus();
-
-    va_list list;
-    va_start(list, format);
     TChar * buffer = new TChar[MinimumBuffer];
-    int buffer_size = vsnprintf(buffer, MinimumBuffer, format, list);
+    int buffer_size = vsnprintf(buffer, MinimumBuffer, format, var_args);
     if (buffer_size < 0)
     {
         delete[] buffer;
@@ -474,7 +474,7 @@ File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
     {
         delete[] buffer;
         buffer = new TChar[buffer_size + 1];
-        vsnprintf(buffer, buffer_size + 1, format, list);
+        vsnprintf(buffer, buffer_size + 1, format, var_args);
     }
     else if (buffer_size >= MaximumBuffer)
     {
@@ -491,7 +491,6 @@ File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
         m_tmp = std::move(test::CString<TChar>("", 0));
 
     if (buffer != nullptr) delete[] buffer;
-    va_end(list);
 
     if (!_CheckSize(buffer_size)) return 0;
     if (!status.IsStandardOutput()) m_size += buffer_size;
@@ -506,6 +505,21 @@ File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
     }
 
     return buffer_size;
+}
+
+template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
+File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
+{
+    
+    va_list var_args;
+    va_start(var_args, format);
+    
+    SizeType size = VPrint(format, var_args);
+
+    va_end(var_args);
+
+    return size;
 }
 
 template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
