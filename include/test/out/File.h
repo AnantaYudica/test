@@ -99,14 +99,14 @@ public:
 public:
     test::CString<char> Filename() const;
 protected:
-    int Print(const char * format, ...) __ATTRIBUTE__((format(printf, 2, 3)));
+    SizeType Print(const char * format, ...) __ATTRIBUTE__((format(printf, 2, 3)));
 protected:
-    int Puts(const TChar * cstr, const SizeType& size);
-    int Puts(const TChar * cstr);
+    SizeType Puts(const TChar * cstr, const SizeType& size);
+    SizeType Puts(const TChar * cstr);
     template<std::size_t S>
-    int Puts(const TChar(&cstr)[S]);
-    int Puts(const test::CString<TChar>& cstr);
-    int Puts(const test::CString<const TChar>& cstr);
+    SizeType Puts(const TChar(&cstr)[S]);
+    SizeType Puts(const test::CString<TChar>& cstr);
+    SizeType Puts(const test::CString<const TChar>& cstr);
 protected:
     test::CString<TChar> Buffer();
     test::CString<TChar> Buffer() const;
@@ -449,7 +449,8 @@ test::CString<char> File<TChar, MinimumBuffer, MaximumBuffer>::Filename() const
 } 
 
 template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-int File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
+typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
+File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
 {
     if (!Initialize()) return 0;
 
@@ -508,7 +509,8 @@ int File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
 }
 
 template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-int File<TChar, MinimumBuffer, MaximumBuffer>::
+typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
+File<TChar, MinimumBuffer, MaximumBuffer>::
     Puts(const TChar * cstr, const SizeType& size)
 {
     if (!Initialize()) return 0;
@@ -543,7 +545,8 @@ int File<TChar, MinimumBuffer, MaximumBuffer>::
 }
 
 template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-int File<TChar, MinimumBuffer, MaximumBuffer>::Puts(const TChar * cstr)
+typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
+File<TChar, MinimumBuffer, MaximumBuffer>::Puts(const TChar * cstr)
 {
     const auto size = strnlen(cstr, MaximumBuffer);
     return Puts(cstr, size);
@@ -551,20 +554,23 @@ int File<TChar, MinimumBuffer, MaximumBuffer>::Puts(const TChar * cstr)
 
 template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
 template<std::size_t S>
-int File<TChar, MinimumBuffer, MaximumBuffer>::Puts(const TChar(&cstr)[S])
+typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
+File<TChar, MinimumBuffer, MaximumBuffer>::Puts(const TChar(&cstr)[S])
 {
     return Puts(cstr, S - 1);
 }
 
 template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-int File<TChar, MinimumBuffer, MaximumBuffer>::
+typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
+File<TChar, MinimumBuffer, MaximumBuffer>::
     Puts(const test::CString<TChar>& cstr)
 {
     return Puts(*cstr, cstr.Size());
 }
 
 template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-int File<TChar, MinimumBuffer, MaximumBuffer>::
+typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType 
+File<TChar, MinimumBuffer, MaximumBuffer>::
     Puts(const test::CString<const TChar>& cstr)
 {
     return Puts(*cstr, cstr.Size());
