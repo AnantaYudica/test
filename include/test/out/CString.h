@@ -3,6 +3,7 @@
 
 #include "../CString.h"
 #include "cstr/Status.h"
+#include "Interface.h"
 
 #include <cstddef>
 #include <type_traits>
@@ -87,6 +88,8 @@ public:
     bool IsGood() const;
     bool IsBad() const;
     StatusType::ValueType GetBadCode() const;
+public:
+    bool Output(test::out::Interface<TChar>& out) const;
 };
 
 template<typename TChar>
@@ -577,6 +580,14 @@ typename CString<TChar>::StatusType::ValueType
 CString<TChar>::GetBadCode() const
 {
     return m_status.BadCode();
+}
+
+template<typename TChar>
+bool CString<TChar>::Output(test::out::Interface<TChar>& out) const
+{
+    if (m_status.IsBad()) return false;
+    const auto size = out.Puts(m_cstr, m_size);
+    return size == m_size;
 }
 
 } //!out
