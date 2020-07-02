@@ -9,6 +9,16 @@
 #include <type_traits>
 #include <cstring>
 #include <utility>
+#include <cstdarg>
+#include <cstdio>
+
+#ifndef __ATTRIBUTE__
+#ifdef __GNUC__
+#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#else
+#define __ATTRIBUTE__(...)
+#endif
+#endif //!__ATTRIBUTE__
 
 namespace test
 {
@@ -74,6 +84,13 @@ public:
 private:
     SizeType _Set(const SizeType& index, const TChar * cstr, 
         const SizeType& size);
+    SizeType _Set(const SizeType& index, const char * format, va_list var_args)
+        __ATTRIBUTE__ ((__format__ (__printf__, 4, 0)));
+public:
+    SizeType VPrint(const char * format, va_list var_args) 
+        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
+    SizeType Print(const char * format, ...) 
+        __ATTRIBUTE__((format(printf, 2, 3)));
 public:
     SizeType Puts(const TChar * cstr, const SizeType& size);
     SizeType Puts(const TChar * cstr);
@@ -500,6 +517,60 @@ CString<TChar>::_Set(const SizeType& index, const TChar * cstr,
         return size;
     }
     return 0;
+}
+
+template<typename TChar>
+typename CString<TChar>::SizeType 
+CString<TChar>::_Set(const SizeType& index, const char * format, 
+    va_list var_args)
+{
+    TChar * buffer = new TChar[m_minimum_capacity];
+    
+    int print_size = vsnprintf(buffer, m_minimum_capacity, format, var_args);
+    
+    if (print_size < 0) 
+    {
+        m_status.Bad(StatusType::print_buffer_failed);
+        return 0;
+    }
+
+    if (print_size >= m_minimum_capacity)
+    {
+        delete[] buffer;
+        buffer = new TChar[print_size + 1];
+        auto print_res = vsnprintf(buffer, m_minimum_capacity, 
+            format, var_args);
+        if (print_res < 0) 
+        {
+            m_status.Bad(StatusType::print_buffer_failed);
+            return 0;
+        }
+    }
+
+    const auto res = _Set(index, buffer, print_size);
+
+    delete[] buffer;
+    return res;
+}
+
+template<typename TChar>
+typename CString<TChar>::SizeType 
+CString<TChar>::VPrint(const char * format, va_list var_args)
+{
+    if (m_status.IsBad()) return 0;
+    return _Set(m_size, format, var_args);
+}
+
+template<typename TChar>
+typename CString<TChar>::SizeType 
+CString<TChar>::Print(const char * format, ...)
+{
+    if (m_status.IsBad()) return 0;
+    va_list args;
+    va_start(args, format);
+    const auto res = _Set(m_size, format, args);
+    va_end(args);
+    return res;
 }
 
 template<typename TChar>
