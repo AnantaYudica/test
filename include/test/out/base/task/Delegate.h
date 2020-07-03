@@ -66,11 +66,14 @@ template<typename TChar, typename TStatus>
 Delegate<TChar, TStatus>::Delegate(TaskInterfaceType * task) :
     m_id(reinterpret_cast<std::intptr_t>(this)),
     m_task(task)
-{}
+{
+    if (m_task != nullptr) m_task->Assign(m_id);
+}
 
 template<typename TChar, typename TStatus>
 Delegate<TChar, TStatus>::~Delegate()
 {
+    if (m_task != nullptr) m_task->Release(m_id);
     m_task = nullptr;
 }
 
