@@ -67,10 +67,6 @@ public:
     SizeType Puts(const test::CString<TChar>& cstr);
     SizeType Puts(const test::CString<const TChar>& cstr);
 public:
-    bool IsGood() const;
-    bool IsBad() const;
-    typename StatusType::ValueType GetBadCode() const;
-public:
     operator bool() const;
 };
 
@@ -171,31 +167,9 @@ Buffer<TChar, TInterface>::Puts(const test::CString<const TChar>& cstr)
 }
 
 template<typename TChar, typename TInterface>
-bool Buffer<TChar, TInterface>::IsGood() const
-{
-    if (m_cstr == nullptr) return false;
-    return m_cstr->IsGood();
-}
-
-template<typename TChar, typename TInterface>
-bool Buffer<TChar, TInterface>::IsBad() const
-{
-    if (m_cstr == nullptr) return true;
-    return m_cstr->IsBad();
-}
-
-template<typename TChar, typename TInterface>
-typename Buffer<TChar, TInterface>::StatusType::ValueType 
-Buffer<TChar, TInterface>::GetBadCode() const
-{
-    if (m_cstr == nullptr) return StatusType::bad;
-    return m_cstr->GetBadCode();
-}
-
-template<typename TChar, typename TInterface>
 Buffer<TChar, TInterface>::operator bool() const
 {
-    return (BaseType::operator bool() && m_cstr != nullptr) && m_cstr->IsGood();
+    return (BaseType::operator bool() && m_cstr != nullptr);
 }
 
 } //!task

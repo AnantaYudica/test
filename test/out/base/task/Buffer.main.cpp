@@ -46,9 +46,6 @@ int main()
     assert(buff1.Puts("test") == 0);
     assert(buff1.Puts(test::CString<char>("test")) == 0);
     assert(buff1.Puts(test::CString<const char>("test")) == 0);
-    assert(buff1.IsGood() == false);
-    assert(buff1.IsBad() == true);
-    assert(buff1.GetBadCode() == Buff1::StatusType::bad);
     assert(buff1 == false);
 
     test::out::CString<char> cstr1;
