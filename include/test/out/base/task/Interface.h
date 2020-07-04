@@ -2,6 +2,7 @@
 #define TEST_OUT_BASE_TASK_INTERFACE_H_
 
 #include "../../Interface.h"
+#include "base/Interface.h"
 #include "Buffer.h"
 
 #include <cstdint>
@@ -15,22 +16,24 @@ namespace base
 namespace task
 {
 
-template<typename TChar>
+template<typename TChar, typename TStatus>
 class Interface
 {
 public:
     typedef test::out::base::task::Buffer<TChar,
-        test::out::base::task::Interface<TChar>> BufferType;
+        test::out::base::task::base::Interface<TStatus>> BufferType;
 protected:
     Interface() = default;
 public:
     virtual ~Interface() = default;
 public:
-    Interface(const Interface<TChar>&) = delete;
-    Interface(Interface<TChar>&& mov) = default;
+    Interface(const Interface<TChar, TStatus>&) = delete;
+    Interface(Interface<TChar, TStatus>&& mov) = default;
 public:
-    Interface<TChar>& operator=(const Interface<TChar>&) = delete;
-    Interface<TChar>& operator=(Interface<TChar>&&) = delete;
+    Interface<TChar, TStatus>& 
+        operator=(const Interface<TChar, TStatus>&) = delete;
+    Interface<TChar, TStatus>& 
+        operator=(Interface<TChar, TStatus>&&) = delete;
 public:
     virtual bool Execute(test::out::Interface<TChar>& out) = 0;
 public:
