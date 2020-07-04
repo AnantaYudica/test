@@ -16,6 +16,7 @@ int main()
         assert(s1.IsDone() == false);
         assert(s1.IsRelease() == false);
         assert(s1.IsAssign() == false);
+        assert(s1.IsRemove() == false);
         assert(s1.GetBadCode() == StatusType::good);
 
         StatusType s2;
@@ -27,6 +28,7 @@ int main()
         assert(s2.IsDone() == false);
         assert(s2.IsRelease() == false);
         assert(s2.IsAssign() == true);
+        assert(s2.IsRemove() == false);
         assert(s2.GetBadCode() == StatusType::good);
         
         res = s2.Release();
@@ -37,6 +39,7 @@ int main()
         assert(s2.IsDone() == false);
         assert(s2.IsRelease() == true);
         assert(s2.IsAssign() == true);
+        assert(s2.IsRemove() == false);
         assert(s2.GetBadCode() == StatusType::good);
 
         res = s2.Execute();
@@ -47,6 +50,18 @@ int main()
         assert(s2.IsDone() == true);
         assert(s2.IsRelease() == true);
         assert(s2.IsAssign() == true);
+        assert(s2.IsRemove() == false);
+        assert(s2.GetBadCode() == StatusType::good);
+
+        res = s2.Remove();
+        
+        assert(res == true);
+        assert(s2.IsGood() == true);
+        assert(s2.IsBad() == false);
+        assert(s2.IsDone() == true);
+        assert(s2.IsRelease() == true);
+        assert(s2.IsAssign() == true);
+        assert(s2.IsRemove() == true);
         assert(s2.GetBadCode() == StatusType::good);
 
         StatusType s3;
@@ -59,6 +74,7 @@ int main()
         assert(s3.IsDone() == false);
         assert(s3.IsRelease() == false);
         assert(s3.IsAssign() == false);
+        assert(s3.IsRemove() == false);
         assert(s3.GetBadCode() == StatusType::good);
         
         res = s3.Execute();
@@ -69,6 +85,7 @@ int main()
         assert(s3.IsDone() == false);
         assert(s3.IsRelease() == false);
         assert(s3.IsAssign() == false);
+        assert(s3.IsRemove() == false);
         assert(s3.GetBadCode() == StatusType::good);
 
         StatusType s4;
@@ -83,6 +100,7 @@ int main()
         assert(s4.IsDone() == false);
         assert(s4.IsRelease() == false);
         assert(s4.IsAssign() == true);
+        assert(s4.IsRemove() == false);
         assert(s4.GetBadCode() == StatusType::bad);
 
         res = s4.Bad(StatusType::bad);
@@ -93,6 +111,7 @@ int main()
         assert(s4.IsDone() == false);
         assert(s4.IsRelease() == false);
         assert(s4.IsAssign() == true);
+        assert(s4.IsRemove() == false);
         assert(s4.GetBadCode() == StatusType::bad);
 
         StatusType s5{s4};
@@ -102,6 +121,7 @@ int main()
         assert(s5.IsDone() == false);
         assert(s5.IsRelease() == false);
         assert(s5.IsAssign() == true);
+        assert(s5.IsRemove() == false);
         assert(s5.GetBadCode() == StatusType::bad);
 
         StatusType s6{std::move(s5)};
@@ -111,6 +131,7 @@ int main()
         assert(s6.IsDone() == false);
         assert(s6.IsRelease() == false);
         assert(s6.IsAssign() == true);
+        assert(s6.IsRemove() == false);
         assert(s6.GetBadCode() == StatusType::bad);
         
         assert(s5.IsGood() == true);
@@ -118,6 +139,7 @@ int main()
         assert(s5.IsDone() == false);
         assert(s5.IsRelease() == false);
         assert(s5.IsAssign() == false);
+        assert(s5.IsRemove() == false);
         assert(s5.GetBadCode() == StatusType::good);
 
         StatusType s7;
@@ -128,6 +150,7 @@ int main()
         assert(s7.IsDone() == false);
         assert(s7.IsRelease() == false);
         assert(s7.IsAssign() == true);
+        assert(s7.IsRemove() == false);
         assert(s7.GetBadCode() == StatusType::bad);
         
         StatusType s8;
@@ -138,6 +161,7 @@ int main()
         assert(s8.IsDone() == false);
         assert(s8.IsRelease() == false);
         assert(s8.IsAssign() == true);
+        assert(s8.IsRemove() == false);
         assert(s8.GetBadCode() == StatusType::bad);
         
         assert(s7.IsGood() == true);
@@ -145,6 +169,7 @@ int main()
         assert(s7.IsDone() == false);
         assert(s7.IsRelease() == false);
         assert(s7.IsAssign() == false);
+        assert(s7.IsRemove() == false);
         assert(s7.GetBadCode() == StatusType::good);
 
         s8.Reset();
@@ -154,6 +179,7 @@ int main()
         assert(s8.IsDone() == false);
         assert(s8.IsRelease() == false);
         assert(s8.IsAssign() == false);
+        assert(s8.IsRemove() == false);
         assert(s8.GetBadCode() == StatusType::good);
         
     }
@@ -167,6 +193,7 @@ int main()
         assert(s1.IsDone() == false);
         assert(s1.IsRelease() == false);
         assert(s1.IsAssign() == false);
+        assert(s1.IsRemove() == false);
         assert(s1.GetBadCode() == StatusType::good);
 
         StatusType s2;
@@ -178,6 +205,7 @@ int main()
         assert(s2.IsDone() == false);
         assert(s2.IsRelease() == false);
         assert(s2.IsAssign() == true);
+        assert(s2.IsRemove() == false);
         assert(s2.GetBadCode() == StatusType::good);
         
         res = s2.Release();
@@ -188,6 +216,7 @@ int main()
         assert(s2.IsDone() == false);
         assert(s2.IsRelease() == true);
         assert(s2.IsAssign() == true);
+        assert(s2.IsRemove() == false);
         assert(s2.GetBadCode() == StatusType::good);
 
         res = s2.Execute();
@@ -198,6 +227,18 @@ int main()
         assert(s2.IsDone() == true);
         assert(s2.IsRelease() == true);
         assert(s2.IsAssign() == true);
+        assert(s2.IsRemove() == false);
+        assert(s2.GetBadCode() == StatusType::good);
+
+        res = s2.Remove();
+        
+        assert(res == true);
+        assert(s2.IsGood() == true);
+        assert(s2.IsBad() == false);
+        assert(s2.IsDone() == true);
+        assert(s2.IsRelease() == true);
+        assert(s2.IsAssign() == true);
+        assert(s2.IsRemove() == true);
         assert(s2.GetBadCode() == StatusType::good);
 
         StatusType s3;
@@ -210,6 +251,7 @@ int main()
         assert(s3.IsDone() == false);
         assert(s3.IsRelease() == false);
         assert(s3.IsAssign() == false);
+        assert(s3.IsRemove() == false);
         assert(s3.GetBadCode() == StatusType::good);
         
         res = s3.Execute();
@@ -220,6 +262,7 @@ int main()
         assert(s3.IsDone() == false);
         assert(s3.IsRelease() == false);
         assert(s3.IsAssign() == false);
+        assert(s3.IsRemove() == false);
         assert(s3.GetBadCode() == StatusType::good);
 
         StatusType s4;
@@ -234,6 +277,7 @@ int main()
         assert(s4.IsDone() == false);
         assert(s4.IsRelease() == false);
         assert(s4.IsAssign() == true);
+        assert(s4.IsRemove() == false);
         assert(s4.GetBadCode() == StatusType::bad);
 
         res = s4.Bad(StatusType::bad);
@@ -244,6 +288,7 @@ int main()
         assert(s4.IsDone() == false);
         assert(s4.IsRelease() == false);
         assert(s4.IsAssign() == true);
+        assert(s4.IsRemove() == false);
         assert(s4.GetBadCode() == StatusType::bad);
 
         StatusType s5{s4};
@@ -253,6 +298,7 @@ int main()
         assert(s5.IsDone() == false);
         assert(s5.IsRelease() == false);
         assert(s5.IsAssign() == true);
+        assert(s5.IsRemove() == false);
         assert(s5.GetBadCode() == StatusType::bad);
 
         StatusType s6{std::move(s5)};
@@ -262,6 +308,7 @@ int main()
         assert(s6.IsDone() == false);
         assert(s6.IsRelease() == false);
         assert(s6.IsAssign() == true);
+        assert(s6.IsRemove() == false);
         assert(s6.GetBadCode() == StatusType::bad);
         
         assert(s5.IsGood() == true);
@@ -269,6 +316,7 @@ int main()
         assert(s5.IsDone() == false);
         assert(s5.IsRelease() == false);
         assert(s5.IsAssign() == false);
+        assert(s5.IsRemove() == false);
         assert(s5.GetBadCode() == StatusType::good);
 
         StatusType s7;
@@ -279,6 +327,7 @@ int main()
         assert(s7.IsDone() == false);
         assert(s7.IsRelease() == false);
         assert(s7.IsAssign() == true);
+        assert(s7.IsRemove() == false);
         assert(s7.GetBadCode() == StatusType::bad);
         
         StatusType s8;
@@ -289,6 +338,7 @@ int main()
         assert(s8.IsDone() == false);
         assert(s8.IsRelease() == false);
         assert(s8.IsAssign() == true);
+        assert(s8.IsRemove() == false);
         assert(s8.GetBadCode() == StatusType::bad);
         
         assert(s7.IsGood() == true);
@@ -296,6 +346,7 @@ int main()
         assert(s7.IsDone() == false);
         assert(s7.IsRelease() == false);
         assert(s7.IsAssign() == false);
+        assert(s7.IsRemove() == false);
         assert(s7.GetBadCode() == StatusType::good);
 
         s8.Reset();
@@ -305,6 +356,7 @@ int main()
         assert(s8.IsDone() == false);
         assert(s8.IsRelease() == false);
         assert(s8.IsAssign() == false);
+        assert(s8.IsRemove() == false);
         assert(s8.GetBadCode() == StatusType::good);
     }
     return 1;
