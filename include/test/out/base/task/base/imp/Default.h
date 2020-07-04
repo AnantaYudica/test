@@ -66,7 +66,8 @@ protected:
 public:
     virtual bool Execute(test::out::Interface<TChar>& out);
 public:
-    virtual bool Assign(const std::intptr_t& deleg_id);
+    virtual bool Assign(const std::intptr_t& deleg_id,
+        std::intptr_t& task_id);
 public:
     virtual bool Release(const std::intptr_t& deleg_id);
 public:
@@ -167,7 +168,8 @@ bool Default<TChar>::Execute(test::out::Interface<TChar>& out)
 }
 
 template<typename TChar>
-bool Default<TChar>::Assign(const std::intptr_t& deleg_id)
+bool Default<TChar>::Assign(const std::intptr_t& deleg_id, 
+    std::intptr_t& task_id)
 {
     return false;
 }
