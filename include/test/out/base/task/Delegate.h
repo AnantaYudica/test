@@ -26,6 +26,7 @@ public:
         BufferType;
 private:
     const std::intptr_t m_id;
+    std::intptr_t m_task_id;
     TaskInterfaceType * m_task;
 public:
     Delegate();
@@ -57,29 +58,34 @@ public:
 template<typename TChar>
 Delegate<TChar>::Delegate() :
     m_id(0),
+    m_task_id(0),
     m_task(nullptr)
 {}
 
 template<typename TChar>
 Delegate<TChar>::Delegate(TaskInterfaceType * task) :
     m_id(reinterpret_cast<std::intptr_t>(this)),
+    m_task_id(0),
     m_task(task)
 {
-    if (m_task != nullptr) m_task->Assign(m_id);
+    if (m_task != nullptr) m_task->Assign(m_id, m_task_id);
 }
 
 template<typename TChar>
 Delegate<TChar>::~Delegate()
 {
     if (m_task != nullptr) m_task->Release(m_id);
+    m_task_id = 0;
     m_task = nullptr;
 }
 
 template<typename TChar>
 Delegate<TChar>::Delegate(Delegate<TChar>&& mov) :
     m_id(mov.m_id),
+    m_task_id(mov.m_task_id),
     m_task(mov.m_task)
 {
+    mov.m_task_id = 0;
     mov.m_task = nullptr;
 }
 
