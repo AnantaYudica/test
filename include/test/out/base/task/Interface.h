@@ -37,7 +37,8 @@ public:
 public:
     virtual bool Execute(test::out::Interface<TChar>& out) = 0;
 public:
-    virtual bool Assign(const std::intptr_t& deleg_id) = 0;
+    virtual bool Assign(const std::intptr_t& deleg_id,
+        std::intptr_t& task_id) = 0;
 public:
     virtual bool Release(const std::intptr_t& deleg_id) = 0;
 public:
