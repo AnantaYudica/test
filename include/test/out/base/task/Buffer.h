@@ -44,6 +44,8 @@ public:
     Buffer(test::out::CString<TChar> * cstr_ptr, 
         TInterface * ptr, BeginPointerFunctionMemberType begin,
         EndPointerFunctionMemberType end);
+    Buffer(test::out::CString<TChar> * cstr_ptr,
+        test::Guard<TInterface> && mov);
 public:
     ~Buffer();
 public:
@@ -88,6 +90,13 @@ Buffer<TChar, TInterface>::Buffer(test::out::CString<TChar> * cstr_ptr,
     TInterface * ptr, BeginPointerFunctionMemberType begin,
     EndPointerFunctionMemberType end) :
         BaseType(ptr, begin, end),
+        m_cstr(cstr_ptr)
+{}
+
+template<typename TChar, typename TInterface>
+Buffer<TChar, TInterface>::Buffer(test::out::CString<TChar> * cstr_ptr,
+    test::Guard<TInterface> && mov) :
+        BaseType(std::move(mov)),
         m_cstr(cstr_ptr)
 {}
 
