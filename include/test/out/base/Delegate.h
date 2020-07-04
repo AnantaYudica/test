@@ -1,10 +1,10 @@
 #ifndef TEST_OUT_BASE_DELEGATE_H_
 #define TEST_OUT_BASE_DELEGATE_H_
 
-#include "../../CString.h"
-#include "../Interface.h"
+#include "../CString.h"
 #include "Interface.h"
-#include "Buffer.h"
+#include "task/Interface.h"
+#include "task/Buffer.h"
 
 #include <cstdint>
 
@@ -15,13 +15,15 @@ namespace out
 namespace base
 {
 
-template<typename TChar>
+template<typename TChar, typename TStatus, typename TTaskStatus>
 class Delegate
 {
 public:
-    typedef test::out::base::task::Interface<TChar> TaskInterfaceType;
+    typedef test::out::base::task::Interface<TChar, TTaskStatus> TaskInterfaceType;
     typedef test::out::base::task::Buffer<TChar, TaskInterfaceType>
         BufferType;
+    typedef test::out::base::Interface<TStatus> InterfaceType;
+    typedef typename InterfaceType::SizeType SizeType;
 private:
     const std::intptr_t m_id;
     std::intptr_t m_task_id;
@@ -32,11 +34,13 @@ public:
 public:
     virtual ~Delegate();
 public:
-    Delegate(const Delegate<TChar>&) = delete;
-    Delegate(Delegate<TChar>&& mov);
+    Delegate(const Delegate<TChar, TStatus, TTaskStatus>&) = delete;
+    Delegate(Delegate<TChar, TStatus, TTaskStatus>&& mov);
 public:
-    Delegate<TChar>& operator=(const Delegate<TChar>&) = delete;
-    Delegate<TChar>& operator=(Delegate<TChar>&&) = delete;
+    Delegate<TChar, TStatus, TTaskStatus>& 
+        operator=(const Delegate<TChar, TStatus, TTaskStatus>&) = delete;
+    Delegate<TChar, TStatus, TTaskStatus>& 
+        operator=(Delegate<TChar, TStatus, TTaskStatus>&&) = delete;
 protected:
     BufferType GetBuffer();
 public:
@@ -53,15 +57,15 @@ public:
     operator bool() const;
 };
 
-template<typename TChar>
-Delegate<TChar>::Delegate() :
+template<typename TChar, typename TStatus, typename TTaskStatus>
+Delegate<TChar, TStatus, TTaskStatus>::Delegate() :
     m_id(0),
     m_task_id(0),
     m_task(nullptr)
 {}
 
-template<typename TChar>
-Delegate<TChar>::Delegate(TaskInterfaceType * task) :
+template<typename TChar, typename TStatus, typename TTaskStatus>
+Delegate<TChar, TStatus, TTaskStatus>::Delegate(TaskInterfaceType * task) :
     m_id(reinterpret_cast<std::intptr_t>(this)),
     m_task_id(0),
     m_task(task)
@@ -69,34 +73,35 @@ Delegate<TChar>::Delegate(TaskInterfaceType * task) :
     if (m_task != nullptr) m_task->Assign(m_id, m_task_id);
 }
 
-template<typename TChar>
-Delegate<TChar>::~Delegate()
+template<typename TChar, typename TStatus, typename TTaskStatus>
+Delegate<TChar, TStatus, TTaskStatus>::~Delegate()
 {
     if (m_task != nullptr) m_task->Release(m_id);
     m_task_id = 0;
     m_task = nullptr;
 }
 
-template<typename TChar>
-Delegate<TChar>::Delegate(Delegate<TChar>&& mov) :
-    m_id(mov.m_id),
-    m_task_id(mov.m_task_id),
-    m_task(mov.m_task)
+template<typename TChar, typename TStatus, typename TTaskStatus>
+Delegate<TChar, TStatus, TTaskStatus>::
+    Delegate(Delegate<TChar, TStatus, TTaskStatus>&& mov) :
+        m_id(mov.m_id),
+        m_task_id(mov.m_task_id),
+        m_task(mov.m_task)
 {
     mov.m_task_id = 0;
     mov.m_task = nullptr;
 }
 
-template<typename TChar>
-typename Delegate<TChar>::BufferType 
-Delegate<TChar>::GetBuffer()
+template<typename TChar, typename TStatus, typename TTaskStatus>
+typename Delegate<TChar, TStatus, TTaskStatus>::BufferType 
+Delegate<TChar, TStatus, TTaskStatus>::GetBuffer()
 {
     if (m_task == nullptr) return {};
     return m_task->Buffer(m_id);
 }
 
-template<typename TChar>
-Delegate<TChar>::operator bool() const
+template<typename TChar, typename TStatus, typename TTaskStatus>
+Delegate<TChar, TStatus, TTaskStatus>::operator bool() const
 {
     return m_id != 0 && m_task != nullptr;
 }
