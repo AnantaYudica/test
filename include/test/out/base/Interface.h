@@ -2,6 +2,7 @@
 #define TEST_OUT_BASE_INTERFACE_H_
 
 #include "../../CString.h"
+#include "../../Guard.h"
 
 #include <cstdlib>
 #include <cstdint>
@@ -23,7 +24,7 @@ namespace out
 namespace base
 {
 
-template<typename TChar, typename TStatus>
+template<typename TStatus>
 class Interface
 {
 public:
@@ -38,51 +39,52 @@ protected:
 public:
     virtual ~Interface();
 public:
-    Interface(const Interface<TChar, TStatus>&) = delete;
-    Interface(Interface<TChar, TStatus>&&) = delete;
+    Interface(const Interface<TStatus>&) = delete;
+    Interface(Interface<TStatus>&&) = delete;
 public:
-    Interface<TChar, TStatus>& 
-        operator=(const Interface<TChar, TStatus>&) = delete;
-    Interface<TChar, TStatus>& 
-        operator=(Interface<TChar, TStatus>&&) = delete;
+    Interface<TStatus>& operator=(const Interface<TStatus>&) = delete;
+    Interface<TStatus>& operator=(Interface<TStatus>&&) = delete;
 public:
-    virtual bool VPrint(const char * format, va_list var_args) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0))) = 0;
-    virtual bool Print(const char * format, ...) 
-        __ATTRIBUTE__((format(printf, 2, 3))) = 0;
+    virtual bool Finalize(const std::intptr_t& id) = 0;
 public:
-    virtual bool Puts(const TChar * cstr, const SizeType& size) = 0;
-    virtual bool Puts(const TChar * cstr) = 0;
-    virtual bool Puts(const test::CString<TChar>& cstr) = 0;
-    virtual bool Puts(const test::CString<const TChar>& cstr) = 0;
+    virtual bool _BeginRequestTask() = 0;
+    virtual void _EndRequestTask() = 0;
+public:
+    virtual bool _BeginExecuteTask() = 0;
+    virtual void _EndExecuteTask() = 0;
+protected:
+    virtual test::Guard<Interface<TStatus>> RequestTaskGuard() = 0;
+    virtual test::Guard<Interface<TStatus>> ExecuteTaskGuard() = 0;
+protected:
+    virtual bool ExecuteTask(const std::intptr_t& id) = 0;
 public:
     TStatus& GetStatus();
     TStatus GetStatus() const;
 };
 
-template<typename TChar, typename TStatus>
-Interface<TChar, TStatus>::Interface() :
+template<typename TStatus>
+Interface<TStatus>::Interface() :
     m_status()
 {}
 
-template<typename TChar, typename TStatus>
+template<typename TStatus>
 template<typename... TArgs>
-Interface<TChar, TStatus>::Interface(TArgs&&... args) :
+Interface<TStatus>::Interface(TArgs&&... args) :
     m_status(std::forward<TArgs>(args)...)
 {}
 
-template<typename TChar, typename TStatus>
-Interface<TChar, TStatus>::~Interface()
+template<typename TStatus>
+Interface<TStatus>::~Interface()
 {}
 
-template<typename TChar, typename TStatus>
-TStatus& Interface<TChar, TStatus>::GetStatus()
+template<typename TStatus>
+TStatus& Interface<TStatus>::GetStatus()
 {
     return m_status;
 }
 
-template<typename TChar, typename TStatus>
-TStatus Interface<TChar, TStatus>::GetStatus() const
+template<typename TStatus>
+TStatus Interface<TStatus>::GetStatus() const
 {
     return {m_status};
 }
