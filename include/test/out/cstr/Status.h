@@ -15,6 +15,7 @@ class Status
 {
 public:
     typedef std::uint8_t ValueType;
+    typedef std::uint8_t IntegerValueType;
 private:
     static constexpr ValueType require_mask = 0x07;
 public:
@@ -32,7 +33,8 @@ public:
         reallocation_failed = bad | (0x05 << 3),
         predict_reallocation_failed = bad | (0x06 << 3),
         copy_reallocation_failed = bad | (0x07 << 3),
-        reallocation_overflow_capacity = bad | (0x08 << 3)
+        reallocation_overflow_capacity = bad | (0x08 << 3),
+        print_buffer_failed = bad | (0x09 << 3)
     };
 private:
     ValueType m_val;
