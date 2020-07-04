@@ -24,16 +24,23 @@ public:
     typedef TValue ValueType;
     typedef TIntegerValue IntegerValueType;
 private:
-    static constexpr IntegerValueType stage_mask = 7;
-    static constexpr IntegerValueType bad_offset = 3; 
+    static constexpr IntegerValueType bad_value = 
+         IntegerValueType(~((IntegerValueType)-1 >> 1));
+    static constexpr IntegerValueType stage_mask = 15;
+    static constexpr IntegerValueType bad_offset = 4; 
+    static constexpr IntegerValueType release_mask = (bad_value | 8 | 4);
+    static constexpr IntegerValueType release_true_condition = 4;
+    static constexpr IntegerValueType execute_mask = release_mask | 2;
+    static constexpr IntegerValueType execute_true_condition = 4 | 2;
 public:
     enum : IntegerValueType
     {
         good = 0,
-        bad = IntegerValueType(~((IntegerValueType)-1 >> 1)),
+        bad = bad_value,
         done = 1,
         release = 2,
-        assign = 4
+        assign = 4,
+        remove = 8
     };
 private:
     TValue m_val;
@@ -57,10 +64,12 @@ public:
     bool IsDone() const;
     bool IsRelease() const;
     bool IsAssign() const;
+    bool IsRemove() const;
 public:
     bool Assign();
     bool Release();
     bool Execute();
+    bool Remove();
 public:
     void Reset();
 public:
@@ -146,6 +155,12 @@ bool Status<TValue, TIntegerValue>::IsAssign() const
 }
 
 template<typename TValue, typename TIntegerValue>
+bool Status<TValue, TIntegerValue>::IsRemove() const
+{
+    return m_val & remove;
+}
+
+template<typename TValue, typename TIntegerValue>
 bool Status<TValue, TIntegerValue>::Assign()
 {
     if (m_val == good)
@@ -159,7 +174,7 @@ bool Status<TValue, TIntegerValue>::Assign()
 template<typename TValue, typename TIntegerValue>
 bool Status<TValue, TIntegerValue>::Release()
 {
-    if (!(m_val & bad) && m_val & assign)
+    if ((m_val & release_mask) == release_true_condition)
     {
         m_val |= release;
         return true;
@@ -170,12 +185,20 @@ bool Status<TValue, TIntegerValue>::Release()
 template<typename TValue, typename TIntegerValue>
 bool Status<TValue, TIntegerValue>::Execute()
 {
-    if ((!(m_val & bad) && m_val & assign) && m_val & release)
+    if ((m_val & execute_mask) == execute_true_condition)
     {
         m_val |= done;
         return true;
     }
     return false;
+}
+
+template<typename TValue, typename TIntegerValue>
+bool Status<TValue, TIntegerValue>::Remove()
+{
+    if (m_val & bad) return false;
+    m_val |= remove;
+    return true;
 }
 
 template<typename TValue, typename TIntegerValue>
