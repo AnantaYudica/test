@@ -3,10 +3,10 @@
 #include <cassert>
 
 class Obj1 :
-    public test::out::base::task::base::imp::Default
+    public test::out::base::task::base::imp::Default<char>
 {
 private:
-    typedef test::out::base::task::base::imp::Default BaseType;
+    typedef test::out::base::task::base::imp::Default<char> BaseType;
 public:
     bool call_execute, call_assign, call_release, call_buffer;
     Obj1() :
