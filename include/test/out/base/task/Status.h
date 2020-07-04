@@ -40,7 +40,8 @@ public:
         done = 1,
         release = 2,
         assign = 4,
-        remove = 8
+        remove = 8,
+        buffer_failed = (bad | 1 << bad_offset)
     };
 private:
     TValue m_val;
@@ -127,7 +128,7 @@ Status<TValue, TIntegerValue>::operator=(Status<TValue, TIntegerValue>&& mov)
 template<typename TValue, typename TIntegerValue>
 bool Status<TValue, TIntegerValue>::IsGood() const
 {
-    return !(m_val & bad); 
+    return (m_val & (bad | remove)) == good; 
 }
 
 template<typename TValue, typename TIntegerValue>
