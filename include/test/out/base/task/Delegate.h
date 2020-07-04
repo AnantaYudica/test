@@ -17,12 +17,11 @@ namespace base
 namespace task
 {
 
-template<typename TChar, typename TStatus>
+template<typename TChar>
 class Delegate
 {
 public:
-    typedef test::out::base::task::Interface<TChar, TStatus>
-        TaskInterfaceType;
+    typedef test::out::base::task::Interface<TChar> TaskInterfaceType;
     typedef test::out::base::task::Buffer<TChar, TaskInterfaceType>
         BufferType;
 private:
@@ -34,12 +33,11 @@ public:
 public:
     virtual ~Delegate();
 public:
-    Delegate(const Delegate<TChar, TStatus>&) = delete;
-    Delegate(Delegate<TChar, TStatus>&& mov);
+    Delegate(const Delegate<TChar>&) = delete;
+    Delegate(Delegate<TChar>&& mov);
 public:
-    Delegate<TChar, TStatus>& 
-        operator=(const Delegate<TChar, TStatus>&) = delete;
-    Delegate<TChar, TStatus>& operator=(Delegate<TChar, TStatus>&&) = delete;
+    Delegate<TChar>& operator=(const Delegate<TChar>&) = delete;
+    Delegate<TChar>& operator=(Delegate<TChar>&&) = delete;
 protected:
     BufferType GetBuffer();
 public:
@@ -56,46 +54,45 @@ public:
     operator bool() const;
 };
 
-template<typename TChar, typename TStatus>
-Delegate<TChar, TStatus>::Delegate() :
+template<typename TChar>
+Delegate<TChar>::Delegate() :
     m_id(0),
     m_task(nullptr)
 {}
 
-template<typename TChar, typename TStatus>
-Delegate<TChar, TStatus>::Delegate(TaskInterfaceType * task) :
+template<typename TChar>
+Delegate<TChar>::Delegate(TaskInterfaceType * task) :
     m_id(reinterpret_cast<std::intptr_t>(this)),
     m_task(task)
 {
     if (m_task != nullptr) m_task->Assign(m_id);
 }
 
-template<typename TChar, typename TStatus>
-Delegate<TChar, TStatus>::~Delegate()
+template<typename TChar>
+Delegate<TChar>::~Delegate()
 {
     if (m_task != nullptr) m_task->Release(m_id);
     m_task = nullptr;
 }
 
-template<typename TChar, typename TStatus>
-Delegate<TChar, TStatus>::Delegate(Delegate<TChar, TStatus>&& mov) :
+template<typename TChar>
+Delegate<TChar>::Delegate(Delegate<TChar>&& mov) :
     m_id(mov.m_id),
     m_task(mov.m_task)
 {
-    mov.m_id = 0;
-    m_task = nullptr;
+    mov.m_task = nullptr;
 }
 
-template<typename TChar, typename TStatus>
-typename Delegate<TChar, TStatus>::BufferType 
-Delegate<TChar, TStatus>::GetBuffer()
+template<typename TChar>
+typename Delegate<TChar>::BufferType 
+Delegate<TChar>::GetBuffer()
 {
     if (m_task == nullptr) return {};
     return m_task->Buffer(m_id);
 }
 
-template<typename TChar, typename TStatus>
-Delegate<TChar, TStatus>::operator bool() const
+template<typename TChar>
+Delegate<TChar>::operator bool() const
 {
     return m_id != 0 && m_task != nullptr;
 }
