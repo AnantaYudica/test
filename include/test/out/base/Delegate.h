@@ -1,5 +1,5 @@
-#ifndef TEST_OUT_BASE_TASK_DELEGATE_H_
-#define TEST_OUT_BASE_TASK_DELEGATE_H_
+#ifndef TEST_OUT_BASE_DELEGATE_H_
+#define TEST_OUT_BASE_DELEGATE_H_
 
 #include "../../CString.h"
 #include "../Interface.h"
@@ -13,8 +13,6 @@ namespace test
 namespace out
 {
 namespace base
-{
-namespace task
 {
 
 template<typename TChar>
@@ -103,12 +101,10 @@ Delegate<TChar>::operator bool() const
     return m_id != 0 && m_task != nullptr;
 }
 
-} //!task
-
 } //!base
 
 } //!out
 
 } //!test
 
-#endif //!TEST_OUT_BASE_TASK_DELEGATE_H_
+#endif //!TEST_OUT_BASE_DELEGATE_H_
