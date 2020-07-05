@@ -3,17 +3,10 @@
 
 #include "../../../Guard.h"
 #include "../../CString.h"
+#include "../../Interface.h"
 
 #include <utility>
 #include <cstdarg>
-
-#ifndef __ATTRIBUTE__
-#ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
-#else
-#define __ATTRIBUTE__(...)
-#endif
-#endif //!__ATTRIBUTE__
 
 namespace test
 {
@@ -25,18 +18,22 @@ namespace task
 {
 
 template<typename TChar, typename TInterface>
-class Buffer : private test::Guard<TInterface>
+class Buffer : 
+    public test::out::Interface<TChar>
 {
+private:
+    typedef test::Guard<TInterface> GuardType;
 public:
-    typedef test::Guard<TInterface> BaseType;
-    typedef typename BaseType::BeginPointerFunctionMemberType 
+    typedef test::out::Interface<TChar> BaseType;
+    typedef typename GuardType::BeginPointerFunctionMemberType 
         BeginPointerFunctionMemberType;
-    typedef typename BaseType::EndPointerFunctionMemberType
+    typedef typename GuardType::EndPointerFunctionMemberType
         EndPointerFunctionMemberType;
     typedef typename test::out::CString<TChar>::StatusType StatusType;
     typedef typename test::out::CString<TChar>::SizeType SizeType;
 private:
     test::out::CString<TChar> * m_cstr;
+    GuardType m_guard;
 public:
     Buffer();
     Buffer(test::out::CString<TChar> * cstr_ptr, 
@@ -47,7 +44,7 @@ public:
     Buffer(test::out::CString<TChar> * cstr_ptr,
         test::Guard<TInterface> && mov);
 public:
-    ~Buffer();
+    virtual ~Buffer();
 public:
     Buffer(const Buffer<TChar, TInterface>&) = delete;
     Buffer(Buffer<TChar, TInterface>&& mov);
@@ -59,10 +56,8 @@ public:
 public:
     SizeType Size() const;
 public:
-    SizeType VPrint(const char * format, va_list var_args) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
-    SizeType Print(const char * format, ...) 
-        __ATTRIBUTE__((format(printf, 2, 3)));
+    SizeType VPrint(const char * format, va_list var_args);
+    SizeType Print(const char * format, ...);
 public:
     SizeType Puts(const TChar * cstr, const SizeType& size);
     SizeType Puts(const TChar * cstr);
@@ -74,30 +69,34 @@ public:
 
 template<typename TChar, typename TInterface>
 Buffer<TChar, TInterface>::Buffer() :
-    BaseType(nullptr, nullptr),
-    m_cstr(nullptr)
+    BaseType(),
+    m_cstr(nullptr),
+    m_guard(nullptr, nullptr)
 {}
 
 template<typename TChar, typename TInterface>
 Buffer<TChar, TInterface>::Buffer(test::out::CString<TChar> * cstr_ptr, 
     TInterface * ptr, BeginPointerFunctionMemberType begin) :
-        BaseType(ptr, begin),
-        m_cstr(cstr_ptr)
+        BaseType(),
+        m_cstr(cstr_ptr),
+        m_guard(ptr, begin)
 {}
     
 template<typename TChar, typename TInterface>
 Buffer<TChar, TInterface>::Buffer(test::out::CString<TChar> * cstr_ptr, 
     TInterface * ptr, BeginPointerFunctionMemberType begin,
     EndPointerFunctionMemberType end) :
-        BaseType(ptr, begin, end),
-        m_cstr(cstr_ptr)
+        BaseType(),
+        m_cstr(cstr_ptr),
+        m_guard(ptr, begin, end)
 {}
 
 template<typename TChar, typename TInterface>
 Buffer<TChar, TInterface>::Buffer(test::out::CString<TChar> * cstr_ptr,
     test::Guard<TInterface> && mov) :
-        BaseType(std::move(mov)),
-        m_cstr(cstr_ptr)
+        BaseType(),
+        m_cstr(cstr_ptr),
+        m_guard(std::move(mov))
 {}
 
 template<typename TChar, typename TInterface>
@@ -108,8 +107,9 @@ Buffer<TChar, TInterface>::~Buffer()
 
 template<typename TChar, typename TInterface>
 Buffer<TChar, TInterface>::Buffer(Buffer<TChar, TInterface>&& mov) :
-    BaseType(std::move(mov)),
-    m_cstr(mov.m_cstr)
+    BaseType(),
+    m_cstr(mov.m_cstr),
+    m_guard(std::move(mov.m_guard))
 {
     mov.m_cstr = nullptr;
 }
@@ -178,7 +178,7 @@ Buffer<TChar, TInterface>::Puts(const test::CString<const TChar>& cstr)
 template<typename TChar, typename TInterface>
 Buffer<TChar, TInterface>::operator bool() const
 {
-    return (BaseType::operator bool() && m_cstr != nullptr);
+    return (m_guard && m_cstr != nullptr);
 }
 
 } //!task
