@@ -35,7 +35,9 @@ public:
     operator bool() const;
 public:
     void* operator new (std::size_t) = delete;
+    void* operator new[] (std::size_t) = delete;
     void operator delete(void*) = delete;
+    void operator delete[](void*) = delete;
 };
 
 template<typename T>
