@@ -25,7 +25,12 @@ public:
         good = 0,
         bad = IntegerValueType(~((IntegerValueType)-1 >> 1)),
         begin = 1,
-        end = 2
+        end = 2,
+        on_begin_failed = bad | (1 << bad_offset),
+        set_begin_failed = bad | (2 << bad_offset),
+        message_failed = bad | (3 << bad_offset),
+        on_end_failed = bad | (4 << bad_offset),
+        set_end_failed = bad | (5 << bad_offset)
     };
 private:
     ValueType m_val;
