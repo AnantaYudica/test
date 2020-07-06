@@ -100,7 +100,7 @@ public:
     SizeType Puts(const test::CString<const TChar>& cstr);
     SizeType Puts(const CString<TChar>& cpy);
 public:
-    test::CString<TChar> Get(); 
+    test::CString<TChar> Get() const; 
 public:
     bool IsGood() const;
     bool IsBad() const;
@@ -627,10 +627,10 @@ CString<TChar>::Puts(const CString<TChar>& cstr)
 }
 
 template<typename TChar>
-test::CString<TChar> CString<TChar>::Get()
+test::CString<TChar> CString<TChar>::Get() const
 {
     if (m_status.IsRequire() || m_status.IsBad()) return {""};
-    return {m_cstr, m_size + 1};
+    return {m_cstr, m_size};
 } 
 
 template<typename TChar>
