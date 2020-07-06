@@ -26,7 +26,7 @@ namespace out
 {
 
 template<typename TChar = char>
-class CString
+class CString : public test::out::Interface<TChar>
 {
 public:
     typedef typename std::remove_cv<TChar>::type CharType;
@@ -87,17 +87,15 @@ private:
     SizeType _Set(const SizeType& index, const char * format, va_list var_args)
         __ATTRIBUTE__ ((__format__ (__printf__, 4, 0)));
 public:
-    SizeType VPrint(const char * format, va_list var_args) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
-    SizeType Print(const char * format, ...) 
-        __ATTRIBUTE__((format(printf, 2, 3)));
+    SizeType VPrint(const char * format, va_list var_args) override;
+    SizeType Print(const char * format, ...) override;
 public:
-    SizeType Puts(const TChar * cstr, const SizeType& size);
-    SizeType Puts(const TChar * cstr);
+    SizeType Puts(const TChar * cstr, const SizeType& size) override;
+    SizeType Puts(const TChar * cstr) override;
     template<std::size_t S>
     SizeType Puts(const TChar(&cstr)[S]);
-    SizeType Puts(const test::CString<TChar>& cstr);
-    SizeType Puts(const test::CString<const TChar>& cstr);
+    SizeType Puts(const test::CString<TChar>& cstr) override;
+    SizeType Puts(const test::CString<const TChar>& cstr) override;
     SizeType Puts(const CString<TChar>& cpy);
 public:
     test::CString<TChar> Get() const; 
