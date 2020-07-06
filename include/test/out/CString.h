@@ -536,7 +536,7 @@ CString<TChar>::_Set(const SizeType& index, const char * format,
     {
         delete[] buffer;
         buffer = new TChar[print_size + 1];
-        auto print_res = vsnprintf(buffer, m_minimum_capacity, 
+        auto print_res = vsnprintf(buffer, print_size + 1, 
             format, var_args);
         if (print_res < 0) 
         {
