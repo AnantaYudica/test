@@ -128,5 +128,20 @@ int main()
     assert(cstr6.IsGood() == true);
     assert(cstr6.IsBad() == false);
 
+    CString<char> cstr10{4};
+    assert(cstr10.Size() == 0);
+    assert(cstr10.Print("%s", "1234567890") == 10);
+    assert(cstr10.Size() == 10);
+    assert(cstr10.IsGood() == true);
+    assert(cstr10.IsBad() == false);
+
+    test::out::Interface<char>& out = cstr10;
+    assert(out.Print("%d", 1112131) == 7);
+    assert(cstr10.Size() == 17);
+    
+    assert(std::strncmp(*(cstr10.Get()), "12345678901112131", 18) == 0);
+    assert(cstr10.IsGood() == true);
+    assert(cstr10.IsBad() == false);
+
     return 1;
 }
