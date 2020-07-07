@@ -100,7 +100,7 @@ public:
     test::CString<char> Filename() const;
 protected:
     SizeType VPrint(const char * format, va_list var_args) 
-        __attribute__ ((__format__ (__printf__, 3, 0)));;
+        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
     SizeType Print(const char * format, ...) __ATTRIBUTE__((format(printf, 2, 3)));
 protected:
     SizeType Puts(const TChar * cstr, const SizeType& size);
