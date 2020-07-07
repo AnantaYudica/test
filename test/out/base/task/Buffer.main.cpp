@@ -62,7 +62,8 @@ int main()
         assert(buff1.Puts("test") == 0);
         assert(buff1.Puts(test::CString<char>("test")) == 0);
         assert(buff1.Puts(test::CString<const char>("test")) == 0);
-        assert(buff1 == false);
+        assert(buff1.IsGood() == false);
+        assert(buff1.IsBad() == true);
 
     }
 
@@ -77,6 +78,8 @@ int main()
         assert(Buff1_2.Puts("4") == 1);
         assert(Buff1_2.Puts(test::CString<char>("5")) == 1);
         assert(Buff1_2.Puts(test::CString<const char>("6")) == 1);
+        assert(Buff1_2.IsGood() == true);
+        assert(Buff1_2.IsBad() == false);
     }
     assert(strncmp(*(cstr1.Get()), "123456", 6) == 0);
     assert(obj1_1.call_begin == true);
@@ -93,6 +96,8 @@ int main()
         assert(Buff1_2.Puts("4") == 1);
         assert(Buff1_2.Puts(test::CString<char>("5")) == 1);
         assert(Buff1_2.Puts(test::CString<const char>("6")) == 1);
+        assert(Buff1_2.IsGood() == true);
+        assert(Buff1_2.IsBad() == false);
     }
     assert(strncmp(*(cstr2.Get()), "123456", 6) == 0);
     assert(obj1_2.call_begin == true);
@@ -109,6 +114,8 @@ int main()
         assert(out_intf.Puts("4") == 1);
         assert(out_intf.Puts(test::CString<char>("5")) == 1);
         assert(out_intf.Puts(test::CString<const char>("6")) == 1);
+        assert(out_intf.IsGood() == true);
+        assert(out_intf.IsBad() == false);
     }
     assert(strncmp(*(cstr3.Get()), "123456", 6) == 0);
     assert(obj1_3.call_begin == true);
