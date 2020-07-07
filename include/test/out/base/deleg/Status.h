@@ -26,9 +26,9 @@ public:
     {
         good = 0,
         bad = IntegerValueType(~((IntegerValueType)-1 >> 1)),
-        task_and_output_nullptr = bad | (1 << bad_offset),
+        task_and_base_intf_nullptr = bad | (1 << bad_offset),
         task_nullptr = bad | (2 << bad_offset),
-        output_nullptr = bad | (3 << bad_offset),
+        base_intf_nullptr = bad | (3 << bad_offset),
         task_assign_failed = bad | (4 << bad_offset)
     };
 private:
