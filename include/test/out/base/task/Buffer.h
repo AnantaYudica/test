@@ -18,8 +18,7 @@ namespace task
 {
 
 template<typename TChar, typename TInterface>
-class Buffer : 
-    public test::out::Interface<TChar>
+class Buffer : public test::out::Interface<TChar>
 {
 private:
     typedef test::Guard<TInterface> GuardType;
@@ -56,15 +55,16 @@ public:
 public:
     SizeType Size() const;
 public:
-    SizeType VPrint(const char * format, va_list var_args);
-    SizeType Print(const char * format, ...);
+    SizeType VPrint(const char * format, va_list var_args) override;
+    SizeType Print(const char * format, ...) override;
 public:
-    SizeType Puts(const TChar * cstr, const SizeType& size);
-    SizeType Puts(const TChar * cstr);
-    SizeType Puts(const test::CString<TChar>& cstr);
-    SizeType Puts(const test::CString<const TChar>& cstr);
+    SizeType Puts(const TChar * cstr, const SizeType& size) override;
+    SizeType Puts(const TChar * cstr) override;
+    SizeType Puts(const test::CString<TChar>& cstr) override;
+    SizeType Puts(const test::CString<const TChar>& cstr) override;
 public:
-    operator bool() const;
+    bool IsBad() const override;
+    bool IsGood() const override;
 };
 
 template<typename TChar, typename TInterface>
@@ -176,7 +176,13 @@ Buffer<TChar, TInterface>::Puts(const test::CString<const TChar>& cstr)
 }
 
 template<typename TChar, typename TInterface>
-Buffer<TChar, TInterface>::operator bool() const
+bool Buffer<TChar, TInterface>::IsBad() const
+{
+    return (!m_guard || m_cstr == nullptr);
+}
+
+template<typename TChar, typename TInterface>
+bool Buffer<TChar, TInterface>::IsGood() const
 {
     return (m_guard && m_cstr != nullptr);
 }
