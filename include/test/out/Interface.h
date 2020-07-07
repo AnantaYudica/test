@@ -46,6 +46,9 @@ public:
     virtual SizeType Puts(const TChar * cstr) = 0;
     virtual SizeType Puts(const test::CString<TChar>& cstr) = 0;
     virtual SizeType Puts(const test::CString<const TChar>& cstr) = 0;
+public:
+    virtual bool IsBad() const = 0;
+    virtual bool IsGood() const = 0;
 };
 
 template<typename TChar>
