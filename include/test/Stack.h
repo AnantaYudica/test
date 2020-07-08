@@ -6,6 +6,7 @@
 #include "node/Data.h"
 
 #include <cstddef>
+#include <type_traits>
 
 namespace test
 {
@@ -15,6 +16,8 @@ class Stack
 {
 public:
     typedef std::size_t SizeType;
+    typedef typename std::remove_pointer<
+        typename std::remove_reference<T>::type>::type ValueType;
 private:
     static bool _Push(test::Node<T, 1> *& head,
         test::Node<T, 1> *& tail, test::Node<T, 1> * curr_head, 
@@ -40,21 +43,25 @@ public:
 public:
     Stack<T>& operator=(const Stack<T>& cpy);
     Stack<T>& operator=(Stack<T>&& mov);
+private:
+    test::node::Data<T> * _Default();
 public:
     SizeType Size() const;
 public:
-    SizeType Push(const T & val);
-    SizeType Push(T && val);
+    test::node::Data<T>& 
+        Push(const typename std::remove_const<T>::type & val);
+    test::node::Data<T>& 
+        Push(typename std::remove_const<T>::type && val);
     template<typename... TArgs, typename std::enable_if<
         std::is_constructible<T, TArgs...>::value, int>::type = 0>
-    SizeType Push(TArgs && ... args);
+    test::node::Data<T>& Push(TArgs && ... args);
     SizeType Push(const Stack<T>& cpy);
     SizeType Push(Stack<T>&& mov);
 public:
-    T Pop();
+    ValueType Pop();
 public:
-    T& Top();
-    T Top() const;
+    ValueType& Top();
+    ValueType Top() const;
 public:
     void Swap(Stack<T>& other);
 };
@@ -188,6 +195,16 @@ Stack<T>& Stack<T>::operator=(Stack<T>&& mov)
     mov.m_size = 0;
     return *this;
 }
+    
+template<typename T>
+test::node::Data<T> * Stack<T>::_Default()
+{
+   if (m_default == nullptr)
+        m_default = new test::node::Data<T>();
+    else
+        *m_default = std::move(ValueType());
+    return m_default; 
+}
 
 template<typename T>
 typename Stack<T>::SizeType Stack<T>::Size() const
@@ -196,44 +213,46 @@ typename Stack<T>::SizeType Stack<T>::Size() const
 }
 
 template<typename T>
-typename Stack<T>::SizeType Stack<T>::Push(const T & val)
+test::node::Data<T>& 
+Stack<T>::Push(const typename std::remove_const<T>::type & val)
 {
     auto new_node = new test::Node<T, 1>(val);
     if (_Push(m_head, m_tail, new_node, new_node))
     {
         ++m_size;
-        return 1;
+        return *new_node;
     }
     delete new_node;
-    return 0;
+    return *_Default();
 }
 
 template<typename T>
-typename Stack<T>::SizeType Stack<T>::Push(T && val)
+test::node::Data<T>& 
+Stack<T>::Push(typename std::remove_const<T>::type && val)
 {
     auto new_node = new test::Node<T, 1>(std::move(val));
     if (_Push(m_head, m_tail, new_node, new_node))
     {
         ++m_size;
-        return 1;
+        return *new_node;
     }
     delete new_node;
-    return 0;
+    return *_Default();
 }
 
 template<typename T>
 template<typename... TArgs, typename std::enable_if<
     std::is_constructible<T, TArgs...>::value, int>::type>
-typename Stack<T>::SizeType Stack<T>::Push(TArgs && ... args)
+test::node::Data<T>& Stack<T>::Push(TArgs && ... args)
 {
     auto new_node = new test::Node<T, 1>(std::forward<TArgs>(args)...);
     if (_Push(m_head, m_tail, new_node, new_node))
     {
         ++m_size;
-        return 1;
+        return *new_node;
     }
     delete new_node;
-    return 0;
+    return *_Default();
 }
 
 template<typename T>
@@ -267,7 +286,7 @@ typename Stack<T>::SizeType Stack<T>::Push(Stack<T>&& mov)
 }
 
 template<typename T>
-T Stack<T>::Pop()
+typename Stack<T>::ValueType Stack<T>::Pop()
 {
     test::Node<T, 1>* pop_node = nullptr;
     if (_Pop(m_head, m_tail, pop_node))
@@ -281,21 +300,17 @@ T Stack<T>::Pop()
 }
 
 template<typename T>
-T& Stack<T>::Top()
+typename Stack<T>::ValueType& Stack<T>::Top()
 {
     if (m_head == nullptr)
     {
-        if (m_default == nullptr)
-            m_default = new test::node::Data<T>();
-        else
-            *m_default = std::move(T());
-        return **m_default;
+        return **_Default();
     }
     return **m_head;
 }
 
 template<typename T>
-T Stack<T>::Top() const
+typename Stack<T>::ValueType Stack<T>::Top() const
 {
     if (m_head == nullptr)
         return {};
