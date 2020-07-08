@@ -56,9 +56,9 @@ int main()
         assert(stack1.Size() == 0);
         assert(cstack1.Size() == 0);
 
-        auto res = stack1.Push(Obj1{1});
+        auto push1 = stack1.Push(Obj1{1});
 
-        assert(res == 1);
+        assert(push1->val1 == 1);
 
         assert(stack1.Size() == 1);
         assert(cstack1.Size() == 1);
@@ -66,9 +66,9 @@ int main()
         assert(cstack1.Top().val1 == 1);
 
         Obj1 obj1_1{2};
-        res = stack1.Push(std::move(obj1_1));
+        auto push2 = stack1.Push(std::move(obj1_1));
 
-        assert(res == 1);
+        assert(push2->val1 == 2);
 
         assert(stack1.Size() == 2);
         assert(cstack1.Size() == 2);
@@ -77,9 +77,9 @@ int main()
         
         assert(obj1_1.val1 == 0);
 
-        res = stack1.Push(1, 2);
+        auto push3 = stack1.Push(1, 2);
         
-        assert(res == 1);
+        assert(push3->val1 == 3);
 
         assert(stack1.Size() == 3);
         assert(cstack1.Size() == 3);
@@ -291,7 +291,7 @@ int main()
         
         test::Stack<Obj1> stack7{stack1};
         const test::Stack<Obj1>& cstack7 = stack7;
-        res = stack7.Push(stack6);
+        auto res = stack7.Push(stack6);
         
         assert(res == 3);
 
