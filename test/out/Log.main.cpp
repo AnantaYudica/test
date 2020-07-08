@@ -1,5 +1,11 @@
 #include "test/out/Log.h"
 #include "test/out/CString.h"
+#include "test/out/log/tag/Crit.h"
+#include "test/out/log/tag/Debug.h"
+#include "test/out/log/tag/Emerg.h"
+#include "test/out/log/tag/Error.h"
+#include "test/out/log/tag/Info.h"
+#include "test/out/log/tag/Warn.h"
 
 #include <cassert>
 #include <cstring>
@@ -1029,6 +1035,103 @@ int main()
             assert(strncmp(*(out_cstr1.Get()), *(out_cstr1_2.Get()), 
                 out_cstr1_2.Size()) == 0);
         }
+    }
+    {
+        Log log1(test::out::log::tag::Crit{});
+        
+        assert(strncmp(*(log1.GetTag()), test::out::log::tag::Crit{}.GetName(), 
+            test::out::log::tag::Crit{}.GetNameSize()) == 0);
+
+        Log log2(test::out::log::tag::Debug{});
+        
+        assert(strncmp(*(log2.GetTag()), test::out::log::tag::Debug{}.GetName(), 
+            test::out::log::tag::Debug{}.GetNameSize()) == 0);
+
+        Log log3(test::out::log::tag::Emerg{});
+        
+        assert(strncmp(*(log3.GetTag()), test::out::log::tag::Emerg{}.GetName(), 
+            test::out::log::tag::Emerg{}.GetNameSize()) == 0);
+
+        Log log4(test::out::log::tag::Error{});
+        
+        assert(strncmp(*(log4.GetTag()), test::out::log::tag::Error{}.GetName(), 
+            test::out::log::tag::Error{}.GetNameSize()) == 0);
+
+        Log log5(test::out::log::tag::Info{});
+        
+        assert(strncmp(*(log5.GetTag()), test::out::log::tag::Info{}.GetName(), 
+            test::out::log::tag::Info{}.GetNameSize()) == 0);
+
+        Log log6(test::out::log::tag::Warn{});
+        
+        assert(strncmp(*(log6.GetTag()), test::out::log::tag::Warn{}.GetName(), 
+            test::out::log::tag::Warn{}.GetNameSize()) == 0);
+    }
+
+    {
+        OutCString out_cstr1_1;
+        {
+            Log log1(&out_cstr1_1, test::out::log::tag::Crit{});
+        
+            assert(strncmp(*(log1.GetTag()), test::out::log::tag::Crit{}.GetName(), 
+                test::out::log::tag::Crit{}.GetNameSize()) == 0);
+
+            Log log2(&out_cstr1_1, test::out::log::tag::Debug{});
+            
+            assert(strncmp(*(log2.GetTag()), test::out::log::tag::Debug{}.GetName(), 
+                test::out::log::tag::Debug{}.GetNameSize()) == 0);
+
+            Log log3(&out_cstr1_1, test::out::log::tag::Emerg{});
+            
+            assert(strncmp(*(log3.GetTag()), test::out::log::tag::Emerg{}.GetName(), 
+                test::out::log::tag::Emerg{}.GetNameSize()) == 0);
+
+            Log log4(&out_cstr1_1, test::out::log::tag::Error{});
+            
+            assert(strncmp(*(log4.GetTag()), test::out::log::tag::Error{}.GetName(), 
+                test::out::log::tag::Error{}.GetNameSize()) == 0);
+
+            Log log5(&out_cstr1_1, test::out::log::tag::Info{});
+            
+            assert(strncmp(*(log5.GetTag()), test::out::log::tag::Info{}.GetName(), 
+                test::out::log::tag::Info{}.GetNameSize()) == 0);
+
+            Log log6(&out_cstr1_1, test::out::log::tag::Warn{});
+            
+            assert(strncmp(*(log6.GetTag()), test::out::log::tag::Warn{}.GetName(), 
+                test::out::log::tag::Warn{}.GetNameSize()) == 0);
+        }
+    }
+    {
+        Log log1(new Out(), &Deleter, test::out::log::tag::Crit{});
+        
+        assert(strncmp(*(log1.GetTag()), test::out::log::tag::Crit{}.GetName(), 
+            test::out::log::tag::Crit{}.GetNameSize()) == 0);
+
+        Log log2(new Out(), &Deleter, test::out::log::tag::Debug{});
+        
+        assert(strncmp(*(log2.GetTag()), test::out::log::tag::Debug{}.GetName(), 
+            test::out::log::tag::Debug{}.GetNameSize()) == 0);
+
+        Log log3(new Out(), &Deleter, test::out::log::tag::Emerg{});
+        
+        assert(strncmp(*(log3.GetTag()), test::out::log::tag::Emerg{}.GetName(), 
+            test::out::log::tag::Emerg{}.GetNameSize()) == 0);
+
+        Log log4(new Out(), &Deleter, test::out::log::tag::Error{});
+        
+        assert(strncmp(*(log4.GetTag()), test::out::log::tag::Error{}.GetName(), 
+            test::out::log::tag::Error{}.GetNameSize()) == 0);
+
+        Log log5(new Out(), &Deleter, test::out::log::tag::Info{});
+        
+        assert(strncmp(*(log5.GetTag()), test::out::log::tag::Info{}.GetName(), 
+            test::out::log::tag::Info{}.GetNameSize()) == 0);
+
+        Log log6(new Out(), &Deleter, test::out::log::tag::Warn{});
+        
+        assert(strncmp(*(log6.GetTag()), test::out::log::tag::Warn{}.GetName(), 
+            test::out::log::tag::Warn{}.GetNameSize()) == 0);
     }
 
     assert(count == 0);
