@@ -4,20 +4,13 @@
 #include "../CString.h"
 #include "file/Status.h"
 #include "file/Base.h"
+#include "Interface.h"
 
 #include <cstdio>
 #include <cstddef>
 #include <cstdarg>
 #include <utility>
 #include <cstdint>
-
-#ifndef __ATTRIBUTE__
-#ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
-#else
-#define __ATTRIBUTE__(...)
-#endif
-#endif //!__ATTRIBUTE__
 
 namespace test
 {
@@ -27,7 +20,8 @@ namespace out
 template<typename TChar, std::size_t MinimumBuffer = 512,
     std::size_t MaximumBuffer = 65535>
 class File : 
-    private test::out::file::Base
+    private test::out::file::Base,
+    public test::out::Interface<char>
 {
 public:
     static_assert(MinimumBuffer != 0, "Minimum Buffer cannot zero");
@@ -99,22 +93,21 @@ public:
 public:
     test::CString<char> Filename() const;
 protected:
-    SizeType VPrint(const char * format, va_list var_args) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
-    SizeType Print(const char * format, ...) __ATTRIBUTE__((format(printf, 2, 3)));
+    SizeType VPrint(const char * format, va_list var_args) override;
+    SizeType Print(const char * format, ...) override;
 protected:
-    SizeType Puts(const TChar * cstr, const SizeType& size);
-    SizeType Puts(const TChar * cstr);
+    SizeType Puts(const TChar * cstr, const SizeType& size) override;
+    SizeType Puts(const TChar * cstr) override;
     template<std::size_t S>
     SizeType Puts(const TChar(&cstr)[S]);
-    SizeType Puts(const test::CString<TChar>& cstr);
-    SizeType Puts(const test::CString<const TChar>& cstr);
+    SizeType Puts(const test::CString<TChar>& cstr) override;
+    SizeType Puts(const test::CString<const TChar>& cstr) override;
 protected:
     test::CString<TChar> Buffer();
     test::CString<TChar> Buffer() const;
 protected:
-    bool IsGood() const;
-    bool IsBad() const;
+    bool IsGood() const override;
+    bool IsBad() const override;
     StatusValueType GetBadCode() const;
 protected:
     bool IsStandard() const;
