@@ -5,6 +5,7 @@
 #include "Cstring.h"
 #include "../Cstring.h"
 #include "log/Status.h"
+#include "log/Tag.h"
 
 #include <cstdint>
 #include <chrono>
@@ -28,6 +29,7 @@ public:
     typedef void (DeleterFunctionType)(test::out::Interface<TChar> *);
     typedef typename test::out::Interface<TChar>::SizeType SizeType;
     typedef test::out::log::Status<std::uint8_t> StatusType;
+    typedef test::out::log::Tag TagType;
 public:
     static bool DefaultOnBegin(test::out::Interface<TChar>& out, 
         std::chrono::time_point<std::chrono::system_clock> timestamp, 
@@ -55,6 +57,10 @@ public:
     Log(const test::CString<TChar>& tag, 
         OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin,
         OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
+    Log(const TagType& tag, 
+        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin,
+        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
+
     template<std::size_t S>
     Log(test::out::Interface<TChar> * out, const TChar(&tag)[S], 
         OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
@@ -62,6 +68,10 @@ public:
     Log(test::out::Interface<TChar> * out, const test::CString<TChar>& tag, 
         OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
         OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
+    Log(test::out::Interface<TChar> * out, const TagType& tag, 
+        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
+        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
+
     template<std::size_t S>
     Log(test::out::Interface<TChar> * out, DeleterFunctionType * deleter,
         const TChar(&tag)[S], 
@@ -71,6 +81,11 @@ public:
         const test::CString<TChar>& tag, 
         OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
         OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
+    Log(test::out::Interface<TChar> * out, DeleterFunctionType * deleter,
+        const TagType& tag, 
+        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
+        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
+
 public:
     virtual ~Log();
 public:
@@ -200,6 +215,21 @@ Log<TChar>::Log(const test::CString<TChar>& tag,
         m_tag(tag),
         m_message()
 {}
+
+template<typename TChar>
+Log<TChar>::Log(const TagType& tag, OnBeginFunctionType * on_begin, 
+    OnEndFunctionType * on_end) :
+        m_status(),
+        m_out(nullptr),
+        m_on_begin(on_begin == nullptr ? 
+            &Log<TChar>::DefaultOnBegin : on_begin),
+        m_on_end(on_end == nullptr ?
+            &Log<TChar>::DefaultOnEnd : on_end),
+        m_deleter(&Log<TChar>::DefaultDeleter),
+        m_timestamp(std::chrono::system_clock::now()),
+        m_tag(tag.GetName(), tag.GetNameSize()),
+        m_message()
+{}
     
 template<typename TChar>
 template<std::size_t S>
@@ -230,6 +260,21 @@ Log<TChar>::Log(test::out::Interface<TChar> * out,
         m_deleter(&Log<TChar>::DefaultDeleter),
         m_timestamp(std::chrono::system_clock::now()),
         m_tag(tag),
+        m_message()
+{}
+
+template<typename TChar>
+Log<TChar>::Log(test::out::Interface<TChar> * out, const TagType& tag, 
+    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
+        m_status(),
+        m_out(out),
+        m_on_begin(on_begin == nullptr ? 
+            &Log<TChar>::DefaultOnBegin : on_begin),
+        m_on_end(on_end == nullptr ?
+            &Log<TChar>::DefaultOnEnd : on_end),
+        m_deleter(&Log<TChar>::DefaultDeleter),
+        m_timestamp(std::chrono::system_clock::now()),
+        m_tag(tag.GetName(), tag.GetNameSize()),
         m_message()
 {}
     
@@ -265,6 +310,23 @@ Log<TChar>::Log(test::out::Interface<TChar> * out,
             &Log<TChar>::DefaultDeleter : deleter),
         m_timestamp(std::chrono::system_clock::now()),
         m_tag(tag),
+        m_message()
+{}
+
+template<typename TChar>
+Log<TChar>::Log(test::out::Interface<TChar> * out, 
+    DeleterFunctionType * deleter, const TagType& tag, 
+    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
+        m_status(),
+        m_out(out),
+        m_on_begin(on_begin == nullptr ? 
+            &Log<TChar>::DefaultOnBegin : on_begin),
+        m_on_end(on_end == nullptr ?
+            &Log<TChar>::DefaultOnEnd : on_end),
+        m_deleter(deleter == nullptr ?
+            &Log<TChar>::DefaultDeleter : deleter),
+        m_timestamp(std::chrono::system_clock::now()),
+        m_tag(tag.GetName(), tag.GetNameSize()),
         m_message()
 {}
 
