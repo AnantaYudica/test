@@ -56,9 +56,9 @@ int main()
         assert(queue1.Size() == 0);
         assert(cqueue1.Size() == 0);
 
-        auto res = queue1.Push(Obj1{1});
+        auto push1 = queue1.Push(Obj1{1});
 
-        assert(res == 1);
+        assert(push1->val1 == 1);
 
         assert(queue1.Size() == 1);
         assert(cqueue1.Size() == 1);
@@ -66,9 +66,9 @@ int main()
         assert(cqueue1.Front().val1 == 1);
 
         Obj1 obj1_1{2};
-        res = queue1.Push(std::move(obj1_1));
+        auto push2 = queue1.Push(std::move(obj1_1));
 
-        assert(res == 1);
+        assert(push2->val1 == 2);
 
         assert(queue1.Size() == 2);
         assert(cqueue1.Size() == 2);
@@ -77,9 +77,9 @@ int main()
         
         assert(obj1_1.val1 == 0);
 
-        res = queue1.Push(1, 2);
+        auto push3 = queue1.Push(1, 2);
 
-        assert(res == 1);
+        assert(push3->val1 == 3);
 
         assert(queue1.Size() == 3);
         assert(cqueue1.Size() == 3);
@@ -291,7 +291,7 @@ int main()
         
         test::Queue<Obj1> queue7{queue1};
         const test::Queue<Obj1>& cqueue7 = queue7;
-        res = queue7.Push(queue6);
+        auto res = queue7.Push(queue6);
 
         assert(res == 3);
 
