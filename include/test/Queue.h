@@ -6,6 +6,7 @@
 #include "node/Data.h"
 
 #include <cstddef>
+#include <type_traits>
 
 namespace test
 {
@@ -15,6 +16,8 @@ class Queue
 {
 public:
     typedef std::size_t SizeType;
+    typedef typename std::remove_pointer<
+        typename std::remove_reference<T>::type>::type ValueType;
 private:
     static bool _Push(test::Node<T, 1> *& head,
         test::Node<T, 1> *& tail, test::Node<T, 1> * curr_head, 
@@ -40,21 +43,25 @@ public:
 public:
     Queue<T>& operator=(const Queue<T>& cpy);
     Queue<T>& operator=(Queue<T>&& mov);
+private:
+    test::node::Data<T> * _Default();
 public:
     SizeType Size() const;
 public:
-    SizeType Push(const T & val);
-    SizeType Push(T && val);
+    test::node::Data<T>& 
+        Push(const typename std::remove_const<ValueType>::type & val);
+    test::node::Data<T>& 
+        Push(typename std::remove_const<ValueType>::type && val);
     template<typename... TArgs, typename std::enable_if<
         std::is_constructible<T, TArgs...>::value, int>::type = 0>
-    SizeType Push(TArgs && ... args);
+    test::node::Data<T>& Push(TArgs && ... args);
     SizeType Push(const Queue<T>& cpy);
     SizeType Push(Queue<T>&& mov);
 public:
-    T Pop();
+    ValueType Pop();
 public:
-    T& Front();
-    T Front() const;
+    ValueType& Front();
+    ValueType Front() const;
 public:
     void Swap(Queue<T>& other);
 };
@@ -190,50 +197,62 @@ Queue<T>& Queue<T>::operator=(Queue<T>&& mov)
 }
 
 template<typename T>
+test::node::Data<T> * Queue<T>::_Default()
+{
+    if (m_default == nullptr)
+        m_default = new test::node::Data<T>();
+    else
+        *m_default = std::move(ValueType());
+    return m_default;
+}
+
+template<typename T>
 typename Queue<T>::SizeType Queue<T>::Size() const
 {
     return m_size;
 }
 
 template<typename T>
-typename Queue<T>::SizeType Queue<T>::Push(const T & val)
+test::node::Data<T>& 
+Queue<T>::Push(const typename std::remove_const<ValueType>::type & val)
 {
     auto new_node = new test::Node<T, 1>(val);
     if (_Push(m_head, m_tail, new_node, new_node))
     {
         ++m_size;
-        return 1;
+        return *new_node;
     }
     delete new_node;
-    return 0;
+    return *_Default();
 }
 
 template<typename T>
-typename Queue<T>::SizeType Queue<T>::Push(T && val)
+test::node::Data<T>& 
+Queue<T>::Push(typename std::remove_const<ValueType>::type && val)
 {
     auto new_node = new test::Node<T, 1>(std::move(val));
     if (_Push(m_head, m_tail, new_node, new_node))
     {
         ++m_size;
-        return 1;
+        return *new_node;
     }
     delete new_node;
-    return 0;
+    return *_Default();
 }
 
 template<typename T>
 template<typename... TArgs, typename std::enable_if<
     std::is_constructible<T, TArgs...>::value, int>::type >
-typename Queue<T>::SizeType Queue<T>::Push(TArgs && ... args)
+test::node::Data<T>& Queue<T>::Push(TArgs && ... args)
 {
     auto new_node = new test::Node<T, 1>(std::forward<TArgs>(args)...);
     if (_Push(m_head, m_tail, new_node, new_node))
     {
         ++m_size;
-        return 1;
+        return *new_node;
     }
     delete new_node;
-    return 0;
+    return *_Default();
 }
 
 template<typename T>
@@ -267,7 +286,7 @@ typename Queue<T>::SizeType Queue<T>::Push(Queue<T>&& mov)
 }
 
 template<typename T>
-T Queue<T>::Pop()
+typename Queue<T>::ValueType Queue<T>::Pop()
 {
     test::Node<T, 1>* pop_node = nullptr;
     if (_Pop(m_head, m_tail, pop_node))
@@ -281,21 +300,17 @@ T Queue<T>::Pop()
 }
 
 template<typename T>
-T& Queue<T>::Front()
+typename Queue<T>::ValueType& Queue<T>::Front()
 {
     if (m_head == nullptr)
     {
-        if (m_default == nullptr)
-            m_default = new test::node::Data<T>();
-        else
-            *m_default = std::move(T());
-        return **m_default;
+        return **_Default();
     }
     return **m_head;
 }
 
 template<typename T>
-T Queue<T>::Front() const
+typename Queue<T>::ValueType Queue<T>::Front() const
 {
     if (m_head == nullptr)
         return {};
