@@ -737,48 +737,48 @@ int main()
 
         test::node::Data<Obj1*const> d7;
         d7 = d3;
-        assert((*d7).val1 == 22);
-        assert(d7->val1 == 22);
+        assert((*d7).val1 == 0);
+        assert(d7->val1 == 0);
 
         const test::node::Data<Obj1*const>& cd7 = d7;
-        assert((*cd7).val1 == 22);
-        assert(cd7->val1 == 22);
+        assert((*cd7).val1 == 0);
+        assert(cd7->val1 == 0);
 
         test::node::Data<Obj1*const> d8;
         d8 = std::move(d6);
-        assert((*d8).val1 == 144);
-        assert(d8->val1 == 144);
+        assert((*d8).val1 == 0);
+        assert(d8->val1 == 0);
 
         const test::node::Data<Obj1*const>& cd8 = d8;
-        assert((*cd8).val1 == 144);
-        assert(cd8->val1 == 144);
+        assert((*cd8).val1 == 0);
+        assert(cd8->val1 == 0);
         
-        assert((*d6).val1 == 0);
-        assert(d6->val1 == 0);
+        assert((*d6).val1 == 144);
+        assert(d6->val1 == 144);
 
-        assert((*cd6).val1 == 0);
-        assert(cd6->val1 == 0);
+        assert((*cd6).val1 == 144);
+        assert(cd6->val1 == 144);
 
         Obj1 obj2{123};
         test::node::Data<Obj1*const> d9;
         d9 = obj2;
-        assert((*d9).val1 == 123);
-        assert(d9->val1 == 123);
+        assert((*d9).val1 == 0);
+        assert(d9->val1 == 0);
 
         const test::node::Data<Obj1*const>& cd9 = d9;
-        assert((*cd9).val1 == 123);
-        assert(cd9->val1 == 123);
+        assert((*cd9).val1 == 0);
+        assert(cd9->val1 == 0);
         
         test::node::Data<Obj1*const> d10;
         d10 = std::move(obj2);
-        assert((*d10).val1 == 123);
-        assert(d10->val1 == 123);
+        assert((*d10).val1 == 0);
+        assert(d10->val1 == 0);
 
         const test::node::Data<Obj1*const>& cd10 = d10;
-        assert((*cd10).val1 == 123);
-        assert(cd10->val1 == 123);
+        assert((*cd10).val1 == 0);
+        assert(cd10->val1 == 0);
 
-        assert(obj2.val1 == 0);
+        assert(obj2.val1 == 123);
     }
     // T = int*const
     {
@@ -810,31 +810,31 @@ int main()
 
         test::node::Data<int*const> d6{0};
         d6 = d2;
-        assert(*d6 == 8);
+        assert(*d6 == 0);
 
         const test::node::Data<int*const>& cd6 = d6;
-        assert(*cd6 == 8);
+        assert(*cd6 == 0);
 
         test::node::Data<int*const> d7{0};
         d7 = std::move(d6);
-        assert(*d7== 8);
+        assert(*d7== 0);
 
         const test::node::Data<int*const>& cd7 = d7;
-        assert(*cd7 == 8);
+        assert(*cd7 == 0);
 
         test::node::Data<int*const> d8{0};
         d8 = 16;
-        assert(*d8 == 16);
+        assert(*d8 == 0);
 
         const test::node::Data<int*const>& cd8 = d8;
-        assert(*cd8 == 16);
+        assert(*cd8 == 0);
 
         test::node::Data<int*const> d9{0};
         d9 = std::move(116);
-        assert(*d9 == 116);
+        assert(*d9 == 0);
 
         const test::node::Data<int*const>& cd9 = d9;
-        assert(*cd9 == 116);
+        assert(*cd9 == 0);
     }
     // T = const Obj1* const
     {
