@@ -168,7 +168,7 @@ void Log<TChar>::DefaultDeleter(test::out::Interface<TChar> * out)
 {}
 
 template<typename TChar>
-static void Deleter(test::out::Interface<TChar> * out)
+void Log<TChar>::Deleter(test::out::Interface<TChar> * out)
 {
     delete out;
 }
