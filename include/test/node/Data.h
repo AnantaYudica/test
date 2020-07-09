@@ -431,17 +431,15 @@ Data<T*>::Data(Data<T*>&& mov) :
 template<typename T>
 Data<T*>& Data<T*>::operator=(const Data<T*>& cpy)
 {
-    if (m_data == nullptr && cpy.m_data == nullptr)
-        m_data = new T();
-    else if (m_data == nullptr && cpy.m_data != nullptr)
-        m_data = new T(*(cpy.m_data));
-    else if (cpy.m_data == nullptr)
+    if (m_data != nullptr)
     {
         delete m_data;
         m_data = nullptr;
     }
-    else
-        *m_data = *(cpy.m_data);
+    if (cpy.m_data != nullptr)
+    {
+        m_data = new T(*(cpy.m_data));
+    }
     return *this;
 }
 
@@ -458,20 +456,24 @@ Data<T*>& Data<T*>::operator=(Data<T*>&& mov)
 template<typename T>
 Data<T*>& Data<T*>::operator=(const T& cpy)
 {
-    if (m_data == nullptr)
-        m_data = new T(cpy);
-    else
-        *m_data = cpy;
+    if (m_data != nullptr)
+    {
+        delete m_data;
+        m_data = nullptr;
+    }
+    m_data = new T(cpy);
     return *this;
 }
 
 template<typename T>
 Data<T*>& Data<T*>::operator=(T&& mov)
 {
-    if (m_data == nullptr)
-        m_data = new T(std::move(mov));
-    else
-        *m_data = std::move(mov);
+    if (m_data != nullptr)
+    {
+        delete m_data;
+        m_data = nullptr;
+    }
+    m_data = new T(std::move(mov));
     return *this;
 }
 
@@ -675,28 +677,24 @@ Data<T*const>::Data(Data<T*const>&& mov) :
 template<typename T>
 Data<T*const>& Data<T*const>::operator=(const Data<T*const>& cpy)
 {
-    *m_data = *(cpy.m_data);
     return *this;
 }
 
 template<typename T>
 Data<T*const>& Data<T*const>::operator=(Data<T*const>&& mov)
 {
-    *m_data = std::move(*(mov.m_data));
     return *this;
 }
 
 template<typename T>
 Data<T*const>& Data<T*const>::operator=(const T& cpy)
 {
-    *m_data = cpy;
     return *this;
 }
 
 template<typename T>
 Data<T*const>& Data<T*const>::operator=(T&& mov)
 {
-    *m_data = std::move(mov);
     return *this;
 }
 
