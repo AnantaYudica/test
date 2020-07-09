@@ -291,7 +291,7 @@ typename Queue<T>::ValueType Queue<T>::Pop()
     test::Node<T, 1>* pop_node = nullptr;
     if (_Pop(m_head, m_tail, pop_node))
     {
-        T ret = std::move(**pop_node);
+        ValueType ret(std::move(**pop_node));
         --m_size;
         delete pop_node;
         return ret;
