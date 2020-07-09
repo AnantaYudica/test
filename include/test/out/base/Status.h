@@ -14,11 +14,16 @@ class Status
 public:
     typedef TValue ValueType;
     typedef TIntegerValue IntegerValueType;
+private:
+    static constexpr IntegerValueType bad_offset = 0;
 public:
     enum : IntegerValueType
     {
         good = 0,
-        bad = IntegerValueType(~((IntegerValueType)-1 >> 1))
+        bad = IntegerValueType(~((IntegerValueType)-1 >> 1)),
+        queue_overflow = bad | ( 1 << bad_offset),
+        task_request_failed = bad | ( 2 << bad_offset),
+        task_execute_failed = bad | ( 3 << bad_offset)
     };
 private:
     TValue m_val;
