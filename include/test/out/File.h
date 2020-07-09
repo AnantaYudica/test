@@ -55,7 +55,7 @@ private:
     test::CString<TChar> m_tmp;
     SizeType m_size;
     const SizeType m_maximum_size;
-protected:
+public:
     File();
     File(const char * filename, const ModeType& mode);
     File(const char * filename, const ModeType& mode, 
