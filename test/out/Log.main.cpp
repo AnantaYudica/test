@@ -2,7 +2,6 @@
 #include "test/out/CString.h"
 #include "test/out/log/tag/Crit.h"
 #include "test/out/log/tag/Debug.h"
-#include "test/out/log/tag/Emerg.h"
 #include "test/out/log/tag/Error.h"
 #include "test/out/log/tag/Info.h"
 #include "test/out/log/tag/Warn.h"
