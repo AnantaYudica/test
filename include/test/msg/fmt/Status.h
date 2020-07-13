@@ -18,12 +18,14 @@ public:
     typedef TValue ValueType;
     typedef TIntegerValue IntegerValueType;
 private:
-    static constexpr IntegerValueType bad_offset = 0;
+    static constexpr IntegerValueType bad_offset = 1;
+    static constexpr IntegerValueType set_mask = 1;
 public:
     enum : IntegerValueType
     {
         good = 0,
-        bad = IntegerValueType(~((IntegerValueType)-1 >> 1))
+        bad = IntegerValueType(~((IntegerValueType)-1 >> 1)),
+        set_value = 1
     };
 private:
     ValueType m_value; 
@@ -43,6 +45,9 @@ public:
 public:
     bool IsGood() const;
     bool IsBad() const;
+    bool IsSetValue() const;
+public:
+    bool SetValue();
 public:
     void Reset();
 public:
@@ -110,6 +115,20 @@ bool Status<TValue, TIntegerValue>::IsBad() const
 {
     return m_value & bad;
 }
+
+template<typename TValue, typename TIntegerValue>
+bool Status<TValue, TIntegerValue>::IsSetValue() const
+{
+    return m_value & set_value;
+}
+
+template<typename TValue, typename TIntegerValue>
+bool Status<TValue, TIntegerValue>::SetValue()
+{
+    if ((m_value & (bad | set_mask)) != good) return false;
+    m_value |= set_value;
+    return true;
+}
     
 template<typename TValue, typename TIntegerValue>
 void Status<TValue, TIntegerValue>::Reset()
@@ -121,7 +140,7 @@ template<typename TValue, typename TIntegerValue>
 bool Status<TValue, TIntegerValue>::Bad(const IntegerValueType& code)
 {
     if (m_value & bad) return false;
-    m_value = code;
+    m_value |= code;
     return true;
 }
 
