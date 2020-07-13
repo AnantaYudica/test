@@ -29,7 +29,13 @@ protected:
     template<typename... TArgs>
     Parameter(TArgs&&... args);
 public:
-    virtual ~Parameter() = default;
+    virtual ~Parameter();
+public:
+    Parameter(const Parameter<TChar>& cpy);
+    Parameter(Parameter<TChar>&& mov);
+public:
+    Parameter<TChar>& operator=(const Parameter<TChar>& cpy);
+    Parameter<TChar>& operator=(Parameter<TChar>&& mov);
 public:
     virtual std::size_t VLoad(std::size_t size, std::size_t index, 
         va_list args) = 0;
@@ -62,6 +68,36 @@ typename Parameter<TChar>::StatusType
 Parameter<TChar>::GetStatus() const
 {
     return {m_status};
+}
+
+template<typename TChar>
+Parameter<TChar>::~Parameter()
+{
+    m_status.Reset();
+}
+
+template<typename TChar>
+Parameter<TChar>::Parameter(const Parameter<TChar>& cpy) :
+    m_status(cpy)
+{}
+
+template<typename TChar>
+Parameter<TChar>::Parameter(Parameter<TChar>&& mov) :
+    m_status(std::move(mov))
+{}
+
+template<typename TChar>
+Parameter<TChar>& Parameter<TChar>::operator=(const Parameter<TChar>& cpy)
+{
+    m_status = cpy.m_status;
+    return *this;
+}
+
+template<typename TChar>
+Parameter<TChar>& Parameter<TChar>::operator=(Parameter<TChar>&& mov)
+{
+    m_status = std::move(mov.m_status)
+    return *this;
 }
 
 } //!fmt
