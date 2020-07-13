@@ -148,7 +148,7 @@ template<typename TValue, typename TIntegerValue>
 typename Status<TValue, TIntegerValue>::IntegerValueType 
 Status<TValue, TIntegerValue>::GetBadCode() const
 {
-    return m_value;
+    return m_value & ~set_mask;
 }
 
 } //!fmt
