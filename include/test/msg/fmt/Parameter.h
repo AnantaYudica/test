@@ -21,19 +21,20 @@ class Parameter
 {
 public:
     typedef test::msg::fmt::Status<std::uint8_t> StatusType;
+    typedef typename StatusType::ValueType ValueStatusType;
+    typedef typename StatusType::IntegerValueType IntegerValueStatusType;
     typedef test::out::Interface<TChar> OutputInterfaceType;
 private:
     StatusType m_status;
 protected:
     Parameter();
-    template<typename... TArgs>
-    Parameter(TArgs&&... args);
+    Parameter(const IntegerValueStatusType& val);
 public:
     virtual ~Parameter();
-public:
+protected:
     Parameter(const Parameter<TChar>& cpy);
     Parameter(Parameter<TChar>&& mov);
-public:
+protected:
     Parameter<TChar>& operator=(const Parameter<TChar>& cpy);
     Parameter<TChar>& operator=(Parameter<TChar>&& mov);
 public:
@@ -51,10 +52,39 @@ Parameter<TChar>::Parameter() :
 {}
 
 template<typename TChar>
-template<typename... TArgs>
-Parameter<TChar>::Parameter(TArgs&&... args) :
-    m_status(std::forward<TArgs>(args)...)
+Parameter<TChar>::Parameter(const IntegerValueStatusType& val) :
+    m_status(val)
 {}
+
+template<typename TChar>
+Parameter<TChar>::~Parameter()
+{
+    m_status.Reset();
+}
+
+template<typename TChar>
+Parameter<TChar>::Parameter(const Parameter<TChar>& cpy) :
+    m_status(cpy.m_status)
+{}
+
+template<typename TChar>
+Parameter<TChar>::Parameter(Parameter<TChar>&& mov) :
+    m_status(std::move(mov.m_status))
+{}
+
+template<typename TChar>
+Parameter<TChar>& Parameter<TChar>::operator=(const Parameter<TChar>& cpy)
+{
+    m_status = cpy.m_status;
+    return *this;
+}
+
+template<typename TChar>
+Parameter<TChar>& Parameter<TChar>::operator=(Parameter<TChar>&& mov)
+{
+    m_status = std::move(mov.m_status);
+    return *this;
+}
 
 template<typename TChar>
 typename Parameter<TChar>::StatusType& 
@@ -68,36 +98,6 @@ typename Parameter<TChar>::StatusType
 Parameter<TChar>::GetStatus() const
 {
     return {m_status};
-}
-
-template<typename TChar>
-Parameter<TChar>::~Parameter()
-{
-    m_status.Reset();
-}
-
-template<typename TChar>
-Parameter<TChar>::Parameter(const Parameter<TChar>& cpy) :
-    m_status(cpy)
-{}
-
-template<typename TChar>
-Parameter<TChar>::Parameter(Parameter<TChar>&& mov) :
-    m_status(std::move(mov))
-{}
-
-template<typename TChar>
-Parameter<TChar>& Parameter<TChar>::operator=(const Parameter<TChar>& cpy)
-{
-    m_status = cpy.m_status;
-    return *this;
-}
-
-template<typename TChar>
-Parameter<TChar>& Parameter<TChar>::operator=(Parameter<TChar>&& mov)
-{
-    m_status = std::move(mov.m_status)
-    return *this;
 }
 
 } //!fmt
