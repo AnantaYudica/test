@@ -85,6 +85,32 @@ int main()
         assert(s6.IsBad() == false);
         assert(s6.IsSetValue() == false);
         assert(s6.GetBadCode() == StatusType::good);
+
+        StatusType s7;
+        
+        assert(s7.IsGood() == true);
+        assert(s7.IsBad() == false);
+        assert(s7.IsSetValue() == false);
+        assert(s7.GetBadCode() == StatusType::good);
+
+        s7.UnsetValue();
+        
+        assert(s7.IsGood() == true);
+        assert(s7.IsBad() == false);
+        assert(s7.IsSetValue() == false);
+        assert(s7.GetBadCode() == StatusType::good);
+
+        s7.SetValue();
+        assert(s7.IsGood() == true);
+        assert(s7.IsBad() == false);
+        assert(s7.IsSetValue() == true);
+        assert(s7.GetBadCode() == StatusType::good);
+        
+        s7.UnsetValue();
+        assert(s7.IsGood() == true);
+        assert(s7.IsBad() == false);
+        assert(s7.IsSetValue() == false);
+        assert(s7.GetBadCode() == StatusType::good);
     }
     
     return 1;
