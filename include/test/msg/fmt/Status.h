@@ -48,6 +48,7 @@ public:
     bool IsSetValue() const;
 public:
     bool SetValue();
+    void UnsetValue();
 public:
     void Reset();
 public:
@@ -128,6 +129,15 @@ bool Status<TValue, TIntegerValue>::SetValue()
     if ((m_value & (bad | set_mask)) != good) return false;
     m_value |= set_value;
     return true;
+}
+
+template<typename TValue, typename TIntegerValue>
+void Status<TValue, TIntegerValue>::UnsetValue()
+{
+    if (m_value & set_value)
+    {
+        m_value ^= set_value;
+    }
 }
     
 template<typename TValue, typename TIntegerValue>
