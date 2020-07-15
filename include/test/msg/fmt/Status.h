@@ -63,7 +63,7 @@ Status<TValue, TIntegerValue>::Status() :
 
 template<typename TValue, typename TIntegerValue>
 Status<TValue, TIntegerValue>::Status(const IntegerValueType& val) :
-    m_value(m_value)
+    m_value(val)
 {}
 
 template<typename TValue, typename TIntegerValue>
