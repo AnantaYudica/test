@@ -5,9 +5,7 @@
 #include <utility>
 #include <cstring>
 
-typedef typename test::msg::fmt::param::flag::Character<>::ValueType ValueType;
-
-template<ValueType Val>
+template<int Val>
 struct ChFormat
 {
     auto Output(test::out::Interface<char>& out) -> decltype(out.Print(""))
@@ -17,7 +15,7 @@ struct ChFormat
 };
 
 template<>
-struct ChFormat<test::msg::fmt::param::flag::Character<>::length_char>
+struct ChFormat<test::msg::fmt::param::flag::Character::length_char>
 {
     static auto Output(test::out::Interface<char>& out) -> decltype(out.Print("_"))
     {
@@ -26,8 +24,8 @@ struct ChFormat<test::msg::fmt::param::flag::Character<>::length_char>
 };
 
 template<>
-struct ChFormat<test::msg::fmt::param::flag::Character<>::length_char
-    | test::msg::fmt::param::flag::Character<>::width>
+struct ChFormat<test::msg::fmt::param::flag::Character::length_char
+    | test::msg::fmt::param::flag::Character::width>
 {
     static auto Output(test::out::Interface<char>& out) -> decltype(out.Print("_"))
     {
@@ -37,7 +35,7 @@ struct ChFormat<test::msg::fmt::param::flag::Character<>::length_char
 
 
 template<>
-struct ChFormat<test::msg::fmt::param::flag::Character<>::length_wchar>
+struct ChFormat<test::msg::fmt::param::flag::Character::length_wchar>
 {
     static auto Output(test::out::Interface<char>& out) -> decltype(out.Print("_"))
     {
@@ -46,8 +44,8 @@ struct ChFormat<test::msg::fmt::param::flag::Character<>::length_wchar>
 };
 
 template<>
-struct ChFormat<test::msg::fmt::param::flag::Character<>::length_wchar
-    | test::msg::fmt::param::flag::Character<>::width>
+struct ChFormat<test::msg::fmt::param::flag::Character::length_wchar
+    | test::msg::fmt::param::flag::Character::width>
 {
     static auto Output(test::out::Interface<char>& out) -> decltype(out.Print("_"))
     {
@@ -59,9 +57,9 @@ int main()
 {
     using namespace test::msg::fmt::param::flag;
 
-    constexpr Character<> ch1{};
+    constexpr Character ch1{};
 
-    assert(ch1.GetValue() == Character<>::length_char);
+    assert(ch1.GetValue() == Character::length_char);
 
     test::out::CString<char> out_cstr1;
 
@@ -69,9 +67,9 @@ int main()
 
     assert(strncmp(*(out_cstr1.Get()), "%c", 3) == 0);
 
-    constexpr Character<> ch2{arg::Width{}};
+    constexpr Character ch2{arg::Width{}};
 
-    assert(ch2.GetValue() == (Character<>::length_char | Character<>::width));
+    assert(ch2.GetValue() == (Character::length_char | Character::width));
     
     test::out::CString<char> out_cstr2;
 
@@ -79,9 +77,9 @@ int main()
 
     assert(strncmp(*(out_cstr2.Get()), "%*c", 4) == 0);
     
-    constexpr Character<> ch3{arg::Length<std::wint_t>{}};
+    constexpr Character ch3{arg::Length<std::wint_t>{}};
 
-    assert(ch3.GetValue() == Character<>::length_wchar);
+    assert(ch3.GetValue() == Character::length_wchar);
     
     test::out::CString<char> out_cstr3;
 
@@ -89,9 +87,9 @@ int main()
 
     assert(strncmp(*(out_cstr3.Get()), "%lc", 4) == 0);
 
-    constexpr Character<> ch4{arg::Length<std::wint_t>{}, arg::Width{}};
+    constexpr Character ch4{arg::Length<std::wint_t>{}, arg::Width{}};
 
-    assert(ch4.GetValue() == (Character<>::length_wchar | Character<>::width));
+    assert(ch4.GetValue() == (Character::length_wchar | Character::width));
     
     test::out::CString<char> out_cstr4;
 
@@ -99,9 +97,9 @@ int main()
 
     assert(strncmp(*(out_cstr4.Get()), "%*lc", 5) == 0);
 
-    constexpr Character<> ch5{ch2};
+    constexpr Character ch5{ch2};
     
-    assert(ch5.GetValue() == (Character<>::length_char | Character<>::width));
+    assert(ch5.GetValue() == (Character::length_char | Character::width));
     
     test::out::CString<char> out_cstr5;
 
@@ -109,9 +107,9 @@ int main()
 
     assert(strncmp(*(out_cstr5.Get()), "%*c", 4) == 0);
 
-    constexpr Character<> ch6{std::move(ch2)};
+    constexpr Character ch6{std::move(ch2)};
 
-    assert(ch6.GetValue() == (Character<>::length_char | Character<>::width));
+    assert(ch6.GetValue() == (Character::length_char | Character::width));
     
     test::out::CString<char> out_cstr6;
 
