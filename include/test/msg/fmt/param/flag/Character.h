@@ -20,11 +20,10 @@ namespace param
 namespace flag
 {
 
-template<typename TValue = std::uint8_t>
 class Character
 {
 public:
-    typedef TValue ValueType;
+    typedef std::uint8_t ValueType;
     typedef test::msg::fmt::param::flag::arg::Width WidthType;
     template<typename T>
     using LengthType = test::msg::fmt::param::flag::arg::Length<T>;
@@ -36,101 +35,97 @@ public:
         length_wchar = 2,
         width = 4
     };
+public:
+    static constexpr ValueType char_format = length_char;
+    static constexpr ValueType wchar_format = length_wchar;
+    static constexpr ValueType w_char_format = length_char | width;
+    static constexpr ValueType w_wchar_format = length_wchar | width;
 private:
     static constexpr ValueType length_mask = length_char | length_wchar;
 private:
     ValueType m_value;
 public:
-    constexpr Character();
+    inline constexpr Character();
     template<typename TArg, typename... TArgs, typename std::enable_if<
         !std::is_same<typename std::remove_cv<TArg>::type, 
-        Character<TValue>>::value, int>::type = 0>
-    constexpr Character(TArg&& arg, TArgs&& ... args);
+        Character>::value, int>::type = 0>
+    inline constexpr Character(TArg&& arg, TArgs&& ... args);
 public:
-    ~Character() = default;
+    inline ~Character() = default;
 public:
-    constexpr Character(const Character<TValue>& cpy);
-    constexpr Character(Character<TValue>&& mov);
+    inline constexpr Character(const Character& cpy);
+    inline constexpr Character(Character&& mov);
 public:
-    Character<TValue>& operator=(const Character<TValue>&) = delete;
-    Character<TValue>& operator=(Character<TValue>&&) = delete;
+    Character& operator=(const Character&) = delete;
+    Character& operator=(Character&&) = delete;
 private:
-    constexpr ValueType _Value(ValueType val);
+    inline constexpr ValueType _Value(ValueType val);
     template<typename... TArgs>
-    constexpr ValueType _Value(ValueType val, WidthType&&, 
+    inline constexpr ValueType _Value(ValueType val, WidthType&&, 
         TArgs&&... args);
     template<typename... TArgs>
-    constexpr ValueType _Value(ValueType val, LengthType<unsigned char>&&, 
-        TArgs&&... args);
+    inline constexpr ValueType _Value(ValueType val, 
+        LengthType<unsigned char>&&, TArgs&&... args);
     template<typename... TArgs>
-    constexpr ValueType _Value(ValueType val, LengthType<std::wint_t>&&, 
+    inline constexpr ValueType _Value(ValueType val, LengthType<std::wint_t>&&,
         TArgs&&... args);
 public:
-    constexpr ValueType GetValue() const;
+    inline constexpr ValueType GetValue() const;
 };
 
-template<typename TValue>
-constexpr Character<TValue>::Character() :
+inline constexpr Character::Character() :
     m_value(good | length_char)
 {}
 
-template<typename TValue>
 template<typename TArg, typename... TArgs, typename std::enable_if<
     !std::is_same<typename std::remove_cv<TArg>::type, 
-    Character<TValue>>::value, int>::type>
-constexpr Character<TValue>::Character(TArg&& arg, TArgs&& ... args) :
+    Character>::value, int>::type>
+inline constexpr Character::Character(TArg&& arg, TArgs&& ... args) :
     m_value(_Value(good | length_char, std::forward<TArg>(arg), 
         std::forward<TArgs>(args)...))
 {}
 
-template<typename TValue>
-constexpr Character<TValue>::Character(const Character<TValue>& cpy) :
+inline constexpr Character::Character(const Character& cpy) :
     m_value(cpy.m_value)
 {}
 
-template<typename TValue>
-constexpr Character<TValue>::Character(Character<TValue>&& mov) :
+inline constexpr Character::Character(Character&& mov) :
     m_value(mov.m_value)
 {}
 
-template<typename TValue>
-constexpr typename Character<TValue>::ValueType 
-Character<TValue>::_Value(ValueType val)
+inline constexpr typename Character::ValueType 
+Character::_Value(ValueType val)
 {
     return val;
 }
 
-template<typename TValue>
 template<typename... TArgs>
-constexpr typename Character<TValue>::ValueType 
-Character<TValue>::_Value(ValueType val, WidthType&&, TArgs&&... args)
+inline constexpr typename Character::ValueType 
+Character::_Value(ValueType val, WidthType&&, TArgs&&... args)
 {
     return _Value(val | width, std::forward<TArgs>(args)...);
 }
 
-template<typename TValue>
 template<typename... TArgs>
-constexpr typename Character<TValue>::ValueType 
-Character<TValue>::_Value(ValueType val, LengthType<unsigned char>&&, 
+inline constexpr typename Character::ValueType 
+Character::_Value(ValueType val, LengthType<unsigned char>&&, 
     TArgs&&... args)
 {
     return _Value((val & ~length_mask) | length_char, 
         std::forward<TArgs>(args)...);
 }
     
-template<typename TValue>
 template<typename... TArgs>
-constexpr typename Character<TValue>::ValueType 
-Character<TValue>::_Value(ValueType val, LengthType<std::wint_t>&&, 
+inline constexpr typename Character::ValueType 
+Character::_Value(ValueType val, LengthType<std::wint_t>&&, 
     TArgs&&... args)
 {
     return _Value((val & ~length_mask) | length_wchar, 
         std::forward<TArgs>(args)...);
 }
 
-template<typename TValue>
-constexpr typename Character<TValue>::ValueType 
-Character<TValue>::GetValue() const
+inline constexpr typename Character::ValueType 
+Character::GetValue() const
 {
     return m_value;
 }
