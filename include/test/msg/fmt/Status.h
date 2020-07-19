@@ -18,14 +18,17 @@ public:
     typedef TValue ValueType;
     typedef TIntegerValue IntegerValueType;
 private:
-    static constexpr IntegerValueType bad_offset = 1;
-    static constexpr IntegerValueType set_mask = 1;
+    static constexpr IntegerValueType bad_offset = 2;
+    static constexpr IntegerValueType value_mask = 3;
 public:
     enum : IntegerValueType
     {
         good = 0,
         bad = IntegerValueType(~((IntegerValueType)-1 >> 1)),
-        set_value = 1
+        default_value = 1 | 2,
+        set_value = 2,
+        value_not_set = (1 << bad_offset) | bad,
+        load_failed = (2 << bad_offset) | bad
     };
 private:
     ValueType m_value; 
@@ -45,6 +48,7 @@ public:
 public:
     bool IsGood() const;
     bool IsBad() const;
+    bool IsDefaultValue() const;
     bool IsSetValue() const;
 public:
     bool SetValue();
@@ -118,6 +122,12 @@ bool Status<TValue, TIntegerValue>::IsBad() const
 }
 
 template<typename TValue, typename TIntegerValue>
+bool Status<TValue, TIntegerValue>::IsDefaultValue() const
+{
+    return m_value & (default_value ^ set_value);
+}
+
+template<typename TValue, typename TIntegerValue>
 bool Status<TValue, TIntegerValue>::IsSetValue() const
 {
     return m_value & set_value;
@@ -126,7 +136,8 @@ bool Status<TValue, TIntegerValue>::IsSetValue() const
 template<typename TValue, typename TIntegerValue>
 bool Status<TValue, TIntegerValue>::SetValue()
 {
-    if ((m_value & (bad | set_mask)) != good) return false;
+    if ((m_value & (bad | value_mask)) != good)
+        return false;
     m_value |= set_value;
     return true;
 }
@@ -134,7 +145,7 @@ bool Status<TValue, TIntegerValue>::SetValue()
 template<typename TValue, typename TIntegerValue>
 void Status<TValue, TIntegerValue>::UnsetValue()
 {
-    if (m_value & set_value)
+    if ((m_value & default_value) == set_value)
     {
         m_value ^= set_value;
     }
@@ -150,7 +161,7 @@ template<typename TValue, typename TIntegerValue>
 bool Status<TValue, TIntegerValue>::Bad(const IntegerValueType& code)
 {
     if (m_value & bad) return false;
-    m_value |= code;
+    m_value |= (code & ~value_mask);
     return true;
 }
 
@@ -158,7 +169,7 @@ template<typename TValue, typename TIntegerValue>
 typename Status<TValue, TIntegerValue>::IntegerValueType 
 Status<TValue, TIntegerValue>::GetBadCode() const
 {
-    return m_value & ~set_mask;
+    return m_value & ~value_mask;
 }
 
 } //!fmt
