@@ -18,7 +18,7 @@ namespace val
 
 union Character
 {
-    unsigned char char_value;
+    int char_value;
     std::wint_t wchar_value;
 };
 
