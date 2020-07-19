@@ -19,7 +19,7 @@ namespace specifier
 namespace print
 {
 
-template<typename TChar, int ValueFlag>
+template<typename TChar, int FlagValue>
 class Character
 {
 public:
@@ -104,9 +104,9 @@ public:
     Character() = delete;
 };
 
-template<typename TChar, int ValueFlag>
-typename Character<TChar, ValueFlag>::SizeType 
-Character<TChar, ValueFlag>::Print(OutputInterfaceType&, 
+template<typename TChar, int FlagValue>
+typename Character<TChar, FlagValue>::SizeType 
+Character<TChar, FlagValue>::Print(OutputInterfaceType&, 
     const WidthType&, const ValueType&)
 {
     return 0;
