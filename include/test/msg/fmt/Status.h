@@ -88,7 +88,10 @@ Status<TValue, TIntegerValue>::
     Status(Status<TValue, TIntegerValue>&& mov) :
         m_value((TIntegerValue)mov.m_value)
 {
-    mov.m_value = good;
+    if ((mov.m_value & default_value) == set_value)
+        mov.m_value = good;
+    else
+        mov.m_value = default_value;
 }
 
 template<typename TValue, typename TIntegerValue>
@@ -105,7 +108,10 @@ Status<TValue, TIntegerValue>&
 Status<TValue, TIntegerValue>::operator=(Status<TValue, TIntegerValue>&& mov)
 {
     m_value = (TIntegerValue)mov.m_value;
-    mov.m_value = good;
+    if ((mov.m_value & default_value) == set_value)
+        mov.m_value = good;
+    else
+        mov.m_value = default_value;
     return *this;
 }
 
