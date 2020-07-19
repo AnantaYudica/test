@@ -31,17 +31,17 @@ public:
     enum : ValueType
     {
         good = 0,
-        length_char = 1,
-        length_wchar = 2,
+        define_char = 1,
+        define_wchar = 2,
         width = 4
     };
 public:
-    static constexpr ValueType char_format = length_char;
-    static constexpr ValueType wchar_format = length_wchar;
-    static constexpr ValueType w_char_format = length_char | width;
-    static constexpr ValueType w_wchar_format = length_wchar | width;
+    static constexpr ValueType char_format = define_char;
+    static constexpr ValueType wchar_format = define_wchar;
+    static constexpr ValueType w_char_format = define_char | width;
+    static constexpr ValueType w_wchar_format = define_wchar | width;
 private:
-    static constexpr ValueType length_mask = length_char | length_wchar;
+    static constexpr ValueType define_mask = define_char | define_wchar;
 private:
     ValueType m_value;
 public:
@@ -74,14 +74,14 @@ public:
 };
 
 inline constexpr Character::Character() :
-    m_value(good | length_char)
+    m_value(good | define_char)
 {}
 
 template<typename TArg, typename... TArgs, typename std::enable_if<
     !std::is_same<typename std::remove_cv<TArg>::type, 
     Character>::value, int>::type>
 inline constexpr Character::Character(TArg&& arg, TArgs&& ... args) :
-    m_value(_Value(good | length_char, std::forward<TArg>(arg), 
+    m_value(_Value(good | define_char, std::forward<TArg>(arg), 
         std::forward<TArgs>(args)...))
 {}
 
@@ -123,7 +123,7 @@ inline constexpr typename Character::ValueType
 Character::_Value(ValueType val, DefineType<char>&&, 
     TArgs&&... args)
 {
-    return _Value((val & ~length_mask) | length_char, 
+    return _Value((val & ~define_mask) | define_char, 
         std::forward<TArgs>(args)...);
 }
     
@@ -132,7 +132,7 @@ inline constexpr typename Character::ValueType
 Character::_Value(ValueType val, DefineType<wchar_t>&&, 
     TArgs&&... args)
 {
-    return _Value((val & ~length_mask) | length_wchar, 
+    return _Value((val & ~define_mask) | define_wchar, 
         std::forward<TArgs>(args)...);
 }
 
