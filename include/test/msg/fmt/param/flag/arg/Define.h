@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_FLAG_ARG_LENGTH_H_
-#define TEST_MSG_FMT_PARAM_FLAG_ARG_LENGTH_H_
+#ifndef TEST_MSG_FMT_PARAM_FLAG_ARG_DEFINE_H_
+#define TEST_MSG_FMT_PARAM_FLAG_ARG_DEFINE_H_
 
 namespace test
 {
@@ -15,10 +15,10 @@ namespace arg
 {
 
 template<typename T>
-class Length
+class Define
 {
 public:
-    constexpr Length() = default;
+    constexpr Define() = default;
 };
 
 } //!arg
@@ -33,5 +33,5 @@ public:
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_FLAG_ARG_LENGTH_H_
+#endif //!TEST_MSG_FMT_PARAM_FLAG_ARG_DEFINE_H_
 
