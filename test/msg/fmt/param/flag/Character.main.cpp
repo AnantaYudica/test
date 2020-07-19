@@ -77,7 +77,7 @@ int main()
 
     assert(strncmp(*(out_cstr2.Get()), "%*c", 4) == 0);
     
-    constexpr Character ch3{arg::Length<wchar_t>{}};
+    constexpr Character ch3{arg::Define<wchar_t>{}};
 
     assert(ch3.GetValue() == Character::length_wchar);
     
@@ -87,7 +87,7 @@ int main()
 
     assert(strncmp(*(out_cstr3.Get()), "%lc", 4) == 0);
 
-    constexpr Character ch4{arg::Length<wchar_t>{}, arg::Width{}};
+    constexpr Character ch4{arg::Define<wchar_t>{}, arg::Width{}};
 
     assert(ch4.GetValue() == (Character::length_wchar | Character::width));
     
@@ -124,7 +124,7 @@ int main()
 
     Character ch8;
     ch8 = std::move(ch7); 
-    
+
     assert(ch8.GetValue() == (Character::length_char | Character::width));
 
     return 1;

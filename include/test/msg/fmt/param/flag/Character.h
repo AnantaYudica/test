@@ -2,7 +2,7 @@
 #define TEST_MSG_FMT_PARAM_FLAG_CHARACTER_H_
 
 #include "arg/Width.h"
-#include "arg/Length.h"
+#include "arg/Define.h"
 
 #include <cstdint>
 #include <utility>
@@ -26,7 +26,7 @@ public:
     typedef std::uint8_t ValueType;
     typedef test::msg::fmt::param::flag::arg::Width WidthType;
     template<typename T>
-    using LengthType = test::msg::fmt::param::flag::arg::Length<T>;
+    using DefineType = test::msg::fmt::param::flag::arg::Define<T>;
 public:
     enum : ValueType
     {
@@ -64,10 +64,10 @@ private:
     inline constexpr ValueType _Value(ValueType val, WidthType&&, 
         TArgs&&... args);
     template<typename... TArgs>
-    inline constexpr ValueType _Value(ValueType val, LengthType<char>&&, 
+    inline constexpr ValueType _Value(ValueType val, DefineType<char>&&, 
         TArgs&&... args);
     template<typename... TArgs>
-    inline constexpr ValueType _Value(ValueType val, LengthType<wchar_t>&&,
+    inline constexpr ValueType _Value(ValueType val, DefineType<wchar_t>&&,
         TArgs&&... args);
 public:
     inline constexpr ValueType GetValue() const;
@@ -120,7 +120,7 @@ Character::_Value(ValueType val, WidthType&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Character::ValueType 
-Character::_Value(ValueType val, LengthType<char>&&, 
+Character::_Value(ValueType val, DefineType<char>&&, 
     TArgs&&... args)
 {
     return _Value((val & ~length_mask) | length_char, 
@@ -129,7 +129,7 @@ Character::_Value(ValueType val, LengthType<char>&&,
     
 template<typename... TArgs>
 inline constexpr typename Character::ValueType 
-Character::_Value(ValueType val, LengthType<wchar_t>&&, 
+Character::_Value(ValueType val, DefineType<wchar_t>&&, 
     TArgs&&... args)
 {
     return _Value((val & ~length_mask) | length_wchar, 

@@ -133,7 +133,7 @@ int main()
 
     }
     {
-        Character<char> ch1{flag::arg::Length<char>{}};
+        Character<char> ch1{flag::arg::Define<char>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -192,7 +192,7 @@ int main()
 
     }
     {
-        Character<char> ch1{flag::arg::Length<wchar_t>{}};
+        Character<char> ch1{flag::arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -252,7 +252,7 @@ int main()
 
     }
     {
-        Character<char> ch1{'D', flag::arg::Length<char>{}};
+        Character<char> ch1{'D', flag::arg::Define<char>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -292,7 +292,7 @@ int main()
 
     }
     {
-        Character<char> ch1{'K', flag::arg::Length<wchar_t>{}};
+        Character<char> ch1{'K', flag::arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -450,7 +450,7 @@ int main()
         assert(ch1.GetBadCode() == Character<char>::StatusType::good);
     }
     {
-        Character<char> ch1{flag::arg::Width{}, flag::arg::Length<wchar_t>{}};
+        Character<char> ch1{flag::arg::Width{}, flag::arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -510,7 +510,7 @@ int main()
 
     }
     {
-        Character<char> ch1{flag::arg::Width{10}, flag::arg::Length<wchar_t>{}};
+        Character<char> ch1{flag::arg::Width{10}, flag::arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -671,7 +671,7 @@ int main()
     
     {
         Character<char> ch1{'L', flag::arg::Width{},
-            flag::arg::Length<wchar_t>{}};
+            flag::arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -732,7 +732,7 @@ int main()
     }
     {
         Character<char> ch1{'N', flag::arg::Width{10},
-            flag::arg::Length<wchar_t>{}};
+            flag::arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -773,7 +773,7 @@ int main()
     }
     {
         Character<char> ch1{'N', flag::arg::Width{10},
-            flag::arg::Length<wchar_t>{}};
+            flag::arg::Define<wchar_t>{}};
             
         assert(ch1.IsSet() == true);
         assert(ch1.GetValue().char_value == 'N');
@@ -850,7 +850,7 @@ int main()
     }
     {
         Character<char> ch1{flag::arg::Width{10},
-            flag::arg::Length<wchar_t>{}};
+            flag::arg::Define<wchar_t>{}};
         
         assert(ch1.IsSet() == false);
         assert(ch1.GetValue().char_value == '\0');
@@ -938,7 +938,7 @@ int main()
     }
     {
         Character<char> ch1{'G', flag::arg::Width{},
-            flag::arg::Length<wchar_t>{}};
+            flag::arg::Define<wchar_t>{}};
             
         assert(ch1.IsSet() == false);
         assert(ch1.GetValue().char_value == 'G');
@@ -1026,7 +1026,7 @@ int main()
     }
     {
          Character<char> ch1{flag::arg::Width{},
-            flag::arg::Length<wchar_t>{}};
+            flag::arg::Define<wchar_t>{}};
         
         assert(ch1.IsSet() == false);
         assert(ch1.GetValue().char_value == '\0');
