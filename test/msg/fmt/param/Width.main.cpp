@@ -80,8 +80,8 @@ int main()
     assert(wd6.GetValue() == 240);
     assert(wd6.IsSet() == true);
     
-    assert(wd5.GetValue() == 0);
-    assert(wd5.IsSet() == false);
+    assert(wd5.GetValue() == 240);
+    assert(wd5.IsSet() == true);
 
     Width<char> wd7;
     assert(wd7.GetValue() == 0);
@@ -109,8 +109,8 @@ int main()
     assert(wd8.GetValue() == 240);
     assert(wd8.IsSet() == true);
 
-    assert(wd7.GetValue() == 0);
-    assert(wd7.IsSet() == false);
+    assert(wd7.GetValue() == 240);
+    assert(wd7.IsSet() == true);
 
     Width<char> wd9{10};
     assert(wd9.GetValue() == 10);
