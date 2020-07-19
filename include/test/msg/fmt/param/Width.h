@@ -78,7 +78,8 @@ Width<TChar>::Width(Width<TChar>&& mov) :
     ParameterBaseType(std::move(mov)),
     m_value(mov.m_value)
 {
-    mov.m_value = 0;
+    if (!mov.GetStatus().IsDefaultValue())
+        mov.m_value = 0;
 }
 
 template<typename TChar>
@@ -94,7 +95,8 @@ Width<TChar>& Width<TChar>::operator=(Width<TChar>&& mov)
 {
     ParameterBaseType::operator=(std::move(mov));
     m_value = mov.m_value;
-    mov.m_value = 0;
+    if (!mov.GetStatus().IsDefaultValue())
+        mov.m_value = 0;
     return *this;
 }
 
