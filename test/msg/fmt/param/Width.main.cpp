@@ -112,5 +112,19 @@ int main()
     assert(wd7.GetValue() == 0);
     assert(wd7.IsSet() == false);
 
+    Width<char> wd9{10};
+    assert(wd9.GetValue() == 10);
+    assert(wd9.IsSet() == true);
+    
+    index = wd9.Load(1, 30);
+    assert(index == 0);
+    assert(wd9.GetValue() == 10);
+    assert(wd9.IsSet() == true);
+    
+    wd9.Unset();
+    assert(wd9.GetValue() == 10);
+    assert(wd9.IsSet() == true);
+    
+
     return 1;
 }
