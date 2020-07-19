@@ -64,10 +64,10 @@ private:
     inline constexpr ValueType _Value(ValueType val, WidthType&&, 
         TArgs&&... args);
     template<typename... TArgs>
-    inline constexpr ValueType _Value(ValueType val, 
-        LengthType<unsigned char>&&, TArgs&&... args);
+    inline constexpr ValueType _Value(ValueType val, LengthType<char>&&, 
+        TArgs&&... args);
     template<typename... TArgs>
-    inline constexpr ValueType _Value(ValueType val, LengthType<std::wint_t>&&,
+    inline constexpr ValueType _Value(ValueType val, LengthType<wchar_t>&&,
         TArgs&&... args);
 public:
     inline constexpr ValueType GetValue() const;
@@ -108,7 +108,7 @@ Character::_Value(ValueType val, WidthType&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Character::ValueType 
-Character::_Value(ValueType val, LengthType<unsigned char>&&, 
+Character::_Value(ValueType val, LengthType<char>&&, 
     TArgs&&... args)
 {
     return _Value((val & ~length_mask) | length_char, 
@@ -117,7 +117,7 @@ Character::_Value(ValueType val, LengthType<unsigned char>&&,
     
 template<typename... TArgs>
 inline constexpr typename Character::ValueType 
-Character::_Value(ValueType val, LengthType<std::wint_t>&&, 
+Character::_Value(ValueType val, LengthType<wchar_t>&&, 
     TArgs&&... args)
 {
     return _Value((val & ~length_mask) | length_wchar, 
