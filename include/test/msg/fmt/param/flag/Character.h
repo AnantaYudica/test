@@ -56,8 +56,8 @@ public:
     inline constexpr Character(const Character& cpy);
     inline constexpr Character(Character&& mov);
 public:
-    Character& operator=(const Character&) = delete;
-    Character& operator=(Character&&) = delete;
+    inline Character& operator=(const Character& cpy);
+    inline Character& operator=(Character&& mov);
 private:
     inline constexpr ValueType _Value(ValueType val);
     template<typename... TArgs>
@@ -92,6 +92,18 @@ inline constexpr Character::Character(const Character& cpy) :
 inline constexpr Character::Character(Character&& mov) :
     m_value(mov.m_value)
 {}
+
+inline Character& Character::operator=(const Character& cpy)
+{
+    m_value = cpy.m_value;
+    return *this;
+}
+
+inline Character& Character::operator=(Character&& mov)
+{
+    m_value = mov.m_value;
+    return *this;
+}
 
 inline constexpr typename Character::ValueType 
 Character::_Value(ValueType val)
