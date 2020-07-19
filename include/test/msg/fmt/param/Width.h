@@ -57,7 +57,7 @@ Width<TChar>::Width() :
 
 template<typename TChar>
 Width<TChar>::Width(const ValueType& val) :
-    ParameterBaseType(StatusType::set_value),
+    ParameterBaseType(StatusType::default_value),
     m_value(val)
 {}
 
@@ -127,8 +127,12 @@ typename Width<TChar>::ValueType Width<TChar>::GetValue() const
 template<typename TChar>
 void Width<TChar>::Unset()
 {
-    m_value = 0;
-    ParameterBaseType::GetStatus().UnsetValue();
+    auto& status = ParameterBaseType::GetStatus();
+    status.UnsetValue();
+    if (!status.IsSetValue())
+    {
+        m_value = 0;
+    }
 }
 
 template<typename TChar>
