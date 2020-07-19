@@ -117,5 +117,15 @@ int main()
 
     assert(strncmp(*(out_cstr6.Get()), "%*c", 4) == 0);
 
+    Character ch7; 
+    ch7 = ch6;
+    
+    assert(ch7.GetValue() == (Character::length_char | Character::width));
+
+    Character ch8;
+    ch8 = std::move(ch7); 
+    
+    assert(ch8.GetValue() == (Character::length_char | Character::width));
+
     return 1;
 }
