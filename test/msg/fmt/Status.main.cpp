@@ -143,6 +143,35 @@ int main()
         assert(s8.IsSetValue() == true);
         assert(s8.GetBadCode() == StatusType::good);
 
+        StatusType s9(std::move(s8));
+        
+        assert(s9.IsGood() == true);
+        assert(s9.IsBad() == false);
+        assert(s9.IsDefaultValue() == true);
+        assert(s9.IsSetValue() == true);
+        assert(s9.GetBadCode() == StatusType::good);
+        
+        assert(s8.IsGood() == true);
+        assert(s8.IsBad() == false);
+        assert(s8.IsDefaultValue() == true);
+        assert(s8.IsSetValue() == true);
+        assert(s8.GetBadCode() == StatusType::good);
+
+        StatusType s10;
+        s10 = std::move(s9);
+
+        assert(s10.IsGood() == true);
+        assert(s10.IsBad() == false);
+        assert(s10.IsDefaultValue() == true);
+        assert(s10.IsSetValue() == true);
+        assert(s10.GetBadCode() == StatusType::good);
+        
+        assert(s9.IsGood() == true);
+        assert(s9.IsBad() == false);
+        assert(s9.IsDefaultValue() == true);
+        assert(s9.IsSetValue() == true);
+        assert(s9.GetBadCode() == StatusType::good);
+
     }
     
     return 1;
