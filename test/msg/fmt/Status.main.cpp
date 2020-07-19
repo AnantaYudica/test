@@ -12,6 +12,7 @@ int main()
         StatusType s1;
         assert(s1.IsGood() == true);
         assert(s1.IsBad() == false);
+        assert(s1.IsDefaultValue() == false);
         assert(s1.IsSetValue() == false);
         assert(s1.GetBadCode() == StatusType::good);
 
@@ -21,12 +22,14 @@ int main()
         assert(res == true);
         assert(s2.IsGood() == true);
         assert(s2.IsBad() == false);
+        assert(s2.IsDefaultValue() == false);
         assert(s2.IsSetValue() == true);
         assert(s2.GetBadCode() == StatusType::good);
 
         assert(s2.Bad(StatusType::bad) == true);
         assert(s2.IsGood() == false);
         assert(s2.IsBad() == true);
+        assert(s2.IsDefaultValue() == false);
         assert(s2.IsSetValue() == true);
         assert(s2.GetBadCode() == StatusType::bad);
         assert(s2.Bad(StatusType::bad) == false);
@@ -36,6 +39,7 @@ int main()
         assert(res == false);
         assert(s2.IsGood() == false);
         assert(s2.IsBad() == true);
+        assert(s2.IsDefaultValue() == false);
         assert(s2.IsSetValue() == true);
         assert(s2.GetBadCode() == StatusType::bad);
 
@@ -43,6 +47,7 @@ int main()
         
         assert(s3.IsGood() == false);
         assert(s3.IsBad() == true);
+        assert(s3.IsDefaultValue() == false);
         assert(s3.IsSetValue() == true);
         assert(s3.GetBadCode() == StatusType::bad);
 
@@ -50,11 +55,13 @@ int main()
         
         assert(s4.IsGood() == false);
         assert(s4.IsBad() == true);
+        assert(s4.IsDefaultValue() == false);
         assert(s4.IsSetValue() == true);
         assert(s4.GetBadCode() == StatusType::bad);
         
         assert(s2.IsGood() == true);
         assert(s2.IsBad() == false);
+        assert(s2.IsDefaultValue() == false);
         assert(s2.IsSetValue() == false);
         assert(s2.GetBadCode() == StatusType::good);
 
@@ -63,6 +70,7 @@ int main()
 
         assert(s5.IsGood() == false);
         assert(s5.IsBad() == true);
+        assert(s5.IsDefaultValue() == false);
         assert(s5.IsSetValue() == true);
         assert(s5.GetBadCode() == StatusType::bad);
         
@@ -71,11 +79,13 @@ int main()
         
         assert(s6.IsGood() == false);
         assert(s6.IsBad() == true);
+        assert(s6.IsDefaultValue() == false);
         assert(s6.IsSetValue() == true);
         assert(s6.GetBadCode() == StatusType::bad);
         
         assert(s3.IsGood() == true);
         assert(s3.IsBad() == false);
+        assert(s3.IsDefaultValue() == false);
         assert(s3.IsSetValue() == false);
         assert(s3.GetBadCode() == StatusType::good);
 
@@ -83,6 +93,7 @@ int main()
         
         assert(s6.IsGood() == true);
         assert(s6.IsBad() == false);
+        assert(s6.IsDefaultValue() == false);
         assert(s6.IsSetValue() == false);
         assert(s6.GetBadCode() == StatusType::good);
 
@@ -90,6 +101,7 @@ int main()
         
         assert(s7.IsGood() == true);
         assert(s7.IsBad() == false);
+        assert(s7.IsDefaultValue() == false);
         assert(s7.IsSetValue() == false);
         assert(s7.GetBadCode() == StatusType::good);
 
@@ -97,20 +109,40 @@ int main()
         
         assert(s7.IsGood() == true);
         assert(s7.IsBad() == false);
+        assert(s7.IsDefaultValue() == false);
         assert(s7.IsSetValue() == false);
         assert(s7.GetBadCode() == StatusType::good);
 
         s7.SetValue();
         assert(s7.IsGood() == true);
         assert(s7.IsBad() == false);
+        assert(s7.IsDefaultValue() == false);
         assert(s7.IsSetValue() == true);
         assert(s7.GetBadCode() == StatusType::good);
         
         s7.UnsetValue();
         assert(s7.IsGood() == true);
         assert(s7.IsBad() == false);
+        assert(s7.IsDefaultValue() == false);
         assert(s7.IsSetValue() == false);
         assert(s7.GetBadCode() == StatusType::good);
+
+        StatusType s8{StatusType::default_value};
+        
+        assert(s8.IsGood() == true);
+        assert(s8.IsBad() == false);
+        assert(s8.IsDefaultValue() == true);
+        assert(s8.IsSetValue() == true);
+        assert(s8.GetBadCode() == StatusType::good);
+        
+        s8.UnsetValue();
+        
+        assert(s8.IsGood() == true);
+        assert(s8.IsBad() == false);
+        assert(s8.IsDefaultValue() == true);
+        assert(s8.IsSetValue() == true);
+        assert(s8.GetBadCode() == StatusType::good);
+
     }
     
     return 1;
