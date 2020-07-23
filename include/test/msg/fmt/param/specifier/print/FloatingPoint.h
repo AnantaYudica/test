@@ -23,8 +23,8 @@ namespace print
 template<typename TChar, int FlagValue>
 class FloatingPoint
 {
-    static_assert(FlagValue == test::msg::fmt::param::flag::
-        FloatingPoint::not_support, "Flag Value is not support");
+    static_assert(!(FlagValue & test::msg::fmt::param::flag::
+        FloatingPoint::not_support), "Flag Value is not support");
 public:
     typedef test::msg::fmt::param::Width<TChar> WidthType;
     typedef test::msg::fmt::param::Precision<TChar> PrecisionType;
@@ -7289,7 +7289,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp_w_ldf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+f", width.GetValue(), 
+    return out.Print("%+*f", width.GetValue(), 
         ValueType::GetValue<double>(val));
 }
 
