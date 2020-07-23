@@ -871,52 +871,52 @@ public:
 public:
     static constexpr ValueType pz_wp_ldf_double_format =  
         define_double | decimal | fixed | lower | width | precision | prefix | 
-        space;
+        zero;
     static constexpr ValueType pz_wp_ldf_long_double_format = 
         define_long | define_double | decimal | fixed | lower | width | 
-        precision | prefix | space;
+        precision | prefix | zero;
     static constexpr ValueType pz_wp_udf_double_format = 
         define_double | decimal | fixed | upper | width | precision | prefix | 
-        space;
+        zero;
     static constexpr ValueType pz_wp_udf_long_double_format = 
         define_long | define_double | decimal | fixed | upper | width | 
-        precision | prefix | space;
+        precision | prefix | zero;
     static constexpr ValueType pz_wp_lde_double_format = 
         define_double | decimal | exponent | lower | width | precision | 
-        prefix | space;
+        prefix | zero;
     static constexpr ValueType pz_wp_lde_long_double_format = 
         define_long | define_double | decimal | exponent | lower | width |
-        precision | prefix | space;
+        precision | prefix | zero;
     static constexpr ValueType pz_wp_ude_double_format = 
         define_double | decimal | exponent | upper | width | precision | 
-        prefix | space;
+        prefix | zero;
     static constexpr ValueType pz_wp_ude_long_double_format = 
         define_long | define_double | decimal | exponent | upper | width | 
-        precision | prefix | space;
+        precision | prefix | zero;
     static constexpr ValueType pz_wp_ldfe_double_format =  
         define_double | decimal | fixed | exponent| lower | width | 
-        precision | prefix | space;
+        precision | prefix | zero;
     static constexpr ValueType pz_wp_ldfe_long_double_format = 
         define_long | define_double | decimal | fixed | exponent | lower | 
-        width | precision | prefix | space;
+        width | precision | prefix | zero;
     static constexpr ValueType pz_wp_udfe_double_format =  
         define_double | decimal | fixed | exponent| upper | width | 
-        precision | prefix | space;
+        precision | prefix | zero;
     static constexpr ValueType pz_wp_udfe_long_double_format = 
         define_long | define_double | decimal | fixed | exponent | upper | 
-        width | precision | prefix | space;
+        width | precision | prefix | zero;
     static constexpr ValueType pz_wp_lhe_double_format = 
         define_double | hexadecimal | exponent | lower | width | precision | 
-        prefix | space;
+        prefix | zero;
     static constexpr ValueType pz_wp_lhe_long_double_format = 
         define_long | define_double | hexadecimal | exponent | lower | 
-        width | precision | prefix | space;
+        width | precision | prefix | zero;
     static constexpr ValueType pz_wp_uhe_double_format = 
         define_double | hexadecimal | exponent | upper | width | precision |
-        prefix | space;
+        prefix | zero;
     static constexpr ValueType pz_wp_uhe_long_double_format = 
         define_long | define_double | hexadecimal | exponent | upper | 
-        width | precision | prefix | space;
+        width | precision | prefix | zero;
 public:
     static constexpr ValueType not_support = hexadecimal | fixed;
 private:
