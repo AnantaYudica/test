@@ -57,7 +57,7 @@ Precision<TChar>::Precision() :
 
 template<typename TChar>
 Precision<TChar>::Precision(const ValueType& val) :
-    ParameterBaseType(StatusType::set_value),
+    ParameterBaseType(StatusType::default_value),
     m_value(val)
 {}
 
@@ -78,7 +78,8 @@ Precision<TChar>::Precision(Precision<TChar>&& mov) :
     ParameterBaseType(std::move(mov)),
     m_value(mov.m_value)
 {
-    mov.m_value = 0;
+    if (!mov.GetStatus().IsDefaultValue())
+        mov.m_value = 0;
 }
 
 template<typename TChar>
@@ -94,7 +95,8 @@ Precision<TChar>& Precision<TChar>::operator=(Precision<TChar>&& mov)
 {
     ParameterBaseType::operator=(std::move(mov));
     m_value = mov.m_value;
-    mov.m_value = 0;
+    if (!mov.GetStatus().IsDefaultValue())
+        mov.m_value = 0;
     return *this;
 }
 
@@ -127,8 +129,12 @@ typename Precision<TChar>::ValueType Precision<TChar>::GetValue() const
 template<typename TChar>
 void Precision<TChar>::Unset()
 {
-    m_value = 0;
-    ParameterBaseType::GetStatus().UnsetValue();
+    auto& status = ParameterBaseType::GetStatus();
+    status.UnsetValue();
+    if (!status.IsSetValue())
+    {
+        m_value = 0;
+    }
 }
 
 template<typename TChar>
