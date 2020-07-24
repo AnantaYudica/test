@@ -165,6 +165,7 @@ bool Character<TChar>::_Set(WidthType& width,
 template<typename TChar>
 Character<TChar>::Character() :
     SpecifierBaseType(),
+    m_flag(),
     m_value{0},
     m_width(),
     m_print_out(nullptr)
@@ -269,10 +270,16 @@ std::size_t Character<TChar>::VLoad(std::size_t size, std::size_t index,
     va_list args)
 {
     auto& status = SpecifierBaseType::GetStatus();
+
+    if (status.IsBad() && !status.Reset(StatusType::value_not_set))
+    {
+        return index;
+    }
+
     std::size_t skip = 0;
     if (m_flag.GetValue() & FlagType::width)
     {
-        if (size == index) 
+        if (size <= index) 
         {
             status.Bad(StatusType::load_failed);
             return size;
@@ -283,7 +290,7 @@ std::size_t Character<TChar>::VLoad(std::size_t size, std::size_t index,
     const std::size_t next_index = index + skip;
 
     if (status.IsSetValue()) return next_index;
-    if (size == next_index) 
+    if (size <= next_index) 
     {
         status.Bad(StatusType::load_failed);
         return size;
@@ -369,6 +376,7 @@ bool Character<TChar>::IsBad() const
 template<typename TChar>
 void Character<TChar>::Reset()
 {
+    Unset();
     SpecifierBaseType::GetStatus().Reset();
 }
 
