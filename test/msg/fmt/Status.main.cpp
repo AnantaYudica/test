@@ -172,6 +172,36 @@ int main()
         assert(s9.IsSetValue() == true);
         assert(s9.GetBadCode() == StatusType::good);
 
+        StatusType s11;
+
+        s11.Bad(StatusType::value_not_set);
+        assert(s11.IsGood() == false);
+        assert(s11.IsBad() == true);
+        assert(s11.IsDefaultValue() == false);
+        assert(s11.IsSetValue() == false);
+        assert(s11.GetBadCode() == StatusType::value_not_set);
+
+        s11.Reset(StatusType::value_not_set);
+        assert(s11.IsGood() == true);
+        assert(s11.IsBad() == false);
+        assert(s11.IsDefaultValue() == false);
+        assert(s11.IsSetValue() == false);
+        assert(s11.GetBadCode() == StatusType::good);
+
+        s11.Bad(StatusType::load_failed);
+        assert(s11.IsGood() == false);
+        assert(s11.IsBad() == true);
+        assert(s11.IsDefaultValue() == false);
+        assert(s11.IsSetValue() == false);
+        assert(s11.GetBadCode() == StatusType::load_failed);
+        
+        s11.Reset(StatusType::load_failed);
+        assert(s11.IsGood() == false);
+        assert(s11.IsBad() == true);
+        assert(s11.IsDefaultValue() == false);
+        assert(s11.IsSetValue() == false);
+        assert(s11.GetBadCode() == StatusType::load_failed);
+
     }
     
     return 1;
