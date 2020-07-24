@@ -28,7 +28,8 @@ public:
         default_value = 1 | 2,
         set_value = 2,
         value_not_set = (1 << bad_offset) | bad,
-        load_failed = (2 << bad_offset) | bad
+        load_failed = (2 << bad_offset) | bad,
+        flag_undefined = (3 << bad_offset) | bad
     };
 private:
     ValueType m_value; 
