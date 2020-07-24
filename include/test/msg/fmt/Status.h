@@ -55,6 +55,7 @@ public:
     void UnsetValue();
 public:
     void Reset();
+    bool Reset(const IntegerValueType& bad_code);
 public:
     bool Bad(const IntegerValueType& code);
 public:
@@ -164,6 +165,17 @@ void Status<TValue, TIntegerValue>::Reset()
         m_value = default_value;
     else
         m_value = good;
+}
+
+template<typename TValue, typename TIntegerValue>
+bool Status<TValue, TIntegerValue>::Reset(const IntegerValueType& bad_code)
+{
+    if (bad_code == value_not_set)
+    {
+        m_value ^= value_not_set;
+        return true;
+    }
+    return false;
 }
 
 template<typename TValue, typename TIntegerValue>
