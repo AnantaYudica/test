@@ -25,6 +25,7 @@ int main()
         Character<char> ch1;
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
+        test::out::CString<char> out_cstr3;
 
         assert(ch1.IsSet() == false);
         assert(ch1.GetValue().char_value == '\0');
@@ -41,6 +42,22 @@ int main()
         assert(ch1.IsGood() == false);
         assert(ch1.IsBad() == true);
         assert(ch1.GetBadCode() == Character<char>::StatusType::value_not_set);
+
+        len = ch1.Load(1, 'N');
+        assert(len == 1);
+        assert(ch1.IsSet() == true);
+        assert(ch1.GetValue().char_value == 'N');
+        assert(ch1.GetValue().wchar_value == 'N');
+        assert(ch1.GetWidth() == 0);
+        assert(ch1.IsGood() == true);
+        assert(ch1.IsBad() == false);
+        assert(ch1.GetBadCode() == Character<char>::StatusType::good);
+
+        len = ch1.Output(out_cstr2);
+        assert(len == 1);
+        assert(strncmp(*(out_cstr2.Get()), "N", 2) == 0);
+        assert(ch1.IsGood() == true);
+        assert(ch1.IsBad() == false);
 
         ch1.Reset();
         assert(ch1.IsGood() == true);
@@ -67,9 +84,9 @@ int main()
         assert(ch1.IsBad() == false);
         assert(ch1.GetBadCode() == Character<char>::StatusType::good);
 
-        len = ch1.Output(out_cstr2);
+        len = ch1.Output(out_cstr3);
         assert(len == 1);
-        assert(strncmp(*(out_cstr2.Get()), "B", 2) == 0);
+        assert(strncmp(*(out_cstr3.Get()), "B", 2) == 0);
         assert(ch1.IsGood() == true);
         assert(ch1.IsBad() == false);
         assert(ch1.GetBadCode() == Character<char>::StatusType::good);
