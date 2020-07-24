@@ -160,7 +160,10 @@ void Status<TValue, TIntegerValue>::UnsetValue()
 template<typename TValue, typename TIntegerValue>
 void Status<TValue, TIntegerValue>::Reset()
 {
-    m_value = good;
+    if ((m_value & default_value) == default_value)
+        m_value = default_value;
+    else
+        m_value = good;
 }
 
 template<typename TValue, typename TIntegerValue>
