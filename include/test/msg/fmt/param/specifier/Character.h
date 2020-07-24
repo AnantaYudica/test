@@ -297,7 +297,25 @@ std::size_t Character<TChar>::VLoad(std::size_t size, std::size_t index,
     }
     for (std::size_t i = 0; i < skip; ++i)
         va_arg(args, void*);
-    m_value = va_arg(args, ValueType);
+    if (m_flag.GetValue() & FlagType::define_char)
+    {
+        int val = va_arg(args, int);
+        memcpy((void*)&m_value, (void*)&val, sizeof(char));
+        memset(((char*)&m_value) + sizeof(char), 0, 
+            sizeof(ValueType) - sizeof(char));
+    }
+    else if (m_flag.GetValue() & FlagType::define_wchar)
+    {
+        wint_t val = va_arg(args, wint_t);
+        memcpy((void*)&m_value, (void*)&val, sizeof(wchar_t));
+        memset(((char*)&m_value) + sizeof(wchar_t), 0, 
+            sizeof(ValueType) - sizeof(wchar_t));
+    }
+    else
+    {
+        status.Bad(StatusType::flag_undefined);
+        return next_index;
+    }
     status.SetValue();
     return next_index + 1;
 }
