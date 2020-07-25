@@ -6137,7 +6137,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ldf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%f", ValueType::GetValue<double>(val));
+    return out.Print("%f", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6147,7 +6147,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ldf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%Lf", ValueType::GetValue<long double>(val));
+    return out.Print("%Lf", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6157,7 +6157,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     udf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%F", ValueType::GetValue<double>(val));
+    return out.Print("%F", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6167,7 +6167,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     udf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%LF", ValueType::GetValue<long double>(val));
+    return out.Print("%LF", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6177,7 +6177,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     lde_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%e", ValueType::GetValue<double>(val));
+    return out.Print("%e", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6187,7 +6187,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     lde_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%Le", ValueType::GetValue<long double>(val));
+    return out.Print("%Le", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6197,7 +6197,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ude_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%E", ValueType::GetValue<double>(val));
+    return out.Print("%E", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6207,7 +6207,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ude_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%LE", ValueType::GetValue<long double>(val));
+    return out.Print("%LE", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6217,7 +6217,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ldfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%g", ValueType::GetValue<double>(val));
+    return out.Print("%g", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6227,7 +6227,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ldfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%Lg", ValueType::GetValue<long double>(val));
+    return out.Print("%Lg", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6237,7 +6237,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     udfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%G", ValueType::GetValue<double>(val));
+    return out.Print("%G", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6247,7 +6247,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     udfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%LG", ValueType::GetValue<long double>(val));
+    return out.Print("%LG", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6257,7 +6257,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     lhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%a", ValueType::GetValue<double>(val));
+    return out.Print("%a", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6267,7 +6267,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     lhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%La", ValueType::GetValue<long double>(val));
+    return out.Print("%La", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6277,7 +6277,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     uhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%A", ValueType::GetValue<double>(val));
+    return out.Print("%A", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6287,7 +6287,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     uhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%LA", ValueType::GetValue<long double>(val));
+    return out.Print("%LA", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6297,7 +6297,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__ldf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#f", ValueType::GetValue<double>(val));
+    return out.Print("%#f", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6307,7 +6307,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__ldf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#Lf", ValueType::GetValue<long double>(val));
+    return out.Print("%#Lf", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6317,7 +6317,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__udf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#F", ValueType::GetValue<double>(val));
+    return out.Print("%#F", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6327,7 +6327,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__udf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#LF", ValueType::GetValue<long double>(val));
+    return out.Print("%#LF", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6337,7 +6337,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__lde_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#e", ValueType::GetValue<double>(val));
+    return out.Print("%#e", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6347,7 +6347,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__lde_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#Le", ValueType::GetValue<long double>(val));
+    return out.Print("%#Le", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6357,7 +6357,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__ude_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#E", ValueType::GetValue<double>(val));
+    return out.Print("%#E", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6367,7 +6367,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__ude_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#LE", ValueType::GetValue<long double>(val));
+    return out.Print("%#LE", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6377,7 +6377,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__ldfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#g", ValueType::GetValue<double>(val));
+    return out.Print("%#g", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6387,7 +6387,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__ldfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#Lg", ValueType::GetValue<long double>(val));
+    return out.Print("%#Lg", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6397,7 +6397,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__udfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#G", ValueType::GetValue<double>(val));
+    return out.Print("%#G", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6407,7 +6407,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__udfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#LG", ValueType::GetValue<long double>(val));
+    return out.Print("%#LG", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6417,7 +6417,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__lhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#a", ValueType::GetValue<double>(val));
+    return out.Print("%#a", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6427,7 +6427,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__lhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#La", ValueType::GetValue<long double>(val));
+    return out.Print("%#La", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6437,7 +6437,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__uhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#A", ValueType::GetValue<double>(val));
+    return out.Print("%#A", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6447,7 +6447,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     p__uhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%#LA", ValueType::GetValue<long double>(val));
+    return out.Print("%#LA", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6457,7 +6457,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__ldf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+f", ValueType::GetValue<double>(val));
+    return out.Print("%+f", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6467,7 +6467,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__ldf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+Lf", ValueType::GetValue<long double>(val));
+    return out.Print("%+Lf", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6477,7 +6477,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__udf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+F", ValueType::GetValue<double>(val));
+    return out.Print("%+F", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6487,7 +6487,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__udf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+LF", ValueType::GetValue<long double>(val));
+    return out.Print("%+LF", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6497,7 +6497,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__lde_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+e", ValueType::GetValue<double>(val));
+    return out.Print("%+e", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6507,7 +6507,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__lde_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+Le", ValueType::GetValue<long double>(val));
+    return out.Print("%+Le", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6517,7 +6517,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__ude_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+E", ValueType::GetValue<double>(val));
+    return out.Print("%+E", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6527,7 +6527,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__ude_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+LE", ValueType::GetValue<long double>(val));
+    return out.Print("%+LE", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6537,7 +6537,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__ldfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+g", ValueType::GetValue<double>(val));
+    return out.Print("%+g", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6547,7 +6547,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__ldfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+Lg", ValueType::GetValue<long double>(val));
+    return out.Print("%+Lg", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6557,7 +6557,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__udfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+G", ValueType::GetValue<double>(val));
+    return out.Print("%+G", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6567,7 +6567,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__udfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+LG", ValueType::GetValue<long double>(val));
+    return out.Print("%+LG", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6577,7 +6577,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__lhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+a", ValueType::GetValue<double>(val));
+    return out.Print("%+a", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6587,7 +6587,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__lhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+La", ValueType::GetValue<long double>(val));
+    return out.Print("%+La", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6597,7 +6597,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__uhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+A", ValueType::GetValue<double>(val));
+    return out.Print("%+A", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6607,7 +6607,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pp__uhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%+LA", ValueType::GetValue<long double>(val));
+    return out.Print("%+LA", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6617,7 +6617,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__ldf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% f", ValueType::GetValue<double>(val));
+    return out.Print("% f", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6627,7 +6627,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__ldf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% Lf", ValueType::GetValue<long double>(val));
+    return out.Print("% Lf", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6637,7 +6637,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__udf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% F", ValueType::GetValue<double>(val));
+    return out.Print("% F", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6647,7 +6647,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__udf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% LF", ValueType::GetValue<long double>(val));
+    return out.Print("% LF", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6657,7 +6657,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__lde_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% e", ValueType::GetValue<double>(val));
+    return out.Print("% e", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6667,7 +6667,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__lde_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% Le", ValueType::GetValue<long double>(val));
+    return out.Print("% Le", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6677,7 +6677,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__ude_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% E", ValueType::GetValue<double>(val));
+    return out.Print("% E", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6687,7 +6687,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__ude_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% LE", ValueType::GetValue<long double>(val));
+    return out.Print("% LE", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6697,7 +6697,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__ldfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% g", ValueType::GetValue<double>(val));
+    return out.Print("% g", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6707,7 +6707,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__ldfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% Lg", ValueType::GetValue<long double>(val));
+    return out.Print("% Lg", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6717,7 +6717,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__udfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% G", ValueType::GetValue<double>(val));
+    return out.Print("% G", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6727,7 +6727,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__udfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% LG", ValueType::GetValue<long double>(val));
+    return out.Print("% LG", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6737,7 +6737,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__lhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% a", ValueType::GetValue<double>(val));
+    return out.Print("% a", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6747,7 +6747,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__lhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% La", ValueType::GetValue<long double>(val));
+    return out.Print("% La", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6757,7 +6757,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__uhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% A", ValueType::GetValue<double>(val));
+    return out.Print("% A", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6767,7 +6767,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     ps__uhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("% LA", ValueType::GetValue<long double>(val));
+    return out.Print("% LA", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6777,7 +6777,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__ldf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0f", ValueType::GetValue<double>(val));
+    return out.Print("%0f", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6787,7 +6787,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__ldf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0Lf", ValueType::GetValue<long double>(val));
+    return out.Print("%0Lf", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6797,7 +6797,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__udf_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0F", ValueType::GetValue<double>(val));
+    return out.Print("%0F", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6807,7 +6807,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__udf_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0LF", ValueType::GetValue<long double>(val));
+    return out.Print("%0LF", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6817,7 +6817,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__lde_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0e", ValueType::GetValue<double>(val));
+    return out.Print("%0e", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6827,7 +6827,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__lde_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0Le", ValueType::GetValue<long double>(val));
+    return out.Print("%0Le", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6837,7 +6837,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__ude_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0E", ValueType::GetValue<double>(val));
+    return out.Print("%0E", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6847,7 +6847,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__ude_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0LE", ValueType::GetValue<long double>(val));
+    return out.Print("%0LE", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6857,7 +6857,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__ldfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0g", ValueType::GetValue<double>(val));
+    return out.Print("%0g", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6867,7 +6867,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__ldfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0Lg", ValueType::GetValue<long double>(val));
+    return out.Print("%0Lg", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6877,7 +6877,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__udfe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0G", ValueType::GetValue<double>(val));
+    return out.Print("%0G", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6887,7 +6887,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__udfe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0LG", ValueType::GetValue<long double>(val));
+    return out.Print("%0LG", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6897,7 +6897,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__lhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0a", ValueType::GetValue<double>(val));
+    return out.Print("%0a", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6907,7 +6907,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__lhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0La", ValueType::GetValue<long double>(val));
+    return out.Print("%0La", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6917,7 +6917,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__uhe_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0A", ValueType::GetValue<double>(val));
+    return out.Print("%0A", ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6927,7 +6927,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     pz__uhe_long_double_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const PrecisionType&, const ValueType& val)
 {
-    return out.Print("%0LA", ValueType::GetValue<long double>(val));
+    return out.Print("%0LA", ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6938,7 +6938,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*f", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6949,7 +6949,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*Lf", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6960,7 +6960,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*F", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6971,7 +6971,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*LF", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -6982,7 +6982,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*e", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -6993,7 +6993,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*Le", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7004,7 +7004,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*E", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7015,7 +7015,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*LE", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7026,7 +7026,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*g", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7037,7 +7037,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*Lg", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7048,7 +7048,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*G", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7059,7 +7059,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*LG", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7070,7 +7070,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*a", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7081,7 +7081,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*La", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7092,7 +7092,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*A", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7103,7 +7103,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%*LA", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7114,7 +7114,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*f", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7125,7 +7125,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*Lf", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7136,7 +7136,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*F", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7147,7 +7147,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*LF", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7158,7 +7158,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*e", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7169,7 +7169,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*Le", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7180,7 +7180,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*E", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7191,7 +7191,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*LE", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7202,7 +7202,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*g", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7213,7 +7213,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*Lg", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7224,7 +7224,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*G", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7235,7 +7235,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*LG", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7246,7 +7246,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*a", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7257,7 +7257,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*La", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7268,7 +7268,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*A", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7279,7 +7279,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%#*LA", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7290,7 +7290,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*f", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7301,7 +7301,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*Lf", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7312,7 +7312,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*F", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7323,7 +7323,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*LF", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7334,7 +7334,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*e", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7345,7 +7345,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*Le", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7356,7 +7356,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*E", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7367,7 +7367,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*LE", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7378,7 +7378,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*g", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7389,7 +7389,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*Lg", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7400,7 +7400,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*G", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7411,7 +7411,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*LG", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7422,7 +7422,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*a", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7433,7 +7433,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*La", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7444,7 +7444,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*A", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7455,7 +7455,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%+*LA", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7466,7 +7466,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *f", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7477,7 +7477,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *Lf", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7488,7 +7488,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *F", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7499,7 +7499,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *LF", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7510,7 +7510,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *e", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7521,7 +7521,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *Le", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7532,7 +7532,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *E", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7543,7 +7543,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *LE", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7554,7 +7554,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *g", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7565,7 +7565,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *Lg", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7576,7 +7576,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *G", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7587,7 +7587,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *LG", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7598,7 +7598,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *a", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7609,7 +7609,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *La", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7620,7 +7620,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *A", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7631,7 +7631,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("% *LA", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7642,7 +7642,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*f", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7653,7 +7653,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*Lf", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7664,7 +7664,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*F", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7675,7 +7675,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*LF", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7686,7 +7686,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*e", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7697,7 +7697,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*Le", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7708,7 +7708,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*E", width.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7719,7 +7719,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*LE", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7730,7 +7730,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*g", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7741,7 +7741,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*Lg", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7752,7 +7752,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*G", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7763,7 +7763,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*LG", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7774,7 +7774,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*a", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7785,7 +7785,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*La", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7796,7 +7796,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*A", width.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7807,7 +7807,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType& width, const PrecisionType&, const ValueType& val)
 {
     return out.Print("%0*LA", width.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7818,7 +7818,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*f", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7829,7 +7829,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*Lf", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7840,7 +7840,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*F", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7851,7 +7851,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*LF", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7862,7 +7862,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*e", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7873,7 +7873,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*Le", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7884,7 +7884,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*E", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7895,7 +7895,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*LE", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7906,7 +7906,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*g", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7917,7 +7917,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*Lg", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7928,7 +7928,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*G", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7939,7 +7939,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*LG", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7950,7 +7950,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*a", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7961,7 +7961,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*La", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7972,7 +7972,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*A", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -7983,7 +7983,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%.*LA", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -7994,7 +7994,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*f", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8005,7 +8005,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*Lf", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8016,7 +8016,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*F", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8027,7 +8027,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*LF", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8038,7 +8038,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*e", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8049,7 +8049,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*Le", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8060,7 +8060,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*E", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8071,7 +8071,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*LE", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8082,7 +8082,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*g", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8093,7 +8093,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*Lg", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8104,7 +8104,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*G", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8115,7 +8115,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*LG", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8126,7 +8126,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*a", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8137,7 +8137,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*La", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8148,7 +8148,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*A", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8159,7 +8159,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%#.*LA", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8170,7 +8170,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*f", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8181,7 +8181,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*Lf", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8192,7 +8192,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*F", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8203,7 +8203,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*LF", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8214,7 +8214,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*e", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8225,7 +8225,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*Le", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8236,7 +8236,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*E", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8247,7 +8247,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*LE", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8258,7 +8258,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*g", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8269,7 +8269,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*Lg", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8280,7 +8280,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*G", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8291,7 +8291,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*LG", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8302,7 +8302,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*a", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8313,7 +8313,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*La", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8324,7 +8324,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*A", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8335,7 +8335,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%+.*LA", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8346,7 +8346,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*f", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8357,7 +8357,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*Lf", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8368,7 +8368,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*F", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8379,7 +8379,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*LF", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8390,7 +8390,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*e", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8401,7 +8401,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*Le", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8412,7 +8412,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*E", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8423,7 +8423,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*LE", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8434,7 +8434,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*g", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8445,7 +8445,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*Lg", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8456,7 +8456,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*G", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8467,7 +8467,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*LG", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8478,7 +8478,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*a", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8489,7 +8489,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*La", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8500,7 +8500,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*A", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8511,7 +8511,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("% .*LA", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8522,7 +8522,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*f", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8533,7 +8533,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*Lf", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8544,7 +8544,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*F", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8555,7 +8555,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*LF", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8566,7 +8566,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*e", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8577,7 +8577,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*Le", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8588,7 +8588,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*E", precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8599,7 +8599,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*LE", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8610,7 +8610,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*g", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8621,7 +8621,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*Lg", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8632,7 +8632,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*G", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8643,7 +8643,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*LG", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8654,7 +8654,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*a", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8665,7 +8665,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*La", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8676,7 +8676,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*A", precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8687,7 +8687,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const WidthType&, const PrecisionType& precision, const ValueType& val)
 {
     return out.Print("%0.*LA", precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8699,7 +8699,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*f", width.GetValue() ,precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8711,7 +8711,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*Lf", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8723,7 +8723,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*F", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8735,7 +8735,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*LF", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8747,7 +8747,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*e", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8759,7 +8759,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*Le", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8771,7 +8771,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*E", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8783,7 +8783,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*LE", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8795,7 +8795,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*g", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8807,7 +8807,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*Lg", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8819,7 +8819,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*G", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8831,7 +8831,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*LG", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8843,7 +8843,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*a", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8855,7 +8855,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*La", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8867,7 +8867,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*A", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8879,7 +8879,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%*.*LA", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8891,7 +8891,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*f", width.GetValue() ,precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8903,7 +8903,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*Lf", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8915,7 +8915,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*F", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8927,7 +8927,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*LF", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8939,7 +8939,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*e", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8951,7 +8951,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*Le", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8963,7 +8963,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*E", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8975,7 +8975,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*LE", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -8987,7 +8987,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*g", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -8999,7 +8999,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*Lg", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9011,7 +9011,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*G", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9023,7 +9023,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*LG", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9035,7 +9035,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*a", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9047,7 +9047,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*La", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9059,7 +9059,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*A", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9071,7 +9071,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%#*.*LA", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9083,7 +9083,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*f", width.GetValue() ,precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9095,7 +9095,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*Lf", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9107,7 +9107,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*F", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9119,7 +9119,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*LF", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9131,7 +9131,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*e", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9143,7 +9143,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*Le", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9155,7 +9155,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*E", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9167,7 +9167,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*LE", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9179,7 +9179,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*g", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9191,7 +9191,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*Lg", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9203,7 +9203,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*G", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9215,7 +9215,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*LG", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9227,7 +9227,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*a", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9239,7 +9239,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*La", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9251,7 +9251,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*A", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9263,7 +9263,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%+*.*LA", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9275,7 +9275,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*f", width.GetValue() ,precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9287,7 +9287,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*Lf", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9299,7 +9299,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*F", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9311,7 +9311,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*LF", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9323,7 +9323,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*e", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9335,7 +9335,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*Le", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9347,7 +9347,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*E", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9359,7 +9359,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*LE", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9371,7 +9371,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*g", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9383,7 +9383,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*Lg", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9395,7 +9395,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*G", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9407,7 +9407,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*LG", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9419,7 +9419,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*a", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9431,7 +9431,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*La", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9443,7 +9443,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*A", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9455,7 +9455,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("% *.*LA", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9467,7 +9467,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*f", width.GetValue() ,precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9479,7 +9479,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*Lf", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9491,7 +9491,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*F", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9503,7 +9503,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*LF", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9515,7 +9515,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*e", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9527,7 +9527,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*Le", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9539,7 +9539,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*E", width.GetValue(), precision.GetValue(), 
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9551,7 +9551,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*LE", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9563,7 +9563,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*g", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9575,7 +9575,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*Lg", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9587,7 +9587,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*G", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9599,7 +9599,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*LG", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9611,7 +9611,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*a", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9623,7 +9623,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*La", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 template<typename TChar>
@@ -9635,7 +9635,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*A", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<double>(val));
+        ValueType::CastTo<double>(val));
 }
 
 template<typename TChar>
@@ -9647,7 +9647,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
     const ValueType& val)
 {
     return out.Print("%0*.*LA", width.GetValue(), precision.GetValue(),
-        ValueType::GetValue<long double>(val));
+        ValueType::CastTo<long double>(val));
 }
 
 
