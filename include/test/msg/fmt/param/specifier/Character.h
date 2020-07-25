@@ -277,7 +277,7 @@ std::size_t Character<TChar>::VLoad(std::size_t size, std::size_t index,
     }
 
     std::size_t skip = 0;
-    if (m_flag.GetValue() & FlagType::width)
+    if ((m_flag.GetValue() & FlagType::width) && !m_width.IsSet())
     {
         if (size <= index) 
         {
