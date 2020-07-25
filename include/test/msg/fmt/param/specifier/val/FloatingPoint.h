@@ -24,6 +24,9 @@ union FloatingPoint
         sizeof(long double) == 10 || sizeof(long double) == 12 ||
         sizeof(long double) == 16 , "Not Support long double size");
 
+    template<typename TRet>
+    static inline TRet CastTo(const FloatingPoint& val);
+
     float float_value;
     double double_value;
     long double long_double_value;
@@ -34,22 +37,20 @@ union FloatingPoint
         typename std::conditional<sizeof(long double) == 10, std::uint16_t,
             typename std::conditional<sizeof(long double) == 12, std::uint32_t,
             std::uint64_t>::type>::type long_double_padding;
-    } float_aligned;
-    
-    template<typename TRet>
-    static inline TRet GetValue(const FloatingPoint& val);
+    } _float_aligned;
+
 };
 
 template<typename TRet>
-inline TRet FloatingPoint::GetValue(const FloatingPoint& val)
+inline TRet FloatingPoint::CastTo(const FloatingPoint& val)
 {
-    if (val.float_aligned.double_padding == 0 && 
-        val.float_aligned.long_double_padding == 0)
+    if (val._float_aligned.double_padding == 0 && 
+        val._float_aligned.long_double_padding == 0)
     {
         return (TRet)val.float_value;
     }
-    else if (val.float_aligned.double_padding != 0 &&
-        val.float_aligned.long_double_padding == 0)
+    else if (val._float_aligned.double_padding != 0 &&
+        val._float_aligned.long_double_padding == 0)
     {
         return (TRet)val.double_value;
     }
