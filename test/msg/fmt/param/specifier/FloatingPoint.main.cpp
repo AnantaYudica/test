@@ -34,7 +34,6 @@ int main()
         assert(ff1.IsSet() == false);
         assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
         assert(val::FloatingPoint::CastTo<double>(ff1.GetValue()) == 0.0);
-        printf("CK2");
         assert(val::FloatingPoint::CastTo<long double>(ff1.GetValue())== 0.0L);
         assert(ff1.GetWidth() == 0);
         assert(ff1.GetPrecision() == 0);
@@ -58,8 +57,6 @@ int main()
         auto len = ff1.Load(1, 3.14);
         assert(len == 1);
         assert(ff1.IsSet() == true);
-        printf("CK : %4.4f\n", ff1.GetValue().double_value);
-        printf("CK %4.4f\n", val::FloatingPoint::CastTo<double>(ff1.GetValue()));
         assert(val::FloatingPoint::CastTo<double>(ff1.GetValue()) == 3.14);
         assert(ff1.GetWidth() == 0);
         assert(ff1.GetPrecision() == 0);
@@ -14991,7 +14988,6 @@ int main()
                 double_val1);
             assert(ff6.GetWidth() == wd2);
             assert(ff6.GetPrecision() == pres1);
-            printf("%d\n", ff6.GetBadCode());
             assert(ff6.IsGood() == true);
             assert(ff6.IsBad() == false);
             assert(ff6.GetBadCode() == FloatingPoint<char>::StatusType::good);
@@ -15129,7 +15125,6 @@ int main()
                 double_val1);
             assert(ff13.GetWidth() == wd2);
             assert(ff13.GetPrecision() == pres1);
-            printf("%d\n", ff13.GetBadCode());
             assert(ff13.IsGood() == true);
             assert(ff13.IsBad() == false);
             assert(ff13.GetBadCode() == FloatingPoint<char>::StatusType::good);
@@ -15415,7 +15410,6 @@ int main()
                 double_val1);
             assert(ff20.GetWidth() == wd2);
             assert(ff20.GetPrecision() == pres1);
-            printf("%d\n", ff20.GetBadCode());
             assert(ff20.IsGood() == true);
             assert(ff20.IsBad() == false);
             assert(ff20.GetBadCode() == FloatingPoint<char>::StatusType::good);
@@ -15833,7 +15827,6 @@ int main()
                 double_val1);
             assert(ff27.GetWidth() == wd2);
             assert(ff27.GetPrecision() == pres1);
-            printf("%d\n", ff27.GetBadCode());
             assert(ff27.IsGood() == true);
             assert(ff27.IsBad() == false);
             assert(ff27.GetBadCode() == FloatingPoint<char>::StatusType::good);
@@ -16126,7 +16119,6 @@ int main()
                 double_val1);
             assert(ff34.GetWidth() == wd2);
             assert(ff34.GetPrecision() == pres1);
-            printf("%d\n", ff34.GetBadCode());
             assert(ff34.IsGood() == true);
             assert(ff34.IsBad() == false);
             assert(ff34.GetBadCode() == FloatingPoint<char>::StatusType::good);
