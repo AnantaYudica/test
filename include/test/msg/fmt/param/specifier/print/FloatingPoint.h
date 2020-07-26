@@ -24,7 +24,7 @@ template<typename TChar, int FlagValue>
 class FloatingPoint
 {
     static_assert(!(FlagValue & test::msg::fmt::param::flag::
-        FloatingPoint::not_support), "Flag Value is not support");
+        FloatingPoint::hexadecimal_not_support), "Flag Value is not support");
 public:
     typedef test::msg::fmt::param::Width<TChar> WidthType;
     typedef test::msg::fmt::param::Precision<TChar> PrecisionType;

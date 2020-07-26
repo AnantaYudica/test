@@ -918,7 +918,7 @@ public:
         define_long | define_double | hexadecimal | exponent | upper | 
         width | precision | prefix | zero;
 public:
-    static constexpr ValueType not_support = hexadecimal | fixed;
+    static constexpr ValueType hexadecimal_not_support = hexadecimal | fixed;
 private:
     ValueType m_value;
 public:
