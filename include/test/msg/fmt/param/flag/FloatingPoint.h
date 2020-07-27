@@ -987,7 +987,7 @@ public:
 };
 
 inline constexpr FloatingPoint::FloatingPoint() :
-    m_value(good | define_double | decimal | fixed | lower)
+    m_value(_Value(good | define_double | decimal | lower))
 {}
 
 template<typename TArg, typename... TArgs, typename std::enable_if<
