@@ -1625,6 +1625,9 @@ public:
 private:
     inline constexpr ValueType _Value(ValueType val);
     template<typename... TArgs>
+    inline constexpr ValueType _Value(ValueType val, 
+        DefineType<signed char>&&, TArgs&&... args);
+    template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<char>&&, 
         TArgs&&... args);
     template<typename... TArgs>
@@ -1734,6 +1737,14 @@ Integer::_Value(ValueType val)
 {
     return ((val & flag_integer_mask) != good ? val : 
         ((val & decimal) ? (val | signed_integer) : (val | unsigned_integer)));
+}
+
+template<typename... TArgs>
+inline constexpr typename Integer::ValueType 
+Integer::_Value(ValueType val, DefineType<signed char>&&, TArgs&&... args)
+{
+    return _Value((val & ~define_mask) | (define_char | define_signed),
+        std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
