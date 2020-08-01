@@ -74,7 +74,6 @@ public:
         typename _TArg = typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
         typename std::enable_if<!std::is_integral<_TArg>::value &&
-            !std::is_same<_TArg, test::msg::fmt::param::Width<TChar>>::value &&
             !std::is_same<_TArg, Character<TChar>>::value, 
         int>::type = 0>
     Character(TArg&& arg, TArgs&&... args);
@@ -176,7 +175,6 @@ Character<TChar>::Character() :
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<!std::is_integral<_TArg>::value &&
-        !std::is_same<_TArg, test::msg::fmt::param::Width<TChar>>::value &&
         !std::is_same<_TArg, Character<TChar>>::value, 
     int>::type>
 Character<TChar>::Character(TArg&& arg, TArgs&&... args) :
