@@ -16,7 +16,7 @@ namespace msg
 namespace fmt
 {
 
-template<typename TChar>
+template<typename TChar, typename... TParam>
 class Parameter
 {
 public:
@@ -32,72 +32,113 @@ protected:
 public:
     virtual ~Parameter();
 protected:
-    Parameter(const Parameter<TChar>& cpy);
-    Parameter(Parameter<TChar>&& mov);
+    Parameter(const Parameter<TChar, TParam...>& cpy);
+    Parameter(Parameter<TChar, TParam...>&& mov);
 protected:
-    Parameter<TChar>& operator=(const Parameter<TChar>& cpy);
-    Parameter<TChar>& operator=(Parameter<TChar>&& mov);
+    Parameter<TChar, TParam...>& 
+        operator=(const Parameter<TChar, TParam...>& cpy);
+    Parameter<TChar, TParam...>& operator=(Parameter<TChar, TParam...>&& mov);
+protected:
+    StatusType& GetStatus();
+    StatusType GetStatus() const;
 public:
     virtual std::size_t VLoad(std::size_t size, std::size_t index, 
         va_list args) = 0;
     virtual std::size_t Load(std::size_t size, ...) = 0;
-protected:
-    StatusType& GetStatus();
-    StatusType GetStatus() const;
+public:
+    virtual void Unset() = 0;
+public:
+    virtual bool IsSet() const = 0;
+public:
+    bool IsGood() const;
+    bool IsBad() const;
+public:
+    void Reset();
+public:
+    typename StatusType::IntegerValueType GetBadCode() const;
 };
 
-template<typename TChar>
-Parameter<TChar>::Parameter() :
+template<typename TChar, typename... TParam>
+Parameter<TChar, TParam...>::Parameter() :
     m_status()
 {}
 
-template<typename TChar>
-Parameter<TChar>::Parameter(const IntegerValueStatusType& val) :
+template<typename TChar, typename... TParam>
+Parameter<TChar, TParam...>::Parameter(const IntegerValueStatusType& val) :
     m_status(val)
 {}
 
-template<typename TChar>
-Parameter<TChar>::~Parameter()
+template<typename TChar, typename... TParam>
+Parameter<TChar, TParam...>::~Parameter()
 {
     m_status.Reset();
 }
 
-template<typename TChar>
-Parameter<TChar>::Parameter(const Parameter<TChar>& cpy) :
-    m_status(cpy.m_status)
+template<typename TChar, typename... TParam>
+Parameter<TChar, TParam...>::
+    Parameter(const Parameter<TChar, TParam...>& cpy) :
+        m_status(cpy.m_status)
 {}
 
-template<typename TChar>
-Parameter<TChar>::Parameter(Parameter<TChar>&& mov) :
+template<typename TChar, typename... TParam>
+Parameter<TChar, TParam...>::Parameter(Parameter<TChar, TParam...>&& mov) :
     m_status(std::move(mov.m_status))
 {}
 
-template<typename TChar>
-Parameter<TChar>& Parameter<TChar>::operator=(const Parameter<TChar>& cpy)
+template<typename TChar, typename... TParam>
+Parameter<TChar, TParam...>& 
+Parameter<TChar, TParam...>::operator=(const Parameter<TChar, TParam...>& cpy)
 {
     m_status = cpy.m_status;
     return *this;
 }
 
-template<typename TChar>
-Parameter<TChar>& Parameter<TChar>::operator=(Parameter<TChar>&& mov)
+template<typename TChar, typename... TParam>
+Parameter<TChar, TParam...>& 
+Parameter<TChar, TParam...>::operator=(Parameter<TChar, TParam...>&& mov)
 {
     m_status = std::move(mov.m_status);
     return *this;
 }
 
-template<typename TChar>
-typename Parameter<TChar>::StatusType& 
-Parameter<TChar>::GetStatus()
+template<typename TChar, typename... TParam>
+typename Parameter<TChar, TParam...>::StatusType& 
+Parameter<TChar, TParam...>::GetStatus()
 {
     return m_status;
 }
 
-template<typename TChar>
-typename Parameter<TChar>::StatusType 
-Parameter<TChar>::GetStatus() const
+template<typename TChar, typename... TParam>
+typename Parameter<TChar, TParam...>::StatusType 
+Parameter<TChar, TParam...>::GetStatus() const
 {
     return {m_status};
+}
+
+template<typename TChar, typename... TParam>
+bool Parameter<TChar, TParam...>::IsGood() const
+{
+    return m_status.IsGood();
+}
+
+template<typename TChar, typename... TParam>
+bool Parameter<TChar, TParam...>::IsBad() const
+{
+    return m_status.IsBad();
+}
+
+template<typename TChar, typename... TParam>
+void Parameter<TChar, TParam...>::Reset()
+{
+    Unset();
+    m_status.Reset();
+}
+
+template<typename TChar, typename... TParam>
+typename Parameter<TChar, TParam...>::StatusType::IntegerValueType 
+Parameter<TChar, TParam...>::GetBadCode() const
+{
+    return m_status.GetBadCode();
 }
 
 } //!fmt
