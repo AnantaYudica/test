@@ -120,18 +120,11 @@ public:
     int GetWidth() const;
     int GetPrecision() const;
 public:
-    void Unset();
+    void Unset() override;
 public:
-    bool IsSet() const;
+    bool IsSet() const override;
 public:
     IntegerFlagType GetFlag() const;
-public:
-    bool IsGood() const;
-    bool IsBad() const;
-public:
-    void Reset();
-public:
-    typename StatusType::IntegerValueType GetBadCode() const;
 };
 
 template<typename TChar>
@@ -463,32 +456,6 @@ typename FloatingPoint<TChar>::IntegerFlagType
 FloatingPoint<TChar>::GetFlag() const
 {
     return m_flag.GetValue();
-}
-
-template<typename TChar>
-bool FloatingPoint<TChar>::IsGood() const
-{
-    return SpecifierBaseType::GetStatus().IsGood();
-}
-
-template<typename TChar>
-bool FloatingPoint<TChar>::IsBad() const
-{
-    return SpecifierBaseType::GetStatus().IsBad();
-}
-
-template<typename TChar>
-void FloatingPoint<TChar>::Reset()
-{
-    Unset();
-    SpecifierBaseType::GetStatus().Reset();
-}
-
-template<typename TChar>
-typename FloatingPoint<TChar>::StatusType::IntegerValueType 
-FloatingPoint<TChar>::GetBadCode() const
-{
-    return SpecifierBaseType::GetStatus().GetBadCode();
 }
 
 } //!specifier

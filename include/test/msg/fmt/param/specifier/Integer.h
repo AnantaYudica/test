@@ -132,18 +132,11 @@ public:
     int GetWidth() const;
     int GetLength() const;
 public:
-    void Unset();
+    void Unset() override;
 public:
-    bool IsSet() const;
+    bool IsSet() const override;
 public:
     IntegerFlagType GetFlag() const;
-public:
-    bool IsGood() const;
-    bool IsBad() const;
-public:
-    void Reset();
-public:
-    typename StatusType::IntegerValueType GetBadCode() const;
 };
 
 template<typename TChar>
@@ -584,32 +577,6 @@ typename Integer<TChar>::IntegerFlagType
 Integer<TChar>::GetFlag() const
 {
     return m_flag.GetValue();
-}
-
-template<typename TChar>
-bool Integer<TChar>::IsGood() const
-{
-    return SpecifierBaseType::GetStatus().IsGood();
-}
-
-template<typename TChar>
-bool Integer<TChar>::IsBad() const
-{
-    return SpecifierBaseType::GetStatus().IsBad();
-}
-
-template<typename TChar>
-void Integer<TChar>::Reset()
-{
-    Unset();
-    SpecifierBaseType::GetStatus().Reset();
-}
-
-template<typename TChar>
-typename Integer<TChar>::StatusType::IntegerValueType 
-Integer<TChar>::GetBadCode() const
-{
-    return SpecifierBaseType::GetStatus().GetBadCode();
 }
 
 } //!specifier
