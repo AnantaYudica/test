@@ -23,37 +23,37 @@ namespace print
 template<typename TChar, int FlagValue>
 class Integer
 {
-    static_assert((FlagValue & test::msg::fmt::param::flag::Integer::
-        signed_octal_not_support) != test::msg::fmt::param::flag::Integer::
+    static_assert((FlagValue & test::msg::fmt::val::flag::Integer::
+        signed_octal_not_support) != test::msg::fmt::val::flag::Integer::
         signed_octal_not_support, "Flag Value is not support");
-    static_assert((FlagValue & test::msg::fmt::param::flag::Integer::
-        signed_hexadecimal_not_support) != test::msg::fmt::param::flag::
+    static_assert((FlagValue & test::msg::fmt::val::flag::Integer::
+        signed_hexadecimal_not_support) != test::msg::fmt::val::flag::
         Integer::signed_hexadecimal_not_support, "Flag Value is not support");
-    static_assert((FlagValue & test::msg::fmt::param::flag::Integer::
-        decimal_upper_not_support) != test::msg::fmt::param::flag::Integer::
+    static_assert((FlagValue & test::msg::fmt::val::flag::Integer::
+        decimal_upper_not_support) != test::msg::fmt::val::flag::Integer::
         decimal_upper_not_support, "Flag Value is not support");
-    static_assert((FlagValue & test::msg::fmt::param::flag::Integer::
-        octal_upper_not_support) != test::msg::fmt::param::flag::Integer::
+    static_assert((FlagValue & test::msg::fmt::val::flag::Integer::
+        octal_upper_not_support) != test::msg::fmt::val::flag::Integer::
         octal_upper_not_support, "Flag Value is not support");
-    static_assert((FlagValue & test::msg::fmt::param::flag::Integer::
-        prefix_decimal_not_support_mask) != test::msg::fmt::param::flag::
+    static_assert((FlagValue & test::msg::fmt::val::flag::Integer::
+        prefix_decimal_not_support_mask) != test::msg::fmt::val::flag::
         Integer::prefix_decimal_not_support, "Flag Value is not support");
-    static_assert((FlagValue & test::msg::fmt::param::flag::Integer::
-        prefix_plus_unsigned_not_support) != test::msg::fmt::param::flag::
+    static_assert((FlagValue & test::msg::fmt::val::flag::Integer::
+        prefix_plus_unsigned_not_support) != test::msg::fmt::val::flag::
         Integer::prefix_plus_unsigned_not_support, 
         "Flag Value is not support");
-    static_assert((FlagValue & test::msg::fmt::param::flag::Integer::
-        prefix_space_unsigned_not_support) != test::msg::fmt::param::flag::
+    static_assert((FlagValue & test::msg::fmt::val::flag::Integer::
+        prefix_space_unsigned_not_support) != test::msg::fmt::val::flag::
         Integer::prefix_space_unsigned_not_support, 
         "Flag Value is not support");
-    static_assert((FlagValue & test::msg::fmt::param::flag::Integer::
-        prefix_zero_length_not_support) != test::msg::fmt::param::flag::
+    static_assert((FlagValue & test::msg::fmt::val::flag::Integer::
+        prefix_zero_length_not_support) != test::msg::fmt::val::flag::
         Integer::prefix_zero_length_not_support, "Flag Value is not support");
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -66,13 +66,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_char_format>
+    test::msg::fmt::val::flag::Integer::lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -85,13 +85,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_short_format>
+    test::msg::fmt::val::flag::Integer::lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -104,13 +104,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_int_format>
+    test::msg::fmt::val::flag::Integer::lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -123,13 +123,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_long_format>
+    test::msg::fmt::val::flag::Integer::lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -142,13 +142,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_long_long_format>
+    test::msg::fmt::val::flag::Integer::lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -161,13 +161,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -180,13 +180,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -199,13 +199,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -218,13 +218,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -237,13 +237,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lds_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -256,13 +256,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_char_format>
+    test::msg::fmt::val::flag::Integer::ldu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -275,13 +275,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_short_format>
+    test::msg::fmt::val::flag::Integer::ldu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -294,13 +294,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_int_format>
+    test::msg::fmt::val::flag::Integer::ldu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -313,13 +313,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_long_format>
+    test::msg::fmt::val::flag::Integer::ldu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -332,13 +332,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_long_long_format>
+    test::msg::fmt::val::flag::Integer::ldu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -351,13 +351,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::ldu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -370,13 +370,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::ldu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -389,13 +389,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::ldu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -408,13 +408,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::ldu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -427,13 +427,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ldu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::ldu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -446,13 +446,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_char_format>
+    test::msg::fmt::val::flag::Integer::lou_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -465,13 +465,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_short_format>
+    test::msg::fmt::val::flag::Integer::lou_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -484,13 +484,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_int_format>
+    test::msg::fmt::val::flag::Integer::lou_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -503,13 +503,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_long_format>
+    test::msg::fmt::val::flag::Integer::lou_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -522,13 +522,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_long_long_format>
+    test::msg::fmt::val::flag::Integer::lou_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -541,13 +541,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::lou_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -560,13 +560,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::lou_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -579,13 +579,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::lou_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -598,13 +598,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::lou_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -617,583 +617,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lou_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::lou_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-  
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::lhu_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-   
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::uhu_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lou_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1206,13 +636,13 @@ public:
   
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_char_format>
+    test::msg::fmt::val::flag::Integer::lhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1225,13 +655,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_short_format>
+    test::msg::fmt::val::flag::Integer::lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1244,13 +674,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_int_format>
+    test::msg::fmt::val::flag::Integer::lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1263,13 +693,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_long_format>
+    test::msg::fmt::val::flag::Integer::lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1282,13 +712,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1301,13 +731,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1320,13 +750,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1339,13 +769,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1358,13 +788,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1377,13 +807,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__lhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1396,13 +826,13 @@ public:
    
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_char_format>
+    test::msg::fmt::val::flag::Integer::uhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1415,13 +845,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_short_format>
+    test::msg::fmt::val::flag::Integer::uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1434,13 +864,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_int_format>
+    test::msg::fmt::val::flag::Integer::uhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1453,13 +883,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_long_format>
+    test::msg::fmt::val::flag::Integer::uhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1472,13 +902,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::uhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1491,13 +921,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::uhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1510,13 +940,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::uhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1529,13 +959,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::uhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1548,13 +978,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::uhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1567,13 +997,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p__uhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::uhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1586,13 +1016,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_char_format>
+    test::msg::fmt::val::flag::Integer::p__lou_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1605,13 +1035,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_short_format>
+    test::msg::fmt::val::flag::Integer::p__lou_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1624,13 +1054,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_int_format>
+    test::msg::fmt::val::flag::Integer::p__lou_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1643,13 +1073,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_long_format>
+    test::msg::fmt::val::flag::Integer::p__lou_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1662,13 +1092,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_long_long_format>
+    test::msg::fmt::val::flag::Integer::p__lou_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1681,13 +1111,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p__lou_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1700,13 +1130,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p__lou_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1719,13 +1149,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p__lou_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1738,13 +1168,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p__lou_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -1757,773 +1187,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp__lds_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p__lou_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps__lds_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lds_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__ldu_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lou_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2536,13 +1206,13 @@ public:
   
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_char_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2555,13 +1225,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_short_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2574,13 +1244,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_int_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2593,13 +1263,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_long_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2612,13 +1282,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2631,13 +1301,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2650,13 +1320,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2669,13 +1339,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2688,13 +1358,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2707,13 +1377,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__lhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p__lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2726,13 +1396,13 @@ public:
    
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_char_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2745,13 +1415,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_short_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2764,13 +1434,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_int_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2783,13 +1453,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_long_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2802,13 +1472,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2821,13 +1491,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2840,13 +1510,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2859,13 +1529,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2878,13 +1548,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2897,13 +1567,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz__uhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p__uhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2916,13 +1586,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_char_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2935,13 +1605,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_short_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2954,13 +1624,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_int_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2973,13 +1643,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_long_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -2992,13 +1662,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_long_long_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3011,13 +1681,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3030,13 +1700,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3049,13 +1719,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3068,13 +1738,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3087,13 +1757,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lds_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::pp__lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3106,13 +1776,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_char_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3125,13 +1795,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_short_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3144,13 +1814,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_int_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3163,13 +1833,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_long_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3182,13 +1852,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_long_long_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3201,13 +1871,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3220,13 +1890,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3239,13 +1909,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3258,13 +1928,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3277,13 +1947,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_ldu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::ps__lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3296,13 +1966,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_char_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3315,13 +1985,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_short_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3334,13 +2004,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_int_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3353,13 +2023,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_long_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3372,13 +2042,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3391,13 +2061,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3410,13 +2080,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3429,13 +2099,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3448,13 +2118,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3467,13 +2137,393 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lou_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz__lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__ldu_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz__lou_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3486,13 +2536,13 @@ public:
   
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_char_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3505,13 +2555,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_short_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3524,13 +2574,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_int_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3543,13 +2593,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_long_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3562,13 +2612,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3581,13 +2631,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3600,13 +2650,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3619,13 +2669,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3638,13 +2688,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3657,13 +2707,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_lhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz__lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3676,13 +2726,13 @@ public:
    
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_char_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3695,13 +2745,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_short_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3714,13 +2764,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_int_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3733,13 +2783,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_long_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3752,13 +2802,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3771,13 +2821,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3790,13 +2840,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3809,13 +2859,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3828,13 +2878,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3847,13 +2897,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::w_uhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz__uhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3866,13 +2916,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_char_format>
+    test::msg::fmt::val::flag::Integer::w_lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3885,13 +2935,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_short_format>
+    test::msg::fmt::val::flag::Integer::w_lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3904,13 +2954,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_int_format>
+    test::msg::fmt::val::flag::Integer::w_lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3923,13 +2973,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_long_format>
+    test::msg::fmt::val::flag::Integer::w_lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3942,13 +2992,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_long_long_format>
+    test::msg::fmt::val::flag::Integer::w_lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3961,13 +3011,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::w_lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3980,13 +3030,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::w_lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -3999,13 +3049,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::w_lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4018,13 +3068,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::w_lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4037,13 +3087,393 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lou_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::w_lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_ldu_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::w_lou_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4056,13 +3486,13 @@ public:
   
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_char_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4075,13 +3505,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_short_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4094,13 +3524,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_int_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4113,13 +3543,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_long_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4132,13 +3562,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4151,13 +3581,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4170,13 +3600,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4189,13 +3619,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4208,13 +3638,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4227,13 +3657,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_lhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::w_lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4246,13 +3676,13 @@ public:
    
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_char_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4265,13 +3695,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_short_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4284,13 +3714,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_int_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4303,13 +3733,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_long_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4322,13 +3752,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4341,13 +3771,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4360,13 +3790,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4379,13 +3809,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4398,13 +3828,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4417,13 +3847,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_w_uhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::w_uhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4436,13 +3866,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_char_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4455,13 +3885,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_short_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4474,13 +3904,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_int_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4493,13 +3923,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4512,13 +3942,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4531,13 +3961,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4550,13 +3980,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4569,13 +3999,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4588,13 +4018,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -4607,773 +4037,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_w_lds_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_lou_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_w_lds_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lds_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_ldu_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lou_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5386,13 +4056,13 @@ public:
   
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_char_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5405,13 +4075,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_short_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5424,13 +4094,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_int_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5443,13 +4113,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5462,13 +4132,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5481,13 +4151,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5500,13 +4170,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5519,13 +4189,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5538,13 +4208,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5557,13 +4227,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_lhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5576,13 +4246,13 @@ public:
    
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_char_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5595,13 +4265,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_short_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5614,13 +4284,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_int_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5633,13 +4303,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5652,13 +4322,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5671,13 +4341,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5690,13 +4360,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5709,13 +4379,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5728,13 +4398,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5747,13 +4417,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pz_w_uhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_w_uhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5766,13 +4436,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_char_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5785,13 +4455,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_short_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5804,13 +4474,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_int_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5823,13 +4493,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_long_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5842,13 +4512,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_long_long_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5861,13 +4531,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5880,13 +4550,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5899,13 +4569,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5918,13 +4588,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5937,13 +4607,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lds_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::pp_w_lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5956,13 +4626,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_char_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5975,13 +4645,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_short_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -5994,13 +4664,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_int_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6013,13 +4683,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_long_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6032,13 +4702,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_long_long_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6051,13 +4721,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6070,13 +4740,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6089,13 +4759,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6108,13 +4778,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6127,13 +4797,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_ldu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::ps_w_lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6146,13 +4816,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_char_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6165,13 +4835,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_short_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6184,13 +4854,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_int_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6203,13 +4873,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6222,13 +4892,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6241,13 +4911,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6260,13 +4930,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6279,13 +4949,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6298,13 +4968,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6317,13 +4987,393 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lou_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_ldu_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pz_w_lou_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6336,13 +5386,13 @@ public:
   
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_char_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6355,13 +5405,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_short_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6374,13 +5424,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_int_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6393,13 +5443,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6412,13 +5462,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6431,13 +5481,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6450,13 +5500,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6469,13 +5519,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6488,13 +5538,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6507,13 +5557,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_lhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6526,13 +5576,13 @@ public:
    
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_char_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6545,13 +5595,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_short_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6564,13 +5614,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_int_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6583,13 +5633,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6602,13 +5652,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6621,13 +5671,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6640,13 +5690,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6659,13 +5709,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6678,13 +5728,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6697,13 +5747,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::l_uhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::pz_w_uhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6716,13 +5766,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_char_format>
+    test::msg::fmt::val::flag::Integer::l_lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6735,13 +5785,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_short_format>
+    test::msg::fmt::val::flag::Integer::l_lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6754,13 +5804,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_int_format>
+    test::msg::fmt::val::flag::Integer::l_lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6773,13 +5823,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_long_format>
+    test::msg::fmt::val::flag::Integer::l_lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6792,13 +5842,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_long_long_format>
+    test::msg::fmt::val::flag::Integer::l_lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6811,13 +5861,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::l_lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6830,13 +5880,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::l_lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6849,13 +5899,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::l_lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6868,13 +5918,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::l_lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6887,13 +5937,393 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lou_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::l_lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_ldu_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::l_lou_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6906,13 +6336,13 @@ public:
   
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_char_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6925,13 +6355,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_short_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6944,13 +6374,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_int_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6963,13 +6393,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_long_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -6982,13 +6412,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7001,13 +6431,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7020,13 +6450,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7039,13 +6469,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7058,13 +6488,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7077,13 +6507,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_lhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::l_lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7096,13 +6526,13 @@ public:
    
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_char_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7115,13 +6545,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_short_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7134,13 +6564,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_int_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7153,13 +6583,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_long_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7172,13 +6602,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7191,13 +6621,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7210,13 +6640,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7229,13 +6659,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7248,13 +6678,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7267,13 +6697,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_l_uhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::l_uhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7286,13 +6716,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_char_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7305,13 +6735,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_short_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7324,13 +6754,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_int_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7343,13 +6773,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7362,13 +6792,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7381,13 +6811,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7400,13 +6830,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7419,13 +6849,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7438,13 +6868,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -7457,773 +6887,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_l_lds_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_lou_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_l_lds_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lds_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_ldu_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_unsigned_char_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_unsigned_short_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_unsigned_int_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_unsigned_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
-    typedef typename SpecifierBaseType::OutputInterfaceType 
-        OutputInterfaceType;
-    typedef typename OutputInterfaceType::SizeType SizeType;
-public:
-    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
-        const LengthType& length, const ValueType& val);
-public:
-    Integer() = delete;
-};
-
-template<typename TChar>
-class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lou_unsigned_long_long_format>
-{
-public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8236,13 +6906,13 @@ public:
   
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_char_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8255,13 +6925,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_short_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8274,13 +6944,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_int_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8293,13 +6963,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8312,13 +6982,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8331,13 +7001,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8350,13 +7020,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8369,13 +7039,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8388,13 +7058,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8407,13 +7077,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_lhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8426,13 +7096,13 @@ public:
    
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_char_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8445,13 +7115,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_short_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8464,13 +7134,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_int_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8483,13 +7153,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8502,13 +7172,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8521,13 +7191,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8540,13 +7210,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8559,13 +7229,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8578,13 +7248,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8597,13 +7267,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::wl_uhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_l_uhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8616,13 +7286,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_char_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8635,13 +7305,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_short_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8654,13 +7324,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_int_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8673,13 +7343,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_long_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8692,13 +7362,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_long_long_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8711,13 +7381,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8730,13 +7400,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8749,13 +7419,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8768,13 +7438,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8787,13 +7457,773 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lou_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::pp_l_lds_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_l_lds_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lds_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_ldu_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::wl_lou_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8806,13 +8236,13 @@ public:
   
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_char_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8825,13 +8255,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_short_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8844,13 +8274,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_int_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8863,13 +8293,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_long_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8882,13 +8312,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8901,13 +8331,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8920,13 +8350,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8939,13 +8369,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8958,13 +8388,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8977,13 +8407,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_lhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::wl_lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -8996,13 +8426,13 @@ public:
    
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_char_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9015,13 +8445,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_short_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9034,13 +8464,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_int_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9053,13 +8483,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_long_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9072,13 +8502,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_long_long_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9091,13 +8521,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9110,13 +8540,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9129,13 +8559,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9148,13 +8578,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9167,13 +8597,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::p_wl_uhu_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::wl_uhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9186,13 +8616,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_char_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9205,13 +8635,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_short_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9224,13 +8654,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_int_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9243,13 +8673,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_long_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9262,13 +8692,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9281,13 +8711,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9300,13 +8730,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9319,13 +8749,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9338,13 +8768,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9357,13 +8787,32 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::pp_wl_lds_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lou_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+  
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9376,13 +8825,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_char_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9395,13 +8844,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_short_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9414,13 +8863,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_int_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9433,13 +8882,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_long_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9452,13 +8901,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_unsigned_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9471,13 +8920,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_unsigned_char_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_unsigned_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9490,13 +8939,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_unsigned_short_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_unsigned_int_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9509,13 +8958,13 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_unsigned_int_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_unsigned_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9528,13 +8977,32 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_unsigned_long_format>
+    test::msg::fmt::val::flag::Integer::p_wl_lhu_unsigned_long_long_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+   
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9547,13 +9015,545 @@ public:
 
 template<typename TChar>
 class Integer<TChar, 
-    test::msg::fmt::param::flag::Integer::ps_wl_lds_unsigned_long_long_format>
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_short_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::Length<TChar> LengthType;
-    typedef test::msg::fmt::param::specifier::val::Integer ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::p_wl_uhu_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::pp_wl_lds_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_unsigned_char_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_unsigned_short_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_unsigned_int_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_unsigned_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
+    typedef typename SpecifierBaseType::OutputInterfaceType 
+        OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+public:
+    static SizeType Print(OutputInterfaceType& out, const WidthType& width,
+        const LengthType& length, const ValueType& val);
+public:
+    Integer() = delete;
+};
+
+template<typename TChar>
+class Integer<TChar, 
+    test::msg::fmt::val::flag::Integer::ps_wl_lds_unsigned_long_long_format>
+{
+public:
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::Length<TChar> LengthType;
+    typedef test::msg::fmt::val::specifier::val::Integer ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -9573,9 +9573,9 @@ Integer<TChar, FlagValue>::Print(OutputInterfaceType&, const WidthType&,
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9583,9 +9583,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9593,9 +9593,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9603,9 +9603,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9613,9 +9613,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9623,9 +9623,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9633,9 +9633,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9643,9 +9643,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9653,9 +9653,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9663,9 +9663,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9673,9 +9673,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9683,9 +9683,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9693,9 +9693,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9703,9 +9703,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9713,9 +9713,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9723,9 +9723,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9733,9 +9733,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9743,9 +9743,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9753,9 +9753,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9763,9 +9763,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ldu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9773,9 +9773,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9783,9 +9783,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9793,9 +9793,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9803,9 +9803,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9813,9 +9813,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9823,9 +9823,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9833,9 +9833,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9843,9 +9843,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9853,9 +9853,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9863,9 +9863,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9873,9 +9873,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9883,9 +9883,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9893,9 +9893,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9903,9 +9903,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9913,9 +9913,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9923,9 +9923,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9933,9 +9933,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9943,9 +9943,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9953,9 +9953,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9963,9 +9963,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9973,9 +9973,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9983,9 +9983,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -9993,9 +9993,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10003,9 +10003,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10013,9 +10013,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10023,9 +10023,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10033,9 +10033,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10043,9 +10043,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10053,9 +10053,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10063,9 +10063,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10073,9 +10073,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10083,9 +10083,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10093,9 +10093,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10103,9 +10103,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10113,9 +10113,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10123,9 +10123,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10133,9 +10133,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10143,9 +10143,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10153,9 +10153,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10163,9 +10163,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10173,9 +10173,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10183,9 +10183,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10193,9 +10193,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10203,9 +10203,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10213,9 +10213,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10223,9 +10223,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10233,9 +10233,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10243,9 +10243,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10253,9 +10253,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10263,9 +10263,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10273,9 +10273,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10283,9 +10283,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10293,9 +10293,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10303,9 +10303,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10313,9 +10313,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10323,9 +10323,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10333,9 +10333,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10343,9 +10343,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10353,9 +10353,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10363,9 +10363,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p__uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10373,9 +10373,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10383,9 +10383,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10393,9 +10393,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10403,9 +10403,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10413,9 +10413,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10423,9 +10423,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10433,9 +10433,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10443,9 +10443,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10453,9 +10453,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10463,9 +10463,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp__lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10473,9 +10473,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10483,9 +10483,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10493,9 +10493,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10503,9 +10503,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10513,9 +10513,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10523,9 +10523,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10533,9 +10533,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10543,9 +10543,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10553,9 +10553,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10563,9 +10563,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps__lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10573,9 +10573,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10583,9 +10583,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10593,9 +10593,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10603,9 +10603,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10613,9 +10613,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10623,9 +10623,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10633,9 +10633,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10643,9 +10643,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10653,9 +10653,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10663,9 +10663,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10673,9 +10673,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10683,9 +10683,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10693,9 +10693,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10703,9 +10703,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10713,9 +10713,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10723,9 +10723,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10733,9 +10733,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10743,9 +10743,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10753,9 +10753,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10763,9 +10763,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__ldu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10773,9 +10773,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10783,9 +10783,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10793,9 +10793,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10803,9 +10803,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10813,9 +10813,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10823,9 +10823,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10833,9 +10833,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10843,9 +10843,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10853,9 +10853,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10863,9 +10863,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10873,9 +10873,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10883,9 +10883,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10893,9 +10893,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10903,9 +10903,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10913,9 +10913,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10923,9 +10923,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10933,9 +10933,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10943,9 +10943,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10953,9 +10953,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10963,9 +10963,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10973,9 +10973,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10983,9 +10983,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -10993,9 +10993,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -11003,9 +11003,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -11013,9 +11013,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -11023,9 +11023,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -11033,9 +11033,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -11043,9 +11043,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -11053,9 +11053,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -11063,9 +11063,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz__uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType&, const ValueType& val)
 {
@@ -11073,9 +11073,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11084,9 +11084,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11095,9 +11095,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11106,9 +11106,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11117,9 +11117,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11128,9 +11128,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11139,9 +11139,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11150,9 +11150,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11161,9 +11161,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11172,9 +11172,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11183,9 +11183,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11194,9 +11194,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11205,9 +11205,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11216,9 +11216,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11227,9 +11227,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11238,9 +11238,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11249,9 +11249,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11260,9 +11260,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11271,9 +11271,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11282,9 +11282,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_ldu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11293,9 +11293,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11304,9 +11304,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11315,9 +11315,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11326,9 +11326,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11337,9 +11337,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11348,9 +11348,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11359,9 +11359,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11370,9 +11370,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11381,9 +11381,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11392,9 +11392,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11403,9 +11403,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11414,9 +11414,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11425,9 +11425,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11436,9 +11436,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11447,9 +11447,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11458,9 +11458,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11469,9 +11469,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11480,9 +11480,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11491,9 +11491,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11502,9 +11502,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11513,9 +11513,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11524,9 +11524,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11535,9 +11535,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11546,9 +11546,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11557,9 +11557,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11568,9 +11568,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11579,9 +11579,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11590,9 +11590,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11601,9 +11601,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11612,9 +11612,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::w_uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11623,9 +11623,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11634,9 +11634,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11645,9 +11645,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11656,9 +11656,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11667,9 +11667,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11678,9 +11678,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11689,9 +11689,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11700,9 +11700,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11711,9 +11711,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11722,9 +11722,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11733,9 +11733,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11744,9 +11744,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11755,9 +11755,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11766,9 +11766,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11777,9 +11777,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11788,9 +11788,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11799,9 +11799,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11810,9 +11810,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11821,9 +11821,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11832,9 +11832,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11843,9 +11843,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11854,9 +11854,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11865,9 +11865,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11876,9 +11876,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11887,9 +11887,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11898,9 +11898,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11909,9 +11909,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11920,9 +11920,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11931,9 +11931,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11942,9 +11942,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_w_uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11953,9 +11953,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11964,9 +11964,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11975,9 +11975,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11986,9 +11986,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -11997,9 +11997,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12008,9 +12008,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12019,9 +12019,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12030,9 +12030,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12041,9 +12041,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12052,9 +12052,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_w_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12063,9 +12063,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12074,9 +12074,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12085,9 +12085,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12096,9 +12096,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12107,9 +12107,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12118,9 +12118,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12129,9 +12129,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12140,9 +12140,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12151,9 +12151,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12162,9 +12162,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_w_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12173,9 +12173,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12184,9 +12184,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12195,9 +12195,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12206,9 +12206,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12217,9 +12217,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12228,9 +12228,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12239,9 +12239,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12250,9 +12250,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12261,9 +12261,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12272,9 +12272,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12283,9 +12283,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12294,9 +12294,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12305,9 +12305,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12316,9 +12316,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12327,9 +12327,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12338,9 +12338,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12349,9 +12349,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12360,9 +12360,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12371,9 +12371,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12382,9 +12382,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_ldu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12393,9 +12393,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12404,9 +12404,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12415,9 +12415,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12426,9 +12426,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12437,9 +12437,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12448,9 +12448,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12459,9 +12459,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12470,9 +12470,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12481,9 +12481,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12492,9 +12492,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12503,9 +12503,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12514,9 +12514,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12525,9 +12525,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12536,9 +12536,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12547,9 +12547,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12558,9 +12558,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12569,9 +12569,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12580,9 +12580,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12591,9 +12591,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12602,9 +12602,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12613,9 +12613,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12624,9 +12624,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12635,9 +12635,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12646,9 +12646,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12657,9 +12657,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12668,9 +12668,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12679,9 +12679,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12690,9 +12690,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12701,9 +12701,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12712,9 +12712,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pz_w_uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType&, const ValueType& val)
 {
@@ -12723,9 +12723,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12734,9 +12734,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12745,9 +12745,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12756,9 +12756,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12767,9 +12767,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12778,9 +12778,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12789,9 +12789,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12800,9 +12800,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12811,9 +12811,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12822,9 +12822,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12833,9 +12833,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12844,9 +12844,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12855,9 +12855,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12866,9 +12866,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12877,9 +12877,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12888,9 +12888,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12899,9 +12899,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12910,9 +12910,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12921,9 +12921,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12932,9 +12932,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_ldu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12943,9 +12943,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12954,9 +12954,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12965,9 +12965,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12976,9 +12976,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12987,9 +12987,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -12998,9 +12998,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13009,9 +13009,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13020,9 +13020,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13031,9 +13031,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13042,9 +13042,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13053,9 +13053,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13064,9 +13064,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13075,9 +13075,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13086,9 +13086,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13097,9 +13097,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13108,9 +13108,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13119,9 +13119,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13130,9 +13130,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13141,9 +13141,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13152,9 +13152,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13163,9 +13163,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13174,9 +13174,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13185,9 +13185,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13196,9 +13196,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13207,9 +13207,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13218,9 +13218,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13229,9 +13229,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13240,9 +13240,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13251,9 +13251,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13262,9 +13262,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::l_uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13273,9 +13273,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13284,9 +13284,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13295,9 +13295,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13306,9 +13306,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13317,9 +13317,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13328,9 +13328,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13339,9 +13339,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13350,9 +13350,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13361,9 +13361,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13372,9 +13372,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13383,9 +13383,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13394,9 +13394,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13405,9 +13405,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13416,9 +13416,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13427,9 +13427,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13438,9 +13438,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13449,9 +13449,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13460,9 +13460,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13471,9 +13471,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13482,9 +13482,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13493,9 +13493,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13504,9 +13504,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13515,9 +13515,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13526,9 +13526,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13537,9 +13537,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13548,9 +13548,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13559,9 +13559,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13570,9 +13570,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13581,9 +13581,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13592,9 +13592,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_l_uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13603,9 +13603,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13614,9 +13614,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13625,9 +13625,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13636,9 +13636,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13647,9 +13647,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13658,9 +13658,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13669,9 +13669,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13680,9 +13680,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13691,9 +13691,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13702,9 +13702,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_l_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13713,9 +13713,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13724,9 +13724,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13735,9 +13735,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13746,9 +13746,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13757,9 +13757,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13768,9 +13768,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13779,9 +13779,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13790,9 +13790,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13801,9 +13801,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13812,9 +13812,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_l_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType&, const LengthType& length, const ValueType& val)
 {
@@ -13823,9 +13823,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13834,9 +13834,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13845,9 +13845,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13856,9 +13856,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13867,9 +13867,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13878,9 +13878,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13889,9 +13889,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13900,9 +13900,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13911,9 +13911,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13922,9 +13922,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13933,9 +13933,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13944,9 +13944,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13955,9 +13955,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13966,9 +13966,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13977,9 +13977,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13988,9 +13988,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -13999,9 +13999,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14010,9 +14010,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14021,9 +14021,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14032,9 +14032,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_ldu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14043,9 +14043,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14054,9 +14054,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14065,9 +14065,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14076,9 +14076,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14087,9 +14087,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14098,9 +14098,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14109,9 +14109,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14120,9 +14120,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14131,9 +14131,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14142,9 +14142,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14153,9 +14153,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14164,9 +14164,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14175,9 +14175,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14186,9 +14186,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14197,9 +14197,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14208,9 +14208,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14219,9 +14219,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14230,9 +14230,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14241,9 +14241,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14252,9 +14252,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14263,9 +14263,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14274,9 +14274,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14285,9 +14285,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14296,9 +14296,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14307,9 +14307,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14318,9 +14318,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14329,9 +14329,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14340,9 +14340,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14351,9 +14351,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14362,9 +14362,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::wl_uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14373,9 +14373,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14384,9 +14384,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14395,9 +14395,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14406,9 +14406,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14417,9 +14417,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14428,9 +14428,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14439,9 +14439,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14450,9 +14450,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14461,9 +14461,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14472,9 +14472,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lou_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14483,9 +14483,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
   
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14494,9 +14494,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14505,9 +14505,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14516,9 +14516,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14527,9 +14527,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14538,9 +14538,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14549,9 +14549,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14560,9 +14560,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14571,9 +14571,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14582,9 +14582,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_lhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14593,9 +14593,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
    
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14604,9 +14604,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14615,9 +14615,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14626,9 +14626,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14637,9 +14637,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14648,9 +14648,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14659,9 +14659,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14670,9 +14670,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14681,9 +14681,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14692,9 +14692,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::p_wl_uhu_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14703,9 +14703,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14714,9 +14714,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14725,9 +14725,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14736,9 +14736,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14747,9 +14747,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14758,9 +14758,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14769,9 +14769,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14780,9 +14780,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14791,9 +14791,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14802,9 +14802,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::pp_wl_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14813,9 +14813,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14824,9 +14824,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14835,9 +14835,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14846,9 +14846,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14857,9 +14857,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14868,9 +14868,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_char_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_char_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14879,9 +14879,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_short_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_short_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14890,9 +14890,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_int_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_int_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14901,9 +14901,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {
@@ -14912,9 +14912,9 @@ Integer<TChar, test::msg::fmt::param::flag::
 }
 
 template<typename TChar>
-typename Integer<TChar, test::msg::fmt::param::flag::
+typename Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_long_long_format>::SizeType 
-Integer<TChar, test::msg::fmt::param::flag::
+Integer<TChar, test::msg::fmt::val::flag::
     Integer::ps_wl_lds_unsigned_long_long_format>::Print(OutputInterfaceType& out, 
     const WidthType& width, const LengthType& length, const ValueType& val)
 {

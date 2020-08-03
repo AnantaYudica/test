@@ -23,22 +23,22 @@ namespace specifier
 
 template<typename TChar>
 class Character :
-    public test::msg::fmt::param::Specifier<TChar>
+    public test::msg::fmt::val::Specifier<TChar>
 {
 public:
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::StatusType StatusType;
     typedef typename SpecifierBaseType::ParameterBaseType ParameterBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
-    typedef test::msg::fmt::param::flag::Character FlagType;
+    typedef test::msg::fmt::val::flag::Character FlagType;
     typedef typename FlagType::ValueType IntegerFlagType;
-    typedef test::msg::fmt::param::specifier::val::Character ValueType;
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::specifier::val::Character ValueType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
 public:
     template<int FlagValue>
-    using PrintType = test::msg::fmt::param::specifier::print::
+    using PrintType = test::msg::fmt::val::specifier::print::
         Character<TChar, FlagValue>;
 private:
     typedef SizeType (OutputPrintFunctionType)(OutputInterfaceType&, 
@@ -53,12 +53,12 @@ private:
         typename _TArg = typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
-                test::msg::fmt::param::flag::arg::Width>::value, 
+                test::msg::fmt::arg::Width>::value, 
             int>::type = 0>
     static bool _SetWidth(WidthType& width, TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     static bool _SetWidth(WidthType& width, 
-        test::msg::fmt::param::flag::arg::Width&& set, TArgs&&... args);
+        test::msg::fmt::arg::Width&& set, TArgs&&... args);
 private:
     template<typename... TArgs>
     static bool _Set(WidthType& width, OutputPrintFunctionType*& print_out, 
@@ -128,7 +128,7 @@ bool Character<TChar>::_SetWidth(WidthType&)
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<!std::is_same<_TArg, 
-            test::msg::fmt::param::flag::arg::Width>::value, 
+            test::msg::fmt::arg::Width>::value, 
         int>::type>
 bool Character<TChar>::_SetWidth(WidthType& width, TArg&&, TArgs&&... args)
 {
@@ -138,7 +138,7 @@ bool Character<TChar>::_SetWidth(WidthType& width, TArg&&, TArgs&&... args)
 template<typename TChar>
 template<typename... TArgs>
 bool Character<TChar>::_SetWidth(WidthType& width, 
-    test::msg::fmt::param::flag::arg::Width&& set, TArgs&&... args)
+    test::msg::fmt::arg::Width&& set, TArgs&&... args)
 {
     if (!set.IsDefault()) width = std::move(WidthType(set.GetValue()));
     return _SetWidth(width, std::forward<TArgs>(args)...);;

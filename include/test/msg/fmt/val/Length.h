@@ -13,7 +13,7 @@ namespace val
 {
 
 template<typename TChar>
-using Length = test::msg::fmt::param::Precision<TChar>;
+using Length = test::msg::fmt::val::Precision<TChar>;
 
 } //!val
 

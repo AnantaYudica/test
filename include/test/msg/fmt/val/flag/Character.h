@@ -1,8 +1,8 @@
 #ifndef TEST_MSG_FMT_VAL_FLAG_CHARACTER_H_
 #define TEST_MSG_FMT_VAL_FLAG_CHARACTER_H_
 
-#include "arg/Width.h"
-#include "arg/Define.h"
+#include "../../arg/Width.h"
+#include "../../arg/Define.h"
 
 #include <cstdint>
 #include <utility>
@@ -24,9 +24,9 @@ class Character
 {
 public:
     typedef std::uint8_t ValueType;
-    typedef test::msg::fmt::param::flag::arg::Width WidthType;
+    typedef test::msg::fmt::arg::Width WidthType;
     template<typename T>
-    using DefineType = test::msg::fmt::param::flag::arg::Define<T>;
+    using DefineType = test::msg::fmt::arg::Define<T>;
 public:
     enum : ValueType
     {

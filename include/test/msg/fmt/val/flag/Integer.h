@@ -1,20 +1,20 @@
 #ifndef TEST_MSG_FMT_VAL_FLAG_INTEGER_H_
 #define TEST_MSG_FMT_VAL_FLAG_INTEGER_H_
 
-#include "arg/Define.h"
-#include "arg/Signed.h"
-#include "arg/Unsigned.h"
-#include "arg/Decimal.h"
-#include "arg/Octal.h"
-#include "arg/Hexadecimal.h"
-#include "arg/Lower.h"
-#include "arg/Upper.h"
-#include "arg/Prefix.h"
-#include "arg/PrefixPlus.h"
-#include "arg/PrefixSpace.h"
-#include "arg/PrefixZero.h"
-#include "arg/Width.h"
-#include "arg/Length.h"
+#include "../../arg/Define.h"
+#include "../../arg/Signed.h"
+#include "../../arg/Unsigned.h"
+#include "../../arg/Decimal.h"
+#include "../../arg/Octal.h"
+#include "../../arg/Hexadecimal.h"
+#include "../../arg/Lower.h"
+#include "../../arg/Upper.h"
+#include "../../arg/Prefix.h"
+#include "../../arg/PrefixPlus.h"
+#include "../../arg/PrefixSpace.h"
+#include "../../arg/PrefixZero.h"
+#include "../../arg/Width.h"
+#include "../../arg/Length.h"
 
 #include <cstdint>
 #include <type_traits>
@@ -36,20 +36,20 @@ class Integer
 public:
     typedef std::uint32_t ValueType;
     template<typename T>
-    using DefineType = test::msg::fmt::param::flag::arg::Define<T>;
-    typedef test::msg::fmt::param::flag::arg::Signed SignedType;
-    typedef test::msg::fmt::param::flag::arg::Unsigned UnsignedType;
-    typedef test::msg::fmt::param::flag::arg::Decimal DecimalType;
-    typedef test::msg::fmt::param::flag::arg::Octal OctalType;
-    typedef test::msg::fmt::param::flag::arg::Hexadecimal HexadecimalType;
-    typedef test::msg::fmt::param::flag::arg::Lower LowerType;
-    typedef test::msg::fmt::param::flag::arg::Upper UpperType;
-    typedef test::msg::fmt::param::flag::arg::Prefix PrefixType;
-    typedef test::msg::fmt::param::flag::arg::PrefixPlus PrefixPlusType;
-    typedef test::msg::fmt::param::flag::arg::PrefixSpace PrefixSpaceType;
-    typedef test::msg::fmt::param::flag::arg::PrefixZero PrefixZeroType;
-    typedef test::msg::fmt::param::flag::arg::Width WidthType;
-    typedef test::msg::fmt::param::flag::arg::Length LengthType;
+    using DefineType = test::msg::fmt::arg::Define<T>;
+    typedef test::msg::fmt::arg::Signed SignedType;
+    typedef test::msg::fmt::arg::Unsigned UnsignedType;
+    typedef test::msg::fmt::arg::Decimal DecimalType;
+    typedef test::msg::fmt::arg::Octal OctalType;
+    typedef test::msg::fmt::arg::Hexadecimal HexadecimalType;
+    typedef test::msg::fmt::arg::Lower LowerType;
+    typedef test::msg::fmt::arg::Upper UpperType;
+    typedef test::msg::fmt::arg::Prefix PrefixType;
+    typedef test::msg::fmt::arg::PrefixPlus PrefixPlusType;
+    typedef test::msg::fmt::arg::PrefixSpace PrefixSpaceType;
+    typedef test::msg::fmt::arg::PrefixZero PrefixZeroType;
+    typedef test::msg::fmt::arg::Width WidthType;
+    typedef test::msg::fmt::arg::Length LengthType;
 public:
     enum : ValueType
     {

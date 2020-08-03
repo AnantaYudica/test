@@ -1,7 +1,7 @@
 #ifndef TEST_MSG_FMT_VAL_FLAG_NOTHING_H_
 #define TEST_MSG_FMT_VAL_FLAG_NOTHING_H_
 
-#include "arg/Define.h"
+#include "../../arg/Define.h"
 
 #include <cstdint>
 #include <type_traits>
@@ -23,7 +23,7 @@ class Nothing
 public:
     typedef std::uint8_t ValueType;
     template<typename T>
-    using DefineType = test::msg::fmt::param::flag::arg::Define<T>;
+    using DefineType = test::msg::fmt::arg::Define<T>;
 public:
     enum : ValueType
     {

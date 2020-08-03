@@ -23,9 +23,9 @@ template<typename TChar, int FlagValue>
 class Character
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::specifier::val::Character ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::specifier::val::Character ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -37,12 +37,12 @@ public:
 };
 
 template<typename TChar>
-class Character<TChar, test::msg::fmt::param::flag::Character::char_format>
+class Character<TChar, test::msg::fmt::val::flag::Character::char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::specifier::val::Character ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::specifier::val::Character ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -54,12 +54,12 @@ public:
 };
 
 template<typename TChar>
-class Character<TChar, test::msg::fmt::param::flag::Character::w_char_format>
+class Character<TChar, test::msg::fmt::val::flag::Character::w_char_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::specifier::val::Character ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::specifier::val::Character ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -71,12 +71,12 @@ public:
 };
 
 template<typename TChar>
-class Character<TChar, test::msg::fmt::param::flag::Character::wchar_format>
+class Character<TChar, test::msg::fmt::val::flag::Character::wchar_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::specifier::val::Character ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::specifier::val::Character ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -88,12 +88,12 @@ public:
 };
 
 template<typename TChar>
-class Character<TChar, test::msg::fmt::param::flag::Character::w_wchar_format>
+class Character<TChar, test::msg::fmt::val::flag::Character::w_wchar_format>
 {
 public:
-    typedef test::msg::fmt::param::Width<TChar> WidthType;
-    typedef test::msg::fmt::param::specifier::val::Character ValueType;
-    typedef test::msg::fmt::param::Specifier<TChar> SpecifierBaseType;
+    typedef test::msg::fmt::val::Width<TChar> WidthType;
+    typedef test::msg::fmt::val::specifier::val::Character ValueType;
+    typedef test::msg::fmt::val::Specifier<TChar> SpecifierBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
     typedef typename OutputInterfaceType::SizeType SizeType;
@@ -114,8 +114,8 @@ Character<TChar, FlagValue>::Print(OutputInterfaceType&,
 
 template<typename TChar>
 typename Character<TChar, 
-    test::msg::fmt::param::flag::Character::char_format>::SizeType
-Character<TChar, test::msg::fmt::param::flag::Character::char_format>::
+    test::msg::fmt::val::flag::Character::char_format>::SizeType
+Character<TChar, test::msg::fmt::val::flag::Character::char_format>::
     Print(OutputInterfaceType& out, const WidthType&, const ValueType& val)
 {
     return out.Print("%c", val.char_value);
@@ -123,8 +123,8 @@ Character<TChar, test::msg::fmt::param::flag::Character::char_format>::
 
 template<typename TChar>
 typename Character<TChar, 
-    test::msg::fmt::param::flag::Character::w_char_format>::SizeType
-Character<TChar, test::msg::fmt::param::flag::Character::w_char_format>::
+    test::msg::fmt::val::flag::Character::w_char_format>::SizeType
+Character<TChar, test::msg::fmt::val::flag::Character::w_char_format>::
     Print(OutputInterfaceType& out, const WidthType& width, const ValueType& val)
 {
     return out.Print("%*c", width.GetValue(), val.char_value);
@@ -132,8 +132,8 @@ Character<TChar, test::msg::fmt::param::flag::Character::w_char_format>::
 
 template<typename TChar>
 typename Character<TChar, 
-    test::msg::fmt::param::flag::Character::wchar_format>::SizeType
-Character<TChar, test::msg::fmt::param::flag::Character::wchar_format>::
+    test::msg::fmt::val::flag::Character::wchar_format>::SizeType
+Character<TChar, test::msg::fmt::val::flag::Character::wchar_format>::
     Print(OutputInterfaceType& out, const WidthType&, const ValueType& val)
 {
     return out.Print("%lc", val.char_value);
@@ -141,8 +141,8 @@ Character<TChar, test::msg::fmt::param::flag::Character::wchar_format>::
 
 template<typename TChar>
 typename Character<TChar, 
-    test::msg::fmt::param::flag::Character::w_wchar_format>::SizeType
-Character<TChar, test::msg::fmt::param::flag::Character::w_wchar_format>::
+    test::msg::fmt::val::flag::Character::w_wchar_format>::SizeType
+Character<TChar, test::msg::fmt::val::flag::Character::w_wchar_format>::
     Print(OutputInterfaceType& out, const WidthType& width, const ValueType& val)
 {
     return out.Print("%*lc", width.GetValue(), val.char_value);
