@@ -1,15 +1,11 @@
-#ifndef TEST_MSG_FMT_PARAM_FLAG_ARG_SIGNED_H_
-#define TEST_MSG_FMT_PARAM_FLAG_ARG_SIGNED_H_
+#ifndef TEST_MSG_FMT_ARG_SIGNED_H_
+#define TEST_MSG_FMT_ARG_SIGNED_H_
 
 namespace test
 {
 namespace msg
 {
 namespace fmt
-{
-namespace param
-{
-namespace flag
 {
 namespace arg
 {
@@ -22,15 +18,11 @@ public:
 
 } //!arg
 
-} //!flag
-
-} //!param
-
 } //!fmt
 
 } //!msg
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_FLAG_ARG_SIGNED_H_
+#endif //!TEST_MSG_FMT_ARG_SIGNED_H_
 
