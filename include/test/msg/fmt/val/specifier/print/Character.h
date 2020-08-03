@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_CHARACTER_H_
-#define TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_CHARACTER_H_
+#ifndef TEST_MSG_FMT_VAL_SPECIFIER_PRINT_CHARACTER_H_
+#define TEST_MSG_FMT_VAL_SPECIFIER_PRINT_CHARACTER_H_
 
 #include "../../flag/Character.h"
 #include "../val/Character.h"
@@ -12,7 +12,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace specifier
 {
@@ -152,7 +152,7 @@ Character<TChar, test::msg::fmt::param::flag::Character::w_wchar_format>::
 
 } //!specifier
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -160,4 +160,4 @@ Character<TChar, test::msg::fmt::param::flag::Character::w_wchar_format>::
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_CHARACTER_H_
+#endif //!TEST_MSG_FMT_VAL_SPECIFIER_PRINT_CHARACTER_H_

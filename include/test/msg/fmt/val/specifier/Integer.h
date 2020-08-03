@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_SPECIFIER_INTEGER_H_
-#define TEST_MSG_FMT_PARAM_SPECIFIER_INTEGER_H_
+#ifndef TEST_MSG_FMT_VAL_SPECIFIER_INTEGER_H_
+#define TEST_MSG_FMT_VAL_SPECIFIER_INTEGER_H_
 
 #include "../Specifier.h"
 #include "../Width.h"
@@ -18,7 +18,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace specifier
 {
@@ -581,7 +581,7 @@ Integer<TChar>::GetFlag() const
 
 } //!specifier
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -589,4 +589,4 @@ Integer<TChar>::GetFlag() const
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_SPECIFIER_INTEGER_H_
+#endif //!TEST_MSG_FMT_VAL_SPECIFIER_INTEGER_H_

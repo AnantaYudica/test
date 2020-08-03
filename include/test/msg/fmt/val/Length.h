@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_LENGTH_H_
-#define TEST_MSG_FMT_PARAM_LENGTH_H_
+#ifndef TEST_MSG_FMT_VAL_LENGTH_H_
+#define TEST_MSG_FMT_VAL_LENGTH_H_
 
 #include "Precision.h"
 
@@ -9,13 +9,13 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 
 template<typename TChar>
 using Length = test::msg::fmt::param::Precision<TChar>;
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -24,4 +24,4 @@ using Length = test::msg::fmt::param::Precision<TChar>;
 } //!test
 
 
-#endif //!TEST_MSG_FMT_PARAM_LENGTH_H_
+#endif //!TEST_MSG_FMT_VAL_LENGTH_H_

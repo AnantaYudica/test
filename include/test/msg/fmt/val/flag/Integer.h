@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_FLAG_INTEGER_H_
-#define TEST_MSG_FMT_PARAM_FLAG_INTEGER_H_
+#ifndef TEST_MSG_FMT_VAL_FLAG_INTEGER_H_
+#define TEST_MSG_FMT_VAL_FLAG_INTEGER_H_
 
 #include "arg/Define.h"
 #include "arg/Signed.h"
@@ -26,7 +26,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace flag
 {
@@ -1932,7 +1932,7 @@ inline constexpr typename Integer::ValueType Integer::GetValue() const
 
 } //!flag
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -1940,4 +1940,4 @@ inline constexpr typename Integer::ValueType Integer::GetValue() const
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_FLAG_INTEGER_H_
+#endif //!TEST_MSG_FMT_VAL_FLAG_INTEGER_H_

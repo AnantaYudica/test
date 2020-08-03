@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_NOTHING_H_
-#define TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_NOTHING_H_
+#ifndef TEST_MSG_FMT_VAL_SPECIFIER_PRINT_NOTHING_H_
+#define TEST_MSG_FMT_VAL_SPECIFIER_PRINT_NOTHING_H_
 
 #include "../../flag/Nothing.h"
 #include "../val/Nothing.h"
@@ -11,7 +11,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace specifier
 {
@@ -164,7 +164,7 @@ Nothing<TChar, test::msg::fmt::param::flag::Nothing::long_long_format>::
 
 } //!specifier
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -172,4 +172,4 @@ Nothing<TChar, test::msg::fmt::param::flag::Nothing::long_long_format>::
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_NOTHING_H_
+#endif //!TEST_MSG_FMT_VAL_SPECIFIER_PRINT_NOTHING_H_

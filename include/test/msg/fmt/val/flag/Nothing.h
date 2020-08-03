@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_FLAG_NOTHING_H_
-#define TEST_MSG_FMT_PARAM_FLAG_NOTHING_H_
+#ifndef TEST_MSG_FMT_VAL_FLAG_NOTHING_H_
+#define TEST_MSG_FMT_VAL_FLAG_NOTHING_H_
 
 #include "arg/Define.h"
 
@@ -13,7 +13,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace flag
 {
@@ -233,7 +233,7 @@ Nothing::GetValue() const
 
 } //!flag
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -241,4 +241,4 @@ Nothing::GetValue() const
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_FLAG_NOTHING_H_
+#endif //!TEST_MSG_FMT_VAL_FLAG_NOTHING_H_

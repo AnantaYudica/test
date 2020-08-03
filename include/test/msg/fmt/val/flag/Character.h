@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_FLAG_CHARACTER_H_
-#define TEST_MSG_FMT_PARAM_FLAG_CHARACTER_H_
+#ifndef TEST_MSG_FMT_VAL_FLAG_CHARACTER_H_
+#define TEST_MSG_FMT_VAL_FLAG_CHARACTER_H_
 
 #include "arg/Width.h"
 #include "arg/Define.h"
@@ -15,7 +15,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace flag
 {
@@ -144,7 +144,7 @@ Character::GetValue() const
 
 } //!flag
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -152,4 +152,4 @@ Character::GetValue() const
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_FLAG_CHARACTER_H_
+#endif //!TEST_MSG_FMT_VAL_FLAG_CHARACTER_H_

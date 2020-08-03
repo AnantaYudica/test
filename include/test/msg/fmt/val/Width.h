@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_WIDTH_H_
-#define TEST_MSG_FMT_PARAM_WIDTH_H_
+#ifndef TEST_MSG_FMT_VAL_WIDTH_H_
+#define TEST_MSG_FMT_VAL_WIDTH_H_
 
 #include "../Parameter.h"
 
@@ -12,7 +12,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 
 template<typename TChar>
@@ -143,7 +143,7 @@ bool Width<TChar>::IsSet() const
     return ParameterBaseType::GetStatus().IsSetValue();
 }
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -151,4 +151,4 @@ bool Width<TChar>::IsSet() const
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_WIDTH_H_
+#endif //!TEST_MSG_FMT_VAL_WIDTH_H_

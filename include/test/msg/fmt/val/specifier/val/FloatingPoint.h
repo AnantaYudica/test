@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_SPECIFIER_VAL_FLOATINGPOINT_H_
-#define TEST_MSG_FMT_PARAM_SPECIFIER_VAL_FLOATINGPOINT_H_
+#ifndef TEST_MSG_FMT_VAL_SPECIFIER_VAL_FLOATINGPOINT_H_
+#define TEST_MSG_FMT_VAL_SPECIFIER_VAL_FLOATINGPOINT_H_
 
 #include <cstddef>
 #include <cstdint>
@@ -11,7 +11,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace specifier
 {
@@ -61,7 +61,7 @@ inline TRet FloatingPoint::CastTo(const FloatingPoint& val)
 
 } //!specifier
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -69,4 +69,4 @@ inline TRet FloatingPoint::CastTo(const FloatingPoint& val)
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_SPECIFIER_VAL_FLOATINGPOINT_H_
+#endif //!TEST_MSG_FMT_VAL_SPECIFIER_VAL_FLOATINGPOINT_H_

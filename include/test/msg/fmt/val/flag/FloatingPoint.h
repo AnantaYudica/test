@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_FLAG_FLOATINGPOINT_H_
-#define TEST_MSG_FMT_PARAM_FLAG_FLOATINGPOINT_H_
+#ifndef TEST_MSG_FMT_VAL_FLAG_FLOATINGPOINT_H_
+#define TEST_MSG_FMT_VAL_FLAG_FLOATINGPOINT_H_
 
 #include "arg/Define.h"
 #include "arg/Decimal.h"
@@ -25,7 +25,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace flag
 {
@@ -1152,7 +1152,7 @@ FloatingPoint::GetValue() const
 
 } //!flag
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -1160,4 +1160,4 @@ FloatingPoint::GetValue() const
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_FLAG_FLOATINGPOINT_H_
+#endif //!TEST_MSG_FMT_VAL_FLAG_FLOATINGPOINT_H_

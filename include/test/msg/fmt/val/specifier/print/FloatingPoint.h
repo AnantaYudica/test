@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_FLOATINGPOINT_H_
-#define TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_FLOATINGPOINT_H_
+#ifndef TEST_MSG_FMT_VAL_SPECIFIER_PRINT_FLOATINGPOINT_H_
+#define TEST_MSG_FMT_VAL_SPECIFIER_PRINT_FLOATINGPOINT_H_
 
 #include "../../flag/FloatingPoint.h"
 #include "../val/FloatingPoint.h"
@@ -13,7 +13,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace specifier
 {
@@ -9657,7 +9657,7 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
 
 } //!specifier
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -9665,4 +9665,4 @@ FloatingPoint<TChar, test::msg::fmt::param::flag::FloatingPoint::
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_FLOATINGPOINT_H_
+#endif //!TEST_MSG_FMT_VAL_SPECIFIER_PRINT_FLOATINGPOINT_H_

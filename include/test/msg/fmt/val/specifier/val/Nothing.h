@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_SPECIFIER_VAL_NOTHING_H_
-#define TEST_MSG_FMT_PARAM_SPECIFIER_VAL_NOTHING_H_
+#ifndef TEST_MSG_FMT_VAL_SPECIFIER_VAL_NOTHING_H_
+#define TEST_MSG_FMT_VAL_SPECIFIER_VAL_NOTHING_H_
 
 namespace test
 {
@@ -7,7 +7,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace specifier
 {
@@ -27,7 +27,7 @@ union Nothing
 
 } //!specifier
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -35,4 +35,4 @@ union Nothing
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_SPECIFIER_VAL_NOTHING_H_
+#endif //!TEST_MSG_FMT_VAL_SPECIFIER_VAL_NOTHING_H_

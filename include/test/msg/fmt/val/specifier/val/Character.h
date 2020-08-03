@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_SPECIFIER_VAL_CHARACTER_H_
-#define TEST_MSG_FMT_PARAM_SPECIFIER_VAL_CHARACTER_H_
+#ifndef TEST_MSG_FMT_VAL_SPECIFIER_VAL_CHARACTER_H_
+#define TEST_MSG_FMT_VAL_SPECIFIER_VAL_CHARACTER_H_
 
 #include <cwchar>
 
@@ -9,7 +9,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace specifier
 {
@@ -26,7 +26,7 @@ union Character
 
 } //!specifier
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -34,4 +34,4 @@ union Character
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_SPECIFIER_VAL_CHARACTER_H_
+#endif //!TEST_MSG_FMT_VAL_SPECIFIER_VAL_CHARACTER_H_

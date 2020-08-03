@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_INTEGER_H_
-#define TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_INTEGER_H_
+#ifndef TEST_MSG_FMT_VAL_SPECIFIER_PRINT_INTEGER_H_
+#define TEST_MSG_FMT_VAL_SPECIFIER_PRINT_INTEGER_H_
 
 #include "../../flag/Integer.h"
 #include "../val/Integer.h"
@@ -13,7 +13,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 namespace specifier
 {
@@ -14926,7 +14926,7 @@ Integer<TChar, test::msg::fmt::param::flag::
 
 } //!specifier
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -14934,4 +14934,4 @@ Integer<TChar, test::msg::fmt::param::flag::
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_SPECIFIER_PRINT_INTEGER_H_
+#endif //!TEST_MSG_FMT_VAL_SPECIFIER_PRINT_INTEGER_H_

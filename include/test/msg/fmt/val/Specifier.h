@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_PARAM_SPECIFIER_H_
-#define TEST_MSG_FMT_PARAM_SPECIFIER_H_
+#ifndef TEST_MSG_FMT_VAL_SPECIFIER_H_
+#define TEST_MSG_FMT_VAL_SPECIFIER_H_
 
 #include "../Parameter.h"
 
@@ -11,7 +11,7 @@ namespace msg
 {
 namespace fmt
 {
-namespace param
+namespace val
 {
 
 template<typename TChar>
@@ -82,7 +82,7 @@ Specifier<TChar>& Specifier<TChar>::operator=(Specifier<TChar>&& mov)
     return *this;
 }
 
-} //!param
+} //!val
 
 } //!fmt
 
@@ -90,4 +90,4 @@ Specifier<TChar>& Specifier<TChar>::operator=(Specifier<TChar>&& mov)
 
 } //!test
 
-#endif //!TEST_MSG_FMT_PARAM_SPECIFIER_H_
+#endif //!TEST_MSG_FMT_VAL_SPECIFIER_H_
