@@ -1,4 +1,4 @@
-#include "test/msg/fmt/param/flag/Nothing.h"
+#include "test/msg/fmt/val/flag/Nothing.h"
 #include "test/out/Interface.h"
 #include "test/out/CString.h"
 
@@ -15,7 +15,7 @@ struct NtFormat
 };
 
 template<>
-struct NtFormat<test::msg::fmt::param::flag::Nothing::define_char>
+struct NtFormat<test::msg::fmt::val::flag::Nothing::define_char>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -25,7 +25,7 @@ struct NtFormat<test::msg::fmt::param::flag::Nothing::define_char>
 };
 
 template<>
-struct NtFormat<test::msg::fmt::param::flag::Nothing::define_short>
+struct NtFormat<test::msg::fmt::val::flag::Nothing::define_short>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -35,7 +35,7 @@ struct NtFormat<test::msg::fmt::param::flag::Nothing::define_short>
 };
 
 template<>
-struct NtFormat<test::msg::fmt::param::flag::Nothing::define_int>
+struct NtFormat<test::msg::fmt::val::flag::Nothing::define_int>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -45,7 +45,7 @@ struct NtFormat<test::msg::fmt::param::flag::Nothing::define_int>
 };
 
 template<>
-struct NtFormat<test::msg::fmt::param::flag::Nothing::define_long>
+struct NtFormat<test::msg::fmt::val::flag::Nothing::define_long>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -55,7 +55,7 @@ struct NtFormat<test::msg::fmt::param::flag::Nothing::define_long>
 };
 
 template<>
-struct NtFormat<test::msg::fmt::param::flag::Nothing::define_long_long>
+struct NtFormat<test::msg::fmt::val::flag::Nothing::define_long_long>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -66,7 +66,8 @@ struct NtFormat<test::msg::fmt::param::flag::Nothing::define_long_long>
 
 int main()
 {
-    using namespace test::msg::fmt::param::flag;
+    using namespace test::msg::fmt::val::flag;
+    using namespace test::msg::fmt;
     {
         constexpr Nothing nt1{};
 

@@ -1,10 +1,10 @@
-#include "test/msg/fmt/param/specifier/val/FloatingPoint.h"
+#include "test/msg/fmt/val/specifier/val/FloatingPoint.h"
 
 #include <cassert>
 
 int main()
 {
-    using namespace test::msg::fmt::param::specifier::val;
+    using namespace test::msg::fmt::val::specifier::val;
     float pi_f = 3.14F;
     double pi_d = pi_f;
     long double pi_ld = pi_d;

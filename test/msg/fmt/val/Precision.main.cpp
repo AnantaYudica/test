@@ -1,4 +1,4 @@
-#include "test/msg/fmt/param/Precision.h"
+#include "test/msg/fmt/val/Precision.h"
 
 #include <cstdio>
 #include <cassert>
@@ -18,7 +18,7 @@ std::size_t Load(T& obj, std::size_t size, ...)
 
 int main()
 {
-using namespace test::msg::fmt::param;
+using namespace test::msg::fmt::val;
 
     Precision<char> prec1;
     assert(prec1.GetValue() == 0);

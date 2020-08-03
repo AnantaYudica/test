@@ -1,4 +1,4 @@
-#include "test/msg/fmt/param/specifier/Integer.h"
+#include "test/msg/fmt/val/specifier/Integer.h"
 #include "test/out/CString.h"
 
 #include <climits>
@@ -18,8 +18,9 @@ std::size_t Load(T& obj, std::size_t size, ...)
 
 int main()
 {
-    using namespace test::msg::fmt::param::specifier;
-    using namespace test::msg::fmt::param;
+    using namespace test::msg::fmt::val::specifier;
+    using namespace test::msg::fmt::val;
+    using namespace test::msg::fmt;
 
     signed char sch1 = SCHAR_MIN, sch2 = SCHAR_MAX, sch3 = (SCHAR_MAX/ 2);
     char ch1 = 'A', ch2 = 'Z', ch3 = 'M';
@@ -134,9 +135,9 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -229,7 +230,7 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Width{}};
+        Integer<char> i1{arg::Width{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -322,10 +323,10 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -418,7 +419,7 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Width{wd1}};
+        Integer<char> i1{arg::Width{wd1}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -511,10 +512,10 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -607,7 +608,7 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Length{}};
+        Integer<char> i1{arg::Length{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -700,10 +701,10 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -796,7 +797,7 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Length{}};
+        Integer<char> i1{arg::Length{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -889,10 +890,10 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -985,7 +986,7 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Length{ln1}};
+        Integer<char> i1{arg::Length{ln1}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1078,10 +1079,10 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1174,8 +1175,8 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Width{},
-            flag::arg::Length{}};
+        Integer<char> i1{arg::Width{},
+            arg::Length{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1270,11 +1271,11 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1369,8 +1370,8 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Width{wd1},
-            flag::arg::Length{}};
+        Integer<char> i1{arg::Width{wd1},
+            arg::Length{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1464,11 +1465,11 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1564,8 +1565,8 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Width{},
-            flag::arg::Length{ln1}};
+        Integer<char> i1{arg::Width{},
+            arg::Length{ln1}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1661,11 +1662,11 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1761,8 +1762,8 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+        Integer<char> i1{arg::Width{wd1},
+            arg::Length{ln1}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1857,11 +1858,11 @@ int main()
         assert(i1.GetBadCode() == Integer<char>::StatusType::good);
     }
     {
-        Integer<char> i1{flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+        Integer<char> i1{arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         
         assert(i1.IsSet() == false);
         assert(i1.GetValue().int_value == 0);
@@ -1958,17 +1959,17 @@ int main()
     }
     ////
     {
-        Integer<char> i1{flag::arg::Define<char>{}};
-        Integer<char> i2{flag::arg::Define<signed char>{}};
-        Integer<char> i3{flag::arg::Define<short>{}};
-        Integer<char> i4{flag::arg::Define<int>{}};
-        Integer<char> i5{flag::arg::Define<long>{}};
-        Integer<char> i6{flag::arg::Define<long long>{}};
-        Integer<char> i7{flag::arg::Define<unsigned char>{}};
-        Integer<char> i8{flag::arg::Define<unsigned short>{}};
-        Integer<char> i9{flag::arg::Define<unsigned int>{}};
-        Integer<char> i10{flag::arg::Define<unsigned long>{}};
-        Integer<char> i11{flag::arg::Define<unsigned long long>{}};
+        Integer<char> i1{arg::Define<char>{}};
+        Integer<char> i2{arg::Define<signed char>{}};
+        Integer<char> i3{arg::Define<short>{}};
+        Integer<char> i4{arg::Define<int>{}};
+        Integer<char> i5{arg::Define<long>{}};
+        Integer<char> i6{arg::Define<long long>{}};
+        Integer<char> i7{arg::Define<unsigned char>{}};
+        Integer<char> i8{arg::Define<unsigned short>{}};
+        Integer<char> i9{arg::Define<unsigned int>{}};
+        Integer<char> i10{arg::Define<unsigned long>{}};
+        Integer<char> i11{arg::Define<unsigned long long>{}};
 
         {
             assert(i1.IsSet() == false);
@@ -2791,50 +2792,50 @@ int main()
         }
     }
     {
-        Integer<char> i1{flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i2{flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i3{flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i4{flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i5{flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i6{flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i7{flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i8{flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i9{flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i10{flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
-        Integer<char> i11{flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+        Integer<char> i1{arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i2{arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i3{arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i4{arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i5{arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i6{arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i7{arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i8{arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i9{arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i10{arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
+        Integer<char> i11{arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         {
             assert(i1.IsSet() == false);
             assert(i1.GetValue().char_value == 0);
@@ -3709,27 +3710,27 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{}};
+            arg::Define<char>{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{}};
+            arg::Define<signed char>{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{}};
+            arg::Define<short>{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{}};
+            arg::Define<int>{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{}};
+            arg::Define<long>{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{}};
+            arg::Define<long long>{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{}};
+            arg::Define<unsigned char>{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{}};
+            arg::Define<unsigned short>{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{}};
+            arg::Define<unsigned int>{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{}};
+            arg::Define<unsigned long>{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{}};
+            arg::Define<unsigned long long>{}};
         
         {
             assert(i1.IsSet() == true);
@@ -4598,60 +4599,60 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         
         {
             assert(i1.IsSet() == true);
@@ -5527,38 +5528,38 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Width{}};
+            arg::Define<char>{},
+            arg::Width{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Width{}};
+            arg::Define<signed char>{},
+            arg::Width{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Width{}};
+            arg::Define<short>{},
+            arg::Width{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Width{}};
+            arg::Define<int>{},
+            arg::Width{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Width{}};
+            arg::Define<long>{},
+            arg::Width{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Width{}};
+            arg::Define<long long>{},
+            arg::Width{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Width{}};
+            arg::Define<unsigned char>{},
+            arg::Width{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Width{}};
+            arg::Define<unsigned short>{},
+            arg::Width{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Width{}};
+            arg::Define<unsigned int>{},
+            arg::Width{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Width{}};
+            arg::Define<unsigned long>{},
+            arg::Width{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Width{}};
+            arg::Define<unsigned long long>{},
+            arg::Width{}};
         
         {
             assert(i1.IsSet() == false);
@@ -6431,71 +6432,71 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{}};
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{}};
         
         {
             assert(i1.IsSet() == false);
@@ -7397,38 +7398,38 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Width{wd1}};
+            arg::Define<char>{},
+            arg::Width{wd1}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Width{wd1}};
+            arg::Define<signed char>{},
+            arg::Width{wd1}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Width{wd1}};
+            arg::Define<short>{},
+            arg::Width{wd1}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Width{wd1}};
+            arg::Define<int>{},
+            arg::Width{wd1}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Width{wd1}};
+            arg::Define<long>{},
+            arg::Width{wd1}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Width{wd1}};
+            arg::Define<long long>{},
+            arg::Width{wd1}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned char>{},
+            arg::Width{wd1}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned short>{},
+            arg::Width{wd1}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned int>{},
+            arg::Width{wd1}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned long>{},
+            arg::Width{wd1}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned long long>{},
+            arg::Width{wd1}};
 
         
         {
@@ -8331,71 +8332,71 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         
         {
             assert(i1.IsSet() == true);
@@ -9297,38 +9298,38 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Length{}};
+            arg::Define<char>{},
+            arg::Length{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Length{}};
+            arg::Define<signed char>{},
+            arg::Length{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Length{}};
+            arg::Define<short>{},
+            arg::Length{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Length{}};
+            arg::Define<int>{},
+            arg::Length{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Length{}};
+            arg::Define<long>{},
+            arg::Length{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Length{}};
+            arg::Define<long long>{},
+            arg::Length{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Length{}};
+            arg::Define<unsigned char>{},
+            arg::Length{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Length{}};
+            arg::Define<unsigned short>{},
+            arg::Length{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Length{}};
+            arg::Define<unsigned int>{},
+            arg::Length{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Length{}};
+            arg::Define<unsigned long>{},
+            arg::Length{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Length{}};
+            arg::Define<unsigned long long>{},
+            arg::Length{}};
         
         
         {
@@ -10221,71 +10222,71 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{}};
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{}};
         
         {
             assert(i1.IsSet() == false);
@@ -11187,38 +11188,38 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Length{ln1}};
+            arg::Define<char>{},
+            arg::Length{ln1}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Length{ln1}};
+            arg::Define<signed char>{},
+            arg::Length{ln1}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Length{ln1}};
+            arg::Define<short>{},
+            arg::Length{ln1}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Length{ln1}};
+            arg::Define<int>{},
+            arg::Length{ln1}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Length{ln1}};
+            arg::Define<long>{},
+            arg::Length{ln1}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Length{ln1}};
+            arg::Define<long long>{},
+            arg::Length{ln1}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned char>{},
+            arg::Length{ln1}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned short>{},
+            arg::Length{ln1}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned int>{},
+            arg::Length{ln1}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long>{},
+            arg::Length{ln1}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long long>{},
+            arg::Length{ln1}};
         
         {
             assert(i1.IsSet() == true);
@@ -12120,71 +12121,71 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         
         {
             assert(i1.IsSet() == true);
@@ -13086,49 +13087,49 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<char>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<signed char>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<short>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<int>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<long>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<long long>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned char>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned short>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned int>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned long>{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned long long>{},
+            arg::Width{wd1},
+            arg::Length{}};
         
         {
             assert(i1.IsSet() == false);
@@ -14032,82 +14033,82 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         
         {
             assert(i1.IsSet() == false);
@@ -15011,49 +15012,49 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<char>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<signed char>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<short>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<int>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<long>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<long long>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned char>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned short>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned int>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long>{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long long>{},
+            arg::Width{},
+            arg::Length{ln1}};
         
         {
             assert(i1.IsSet() == false);
@@ -15957,82 +15958,82 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         
         {
             assert(i1.IsSet() == false);
@@ -16936,49 +16937,49 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<char>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<signed char>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<short>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<int>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<long>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<long long>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned char>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned short>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned int>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned long>{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned long long>{},
+            arg::Width{},
+            arg::Length{}};
         
         
         {
@@ -17883,82 +17884,82 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         
         {
             assert(i1.IsSet() == false);
@@ -18862,49 +18863,49 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<char>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<signed char>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<short>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<int>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<long>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<long long>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned char>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned short>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned int>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long long>{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         
         {
             assert(i1.IsSet() == true);
@@ -19808,82 +19809,82 @@ int main()
     }
     {
         Integer<char> i1{sch1,
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i2{ch1,
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i3{sh1,
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i4{in1,
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i5{lo1,
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i6{lolo1,
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i7{uch1,
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i8{ush1,
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i9{uin1,
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i10{ulo1,
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i11{ulolo1,
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         
         {
             assert(i1.IsSet() == true);
@@ -20789,85 +20790,85 @@ int main()
     {
         
         Integer<char> i1{
-            flag::arg::Prefix{},
-            flag::arg::Define<char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Prefix{},
+            arg::Define<char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i2{
-            flag::arg::Prefix{},
-            flag::arg::Define<signed char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Prefix{},
+            arg::Define<signed char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i3{
-            flag::arg::Prefix{},
-            flag::arg::Define<short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Prefix{},
+            arg::Define<short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i4{
-            flag::arg::Prefix{},
-            flag::arg::Define<int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Prefix{},
+            arg::Define<int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         Integer<char> i5{lo1,
-            flag::arg::Prefix{},
-            flag::arg::Define<long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{}};
+            arg::Prefix{},
+            arg::Define<long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{}};
         Integer<char> i6{lolo1,
-            flag::arg::Prefix{},
-            flag::arg::Define<long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1}};
+            arg::Prefix{},
+            arg::Define<long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1}};
         Integer<char> i7{uch1,
-            flag::arg::Prefix{},
-            flag::arg::Define<unsigned char>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Length{ln1}};
+            arg::Prefix{},
+            arg::Define<unsigned char>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Length{ln1}};
         Integer<char> i8{ush1,
-            flag::arg::Prefix{},
-            flag::arg::Define<unsigned short>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{}};
+            arg::Prefix{},
+            arg::Define<unsigned short>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{}};
         Integer<char> i9{uin1,
-            flag::arg::Prefix{},
-            flag::arg::Define<unsigned int>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{},
-            flag::arg::Length{ln1}};
+            arg::Prefix{},
+            arg::Define<unsigned int>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{},
+            arg::Length{ln1}};
         Integer<char> i10{ulo1,
-            flag::arg::Prefix{},
-            flag::arg::Define<unsigned long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{}};
+            arg::Prefix{},
+            arg::Define<unsigned long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{}};
         Integer<char> i11{ulolo1,
-            flag::arg::Prefix{},
-            flag::arg::Define<unsigned long long>{},
-            flag::arg::Unsigned{},
-            flag::arg::Hexadecimal{},
-            flag::arg::Upper{},
-            flag::arg::Width{wd1},
-            flag::arg::Length{ln1}};
+            arg::Prefix{},
+            arg::Define<unsigned long long>{},
+            arg::Unsigned{},
+            arg::Hexadecimal{},
+            arg::Upper{},
+            arg::Width{wd1},
+            arg::Length{ln1}};
         
         {
             assert(i1.IsSet() == false);

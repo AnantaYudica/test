@@ -1,4 +1,4 @@
-#include "test/msg/fmt/param/flag/FloatingPoint.h"
+#include "test/msg/fmt/val/flag/FloatingPoint.h"
 #include "test/out/CString.h"
 
 #include <cassert>
@@ -17,10 +17,10 @@ struct FfFormat
 ///////
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -30,11 +30,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed|
-    test::msg::fmt::param::flag::FloatingPoint::lower>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed|
+    test::msg::fmt::val::flag::FloatingPoint::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -44,10 +44,10 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -57,11 +57,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed|
-    test::msg::fmt::param::flag::FloatingPoint::upper>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed|
+    test::msg::fmt::val::flag::FloatingPoint::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -71,10 +71,10 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -84,11 +84,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -98,10 +98,10 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -111,11 +111,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -126,11 +126,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -140,12 +140,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -155,11 +155,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -169,12 +169,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -184,10 +184,10 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -197,11 +197,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -211,10 +211,10 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -224,11 +224,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -240,11 +240,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: #
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -254,12 +254,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -269,11 +269,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -283,12 +283,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -298,11 +298,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -312,12 +312,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -327,11 +327,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -341,12 +341,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -357,12 +357,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -372,13 +372,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -388,12 +388,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -403,13 +403,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -419,11 +419,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -433,12 +433,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -448,11 +448,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -462,12 +462,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -479,12 +479,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: +
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -494,13 +494,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -510,12 +510,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -525,13 +525,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -541,12 +541,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -556,13 +556,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -572,12 +572,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -587,13 +587,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -604,13 +604,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -620,14 +620,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -637,13 +637,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -653,14 +653,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -670,12 +670,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -685,13 +685,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -701,12 +701,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -716,13 +716,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -734,12 +734,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix:  
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -749,13 +749,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -765,12 +765,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -780,13 +780,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -796,12 +796,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -811,13 +811,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -827,12 +827,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -842,13 +842,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -859,13 +859,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -875,14 +875,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -892,13 +892,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -908,14 +908,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -925,12 +925,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -940,13 +940,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -956,12 +956,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -971,13 +971,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -989,12 +989,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: 0
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1004,13 +1004,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1020,12 +1020,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1035,13 +1035,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1051,12 +1051,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1066,13 +1066,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1082,12 +1082,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1097,13 +1097,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1114,13 +1114,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1130,14 +1130,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1147,13 +1147,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1163,14 +1163,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1180,12 +1180,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1195,13 +1195,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1211,12 +1211,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1226,13 +1226,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1244,11 +1244,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //////////
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1258,12 +1258,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1273,11 +1273,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1287,12 +1287,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1302,11 +1302,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1316,12 +1316,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1331,11 +1331,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1345,12 +1345,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1361,12 +1361,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1376,13 +1376,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1392,12 +1392,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1407,13 +1407,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1423,11 +1423,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1437,12 +1437,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1452,11 +1452,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1466,12 +1466,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1483,12 +1483,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: #
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1498,13 +1498,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1514,12 +1514,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1529,13 +1529,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1545,12 +1545,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1560,13 +1560,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1576,12 +1576,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1591,13 +1591,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1608,13 +1608,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1624,14 +1624,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1641,13 +1641,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1657,14 +1657,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1674,12 +1674,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1689,13 +1689,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1705,12 +1705,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1720,13 +1720,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1738,13 +1738,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: +
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1754,14 +1754,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1771,13 +1771,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1787,14 +1787,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1804,13 +1804,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1820,14 +1820,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1837,13 +1837,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1853,14 +1853,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1871,14 +1871,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1888,15 +1888,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1906,14 +1906,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1923,15 +1923,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1941,13 +1941,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1957,14 +1957,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1974,13 +1974,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1990,14 +1990,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2009,13 +2009,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix:  
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2025,14 +2025,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2042,13 +2042,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2058,14 +2058,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2075,13 +2075,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2091,14 +2091,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2108,13 +2108,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2124,14 +2124,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2142,14 +2142,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2159,15 +2159,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2177,14 +2177,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2194,15 +2194,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2212,13 +2212,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2228,14 +2228,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2245,13 +2245,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2261,14 +2261,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2280,13 +2280,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: 0
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2296,14 +2296,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2313,13 +2313,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2329,14 +2329,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2346,13 +2346,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2362,14 +2362,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2379,13 +2379,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2395,14 +2395,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2413,14 +2413,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2430,15 +2430,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2448,14 +2448,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2465,15 +2465,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2483,13 +2483,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2499,14 +2499,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2516,13 +2516,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2532,14 +2532,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2550,11 +2550,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //////////////
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2564,12 +2564,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2579,11 +2579,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2593,12 +2593,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2608,11 +2608,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2622,12 +2622,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2637,11 +2637,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2651,12 +2651,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2667,12 +2667,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2682,13 +2682,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2698,12 +2698,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2713,13 +2713,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2729,11 +2729,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2743,12 +2743,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2758,11 +2758,11 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2772,12 +2772,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2789,12 +2789,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: #
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2804,13 +2804,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2820,12 +2820,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2835,13 +2835,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2851,12 +2851,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2866,13 +2866,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2882,12 +2882,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2897,13 +2897,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2914,13 +2914,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2930,14 +2930,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2947,13 +2947,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2963,14 +2963,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2980,12 +2980,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2995,13 +2995,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3011,12 +3011,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3026,13 +3026,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3044,13 +3044,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: +
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3060,14 +3060,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3077,13 +3077,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3093,14 +3093,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3110,13 +3110,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3126,14 +3126,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3143,13 +3143,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3159,14 +3159,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3177,14 +3177,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3194,15 +3194,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3212,14 +3212,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3229,15 +3229,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3247,13 +3247,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3263,14 +3263,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3280,13 +3280,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3296,14 +3296,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3315,13 +3315,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix:  
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3331,14 +3331,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3348,13 +3348,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3364,14 +3364,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3381,13 +3381,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3397,14 +3397,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3414,13 +3414,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3430,14 +3430,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3448,14 +3448,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3465,15 +3465,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3483,14 +3483,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3500,15 +3500,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3518,13 +3518,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3534,14 +3534,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3551,13 +3551,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3567,14 +3567,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3586,13 +3586,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: 0
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3602,14 +3602,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3619,13 +3619,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3635,14 +3635,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3652,13 +3652,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3668,14 +3668,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3685,13 +3685,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3701,14 +3701,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3719,14 +3719,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3736,15 +3736,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3754,14 +3754,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3771,15 +3771,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3789,13 +3789,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3805,14 +3805,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3822,13 +3822,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3838,14 +3838,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3857,12 +3857,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3872,13 +3872,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3888,12 +3888,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3903,13 +3903,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3919,12 +3919,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3934,13 +3934,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3950,12 +3950,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3965,13 +3965,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3982,13 +3982,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3998,14 +3998,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4015,13 +4015,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4031,14 +4031,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4048,12 +4048,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4063,13 +4063,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4079,12 +4079,12 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4094,13 +4094,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4112,13 +4112,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: #
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4128,14 +4128,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4145,13 +4145,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4161,14 +4161,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4178,13 +4178,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4194,14 +4194,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4211,13 +4211,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4227,14 +4227,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4245,14 +4245,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4262,15 +4262,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4280,14 +4280,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4297,15 +4297,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4315,13 +4315,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4331,14 +4331,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4348,13 +4348,13 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4364,14 +4364,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper |
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper |
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4383,14 +4383,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: +
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4400,15 +4400,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4418,14 +4418,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4435,15 +4435,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4453,14 +4453,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4470,15 +4470,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4488,14 +4488,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4505,15 +4505,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4524,15 +4524,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4542,16 +4542,16 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4561,15 +4561,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4579,16 +4579,16 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4598,14 +4598,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4615,15 +4615,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4633,14 +4633,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4650,15 +4650,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::plus|
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::plus|
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4670,14 +4670,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix:  
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4687,15 +4687,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4705,14 +4705,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4722,15 +4722,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4740,14 +4740,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4757,15 +4757,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4775,14 +4775,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4792,15 +4792,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4811,15 +4811,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4829,16 +4829,16 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4848,15 +4848,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4866,16 +4866,16 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4885,14 +4885,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4902,15 +4902,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4920,14 +4920,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4937,15 +4937,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::space |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::space |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4957,14 +4957,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 //prefix: 0
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4974,15 +4974,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4992,14 +4992,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5009,15 +5009,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5027,14 +5027,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5044,15 +5044,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5062,14 +5062,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5079,15 +5079,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5098,15 +5098,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5116,16 +5116,16 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5135,15 +5135,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5153,16 +5153,16 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::decimal |
-    test::msg::fmt::param::flag::FloatingPoint::fixed |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::decimal |
+    test::msg::fmt::val::flag::FloatingPoint::fixed |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5172,14 +5172,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5189,15 +5189,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::lower | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::lower | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5207,14 +5207,14 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent |
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent |
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5224,15 +5224,15 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_double |
 };
 
 template<>
-struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
-    test::msg::fmt::param::flag::FloatingPoint::define_double |
-    test::msg::fmt::param::flag::FloatingPoint::hexadecimal |
-    test::msg::fmt::param::flag::FloatingPoint::exponent|
-    test::msg::fmt::param::flag::FloatingPoint::upper | 
-    test::msg::fmt::param::flag::FloatingPoint::prefix |
-    test::msg::fmt::param::flag::FloatingPoint::zero |
-    test::msg::fmt::param::flag::FloatingPoint::width |
-    test::msg::fmt::param::flag::FloatingPoint::precision>
+struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
+    test::msg::fmt::val::flag::FloatingPoint::define_double |
+    test::msg::fmt::val::flag::FloatingPoint::hexadecimal |
+    test::msg::fmt::val::flag::FloatingPoint::exponent|
+    test::msg::fmt::val::flag::FloatingPoint::upper | 
+    test::msg::fmt::val::flag::FloatingPoint::prefix |
+    test::msg::fmt::val::flag::FloatingPoint::zero |
+    test::msg::fmt::val::flag::FloatingPoint::width |
+    test::msg::fmt::val::flag::FloatingPoint::precision>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5244,7 +5244,8 @@ struct FfFormat<test::msg::fmt::param::flag::FloatingPoint::define_long |
 
 int main()
 {
-    using namespace test::msg::fmt::param::flag;
+    using namespace test::msg::fmt::val::flag;
+    using namespace test::msg::fmt;
     {
         {
             constexpr FloatingPoint ff1{};

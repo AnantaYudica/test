@@ -1,4 +1,4 @@
-#include "test/msg/fmt/param/specifier/FloatingPoint.h"
+#include "test/msg/fmt/val/specifier/FloatingPoint.h"
 #include "test/out/CString.h"
 
 #include <cassert>
@@ -17,8 +17,9 @@ std::size_t Load(T& obj, std::size_t size, ...)
 
 int main()
 {
-    using namespace test::msg::fmt::param::specifier;
-    using namespace test::msg::fmt::param;
+    using namespace test::msg::fmt::val::specifier;
+    using namespace test::msg::fmt::val;
+    using namespace test::msg::fmt;
     const float float_val1 = 2.22f, float_val2 = 8.88f;
     const double double_val1 = 34.567, double_val2 = 345.67;
     const long double l_double_val1 = 0.000012345L,
@@ -32,9 +33,12 @@ int main()
         test::out::CString<char> out_cstr3_a, out_cstr3_b;
 
         assert(ff1.IsSet() == false);
-        assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
-        assert(val::FloatingPoint::CastTo<double>(ff1.GetValue()) == 0.0);
-        assert(val::FloatingPoint::CastTo<long double>(ff1.GetValue())== 0.0L);
+        assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
+        assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()) == 0.0);
+        assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue())== 0.0L);
         assert(ff1.GetWidth() == 0);
         assert(ff1.GetPrecision() == 0);
         assert(ff1.GetFlag() == flag::FloatingPoint::ldf_double_format);
@@ -43,7 +47,8 @@ int main()
         assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
         auto len_a = out_cstr1_a.Print("%f", 
-            val::FloatingPoint::CastTo<double>(ff1.GetValue()));
+            specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()));
         auto len_b = ff1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -57,7 +62,8 @@ int main()
         auto len = ff1.Load(1, 3.14);
         assert(len == 1);
         assert(ff1.IsSet() == true);
-        assert(val::FloatingPoint::CastTo<double>(ff1.GetValue()) == 3.14);
+        assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()) == 3.14);
         assert(ff1.GetWidth() == 0);
         assert(ff1.GetPrecision() == 0);
         assert(ff1.IsGood() == true);
@@ -65,7 +71,8 @@ int main()
         assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
         len_a = out_cstr2_a.Print("%f", 
-            val::FloatingPoint::CastTo<double>(ff1.GetValue()));
+            specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()));
         len_b = ff1.Output(out_cstr2_b);
         assert(len_a == len_b);
         assert(out_cstr2_a.Size() == out_cstr2_b.Size());
@@ -83,7 +90,8 @@ int main()
         len = ff1.Load(1, 6.28);
         assert(len == 1);
         assert(ff1.IsSet() == true);
-        assert(val::FloatingPoint::CastTo<double>(ff1.GetValue()) == 6.28);
+        assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()) == 6.28);
         assert(ff1.GetWidth() == 0);
         assert(ff1.GetPrecision() == 0);
         assert(ff1.IsGood() == true);
@@ -93,7 +101,8 @@ int main()
         len = Load(ff1, 1, 3.14);
         assert(len == 0);
         assert(ff1.IsSet() == true);
-        assert(val::FloatingPoint::CastTo<double>(ff1.GetValue()) == 6.28);
+        assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()) == 6.28);
         assert(ff1.GetWidth() == 0);
         assert(ff1.GetPrecision() == 0);
         assert(ff1.IsGood() == true);
@@ -101,7 +110,8 @@ int main()
         assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
         len_a = out_cstr3_a.Print("%f", 
-            val::FloatingPoint::CastTo<double>(ff1.GetValue()));
+            specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()));
         len_b = ff1.Output(out_cstr3_b);
         assert(len_a == len_b);
         assert(out_cstr3_a.Size() == out_cstr3_b.Size());
@@ -114,16 +124,17 @@ int main()
 
     /////
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}};
+        FloatingPoint<char> ff1{arg::Width{}};
+        FloatingPoint<char> ff2{arg::Width{}};
+        FloatingPoint<char> ff3{arg::Width{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::w_ldf_double_format);
@@ -132,7 +143,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -142,7 +154,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -154,9 +167,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -187,7 +203,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -198,7 +215,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -209,7 +227,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -221,7 +240,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -230,7 +250,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -240,7 +261,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -253,7 +275,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -264,7 +287,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -275,7 +299,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -286,9 +311,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -317,16 +345,17 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Precision{}};
-        FloatingPoint<char> ff2{flag::arg::Precision{}};
-        FloatingPoint<char> ff3{flag::arg::Precision{}};
+        FloatingPoint<char> ff1{arg::Precision{}};
+        FloatingPoint<char> ff2{arg::Precision{}};
+        FloatingPoint<char> ff3{arg::Precision{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -335,7 +364,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 0.0);
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
             assert(ff2.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -344,7 +374,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -356,9 +387,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -389,7 +423,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -400,7 +435,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -411,7 +447,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -423,7 +460,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -432,7 +470,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -442,7 +481,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -455,7 +495,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -466,7 +507,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -477,7 +519,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -488,9 +531,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -519,16 +565,17 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, flag::arg::Precision{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, flag::arg::Precision{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, flag::arg::Precision{}};
+        FloatingPoint<char> ff1{arg::Width{}, arg::Precision{}};
+        FloatingPoint<char> ff2{arg::Width{}, arg::Precision{}};
+        FloatingPoint<char> ff3{arg::Width{}, arg::Precision{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -537,7 +584,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -547,7 +595,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -559,9 +608,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -592,7 +644,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 3);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -603,7 +656,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 3);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -614,7 +668,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 3);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -626,7 +681,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -635,7 +691,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -645,7 +702,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -658,7 +716,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 3);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -669,7 +728,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 3);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -680,7 +740,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 3);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -691,9 +752,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -723,16 +787,17 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}};
+        FloatingPoint<char> ff1{arg::Width{wd1}};
+        FloatingPoint<char> ff2{arg::Width{wd1}};
+        FloatingPoint<char> ff3{arg::Width{wd1}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::w_ldf_double_format);
@@ -741,7 +806,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -751,7 +817,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -763,9 +830,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -796,7 +866,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -807,7 +878,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -818,7 +890,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -830,7 +903,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -839,7 +913,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -849,7 +924,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -862,7 +938,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -873,7 +950,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -884,7 +962,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -895,9 +974,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -926,16 +1008,17 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff2{flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff3{flag::arg::Precision{pres1}};
+        FloatingPoint<char> ff1{arg::Precision{pres1}};
+        FloatingPoint<char> ff2{arg::Precision{pres1}};
+        FloatingPoint<char> ff3{arg::Precision{pres1}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -944,7 +1027,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 0.0);
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
             assert(ff2.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -953,7 +1037,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -965,9 +1050,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -998,7 +1086,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -1009,7 +1098,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -1020,7 +1110,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -1032,7 +1123,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -1041,7 +1133,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -1051,7 +1144,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -1064,7 +1158,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -1075,7 +1170,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -1086,7 +1182,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -1097,9 +1194,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -1128,16 +1228,17 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, flag::arg::Precision{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, flag::arg::Precision{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, flag::arg::Precision{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, arg::Precision{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, arg::Precision{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, arg::Precision{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -1146,7 +1247,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -1156,7 +1258,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -1168,9 +1271,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -1201,7 +1307,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -1212,7 +1319,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -1223,7 +1331,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -1235,7 +1344,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -1244,7 +1354,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -1254,7 +1365,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -1267,7 +1379,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -1278,7 +1391,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -1289,7 +1403,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -1300,9 +1415,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -1332,19 +1450,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}};
+        FloatingPoint<char> ff1{arg::Width{}, 
+            arg::Precision{pres1}};
+        FloatingPoint<char> ff2{arg::Width{}, 
+            arg::Precision{pres1}};
+        FloatingPoint<char> ff3{arg::Width{}, 
+            arg::Precision{pres1}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -1353,7 +1472,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -1363,7 +1483,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -1375,9 +1496,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -1408,7 +1532,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -1419,7 +1544,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -1430,7 +1556,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -1442,7 +1569,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -1451,7 +1579,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -1461,7 +1590,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -1474,7 +1604,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -1485,7 +1616,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -1496,7 +1628,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -1507,9 +1640,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -1538,19 +1674,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, 
+            arg::Precision{pres1}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, 
+            arg::Precision{pres1}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, 
+            arg::Precision{pres1}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -1559,7 +1696,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -1569,7 +1707,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -1581,9 +1720,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -1614,7 +1756,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -1625,7 +1768,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -1636,7 +1780,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -1648,7 +1793,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -1657,7 +1803,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -1667,7 +1814,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -1680,7 +1828,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -1691,7 +1840,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -1702,7 +1852,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -1713,9 +1864,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -1744,16 +1898,17 @@ int main()
     }
     //////
     {
-        FloatingPoint<char> ff1{flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{arg::Define<float>{}};
+        FloatingPoint<char> ff2{arg::Define<float>{}};
+        FloatingPoint<char> ff3{arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::ldf_double_format);
@@ -1762,7 +1917,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -1772,7 +1928,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -1784,9 +1941,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -1817,7 +1977,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -1828,7 +1989,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -1839,7 +2001,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -1851,7 +2014,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -1860,7 +2024,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -1870,7 +2035,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -1883,7 +2049,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -1894,7 +2061,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -1905,7 +2073,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -1916,9 +2085,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -1947,19 +2119,20 @@ int main()
     }
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{arg::Width{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{arg::Width{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{arg::Width{}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::w_ldf_double_format);
@@ -1968,7 +2141,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -1978,7 +2152,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -1990,9 +2165,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2023,7 +2201,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -2034,7 +2213,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -2045,7 +2225,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -2057,7 +2238,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -2066,7 +2248,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -2076,7 +2259,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -2089,7 +2273,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -2100,7 +2285,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -2111,7 +2297,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -2122,9 +2309,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2153,19 +2343,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{arg::Precision{}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -2174,7 +2365,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 0.0);
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
             assert(ff2.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -2183,7 +2375,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -2195,9 +2388,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2228,7 +2424,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -2239,7 +2436,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -2250,7 +2448,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -2262,7 +2461,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -2271,7 +2471,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -2281,7 +2482,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -2294,7 +2496,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -2305,7 +2508,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -2316,7 +2520,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -2327,9 +2532,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2358,19 +2566,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{arg::Width{}, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{arg::Width{}, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{arg::Width{}, arg::Precision{}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -2379,7 +2588,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -2389,7 +2599,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -2401,9 +2612,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2434,7 +2648,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 3);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -2445,7 +2660,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 3);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -2456,7 +2672,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 3);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -2468,7 +2685,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -2477,7 +2695,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -2487,7 +2706,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -2500,7 +2720,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 3);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -2511,7 +2732,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 3);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -2522,7 +2744,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 3);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -2533,9 +2756,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2565,19 +2791,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::w_ldf_double_format);
@@ -2586,7 +2813,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -2596,7 +2824,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -2608,9 +2837,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2641,7 +2873,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -2652,7 +2885,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -2663,7 +2897,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -2675,7 +2910,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -2684,7 +2920,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -2694,7 +2931,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -2707,7 +2945,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -2718,7 +2957,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -2729,7 +2969,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -2740,9 +2981,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2771,19 +3015,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Precision{pres1}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{flag::arg::Precision{pres1}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{flag::arg::Precision{pres1}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{arg::Precision{pres1}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{arg::Precision{pres1}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{arg::Precision{pres1}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -2792,7 +3037,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 0.0);
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
             assert(ff2.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -2801,7 +3047,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -2813,9 +3060,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2846,7 +3096,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -2857,7 +3108,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -2868,7 +3120,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -2880,7 +3133,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -2889,7 +3143,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -2899,7 +3154,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -2912,7 +3168,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -2923,7 +3180,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -2934,7 +3192,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -2945,9 +3204,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -2976,19 +3238,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -2997,7 +3260,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -3007,7 +3271,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -3019,9 +3284,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -3052,7 +3320,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -3063,7 +3332,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -3074,7 +3344,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -3086,7 +3357,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -3095,7 +3367,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -3105,7 +3378,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -3118,7 +3392,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -3129,7 +3404,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -3140,7 +3416,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -3151,9 +3428,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -3183,19 +3463,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
+        FloatingPoint<char> ff2{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
+        FloatingPoint<char> ff3{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -3204,7 +3485,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -3214,7 +3496,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -3226,9 +3509,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -3259,7 +3545,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -3270,7 +3557,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -3281,7 +3569,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -3293,7 +3582,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -3302,7 +3592,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -3312,7 +3603,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -3325,7 +3617,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -3336,7 +3629,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -3347,7 +3641,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -3358,9 +3653,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -3389,19 +3687,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -3410,7 +3709,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -3420,7 +3720,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -3432,9 +3733,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -3465,7 +3769,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -3476,7 +3781,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -3487,7 +3793,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -3499,7 +3806,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -3508,7 +3816,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -3518,7 +3827,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -3531,7 +3841,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -3542,7 +3853,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -3553,7 +3865,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -3564,9 +3877,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -3595,16 +3911,17 @@ int main()
     }
     ///////
     {
-        FloatingPoint<char> ff1{flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{arg::Define<double>{}};
+        FloatingPoint<char> ff2{arg::Define<double>{}};
+        FloatingPoint<char> ff3{arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::ldf_double_format);
@@ -3613,7 +3930,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -3623,7 +3941,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -3635,9 +3954,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -3668,7 +3990,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -3679,7 +4002,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -3690,7 +4014,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -3702,7 +4027,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -3711,7 +4037,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -3721,7 +4048,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -3734,7 +4062,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -3745,7 +4074,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -3756,7 +4086,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -3767,9 +4098,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -3798,19 +4132,20 @@ int main()
     }
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{arg::Width{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{arg::Width{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{arg::Width{}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::w_ldf_double_format);
@@ -3819,7 +4154,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -3829,7 +4165,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -3841,9 +4178,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -3874,7 +4214,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -3885,7 +4226,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -3896,7 +4238,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -3908,7 +4251,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -3917,7 +4261,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -3927,7 +4272,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -3940,7 +4286,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -3951,7 +4298,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -3962,7 +4310,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -3973,9 +4322,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4004,19 +4356,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{arg::Precision{}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -4025,7 +4378,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 0.0);
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
             assert(ff2.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -4034,7 +4388,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -4046,9 +4401,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4079,7 +4437,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -4090,7 +4449,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -4101,7 +4461,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -4113,7 +4474,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -4122,7 +4484,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -4132,7 +4495,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -4145,7 +4509,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -4156,7 +4521,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -4167,7 +4533,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -4178,9 +4545,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4209,19 +4579,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{arg::Width{}, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{arg::Width{}, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{arg::Width{}, arg::Precision{}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -4230,7 +4601,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -4240,7 +4612,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -4252,9 +4625,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4285,7 +4661,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 3);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -4296,7 +4673,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 3);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -4307,7 +4685,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 3);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -4319,7 +4698,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -4328,7 +4708,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -4338,7 +4719,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -4351,7 +4733,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 3);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -4362,7 +4745,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 3);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -4373,7 +4757,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 3);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -4384,9 +4769,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4416,19 +4804,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::w_ldf_double_format);
@@ -4437,7 +4826,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -4447,7 +4837,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -4459,9 +4850,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4492,7 +4886,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -4503,7 +4898,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -4514,7 +4910,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -4526,7 +4923,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -4535,7 +4933,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -4545,7 +4944,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -4558,7 +4958,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -4569,7 +4970,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -4580,7 +4982,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -4591,9 +4994,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4622,19 +5028,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Precision{pres1}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{flag::arg::Precision{pres1}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{flag::arg::Precision{pres1}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{arg::Precision{pres1}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{arg::Precision{pres1}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{arg::Precision{pres1}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -4643,7 +5050,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 0.0);
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
             assert(ff2.GetFlag() == flag::FloatingPoint::p_ldf_double_format);
@@ -4652,7 +5060,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -4664,9 +5073,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4697,7 +5109,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -4708,7 +5121,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -4719,7 +5133,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -4731,7 +5146,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -4740,7 +5156,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -4750,7 +5167,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -4763,7 +5181,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -4774,7 +5193,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -4785,7 +5205,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -4796,9 +5217,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4827,19 +5251,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -4848,7 +5273,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -4858,7 +5284,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -4870,9 +5297,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -4903,7 +5333,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -4914,7 +5345,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -4925,7 +5357,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -4937,7 +5370,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -4946,7 +5380,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -4956,7 +5391,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -4969,7 +5405,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -4980,7 +5417,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -4991,7 +5429,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -5002,9 +5441,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5034,19 +5476,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
+        FloatingPoint<char> ff2{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
+        FloatingPoint<char> ff3{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -5055,7 +5498,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -5065,7 +5509,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -5077,9 +5522,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5110,7 +5558,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -5121,7 +5570,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -5132,7 +5582,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -5144,7 +5595,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -5153,7 +5605,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -5163,7 +5616,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -5176,7 +5630,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -5187,7 +5642,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -5198,7 +5654,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -5209,9 +5666,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5240,19 +5700,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_double_format);
@@ -5261,7 +5722,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -5271,7 +5733,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -5283,9 +5746,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5316,7 +5782,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -5327,7 +5794,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -5338,7 +5806,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -5350,7 +5819,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -5359,7 +5829,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -5369,7 +5840,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -5382,7 +5854,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -5393,7 +5866,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -5404,7 +5878,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 (double)l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -5415,9 +5890,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5446,16 +5924,17 @@ int main()
     }
     /////
     {
-        FloatingPoint<char> ff1{flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{arg::Define<long double>{}};
+        FloatingPoint<char> ff2{arg::Define<long double>{}};
+        FloatingPoint<char> ff3{arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::ldf_long_double_format);
@@ -5464,7 +5943,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -5474,7 +5954,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -5486,9 +5967,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%Lf%Lf%Lf", 
-                val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5519,7 +6003,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -5530,7 +6015,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -5541,7 +6027,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -5553,7 +6040,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -5562,7 +6050,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -5572,7 +6061,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -5585,7 +6075,8 @@ int main()
             auto len = ff1.Load(1, (long double)float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -5596,7 +6087,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -5607,7 +6099,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -5618,9 +6111,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%Lf%Lf%Lf", 
-                val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5649,19 +6145,20 @@ int main()
     }
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{arg::Width{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{arg::Width{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{arg::Width{}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::w_ldf_long_double_format);
@@ -5670,7 +6167,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -5680,7 +6178,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -5692,9 +6191,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*Lf%*Lf%*Lf", 
-                0, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5725,7 +6227,8 @@ int main()
             auto len = ff1.Load(2, wd2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -5736,7 +6239,8 @@ int main()
             len = ff2.Load(2, wd2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -5747,7 +6251,8 @@ int main()
             len = ff3.Load(2, wd2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -5759,7 +6264,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -5768,7 +6274,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -5778,7 +6285,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -5791,7 +6299,8 @@ int main()
             auto len = ff1.Load(2, wd2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -5802,7 +6311,8 @@ int main()
             len = ff2.Load(2, wd2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -5813,7 +6323,8 @@ int main()
             len = ff3.Load(2, wd2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -5824,9 +6335,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*Lf%*Lf%*Lf", 
-                wd2, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd2, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd2, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5855,19 +6369,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{arg::Precision{}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::p_ldf_long_double_format);
@@ -5876,7 +6391,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 0.0);
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
             assert(ff2.GetFlag() == flag::FloatingPoint::p_ldf_long_double_format);
@@ -5885,7 +6401,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -5897,9 +6414,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*Lf%.*Lf%.*Lf", 
-                0, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -5930,7 +6450,8 @@ int main()
             auto len = ff1.Load(2, pres2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -5941,7 +6462,8 @@ int main()
             len = ff2.Load(2, pres2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -5952,7 +6474,8 @@ int main()
             len = ff3.Load(2, pres2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -5964,7 +6487,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -5973,7 +6497,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -5983,7 +6508,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -5996,7 +6522,8 @@ int main()
             auto len = ff1.Load(2, pres2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -6007,7 +6534,8 @@ int main()
             len = ff2.Load(2, pres2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -6018,7 +6546,8 @@ int main()
             len = ff3.Load(2, pres2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -6029,9 +6558,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*Lf%.*Lf%.*Lf", 
-                pres2, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                pres2, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                pres2, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6060,19 +6592,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{arg::Width{}, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{arg::Width{}, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{arg::Width{}, arg::Precision{}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_long_double_format);
@@ -6081,7 +6614,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -6091,7 +6625,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -6103,9 +6638,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                0, 0, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6136,7 +6674,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, (long double) float_val2);
             assert(len == 3);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -6147,7 +6686,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, (long double) double_val2);
             assert(len == 3);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -6158,7 +6698,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, l_double_val2);
             assert(len == 3);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -6170,7 +6711,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -6179,7 +6721,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -6189,7 +6732,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -6202,7 +6746,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, (long double) float_val2);
             assert(len == 3);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -6213,7 +6758,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, (long double) double_val2);
             assert(len == 3);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -6224,7 +6770,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, l_double_val2);
             assert(len == 3);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -6235,9 +6782,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd2, pres2, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6267,19 +6817,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::w_ldf_long_double_format);
@@ -6288,7 +6839,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -6298,7 +6850,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -6310,9 +6863,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*Lf%*Lf%*Lf", 
-                wd1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6343,7 +6899,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -6354,7 +6911,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -6365,7 +6923,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -6377,7 +6936,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -6386,7 +6946,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -6396,7 +6957,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -6409,7 +6971,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -6420,7 +6983,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -6431,7 +6995,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -6442,9 +7007,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*Lf%*Lf%*Lf", 
-                wd1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6473,19 +7041,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Precision{pres1}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{flag::arg::Precision{pres1}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{flag::arg::Precision{pres1}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{arg::Precision{pres1}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{arg::Precision{pres1}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{arg::Precision{pres1}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::p_ldf_long_double_format);
@@ -6494,7 +7063,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 0.0);
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
             assert(ff2.GetFlag() == flag::FloatingPoint::p_ldf_long_double_format);
@@ -6503,7 +7073,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -6515,9 +7086,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*Lf%.*Lf%.*Lf", 
-                pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6548,7 +7122,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -6559,7 +7134,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -6570,7 +7146,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -6582,7 +7159,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -6591,7 +7169,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -6601,7 +7180,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -6614,7 +7194,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -6625,7 +7206,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -6636,7 +7218,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -6647,9 +7230,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*Lf%.*Lf%.*Lf", 
-                pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6678,19 +7264,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_long_double_format);
@@ -6699,7 +7286,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -6709,7 +7297,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -6721,9 +7310,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6754,7 +7346,8 @@ int main()
             auto len = ff1.Load(2, pres2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -6765,7 +7358,8 @@ int main()
             len = ff2.Load(2, pres2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -6776,7 +7370,8 @@ int main()
             len = ff3.Load(2, pres2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -6788,7 +7383,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
             assert(ff1.IsGood() == true);
@@ -6797,7 +7393,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -6807,7 +7404,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -6820,7 +7418,8 @@ int main()
             auto len = ff1.Load(2, pres2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -6831,7 +7430,8 @@ int main()
             len = ff2.Load(2, pres2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -6842,7 +7442,8 @@ int main()
             len = ff3.Load(2, pres2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -6853,9 +7454,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6885,19 +7489,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
+        FloatingPoint<char> ff2{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
+        FloatingPoint<char> ff3{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_long_double_format);
@@ -6906,7 +7511,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -6916,7 +7522,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -6928,9 +7535,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -6961,7 +7571,8 @@ int main()
             auto len = ff1.Load(2, wd2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -6972,7 +7583,8 @@ int main()
             len = ff2.Load(2, wd2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -6983,7 +7595,8 @@ int main()
             len = ff3.Load(2, wd2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -6995,7 +7608,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -7004,7 +7618,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -7014,7 +7629,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -7027,7 +7643,8 @@ int main()
             auto len = ff1.Load(2, wd2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -7038,7 +7655,8 @@ int main()
             len = ff2.Load(2, wd2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -7049,7 +7667,8 @@ int main()
             len = ff3.Load(2, wd2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -7060,9 +7679,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7091,19 +7713,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
+        FloatingPoint<char> ff3{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.GetFlag() == flag::FloatingPoint::wp_ldf_long_double_format);
@@ -7112,7 +7735,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -7122,7 +7746,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -7134,9 +7759,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7167,7 +7795,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -7178,7 +7807,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -7189,7 +7819,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -7201,7 +7832,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 0.0f);
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 0.0f);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
             assert(ff1.IsGood() == true);
@@ -7210,7 +7842,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 0.0);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -7220,7 +7853,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -7233,7 +7867,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val2);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -7244,7 +7879,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -7255,7 +7891,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -7266,9 +7903,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7306,7 +7946,8 @@ int main()
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -7316,7 +7957,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -7326,7 +7968,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -7338,9 +7981,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7371,7 +8017,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -7382,7 +8029,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -7393,7 +8041,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -7405,7 +8054,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -7415,7 +8065,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -7425,7 +8076,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -7438,7 +8090,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -7449,7 +8102,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -7460,7 +8114,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -7471,9 +8126,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7502,16 +8160,17 @@ int main()
     }
     /////
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -7521,7 +8180,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -7531,7 +8191,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -7543,9 +8204,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7576,7 +8240,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -7587,7 +8252,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -7598,7 +8264,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -7610,7 +8277,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -7620,7 +8288,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -7630,7 +8299,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -7643,7 +8313,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -7654,7 +8325,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -7665,7 +8337,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -7676,9 +8349,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7707,16 +8383,17 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Precision{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Precision{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Precision{}};
+        FloatingPoint<char> ff1{float_val1, arg::Precision{}};
+        FloatingPoint<char> ff2{double_val1, arg::Precision{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Precision{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -7726,7 +8403,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -7736,7 +8414,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -7748,9 +8427,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7781,7 +8463,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -7792,7 +8475,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -7803,7 +8487,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -7815,7 +8500,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -7825,7 +8511,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -7835,7 +8522,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -7848,7 +8536,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -7859,7 +8548,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -7870,7 +8560,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -7881,9 +8572,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7912,16 +8606,17 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, flag::arg::Precision{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, flag::arg::Precision{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, flag::arg::Precision{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, arg::Precision{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, arg::Precision{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, arg::Precision{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -7931,7 +8626,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -7941,7 +8637,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -7953,9 +8650,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -7986,7 +8686,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -7997,7 +8698,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -8008,7 +8710,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -8020,7 +8723,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -8030,7 +8734,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -8040,7 +8745,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -8053,7 +8759,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -8064,7 +8771,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -8075,7 +8783,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -8086,9 +8795,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -8118,16 +8830,17 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -8137,7 +8850,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -8147,7 +8861,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -8159,9 +8874,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -8192,7 +8910,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -8203,7 +8922,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -8214,7 +8934,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -8226,7 +8947,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -8236,7 +8958,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -8246,7 +8969,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -8259,7 +8983,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -8270,7 +8995,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -8281,7 +9007,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -8292,9 +9019,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -8323,16 +9053,17 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Precision{pres1}};
+        FloatingPoint<char> ff1{float_val1, arg::Precision{pres1}};
+        FloatingPoint<char> ff2{double_val1, arg::Precision{pres1}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Precision{pres1}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -8342,7 +9073,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -8352,7 +9084,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -8364,9 +9097,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -8397,7 +9133,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -8408,7 +9145,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -8419,7 +9157,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -8431,7 +9170,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -8441,7 +9181,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -8451,7 +9192,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -8464,7 +9206,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -8475,7 +9218,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -8486,7 +9230,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -8497,9 +9242,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -8528,16 +9276,17 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, flag::arg::Precision{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, flag::arg::Precision{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, flag::arg::Precision{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, arg::Precision{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, arg::Precision{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, arg::Precision{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -8547,7 +9296,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -8557,7 +9307,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -8569,9 +9320,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -8602,7 +9356,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -8613,7 +9368,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -8624,7 +9380,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -8636,7 +9393,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -8646,7 +9404,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -8656,7 +9415,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -8669,7 +9429,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -8680,7 +9441,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -8691,7 +9453,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -8702,9 +9465,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -8734,19 +9500,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, 
+            arg::Precision{pres1}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, 
+            arg::Precision{pres1}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, 
+            arg::Precision{pres1}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -8756,7 +9523,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -8766,7 +9534,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -8778,9 +9547,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -8811,7 +9583,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -8822,7 +9595,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -8833,7 +9607,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -8845,7 +9620,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -8855,7 +9631,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -8865,7 +9642,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -8878,7 +9656,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -8889,7 +9668,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -8900,7 +9680,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -8911,9 +9692,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -8942,19 +9726,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -8964,7 +9749,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -8974,7 +9760,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -8986,9 +9773,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9019,7 +9809,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -9030,7 +9821,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -9041,7 +9833,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -9053,7 +9846,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -9063,7 +9857,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -9073,7 +9868,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -9086,7 +9882,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -9097,7 +9894,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -9108,7 +9906,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -9119,9 +9918,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9150,16 +9952,17 @@ int main()
     }
     //////
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Define<float>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Define<float>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9169,7 +9972,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9179,7 +9983,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9191,9 +9996,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9224,7 +10032,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9235,7 +10044,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9246,7 +10056,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9258,7 +10069,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9268,7 +10080,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9278,7 +10091,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9291,7 +10105,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9302,7 +10117,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9313,7 +10129,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9324,9 +10141,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9355,19 +10175,20 @@ int main()
     }
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9377,7 +10198,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9387,7 +10209,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9399,9 +10222,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9432,7 +10258,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -9443,7 +10270,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -9454,7 +10282,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -9466,7 +10295,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9476,7 +10306,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9486,7 +10317,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9499,7 +10331,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -9510,7 +10343,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -9521,7 +10355,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -9532,9 +10367,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9563,19 +10401,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Precision{}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9585,7 +10424,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9595,7 +10435,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9607,9 +10448,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9640,7 +10484,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -9651,7 +10496,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -9662,7 +10508,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -9674,7 +10521,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9684,7 +10532,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9694,7 +10543,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9707,7 +10557,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -9718,7 +10569,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -9729,7 +10581,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -9740,9 +10593,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9771,19 +10627,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, arg::Precision{}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9793,7 +10650,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9803,7 +10661,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9815,9 +10674,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9848,7 +10710,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -9859,7 +10722,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -9870,7 +10734,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -9882,7 +10747,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -9892,7 +10758,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -9902,7 +10769,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -9915,7 +10783,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -9926,7 +10795,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -9937,7 +10807,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -9948,9 +10819,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -9980,19 +10854,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -10002,7 +10877,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -10012,7 +10888,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -10024,9 +10901,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -10057,7 +10937,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -10068,7 +10949,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -10079,7 +10961,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -10091,7 +10974,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -10101,7 +10985,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -10111,7 +10996,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -10124,7 +11010,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -10135,7 +11022,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -10146,7 +11034,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -10157,9 +11046,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -10188,19 +11080,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Precision{pres1}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Precision{pres1}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Precision{pres1}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Precision{pres1}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Precision{pres1}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Precision{pres1}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -10210,7 +11103,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -10220,7 +11114,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -10232,9 +11127,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -10265,7 +11163,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -10276,7 +11175,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -10287,7 +11187,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -10299,7 +11200,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -10309,7 +11211,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -10319,7 +11222,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -10332,7 +11236,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -10343,7 +11248,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -10354,7 +11260,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -10365,9 +11272,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -10396,19 +11306,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<float>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -10418,7 +11329,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -10428,7 +11340,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -10440,9 +11353,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -10473,7 +11389,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -10484,7 +11401,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -10495,7 +11413,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -10507,7 +11426,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -10517,7 +11437,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -10527,7 +11448,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -10540,7 +11462,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -10551,7 +11474,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -10562,7 +11486,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -10573,9 +11498,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -10605,19 +11533,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -10627,7 +11556,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -10637,7 +11567,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -10649,9 +11580,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -10682,7 +11616,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -10693,7 +11628,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -10704,7 +11640,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -10716,7 +11653,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -10726,7 +11664,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -10736,7 +11675,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -10749,7 +11689,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -10760,7 +11701,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -10771,7 +11713,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -10782,9 +11725,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -10813,19 +11759,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<float>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<float>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -10835,7 +11782,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -10845,7 +11793,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -10857,9 +11806,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -10890,7 +11842,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -10901,7 +11854,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -10912,7 +11866,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -10924,7 +11879,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -10934,7 +11890,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -10944,7 +11901,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -10957,7 +11915,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -10968,7 +11927,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -10979,7 +11939,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -10990,9 +11951,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11021,16 +11985,17 @@ int main()
     }
     ///////
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Define<double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Define<double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11040,7 +12005,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11050,7 +12016,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11062,9 +12029,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11095,7 +12065,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11106,7 +12077,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11117,7 +12089,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11129,7 +12102,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11139,7 +12113,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11149,7 +12124,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11162,7 +12138,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11173,7 +12150,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11184,7 +12162,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11195,9 +12174,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%f%f%f", 
-                val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11226,19 +12208,20 @@ int main()
     }
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11248,7 +12231,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11258,7 +12242,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11270,9 +12255,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11303,7 +12291,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -11314,7 +12303,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -11325,7 +12315,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -11337,7 +12328,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11347,7 +12339,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11357,7 +12350,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11370,7 +12364,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -11381,7 +12376,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -11392,7 +12388,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -11403,9 +12400,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11434,19 +12434,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Precision{}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11456,7 +12457,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11466,7 +12468,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11478,9 +12481,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11511,7 +12517,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -11522,7 +12529,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -11533,7 +12541,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -11545,7 +12554,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11555,7 +12565,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11565,7 +12576,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11578,7 +12590,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -11589,7 +12602,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -11600,7 +12614,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -11611,9 +12626,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11642,19 +12660,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, arg::Precision{}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11664,7 +12683,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11674,7 +12694,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11686,9 +12707,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11719,7 +12743,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -11730,7 +12755,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -11741,7 +12767,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -11753,7 +12780,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -11763,7 +12791,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -11773,7 +12802,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -11786,7 +12816,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -11797,7 +12828,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -11808,7 +12840,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, (double)l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -11819,9 +12852,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11851,19 +12887,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -11873,7 +12910,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -11883,7 +12921,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -11895,9 +12934,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -11928,7 +12970,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -11939,7 +12982,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -11950,7 +12994,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -11962,7 +13007,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -11972,7 +13018,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -11982,7 +13029,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -11995,7 +13043,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -12006,7 +13055,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -12017,7 +13067,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -12028,9 +13079,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*f%*f%*f", 
-                wd1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12059,19 +13113,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Precision{pres1}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Precision{pres1}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Precision{pres1}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Precision{pres1}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Precision{pres1}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Precision{pres1}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -12081,7 +13136,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -12091,7 +13147,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -12103,9 +13160,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12136,7 +13196,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -12147,7 +13208,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -12158,7 +13220,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -12170,7 +13233,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -12180,7 +13244,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -12190,7 +13255,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -12203,7 +13269,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -12214,7 +13281,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -12225,7 +13293,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -12236,9 +13305,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*f%.*f%.*f", 
-                pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12267,19 +13339,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -12289,7 +13362,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -12299,7 +13373,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -12311,9 +13386,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12344,7 +13422,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -12355,7 +13434,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -12366,7 +13446,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -12378,7 +13459,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -12388,7 +13470,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -12398,7 +13481,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -12411,7 +13495,8 @@ int main()
             auto len = ff1.Load(2, pres2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -12422,7 +13507,8 @@ int main()
             len = ff2.Load(2, pres2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -12433,7 +13519,8 @@ int main()
             len = ff3.Load(2, pres2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -12444,9 +13531,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12476,19 +13566,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -12498,7 +13589,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -12508,7 +13600,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -12520,9 +13613,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                0, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12553,7 +13649,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -12564,7 +13661,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -12575,7 +13673,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -12587,7 +13686,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -12597,7 +13697,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -12607,7 +13708,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -12620,7 +13722,8 @@ int main()
             auto len = ff1.Load(2, wd2, float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -12631,7 +13734,8 @@ int main()
             len = ff2.Load(2, wd2, double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -12642,7 +13746,8 @@ int main()
             len = ff3.Load(2, wd2, (double)l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -12653,9 +13758,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12684,19 +13792,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -12706,7 +13815,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -12716,7 +13826,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -12728,9 +13839,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12761,7 +13875,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -12772,7 +13887,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -12783,7 +13899,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -12795,7 +13912,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -12805,7 +13923,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -12815,7 +13934,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -12828,7 +13948,8 @@ int main()
             auto len = ff1.Load(1, float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -12839,7 +13960,8 @@ int main()
             len = ff2.Load(1, double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -12850,7 +13972,8 @@ int main()
             len = ff3.Load(1, (double)l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -12861,9 +13984,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*f%*.*f%*.*f", 
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12892,16 +14018,17 @@ int main()
     }
     /////
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Define<long double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Define<long double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -12911,7 +14038,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -12921,7 +14049,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -12933,9 +14062,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%Lf%Lf%Lf", 
-                val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -12966,7 +14098,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -12977,7 +14110,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -12988,7 +14122,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -13000,7 +14135,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -13010,7 +14146,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -13020,7 +14157,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -13033,7 +14171,8 @@ int main()
             auto len = ff1.Load(1, (long double)float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -13044,7 +14183,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -13055,7 +14195,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -13066,9 +14207,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%Lf%Lf%Lf", 
-                val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -13097,19 +14241,20 @@ int main()
     }
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -13119,7 +14264,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -13129,7 +14275,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -13141,9 +14288,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*Lf%*Lf%*Lf", 
-                0, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -13174,7 +14324,8 @@ int main()
             auto len = ff1.Load(2, wd2, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -13185,7 +14336,8 @@ int main()
             len = ff2.Load(2, wd2, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -13196,7 +14348,8 @@ int main()
             len = ff3.Load(2, wd2, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -13208,7 +14361,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -13218,7 +14372,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -13228,7 +14383,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -13241,7 +14397,8 @@ int main()
             auto len = ff1.Load(2, wd2, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == 0);
@@ -13252,7 +14409,8 @@ int main()
             len = ff2.Load(2, wd2, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == 0);
@@ -13263,7 +14421,8 @@ int main()
             len = ff3.Load(2, wd2, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == 0);
@@ -13274,9 +14433,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*Lf%*Lf%*Lf", 
-                wd2, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd2, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd2, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -13305,19 +14467,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Precision{}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -13327,7 +14490,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -13337,7 +14501,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -13349,9 +14514,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*Lf%.*Lf%.*Lf", 
-                0, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                0, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                0, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -13382,7 +14550,8 @@ int main()
             auto len = ff1.Load(2, pres2, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -13393,7 +14562,8 @@ int main()
             len = ff2.Load(2, pres2, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -13404,7 +14574,8 @@ int main()
             len = ff3.Load(2, pres2, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -13416,7 +14587,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -13426,7 +14598,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -13436,7 +14609,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -13449,7 +14623,8 @@ int main()
             auto len = ff1.Load(2, pres2, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres2);
@@ -13460,7 +14635,8 @@ int main()
             len = ff2.Load(2, pres2, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres2);
@@ -13471,7 +14647,8 @@ int main()
             len = ff3.Load(2, pres2, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres2);
@@ -13482,9 +14659,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*Lf%.*Lf%.*Lf", 
-                pres2, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                pres2, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                pres2, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -13513,19 +14693,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, arg::Precision{}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -13535,7 +14716,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -13545,7 +14727,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -13557,9 +14740,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                0, 0, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                0, 0, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                0, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -13590,7 +14776,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -13601,7 +14788,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -13612,7 +14800,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -13624,7 +14813,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -13634,7 +14824,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == 0);
@@ -13644,7 +14835,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == 0);
@@ -13657,7 +14849,8 @@ int main()
             auto len = ff1.Load(3, wd2, pres2, (long double) float_val2);
             assert(len == 2);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres2);
@@ -13668,7 +14861,8 @@ int main()
             len = ff2.Load(3, wd2, pres2, (long double) double_val2);
             assert(len == 2);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres2);
@@ -13679,7 +14873,8 @@ int main()
             len = ff3.Load(3, wd2, pres2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres2);
@@ -13690,9 +14885,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd2, pres2, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd2, pres2, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd2, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -13722,19 +14920,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -13744,7 +14943,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -13754,7 +14954,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -13766,9 +14967,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*Lf%*Lf%*Lf", 
-                wd1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -13799,7 +15003,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -13810,7 +15015,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -13821,7 +15027,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -13833,7 +15040,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -13843,7 +15051,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -13853,7 +15062,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -13866,7 +15076,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -13877,7 +15088,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -13888,7 +15100,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -13899,9 +15112,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*Lf%*Lf%*Lf", 
-                wd1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -13930,19 +15146,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Precision{pres1}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Precision{pres1}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Precision{pres1}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Precision{pres1}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Precision{pres1}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Precision{pres1}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -13952,7 +15169,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) == 
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -13962,7 +15180,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -13974,9 +15193,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%.*Lf%.*Lf%.*Lf", 
-                pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -14007,7 +15229,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -14018,7 +15241,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -14029,7 +15253,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -14041,7 +15266,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -14051,7 +15277,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -14061,7 +15288,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -14074,7 +15302,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -14085,7 +15314,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -14096,7 +15326,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -14107,9 +15338,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%.*Lf%.*Lf%.*Lf", 
-                pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -14138,19 +15372,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, flag::arg::Precision{}, 
-            flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<long double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, arg::Precision{}, 
+            arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -14160,7 +15395,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -14170,7 +15406,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -14182,9 +15419,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -14215,7 +15455,8 @@ int main()
             auto len = ff1.Load(2, pres2, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -14226,7 +15467,8 @@ int main()
             len = ff2.Load(2, pres2, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -14237,7 +15479,8 @@ int main()
             len = ff3.Load(2, pres2, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -14249,7 +15492,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == 0);
@@ -14259,7 +15503,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == 0);
@@ -14269,7 +15514,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == 0);
@@ -14282,7 +15528,8 @@ int main()
             auto len = ff1.Load(2, pres2, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres2);
@@ -14293,7 +15540,8 @@ int main()
             len = ff2.Load(2, pres2, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres2);
@@ -14304,7 +15552,8 @@ int main()
             len = ff3.Load(2, pres2, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres2);
@@ -14315,9 +15564,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -14347,19 +15599,20 @@ int main()
 
     
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -14369,7 +15622,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -14379,7 +15633,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -14391,9 +15646,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -14424,7 +15682,8 @@ int main()
             auto len = ff1.Load(2, wd2, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -14435,7 +15694,8 @@ int main()
             len = ff2.Load(2, wd2, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -14446,7 +15706,8 @@ int main()
             len = ff3.Load(2, wd2, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -14458,7 +15719,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == pres1);
@@ -14468,7 +15730,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == 0);
             assert(ff2.GetPrecision() == pres1);
@@ -14478,7 +15741,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -14491,7 +15755,8 @@ int main()
             auto len = ff1.Load(2, wd2, (long double) float_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd2);
             assert(ff1.GetPrecision() == pres1);
@@ -14502,7 +15767,8 @@ int main()
             len = ff2.Load(2, wd2, (long double) double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd2);
             assert(ff2.GetPrecision() == pres1);
@@ -14513,7 +15779,8 @@ int main()
             len = ff3.Load(2, wd2, l_double_val2);
             assert(len == 1);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -14524,9 +15791,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -14555,19 +15825,20 @@ int main()
     }
 
     {
-        FloatingPoint<char> ff1{float_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff2{double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
-        FloatingPoint<char> ff3{l_double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{}};
+        FloatingPoint<char> ff1{float_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
+        FloatingPoint<char> ff2{double_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
+        FloatingPoint<char> ff3{l_double_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<long double>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
         test::out::CString<char> out_cstr2_a, out_cstr2_b;
         
         {
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -14577,7 +15848,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -14587,7 +15859,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -14599,9 +15872,12 @@ int main()
         
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -14632,7 +15908,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -14643,7 +15920,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -14654,7 +15932,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -14666,7 +15945,8 @@ int main()
         {
             ff1.Unset();
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) == 
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -14676,7 +15956,8 @@ int main()
 
             ff2.Unset();
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -14686,7 +15967,8 @@ int main()
 
             ff3.Unset();
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -14699,7 +15981,8 @@ int main()
             auto len = ff1.Load(1, (long double) float_val2);
             assert(len == 0);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff1.GetValue()) ==
                 float_val1);
             assert(ff1.GetWidth() == wd1);
             assert(ff1.GetPrecision() == pres1);
@@ -14710,7 +15993,8 @@ int main()
             len = ff2.Load(1, (long double) double_val2);
             assert(len == 0);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff2.GetValue()) ==
                 double_val1);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -14721,7 +16005,8 @@ int main()
             len = ff3.Load(1, l_double_val2);
             assert(len == 0);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val1);
             assert(ff3.GetWidth() == wd1);
             assert(ff3.GetPrecision() == pres1);
@@ -14732,9 +16017,12 @@ int main()
 
         {
             auto len_a = out_cstr1_a.Print("%*.*Lf%*.*Lf%*.*Lf", 
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()));
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -14763,38 +16051,39 @@ int main()
     }
     /////
     {   
-        FloatingPoint<char> ff1{flag::arg::Define<long double>{},
-            flag::arg::Prefix{}, flag::arg::Upper{}, flag::arg::Hexadecimal{},
-            flag::arg::Exponent{}};
-        FloatingPoint<char> ff2{flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{},
-            flag::arg::Prefix{}, flag::arg::Upper{}, flag::arg::Hexadecimal{},
-            flag::arg::Exponent{}};
-        FloatingPoint<char> ff3{flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{},
-            flag::arg::Prefix{}, flag::arg::Upper{}, flag::arg::Hexadecimal{},
-            flag::arg::Exponent{}};
-        FloatingPoint<char> ff4{flag::arg::Width{wd1}, 
-            flag::arg::Precision{}, flag::arg::Define<long double>{},
-            flag::arg::Prefix{}, flag::arg::Upper{}, flag::arg::Hexadecimal{},
-            flag::arg::Exponent{}};
-        FloatingPoint<char> ff5{float_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{},
-            flag::arg::Prefix{}, flag::arg::Upper{}, flag::arg::Hexadecimal{},
-            flag::arg::Exponent{}};
-        FloatingPoint<char> ff6{double_val1, flag::arg::Width{}, 
-            flag::arg::Precision{pres1}, flag::arg::Define<long double>{},
-            flag::arg::Prefix{}, flag::arg::Upper{}, flag::arg::Hexadecimal{},
-            flag::arg::Exponent{}};
-        FloatingPoint<char> ff7{l_double_val1, flag::arg::Width{wd1}, 
-            flag::arg::Precision{}, flag::arg::Define<long double>{},
-            flag::arg::Prefix{}, flag::arg::Upper{}, flag::arg::Hexadecimal{},
-            flag::arg::Exponent{}};
+        FloatingPoint<char> ff1{arg::Define<long double>{},
+            arg::Prefix{}, arg::Upper{}, arg::Hexadecimal{},
+            arg::Exponent{}};
+        FloatingPoint<char> ff2{arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<long double>{},
+            arg::Prefix{}, arg::Upper{}, arg::Hexadecimal{},
+            arg::Exponent{}};
+        FloatingPoint<char> ff3{arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<long double>{},
+            arg::Prefix{}, arg::Upper{}, arg::Hexadecimal{},
+            arg::Exponent{}};
+        FloatingPoint<char> ff4{arg::Width{wd1}, 
+            arg::Precision{}, arg::Define<long double>{},
+            arg::Prefix{}, arg::Upper{}, arg::Hexadecimal{},
+            arg::Exponent{}};
+        FloatingPoint<char> ff5{float_val1, arg::Width{wd1}, 
+            arg::Precision{pres1}, arg::Define<long double>{},
+            arg::Prefix{}, arg::Upper{}, arg::Hexadecimal{},
+            arg::Exponent{}};
+        FloatingPoint<char> ff6{double_val1, arg::Width{}, 
+            arg::Precision{pres1}, arg::Define<long double>{},
+            arg::Prefix{}, arg::Upper{}, arg::Hexadecimal{},
+            arg::Exponent{}};
+        FloatingPoint<char> ff7{l_double_val1, arg::Width{wd1}, 
+            arg::Precision{}, arg::Define<long double>{},
+            arg::Prefix{}, arg::Upper{}, arg::Hexadecimal{},
+            arg::Exponent{}};
             
 
         {
             assert(ff1.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff1.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()) == 
                 0.0L);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -14804,7 +16093,8 @@ int main()
             assert(ff1.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()) ==
                 0.0L);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -14814,7 +16104,8 @@ int main()
             assert(ff2.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 0.0L);
             assert(ff3.GetWidth() == 0);
             assert(ff3.GetPrecision() == pres1);
@@ -14824,7 +16115,8 @@ int main()
             assert(ff3.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff4.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff4.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff4.GetValue()) == 
                 0.0L);
             assert(ff4.GetWidth() == wd1);
             assert(ff4.GetPrecision() == 0);
@@ -14834,7 +16126,8 @@ int main()
             assert(ff4.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff5.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff5.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff5.GetValue()) ==
                 float_val1);
             assert(ff5.GetWidth() == wd1);
             assert(ff5.GetPrecision() == pres1);
@@ -14844,7 +16137,8 @@ int main()
             assert(ff5.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff6.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff6.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff6.GetValue()) ==
                 double_val1);
             assert(ff6.GetWidth() == 0);
             assert(ff6.GetPrecision() == pres1);
@@ -14854,7 +16148,8 @@ int main()
             assert(ff6.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff7.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff7.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff7.GetValue()) ==
                 l_double_val1);
             assert(ff7.GetWidth() == wd1);
             assert(ff7.GetPrecision() == 0);
@@ -14868,13 +16163,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff4.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff5.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff6.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff7.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff4.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff5.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff6.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff7.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -14929,7 +16231,8 @@ int main()
             auto len = ff1.Load(1, (long double) l_double_val2);
             assert(len == 1);
             assert(ff1.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff1.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()) ==
                 l_double_val2);
             assert(ff1.GetWidth() == 0);
             assert(ff1.GetPrecision() == 0);
@@ -14940,7 +16243,8 @@ int main()
             len = ff2.Load(1, (long double) l_double_val2);
             assert(len == 1);
             assert(ff2.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff2.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()) ==
                 l_double_val2);
             assert(ff2.GetWidth() == wd1);
             assert(ff2.GetPrecision() == pres1);
@@ -14951,7 +16255,8 @@ int main()
             len = ff3.Load(2, wd2, l_double_val2);
             assert(len == 2);
             assert(ff3.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff3.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()) ==
                 l_double_val2);
             assert(ff3.GetWidth() == wd2);
             assert(ff3.GetPrecision() == pres1);
@@ -14962,7 +16267,8 @@ int main()
             len = ff4.Load(2, pres2, l_double_val2);
             assert(len == 2);
             assert(ff4.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff4.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff4.GetValue()) ==
                 l_double_val2);
             assert(ff4.GetWidth() == wd1);
             assert(ff4.GetPrecision() == pres2);
@@ -14973,7 +16279,8 @@ int main()
             len = ff5.Load(1, (long double )float_val2);
             assert(len == 0);
             assert(ff5.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff5.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff5.GetValue()) ==
                 float_val1);
             assert(ff5.GetWidth() == wd1);
             assert(ff5.GetPrecision() == pres1);
@@ -14984,7 +16291,8 @@ int main()
             len = ff6.Load(1, wd2, (long double)double_val2);
             assert(len == 1);
             assert(ff6.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff6.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff6.GetValue()) ==
                 double_val1);
             assert(ff6.GetWidth() == wd2);
             assert(ff6.GetPrecision() == pres1);
@@ -14995,7 +16303,8 @@ int main()
             len = ff7.Load(1, pres2, l_double_val2);
             assert(len == 1);
             assert(ff7.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff7.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff7.GetValue()) ==
                 l_double_val1);
             assert(ff7.GetWidth() == wd1);
             assert(ff7.GetPrecision() == pres2);
@@ -15008,13 +16317,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff1.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff2.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff3.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff4.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff5.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff6.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff7.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff1.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff4.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff5.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff6.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff7.GetValue()));
             auto len_b = ff1.Output(out_cstr1_b);
             len_b += ff2.Output(out_cstr1_b);
             len_b += ff3.Output(out_cstr1_b);
@@ -15076,7 +16392,8 @@ int main()
 
         {
             assert(ff8.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff8.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff8.GetValue()) ==
                 l_double_val2);
             assert(ff8.GetWidth() == 0);
             assert(ff8.GetPrecision() == 0);
@@ -15085,7 +16402,8 @@ int main()
             assert(ff8.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff9.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff9.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff9.GetValue()) ==
                 l_double_val2);
             assert(ff9.GetWidth() == wd1);
             assert(ff9.GetPrecision() == pres1);
@@ -15094,7 +16412,8 @@ int main()
             assert(ff9.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff10.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff10.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff10.GetValue()) ==
                 l_double_val2);
             assert(ff10.GetWidth() == wd2);
             assert(ff10.GetPrecision() == pres1);
@@ -15103,7 +16422,8 @@ int main()
             assert(ff10.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff11.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff11.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff11.GetValue()) ==
                 l_double_val2);
             assert(ff11.GetWidth() == wd1);
             assert(ff11.GetPrecision() == pres2);
@@ -15112,7 +16432,8 @@ int main()
             assert(ff11.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff12.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff12.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff12.GetValue()) ==
                 float_val1);
             assert(ff12.GetWidth() == wd1);
             assert(ff12.GetPrecision() == pres1);
@@ -15121,7 +16442,8 @@ int main()
             assert(ff12.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff13.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff13.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff13.GetValue()) ==
                 double_val1);
             assert(ff13.GetWidth() == wd2);
             assert(ff13.GetPrecision() == pres1);
@@ -15130,7 +16452,8 @@ int main()
             assert(ff13.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff14.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff14.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff14.GetValue()) ==
                 l_double_val1);
             assert(ff14.GetWidth() == wd1);
             assert(ff14.GetPrecision() == pres2);
@@ -15143,13 +16466,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff8.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff9.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff10.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff11.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff12.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff13.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff14.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff8.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff9.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff10.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff11.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff12.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff13.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff14.GetValue()));
             auto len_b = ff8.Output(out_cstr1_b);
             len_b += ff9.Output(out_cstr1_b);
             len_b += ff10.Output(out_cstr1_b);
@@ -15204,7 +16534,8 @@ int main()
         {
             ff8.Unset();
             assert(ff8.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff8.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff8.GetValue()) == 
                 0.0L);
             assert(ff8.GetWidth() == 0);
             assert(ff8.GetPrecision() == 0);
@@ -15215,7 +16546,8 @@ int main()
 
             ff9.Unset();
             assert(ff9.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff9.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff9.GetValue()) ==
                 0.0L);
             assert(ff9.GetWidth() == wd1);
             assert(ff9.GetPrecision() == pres1);
@@ -15226,7 +16558,8 @@ int main()
 
             ff10.Unset();
             assert(ff10.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff10.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff10.GetValue()) ==
                 0.0L);
             assert(ff10.GetWidth() == 0);
             assert(ff10.GetPrecision() == pres1);
@@ -15237,7 +16570,8 @@ int main()
 
             ff11.Unset();
             assert(ff11.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff11.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff11.GetValue()) == 
                 0.0L);
             assert(ff11.GetWidth() == wd1);
             assert(ff11.GetPrecision() == 0);
@@ -15248,7 +16582,8 @@ int main()
 
             ff12.Unset();
             assert(ff12.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff12.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff12.GetValue()) ==
                 float_val1);
             assert(ff12.GetWidth() == wd1);
             assert(ff12.GetPrecision() == pres1);
@@ -15259,7 +16594,8 @@ int main()
 
             ff13.Unset();
             assert(ff13.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff13.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff13.GetValue()) ==
                 double_val1);
             assert(ff13.GetWidth() == 0);
             assert(ff13.GetPrecision() == pres1);
@@ -15270,7 +16606,8 @@ int main()
 
             ff14.Unset();
             assert(ff14.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff14.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff14.GetValue()) ==
                 l_double_val1);
             assert(ff14.GetWidth() == wd1);
             assert(ff14.GetPrecision() == 0);
@@ -15284,13 +16621,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff8.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff9.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff10.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff11.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff12.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff13.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff14.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff8.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff9.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff10.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff11.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff12.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff13.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff14.GetValue()));
             auto len_b = ff8.Output(out_cstr1_b);
             len_b += ff9.Output(out_cstr1_b);
             len_b += ff10.Output(out_cstr1_b);
@@ -15361,7 +16705,8 @@ int main()
         
         {
             assert(ff15.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff15.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff15.GetValue()) ==
                 l_double_val2);
             assert(ff15.GetWidth() == 0);
             assert(ff15.GetPrecision() == 0);
@@ -15370,7 +16715,8 @@ int main()
             assert(ff15.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff16.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff16.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff16.GetValue()) ==
                 l_double_val2);
             assert(ff16.GetWidth() == wd1);
             assert(ff16.GetPrecision() == pres1);
@@ -15379,7 +16725,8 @@ int main()
             assert(ff16.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff17.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff17.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff17.GetValue()) ==
                 l_double_val2);
             assert(ff17.GetWidth() == wd2);
             assert(ff17.GetPrecision() == pres1);
@@ -15388,7 +16735,8 @@ int main()
             assert(ff17.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff18.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff18.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff18.GetValue()) ==
                 l_double_val2);
             assert(ff18.GetWidth() == wd1);
             assert(ff18.GetPrecision() == pres2);
@@ -15397,7 +16745,8 @@ int main()
             assert(ff18.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff19.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff19.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff19.GetValue()) ==
                 float_val1);
             assert(ff19.GetWidth() == wd1);
             assert(ff19.GetPrecision() == pres1);
@@ -15406,7 +16755,8 @@ int main()
             assert(ff19.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff20.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff20.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff20.GetValue()) ==
                 double_val1);
             assert(ff20.GetWidth() == wd2);
             assert(ff20.GetPrecision() == pres1);
@@ -15415,7 +16765,8 @@ int main()
             assert(ff20.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff21.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff21.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff21.GetValue()) ==
                 l_double_val1);
             assert(ff21.GetWidth() == wd1);
             assert(ff21.GetPrecision() == pres2);
@@ -15428,13 +16779,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff15.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff16.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff17.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff18.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff19.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff20.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff21.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff15.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff16.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff17.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff18.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff19.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff20.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff21.GetValue()));
             auto len_b = ff15.Output(out_cstr1_b);
             len_b += ff16.Output(out_cstr1_b);
             len_b += ff17.Output(out_cstr1_b);
@@ -15489,7 +16847,8 @@ int main()
         {
             ff15.Unset();
             assert(ff15.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff15.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff15.GetValue()) == 
                 0.0L);
             assert(ff15.GetWidth() == 0);
             assert(ff15.GetPrecision() == 0);
@@ -15500,7 +16859,8 @@ int main()
 
             ff16.Unset();
             assert(ff16.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff16.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff16.GetValue()) ==
                 0.0L);
             assert(ff16.GetWidth() == wd1);
             assert(ff16.GetPrecision() == pres1);
@@ -15511,7 +16871,8 @@ int main()
 
             ff17.Unset();
             assert(ff17.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff17.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff17.GetValue()) ==
                 0.0L);
             assert(ff17.GetWidth() == 0);
             assert(ff17.GetPrecision() == pres1);
@@ -15522,7 +16883,8 @@ int main()
 
             ff18.Unset();
             assert(ff18.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff18.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff18.GetValue()) == 
                 0.0L);
             assert(ff18.GetWidth() == wd1);
             assert(ff18.GetPrecision() == 0);
@@ -15533,7 +16895,8 @@ int main()
 
             ff19.Unset();
             assert(ff19.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff19.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff19.GetValue()) ==
                 float_val1);
             assert(ff19.GetWidth() == wd1);
             assert(ff19.GetPrecision() == pres1);
@@ -15544,7 +16907,8 @@ int main()
 
             ff20.Unset();
             assert(ff20.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff20.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff20.GetValue()) ==
                 double_val1);
             assert(ff20.GetWidth() == 0);
             assert(ff20.GetPrecision() == pres1);
@@ -15555,7 +16919,8 @@ int main()
 
             ff21.Unset();
             assert(ff21.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff21.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff21.GetValue()) ==
                 l_double_val1);
             assert(ff21.GetWidth() == wd1);
             assert(ff21.GetPrecision() == 0);
@@ -15569,13 +16934,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff15.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff16.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff17.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff18.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff19.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff20.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff21.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff15.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff16.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff17.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff18.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff19.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff20.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff21.GetValue()));
             auto len_b = ff15.Output(out_cstr1_b);
             len_b += ff16.Output(out_cstr1_b);
             len_b += ff17.Output(out_cstr1_b);
@@ -15629,7 +17001,8 @@ int main()
         
         {
             assert(ff1_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff1_c.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff1_c.GetValue()) == 
                 0.0L);
             assert(ff1_c.GetWidth() == 0);
             assert(ff1_c.GetPrecision() == 0);
@@ -15639,7 +17012,8 @@ int main()
             assert(ff1_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff2_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff2_c.GetValue()) ==
                 0.0L);
             assert(ff2_c.GetWidth() == wd1);
             assert(ff2_c.GetPrecision() == pres1);
@@ -15649,7 +17023,8 @@ int main()
             assert(ff2_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3_c.GetValue()) ==
                 0.0L);
             assert(ff3_c.GetWidth() == 0);
             assert(ff3_c.GetPrecision() == pres1);
@@ -15659,7 +17034,8 @@ int main()
             assert(ff3_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff4_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff4_c.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff4_c.GetValue()) == 
                 0.0L);
             assert(ff4_c.GetWidth() == wd1);
             assert(ff4_c.GetPrecision() == 0);
@@ -15669,7 +17045,8 @@ int main()
             assert(ff4_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff5_c.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff5_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff5_c.GetValue()) ==
                 float_val1);
             assert(ff5_c.GetWidth() == wd1);
             assert(ff5_c.GetPrecision() == pres1);
@@ -15679,7 +17056,8 @@ int main()
             assert(ff5_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff6_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff6_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff6_c.GetValue()) ==
                 double_val1);
             assert(ff6_c.GetWidth() == 0);
             assert(ff6_c.GetPrecision() == pres1);
@@ -15689,7 +17067,8 @@ int main()
             assert(ff6_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff7_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff7_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff7_c.GetValue()) ==
                 l_double_val1);
             assert(ff7_c.GetWidth() == wd1);
             assert(ff7_c.GetPrecision() == 0);
@@ -15703,13 +17082,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff1_c.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff2_c.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff3_c.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff4_c.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff5_c.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff6_c.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff7_c.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff1_c.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2_c.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3_c.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff4_c.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff5_c.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff6_c.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff7_c.GetValue()));
             auto len_b = ff1_c.Output(out_cstr1_b);
             len_b += ff2_c.Output(out_cstr1_b);
             len_b += ff3_c.Output(out_cstr1_b);
@@ -15778,7 +17164,8 @@ int main()
         ff28 = ff7;
         {
             assert(ff22.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff22.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff22.GetValue()) ==
                 l_double_val2);
             assert(ff22.GetWidth() == 0);
             assert(ff22.GetPrecision() == 0);
@@ -15787,7 +17174,8 @@ int main()
             assert(ff22.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff23.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff23.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff23.GetValue()) ==
                 l_double_val2);
             assert(ff23.GetWidth() == wd1);
             assert(ff23.GetPrecision() == pres1);
@@ -15796,7 +17184,8 @@ int main()
             assert(ff23.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff24.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff24.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff24.GetValue()) ==
                 l_double_val2);
             assert(ff24.GetWidth() == wd2);
             assert(ff24.GetPrecision() == pres1);
@@ -15805,7 +17194,8 @@ int main()
             assert(ff24.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff25.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff25.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff25.GetValue()) ==
                 l_double_val2);
             assert(ff25.GetWidth() == wd1);
             assert(ff25.GetPrecision() == pres2);
@@ -15814,7 +17204,8 @@ int main()
             assert(ff25.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff26.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff26.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff26.GetValue()) ==
                 float_val1);
             assert(ff26.GetWidth() == wd1);
             assert(ff26.GetPrecision() == pres1);
@@ -15823,7 +17214,8 @@ int main()
             assert(ff26.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff27.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff27.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff27.GetValue()) ==
                 double_val1);
             assert(ff27.GetWidth() == wd2);
             assert(ff27.GetPrecision() == pres1);
@@ -15832,7 +17224,8 @@ int main()
             assert(ff27.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff28.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff28.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff28.GetValue()) ==
                 l_double_val1);
             assert(ff28.GetWidth() == wd1);
             assert(ff28.GetPrecision() == pres2);
@@ -15845,13 +17238,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff22.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff23.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff24.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff25.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff26.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff27.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff28.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff22.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff23.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff24.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff25.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff26.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff27.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff28.GetValue()));
             auto len_b = ff22.Output(out_cstr1_b);
             len_b += ff23.Output(out_cstr1_b);
             len_b += ff24.Output(out_cstr1_b);
@@ -15906,7 +17306,8 @@ int main()
         {
             ff22.Unset();
             assert(ff22.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff22.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff22.GetValue()) == 
                 0.0L);
             assert(ff22.GetWidth() == 0);
             assert(ff22.GetPrecision() == 0);
@@ -15917,7 +17318,8 @@ int main()
 
             ff23.Unset();
             assert(ff23.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff23.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff23.GetValue()) ==
                 0.0L);
             assert(ff23.GetWidth() == wd1);
             assert(ff23.GetPrecision() == pres1);
@@ -15928,7 +17330,8 @@ int main()
 
             ff24.Unset();
             assert(ff24.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff24.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff24.GetValue()) ==
                 0.0L);
             assert(ff24.GetWidth() == 0);
             assert(ff24.GetPrecision() == pres1);
@@ -15939,7 +17342,8 @@ int main()
 
             ff25.Unset();
             assert(ff25.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff25.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff25.GetValue()) == 
                 0.0L);
             assert(ff25.GetWidth() == wd1);
             assert(ff25.GetPrecision() == 0);
@@ -15950,7 +17354,8 @@ int main()
 
             ff26.Unset();
             assert(ff26.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff26.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff26.GetValue()) ==
                 float_val1);
             assert(ff26.GetWidth() == wd1);
             assert(ff26.GetPrecision() == pres1);
@@ -15961,7 +17366,8 @@ int main()
 
             ff27.Unset();
             assert(ff27.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff27.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff27.GetValue()) ==
                 double_val1);
             assert(ff27.GetWidth() == 0);
             assert(ff27.GetPrecision() == pres1);
@@ -15972,7 +17378,8 @@ int main()
 
             ff28.Unset();
             assert(ff28.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff28.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff28.GetValue()) ==
                 l_double_val1);
             assert(ff28.GetWidth() == wd1);
             assert(ff28.GetPrecision() == 0);
@@ -15986,13 +17393,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff22.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff23.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff24.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff25.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff26.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff27.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff28.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff22.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff23.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff24.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff25.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff26.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff27.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff28.GetValue()));
             auto len_b = ff22.Output(out_cstr1_b);
             len_b += ff23.Output(out_cstr1_b);
             len_b += ff24.Output(out_cstr1_b);
@@ -16070,7 +17484,8 @@ int main()
         ff35 = std::move(ff7_c);
         {
             assert(ff29.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff29.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff29.GetValue()) ==
                 l_double_val2);
             assert(ff29.GetWidth() == 0);
             assert(ff29.GetPrecision() == 0);
@@ -16079,7 +17494,8 @@ int main()
             assert(ff29.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff30.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff30.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff30.GetValue()) ==
                 l_double_val2);
             assert(ff30.GetWidth() == wd1);
             assert(ff30.GetPrecision() == pres1);
@@ -16088,7 +17504,8 @@ int main()
             assert(ff30.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff31.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff31.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff31.GetValue()) ==
                 l_double_val2);
             assert(ff31.GetWidth() == wd2);
             assert(ff31.GetPrecision() == pres1);
@@ -16097,7 +17514,8 @@ int main()
             assert(ff31.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff32.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff32.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff32.GetValue()) ==
                 l_double_val2);
             assert(ff32.GetWidth() == wd1);
             assert(ff32.GetPrecision() == pres2);
@@ -16106,7 +17524,8 @@ int main()
             assert(ff32.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff33.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff33.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff33.GetValue()) ==
                 float_val1);
             assert(ff33.GetWidth() == wd1);
             assert(ff33.GetPrecision() == pres1);
@@ -16115,7 +17534,8 @@ int main()
             assert(ff33.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff34.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<double>(ff34.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff34.GetValue()) ==
                 double_val1);
             assert(ff34.GetWidth() == wd2);
             assert(ff34.GetPrecision() == pres1);
@@ -16124,7 +17544,8 @@ int main()
             assert(ff34.GetBadCode() == FloatingPoint<char>::StatusType::good);
             
             assert(ff35.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<long double>(ff35.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff35.GetValue()) ==
                 l_double_val1);
             assert(ff35.GetWidth() == wd1);
             assert(ff35.GetPrecision() == pres2);
@@ -16137,13 +17558,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff29.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff30.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff31.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff32.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff33.GetValue()),
-                wd2, pres1, val::FloatingPoint::CastTo<long double>(ff34.GetValue()),
-                wd1, pres2, val::FloatingPoint::CastTo<long double>(ff35.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff29.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff30.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff31.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff32.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff33.GetValue()),
+                wd2, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff34.GetValue()),
+                wd1, pres2, specifier::val::FloatingPoint::
+            CastTo<long double>(ff35.GetValue()));
             auto len_b = ff29.Output(out_cstr1_b);
             len_b += ff30.Output(out_cstr1_b);
             len_b += ff31.Output(out_cstr1_b);
@@ -16198,7 +17626,8 @@ int main()
         {
             ff29.Unset();
             assert(ff29.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff29.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff29.GetValue()) == 
                 0.0L);
             assert(ff29.GetWidth() == 0);
             assert(ff29.GetPrecision() == 0);
@@ -16209,7 +17638,8 @@ int main()
 
             ff30.Unset();
             assert(ff30.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff30.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff30.GetValue()) ==
                 0.0L);
             assert(ff30.GetWidth() == wd1);
             assert(ff30.GetPrecision() == pres1);
@@ -16220,7 +17650,8 @@ int main()
 
             ff31.Unset();
             assert(ff31.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff31.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff31.GetValue()) ==
                 0.0L);
             assert(ff31.GetWidth() == 0);
             assert(ff31.GetPrecision() == pres1);
@@ -16231,7 +17662,8 @@ int main()
 
             ff32.Unset();
             assert(ff32.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff32.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff32.GetValue()) == 
                 0.0L);
             assert(ff32.GetWidth() == wd1);
             assert(ff32.GetPrecision() == 0);
@@ -16242,7 +17674,8 @@ int main()
 
             ff33.Unset();
             assert(ff33.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff33.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff33.GetValue()) ==
                 float_val1);
             assert(ff33.GetWidth() == wd1);
             assert(ff33.GetPrecision() == pres1);
@@ -16253,7 +17686,8 @@ int main()
 
             ff34.Unset();
             assert(ff34.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff34.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff34.GetValue()) ==
                 double_val1);
             assert(ff34.GetWidth() == 0);
             assert(ff34.GetPrecision() == pres1);
@@ -16264,7 +17698,8 @@ int main()
 
             ff35.Unset();
             assert(ff35.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff35.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff35.GetValue()) ==
                 l_double_val1);
             assert(ff35.GetWidth() == wd1);
             assert(ff35.GetPrecision() == 0);
@@ -16278,13 +17713,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff29.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff30.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff31.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff32.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff33.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff34.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff35.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff29.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff30.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff31.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff32.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff33.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff34.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff35.GetValue()));
             auto len_b = ff29.Output(out_cstr1_b);
             len_b += ff30.Output(out_cstr1_b);
             len_b += ff31.Output(out_cstr1_b);
@@ -16338,7 +17780,8 @@ int main()
         
         {
             assert(ff1_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff1_c.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff1_c.GetValue()) == 
                 0.0L);
             assert(ff1_c.GetWidth() == 0);
             assert(ff1_c.GetPrecision() == 0);
@@ -16348,7 +17791,8 @@ int main()
             assert(ff1_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff2_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff2_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff2_c.GetValue()) ==
                 0.0L);
             assert(ff2_c.GetWidth() == wd1);
             assert(ff2_c.GetPrecision() == pres1);
@@ -16358,7 +17802,8 @@ int main()
             assert(ff2_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff3_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff3_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff3_c.GetValue()) ==
                 0.0L);
             assert(ff3_c.GetWidth() == 0);
             assert(ff3_c.GetPrecision() == pres1);
@@ -16368,7 +17813,8 @@ int main()
             assert(ff3_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff4_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff4_c.GetValue()) == 
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff4_c.GetValue()) == 
                 0.0L);
             assert(ff4_c.GetWidth() == wd1);
             assert(ff4_c.GetPrecision() == 0);
@@ -16378,7 +17824,8 @@ int main()
             assert(ff4_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff5_c.IsSet() == true);
-            assert(val::FloatingPoint::CastTo<float>(ff5_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<float>(ff5_c.GetValue()) ==
                 float_val1);
             assert(ff5_c.GetWidth() == wd1);
             assert(ff5_c.GetPrecision() == pres1);
@@ -16388,7 +17835,8 @@ int main()
             assert(ff5_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff6_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<double>(ff6_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<double>(ff6_c.GetValue()) ==
                 double_val1);
             assert(ff6_c.GetWidth() == 0);
             assert(ff6_c.GetPrecision() == pres1);
@@ -16398,7 +17846,8 @@ int main()
             assert(ff6_c.GetBadCode() == FloatingPoint<char>::StatusType::good);
 
             assert(ff7_c.IsSet() == false);
-            assert(val::FloatingPoint::CastTo<long double>(ff7_c.GetValue()) ==
+            assert(specifier::val::FloatingPoint::
+            CastTo<long double>(ff7_c.GetValue()) ==
                 l_double_val1);
             assert(ff7_c.GetWidth() == wd1);
             assert(ff7_c.GetPrecision() == 0);
@@ -16412,13 +17861,20 @@ int main()
             test::out::CString<char> out_cstr1_a, out_cstr1_b;
             auto len_a = 
                 out_cstr1_a.Print("%#LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA%#*.*LA",
-                val::FloatingPoint::CastTo<long double>(ff1_c.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff2_c.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff3_c.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff4_c.GetValue()),
-                wd1, pres1, val::FloatingPoint::CastTo<long double>(ff5_c.GetValue()),
-                0, pres1, val::FloatingPoint::CastTo<long double>(ff6_c.GetValue()),
-                wd1, 0, val::FloatingPoint::CastTo<long double>(ff7_c.GetValue()));
+                specifier::val::FloatingPoint::
+            CastTo<long double>(ff1_c.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff2_c.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff3_c.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff4_c.GetValue()),
+                wd1, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff5_c.GetValue()),
+                0, pres1, specifier::val::FloatingPoint::
+            CastTo<long double>(ff6_c.GetValue()),
+                wd1, 0, specifier::val::FloatingPoint::
+            CastTo<long double>(ff7_c.GetValue()));
             auto len_b = ff1_c.Output(out_cstr1_b);
             len_b += ff2_c.Output(out_cstr1_b);
             len_b += ff3_c.Output(out_cstr1_b);

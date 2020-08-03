@@ -1,4 +1,4 @@
-#include "test/msg/fmt/param/flag/Character.h"
+#include "test/msg/fmt/val/flag/Character.h"
 #include "test/out/CString.h"
 
 #include <cassert>
@@ -15,7 +15,7 @@ struct ChFormat
 };
 
 template<>
-struct ChFormat<test::msg::fmt::param::flag::Character::define_char>
+struct ChFormat<test::msg::fmt::val::flag::Character::define_char>
 {
     static auto Output(test::out::Interface<char>& out) -> decltype(out.Print("_"))
     {
@@ -24,8 +24,8 @@ struct ChFormat<test::msg::fmt::param::flag::Character::define_char>
 };
 
 template<>
-struct ChFormat<test::msg::fmt::param::flag::Character::define_char
-    | test::msg::fmt::param::flag::Character::width>
+struct ChFormat<test::msg::fmt::val::flag::Character::define_char
+    | test::msg::fmt::val::flag::Character::width>
 {
     static auto Output(test::out::Interface<char>& out) -> decltype(out.Print("_"))
     {
@@ -35,7 +35,7 @@ struct ChFormat<test::msg::fmt::param::flag::Character::define_char
 
 
 template<>
-struct ChFormat<test::msg::fmt::param::flag::Character::define_wchar>
+struct ChFormat<test::msg::fmt::val::flag::Character::define_wchar>
 {
     static auto Output(test::out::Interface<char>& out) -> decltype(out.Print("_"))
     {
@@ -44,8 +44,8 @@ struct ChFormat<test::msg::fmt::param::flag::Character::define_wchar>
 };
 
 template<>
-struct ChFormat<test::msg::fmt::param::flag::Character::define_wchar
-    | test::msg::fmt::param::flag::Character::width>
+struct ChFormat<test::msg::fmt::val::flag::Character::define_wchar
+    | test::msg::fmt::val::flag::Character::width>
 {
     static auto Output(test::out::Interface<char>& out) -> decltype(out.Print("_"))
     {
@@ -55,7 +55,8 @@ struct ChFormat<test::msg::fmt::param::flag::Character::define_wchar
 
 int main()
 {
-    using namespace test::msg::fmt::param::flag;
+    using namespace test::msg::fmt::val::flag;
+    using namespace test::msg::fmt;
 
     constexpr Character ch1{};
 

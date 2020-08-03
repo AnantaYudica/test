@@ -1,4 +1,4 @@
-#include "test/msg/fmt/param/flag/Integer.h"
+#include "test/msg/fmt/val/flag/Integer.h"
 #include "test/out/CString.h"
 
 #include <cassert>
@@ -17,11 +17,11 @@ struct IFormat
 
 ///////
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -31,11 +31,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -45,11 +45,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -59,11 +59,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -73,11 +73,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -87,11 +87,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -101,11 +101,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -115,11 +115,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -129,11 +129,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -143,11 +143,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -157,11 +157,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -171,11 +171,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -185,11 +185,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -199,11 +199,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -213,11 +213,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -227,11 +227,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -241,11 +241,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -255,11 +255,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -269,11 +269,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -283,11 +283,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -297,11 +297,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -311,11 +311,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -325,11 +325,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -339,11 +339,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -353,11 +353,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -367,11 +367,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -381,11 +381,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -395,11 +395,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -409,11 +409,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -423,11 +423,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -437,11 +437,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -451,11 +451,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -465,11 +465,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -479,11 +479,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -493,11 +493,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -507,11 +507,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -521,11 +521,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -535,11 +535,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -549,11 +549,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -563,11 +563,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -577,11 +577,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -591,11 +591,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -605,11 +605,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -619,11 +619,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -633,11 +633,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -647,11 +647,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -661,11 +661,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -675,11 +675,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -689,11 +689,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -703,11 +703,11 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -717,12 +717,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -732,12 +732,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -747,12 +747,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -762,12 +762,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -777,12 +777,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -792,12 +792,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -807,12 +807,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -822,12 +822,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -837,12 +837,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -852,12 +852,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -867,12 +867,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -882,12 +882,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -897,12 +897,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -912,12 +912,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -927,12 +927,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -942,12 +942,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -957,12 +957,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -972,12 +972,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -987,12 +987,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1002,12 +1002,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1017,12 +1017,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1032,12 +1032,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1047,12 +1047,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1062,12 +1062,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1077,12 +1077,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1092,12 +1092,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1107,12 +1107,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1122,12 +1122,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1137,12 +1137,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1152,12 +1152,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1167,13 +1167,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1183,13 +1183,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1199,13 +1199,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1215,13 +1215,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1231,13 +1231,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1247,13 +1247,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1263,13 +1263,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1279,13 +1279,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1295,13 +1295,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1311,13 +1311,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1327,13 +1327,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1343,13 +1343,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1359,13 +1359,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1375,13 +1375,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1391,13 +1391,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1407,13 +1407,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1423,13 +1423,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1439,13 +1439,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1455,13 +1455,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1471,13 +1471,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1487,13 +1487,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
  
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1503,13 +1503,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1519,13 +1519,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1535,13 +1535,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1551,13 +1551,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1567,13 +1567,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1583,13 +1583,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1599,13 +1599,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1615,13 +1615,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1631,13 +1631,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1647,13 +1647,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1663,13 +1663,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1679,13 +1679,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1695,13 +1695,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1711,13 +1711,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1727,13 +1727,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1743,13 +1743,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1759,13 +1759,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1775,13 +1775,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1791,13 +1791,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1807,13 +1807,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1823,13 +1823,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1839,13 +1839,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1855,13 +1855,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1871,13 +1871,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1887,13 +1887,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1903,13 +1903,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1919,13 +1919,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1935,13 +1935,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1951,13 +1951,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1967,13 +1967,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
  
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1983,13 +1983,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -1999,13 +1999,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2015,13 +2015,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2031,13 +2031,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2047,13 +2047,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2063,13 +2063,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2079,13 +2079,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2095,13 +2095,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2111,13 +2111,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2127,13 +2127,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
   
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2143,13 +2143,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2159,13 +2159,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2175,13 +2175,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2191,13 +2191,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2207,13 +2207,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2223,13 +2223,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2239,13 +2239,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2255,13 +2255,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2271,13 +2271,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2287,12 +2287,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2302,12 +2302,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2317,12 +2317,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2332,12 +2332,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2347,12 +2347,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2362,12 +2362,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2377,12 +2377,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2392,12 +2392,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2407,12 +2407,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2422,12 +2422,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2437,12 +2437,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2452,12 +2452,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2467,12 +2467,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2482,12 +2482,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2497,12 +2497,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2512,12 +2512,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2527,12 +2527,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2542,12 +2542,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2557,12 +2557,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2572,12 +2572,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2587,12 +2587,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2602,12 +2602,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2617,12 +2617,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2632,12 +2632,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2647,12 +2647,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2662,12 +2662,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2677,12 +2677,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2692,12 +2692,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2707,12 +2707,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2722,12 +2722,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2737,12 +2737,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
  
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2752,12 +2752,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2767,12 +2767,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2782,12 +2782,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2797,12 +2797,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2812,12 +2812,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2827,12 +2827,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2842,12 +2842,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2857,12 +2857,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2872,12 +2872,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2887,12 +2887,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
   
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2902,12 +2902,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2917,12 +2917,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2932,12 +2932,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2947,12 +2947,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2962,12 +2962,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2977,12 +2977,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -2992,12 +2992,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3007,12 +3007,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3022,12 +3022,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3037,13 +3037,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3053,13 +3053,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3069,13 +3069,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3085,13 +3085,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3101,13 +3101,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3117,13 +3117,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3133,13 +3133,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3149,13 +3149,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3165,13 +3165,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3181,13 +3181,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3197,13 +3197,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
  
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3213,13 +3213,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3229,13 +3229,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3245,13 +3245,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3261,13 +3261,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3277,13 +3277,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3293,13 +3293,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3309,13 +3309,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3325,13 +3325,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3341,13 +3341,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3357,13 +3357,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
   
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3373,13 +3373,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3389,13 +3389,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3405,13 +3405,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3421,13 +3421,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3437,13 +3437,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3453,13 +3453,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3469,13 +3469,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3485,13 +3485,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3501,13 +3501,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3517,14 +3517,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3534,14 +3534,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3551,14 +3551,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3568,14 +3568,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3585,14 +3585,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3602,14 +3602,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3619,14 +3619,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3636,14 +3636,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3653,14 +3653,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3670,14 +3670,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3687,14 +3687,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
    
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3704,14 +3704,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3721,14 +3721,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3738,14 +3738,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3755,14 +3755,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3772,14 +3772,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3789,14 +3789,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3806,14 +3806,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3823,14 +3823,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3840,14 +3840,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3857,14 +3857,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
    
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3874,14 +3874,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3891,14 +3891,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3908,14 +3908,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3925,14 +3925,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3942,14 +3942,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3959,14 +3959,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3976,14 +3976,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -3993,14 +3993,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4010,14 +4010,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4027,14 +4027,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4044,14 +4044,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4061,14 +4061,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4078,14 +4078,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4095,14 +4095,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4112,14 +4112,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4129,14 +4129,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4146,14 +4146,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4163,14 +4163,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4180,14 +4180,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4197,14 +4197,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4214,14 +4214,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4231,14 +4231,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4248,14 +4248,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4265,14 +4265,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4282,14 +4282,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4299,14 +4299,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4316,14 +4316,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4333,14 +4333,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4350,14 +4350,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4367,14 +4367,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
  
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4384,14 +4384,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4401,14 +4401,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4418,14 +4418,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4435,14 +4435,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4452,14 +4452,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4469,14 +4469,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4486,14 +4486,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4503,14 +4503,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4520,14 +4520,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4537,14 +4537,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
   
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4554,14 +4554,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4571,14 +4571,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4588,14 +4588,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4605,14 +4605,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4622,14 +4622,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4639,14 +4639,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4656,14 +4656,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4673,14 +4673,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4690,14 +4690,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::zero>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::zero>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4707,12 +4707,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4722,12 +4722,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4737,12 +4737,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4752,12 +4752,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4767,12 +4767,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4782,12 +4782,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4797,12 +4797,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4812,12 +4812,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4827,12 +4827,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4842,12 +4842,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4857,12 +4857,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4872,12 +4872,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4887,12 +4887,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4902,12 +4902,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4917,12 +4917,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4932,12 +4932,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4947,12 +4947,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4962,12 +4962,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4977,12 +4977,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -4992,12 +4992,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5007,12 +5007,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5022,12 +5022,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5037,12 +5037,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5052,12 +5052,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5067,12 +5067,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5082,12 +5082,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5097,12 +5097,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5112,12 +5112,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5127,12 +5127,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5142,12 +5142,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5157,12 +5157,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
  
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5172,12 +5172,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5187,12 +5187,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5202,12 +5202,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5217,12 +5217,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5232,12 +5232,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5247,12 +5247,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5262,12 +5262,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5277,12 +5277,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5292,12 +5292,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5307,12 +5307,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
   
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5322,12 +5322,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5337,12 +5337,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5352,12 +5352,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5367,12 +5367,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5382,12 +5382,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5397,12 +5397,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5412,12 +5412,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5427,12 +5427,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5442,12 +5442,12 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5457,13 +5457,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5473,13 +5473,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5489,13 +5489,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5505,13 +5505,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5521,13 +5521,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5537,13 +5537,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5553,13 +5553,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5569,13 +5569,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5585,13 +5585,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5601,13 +5601,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5617,13 +5617,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
  
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5633,13 +5633,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5649,13 +5649,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5665,13 +5665,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5681,13 +5681,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5697,13 +5697,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5713,13 +5713,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5729,13 +5729,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5745,13 +5745,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5761,13 +5761,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5777,13 +5777,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
   
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5793,13 +5793,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5809,13 +5809,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5825,13 +5825,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5841,13 +5841,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5857,13 +5857,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5873,13 +5873,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5889,13 +5889,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5905,13 +5905,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5921,13 +5921,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5937,14 +5937,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5954,14 +5954,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5971,14 +5971,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -5988,14 +5988,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6005,14 +6005,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6022,14 +6022,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6039,14 +6039,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6056,14 +6056,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6073,14 +6073,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6090,14 +6090,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6107,14 +6107,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
    
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6124,14 +6124,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6141,14 +6141,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6158,14 +6158,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6175,14 +6175,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6192,14 +6192,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6209,14 +6209,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6226,14 +6226,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6243,14 +6243,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6260,14 +6260,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6277,13 +6277,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
       
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6293,13 +6293,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6309,13 +6309,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6325,13 +6325,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6341,13 +6341,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6357,13 +6357,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6373,13 +6373,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6389,13 +6389,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6405,13 +6405,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6421,13 +6421,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6437,13 +6437,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6453,13 +6453,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6469,13 +6469,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6485,13 +6485,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6501,13 +6501,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6517,13 +6517,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6533,13 +6533,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6549,13 +6549,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6565,13 +6565,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6581,13 +6581,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6597,13 +6597,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6613,13 +6613,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6629,13 +6629,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6645,13 +6645,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6661,13 +6661,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6677,13 +6677,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6693,13 +6693,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6709,13 +6709,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6725,13 +6725,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6741,13 +6741,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6757,13 +6757,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
  
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6773,13 +6773,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6789,13 +6789,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6805,13 +6805,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6821,13 +6821,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6837,13 +6837,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6853,13 +6853,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6869,13 +6869,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6885,13 +6885,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6901,13 +6901,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6917,13 +6917,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
   
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6933,13 +6933,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6949,13 +6949,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6965,13 +6965,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6981,13 +6981,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -6997,13 +6997,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7013,13 +7013,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7029,13 +7029,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7045,13 +7045,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7061,13 +7061,13 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7077,14 +7077,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7094,14 +7094,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7111,14 +7111,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7128,14 +7128,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7145,14 +7145,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7162,14 +7162,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7179,14 +7179,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7196,14 +7196,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7213,14 +7213,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7230,14 +7230,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::octal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::octal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7247,14 +7247,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
  
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7264,14 +7264,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7281,14 +7281,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7298,14 +7298,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7315,14 +7315,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7332,14 +7332,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7349,14 +7349,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7366,14 +7366,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7383,14 +7383,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7400,14 +7400,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7417,14 +7417,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
   
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7434,14 +7434,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7451,14 +7451,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7468,14 +7468,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7485,14 +7485,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7502,14 +7502,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7519,14 +7519,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7536,14 +7536,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7553,14 +7553,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7570,14 +7570,14 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::unsigned_integer | 
-    test::msg::fmt::param::flag::Integer::hexadecimal | 
-    test::msg::fmt::param::flag::Integer::upper | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::unsigned_integer | 
+    test::msg::fmt::val::flag::Integer::hexadecimal | 
+    test::msg::fmt::val::flag::Integer::upper | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7587,15 +7587,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7605,15 +7605,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7623,15 +7623,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7641,15 +7641,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7659,15 +7659,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7677,15 +7677,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7695,15 +7695,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7713,15 +7713,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7731,15 +7731,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7749,15 +7749,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::plus>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::plus>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7767,15 +7767,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
    
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7785,15 +7785,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7803,15 +7803,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7821,15 +7821,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7839,15 +7839,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_signed | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_signed | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7857,15 +7857,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_signed |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_char | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_char | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7875,15 +7875,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_short | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_short | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7893,15 +7893,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_int | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_int | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7911,15 +7911,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7929,15 +7929,15 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 };
 
 template<>
-struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned | 
-    test::msg::fmt::param::flag::Integer::define_long_long | 
-    test::msg::fmt::param::flag::Integer::signed_integer | 
-    test::msg::fmt::param::flag::Integer::decimal | 
-    test::msg::fmt::param::flag::Integer::lower | 
-    test::msg::fmt::param::flag::Integer::width | 
-    test::msg::fmt::param::flag::Integer::length | 
-    test::msg::fmt::param::flag::Integer::prefix | 
-    test::msg::fmt::param::flag::Integer::space>
+struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned | 
+    test::msg::fmt::val::flag::Integer::define_long_long | 
+    test::msg::fmt::val::flag::Integer::signed_integer | 
+    test::msg::fmt::val::flag::Integer::decimal | 
+    test::msg::fmt::val::flag::Integer::lower | 
+    test::msg::fmt::val::flag::Integer::width | 
+    test::msg::fmt::val::flag::Integer::length | 
+    test::msg::fmt::val::flag::Integer::prefix | 
+    test::msg::fmt::val::flag::Integer::space>
 {
     static auto Output(test::out::Interface<char>& out) -> 
         decltype(out.Print("_"))
@@ -7949,7 +7949,8 @@ struct IFormat<test::msg::fmt::param::flag::Integer::define_unsigned |
 
 int main()
 {
-    using namespace test::msg::fmt::param::flag;
+    using namespace test::msg::fmt::val::flag;
+    using namespace test::msg::fmt;
     {
         //default
         {

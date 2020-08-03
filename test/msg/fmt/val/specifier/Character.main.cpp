@@ -1,5 +1,5 @@
-#include "test/msg/fmt/param/specifier/Character.h"
-#include "test/msg/fmt/param/flag/Character.h"
+#include "test/msg/fmt/val/specifier/Character.h"
+#include "test/msg/fmt/val/flag/Character.h"
 #include "test/out/CString.h"
 
 #include <cassert>
@@ -19,8 +19,9 @@ std::size_t Load(T& obj, std::size_t size, ...)
 
 int main()
 {
-    using namespace test::msg::fmt::param::specifier;
-    using namespace test::msg::fmt::param;
+    using namespace test::msg::fmt::val::specifier;
+    using namespace test::msg::fmt::val;
+    using namespace test::msg::fmt;
     {
         Character<char> ch1;
         test::out::CString<char> out_cstr1;
@@ -150,7 +151,7 @@ int main()
 
     }
     {
-        Character<char> ch1{flag::arg::Define<char>{}};
+        Character<char> ch1{arg::Define<char>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -209,7 +210,7 @@ int main()
 
     }
     {
-        Character<char> ch1{flag::arg::Define<wchar_t>{}};
+        Character<char> ch1{arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -269,7 +270,7 @@ int main()
 
     }
     {
-        Character<char> ch1{'D', flag::arg::Define<char>{}};
+        Character<char> ch1{'D', arg::Define<char>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -309,7 +310,7 @@ int main()
 
     }
     {
-        Character<char> ch1{'K', flag::arg::Define<wchar_t>{}};
+        Character<char> ch1{'K', arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -348,7 +349,7 @@ int main()
         assert(ch1.GetBadCode() == Character<char>::StatusType::good);
     }
     {
-        Character<char> ch1{flag::arg::Width{}};
+        Character<char> ch1{arg::Width{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -408,7 +409,7 @@ int main()
 
     }
     {
-        Character<char> ch1{flag::arg::Width{10}};
+        Character<char> ch1{arg::Width{10}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -467,7 +468,7 @@ int main()
         assert(ch1.GetBadCode() == Character<char>::StatusType::good);
     }
     {
-        Character<char> ch1{flag::arg::Width{}, flag::arg::Define<wchar_t>{}};
+        Character<char> ch1{arg::Width{}, arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -527,7 +528,7 @@ int main()
 
     }
     {
-        Character<char> ch1{flag::arg::Width{10}, flag::arg::Define<wchar_t>{}};
+        Character<char> ch1{arg::Width{10}, arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -587,7 +588,7 @@ int main()
         
     }
     {
-        Character<char> ch1{'L', flag::arg::Width{}};
+        Character<char> ch1{'L', arg::Width{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -646,7 +647,7 @@ int main()
         assert(ch1.GetBadCode() == Character<char>::StatusType::good);
     }
     {
-        Character<char> ch1{'N', flag::arg::Width{-10}};
+        Character<char> ch1{'N', arg::Width{-10}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -687,8 +688,8 @@ int main()
     }
     
     {
-        Character<char> ch1{'L', flag::arg::Width{},
-            flag::arg::Define<wchar_t>{}};
+        Character<char> ch1{'L', arg::Width{},
+            arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -748,8 +749,8 @@ int main()
 
     }
     {
-        Character<char> ch1{'N', flag::arg::Width{10},
-            flag::arg::Define<wchar_t>{}};
+        Character<char> ch1{'N', arg::Width{10},
+            arg::Define<wchar_t>{}};
         test::out::CString<char> out_cstr1;
         test::out::CString<char> out_cstr2;
         
@@ -789,8 +790,8 @@ int main()
 
     }
     {
-        Character<char> ch1{'N', flag::arg::Width{10},
-            flag::arg::Define<wchar_t>{}};
+        Character<char> ch1{'N', arg::Width{10},
+            arg::Define<wchar_t>{}};
             
         assert(ch1.IsSet() == true);
         assert(ch1.GetValue().char_value == 'N');
@@ -866,8 +867,8 @@ int main()
         assert(ch4.GetBadCode() == Character<char>::StatusType::good);
     }
     {
-        Character<char> ch1{flag::arg::Width{10},
-            flag::arg::Define<wchar_t>{}};
+        Character<char> ch1{arg::Width{10},
+            arg::Define<wchar_t>{}};
         
         assert(ch1.IsSet() == false);
         assert(ch1.GetValue().char_value == '\0');
@@ -954,8 +955,8 @@ int main()
         assert(ch4.GetBadCode() == Character<char>::StatusType::good);
     }
     {
-        Character<char> ch1{'G', flag::arg::Width{},
-            flag::arg::Define<wchar_t>{}};
+        Character<char> ch1{'G', arg::Width{},
+            arg::Define<wchar_t>{}};
             
         assert(ch1.IsSet() == false);
         assert(ch1.GetValue().char_value == 'G');
@@ -1042,8 +1043,8 @@ int main()
         assert(ch4.GetBadCode() == Character<char>::StatusType::good);
     }
     {
-         Character<char> ch1{flag::arg::Width{},
-            flag::arg::Define<wchar_t>{}};
+         Character<char> ch1{arg::Width{},
+            arg::Define<wchar_t>{}};
         
         assert(ch1.IsSet() == false);
         assert(ch1.GetValue().char_value == '\0');

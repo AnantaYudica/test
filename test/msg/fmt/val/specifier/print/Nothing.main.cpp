@@ -1,12 +1,13 @@
-#include "test/msg/fmt/param/specifier/print/Nothing.h"
+#include "test/msg/fmt/val/specifier/print/Nothing.h"
 #include "test/out/CString.h"
 
 #include <cassert>
 
 int main()
 {
-    using namespace test::msg::fmt::param;
-    using namespace test::msg::fmt::param::specifier::print;
+    using namespace test::msg::fmt::val;
+    using namespace test::msg::fmt::val::specifier::print;
+    using namespace test::msg::fmt;
 
     char ch_val1 = 'B';
     short sh_val1 = 1;
@@ -29,7 +30,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<char>{}};
+        constexpr flag::Nothing nt1{arg::Define<char>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, ch1);
@@ -37,7 +38,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<signed char>{}};
+        constexpr flag::Nothing nt1{arg::Define<signed char>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, ch1);
@@ -45,7 +46,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<unsigned char>{}};
+        constexpr flag::Nothing nt1{arg::Define<unsigned char>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, ch1);
@@ -53,7 +54,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<short>{}};
+        constexpr flag::Nothing nt1{arg::Define<short>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, sh1);
@@ -61,7 +62,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<unsigned short>{}};
+        constexpr flag::Nothing nt1{arg::Define<unsigned short>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, sh1);
@@ -69,7 +70,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<int>{}};
+        constexpr flag::Nothing nt1{arg::Define<int>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, in1);
@@ -77,7 +78,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<unsigned int>{}};
+        constexpr flag::Nothing nt1{arg::Define<unsigned int>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, in1);
@@ -85,7 +86,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<long>{}};
+        constexpr flag::Nothing nt1{arg::Define<long>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, lo1);
@@ -93,7 +94,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<unsigned long>{}};
+        constexpr flag::Nothing nt1{arg::Define<unsigned long>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, lo1);
@@ -101,7 +102,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<long long>{}};
+        constexpr flag::Nothing nt1{arg::Define<long long>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, lolo1);
@@ -109,7 +110,7 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "", 1) == 0);
     }
     {
-        constexpr flag::Nothing nt1{flag::arg::Define<unsigned long long>{}};
+        constexpr flag::Nothing nt1{arg::Define<unsigned long long>{}};
         test::out::CString<char> out_cstr1;
 
         auto size = Nothing<char, nt1.GetValue()>::Print(out_cstr1, lolo1);

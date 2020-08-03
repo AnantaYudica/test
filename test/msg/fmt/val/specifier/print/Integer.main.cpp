@@ -1,4 +1,4 @@
-#include "test/msg/fmt/param/specifier/print/Integer.h"
+#include "test/msg/fmt/val/specifier/print/Integer.h"
 #include "test/out/CString.h"
 
 #include <cassert>
@@ -6,7 +6,8 @@
 
 int main()
 {
-    using namespace test::msg::fmt::param;
+    using namespace test::msg::fmt::val;
+    using namespace test::msg::fmt;
     specifier::val::Integer val1{.char_value='Z'};
     specifier::val::Integer val2{.short_value=static_cast<short>(-1)};
     specifier::val::Integer val3{.int_value=-1};
@@ -30,25 +31,25 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::Define<char>{}};
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Define<short>{}};
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Define<int>{}};
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Define<long>{}};
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Define<long long>{}};
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Define<unsigned char>{}};
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Define<unsigned short>{}};
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Define<unsigned int>{}};
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Define<unsigned long>{}};
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Define<unsigned long long>{}};
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -102,35 +103,35 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -184,35 +185,35 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -266,35 +267,35 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -348,35 +349,35 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -430,35 +431,35 @@ int main()
     //unsigned-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -512,35 +513,35 @@ int main()
     //unsigned-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -594,35 +595,35 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -676,35 +677,35 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -758,35 +759,35 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -840,35 +841,35 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -922,35 +923,35 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1004,35 +1005,35 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1086,35 +1087,35 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1168,35 +1169,35 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1250,35 +1251,35 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1332,35 +1333,35 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1422,45 +1423,45 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1514,45 +1515,45 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1606,45 +1607,45 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1698,45 +1699,45 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1790,45 +1791,45 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1882,45 +1883,45 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -1974,45 +1975,45 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2066,45 +2067,45 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2158,45 +2159,45 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2250,45 +2251,45 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2343,35 +2344,35 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2425,45 +2426,45 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2517,45 +2518,45 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2609,45 +2610,45 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2701,45 +2702,45 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2806,35 +2807,35 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2888,45 +2889,45 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -2980,45 +2981,45 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3072,45 +3073,45 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3164,45 +3165,45 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3269,35 +3270,35 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3351,45 +3352,45 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3443,45 +3444,45 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3535,45 +3536,45 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3627,45 +3628,45 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3719,45 +3720,45 @@ int main()
     //unsigned-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3811,45 +3812,45 @@ int main()
     //unsigned-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3903,45 +3904,45 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -3995,45 +3996,45 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4087,45 +4088,45 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4179,45 +4180,45 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4271,45 +4272,45 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4363,45 +4364,45 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4455,45 +4456,45 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4547,45 +4548,45 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4639,45 +4640,45 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4731,45 +4732,45 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4824,35 +4825,35 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4906,45 +4907,45 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -4998,45 +4999,45 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5090,45 +5091,45 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5182,45 +5183,45 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5274,45 +5275,45 @@ int main()
     //unsigned-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5366,45 +5367,45 @@ int main()
     //unsigned-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5458,45 +5459,45 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5550,45 +5551,45 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5642,45 +5643,45 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5734,45 +5735,45 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5826,45 +5827,45 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -5918,45 +5919,45 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6010,45 +6011,45 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6102,45 +6103,45 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6194,45 +6195,45 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6286,45 +6287,45 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6386,55 +6387,55 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6488,55 +6489,55 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6590,55 +6591,55 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6692,55 +6693,55 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6794,55 +6795,55 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6896,55 +6897,55 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -6998,55 +6999,55 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -7100,55 +7101,55 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -7202,55 +7203,55 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -7304,55 +7305,55 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -7407,45 +7408,45 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -7499,55 +7500,55 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -7601,55 +7602,55 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -7703,55 +7704,55 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -7805,55 +7806,55 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -7920,45 +7921,45 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8012,55 +8013,55 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8114,55 +8115,55 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8216,55 +8217,55 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8318,55 +8319,55 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8433,45 +8434,45 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8525,55 +8526,55 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8627,55 +8628,55 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8729,55 +8730,55 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8831,55 +8832,55 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -8933,55 +8934,55 @@ int main()
     //unsigned-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9035,55 +9036,55 @@ int main()
     //unsigned-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9137,55 +9138,55 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9239,55 +9240,55 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9341,55 +9342,55 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9443,55 +9444,55 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9545,55 +9546,55 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9647,55 +9648,55 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9749,55 +9750,55 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9851,55 +9852,55 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -9953,55 +9954,55 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10055,55 +10056,55 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixZero{}, 
-            flag::arg::Width{},
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::PrefixZero{}, 
+            arg::Width{},
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10158,35 +10159,35 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10240,45 +10241,45 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10332,45 +10333,45 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10424,45 +10425,45 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10516,45 +10517,45 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10608,45 +10609,45 @@ int main()
     //unsigned-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10700,45 +10701,45 @@ int main()
     //unsigned-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10792,45 +10793,45 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10884,45 +10885,45 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -10976,45 +10977,45 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11068,45 +11069,45 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11160,45 +11161,45 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11252,45 +11253,45 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11344,45 +11345,45 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11436,45 +11437,45 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11528,45 +11529,45 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11620,45 +11621,45 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11720,55 +11721,55 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11822,55 +11823,55 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -11924,55 +11925,55 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12026,55 +12027,55 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12128,55 +12129,55 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12230,55 +12231,55 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12332,55 +12333,55 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12434,55 +12435,55 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12536,55 +12537,55 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12638,55 +12639,55 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12741,45 +12742,45 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12833,55 +12834,55 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -12935,55 +12936,55 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13037,55 +13038,55 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13139,55 +13140,55 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13254,45 +13255,45 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13346,55 +13347,55 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13448,55 +13449,55 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13550,55 +13551,55 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13652,55 +13653,55 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13785,35 +13786,35 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13867,45 +13868,45 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -13959,45 +13960,45 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14051,45 +14052,45 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14143,45 +14144,45 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14235,45 +14236,45 @@ int main()
     //unsigned-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14327,45 +14328,45 @@ int main()
     //unsigned-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14419,45 +14420,45 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14511,45 +14512,45 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14603,45 +14604,45 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14695,45 +14696,45 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14787,45 +14788,45 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14879,45 +14880,45 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -14971,45 +14972,45 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15063,45 +15064,45 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15155,45 +15156,45 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15247,45 +15248,45 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15347,55 +15348,55 @@ int main()
     //octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15449,55 +15450,55 @@ int main()
     //octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15551,55 +15552,55 @@ int main()
     //unsinged-octal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15653,55 +15654,55 @@ int main()
     //unsigned-octal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Octal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Octal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15755,55 +15756,55 @@ int main()
     //hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15857,55 +15858,55 @@ int main()
     //hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -15959,55 +15960,55 @@ int main()
     //hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Hexadecimal{}, flag::arg::Upper{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Hexadecimal{}, arg::Upper{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16061,55 +16062,55 @@ int main()
     //unsigned-hexadecimal
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16163,55 +16164,55 @@ int main()
     //unsigned-hexadecimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Lower{}, flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Lower{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16265,55 +16266,55 @@ int main()
     //unsigned-hexadecimal-upper
     {
         constexpr flag::Integer i1{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned char>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned short>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned int>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::Prefix{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Unsigned{}, flag::arg::Hexadecimal{}, 
-            flag::arg::Upper{}, flag::arg::Define<unsigned long long>{}};
+            arg::Prefix{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Unsigned{}, arg::Hexadecimal{}, 
+            arg::Upper{}, arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16368,45 +16369,45 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16460,55 +16461,55 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16562,55 +16563,55 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16664,55 +16665,55 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16766,55 +16767,55 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixPlus{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixPlus{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16881,45 +16882,45 @@ int main()
     //default
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -16973,55 +16974,55 @@ int main()
     //decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -17075,55 +17076,55 @@ int main()
     //decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Decimal{}, flag::arg::Lower{},
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Decimal{}, arg::Lower{},
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -17177,55 +17178,55 @@ int main()
     //signed-decimal
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
@@ -17279,55 +17280,55 @@ int main()
     //signed-decimal-lower
     {
         constexpr flag::Integer i1{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<char>{}};
         constexpr flag::Integer i2{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<short>{}};
         constexpr flag::Integer i3{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<int>{}};
         constexpr flag::Integer i4{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long>{}};
         constexpr flag::Integer i5{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<long long>{}};
         constexpr flag::Integer i6{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned char>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned char>{}};
         constexpr flag::Integer i7{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned short>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned short>{}};
         constexpr flag::Integer i8{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned int>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned int>{}};
         constexpr flag::Integer i9{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long>{}};
         constexpr flag::Integer i10{
-            flag::arg::PrefixSpace{}, 
-            flag::arg::Width{}, flag::arg::Length{}, 
-            flag::arg::Signed{}, flag::arg::Decimal{}, flag::arg::Lower{}, 
-            flag::arg::Define<unsigned long long>{}};
+            arg::PrefixSpace{}, 
+            arg::Width{}, arg::Length{}, 
+            arg::Signed{}, arg::Decimal{}, arg::Lower{}, 
+            arg::Define<unsigned long long>{}};
 
         test::out::CString<char> out_cstr1_a, out_cstr1_b;
 
