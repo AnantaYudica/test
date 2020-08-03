@@ -12,7 +12,7 @@ namespace fmt
 namespace arg
 {
 
-typedef test::msg::fmt::param::flag::arg::Precision Length;
+typedef test::msg::fmt::arg::Precision Length;
 
 } //!arg
 
