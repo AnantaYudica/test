@@ -46,6 +46,9 @@ public:
         va_list args) = 0;
     virtual std::size_t Load(std::size_t size, ...) = 0;
 public:
+    virtual typename OutputInterfaceType::SizeType
+        Output(OutputInterfaceType& out) = 0;
+public:
     virtual void Unset() = 0;
 public:
     virtual bool IsSet() const = 0;
