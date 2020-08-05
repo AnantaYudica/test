@@ -42,6 +42,9 @@ public:
         va_list args) override;
     std::size_t Load(std::size_t size, ...) override;
 public:
+    typename OutputInterfaceType::SizeType
+        Output(OutputInterfaceType& out) override;
+public:
     ValueType GetValue() const;
 public:
     void Unset();
@@ -118,6 +121,13 @@ std::size_t Precision<TChar>::Load(std::size_t size, ...)
     const auto last_index = VLoad(size, 0, args);
     va_end(args);
     return last_index;
+}
+
+template<typename TChar>
+typename Precision<TChar>::OutputInterfaceType::SizeType
+Precision<TChar>::Output(OutputInterfaceType&)
+{
+    return 0;
 }
 
 template<typename TChar>

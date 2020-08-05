@@ -42,6 +42,9 @@ public:
         va_list args) override;
     std::size_t Load(std::size_t size, ...) override;
 public:
+    typename OutputInterfaceType::SizeType
+        Output(OutputInterfaceType& out) override;
+public:
     ValueType GetValue() const;
 public:
     void Unset();
@@ -120,6 +123,13 @@ std::size_t Width<TChar>::Load(std::size_t size, ...)
     return last_index;
 }
 
+template<typename TChar>
+typename Width<TChar>::OutputInterfaceType::SizeType
+Width<TChar>::Output(OutputInterfaceType&)
+{
+    return 0;
+}
+    
 template<typename TChar>
 typename Width<TChar>::ValueType Width<TChar>::GetValue() const
 {
