@@ -67,7 +67,7 @@ struct NtFormat<test::msg::fmt::val::flag::Nothing::define_long_long>
 int main()
 {
     using namespace test::msg::fmt::val::flag;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
     {
         constexpr Nothing nt1{};
 

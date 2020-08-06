@@ -21,7 +21,7 @@ int main()
 {
     using namespace test::msg::fmt::val::specifier;
     using namespace test::msg::fmt::val;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
     {
         Character<char> ch1;
         test::out::CString<char> out_cstr1;

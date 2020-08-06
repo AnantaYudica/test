@@ -14,7 +14,7 @@
 int main()
 {
     using namespace test::msg::fmt::val;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
     specifier::val::FloatingPoint val1{.float_value=3.14f};
     specifier::val::FloatingPoint val2{.double_value=3.14};
     specifier::val::FloatingPoint val3{.long_double_value=3.14};

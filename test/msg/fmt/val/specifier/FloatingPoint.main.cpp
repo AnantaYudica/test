@@ -19,7 +19,7 @@ int main()
 {
     using namespace test::msg::fmt::val::specifier;
     using namespace test::msg::fmt::val;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
     const float float_val1 = 2.22f, float_val2 = 8.88f;
     const double double_val1 = 34.567, double_val2 = 345.67;
     const long double l_double_val1 = 0.000012345L,

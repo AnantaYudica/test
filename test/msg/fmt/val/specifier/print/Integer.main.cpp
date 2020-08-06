@@ -7,7 +7,7 @@
 int main()
 {
     using namespace test::msg::fmt::val;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
     specifier::val::Integer val1{.char_value='Z'};
     specifier::val::Integer val2{.short_value=static_cast<short>(-1)};
     specifier::val::Integer val3{.int_value=-1};

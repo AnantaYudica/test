@@ -7950,7 +7950,7 @@ struct IFormat<test::msg::fmt::val::flag::Integer::define_unsigned |
 int main()
 {
     using namespace test::msg::fmt::val::flag;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
     {
         //default
         {

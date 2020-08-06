@@ -5245,7 +5245,7 @@ struct FfFormat<test::msg::fmt::val::flag::FloatingPoint::define_long |
 int main()
 {
     using namespace test::msg::fmt::val::flag;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
     {
         {
             constexpr FloatingPoint ff1{};

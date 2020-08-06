@@ -7,7 +7,7 @@ int main()
 {
     using namespace test::msg::fmt::val;
     using namespace test::msg::fmt::val::specifier::print;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
 
     char ch_val1 = 'B';
     short sh_val1 = 1;

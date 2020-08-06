@@ -56,7 +56,7 @@ struct ChFormat<test::msg::fmt::val::flag::Character::define_wchar
 int main()
 {
     using namespace test::msg::fmt::val::flag;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
 
     constexpr Character ch1{};
 

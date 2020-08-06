@@ -20,7 +20,7 @@ int main()
 {
     using namespace test::msg::fmt::val::specifier;
     using namespace test::msg::fmt::val;
-    using namespace test::msg::fmt;
+    using namespace test::msg::fmt::var;
 
     signed char sch1 = SCHAR_MIN, sch2 = SCHAR_MAX, sch3 = (SCHAR_MAX/ 2);
     char ch1 = 'A', ch2 = 'Z', ch3 = 'M';
