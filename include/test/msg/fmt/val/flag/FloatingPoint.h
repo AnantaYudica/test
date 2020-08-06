@@ -1,19 +1,19 @@
 #ifndef TEST_MSG_FMT_VAL_FLAG_FLOATINGPOINT_H_
 #define TEST_MSG_FMT_VAL_FLAG_FLOATINGPOINT_H_
 
-#include "../../arg/Define.h"
-#include "../../arg/Decimal.h"
-#include "../../arg/Hexadecimal.h"
-#include "../../arg/Exponent.h"
-#include "../../arg/Fixed.h"
-#include "../../arg/Lower.h"
-#include "../../arg/Upper.h"
-#include "../../arg/Prefix.h"
-#include "../../arg/PrefixPlus.h"
-#include "../../arg/PrefixSpace.h"
-#include "../../arg/PrefixZero.h"
-#include "../../arg/Width.h"
-#include "../../arg/Precision.h"
+#include "../../var/arg/Define.h"
+#include "../../var/arg/Decimal.h"
+#include "../../var/arg/Hexadecimal.h"
+#include "../../var/arg/Exponent.h"
+#include "../../var/arg/Fixed.h"
+#include "../../var/arg/Lower.h"
+#include "../../var/arg/Upper.h"
+#include "../../var/arg/Prefix.h"
+#include "../../var/arg/PrefixPlus.h"
+#include "../../var/arg/PrefixSpace.h"
+#include "../../var/arg/PrefixZero.h"
+#include "../../var/arg/Width.h"
+#include "../../var/arg/Precision.h"
 
 #include <cstdint>
 #include <utility>
@@ -35,19 +35,19 @@ class FloatingPoint
 public:
     typedef std::uint16_t ValueType;
     template<typename T>
-    using DefineType = test::msg::fmt::arg::Define<T>;
-    typedef test::msg::fmt::arg::Decimal DecimalType;
-    typedef test::msg::fmt::arg::Hexadecimal HexadecimalType;
-    typedef test::msg::fmt::arg::Exponent ExponentType;
-    typedef test::msg::fmt::arg::Fixed FixedType;
-    typedef test::msg::fmt::arg::Lower LowerType;
-    typedef test::msg::fmt::arg::Upper UpperType;
-    typedef test::msg::fmt::arg::Prefix PrefixType;
-    typedef test::msg::fmt::arg::PrefixPlus PrefixPlusType;
-    typedef test::msg::fmt::arg::PrefixSpace PrefixSpaceType;
-    typedef test::msg::fmt::arg::PrefixZero PrefixZeroType;
-    typedef test::msg::fmt::arg::Width WidthType;
-    typedef test::msg::fmt::arg::Precision PrecisionType;
+    using DefineType = test::msg::fmt::var::arg::Define<T>;
+    typedef test::msg::fmt::var::arg::Decimal DecimalType;
+    typedef test::msg::fmt::var::arg::Hexadecimal HexadecimalType;
+    typedef test::msg::fmt::var::arg::Exponent ExponentType;
+    typedef test::msg::fmt::var::arg::Fixed FixedType;
+    typedef test::msg::fmt::var::arg::Lower LowerType;
+    typedef test::msg::fmt::var::arg::Upper UpperType;
+    typedef test::msg::fmt::var::arg::Prefix PrefixType;
+    typedef test::msg::fmt::var::arg::PrefixPlus PrefixPlusType;
+    typedef test::msg::fmt::var::arg::PrefixSpace PrefixSpaceType;
+    typedef test::msg::fmt::var::arg::PrefixZero PrefixZeroType;
+    typedef test::msg::fmt::var::arg::Width WidthType;
+    typedef test::msg::fmt::var::arg::Precision PrecisionType;
 public:
     enum : ValueType
     {

@@ -53,12 +53,12 @@ private:
         typename _TArg = typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
-                test::msg::fmt::arg::Width>::value, 
+                test::msg::fmt::var::arg::Width>::value, 
             int>::type = 0>
     static bool _SetWidth(WidthType& width, TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     static bool _SetWidth(WidthType& width, 
-        test::msg::fmt::arg::Width&& set, TArgs&&... args);
+        test::msg::fmt::var::arg::Width&& set, TArgs&&... args);
 private:
     template<typename... TArgs>
     static bool _Set(WidthType& width, OutputPrintFunctionType*& print_out, 
@@ -128,7 +128,7 @@ bool Character<TChar>::_SetWidth(WidthType&)
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<!std::is_same<_TArg, 
-            test::msg::fmt::arg::Width>::value, 
+            test::msg::fmt::var::arg::Width>::value, 
         int>::type>
 bool Character<TChar>::_SetWidth(WidthType& width, TArg&&, TArgs&&... args)
 {
@@ -138,7 +138,7 @@ bool Character<TChar>::_SetWidth(WidthType& width, TArg&&, TArgs&&... args)
 template<typename TChar>
 template<typename... TArgs>
 bool Character<TChar>::_SetWidth(WidthType& width, 
-    test::msg::fmt::arg::Width&& set, TArgs&&... args)
+    test::msg::fmt::var::arg::Width&& set, TArgs&&... args)
 {
     if (!set.IsDefault()) width = std::move(WidthType(set.GetValue()));
     return _SetWidth(width, std::forward<TArgs>(args)...);;

@@ -56,12 +56,12 @@ private:
         typename _TArg = typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
-                test::msg::fmt::arg::Width>::value, 
+                test::msg::fmt::var::arg::Width>::value, 
             int>::type = 0>
     static bool _SetWidth(WidthType& width, TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     static bool _SetWidth(WidthType& width, 
-        test::msg::fmt::arg::Width&& set, TArgs&&... args);
+        test::msg::fmt::var::arg::Width&& set, TArgs&&... args);
         
 private:
     static bool _SetPrecision(PrecisionType& precision);
@@ -69,13 +69,13 @@ private:
         typename _TArg = typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
-                test::msg::fmt::arg::Precision>::value, 
+                test::msg::fmt::var::arg::Precision>::value, 
             int>::type = 0>
     static bool _SetPrecision(PrecisionType& precision, TArg&& arg, 
         TArgs&&... args);
     template<typename... TArgs>
     static bool _SetPrecision(PrecisionType& precision, 
-        test::msg::fmt::arg::Precision&& set, TArgs&&... args);
+        test::msg::fmt::var::arg::Precision&& set, TArgs&&... args);
 private:
     template<typename... TArgs>
     static bool _Set(WidthType& width, PrecisionType& precision, 
@@ -146,7 +146,7 @@ bool FloatingPoint<TChar>::_SetWidth(WidthType&)
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<!std::is_same<_TArg, 
-        test::msg::fmt::arg::Width>::value, int>::type>
+        test::msg::fmt::var::arg::Width>::value, int>::type>
 bool FloatingPoint<TChar>::_SetWidth(WidthType& width, TArg&&, 
     TArgs&&... args)
 {
@@ -156,7 +156,7 @@ bool FloatingPoint<TChar>::_SetWidth(WidthType& width, TArg&&,
 template<typename TChar>
 template<typename... TArgs>
 bool FloatingPoint<TChar>::_SetWidth(WidthType& width, 
-    test::msg::fmt::arg::Width&& set, TArgs&&... args)
+    test::msg::fmt::var::arg::Width&& set, TArgs&&... args)
 {
     if (!set.IsDefault()) width = std::move(WidthType(set.GetValue()));
     return _SetWidth(width, std::forward<TArgs>(args)...);;
@@ -171,7 +171,7 @@ bool FloatingPoint<TChar>::_SetPrecision(PrecisionType&)
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<!std::is_same<_TArg, 
-        test::msg::fmt::arg::Precision>::value, int>::type>
+        test::msg::fmt::var::arg::Precision>::value, int>::type>
 bool FloatingPoint<TChar>::_SetPrecision(PrecisionType& precision, TArg&&,
     TArgs&&... args)
 {
@@ -181,7 +181,7 @@ bool FloatingPoint<TChar>::_SetPrecision(PrecisionType& precision, TArg&&,
 template<typename TChar>
 template<typename... TArgs>
 bool FloatingPoint<TChar>::_SetPrecision(PrecisionType& precision, 
-    test::msg::fmt::arg::Precision&& set, TArgs&&... args)
+    test::msg::fmt::var::arg::Precision&& set, TArgs&&... args)
 {
     if (!set.IsDefault()) precision = std::move(PrecisionType(set.GetValue()));
     return _SetPrecision(precision, std::forward<TArgs>(args)...);;

@@ -56,24 +56,24 @@ private:
         typename _TArg = typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
-                test::msg::fmt::arg::Width>::value, 
+                test::msg::fmt::var::arg::Width>::value, 
             int>::type = 0>
     static bool _SetWidth(WidthType& width, TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     static bool _SetWidth(WidthType& width, 
-        test::msg::fmt::arg::Width&& set, TArgs&&... args);
+        test::msg::fmt::var::arg::Width&& set, TArgs&&... args);
 private:   
     static bool _SetLength(LengthType& length);
     template<typename TArg, typename... TArgs, 
         typename _TArg = typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
-                test::msg::fmt::arg::Length>::value, 
+                test::msg::fmt::var::arg::Length>::value, 
             int>::type = 0>
     static bool _SetLength(LengthType& length, TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     static bool _SetLength(LengthType& length, 
-        test::msg::fmt::arg::Length&& set, TArgs&&... args);
+        test::msg::fmt::var::arg::Length&& set, TArgs&&... args);
 private:
     template<typename... TArgs>
     static bool _Set(WidthType& width, LengthType& length, 
@@ -158,7 +158,7 @@ bool Integer<TChar>::_SetWidth(WidthType&)
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<!std::is_same<_TArg, 
-        test::msg::fmt::arg::Width>::value, 
+        test::msg::fmt::var::arg::Width>::value, 
     int>::type>
 bool Integer<TChar>::_SetWidth(WidthType& width, TArg&&, TArgs&&... args)
 {
@@ -168,7 +168,7 @@ bool Integer<TChar>::_SetWidth(WidthType& width, TArg&&, TArgs&&... args)
 template<typename TChar>
 template<typename... TArgs>
 bool Integer<TChar>::_SetWidth(WidthType& width, 
-    test::msg::fmt::arg::Width&& set, TArgs&&... args)
+    test::msg::fmt::var::arg::Width&& set, TArgs&&... args)
 {
     if (!set.IsDefault()) width = std::move(WidthType(set.GetValue()));
     return _SetWidth(width, std::forward<TArgs>(args)...);;
@@ -183,7 +183,7 @@ bool Integer<TChar>::_SetLength(LengthType&)
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<!std::is_same<_TArg, 
-        test::msg::fmt::arg::Length>::value, 
+        test::msg::fmt::var::arg::Length>::value, 
     int>::type>
 bool Integer<TChar>::_SetLength(LengthType& length, TArg&&, TArgs&&... args)
 {
@@ -193,7 +193,7 @@ bool Integer<TChar>::_SetLength(LengthType& length, TArg&&, TArgs&&... args)
 template<typename TChar>
 template<typename... TArgs>
 bool Integer<TChar>::_SetLength(LengthType& length, 
-    test::msg::fmt::arg::Length&& set, TArgs&&... args)
+    test::msg::fmt::var::arg::Length&& set, TArgs&&... args)
 {
     if (!set.IsDefault()) length = std::move(LengthType(set.GetValue()));
     return _SetLength(length, std::forward<TArgs>(args)...);;

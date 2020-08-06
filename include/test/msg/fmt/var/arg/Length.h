@@ -14,7 +14,7 @@ namespace var
 namespace arg
 {
 
-typedef test::msg::fmt::arg::Precision Length;
+typedef test::msg::fmt::var::arg::Precision Length;
 
 } //!arg
 
