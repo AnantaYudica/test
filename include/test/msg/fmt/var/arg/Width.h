@@ -1,11 +1,13 @@
-#ifndef TEST_MSG_FMT_ARG_WIDTH_H_
-#define TEST_MSG_FMT_ARG_WIDTH_H_
+#ifndef TEST_MSG_FMT_VAR_ARG_WIDTH_H_
+#define TEST_MSG_FMT_VAR_ARG_WIDTH_H_
 
 namespace test
 {
 namespace msg
 {
 namespace fmt
+{
+namespace var
 {
 namespace arg
 {
@@ -45,11 +47,13 @@ inline constexpr int Width::GetValue() const
 
 } //!arg
 
+} //!var
+
 } //!fmt
 
 } //!msg
 
 } //!test
 
-#endif //!TEST_MSG_FMT_ARG_WIDTH_H_
+#endif //!TEST_MSG_FMT_VAR_ARG_WIDTH_H_
 

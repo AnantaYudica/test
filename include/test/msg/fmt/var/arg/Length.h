@@ -1,5 +1,5 @@
-#ifndef TEST_MSG_FMT_ARG_LENGTH_H_
-#define TEST_MSG_FMT_ARG_LENGTH_H_
+#ifndef TEST_MSG_FMT_VAR_ARG_LENGTH_H_
+#define TEST_MSG_FMT_VAR_ARG_LENGTH_H_
 
 #include "Precision.h"
 
@@ -9,6 +9,8 @@ namespace msg
 {
 namespace fmt
 {
+namespace var
+{
 namespace arg
 {
 
@@ -16,11 +18,13 @@ typedef test::msg::fmt::arg::Precision Length;
 
 } //!arg
 
+} //!var
+
 } //!fmt
 
 } //!msg
 
 } //!test
 
-#endif //!TEST_MSG_FMT_ARG_LENGTH_H_
+#endif //!TEST_MSG_FMT_VAR_ARG_LENGTH_H_
 

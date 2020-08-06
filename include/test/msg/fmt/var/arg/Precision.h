@@ -1,11 +1,13 @@
-#ifndef TEST_MSG_FMT_ARG_PRECISION_H_
-#define TEST_MSG_FMT_ARG_PRECISION_H_
+#ifndef TEST_MSG_FMT_VAR_ARG_PRECISION_H_
+#define TEST_MSG_FMT_VAR_ARG_PRECISION_H_
 
 namespace test
 {
 namespace msg
 {
 namespace fmt
+{
+namespace var
 {
 namespace arg
 {
@@ -45,11 +47,13 @@ inline constexpr int Precision::GetValue() const
 
 } //!arg
 
+} //!var
+
 } //!fmt
 
 } //!msg
 
 } //!test
 
-#endif //!TEST_MSG_FMT_ARG_PRECISION_H_
+#endif //!TEST_MSG_FMT_VAR_ARG_PRECISION_H_
 
