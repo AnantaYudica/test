@@ -46,7 +46,7 @@ public:
             test::msg::fmt::var::Character<TChar>>&& mov);
 public:
     virtual std::size_t VLoad(std::size_t size, std::size_t index, 
-        va_list args) override;
+        va_list& args) override;
     virtual std::size_t Load(std::size_t size, ...) override;
 public:
     virtual typename OutputInterfaceType::SizeType 
@@ -99,7 +99,7 @@ public:
             TParam...>&& mov);
 public:
     virtual std::size_t VLoad(std::size_t size, std::size_t index, 
-        va_list args) override;
+        va_list& args) override;
     virtual std::size_t Load(std::size_t size, ...) override;
 public:
     virtual typename OutputInterfaceType::SizeType 
@@ -168,7 +168,7 @@ Parameter<TChar, test::msg::fmt::var::Character<TChar>>&
 
 template<typename TChar>
 std::size_t Parameter<TChar, test::msg::fmt::var::Character<TChar>>::
-    VLoad(std::size_t size, std::size_t index, va_list args)
+    VLoad(std::size_t size, std::size_t index, va_list& args)
 {
     return m_value.VLoad(size, index, args);
 }
@@ -280,12 +280,9 @@ Parameter<TChar, test::msg::fmt::var::Character<TChar>, TParam...>::
 
 template<typename TChar, typename... TParam>
 std::size_t Parameter<TChar, test::msg::fmt::var::Character<TChar>, 
-    TParam...>::VLoad(std::size_t size, std::size_t index, va_list args)
+    TParam...>::VLoad(std::size_t size, std::size_t index, va_list& args)
 {
     const auto next_index = m_value.VLoad(size, index, args);
-    const auto size_diff = next_index - index;
-    for (std::size_t i = 0; i < size_diff; ++i)
-        va_arg(args, void*);
     return Parameter<TChar, TParam...>::VLoad(size, next_index, args);
 }
 
