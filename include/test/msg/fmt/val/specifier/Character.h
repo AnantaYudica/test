@@ -93,7 +93,7 @@ public:
     Character<TChar>& operator=(Character<TChar>&& mov);
 public:
     std::size_t VLoad(std::size_t size, std::size_t index, 
-        va_list args) override;
+        va_list& args) override;
     std::size_t Load(std::size_t size, ...) override;
 public:
     typename OutputInterfaceType::SizeType
@@ -258,7 +258,7 @@ Character<TChar>& Character<TChar>::operator=(Character<TChar>&& mov)
 
 template<typename TChar>
 std::size_t Character<TChar>::VLoad(std::size_t size, std::size_t index, 
-    va_list args)
+    va_list& args)
 {
     auto& status = SpecifierBaseType::GetStatus();
 
@@ -286,8 +286,6 @@ std::size_t Character<TChar>::VLoad(std::size_t size, std::size_t index,
         status.Bad(StatusType::load_failed);
         return size;
     }
-    for (std::size_t i = 0; i < skip; ++i)
-        va_arg(args, void*);
     if (m_flag.GetValue() & FlagType::define_char)
     {
         int val = va_arg(args, int);

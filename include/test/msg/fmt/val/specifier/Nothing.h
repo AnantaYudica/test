@@ -124,7 +124,7 @@ public:
     Nothing<TChar>& operator=(Nothing<TChar>&& mov);
 public:
     std::size_t VLoad(std::size_t size, std::size_t index, 
-        va_list args) override;
+        va_list& args) override;
     std::size_t Load(std::size_t size, ...) override;
 public:
     typename OutputInterfaceType::SizeType
@@ -430,7 +430,7 @@ Nothing<TChar>& Nothing<TChar>::operator=(Nothing<TChar>&& mov)
 
 template<typename TChar>
 std::size_t 
-Nothing<TChar>::VLoad(std::size_t size, std::size_t index, va_list)
+Nothing<TChar>::VLoad(std::size_t size, std::size_t index, va_list&)
 {
     auto& status = SpecifierBaseType::GetStatus();
     

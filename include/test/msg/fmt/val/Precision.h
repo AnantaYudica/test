@@ -39,7 +39,7 @@ public:
     Precision<TChar>& operator=(Precision<TChar>&& mov);
 public:
     std::size_t VLoad(std::size_t size, std::size_t index, 
-        va_list args) override;
+        va_list& args) override;
     std::size_t Load(std::size_t size, ...) override;
 public:
     typename OutputInterfaceType::SizeType
@@ -104,7 +104,8 @@ Precision<TChar>& Precision<TChar>::operator=(Precision<TChar>&& mov)
 }
 
 template<typename TChar>
-std::size_t Precision<TChar>::VLoad(std::size_t, std::size_t index, va_list args)
+std::size_t Precision<TChar>::VLoad(std::size_t, std::size_t index, 
+    va_list& args)
 {
     auto& status = ParameterBaseType::GetStatus();
     if (status.IsSetValue()) return index;

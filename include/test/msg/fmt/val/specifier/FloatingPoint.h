@@ -111,7 +111,7 @@ public:
     FloatingPoint<TChar>& operator=(FloatingPoint<TChar>&& mov);
 public:
     std::size_t VLoad(std::size_t size, std::size_t index, 
-        va_list args) override;
+        va_list& args) override;
     std::size_t Load(std::size_t size, ...) override;
 public:
     SizeType Output(OutputInterfaceType& out) override;
@@ -322,7 +322,7 @@ FloatingPoint<TChar>::operator=(FloatingPoint<TChar>&& mov)
 
 template<typename TChar>
 std::size_t FloatingPoint<TChar>::VLoad(std::size_t size, std::size_t index, 
-    va_list args)
+    va_list& args)
 {
     auto& status = SpecifierBaseType::GetStatus();
     
@@ -351,8 +351,6 @@ std::size_t FloatingPoint<TChar>::VLoad(std::size_t size, std::size_t index,
             status.Bad(StatusType::load_failed);
             return size;
         }
-        for (std::size_t i = 0; i < skip; ++i)
-            va_arg(args, void*);
         skip = m_precision.VLoad(size, index, args) - index;
         total_skip += skip;
     }
@@ -366,8 +364,6 @@ std::size_t FloatingPoint<TChar>::VLoad(std::size_t size, std::size_t index,
         status.Bad(StatusType::load_failed);
         return size;
     }
-    for (std::size_t i = 0; i < skip; ++i)
-        va_arg(args, void*);
     if ((m_flag.GetValue() & (FlagType::define_long | FlagType::define_double))
         != FlagType::define_double)
     {

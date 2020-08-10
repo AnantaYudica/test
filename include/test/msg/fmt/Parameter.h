@@ -43,7 +43,7 @@ protected:
     StatusType GetStatus() const;
 public:
     virtual std::size_t VLoad(std::size_t size, std::size_t index, 
-        va_list args) = 0;
+        va_list& args) = 0;
     virtual std::size_t Load(std::size_t size, ...) = 0;
 public:
     virtual typename OutputInterfaceType::SizeType

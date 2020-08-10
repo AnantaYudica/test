@@ -44,7 +44,7 @@ public:
     Integer<TChar>& operator=(const Integer<TChar>& cpy);
     Integer<TChar>& operator=(Integer<TChar>&& mov);
 public:
-    std::size_t VLoad(std::size_t size, std::size_t index, va_list args);
+    std::size_t VLoad(std::size_t size, std::size_t index, va_list& args);
     std::size_t Load(std::size_t size, ...);
 public:
     typename OutputInterfaceType::SizeType Output(OutputInterfaceType& out);
@@ -103,7 +103,7 @@ Integer<TChar>& Integer<TChar>::operator=(Integer<TChar>&& mov)
 
 template<typename TChar>
 std::size_t Integer<TChar>::VLoad(std::size_t size, std::size_t index, 
-    va_list args)
+    va_list& args)
 {
     return m_specifier.VLoad(size, index, args);
 }
