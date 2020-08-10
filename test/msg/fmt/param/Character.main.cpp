@@ -703,32 +703,5 @@ int main()
         assert(size == 2);
         assert(strncmp(*(out_cstr1.Get()), "vWvWvWvWvWvW", 13) == 0);
     }
-    
-    
-    /*
-    Character<char> ch1;
-
-    ch1.Load(1, 'C');
-    test::out::CString<char> out_cstr1;
-    ch1.Output(out_cstr1);
-
-    printf("%s\n", *(out_cstr1.Get()));
-
-    Parameter<char, Character<char>, Character<char>> p1
-        {Character<char>{}, Character<char>{}};
-
-    p1.Load(2, 'A', 'B');
-    test::out::CString<char> out_cstr2;
-    p1.Output(out_cstr2);
-    printf("%s\n", *(out_cstr2.Get()));
-
-    Parameter<char> * p1c = &p1;
-    p1c->Unset();
-    p1c->Load(2, 'X', 'Y');
-    test::out::CString<char> out_cstr3;
-    p1c->Output(out_cstr3);
-    printf("%s\n", *(out_cstr3.Get()));
-    */
-
     return 1;
 };
