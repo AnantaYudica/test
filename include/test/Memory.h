@@ -18,32 +18,51 @@
 #define TEST_MEMORY_DEBUG_DEALLOC 0
 #endif //!TEST_MEMORY_DEBUG_DEALLOC
 
-#include "Output.h"
 #include "mem/Block.h"
+#include "Status.h"
+
+#include <cstdio>
+
+#ifndef __ATTRIBUTE__
+#ifdef __GNUC__
+#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#else
+#define __ATTRIBUTE__(...)
+#endif
+#endif //!__ATTRIBUTE__
 
 namespace test
 {
 
-template<typename Tout = Output<>>
+template<typename TStatus = test::Status>
 class Memory final
 {
+public:
+    typedef TStatus StatusType;
 private:
     mem::Block* m_blocks;
     std::size_t m_blocksLength;
     std::size_t m_blocksSize;
-    Tout* m_output;
+    StatusType* m_status;
 public:
-    Memory(Tout& output);
+    Memory(StatusType& status);
 public:
-    Memory(const Memory<Tout>& cpy) = delete;
-    Memory(Memory<Tout>&& mov);
+    Memory(const Memory<TStatus>&) = delete;
+    Memory(Memory<TStatus>&& mov);
 public:
     ~Memory();
 public:
-    Memory<Tout>& operator=(const Memory<Tout>&) = delete;
-    Memory<Tout>& operator=(Memory<Tout>&&) = delete;
+    Memory<TStatus>& operator=(const Memory<TStatus>&) = delete;
+    Memory<TStatus>& operator=(Memory<TStatus>&&) = delete;
 public:
-    void Set(Tout& output);
+    void Set(StatusType& status);
+private:
+    void Info(const char* format, ...) 
+        __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+    void Debug(const char* format, ...)
+        __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+    void Error(const char* format, ...)
+        __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
 private:
     void ReallocationBlock();
     void AppendBlock(mem::Block& b);
@@ -56,12 +75,12 @@ public:
     bool HasRegister(void * p);
 };
 
-template<typename Tout>
-Memory<Tout>::Memory(Tout& output) :
+template<typename TStatus>
+Memory<TStatus>::Memory(StatusType& status) :
     m_blocks(nullptr),
     m_blocksLength(TEST_MEMORY_INIT_BLOCK_SIZE),
     m_blocksSize(0),
-    m_output(&output)
+    m_status(&status)
 {
     m_blocks = (mem::Block*)std::malloc(m_blocksLength * 
         sizeof(mem::Block));
@@ -69,41 +88,37 @@ Memory<Tout>::Memory(Tout& output) :
     const auto && _default = mem::Block();
     for (std::size_t i = 0; i < m_blocksLength; ++i)
         memcpy((void*)(m_blocks + i), (void*)&_default, sizeof(mem::Block));
-    assert(m_output != NULL);
-    m_output->Debug("Memory Register Begin {length : %zu, size : %d bytes}\n",
+    Debug("Memory Register Begin {length : %zu, size : %d bytes}\n",
         m_blocksLength, m_blocksLength * sizeof(mem::Block));
 }
 
-template<typename Tout>
-Memory<Tout>::Memory(Memory<Tout>&& mov) :
+template<typename TStatus>
+Memory<TStatus>::Memory(Memory<TStatus>&& mov) :
     m_blocks(mov.m_blocks),
     m_blocksLength(mov.m_blocksLength),
-    m_blocksSize(mov.m_blocksSize),
-    m_output(NULL)
+    m_blocksSize(mov.m_blocksSize)
 {
     mov.m_blocks = NULL;
     mov.m_blocksLength = 0;
     mov.m_blocksSize = 0;
-    mov.m_output = NULL;
 }
 
-template<typename Tout>
-Memory<Tout>::~Memory()
+template<typename TStatus>
+Memory<TStatus>::~Memory()
 {
     if (m_blocksLength != 0)
     {
-        assert(m_output != NULL);
         if (m_blocksSize != 0)
         {
-            m_output->Debug("Memory Register {size : %zu}\n", m_blocksSize);
+            Debug("Memory Register {size : %zu}\n", m_blocksSize);
             for (std::size_t i = 0; i < m_blocksSize; ++i)
             {
-                m_output->Error("Memory Block {addr : %p, size : %zu byte} "
+                Error("Memory Block {addr : %p, size : %zu byte} "
                     "has not deallocation\n", (m_blocks + i)->Pointer(),
                     (m_blocks + i)->Size());
                 if ((m_blocks + i)->File() != nullptr)
                 {
-                    m_output->Error(" in file %s, line %zu\n",
+                    Error(" in file %s, line %zu\n",
                         (m_blocks + i)->File(), (m_blocks + i)->Line());
                 }
             }
@@ -111,22 +126,49 @@ Memory<Tout>::~Memory()
         if (m_blocks != nullptr)
         {
             std::free(m_blocks);
-            m_output->Debug("Memory Register End\n");
+            Debug("Memory Register End\n");
         }
     }
 }
 
-template<typename Tout>
-void Memory<Tout>::Set(Tout& output)
+template<typename TStatus>
+void Memory<TStatus>::Set(StatusType& status)
 {
-    assert(m_output == NULL);
-    m_output = &output;
+    assert(m_status == NULL);
+    m_status = &status;
 }
 
-template<typename Tout>
-void Memory<Tout>::ReallocationBlock()
+template<typename TStatus>
+void Memory<TStatus>::Info(const char* format, ...)
 {
-    assert(m_output != NULL);
+    va_list args;
+    va_start(args, format);
+    vprintf(format, args);
+    va_end(args);
+}
+
+template<typename TStatus>
+void Memory<TStatus>::Debug(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    vprintf(format, args);
+    va_end(args);
+}
+
+template<typename TStatus>
+void Memory<TStatus>::Error(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    vprintf(format, args);
+    va_end(args);
+    m_status->Error();
+}
+
+template<typename TStatus>
+void Memory<TStatus>::ReallocationBlock()
+{
     if (m_blocksSize == m_blocksLength)
     {
         const auto old_length = m_blocksLength;
@@ -135,7 +177,7 @@ void Memory<Tout>::ReallocationBlock()
             sizeof(mem::Block));
         if (new_blocks == NULL)
         {
-            m_output->Error("Error Realloc {from %zu, byte to %zu bytes}\n", 
+            Error("Error Realloc {from %zu, byte to %zu bytes}\n", 
                 old_length * sizeof(mem::Block), m_blocksLength * sizeof(mem::Block));
             m_blocksLength = old_length;
             return;
@@ -146,20 +188,19 @@ void Memory<Tout>::ReallocationBlock()
         const auto && _default = mem::Block();
         for (std::size_t i = old_length; i < m_blocksLength; ++i)
             memcpy((void*)(m_blocks + i), (void*)&_default, sizeof(mem::Block));
-        m_output->Debug("Memory Register Realloc {length : %zu, " 
+        Debug("Memory Register Realloc {length : %zu, " 
             "size : %zu bytes}\n", m_blocksLength, 
             m_blocksLength * sizeof(mem::Block));
     }
 }
 
-template<typename Tout>
-void Memory<Tout>::AppendBlock(mem::Block& b)
+template<typename TStatus>
+void Memory<TStatus>::AppendBlock(mem::Block& b)
 {
-    assert(m_output != NULL);
     if (!HasRegister(b.Pointer()))
     {
 #if TEST_MEMORY_DEBUG_ALLOC
-        m_output->Debug("alloc-memory {addr : %p, size : %zu bytes}\n",
+        Debug("alloc-memory {addr : %p, size : %zu bytes}\n",
                 b.Pointer(), b.Size());
 #endif
         *(m_blocks + m_blocksSize) = std::move(b);
@@ -167,13 +208,13 @@ void Memory<Tout>::AppendBlock(mem::Block& b)
     }
     else
     {
-        m_output->Error("Memory Register duplicate! {Addrs : %p}\n",
+        Error("Memory Register duplicate! {Addrs : %p}\n",
             b.Pointer());
     }
 }
 
-template<typename Tout>
-void Memory<Tout>::Register(void* p, const std::size_t s)
+template<typename TStatus>
+void Memory<TStatus>::Register(void* p, const std::size_t s)
 {
     assert(p != NULL);
     assert(m_blocks != NULL);
@@ -182,9 +223,9 @@ void Memory<Tout>::Register(void* p, const std::size_t s)
     AppendBlock(b);
 }
 
-template<typename Tout>
+template<typename TStatus>
 template<std::size_t N>
-void Memory<Tout>::Register(void* p, const std::size_t s,
+void Memory<TStatus>::Register(void* p, const std::size_t s,
     const char (&f)[N], const int& l)
 {
     assert(p != NULL);
@@ -194,10 +235,9 @@ void Memory<Tout>::Register(void* p, const std::size_t s,
     AppendBlock(b);
 }
 
-template<typename Tout>
-void Memory<Tout>::Unregister(void * p)
+template<typename TStatus>
+void Memory<TStatus>::Unregister(void * p)
 {
-    assert(m_output != NULL);
     bool found = false;
     std::size_t iReplace = 0;
     for (std::size_t i = 0; i < m_blocksSize; ++i)
@@ -209,7 +249,7 @@ void Memory<Tout>::Unregister(void * p)
             if (found)
             {
 #if TEST_MEMORY_DEBUG_DEALLOC
-                m_output->Debug("dealloc-memory {addr : %p, "
+                Debug("dealloc-memory {addr : %p, "
                     "size : %zu bytes}\n", (m_blocks + i)->Pointer(),
                     (m_blocks + i)->Size());
 #endif 
@@ -224,8 +264,8 @@ void Memory<Tout>::Unregister(void * p)
     if (found) --m_blocksSize;
 }
 
-template<typename Tout>
-bool Memory<Tout>::HasRegister(void * p)
+template<typename TStatus>
+bool Memory<TStatus>::HasRegister(void * p)
 {
     if (m_blocksSize == 0) return false;
     for (std::size_t i = 0; i < m_blocksSize; ++i)
