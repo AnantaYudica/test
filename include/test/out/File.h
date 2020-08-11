@@ -212,8 +212,8 @@ File<TChar, MinimumBuffer, MaximumBuffer>::~File()
 
 template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
 bool File<TChar, MinimumBuffer, MaximumBuffer>::
-    OnMaximumSize(test::CString<char> old_filename,
-        test::CString<char>& new_filename, ModeType& mode)
+    OnMaximumSize(test::CString<char>,
+        test::CString<char>&, ModeType&)
 {
     return false;
 }
