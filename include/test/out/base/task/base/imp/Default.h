@@ -162,27 +162,27 @@ Default<TChar>::BufferGuard()
 }
 
 template<typename TChar>
-bool Default<TChar>::Execute(test::out::Interface<TChar>& out)
+bool Default<TChar>::Execute(test::out::Interface<TChar>&)
 {
     return false;
 }
 
 template<typename TChar>
-bool Default<TChar>::Assign(const std::intptr_t& deleg_id, 
-    std::intptr_t& task_id)
+bool Default<TChar>::Assign(const std::intptr_t&, 
+    std::intptr_t&)
 {
     return false;
 }
 
 template<typename TChar>
-bool Default<TChar>::Release(const std::intptr_t& deleg_id)
+bool Default<TChar>::Release(const std::intptr_t&)
 {
     return false;
 }
 
 template<typename TChar>
 typename Default<TChar>::BufferType 
-Default<TChar>::Buffer(const std::intptr_t& deleg_id)
+Default<TChar>::Buffer(const std::intptr_t&)
 {
     return {};
 }
