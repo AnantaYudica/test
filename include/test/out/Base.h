@@ -156,8 +156,8 @@ Base<TChar, MaximumQueue>::~Base()
 }
 
 template<typename TChar, std::size_t MaximumQueue>
-bool Base<TChar, MaximumQueue>::OnMaximumSize(test::CString<char> old_filename,
-    test::CString<char>& new_filename, ModeType& mode)
+bool Base<TChar, MaximumQueue>::OnMaximumSize(test::CString<char>,
+    test::CString<char>&, ModeType&)
 {
     return false;
 }
