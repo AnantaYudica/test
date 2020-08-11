@@ -532,7 +532,7 @@ CString<TChar>::_Set(const SizeType& index, const char * format,
         return 0;
     }
 
-    if (print_size >= m_minimum_capacity)
+    if ((SizeType)print_size >= m_minimum_capacity)
     {
         delete[] buffer;
         buffer = new TChar[print_size + 1];
