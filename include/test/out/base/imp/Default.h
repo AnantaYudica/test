@@ -96,7 +96,7 @@ Default<TChar>::ExecuteTaskGuard()
 }
 
 template<typename TChar>
-bool Default<TChar>::ExecuteTask(const std::intptr_t& id)
+bool Default<TChar>::ExecuteTask(const std::intptr_t&)
 {
     return false;
 }
