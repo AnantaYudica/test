@@ -157,14 +157,14 @@ bool Log<TChar>::DefaultOnBegin(test::out::Interface<TChar>& out,
 
 template<typename TChar>
 bool Log<TChar>::DefaultOnEnd(test::out::Interface<TChar>& out, 
-    std::chrono::time_point<std::chrono::system_clock> timestamp,
-    test::CString<TChar> tag)
+    std::chrono::time_point<std::chrono::system_clock>,
+    test::CString<TChar>)
 {
     return out.Puts("\n") != 0;
 }
 
 template<typename TChar>
-void Log<TChar>::DefaultDeleter(test::out::Interface<TChar> * out)
+void Log<TChar>::DefaultDeleter(test::out::Interface<TChar> *)
 {}
 
 template<typename TChar>
