@@ -463,13 +463,14 @@ File<TChar, MinimumBuffer, MaximumBuffer>::VPrint(const char * format,
         m_tmp = std::move(test::CString<TChar>("", 0));
         return 0;
     } 
-    else if (buffer_size >= MinimumBuffer && buffer_size < MaximumBuffer)
+    else if ((SizeType)buffer_size >= MinimumBuffer && 
+        (SizeType)buffer_size < MaximumBuffer)
     {
         delete[] buffer;
         buffer = new TChar[buffer_size + 1];
         vsnprintf(buffer, buffer_size + 1, format, var_args);
     }
-    else if (buffer_size >= MaximumBuffer)
+    else if ((SizeType)buffer_size >= MaximumBuffer)
     {
         delete[] buffer;
         buffer = nullptr;
