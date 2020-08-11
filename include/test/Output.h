@@ -2,25 +2,33 @@
 #define TEST_OUTPUT_H_
 
 #include "Status.h"
+#include "out/Argument.h"
+#include "out/Base.h"
+#include "cstr/out/Argument.h"
 
 #include <iostream>
 #include <cstdlib>
 #include <cassert>
+#include <cstdarg>
 
-#include "out/Argument.h"
-#include "cstr/out/Argument.h"
+#ifndef __ATTRIBUTE__
+#ifdef __GNUC__
+#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#else
+#define __ATTRIBUTE__(...)
+#endif
+#endif //!__ATTRIBUTE__
 
 namespace test
 {
 
 template<typename Ts = Status>
-class Output
+class Output : protected test::out::Base<char>
 {
 private:
     bool m_enable;
     bool m_infoEnable;
     bool m_debugEnable;
-    FILE* m_outputFile;
     Ts* m_status;
 public:
     Output(Ts& status);
@@ -36,12 +44,19 @@ public:
 public:
     void Set(Ts& status);
 public:
-    template<typename... Targs>
-    void Error(const char* format, Targs&&... args);
-    template<typename... Targs>
-    void Info(const char* format, Targs&&... args);
-    template<typename... Targs>
-    void Debug(const char* format, Targs&&... args);
+    void VError(const char* format, va_list args) 
+        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
+    void VInfo(const char* format, va_list args) 
+        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
+    void VDebug(const char* format, va_list args)
+        __ATTRIBUTE__((__format__ (__printf__, 3, 0)));
+public:
+    void Error(const char* format, ...) 
+        __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+    void Info(const char* format, ...)
+        __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+    void Debug(const char* format, ...)
+        __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
 public:
     bool Enable();
     void Enable(bool enable);
@@ -53,50 +68,37 @@ public:
 
 template<typename Ts>
 Output<Ts>::Output(Ts& status) :
+    test::out::Base<char>(),
     m_enable(true),
     m_infoEnable(true),
     m_debugEnable(true),
-    m_outputFile(stdout),
     m_status(&status)
 {}
 
 template<typename Ts>
 Output<Ts>::Output(Ts& status, const char* file_output) :
+    test::out::Base<char>(file_output, 
+        test::out::Base<char>::FileType::mode_write),
     m_enable(true),
     m_infoEnable(true),
     m_debugEnable(true),
-    m_outputFile(NULL),
     m_status(&status)
-{
-#if (defined(_MSC_BUILD) && !defined(_CRT_SECURE_NO_WARNINGS))
-    fopen_s(&m_outputFile, file_output, "w"); 
-#else 
-    m_outputFile = fopen(file_output, "w");
-#endif 
-    assert(m_outputFile != NULL);
-}
+{}
 
 template<typename Ts>
 Output<Ts>::Output(Output<Ts>&& mov) :
+    test::out::Base<char>(std::move(mov)),
     m_enable(mov.m_enable),
     m_infoEnable(mov.m_infoEnable),
     m_debugEnable(mov.m_debugEnable),
-    m_outputFile(mov.m_outputFile),
     m_status(NULL)
 {
-    mov.m_outputFile = NULL;
     mov.m_status = NULL;
 }
 
 template<typename Ts>
 Output<Ts>::~Output()
-{
-    if (m_outputFile != NULL)
-    {
-        fclose(m_outputFile);
-        m_outputFile = NULL;
-    }
-}
+{}
 
 template<typename Ts>
 void Output<Ts>::Set(Ts& status)
@@ -106,44 +108,62 @@ void Output<Ts>::Set(Ts& status)
 }
 
 template<typename Ts>
-template<typename... Targs>
-void Output<Ts>::Error(const char* format, Targs&&... args)
+void Output<Ts>::VError(const char* format, va_list args)
 {
     assert(m_status != NULL);
     m_status->Error();
     if (m_enable)
     {
-        assert(m_outputFile != NULL);
-        fprintf(m_outputFile, format, 
-            test::out::Argument<Targs>::Value(args)...);
-        fflush(m_outputFile);
+        auto&& err = test::out::Base<char>::Error();
+        err.VPrint(format, args);
     }
 }
 
 template<typename Ts>
-template<typename... Targs>
-void Output<Ts>::Info(const char* format, Targs&&... args)
+void Output<Ts>::VInfo(const char* format, va_list args) 
 {
     if (m_enable && m_infoEnable)
     {
-        assert(m_outputFile != NULL);
-        fprintf(m_outputFile, format, 
-            test::out::Argument<Targs>::Value(args)...);
-        fflush(m_outputFile);
+        auto&& info = test::out::Base<char>::Info();
+        info.VPrint(format, args);
     }
 }
 
 template<typename Ts>
-template<typename... Targs>
-void Output<Ts>::Debug(const char* format, Targs&&... args)
+void Output<Ts>::VDebug(const char* format, va_list args)
 {
     if (m_enable && m_debugEnable)
     {
-        assert(m_outputFile != NULL);
-        fprintf(m_outputFile, format, 
-            test::out::Argument<Targs>::Value(args)...);
-        fflush(m_outputFile);
+        auto&& debug = test::out::Base<char>::Debug();
+        debug.VPrint(format, args);
     }
+}
+
+template<typename Ts>
+void Output<Ts>::Error(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    VError(format, args);
+    va_end(args);
+}
+
+template<typename Ts>
+void Output<Ts>::Info(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    VInfo(format, args);
+    va_end(args);
+}
+
+template<typename Ts>
+void Output<Ts>::Debug(const char* format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    VDebug(format, args);
+    va_end(args);
 }
 
 template<typename Ts>
