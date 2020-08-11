@@ -653,7 +653,7 @@ Data<T*const>& Data<T*const>::operator=(const T& cpy)
 }
 
 template<typename T>
-Data<T*const>& Data<T*const>::operator=(T&& mov)
+Data<T*const>& Data<T*const>::operator=(T&&)
 {
     return *this;
 }
