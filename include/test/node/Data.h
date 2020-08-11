@@ -47,7 +47,6 @@ public:
     T operator*() const;
 public:
     T* operator->();
-    const T*const operator->() const;
 };
 
 template<typename T>
@@ -79,7 +78,6 @@ public:
     T operator*() const;
 public:
     const T* operator->();
-    const T*const operator->() const;
 };
 
 template<typename T>
@@ -113,7 +111,6 @@ public:
     T operator*() const;
 public:
     T* operator->();
-    const T*const operator->() const;
 };
 
 template<typename T>
@@ -147,7 +144,6 @@ public:
     T operator*() const;
 public:
     const T* operator->();
-    const T*const operator->() const;
 };
 
 template<typename T>
@@ -179,8 +175,7 @@ public:
     T& operator*();
     T operator*() const;
 public:
-    T*const operator->();
-    const T*const operator->() const;
+    T* operator->();
 };
 
 
@@ -213,8 +208,7 @@ public:
     const T& operator*();
     T operator*() const;
 public:
-    const T*const operator->();
-    const T*const operator->() const;
+    const T* operator->();
 };
 
 template<typename T>
@@ -300,12 +294,6 @@ T* Data<T>::operator->()
 }
 
 template<typename T>
-const T*const Data<T>::operator->() const
-{
-    return &m_data;
-}
-
-template<typename T>
 Data<const T>::Data() :
     m_data()
 {}
@@ -374,12 +362,6 @@ T Data<const T>::operator*() const
 
 template<typename T>
 const T* Data<const T>::operator->()
-{
-    return &m_data;
-}
-
-template<typename T>
-const T*const Data<const T>::operator->() const
 {
     return &m_data;
 }
@@ -502,17 +484,6 @@ T* Data<T*>::operator->()
 }
 
 template<typename T>
-const T*const Data<T*>::operator->() const
-{
-    if (m_data == nullptr)
-    {
-        Data<T*>* pthis = const_cast<Data<T*>*>(this);
-        pthis->m_data = new T(); 
-    }
-    return m_data;
-}
-
-template<typename T>
 Data<const T*>::Data() :
     m_data(new const T())
 {}
@@ -628,17 +599,6 @@ const T* Data<const T*>::operator->()
 }
 
 template<typename T>
-const T*const Data<const T*>::operator->() const
-{
-    if (m_data == nullptr)
-    {
-        Data<const T*>* pthis = const_cast<Data<const T*>*>(this);
-        pthis->m_data = new const T(); 
-    }
-    return m_data;
-}
-
-template<typename T>
 Data<T*const>::Data() :
     m_data(new T())
 {}
@@ -711,13 +671,7 @@ T Data<T*const>::operator*() const
 }
 
 template<typename T>
-T*const Data<T*const>::operator->()
-{
-    return m_data;
-}
-
-template<typename T>
-const T*const Data<T*const>::operator->() const
+T* Data<T*const>::operator->()
 {
     return m_data;
 }
@@ -798,13 +752,7 @@ T Data<const T*const>::operator*() const
 }
 
 template<typename T>
-const T*const Data<const T*const>::operator->()
-{
-    return m_data;
-}
-
-template<typename T>
-const T*const Data<const T*const>::operator->() const
+const T* Data<const T*const>::operator->()
 {
     return m_data;
 }
