@@ -399,8 +399,8 @@ CString<TChar>::CString(const CString<TChar>& cpy) :
 
 template<typename TChar>
 CString<TChar>::CString(CString<TChar>&& mov):
-    m_cstr(mov.m_cstr),
     m_status(std::move(mov.m_status)),
+    m_cstr(mov.m_cstr),
     m_size(mov.m_size),
     m_capacity(mov.m_capacity),
     m_minimum_capacity(mov.m_minimum_capacity), 
