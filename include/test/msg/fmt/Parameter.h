@@ -2,6 +2,7 @@
 #define TEST_MSG_FMT_PARAMETER_H_
 
 #include "../../out/Interface.h"
+#include "../../Pointer.h"
 #include "Status.h"
 
 #include <cstdarg>
@@ -25,10 +26,10 @@ public:
     typedef typename StatusType::IntegerValueType IntegerValueStatusType;
     typedef test::out::Interface<TChar> OutputInterfaceType;
 private:
-    StatusType m_status;
+    test::Pointer<StatusType> m_status;
 protected:
     Parameter();
-    Parameter(const IntegerValueStatusType& val);
+    Parameter(test::Pointer<StatusType>&& status);
 public:
     virtual ~Parameter();
 protected:
@@ -41,6 +42,8 @@ protected:
 protected:
     StatusType& GetStatus();
     StatusType GetStatus() const;
+protected:
+    test::Pointer<StatusType> GetStatusPointer();
 public:
     virtual std::size_t VLoad(std::size_t size, std::size_t index, 
         va_list& args) = 0;
@@ -67,15 +70,13 @@ Parameter<TChar, TParam...>::Parameter() :
 {}
 
 template<typename TChar, typename... TParam>
-Parameter<TChar, TParam...>::Parameter(const IntegerValueStatusType& val) :
-    m_status(val)
+Parameter<TChar, TParam...>::Parameter(test::Pointer<StatusType>&& status) :
+    m_status(std::move(status))
 {}
 
 template<typename TChar, typename... TParam>
 Parameter<TChar, TParam...>::~Parameter()
-{
-    m_status.Reset();
-}
+{}
 
 template<typename TChar, typename... TParam>
 Parameter<TChar, TParam...>::
@@ -108,40 +109,47 @@ template<typename TChar, typename... TParam>
 typename Parameter<TChar, TParam...>::StatusType& 
 Parameter<TChar, TParam...>::GetStatus()
 {
-    return m_status;
+    return *m_status;
 }
 
 template<typename TChar, typename... TParam>
 typename Parameter<TChar, TParam...>::StatusType 
 Parameter<TChar, TParam...>::GetStatus() const
 {
-    return {m_status};
+    return {*m_status};
+}
+
+template<typename TChar, typename... TParam>
+test::Pointer<typename Parameter<TChar, TParam...>::StatusType> 
+Parameter<TChar, TParam...>::GetStatusPointer()
+{
+    return m_status;
 }
 
 template<typename TChar, typename... TParam>
 bool Parameter<TChar, TParam...>::IsGood() const
 {
-    return m_status.IsGood();
+    return (*m_status).IsGood();
 }
 
 template<typename TChar, typename... TParam>
 bool Parameter<TChar, TParam...>::IsBad() const
 {
-    return m_status.IsBad();
+    return (*m_status).IsBad();
 }
 
 template<typename TChar, typename... TParam>
 void Parameter<TChar, TParam...>::Reset()
 {
     Unset();
-    m_status.Reset();
+    m_status->Reset();
 }
 
 template<typename TChar, typename... TParam>
 typename Parameter<TChar, TParam...>::StatusType::IntegerValueType 
 Parameter<TChar, TParam...>::GetBadCode() const
 {
-    return m_status.GetBadCode();
+    return (*m_status).GetBadCode();
 }
 
 } //!fmt
