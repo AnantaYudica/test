@@ -25,11 +25,12 @@ public:
     typedef typename StatusType::ValueType ValueStatusType;
     typedef typename StatusType::IntegerValueType IntegerValueStatusType;
     typedef test::out::Interface<TChar> OutputInterfaceType;
+    typedef test::Pointer<StatusType> StatusPointerType;
 private:
-    test::Pointer<StatusType> m_status;
+    StatusPointerType m_status;
 protected:
     Parameter();
-    Parameter(test::Pointer<StatusType>&& status);
+    Parameter(StatusPointerType&& status);
 public:
     virtual ~Parameter();
 protected:
@@ -43,7 +44,7 @@ protected:
     StatusType& GetStatus();
     StatusType GetStatus() const;
 protected:
-    test::Pointer<StatusType> GetStatusPointer();
+    StatusPointerType GetStatusPointer();
 public:
     virtual std::size_t VLoad(std::size_t size, std::size_t index, 
         va_list& args) = 0;
@@ -120,7 +121,7 @@ Parameter<TChar, TParam...>::GetStatus() const
 }
 
 template<typename TChar, typename... TParam>
-test::Pointer<typename Parameter<TChar, TParam...>::StatusType> 
+typename Parameter<TChar, TParam...>::StatusPointerType
 Parameter<TChar, TParam...>::GetStatusPointer()
 {
     return m_status;
