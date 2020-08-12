@@ -82,7 +82,7 @@ Parameter<TChar, TParam...>::~Parameter()
 template<typename TChar, typename... TParam>
 Parameter<TChar, TParam...>::
     Parameter(const Parameter<TChar, TParam...>& cpy) :
-        m_status(cpy.m_status)
+        m_status(*(cpy.m_status))
 {}
 
 template<typename TChar, typename... TParam>
@@ -94,7 +94,7 @@ template<typename TChar, typename... TParam>
 Parameter<TChar, TParam...>& 
 Parameter<TChar, TParam...>::operator=(const Parameter<TChar, TParam...>& cpy)
 {
-    m_status = cpy.m_status;
+    *m_status = *(cpy.m_status);
     return *this;
 }
 
@@ -102,7 +102,7 @@ template<typename TChar, typename... TParam>
 Parameter<TChar, TParam...>& 
 Parameter<TChar, TParam...>::operator=(Parameter<TChar, TParam...>&& mov)
 {
-    m_status = std::move(mov.m_status);
+    *m_status = std::move(*(mov.m_status));
     return *this;
 }
 
