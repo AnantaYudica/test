@@ -40,6 +40,7 @@ public:
         operator=(Pointer<T, DefaultValueFunc, TEnable>&& mov);
 public:
     T& operator*();
+    const T& operator*() const;
 public:
     T* operator->();
 public:
@@ -82,6 +83,7 @@ public:
         operator=(Pointer<T, DefaultValueFunc, void>&& mov);
 public:
     T& operator*();
+    const T& operator*() const;
 public:
     T* operator->();
 public:
@@ -174,6 +176,12 @@ Pointer<T, DefaultValueFunc, TEnable>::
 
 template<typename T, T(*DefaultValueFunc)(), typename TEnable>
 T& Pointer<T, DefaultValueFunc, TEnable>::operator*()
+{
+    return *m_value;
+}
+
+template<typename T, T(*DefaultValueFunc)(), typename TEnable>
+const T& Pointer<T, DefaultValueFunc, TEnable>::operator*() const
 {
     return *m_value;
 }
@@ -293,6 +301,14 @@ Pointer<T, DefaultValueFunc,
 template<typename T, T(*DefaultValueFunc)()>
 T& Pointer<T, DefaultValueFunc, 
     typename std::enable_if<DefaultValueFunc == nullptr>::type>::operator*()
+{
+    return *m_value;
+}
+
+template<typename T, T(*DefaultValueFunc)()>
+const T& Pointer<T, DefaultValueFunc, 
+    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
+        operator*() const
 {
     return *m_value;
 }
