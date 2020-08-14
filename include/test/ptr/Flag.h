@@ -10,7 +10,7 @@ namespace ptr
 
 typedef std::uint8_t FlagIntegerType;
 
-enum class Flag : FlagIntegerType
+enum Flag : std::uint8_t 
 {
     empty = 0,
     default_initialization = 1,
