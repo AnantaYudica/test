@@ -346,7 +346,7 @@ void* operator new[]( std::size_t sz, const char (&file)[N], const int& line)
 
 template<std::size_t N>
 void* operator new ( std::size_t sz, void* ptr,
-    const char (&file)[N], const int& line)
+    const char (&)[N], const int&)
 {
     auto p = ::operator new(sz, ptr);
     return p;
@@ -354,7 +354,7 @@ void* operator new ( std::size_t sz, void* ptr,
 
 template<std::size_t N>
 void* operator new[]( std::size_t sz, void* ptr,
-    const char (&file)[N], const int& line)
+    const char (&)[N], const int& )
 {
     auto p = ::operator new[](sz, ptr);
     return p;
