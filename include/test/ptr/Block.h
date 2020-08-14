@@ -4,6 +4,7 @@
 #include "Flag.h"
 #include "block/Header.h"
 
+#include <cstddef>
 #include <cstdint>
 
 namespace test
@@ -15,6 +16,7 @@ class Block
 {
 public:
     typedef test::ptr::block::Header HeaderType;
+    typedef typename HeaderType::DestructorFuncType DestructorFuncType;
     typedef test::ptr::FlagIntegerType FlagIntegerType;
 private:
     char * m_value;
@@ -31,11 +33,14 @@ public:
     inline Block& operator=(const Block& cpy);
     inline Block& operator=(Block&& mov);
 public:
-    inline void * Allocation(const std::size_t& size);
+    inline void * Allocation(const FlagIntegerType& flag, 
+        const std::size_t& type_size, const std::size_t& type_count,
+        DestructorFuncType& destructor);
     inline void Deallocation();
 public:
-    inline FlagIntegerType* GetFlag();
-    inline std::size_t* GetSize();
+    inline FlagIntegerType GetFlag() const;
+    inline std::size_t GetTypeSize() const;
+    inline std::size_t GetDataSize() const;
     inline void* GetData();
 };
 
@@ -77,28 +82,50 @@ inline Block& Block::operator=(Block&& mov)
     return *this;
 }
 
-inline void * Block::Allocation(const std::size_t& size)
+inline void * Block::Allocation(const FlagIntegerType& flag, 
+    const std::size_t& type_size, const std::size_t& type_count,
+    DestructorFuncType& destructor)
 {
-    m_value = new char[sizeof(HeaderType) + size];
-    *GetFlag() = 0;
-    *GetSize() = size;
+    const std::size_t data_size = type_size * type_count;
+    m_value = new char[sizeof(HeaderType) + data_size];
+    HeaderType * header = (HeaderType*)m_value;
+    header->flag = flag;
+    header->destructor = &destructor;
+    header->type_size = type_size;
+    header->data_size = data_size;
     return GetData();
 }
 
 inline void Block::Deallocation()
 {
+    if (m_value == _Default()) return;
+    HeaderType * header = (HeaderType*)m_value;
+    const auto type_size = GetTypeSize();
+    const auto data_size = GetDataSize();
+    char * data = (char *)GetData();
+    for (size_t i = 0; i < data_size;)
+    {
+        (*header->destructor)(data);
+        data += type_size;
+        i += type_size;
+    }
     delete[] m_value;
     m_value = _Default();
 }
 
-inline FlagIntegerType* Block::GetFlag()
+inline FlagIntegerType Block::GetFlag() const
 {
-    return &(((HeaderType*)m_value)->flag);
+    return ((HeaderType*)m_value)->flag;
 }
 
-inline std::size_t* Block::GetSize()
+inline std::size_t Block::GetTypeSize() const
 {
-    return &(((HeaderType*)m_value)->size);
+    return ((HeaderType*)m_value)->type_size;
+}
+
+inline std::size_t Block::GetDataSize() const
+{
+    return ((HeaderType*)m_value)->data_size;
 }
 
 inline void* Block::GetData()
