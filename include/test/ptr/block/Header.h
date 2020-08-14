@@ -14,8 +14,14 @@ namespace block
 
 struct Header
 {
+    typedef test::ptr::FlagIntegerType FlagIntegerType;
+
+    typedef void(DestructorFuncType)(void *);
+
     test::ptr::FlagIntegerType flag;
-    std::size_t size;
+    DestructorFuncType* destructor;
+    std::size_t type_size;
+    std::size_t data_size;
 };
 
 } //!block
