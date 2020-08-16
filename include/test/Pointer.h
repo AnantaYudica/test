@@ -1,339 +1,416 @@
 #ifndef TEST_POINTER_H_
 #define TEST_POINTER_H_
 
-#include <cstddef>
+#include "ptr/Base.h"
+#include "ptr/Default.h"
+#include "ptr/Flag.h"
+#include "ptr/arg/Array.h"
+
 #include <type_traits>
-#include <atomic>
+#include <utility>
+#include <cstdint>
+#include <cstddef>
 
 namespace test
 {
 
-template<typename T, T(*DefaultValueFunc)() = nullptr, typename TEnable = void>
-class Pointer
+template<typename T, typename TDefault = test::ptr::Default<T>>
+class Pointer : public test::ptr::Base
 {
 public:
+    static_assert(decltype(IsBaseOfDefault(std::declval<TDefault>()))::value,
+        "T is base of test::ptr::Default<...>");
+public:
+    typedef test::ptr::Base BaseType;
     typedef T ValueType;
     typedef std::size_t IntegerCountType;
     typedef std::atomic<IntegerCountType> CountType;
 private:
-    static void _Reset(ValueType*& value, CountType*& count);
+    typedef test::ptr::Flag FlagType;
+    typedef test::ptr::FlagIntegerType FlagIntegerType;
 private:
-    ValueType * m_value;
-    CountType * m_count;
+    std::size_t m_step;
 public:
     Pointer();
     template<typename TArg, typename... TArgs, typename _TArg = 
         typename std::remove_pointer<typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type>::type, 
-        typename std::enable_if<!std::is_same<_TArg, Pointer<T, 
-            DefaultValueFunc, TEnable>>::value, int>::type = 0>
+        typename std::enable_if<!std::is_same<_TArg, 
+                Pointer<T, TDefault>>::value &&
+            !std::is_same<_TArg, test::ptr::Base>::value &&
+            !std::is_same<_TArg, test::ptr::arg::Array>::value, int>::type = 0>
     Pointer(TArg&& arg, TArgs&&... args);
+    template<typename... TArgs>
+    Pointer(test::ptr::arg::Array&& array, TArgs&&... args);
+public:
+    explicit Pointer(const BaseType& base, const std::size_t& step);
 public:
     ~Pointer();
 public:
-    Pointer(const Pointer<T, DefaultValueFunc, TEnable>& cpy);
-    Pointer(Pointer<T, DefaultValueFunc, TEnable>&& mov);
+    Pointer(const Pointer<T, TDefault>& cpy);
+    Pointer(Pointer<T, TDefault>&& mov);
 public:
-    Pointer<T, DefaultValueFunc, TEnable>& 
-        operator=(const Pointer<T, DefaultValueFunc, TEnable>& cpy);
-    Pointer<T, DefaultValueFunc, TEnable>& 
-        operator=(Pointer<T, DefaultValueFunc, TEnable>&& mov);
+    Pointer<T, TDefault>& operator=(const Pointer<T, TDefault>& cpy);
+    Pointer<T, TDefault>& operator=(Pointer<T, TDefault>&& mov);
+public:
+    template<typename TTo, typename TToDefault = TDefault,
+        typename std::enable_if<std::is_same<
+            decltype(const_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+            int>::type = 0>
+    Pointer<TTo, TToDefault> ConstCast();
+    template<typename TTo, typename TToDefault = TDefault,
+        typename std::enable_if<std::is_same<
+            decltype(dynamic_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+            int>::type = 0>
+    Pointer<TTo, TToDefault> DynamicCast();
+    template<typename TTo, typename TToDefault = TDefault,
+        typename std::enable_if<std::is_same<
+            decltype(reinterpret_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+            int>::type = 0>
+    Pointer<TTo, TToDefault> ReinterpretCast();
+    template<typename TTo, typename TToDefault = TDefault,
+        typename std::enable_if<std::is_same<
+            decltype(static_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+            int>::type = 0>
+    Pointer<TTo, TToDefault> StaticCast();
+public:
+    std::size_t StepSize() const;
+    std::size_t AllocationSize() const;
+    std::size_t Size() const;
+public:
+    std::size_t Offset() const;
+    std::size_t Index() const;
+    void SetIndex(const std::size_t& set);
+public:
+    Pointer<T, TDefault>& operator+=(const std::size_t& index);
+    Pointer<T, TDefault>& operator-=(const std::size_t& index);
 public:
     T& operator*();
     const T& operator*() const;
 public:
     T* operator->();
 public:
-    bool operator==(const Pointer<T, 
-        DefaultValueFunc, TEnable>& other) const;
-    bool operator!=(const Pointer<T, 
-        DefaultValueFunc, TEnable>& other) const;
+    T& operator[](const std::size_t& index);
+    const T& operator[](const std::size_t& index) const;
+public:
+    Pointer<T, TDefault>& operator++();
+    Pointer<T, TDefault> operator++(int);
+public:
+    Pointer<T, TDefault>& operator--();
+    Pointer<T, TDefault> operator--(int);
+public:
+    Pointer<T, TDefault> operator+(const std::size_t& index);
+    Pointer<T, TDefault> operator-(const std::size_t& index);
+    Pointer<T, TDefault> operator+(const int& index);
+    Pointer<T, TDefault> operator-(const int& index);
+public:
+    template<typename TOther, typename TOtherDefault>
+    bool operator==(const Pointer<TOther, TOtherDefault>& other) const;
+    template<typename TOther, typename TOtherDefault>
+    bool operator!=(const Pointer<TOther, TOtherDefault>& other) const;
 };
 
-template<typename T, T(*DefaultValueFunc)()>
-class Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>
+template<typename T, typename TDefault>
+Pointer<T, TDefault>::Pointer() :
+    BaseType(),
+    m_step(sizeof(typename TDefault::ValueType))
 {
-public:
-    typedef T ValueType;
-    typedef std::size_t IntegerCountType;
-    typedef std::atomic<IntegerCountType> CountType;
-private:
-    static void _Reset(ValueType*& value, CountType*& count);
-private:
-    ValueType * m_value;
-    CountType * m_count;
-public:
-    Pointer();
-    template<typename TArg, typename... TArgs, typename _TArg = 
-        typename std::remove_pointer<typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type>::type, 
-        typename std::enable_if<!std::is_same<_TArg, Pointer<T, 
-            DefaultValueFunc, void>>::value, int>::type = 0>
-    Pointer(TArg&& arg, TArgs&&... args);
-public:
-    ~Pointer();
-public:
-    Pointer(const Pointer<T, DefaultValueFunc, void>& cpy);
-    Pointer(Pointer<T, DefaultValueFunc, void>&& mov);
-public:
-    Pointer<T, DefaultValueFunc, void>& 
-        operator=(const Pointer<T, DefaultValueFunc, void>& cpy);
-    Pointer<T, DefaultValueFunc, void>& 
-        operator=(Pointer<T, DefaultValueFunc, void>&& mov);
-public:
-    T& operator*();
-    const T& operator*() const;
-public:
-    T* operator->();
-public:
-    bool operator==(const Pointer<T, DefaultValueFunc, void>& other) const;
-    bool operator!=(const Pointer<T, DefaultValueFunc, void>& other) const;
-};
-
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-void Pointer<T, DefaultValueFunc, TEnable>::
-    _Reset(ValueType*& value, CountType*& count)
-{
-    const auto is_count_null = (count == nullptr);
-    if (!is_count_null && *count == 1)
-    {
-        if (value != nullptr)
-            delete value;
-        delete count;
-    }
-    else if (!is_count_null)
-        (*count)--;
-    count = nullptr;
-    value = nullptr;
+    void* data = BaseType::Allocation(FlagType::default_initialization, 
+        m_step, 1, TDefault::Destructor);
+    TDefault::Constructor(data);
 }
 
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-Pointer<T, DefaultValueFunc, TEnable>::Pointer() :
-    m_value(new ValueType(DefaultValueFunc())),
-    m_count(new CountType(1))
-{}
-
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
+template<typename T, typename TDefault>
 template<typename TArg, typename... TArgs, typename _TArg, 
-    typename std::enable_if<!std::is_same<_TArg, Pointer<T, 
-        DefaultValueFunc, TEnable>>::value, int>::type>
-Pointer<T, DefaultValueFunc, TEnable>::Pointer(TArg&& arg, TArgs&&... args) :
-    m_value(new ValueType(std::forward<TArg>(arg), 
-        std::forward<TArgs>(args)...)),
-    m_count(new CountType(1))
+    typename std::enable_if<!std::is_same<_TArg, 
+            Pointer<T, TDefault>>::value &&
+        !std::is_same<_TArg, test::ptr::Base>::value &&
+        !std::is_same<_TArg, test::ptr::arg::Array>::value, int>::type>
+Pointer<T, TDefault>::Pointer(TArg&& arg, TArgs&&... args) :
+    BaseType(),
+    m_step(sizeof(typename TDefault::ValueType))
+{
+    void* data = BaseType::Allocation(FlagType::empty, m_step, 1, 
+        TDefault::Destructor);
+    TDefault::Constructor(data, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename T, typename TDefault>
+template<typename... TArgs>
+Pointer<T, TDefault>::Pointer(test::ptr::arg::Array&& array, TArgs&&... args) :
+    BaseType(),
+    m_step(sizeof(typename TDefault::ValueType))
+{
+    void* data = BaseType::Allocation(FlagType::array_allocation, m_step, 
+        array.GetSize(), TDefault::Destructor);
+    TDefault::Constructor(array.GetSize(), data, std::forward<TArgs>(args)...);
+}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault>::Pointer(const BaseType& base, const std::size_t& step) :
+    BaseType(base),
+    m_step(step)
 {}
 
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-Pointer<T, DefaultValueFunc, TEnable>::~Pointer()
+template<typename T, typename TDefault>
+Pointer<T, TDefault>::~Pointer()
 {
-    _Reset(m_value, m_count);
+    BaseType::Deallocation();
+    m_step = 0;
 }
 
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-Pointer<T, DefaultValueFunc, TEnable>::
-    Pointer(const Pointer<T, DefaultValueFunc, TEnable>& cpy) :
-        m_value(cpy.m_value),
-        m_count(cpy.m_count)
+template<typename T, typename TDefault>
+Pointer<T, TDefault>::Pointer(const Pointer<T, TDefault>& cpy) :
+    BaseType(cpy),
+    m_step(cpy.m_step)
+{}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault>::Pointer(Pointer<T, TDefault>&& mov) :
+    BaseType(std::move(mov)),
+    m_step(mov.m_step)
 {
-    (*m_count)++;
+    mov.m_step = sizeof(typename TDefault::ValueType);
+    void * data = mov.BaseType::Allocation(FlagType::default_initialization, 
+        mov.m_step, 1, TDefault::Destructor);
+    TDefault::Constructor(data);
 }
 
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-Pointer<T, DefaultValueFunc, TEnable>::
-    Pointer(Pointer<T, DefaultValueFunc, TEnable>&& mov) :
-        m_value(mov.m_value),
-        m_count(mov.m_count)
+template<typename T, typename TDefault>
+Pointer<T, TDefault>& 
+Pointer<T, TDefault>::operator=(const Pointer<T, TDefault>& cpy)
 {
-    mov.m_value = new ValueType(DefaultValueFunc());
-    mov.m_count = new CountType(1);
-}
-
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-Pointer<T, DefaultValueFunc, TEnable>& 
-Pointer<T,DefaultValueFunc, TEnable>::
-    operator=(const Pointer<T, DefaultValueFunc, TEnable>& cpy)
-{
-    _Reset(m_value, m_count);
-    m_value = cpy.m_value;
-    m_count = cpy.m_count;
-    (*m_count)++;
+    BaseType::operator=(cpy);
+    m_step = cpy.m_step;
     return *this;
 }
 
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-Pointer<T, DefaultValueFunc, TEnable>& 
-Pointer<T, DefaultValueFunc, TEnable>::
-    operator=(Pointer<T, DefaultValueFunc, TEnable>&& mov)
+template<typename T, typename TDefault>
+Pointer<T, TDefault>& 
+Pointer<T, TDefault>::operator=(Pointer<T, TDefault>&& mov)
 {
-    _Reset(m_value, m_count);
-    m_value = mov.m_value;
-    m_count = mov.m_count;
-    mov.m_value = new ValueType(DefaultValueFunc());
-    mov.m_count = new CountType(1);
+    BaseType::operator=(std::move(mov));
+    m_step = mov.m_step;
+    mov.m_step = sizeof(typename TDefault::ValueType);
+    void * data = mov.BaseType::Allocation(FlagType::default_initialization, 
+        mov.m_step, 1, TDefault::Destructor);
+    TDefault::Constructor(data);
     return *this;
 }
 
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-T& Pointer<T, DefaultValueFunc, TEnable>::operator*()
+template<typename T, typename TDefault>
+template<typename TTo, typename TToDefault,
+    typename std::enable_if<std::is_same<
+        decltype(const_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+        int>::type>
+Pointer<TTo, TToDefault> Pointer<T, TDefault>::ConstCast()
 {
-    return *m_value;
+    Pointer<TTo, TToDefault> ret{(BaseType&)*this, m_step};
+    return ret;
 }
 
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-const T& Pointer<T, DefaultValueFunc, TEnable>::operator*() const
+template<typename T, typename TDefault>
+template<typename TTo, typename TToDefault,
+    typename std::enable_if<std::is_same<
+        decltype(dynamic_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+        int>::type>
+Pointer<TTo, TToDefault> Pointer<T, TDefault>::DynamicCast()
 {
-    return *m_value;
-}
-
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-T* Pointer<T, DefaultValueFunc, TEnable>::operator->()
-{
-    return m_value;
-}
-
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-bool Pointer<T, DefaultValueFunc, TEnable>::
-    operator==(const Pointer<T, DefaultValueFunc, TEnable>& other) const
-{
-    return m_value == other.m_value;
-}
-
-template<typename T, T(*DefaultValueFunc)(), typename TEnable>
-bool Pointer<T, DefaultValueFunc, TEnable>::
-    operator!=(const Pointer<T, DefaultValueFunc, TEnable>& other) const
-{
-    return m_value != other.m_value;
-}
-
-template<typename T, T(*DefaultValueFunc)()>
-void Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
-        _Reset(ValueType*& value, CountType*& count)
-{
-    const auto is_count_null = (count == nullptr);
-    if (!is_count_null && *count == 1)
+    TTo* ptr = dynamic_cast<TTo*>(BaseType::Get<T>());
+    if (ptr == nullptr)
     {
-        if (value != nullptr)
-            delete value;
-        delete count;
+        Pointer<TTo, TToDefault> ret;
+        return ret;
     }
-    else if (!is_count_null)
-        (*count)--;
-    count = nullptr;
-    value = nullptr;
+    Pointer<TTo, TToDefault> ret{(BaseType&)*this, m_step};
+    return ret;
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::Pointer() :
-        m_value(new ValueType()),
-        m_count(new CountType(1))
-{}
-
-template<typename T, T(*DefaultValueFunc)()>
-template<typename TArg, typename... TArgs, typename _TArg, 
-    typename std::enable_if<!std::is_same<_TArg, Pointer<T, 
-        DefaultValueFunc, void>>::value, int>::type>
-Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
-        Pointer(TArg&& arg, TArgs&&... args) :
-            m_value(new ValueType(std::forward<TArg>(arg), 
-                std::forward<TArgs>(args)...)),
-            m_count(new CountType(1))
-{}
-
-template<typename T, T(*DefaultValueFunc)()>
-Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::~Pointer()
+template<typename T, typename TDefault>
+template<typename TTo, typename TToDefault,
+    typename std::enable_if<std::is_same<
+        decltype(reinterpret_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+        int>::type>
+Pointer<TTo, TToDefault> Pointer<T, TDefault>::ReinterpretCast()
 {
-    _Reset(m_value, m_count);
+    Pointer<TTo, TToDefault> ret{(BaseType&)*this, sizeof(TTo)};
+    return ret;
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
-        Pointer(const Pointer<T, DefaultValueFunc, void>& cpy) :
-            m_value(cpy.m_value),
-            m_count(cpy.m_count)
+template<typename T, typename TDefault>
+template<typename TTo, typename TToDefault,
+    typename std::enable_if<std::is_same<
+        decltype(static_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+        int>::type>
+Pointer<TTo, TToDefault> Pointer<T, TDefault>::StaticCast()
 {
-    (*m_count)++;
+    Pointer<TTo, TToDefault> ret{(BaseType&)*this, m_step};
+    return ret;
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
-        Pointer(Pointer<T, DefaultValueFunc, void>&& mov) :
-            m_value(mov.m_value),
-            m_count(mov.m_count)
+template<typename T, typename TDefault>
+std::size_t Pointer<T, TDefault>::StepSize() const
 {
-    mov.m_value = new ValueType();
-    mov.m_count = new CountType(1);
+    return m_step;
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-Pointer<T, DefaultValueFunc, void>& 
-Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
-        operator=(const Pointer<T, DefaultValueFunc, void>& cpy)
+template<typename T, typename TDefault>
+std::size_t Pointer<T, TDefault>::AllocationSize() const
 {
-    _Reset(m_value, m_count);
-    m_value = cpy.m_value;
-    m_count = cpy.m_count;
-    (*m_count)++;
+    return BaseType::GetDataSize();
+}
+
+template<typename T, typename TDefault>
+std::size_t Pointer<T, TDefault>::Size() const
+{
+    return BaseType::GetDataSize() / m_step;
+}
+
+template<typename T, typename TDefault>
+std::size_t Pointer<T, TDefault>::Offset() const
+{
+    return BaseType::GetOffset();
+}
+
+template<typename T, typename TDefault>
+std::size_t Pointer<T, TDefault>::Index() const
+{
+    return BaseType::GetOffset() / m_step;
+}
+
+template<typename T, typename TDefault>
+void Pointer<T, TDefault>::SetIndex(const std::size_t& set)
+{
+    BaseType::SetOffset(set * m_step);
+}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault>& 
+Pointer<T, TDefault>::operator+=(const std::size_t& index)
+{
+    BaseType::operator+=(index * m_step);
     return *this;
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-Pointer<T, DefaultValueFunc, void>& 
-Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
-        operator=(Pointer<T, DefaultValueFunc, void>&& mov)
+template<typename T, typename TDefault>
+Pointer<T, TDefault>& 
+Pointer<T, TDefault>::operator-=(const std::size_t& index)
 {
-    _Reset(m_value, m_count);
-    m_value = mov.m_value;
-    m_count = mov.m_count;
-    mov.m_value = new ValueType();
-    mov.m_count = new CountType(1);
+    BaseType::operator-=(index * m_step);
     return *this;
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-T& Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::operator*()
+template<typename T, typename TDefault>
+T& Pointer<T, TDefault>::operator*()
 {
-    return *m_value;
+    return *(BaseType::Get<T>());
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-const T& Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
-        operator*() const
+template<typename T, typename TDefault>
+const T& Pointer<T, TDefault>::operator*() const
 {
-    return *m_value;
+    return *(const_cast<Pointer<T, TDefault>*>(this)->BaseType::Get<T>());
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-T* Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::operator->()
+template<typename T, typename TDefault>
+T* Pointer<T, TDefault>::operator->()
 {
-    return m_value;
+    return BaseType::Get<T>();
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-bool Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
-        operator==(const Pointer<T, DefaultValueFunc, void>& other) const
+template<typename T, typename TDefault>
+T& Pointer<T, TDefault>::operator[](const std::size_t& index)
 {
-    return m_value == other.m_value;
+    Pointer<T, TDefault> ret{*this};
+    ret.SetIndex(index);
+    return *(ret.Get<T>());
 }
 
-template<typename T, T(*DefaultValueFunc)()>
-bool Pointer<T, DefaultValueFunc, 
-    typename std::enable_if<DefaultValueFunc == nullptr>::type>::
-        operator!=(const Pointer<T, DefaultValueFunc, void>& other) const
+template<typename T, typename TDefault>
+const T& Pointer<T, TDefault>::operator[](const std::size_t& index) const
 {
-    return m_value != other.m_value;
+    Pointer<T, TDefault> ret{*this};
+    ret.SetIndex(index);
+    return *(ret.Get<T>());
+}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault>& Pointer<T, TDefault>::operator++()
+{
+    BaseType::operator+=(m_step);
+    return *this;
+}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault> Pointer<T, TDefault>::operator++(int)
+{
+    Pointer<T, TDefault> ret{*this};
+    BaseType::operator+=(m_step);
+    return ret;
+}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault>& Pointer<T, TDefault>::operator--()
+{
+    BaseType::operator-=(m_step);
+    return *this;
+}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault> Pointer<T, TDefault>::operator--(int)
+{
+    Pointer<T, TDefault> ret{*this};
+    BaseType::operator-=(m_step);
+    return ret;
+}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault> Pointer<T, TDefault>::operator+(const std::size_t& index)
+{
+    Pointer<T, TDefault> ret{*this};
+    ret += index;
+    return ret;
+}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault> Pointer<T, TDefault>::operator-(const std::size_t& index)
+{
+    Pointer<T, TDefault> ret{*this};
+    ret -= index;
+    return ret;
+}
+
+template<typename T, typename TDefault>
+Pointer<T, TDefault> Pointer<T, TDefault>::operator+(const int& index)
+{
+    if (index >= 0)
+        return (*this + std::size_t(index));
+    return (*this - std::size_t(-index));
+}
+    
+template<typename T, typename TDefault>
+Pointer<T, TDefault> Pointer<T, TDefault>::operator-(const int& index)
+{
+    if (index >= 0)
+        return (*this - std::size_t(index));
+    return (*this + std::size_t(-index));
+}
+
+template<typename T, typename TDefault>
+template<typename TOther, typename TOtherDefault>
+bool Pointer<T, TDefault>::
+    operator==(const Pointer<TOther, TOtherDefault>& other) const
+{
+    return this->BaseType::operator==(other);
+}
+
+template<typename T, typename TDefault>
+template<typename TOther, typename TOtherDefault>
+bool Pointer<T, TDefault>::
+    operator!=(const Pointer<TOther, TOtherDefault>& other) const
+{
+    return this->BaseType::operator!=(other);
 }
 
 } //!test
