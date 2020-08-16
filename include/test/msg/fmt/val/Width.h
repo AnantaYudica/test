@@ -2,6 +2,7 @@
 #define TEST_MSG_FMT_VAL_WIDTH_H_
 
 #include "../Parameter.h"
+#include "Status.h"
 
 #include <utility>
 #include <cstdarg>
@@ -23,12 +24,18 @@ public:
     typedef typename ParameterBaseType::StatusType StatusType;
     typedef typename ParameterBaseType::OutputInterfaceType 
         OutputInterfaceType;
+    typedef typename ParameterBaseType::StatusPointerType StatusPointerType;
+    typedef test::msg::fmt::val::Status StatusValueType;
     typedef int ValueType;
 private:
+    StatusValueType m_value_status;
     ValueType m_value;
 public:
     Width();
     Width(const ValueType& val);
+protected:
+    Width(StatusPointerType&& status);
+    Width(StatusPointerType&& status, const ValueType& val);
 public:
     ~Width();
 public:
@@ -55,33 +62,52 @@ public:
 template<typename TChar>
 Width<TChar>::Width() :
     ParameterBaseType(),
+    m_value_status(0),
     m_value(0)
 {}
 
 template<typename TChar>
 Width<TChar>::Width(const ValueType& val) :
-    ParameterBaseType(StatusType::default_value),
+    ParameterBaseType(),
+    m_value_status(StatusValueType::default_value),
+    m_value(val)
+{}
+
+template<typename TChar>
+Width<TChar>::Width(StatusPointerType&& status) :
+    ParameterBaseType(std::forward<StatusPointerType>(status)),
+    m_value_status(0),
+    m_value(0)
+{}
+
+template<typename TChar>
+Width<TChar>::Width(StatusPointerType&& status, const ValueType& val) :
+    ParameterBaseType(std::forward<StatusPointerType>(status)),
+    m_value_status(StatusValueType::default_value),
     m_value(val)
 {}
 
 template<typename TChar>
 Width<TChar>::~Width()
 {
+    m_value_status.Reset();
     m_value = 0;
 }
 
 template<typename TChar>
 Width<TChar>::Width(const Width<TChar>& cpy) :
     ParameterBaseType(cpy),
+    m_value_status(cpy.m_value_status),
     m_value(cpy.m_value)
 {}
 
 template<typename TChar>
 Width<TChar>::Width(Width<TChar>&& mov) :
     ParameterBaseType(std::move(mov)),
+    m_value_status(std::move(mov.m_value_status)),
     m_value(mov.m_value)
 {
-    if (!mov.GetStatus().IsDefaultValue())
+    if (!mov.m_value_status.IsDefaultValue())
         mov.m_value = 0;
 }
 
@@ -89,6 +115,7 @@ template<typename TChar>
 Width<TChar>& Width<TChar>::operator=(const Width<TChar>& cpy)
 {
     ParameterBaseType::operator=(cpy);
+    m_value_status = cpy.m_value_status;
     m_value = cpy.m_value;
     return *this;
 }
@@ -97,8 +124,9 @@ template<typename TChar>
 Width<TChar>& Width<TChar>::operator=(Width<TChar>&& mov)
 {
     ParameterBaseType::operator=(std::move(mov));
+    m_value_status = std::move(mov.m_value_status);
     m_value = mov.m_value;
-    if (!mov.GetStatus().IsDefaultValue())
+    if (!mov.m_value_status.IsDefaultValue())
         mov.m_value = 0;
     return *this;
 }
@@ -107,10 +135,9 @@ template<typename TChar>
 std::size_t Width<TChar>::VLoad(std::size_t, std::size_t index, 
     va_list& args)
 {
-    auto& status = ParameterBaseType::GetStatus();
-    if (status.IsSetValue()) return index;
+    if (m_value_status.IsSetValue()) return index;
     m_value = va_arg(args, ValueType);
-    status.SetValue();
+    m_value_status.SetValue();
     return index + 1;
 }
 
@@ -140,9 +167,8 @@ typename Width<TChar>::ValueType Width<TChar>::GetValue() const
 template<typename TChar>
 void Width<TChar>::Unset()
 {
-    auto& status = ParameterBaseType::GetStatus();
-    status.UnsetValue();
-    if (!status.IsSetValue())
+    m_value_status.UnsetValue();
+    if (!m_value_status.IsSetValue())
     {
         m_value = 0;
     }
@@ -151,7 +177,7 @@ void Width<TChar>::Unset()
 template<typename TChar>
 bool Width<TChar>::IsSet() const
 {
-    return ParameterBaseType::GetStatus().IsSetValue();
+    return m_value_status.IsSetValue();
 }
 
 } //!val
