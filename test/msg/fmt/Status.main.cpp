@@ -1,3 +1,7 @@
+#define USING_TEST_MEMORY
+#include "Test.h"
+TEST_CONSTRUCT;
+
 #include "test/msg/fmt/Status.h"
 
 #include <cassert>
@@ -121,5 +125,5 @@ int main()
 
     }
     
-    return 1;
+    return TEST::GetInstance().Status().Get();
 }
