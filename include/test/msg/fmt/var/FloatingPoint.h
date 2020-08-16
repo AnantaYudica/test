@@ -25,6 +25,7 @@ public:
     typedef test::msg::fmt::val::specifier::FloatingPoint<TChar> SpecifierType;
     typedef test::msg::fmt::Parameter<TChar> BaseType;
     typedef typename BaseType::OutputInterfaceType OutputInterfaceType;
+    typedef typename BaseType::StatusPointerType StatusPointerType;
 private:
     SpecifierType m_specifier;
 public:
@@ -32,9 +33,15 @@ public:
     template<typename TArg, typename... TArgs, typename _TArg = 
         typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
+        typename _TStatusPointer = 
+            typename test::msg::fmt::Parameter<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_same<_TArg, 
-            FloatingPoint<TChar>>::value, int>::type = 0>
+                FloatingPoint<TChar>>::value &&
+            !std::is_same<_TArg, _TStatusPointer>::value, int>::type = 0>
     FloatingPoint(TArg&& arg, TArgs&&... args);
+public:
+    template<typename... TArgs>
+    FloatingPoint(StatusPointerType&& status, TArgs&&... args);
 public:
     ~FloatingPoint();
 public:
@@ -56,17 +63,29 @@ public:
 
 template<typename TChar>
 FloatingPoint<TChar>::FloatingPoint() :
-    test::msg::fmt::Parameter<TChar>(),
-    m_specifier()
+    BaseType(),
+    m_specifier(BaseType::GetStatusPointer())
 {}
 
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
+    typename _TStatusPointer,
     typename std::enable_if<!std::is_same<_TArg, 
-        FloatingPoint<TChar>>::value, int>::type>
+            FloatingPoint<TChar>>::value &&
+        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
 FloatingPoint<TChar>::FloatingPoint(TArg&& arg, TArgs&&... args) :
-    test::msg::fmt::Parameter<TChar>(),
-    m_specifier(std::forward<TArg>(arg), std::forward<TArgs>(args)...)
+    BaseType(),
+    m_specifier(BaseType::GetStatusPointer(), 
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...)
+{}
+
+template<typename TChar>
+template<typename... TArgs>
+FloatingPoint<TChar>::FloatingPoint(StatusPointerType&& status, 
+    TArgs&&... args) :
+        BaseType(std::forward<StatusPointerType>(status)),
+        m_specifier(BaseType::GetStatusPointer(), 
+            std::forward<TArgs>(args)...)
 {}
 
 template<typename TChar>
@@ -75,13 +94,13 @@ FloatingPoint<TChar>::~FloatingPoint()
 
 template<typename TChar>
 FloatingPoint<TChar>::FloatingPoint(const FloatingPoint<TChar>& cpy) :
-    test::msg::fmt::Parameter<TChar>(cpy),
+    BaseType(cpy),
     m_specifier(cpy.m_specifier)
 {}
 
 template<typename TChar>
 FloatingPoint<TChar>::FloatingPoint(FloatingPoint<TChar>&& mov) :
-    test::msg::fmt::Parameter<TChar>(std::move(mov)),
+    BaseType(std::move(mov)),
     m_specifier(std::move(mov.m_specifier))
 {}
 
@@ -89,7 +108,7 @@ template<typename TChar>
 FloatingPoint<TChar>& 
 FloatingPoint<TChar>::operator=(const FloatingPoint<TChar>& cpy)
 {
-    test::msg::fmt::Parameter<TChar>::operator=(cpy);
+    BaseType::operator=(cpy);
     m_specifier = cpy.m_specifier;
     return *this;
 }
@@ -98,7 +117,7 @@ template<typename TChar>
 FloatingPoint<TChar>& 
 FloatingPoint<TChar>::operator=(FloatingPoint<TChar>&& mov)
 {
-    test::msg::fmt::Parameter<TChar>::operator=(std::move(mov));
+    BaseType::operator=(std::move(mov));
     m_specifier = std::move(mov.m_specifier);
     return *this;
 }

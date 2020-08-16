@@ -25,6 +25,7 @@ public:
     typedef test::msg::fmt::val::specifier::Pointer<TChar> SpecifierType;
     typedef test::msg::fmt::Parameter<TChar> BaseType;
     typedef typename BaseType::OutputInterfaceType OutputInterfaceType;
+    typedef typename BaseType::StatusPointerType StatusPointerType;
 private:
     SpecifierType m_specifier;
 public:
@@ -32,9 +33,15 @@ public:
     template<typename TArg, typename... TArgs, typename _TArg = 
         typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
+        typename _TStatusPointer = 
+            typename test::msg::fmt::Parameter<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_same<_TArg, 
-            Pointer<TChar>>::value, int>::type = 0>
+                Pointer<TChar>>::value &&
+            !std::is_same<_TArg, _TStatusPointer>::value, int>::type = 0>
     Pointer(TArg&& arg, TArgs&&... args);
+public:
+    template<typename... TArgs>
+    Pointer(StatusPointerType&& status, TArgs&&... args);
 public:
     ~Pointer();
 public:
@@ -56,17 +63,28 @@ public:
 
 template<typename TChar>
 Pointer<TChar>::Pointer() :
-    test::msg::fmt::Parameter<TChar>(),
-    m_specifier()
+    BaseType(),
+    m_specifier(BaseType::GetStatusPointer())
 {}
 
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
+    typename _TStatusPointer,
     typename std::enable_if<!std::is_same<_TArg, 
-        Pointer<TChar>>::value, int>::type>
+            Pointer<TChar>>::value &&
+        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
 Pointer<TChar>::Pointer(TArg&& arg, TArgs&&... args) :
-    test::msg::fmt::Parameter<TChar>(),
-    m_specifier(std::forward<TArg>(arg), std::forward<TArgs>(args)...)
+    BaseType(),
+    m_specifier(BaseType::GetStatusPointer(), 
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...)
+{}
+
+template<typename TChar>
+template<typename... TArgs>
+Pointer<TChar>::Pointer(StatusPointerType&& status, TArgs&&... args) :
+    BaseType(std::forward<StatusPointerType>(status)),
+    m_specifier(BaseType::GetStatusPointer(), 
+        std::forward<TArgs>(args)...)
 {}
 
 template<typename TChar>
@@ -75,20 +93,20 @@ Pointer<TChar>::~Pointer()
 
 template<typename TChar>
 Pointer<TChar>::Pointer(const Pointer<TChar>& cpy) :
-    test::msg::fmt::Parameter<TChar>(cpy),
+    BaseType(cpy),
     m_specifier(cpy.m_specifier)
 {}
 
 template<typename TChar>
 Pointer<TChar>::Pointer(Pointer<TChar>&& mov) :
-    test::msg::fmt::Parameter<TChar>(std::move(mov)),
+    BaseType(std::move(mov)),
     m_specifier(std::move(mov.m_specifier))
 {}
 
 template<typename TChar>
 Pointer<TChar>& Pointer<TChar>::operator=(const Pointer<TChar>& cpy)
 {
-    test::msg::fmt::Parameter<TChar>::operator=(cpy);
+    BaseType::operator=(cpy);
     m_specifier = cpy.m_specifier;
     return *this;
 }
@@ -96,7 +114,7 @@ Pointer<TChar>& Pointer<TChar>::operator=(const Pointer<TChar>& cpy)
 template<typename TChar>
 Pointer<TChar>& Pointer<TChar>::operator=(Pointer<TChar>&& mov)
 {
-    test::msg::fmt::Parameter<TChar>::operator=(std::move(mov));
+    BaseType::operator=(std::move(mov));
     m_specifier = std::move(mov.m_specifier);
     return *this;
 }
