@@ -25,11 +25,16 @@ public:
     typedef typename StatusType::IntegerValueType IntegerValueStatusType;
     typedef typename Parameter<TChar>::OutputInterfaceType 
         OutputInterfaceType;
+    typedef typename Parameter<TChar>::StatusPointerType StatusPointerType;
 private:
     test::msg::fmt::var::Nothing<TChar> m_value;
 public:
     Parameter();
-    Parameter(test::msg::fmt::var::Nothing<TChar>&& char_arg);
+    Parameter(test::msg::fmt::var::Nothing<TChar>&& nothing_var);
+public:
+    Parameter(StatusPointerType&& status);
+    Parameter(StatusPointerType&& status, 
+        test::msg::fmt::var::Nothing<TChar>&& nothing_var);
 public:
     virtual ~Parameter();
 public:
@@ -67,6 +72,7 @@ public:
     typedef typename StatusType::IntegerValueType IntegerValueStatusType;
     typedef typename Parameter<TChar, TParam...>::OutputInterfaceType 
         OutputInterfaceType;
+    typedef typename Parameter<TChar>::StatusPointerType StatusPointerType;
 private:
     test::msg::fmt::var::Nothing<TChar> m_value;
 public:
@@ -74,15 +80,28 @@ public:
     template<typename TArg, typename... TArgs, typename _TArg = 
         typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
+        typename _TStatusPointer = 
+            typename Parameter<TChar>::StatusPointerType,
         typename std::enable_if<
             !std::is_base_of<Parameter<TChar>, _TArg>::value && 
             !std::is_same<_TArg, 
-                test::msg::fmt::var::Nothing<TChar>>::value, 
-            int>::type = 0>
+                test::msg::fmt::var::Nothing<TChar>>::value &&
+            !std::is_same<_TArg, _TStatusPointer>::value, int>::type = 0>
     Parameter(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
-    Parameter(test::msg::fmt::var::Nothing<TChar>&& char_arg, 
+    Parameter(test::msg::fmt::var::Nothing<TChar>&& nothing_var, 
         TArgs&&... args);
+public:
+    Parameter(StatusPointerType&& status);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_reference<
+            typename std::remove_cv<TArg>::type>::type,
+        typename std::enable_if<!std::is_same<_TArg, 
+            test::msg::fmt::var::Nothing<TChar>>::value, int>::type = 0>
+    Parameter(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
+    template<typename... TArgs>
+    Parameter(StatusPointerType&& status, 
+        test::msg::fmt::var::Nothing<TChar>&& nothing_var, TArgs&&... args);
 public:
     virtual ~Parameter();
 public:
@@ -114,15 +133,34 @@ public:
 template<typename TChar>
 Parameter<TChar, test::msg::fmt::var::Nothing<TChar>>::Parameter() :
     Parameter<TChar>(),
-    m_value()
+    m_value(Parameter<TChar>::GetStatusPointer())
 {}
 
 template<typename TChar>
 Parameter<TChar, test::msg::fmt::var::Nothing<TChar>>::
-    Parameter(test::msg::fmt::var::Nothing<TChar>&& char_arg) :
+    Parameter(test::msg::fmt::var::Nothing<TChar>&& nothing_var) :
         Parameter<TChar>(),
-        m_value(std::move(char_arg))
+        m_value(Parameter<TChar>::GetStatusPointer())
+{
+    m_value = std::move(nothing_var);
+}
+
+template<typename TChar>
+Parameter<TChar, test::msg::fmt::var::Nothing<TChar>>::
+    Parameter(StatusPointerType&& status) :
+        Parameter<TChar>(std::forward<StatusPointerType>(status)),
+        m_value(Parameter<TChar>::GetStatusPointer())
 {}
+
+template<typename TChar>
+Parameter<TChar, test::msg::fmt::var::Nothing<TChar>>::
+    Parameter(StatusPointerType&& status, 
+        test::msg::fmt::var::Nothing<TChar>&& nothing_var) :
+            Parameter<TChar>(std::forward<StatusPointerType>(status)),
+            m_value(Parameter<TChar>::GetStatusPointer())
+{
+    m_value = std::move(nothing_var);
+}
 
 template<typename TChar>
 Parameter<TChar, test::msg::fmt::var::Nothing<TChar>>::~Parameter()
@@ -208,31 +246,65 @@ template<typename TChar, typename... TParam>
 Parameter<TChar, test::msg::fmt::var::Nothing<TChar>, TParam...>::
     Parameter() :
         Parameter<TChar, TParam...>(),
-        m_value()
+        m_value(Parameter<TChar>::GetStatusPointer())
 {}
 
 template<typename TChar, typename... TParam>
 template<typename TArg, typename... TArgs, typename _TArg,
+    typename _TStatusPointer,
     typename std::enable_if<
         !std::is_base_of<Parameter<TChar>, _TArg>::value && 
         !std::is_same<_TArg, 
-            test::msg::fmt::var::Nothing<TChar>>::value, 
-        int>::type>
+            test::msg::fmt::var::Nothing<TChar>>::value &&
+        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
 Parameter<TChar, test::msg::fmt::var::Nothing<TChar>, TParam...>::
     Parameter(TArg&& arg, TArgs&&... args) :
         Parameter<TChar, TParam...>(std::forward<TArg>(arg), 
             std::forward<TArgs>(args)...),
-        m_value()
+        m_value(Parameter<TChar>::GetStatusPointer())
 {}
 
 template<typename TChar, typename... TParam>
 template<typename... TArgs>
 Parameter<TChar, test::msg::fmt::var::Nothing<TChar>, TParam...>::
-    Parameter(test::msg::fmt::var::Nothing<TChar>&& char_arg, 
+    Parameter(test::msg::fmt::var::Nothing<TChar>&& nothing_var, 
         TArgs&&... args) :
             Parameter<TChar, TParam...>(std::forward<TArgs>(args)...),
-            m_value(std::move(char_arg))
+            m_value(Parameter<TChar>::GetStatusPointer())
+{
+    m_value = std::move(nothing_var);
+}
+
+template<typename TChar, typename... TParam>
+Parameter<TChar, test::msg::fmt::var::Nothing<TChar>, TParam...>::
+    Parameter(StatusPointerType&& status) :
+        Parameter<TChar, TParam...>(std::forward<StatusPointerType>(status)),
+        m_value(Parameter<TChar>::GetStatusPointer())
 {}
+
+template<typename TChar, typename... TParam>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_same<_TArg, 
+        test::msg::fmt::var::Nothing<TChar>>::value, int>::type>
+Parameter<TChar, test::msg::fmt::var::Nothing<TChar>, TParam...>::
+    Parameter(StatusPointerType&& status, TArg&& arg, TArgs&&... args) :
+        Parameter<TChar, TParam...>(std::forward<StatusPointerType>(status),
+            std::forward<TArg>(arg), std::forward<TArgs>(args)...),
+        m_value(Parameter<TChar>::GetStatusPointer())
+{}
+
+template<typename TChar, typename... TParam>
+template<typename... TArgs>
+Parameter<TChar, test::msg::fmt::var::Nothing<TChar>, TParam...>::
+    Parameter(StatusPointerType&& status, 
+        test::msg::fmt::var::Nothing<TChar>&& nothing_var, TArgs&&... args) :
+            Parameter<TChar, TParam...>(
+                std::forward<StatusPointerType>(status),
+                std::forward<TArgs>(args)...),
+            m_value(Parameter<TChar>::GetStatusPointer())
+{
+    m_value = std::move(nothing_var);
+}
 
 template<typename TChar, typename... TParam>
 Parameter<TChar, test::msg::fmt::var::Nothing<TChar>, TParam...>::
