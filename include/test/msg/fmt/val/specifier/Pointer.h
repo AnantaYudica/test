@@ -31,6 +31,8 @@ public:
     typedef typename SpecifierBaseType::ParameterBaseType ParameterBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
+    typedef typename SpecifierBaseType::StatusPointerType StatusPointerType;
+    typedef typename SpecifierBaseType::ValueStatusType ValueStatusType;
     typedef typename OutputInterfaceType::SizeType SizeType;
     typedef test::msg::fmt::val::flag::Pointer FlagType;
     typedef typename FlagType::ValueType IntegerFlagType;
@@ -74,12 +76,25 @@ public:
         typename _TArg = typename std::remove_pointer<typename 
             std::remove_reference<typename std::remove_cv<TArg>
                 ::type>::type>::type,
+        typename _TStatusPointer = 
+            typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_void<_TArg>::value &&
-            !std::is_same<_TArg, Pointer<TChar>>::value, 
+            !std::is_same<_TArg, Pointer<TChar>>::value &&
+            !std::is_same<_TArg, _TStatusPointer>::value, 
         int>::type = 0>
     Pointer(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     Pointer(const void* val, TArgs&&... args);
+public:
+    Pointer(StatusPointerType&& status);
+    template<typename TArg, typename... TArgs, 
+        typename _TArg = typename std::remove_pointer<typename 
+            std::remove_reference<typename std::remove_cv<TArg>
+                ::type>::type>::type,
+        typename std::enable_if<!std::is_void<_TArg>::value, int>::type = 0>
+    Pointer(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
+    template<typename... TArgs>
+    Pointer(StatusPointerType&& status, const void* val, TArgs&&... args);
 public:
     ~Pointer();
 public:
@@ -163,8 +178,10 @@ Pointer<TChar>::Pointer() :
 
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
+    typename _TStatusPointer,
     typename std::enable_if<!std::is_void<_TArg>::value &&
-        !std::is_same<_TArg, Pointer<TChar>>::value, int>::type>
+        !std::is_same<_TArg, Pointer<TChar>>::value &&
+        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
 Pointer<TChar>::Pointer(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
@@ -179,11 +196,51 @@ Pointer<TChar>::Pointer(TArg&& arg, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Pointer<TChar>::Pointer(const void* val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{const_cast<void*>(val)},
     m_width(),
     m_print_out(nullptr)
+{
+    _Set(m_width, m_print_out, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Pointer<TChar>::Pointer(StatusPointerType&& status) :
+    SpecifierBaseType(std::forward<StatusPointerType>(status)),
+    m_flag{},
+    m_value{nullptr},
+    m_width(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_print_out);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_void<_TArg>::value, int>::type>
+Pointer<TChar>::Pointer(StatusPointerType&& status, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status)),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{nullptr},
+        m_width(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_print_out, std::forward<TArg>(arg),
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Pointer<TChar>::Pointer(StatusPointerType&& status, const void* val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{const_cast<void*>(val)},
+        m_width(),
+        m_print_out(nullptr)
 {
     _Set(m_width, m_print_out, std::forward<TArgs>(args)...);
 }
@@ -209,7 +266,7 @@ Pointer<TChar>::Pointer(Pointer<TChar>&& mov) :
     m_width(std::move(mov.m_width)),
     m_print_out(mov.m_print_out)
 {
-    if (!mov.GetStatus().IsDefaultValue())
+    if (!mov.GetValueStatus().IsDefaultValue())
         mov.m_value = nullptr;
 }
 
@@ -232,7 +289,7 @@ Pointer<TChar>& Pointer<TChar>::operator=(Pointer<TChar>&& mov)
     m_value = mov.m_value;
     m_width = std::move(mov.m_width);
     m_print_out = mov.m_print_out;
-    if (!mov.GetStatus().IsDefaultValue())
+    if (!mov.GetValueStatus().IsDefaultValue())
         mov.m_value = nullptr;
     return *this;
 }
@@ -261,14 +318,14 @@ std::size_t Pointer<TChar>::VLoad(std::size_t size, std::size_t index,
 
     const std::size_t next_index = index + skip;
 
-    if (status.IsSetValue()) return next_index;
+    if (SpecifierBaseType::GetValueStatus().IsSetValue()) return next_index;
     if (size <= next_index) 
     {
         status.Bad(StatusType::load_failed);
         return size;
     }
     m_value = va_arg(args, void*);
-    status.SetValue();
+    SpecifierBaseType::GetValueStatus().SetValue();
     return next_index + 1;
 }
     
@@ -308,9 +365,8 @@ int Pointer<TChar>::GetWidth() const
 template<typename TChar>
 void Pointer<TChar>::Unset()
 {
-    auto& status = SpecifierBaseType::GetStatus();
-    status.UnsetValue();
-    if (!status.IsSetValue())
+    SpecifierBaseType::GetValueStatus().UnsetValue();
+    if (!SpecifierBaseType::GetValueStatus().IsSetValue())
         m_value = nullptr;
     m_width.Unset();
 }
@@ -319,7 +375,7 @@ template<typename TChar>
 bool Pointer<TChar>::IsSet() const
 {
     return (!(m_flag.GetValue() & FlagType::width) || m_width.IsSet()) &&
-        SpecifierBaseType::GetStatus().IsSetValue();
+        SpecifierBaseType::GetValueStatus().IsSetValue();
 }
 
 template<typename TChar>

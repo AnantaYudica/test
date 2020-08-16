@@ -32,6 +32,8 @@ public:
     typedef typename SpecifierBaseType::ParameterBaseType ParameterBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
+    typedef typename SpecifierBaseType::StatusPointerType StatusPointerType;
+    typedef typename SpecifierBaseType::ValueStatusType ValueStatusType;
     typedef typename OutputInterfaceType::SizeType SizeType;
     typedef test::msg::fmt::val::flag::Nothing FlagType;
     typedef typename FlagType::ValueType IntegerFlagType;
@@ -77,10 +79,13 @@ public:
         typename _TArg = typename std::remove_pointer<typename 
             std::remove_reference<typename std::remove_cv<TArg>
                 ::type>::type>::type,
+        typename _TStatusPointer = 
+            typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_integral<_TArg>::value &&
             !std::is_floating_point<_TArg>::value &&
             !std::is_void<_TArg>::value &&
-            !std::is_same<_TArg, Nothing<TChar>>::value, 
+            !std::is_same<_TArg, Nothing<TChar>>::value &&
+            !std::is_same<_TArg, _TStatusPointer>::value, 
             int>::type = 0>
     Nothing(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
@@ -115,6 +120,50 @@ public:
     Nothing(const void*, TArgs&&... args);
     template<typename... TArgs>
     Nothing(const char*, TArgs&&... args);
+public:
+    Nothing(StatusPointerType&& status);
+    template<typename TArg, typename... TArgs, 
+        typename _TArg = typename std::remove_pointer<typename 
+            std::remove_reference<typename std::remove_cv<TArg>
+                ::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const char&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const signed char&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const short&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const int&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const long&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const long long&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const unsigned char&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const unsigned short&, 
+        TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const unsigned int&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const unsigned long&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const unsigned long long&, 
+        TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const float&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const double&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const long double&, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const void*, TArgs&&... args);
+    template<typename... TArgs>
+    Nothing(StatusPointerType&& status, const char*, TArgs&&... args);
 public:
     ~Nothing();
 public:
@@ -212,12 +261,14 @@ Nothing<TChar>::Nothing() :
 
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
+    typename _TStatusPointer,
     typename std::enable_if<!std::is_integral<_TArg>::value &&
         !std::is_floating_point<_TArg>::value &&
         !std::is_void<_TArg>::value &&
-        !std::is_same<_TArg, Nothing<TChar>>::value, 
+        !std::is_same<_TArg, Nothing<TChar>>::value &&
+        !std::is_same<_TArg, _TStatusPointer>::value, 
         int>::type>
-Nothing<TChar>::Nothing(TArg&& arg, TArgs&&... args):
+Nothing<TChar>::Nothing(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
@@ -230,7 +281,7 @@ Nothing<TChar>::Nothing(TArg&& arg, TArgs&&... args):
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const char&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<char>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -242,7 +293,7 @@ Nothing<TChar>::Nothing(const char&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const signed char&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<signed char>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -254,7 +305,7 @@ Nothing<TChar>::Nothing(const signed char&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const short&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<short>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -266,7 +317,7 @@ Nothing<TChar>::Nothing(const short&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const int&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<int>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -278,7 +329,7 @@ Nothing<TChar>::Nothing(const int&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const long&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<long>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -290,7 +341,7 @@ Nothing<TChar>::Nothing(const long&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const long long&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<long long>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -302,7 +353,7 @@ Nothing<TChar>::Nothing(const long long&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const unsigned char&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<unsigned char>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -314,7 +365,7 @@ Nothing<TChar>::Nothing(const unsigned char&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const unsigned short&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<unsigned short>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -326,7 +377,7 @@ Nothing<TChar>::Nothing(const unsigned short&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const unsigned int&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<unsigned int>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -338,7 +389,7 @@ Nothing<TChar>::Nothing(const unsigned int&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const unsigned long&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<unsigned long>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -350,7 +401,7 @@ Nothing<TChar>::Nothing(const unsigned long&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const unsigned long long&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<unsigned long long>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -362,7 +413,7 @@ Nothing<TChar>::Nothing(const unsigned long long&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const float&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<float>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -374,7 +425,7 @@ Nothing<TChar>::Nothing(const float&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const double&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<double>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -386,7 +437,7 @@ Nothing<TChar>::Nothing(const double&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const long double&, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<long double>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -398,7 +449,7 @@ Nothing<TChar>::Nothing(const long double&, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const void*, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<const void*>{},
         std::forward<TArgs>(args)...},
     m_width(),
@@ -410,11 +461,261 @@ Nothing<TChar>::Nothing(const void*, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Nothing<TChar>::Nothing(const char*, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<const char*>{},
         std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Nothing<TChar>::Nothing(StatusPointerType&& status) :
+    SpecifierBaseType(std::forward<StatusPointerType>(status)),
+    m_flag(),
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(StatusPointerType&& status, TArg&& arg, 
+    TArgs&&... args):
+        SpecifierBaseType(std::forward<StatusPointerType>(status)),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const char&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<char>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const signed char&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<signed char>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const short&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<short>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const int&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<int>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const long&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<long>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const long long&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<long long>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const unsigned char&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<unsigned char>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const unsigned short&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<unsigned short>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+    
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const unsigned int&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<unsigned int>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const unsigned long&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<unsigned long>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const unsigned long long&,
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<unsigned long long>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+    
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const float&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<float>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const double&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<double>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const long double&, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<long double>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const void*, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<const void*>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Nothing<TChar>::Nothing(StatusPointerType&& status, const char*, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<const char*>{},
+            std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
 {
     _Set(m_width, m_precision, std::forward<TArgs>(args)...);
 }
@@ -497,7 +798,7 @@ Nothing<TChar>::VLoad(std::size_t size, std::size_t index,
     
     const std::size_t next_index = index + (total_skip);
 
-    if (status.IsSetValue()) return next_index;
+    if (SpecifierBaseType::GetValueStatus().IsSetValue()) return next_index;
 
     if (size <= next_index) 
     {
@@ -522,7 +823,7 @@ Nothing<TChar>::VLoad(std::size_t size, std::size_t index,
         status.Bad(StatusType::flag_undefined);
         return next_index;
     }
-    status.SetValue();
+    SpecifierBaseType::GetValueStatus().SetValue();
     return next_index + 1;
 }
 
@@ -548,8 +849,7 @@ Nothing<TChar>::Output(OutputInterfaceType&)
 template<typename TChar>
 void Nothing<TChar>::Unset()
 {
-    auto& status = SpecifierBaseType::GetStatus();
-    status.UnsetValue();
+    SpecifierBaseType::GetValueStatus().UnsetValue();
     m_width.Unset();
     m_precision.Unset();
 }
@@ -559,7 +859,7 @@ bool Nothing<TChar>::IsSet() const
 {
     return ((!(m_flag.GetValue() & FlagType::width) || m_width.IsSet()) && 
         (!(m_flag.GetValue() & FlagType::precision) || m_precision.IsSet())) &&
-        SpecifierBaseType::GetStatus().IsSetValue();
+        SpecifierBaseType::GetValueStatus().IsSetValue();
 }
 
 template<typename TChar>

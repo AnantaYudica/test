@@ -33,6 +33,8 @@ public:
     typedef typename SpecifierBaseType::ParameterBaseType ParameterBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
+    typedef typename SpecifierBaseType::StatusPointerType StatusPointerType;
+    typedef typename SpecifierBaseType::ValueStatusType ValueStatusType;
     typedef typename OutputInterfaceType::SizeType SizeType;
     typedef test::msg::fmt::val::flag::Integer FlagType;
     typedef typename FlagType::ValueType IntegerFlagType;
@@ -89,8 +91,11 @@ public:
     template<typename TArg, typename... TArgs, 
         typename _TArg = typename std::remove_reference<
             typename std::remove_cv<TArg>::type>::type,
+        typename _TStatusPointer = 
+            typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_integral<_TArg>::value &&
-            !std::is_same<Integer<TChar>, _TArg>::value, 
+            !std::is_same<Integer<TChar>, _TArg>::value &&
+            !std::is_same<_TArg, _TStatusPointer>::value, 
             int>::type = 0>
     Integer(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
@@ -113,6 +118,39 @@ public:
     Integer(const unsigned long& val, TArgs&&... args);
     template<typename... TArgs>
     Integer(const unsigned long long& val, TArgs&&... args);
+public:
+    Integer(StatusPointerType&& status);
+    template<typename TArg, typename... TArgs, 
+        typename _TArg = typename std::remove_reference<
+            typename std::remove_cv<TArg>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const char& val, TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const short& val, TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const int& val, TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const long& val, TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const long long& val, TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const unsigned char& val, 
+        TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const unsigned short& val, 
+        TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const unsigned int& val, 
+        TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const unsigned long& val, 
+        TArgs&&... args);
+    template<typename... TArgs>
+    Integer(StatusPointerType&& status, const unsigned long long& val, 
+        TArgs&&... args);
 public:
     ~Integer();
 public:
@@ -224,8 +262,10 @@ Integer<TChar>::Integer() :
 
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
+    typename _TStatusPointer,
     typename std::enable_if<!std::is_integral<_TArg>::value &&
-        !std::is_same<Integer<TChar>, _TArg>::value, int>::type>
+        !std::is_same<Integer<TChar>, _TArg>::value &&
+        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
 Integer<TChar>::Integer(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
@@ -241,7 +281,7 @@ Integer<TChar>::Integer(TArg&& arg, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const char& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.char_value = val},
     m_width(),
@@ -254,7 +294,7 @@ Integer<TChar>::Integer(const char& val, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const short& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.short_value = val},
     m_width(),
@@ -267,7 +307,7 @@ Integer<TChar>::Integer(const short& val, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const int& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.int_value = val},
     m_width(),
@@ -280,7 +320,7 @@ Integer<TChar>::Integer(const int& val, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const long& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.long_value = val},
     m_width(),
@@ -293,7 +333,7 @@ Integer<TChar>::Integer(const long& val, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const long long& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.long_long_value = val},
     m_width(),
@@ -306,7 +346,7 @@ Integer<TChar>::Integer(const long long& val, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const unsigned char& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.unsigned_char_value = val},
     m_width(),
@@ -319,7 +359,7 @@ Integer<TChar>::Integer(const unsigned char& val, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const unsigned short& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.unsigned_short_value = val},
     m_width(),
@@ -332,7 +372,7 @@ Integer<TChar>::Integer(const unsigned short& val, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const unsigned int& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.unsigned_int_value = val},
     m_width(),
@@ -345,7 +385,7 @@ Integer<TChar>::Integer(const unsigned int& val, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const unsigned long& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.unsigned_long_value = val},
     m_width(),
@@ -358,12 +398,190 @@ Integer<TChar>::Integer(const unsigned long& val, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 Integer<TChar>::Integer(const unsigned long long& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.unsigned_long_long_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Integer<TChar>::Integer(StatusPointerType&& status) :
+    SpecifierBaseType(std::forward<StatusPointerType>(status)),
+    m_flag(),
+    m_value{},
+    m_width(),
+    m_length(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, int>::type>
+Integer<TChar>::Integer(StatusPointerType&& status, TArg&& arg,
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status)),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, const char& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.char_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, const short& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.short_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, const int& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.int_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, const long& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.long_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, const long long& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.long_long_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, const unsigned char& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.unsigned_char_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+    
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, const unsigned short& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.unsigned_short_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+    
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, const unsigned int& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.unsigned_int_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+    
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, const unsigned long& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.unsigned_long_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+    
+template<typename TChar>
+template<typename... TArgs>
+Integer<TChar>::Integer(StatusPointerType&& status, 
+    const unsigned long long& val, TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.unsigned_long_long_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
 {
     _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
 }
@@ -391,7 +609,7 @@ Integer<TChar>::Integer(Integer<TChar>&& mov) :
     m_length(std::move(mov.m_length)),
     m_print_out(mov.m_print_out)
 {
-    if (!mov.GetStatus().IsDefaultValue())
+    if (!mov.GetValueStatus().IsDefaultValue())
         mov.m_value = ValueType{0};
 }
 
@@ -416,7 +634,7 @@ Integer<TChar>& Integer<TChar>::operator=(Integer<TChar>&& mov)
     m_width = std::move(mov.m_width);
     m_length = std::move(mov.m_length);
     m_print_out = mov.m_print_out;
-    if (!mov.GetStatus().IsDefaultValue())
+    if (!mov.GetValueStatus().IsDefaultValue())
         mov.m_value = ValueType{0};
     return *this;
 }
@@ -458,7 +676,7 @@ std::size_t Integer<TChar>::VLoad(std::size_t size, std::size_t index,
     
     const std::size_t next_index = index + (total_skip);
 
-    if (status.IsSetValue()) return next_index;
+    if (SpecifierBaseType::GetValueStatus().IsSetValue()) return next_index;
 
     if (size <= next_index) 
     {
@@ -505,7 +723,7 @@ std::size_t Integer<TChar>::VLoad(std::size_t size, std::size_t index,
         status.Bad(StatusType::flag_undefined);
         return next_index;
     }
-    status.SetValue();
+    SpecifierBaseType::GetValueStatus().SetValue();
     return next_index + 1;
 }
     
@@ -552,9 +770,8 @@ int Integer<TChar>::GetLength() const
 template<typename TChar>
 void Integer<TChar>::Unset()
 {
-    auto& status = SpecifierBaseType::GetStatus();
-    status.UnsetValue();
-    if (!status.IsSetValue())
+    SpecifierBaseType::GetValueStatus().UnsetValue();
+    if (!SpecifierBaseType::GetValueStatus().IsSetValue())
         m_value = ValueType{};
     m_width.Unset();
     m_length.Unset();
@@ -565,7 +782,7 @@ bool Integer<TChar>::IsSet() const
 {
     return ((!(m_flag.GetValue() & FlagType::width) || m_width.IsSet()) && 
         (!(m_flag.GetValue() & FlagType::length) || m_length.IsSet())) &&
-        SpecifierBaseType::GetStatus().IsSetValue();
+        SpecifierBaseType::GetValueStatus().IsSetValue();
 }
 
 template<typename TChar>

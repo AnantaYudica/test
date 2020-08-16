@@ -34,6 +34,8 @@ public:
     typedef typename SpecifierBaseType::ParameterBaseType ParameterBaseType;
     typedef typename SpecifierBaseType::OutputInterfaceType 
         OutputInterfaceType;
+    typedef typename SpecifierBaseType::StatusPointerType StatusPointerType;
+    typedef typename SpecifierBaseType::ValueStatusType ValueStatusType;
     typedef typename OutputInterfaceType::SizeType SizeType;
     typedef test::msg::fmt::val::flag::String FlagType;
     typedef typename FlagType::ValueType IntegerFlagType;
@@ -91,16 +93,34 @@ public:
         typename _TArg = typename std::remove_pointer<typename 
             std::remove_reference<typename std::remove_cv<TArg>
                 ::type>::type>::type,
+        typename _TStatusPointer = 
+            typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_integral<_TArg>::value &&
-            !std::is_same<_TArg, String<TChar>>::value, 
+            !std::is_same<_TArg, String<TChar>>::value &&
+            !std::is_same<_TArg, _TStatusPointer>::value, 
         int>::type = 0>
     String(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     String(const char *& val, TArgs&&... args);
     template<typename... TArgs, typename Twchar = wchar_t,
-        typename std::enable_if<!std::is_same<Twchar, char>::value, 
-        int>::type = 0>
+        typename std::enable_if<std::is_same<Twchar, wchar_t>::value &&
+            !std::is_same<Twchar, char>::value, int>::type = 0>
     String(const Twchar *& w_val, TArgs&&... args);
+public:
+    String(StatusPointerType&& status);
+    template<typename TArg, typename... TArgs, 
+        typename _TArg = typename std::remove_pointer<typename 
+            std::remove_reference<typename std::remove_cv<TArg>
+                ::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type = 0>
+    String(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
+    template<typename... TArgs>
+    String(StatusPointerType&& status, const char *& val, TArgs&&... args);
+    template<typename... TArgs, typename Twchar = wchar_t,
+        typename std::enable_if<std::is_same<Twchar, wchar_t>::value &&
+            !std::is_same<Twchar, char>::value, int>::type = 0>
+    String(StatusPointerType&& status, const Twchar *& w_val, TArgs&&... args);
 public:
     ~String();
 public:
@@ -211,8 +231,10 @@ String<TChar>::String() :
 
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
+    typename _TStatusPointer,
     typename std::enable_if<!std::is_integral<_TArg>::value &&
-        !std::is_same<_TArg, String<TChar>>::value, int>::type>
+        !std::is_same<_TArg, String<TChar>>::value &&
+        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
 String<TChar>::String(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
@@ -228,7 +250,7 @@ String<TChar>::String(TArg&& arg, TArgs&&... args) :
 template<typename TChar>
 template<typename... TArgs>
 String<TChar>::String(const char *& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.char_ptr_value = val},
     m_width(),
@@ -240,14 +262,75 @@ String<TChar>::String(const char *& val, TArgs&&... args) :
 
 template<typename TChar>
 template<typename... TArgs, typename Twchar,
-    typename std::enable_if<!std::is_same<Twchar, char>::value, int>::type>
+    typename std::enable_if<std::is_same<Twchar, wchar_t>::value &&
+        !std::is_same<Twchar, char>::value, int>::type>
 String<TChar>::String(const Twchar *& val, TArgs&&... args) :
-    SpecifierBaseType(StatusType::default_value),
+    SpecifierBaseType(ValueStatusType::default_value),
     m_flag{std::forward<TArgs>(args)...},
     m_value{.wchar_ptr_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+String<TChar>::String(StatusPointerType&& status) :
+    SpecifierBaseType(std::forward<StatusPointerType>(status)),
+    m_flag(),
+    m_value{0},
+    m_width(),
+    m_length(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, int>::type>
+String<TChar>::String(StatusPointerType&& status, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status)),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{0},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs>
+String<TChar>::String(StatusPointerType&& status, const char *& val, 
+    TArgs&&... args) :
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.char_ptr_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+template<typename... TArgs, typename Twchar,
+    typename std::enable_if<std::is_same<Twchar, wchar_t>::value &&
+        !std::is_same<Twchar, char>::value, int>::type>
+String<TChar>::String(StatusPointerType&& status, const Twchar *& w_val, 
+    TArgs&&... args):
+        SpecifierBaseType(std::forward<StatusPointerType>(status),
+            ValueStatusType::default_value),
+        m_flag{std::forward<TArgs>(args)...},
+        m_value{.wchar_ptr_value = w_val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
 {
     _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
 }
@@ -275,7 +358,7 @@ String<TChar>::String(String<TChar>&& mov) :
     m_length(std::move(mov.m_length)),
     m_print_out(mov.m_print_out)
 {
-    if (!mov.GetStatus().IsDefaultValue())
+    if (!mov.GetValueStatus().IsDefaultValue())
         mov.m_value = ValueType{0};
 }
 
@@ -300,7 +383,7 @@ String<TChar>& String<TChar>::operator=(String<TChar>&& mov)
     m_width = std::move(mov.m_width);
     m_length = std::move(mov.m_length);
     m_print_out = mov.m_print_out;
-    if (!mov.GetStatus().IsDefaultValue())
+    if (!mov.GetValueStatus().IsDefaultValue())
         mov.m_value = ValueType{0};
     return *this;
 }
@@ -342,7 +425,7 @@ std::size_t String<TChar>::VLoad(std::size_t size, std::size_t index,
     
     const std::size_t next_index = index + (total_skip);
 
-    if (status.IsSetValue()) return next_index;
+    if (SpecifierBaseType::GetValueStatus().IsSetValue()) return next_index;
 
     if (size <= next_index) 
     {
@@ -362,7 +445,7 @@ std::size_t String<TChar>::VLoad(std::size_t size, std::size_t index,
         status.Bad(StatusType::flag_undefined);
         return next_index;
     }
-    status.SetValue();
+    SpecifierBaseType::GetValueStatus().SetValue();
     return next_index + 1;
 }
 
@@ -408,9 +491,8 @@ int String<TChar>::GetLength() const
 template<typename TChar>
 void String<TChar>::Unset()
 {
-    auto& status = SpecifierBaseType::GetStatus();
-    status.UnsetValue();
-    if (!status.IsSetValue())
+    SpecifierBaseType::GetValueStatus().UnsetValue();
+    if (!SpecifierBaseType::GetValueStatus().IsSetValue())
         m_value = ValueType{};
     m_width.Unset();
     m_length.Unset();
@@ -421,7 +503,7 @@ bool String<TChar>::IsSet() const
 {
     return ((!(m_flag.GetValue() & FlagType::width) || m_width.IsSet()) && 
         (!(m_flag.GetValue() & FlagType::length) || m_length.IsSet())) &&
-        SpecifierBaseType::GetStatus().IsSetValue();
+        SpecifierBaseType::GetValueStatus().IsSetValue();
 }
 
 template<typename TChar>
