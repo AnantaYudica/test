@@ -151,7 +151,8 @@ TRet Argument<arg::Value<I>, TArgs...>::Call(const TCaseId&, TFunc func,
 
 template<std::size_t I, typename... TArgs>
 template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
-    typename TCaseId, std::size_t ICaseId, typename... TVarArgs, typename TFuncMmbr>
+    typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
+    typename TFuncMmbr>
 TRet Argument<arg::Value<I>, TArgs...>::Call(const type::Index<TCaseId, 
     ICaseId>& i_case_id, TFuncMmbr func_mmbr, TDerived& d, 
     test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
