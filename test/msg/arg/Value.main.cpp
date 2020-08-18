@@ -10,8 +10,6 @@ TEST_CONSTRUCT;
 #include <cassert>
 #include <cstdarg>
 
-#include <cstdio>
-
 struct CaseA1 {};
 
 test::out::CString<char> gl_out_cstr1;
