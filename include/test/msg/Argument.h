@@ -21,10 +21,11 @@ public:
     template<std::size_t I, typename TVar>
     using ElementType = typename test::var::Element<I, TVar>::Type;
 public:
-    template<typename TRet, typename TDerived, typename TVar, 
+    template<std::size_t IAt, typename TRet, typename TDerived, typename TVar, 
         typename... TFuncMmbrArgs>
     using PointerFunctionMemberType = TRet(TDerived::*)(TFuncMmbrArgs...);
-    template<typename TRet, typename TVar, typename... TFuncArgs>
+    template<std::size_t IAt, typename TRet, typename TVar, 
+        typename... TFuncArgs>
     using PointerFunctionType = TRet(*)(TFuncArgs...);
 public:
     template<typename TCaseId, std::size_t ICaseId>
@@ -47,27 +48,27 @@ protected:
 public:
     template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
         typename TCaseId, typename... TVarArgs, 
-        typename TFuncMmbr = PointerFunctionMemberType< TRet, TDerived, 
+        typename TFuncMmbr = PointerFunctionMemberType<0, TRet, TDerived, 
             test::Variable<TVarArgs...>, TFuncMmbrArgs...>>
     TRet Call(const TCaseId&, TFuncMmbr func_mmbr, TDerived& d,
         test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args);
     template<typename TRet, typename... TFuncArgs, typename TCaseId,
-        typename... TVarArgs, typename TFunc = PointerFunctionType<TRet, 
+        typename... TVarArgs, typename TFunc = PointerFunctionType<0, TRet, 
             test::Variable<TVarArgs...>, TFuncArgs...>>
     TRet Call(const TCaseId&, TFunc func, test::Variable<TVarArgs...>& var,
         TFuncArgs&&... args);
 public:
     template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
         typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
-        typename TFuncMmbr = PointerFunctionMemberType<TRet, TDerived,
+        typename TFuncMmbr = PointerFunctionMemberType<ICaseId, TRet, TDerived,
             test::Variable<TVarArgs...>, TFuncMmbrArgs...>>
     TRet Call(const type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr,
         TDerived& d, test::Variable<TVarArgs...>& var, 
         TFuncMmbrArgs&&... args);
     template<typename TRet, typename... TFuncArgs, 
         typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
-        typename TFunc = PointerFunctionType<TRet, test::Variable<TVarArgs...>,
-            TFuncArgs...>>
+        typename TFunc = PointerFunctionType<ICaseId, TRet, 
+            test::Variable<TVarArgs...>, TFuncArgs...>>
     TRet Call(const type::Index<TCaseId, ICaseId>&, TFunc func,
         test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
 };
