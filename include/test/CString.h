@@ -56,7 +56,7 @@ public:
     CString(const TChar* cstr, const std::size_t& size);
     CString(const CString<TChar>& cpy);
     CString(const CString<const TChar>& cpy);
-    CString(CString<const TChar>&& mov) = delete;
+    CString(CString<const TChar>&& mov);
 public:
     CString<TChar>& operator=(const CString<const TChar>& cpy) = delete;
     CString<TChar>& operator=(CString<const TChar>&& mov) = delete;
@@ -263,6 +263,12 @@ template<typename TChar>
 CString<const TChar>::CString(const CString<const TChar>& cpy) :
     m_cstr(cpy.m_cstr),
     m_size(cpy.m_size)
+{}
+
+template<typename TChar>
+CString<const TChar>::CString(CString<const TChar>&& mov) :
+    m_cstr(mov.m_cstr),
+    m_size(mov.m_size)
 {}
 
 template<typename TChar>
