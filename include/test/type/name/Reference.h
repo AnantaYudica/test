@@ -2,6 +2,9 @@
 #define TEST_TYPE_NAME_REFERENCE_H_
 
 #include "../../CString.h"
+#include "../../cstr/Format.h"
+#include "../Name.h"
+#include "Pointer.h"
 
 #include <cstddef>
 
@@ -29,7 +32,9 @@ struct Reference<T&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static TChar _ref[] = "&";
+        static test::CString<char> _ref = test::cstr::Format(
+            (test::type::name::Pointer<T>::CStr().Size() + 2),
+            "%s&", *(test::type::name::Pointer<T>::CStr()));
         return {_ref};
     }
 };
@@ -40,7 +45,9 @@ struct Reference<T&&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static TChar _ref[] = "&&";
+        static test::CString<char> _ref = test::cstr::Format(
+            (test::type::name::Pointer<T>::CStr().Size() + 3),
+            "%s&&", *(test::type::name::Pointer<T>::CStr()));
         return {_ref};
     }
 };
