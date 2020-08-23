@@ -33,7 +33,7 @@ struct Function<T(TArgs...)>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Parameter<TArgs...>::
                 template CStr<TChar>().Size() + 3),
             "(%s)", *(test::type::name::Parameter<TArgs...>::
@@ -59,7 +59,7 @@ struct Function<T(TArg, ...)>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Parameter<TArg>::template 
                 CStr<TChar>().Size() + 8),
             "(%s, ...)", *(test::type::name::Parameter<TArg>::
@@ -74,7 +74,7 @@ struct Function<T(TArg, TArgs..., ...)>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Parameter<TArg, TArgs...>::
                 template CStr<TChar>().Size() + 8),
             "(%s, ...)", *(test::type::name::Parameter<
@@ -89,7 +89,7 @@ struct Function<T(TArgs...) &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 3),
             "%s &", *(test::type::name::Function<T(TArgs...)>::
@@ -104,7 +104,7 @@ struct Function<T(...) &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 3),
             "%s &", *(test::type::name::Function<T(...)>::
@@ -119,7 +119,7 @@ struct Function<T(TArg, ...) &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 3),
             "%s &", *(test::type::name::Function<T(TArg, ...)>::
@@ -134,7 +134,7 @@ struct Function<T(TArg, TArgs..., ...) &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 3),
             "%s &", *(test::type::name::Function<T(TArg, TArgs..., ...)>::
@@ -149,7 +149,7 @@ struct Function<T(TArgs...) &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 4),
             "%s &&", *(test::type::name::Function<T(TArgs...)>::
@@ -164,7 +164,7 @@ struct Function<T(...) &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 4),
             "%s &&", *(test::type::name::Function<T(...)>::
@@ -179,7 +179,7 @@ struct Function<T(TArg, ...) &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 4),
             "%s &&", *(test::type::name::Function<T(TArg, ...)>::
@@ -194,7 +194,7 @@ struct Function<T(TArg, TArgs..., ...) &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 4),
             "%s &&", *(test::type::name::Function<T(TArg, TArgs..., ...)>::
@@ -209,7 +209,7 @@ struct Function<T(TArgs...) const>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 7),
             "%s const", *(test::type::name::Function<T(TArgs...)>::
@@ -224,7 +224,7 @@ struct Function<T(...) const>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 7),
             "%s const", *(test::type::name::Function<T(...)>::
@@ -239,7 +239,7 @@ struct Function<T(TArg, ...) const>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 7),
             "%s const", *(test::type::name::Function<T(TArg, ...)>::
@@ -254,7 +254,7 @@ struct Function<T(TArg, TArgs..., ...) const>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 7),
             "%s const", *(test::type::name::Function<T(TArg, TArgs..., ...)>::
@@ -269,7 +269,7 @@ struct Function<T(TArgs...) const &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 9),
             "%s const &", *(test::type::name::Function<T(TArgs...)>::
@@ -284,7 +284,7 @@ struct Function<T(...) const &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 9),
             "%s const &", *(test::type::name::Function<T(...)>::
@@ -299,7 +299,7 @@ struct Function<T(TArg, ...) const &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 9),
             "%s const &", *(test::type::name::Function<T(TArg, ...)>::
@@ -314,7 +314,7 @@ struct Function<T(TArg, TArgs..., ...) const &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 9),
             "%s const &", *(test::type::name::Function<
@@ -329,7 +329,7 @@ struct Function<T(TArgs...) const &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 10),
             "%s const &&", *(test::type::name::Function<T(TArgs...)>::
@@ -344,7 +344,7 @@ struct Function<T(...) const &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 10),
             "%s const &&", *(test::type::name::Function<T(...)>::
@@ -359,7 +359,7 @@ struct Function<T(TArg, ...) const &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 10),
             "%s const &&", *(test::type::name::Function<T(TArg, ...)>::
@@ -374,7 +374,7 @@ struct Function<T(TArg, TArgs..., ...) const &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 10),
             "%s const &&", *(test::type::name::Function<
@@ -389,7 +389,7 @@ struct Function<T(TArgs...) volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 10),
             "%s volatile", *(test::type::name::Function<T(TArgs...)>::
@@ -404,7 +404,7 @@ struct Function<T(...) volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 10),
             "%s volatile", *(test::type::name::Function<T(...)>::
@@ -419,7 +419,7 @@ struct Function<T(TArg, ...) volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 10),
             "%s volatile", *(test::type::name::Function<T(TArg, ...)>::
@@ -434,7 +434,7 @@ struct Function<T(TArg, TArgs..., ...) volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 10),
             "%s volatile", *(test::type::name::Function<
@@ -449,7 +449,7 @@ struct Function<T(TArgs...) volatile &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 12),
             "%s volatile &", *(test::type::name::Function<T(TArgs...)>::
@@ -464,7 +464,7 @@ struct Function<T(...) volatile &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 12),
             "%s volatile &", *(test::type::name::Function<T(...)>::
@@ -479,7 +479,7 @@ struct Function<T(TArg, ...) volatile &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 12),
             "%s volatile &", *(test::type::name::Function<T(TArg, ...)>::
@@ -494,7 +494,7 @@ struct Function<T(TArg, TArgs..., ...) volatile &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 12),
             "%s volatile &", *(test::type::name::Function<
@@ -509,7 +509,7 @@ struct Function<T(TArgs...) volatile &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 13),
             "%s volatile &&", *(test::type::name::Function<T(TArgs...)>::
@@ -524,7 +524,7 @@ struct Function<T(...) volatile &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 13),
             "%s volatile &&", *(test::type::name::Function<T(...)>::
@@ -539,7 +539,7 @@ struct Function<T(TArg, ...) volatile &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 13),
             "%s volatile &&", *(test::type::name::Function<T(TArg, ...)>::
@@ -554,7 +554,7 @@ struct Function<T(TArg, TArgs..., ...) volatile &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 13),
             "%s volatile &&", *(test::type::name::Function<
@@ -569,7 +569,7 @@ struct Function<T(TArgs...) const volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 16),
             "%s const volatile", *(test::type::name::Function<T(TArgs...)>::
@@ -584,7 +584,7 @@ struct Function<T(...) const volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 16),
             "%s const volatile", *(test::type::name::Function<T(...)>::
@@ -599,7 +599,7 @@ struct Function<T(TArg, ...) const volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 16),
             "%s const volatile", *(test::type::name::Function<T(TArg, ...)>::
@@ -614,7 +614,7 @@ struct Function<T(TArg, TArgs..., ...) const volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 16),
             "%s const volatile", *(test::type::name::Function<
@@ -629,7 +629,7 @@ struct Function<T(TArgs...) const volatile &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 18),
             "%s const volatile &", *(test::type::name::Function<T(TArgs...)>::
@@ -644,7 +644,7 @@ struct Function<T(...) const volatile &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 18),
             "%s const volatile &", *(test::type::name::Function<T(...)>::
@@ -659,7 +659,7 @@ struct Function<T(TArg, ...) const volatile &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 18),
             "%s const volatile &", *(test::type::name::Function<T(TArg, ...)>::
@@ -674,7 +674,7 @@ struct Function<T(TArg, TArgs..., ...) const volatile &>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 18),
             "%s const volatile &", *(test::type::name::Function<
@@ -689,7 +689,7 @@ struct Function<T(TArgs...) const volatile &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArgs...)>::
                 template CStr<TChar>().Size() + 19),
             "%s const volatile &&", *(test::type::name::Function<T(TArgs...)>::
@@ -704,7 +704,7 @@ struct Function<T(...) const volatile &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(...)>::
                 template CStr<TChar>().Size() + 19),
             "%s const volatile &&", *(test::type::name::Function<T(...)>::
@@ -719,7 +719,7 @@ struct Function<T(TArg, ...) const volatile &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, ...)>::
                 template CStr<TChar>().Size() + 19),
             "%s const volatile &&", *(test::type::name::Function<
@@ -734,7 +734,7 @@ struct Function<T(TArg, TArgs..., ...) const volatile &&>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _func = test::cstr::Format(
+        static test::CString<TChar> _func = test::cstr::Format(
             (test::type::name::Function<T(TArg, TArgs..., ...)>::
                 template CStr<TChar>().Size() + 19),
             "%s const volatile &&", *(test::type::name::Function<
