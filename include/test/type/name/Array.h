@@ -43,7 +43,7 @@ struct Array<T[N]>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _arr = test::cstr::Format(
+        static test::CString<TChar> _arr = test::cstr::Format(
             (static_cast<std::size_t>(log10(N)) + 4), "[%d]", N);
         return {_arr};
     }
