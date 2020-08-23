@@ -3,6 +3,7 @@
 
 #include "../../CString.h"
 #include "../../cstr/Format.h"
+#include "Value.h"
 
 namespace test
 {
@@ -14,9 +15,10 @@ namespace name
 template<typename... TArgs>
 struct Parameter
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static char _name[] = "";
+        static TChar _name[] = "";
         return {_name};
     }
 };
@@ -24,11 +26,12 @@ struct Parameter
 template<typename TArg>
 struct Parameter<TArg>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::Name<TArg>::CStr().Size() + 1),
-            "%s", *(test::type::Name<TArg>::CStr()));
+        static test::CString<TChar> _name = test::cstr::Format(
+            (test::type::Name<TArg>::template CStr<TChar>().Size() + 1),
+            "%s", *(test::type::Name<TArg>::template CStr<TChar>()));
         return {_name};
     }
 };
@@ -36,13 +39,43 @@ struct Parameter<TArg>
 template<typename TArg0, typename TArg1, typename... TArgs>
 struct Parameter<TArg0, TArg1, TArgs...>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::Name<TArg0>::CStr().Size() + 3 +
-                test::type::name::Parameter<TArg1, TArgs...>::CStr().Size()),
-            "%s, %s", *(test::type::Name<TArg0>::CStr()),
-                *(test::type::Name<TArg1, TArgs...>::CStr()));
+        static test::CString<TChar> _name = test::cstr::Format(
+            (test::type::Name<TArg0>::template CStr<TChar>().Size() + 3 +
+                test::type::name::Parameter<TArg1, TArgs...>::
+                template CStr<TChar>().Size()),
+            "%s, %s", *(test::type::Name<TArg0>::template CStr<TChar>()),
+            *(test::type::name::Parameter<TArg1, TArgs...>::
+                template CStr<TChar>()));
+        return {_name};
+    }
+};
+
+template<typename T, T V>
+struct Parameter<test::type::name::Value<T, V>>
+{
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
+    {
+        return {test::type::name::Value<T, V>::template CStr<TChar>()};
+    }
+};
+
+template<typename T, T V, typename TArg1, typename... TArgs>
+struct Parameter<test::type::name::Value<T, V>, TArg1, TArgs...>
+{
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
+    {
+        static test::CString<TChar> _name = test::cstr::Format(
+            (test::type::name::Value<T, V>::template CStr<TChar>().Size() + 3 +
+                test::type::name::Parameter<TArg1, TArgs...>::
+                template CStr<TChar>().Size()),
+            "%s, %s", *(test::type::name::Value<T, V>::template CStr<TChar>()),
+            *(test::type::name::Parameter<TArg1, TArgs...>::
+                template CStr<TChar>()));
         return {_name};
     }
 };
