@@ -18,6 +18,7 @@ namespace name
 template<typename T>
 struct Reference
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -29,10 +30,11 @@ struct Reference
 template<typename T>
 struct Reference<T&>
 {
+    typedef typename test::type::name::Pointer<T>::Type Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ref = test::cstr::Format(
+        static test::CString<TChar> _ref = test::cstr::Format(
             (test::type::name::Pointer<T>::CStr().Size() + 2),
             "%s&", *(test::type::name::Pointer<T>::CStr()));
         return {_ref};
@@ -42,10 +44,11 @@ struct Reference<T&>
 template<typename T>
 struct Reference<T&&>
 {
+    typedef typename test::type::name::Pointer<T>::Type Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ref = test::cstr::Format(
+        static test::CString<TChar> _ref = test::cstr::Format(
             (test::type::name::Pointer<T>::CStr().Size() + 3),
             "%s&&", *(test::type::name::Pointer<T>::CStr()));
         return {_ref};
