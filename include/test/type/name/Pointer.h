@@ -17,6 +17,7 @@ namespace name
 template<typename T>
 struct Pointer
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -28,12 +29,13 @@ struct Pointer
 template<typename T>
 struct Pointer<T*>
 {
+    typedef typename Pointer<T>::Type Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ptr = test::cstr::Format(
-            (test::type::name::Pointer<T>::CStr().Size() + 2),
-            "%s*", *(test::type::name::Pointer<T>::CStr()));
+        static test::CString<char> _ptr = test::cstr::Format(2 +
+            (test::type::name::Pointer<T>::template CStr<TChar>().Size()),
+            "%s*", *(test::type::name::Pointer<T>::template CStr<TChar>()));
         return {_ptr};
     }
 };
@@ -41,12 +43,14 @@ struct Pointer<T*>
 template<typename T>
 struct Pointer<T*const>
 {
+    typedef typename Pointer<T>::Type Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
         static test::CString<char> _ptr = test::cstr::Format(
-            (test::type::name::Pointer<T>::CStr().Size() + 7),
-            "%s*const", *(test::type::name::Pointer<T>::CStr()));
+            (test::type::name::Pointer<T>::template CStr<TChar>().Size() + 7),
+            "%s*const", *(test::type::name::Pointer<T>::
+                template CStr<TChar>()));
         return {_ptr};
     }
 };
@@ -54,12 +58,14 @@ struct Pointer<T*const>
 template<typename T>
 struct Pointer<T*volatile>
 {
+    typedef typename Pointer<T>::Type Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
         static test::CString<char> _ptr = test::cstr::Format(
-            (test::type::name::Pointer<T>::CStr().Size() + 10),
-            "%s*volatile", *(test::type::name::Pointer<T>::CStr()));
+            (test::type::name::Pointer<T>::template CStr<TChar>().Size() + 10),
+            "%s*volatile", *(test::type::name::Pointer<T>::
+                template CStr<TChar>()));
         return {_ptr};
     }
 };
@@ -67,12 +73,14 @@ struct Pointer<T*volatile>
 template<typename T>
 struct Pointer<T*const volatile>
 {
+    typedef typename Pointer<T>::Type Type;
     template<typename TChar= char>
     static test::CString<const char> CStr()
     {
         static test::CString<char> _ptr = test::cstr::Format(
-            (test::type::name::Pointer<T>::CStr().Size() + 16),
-            "%s*const volatile", *(test::type::name::Pointer<T>::CStr()));
+            (test::type::name::Pointer<T>::template CStr<TChar>().Size() + 16),
+            "%s*const volatile", *(test::type::name::Pointer<T>::
+                template CStr<TChar>()));
         return {_ptr};
     }
 };
@@ -80,12 +88,13 @@ struct Pointer<T*const volatile>
 template<typename T, typename TM>
 struct Pointer<T TM::*>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
         static test::CString<char> _ptr = test::cstr::Format(
-            (test::type::Name<TM>::CStr().Size() + 4),
-            "%s::*", *(test::type::Name<TM>::CStr()));
+            (test::type::Name<TM>::template CStr<TChar>().Size() + 4),
+            "%s::*", *(test::type::Name<TM>::template CStr<TChar>()));
         return {_ptr};
     }
 };
@@ -93,12 +102,13 @@ struct Pointer<T TM::*>
 template<typename T, typename TM>
 struct Pointer<T TM::*const>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
         static test::CString<char> _ptr = test::cstr::Format(
-            (test::type::Name<TM>::CStr().Size() + 9),
-            "%s::*const", *(test::type::Name<TM>::CStr()));
+            (test::type::Name<TM>::template CStr<TChar>().Size() + 9),
+            "%s::*const", *(test::type::Name<TM>::template CStr<TChar>()));
         return {_ptr};
     }
 };
@@ -106,12 +116,13 @@ struct Pointer<T TM::*const>
 template<typename T, typename TM>
 struct Pointer<T TM::*volatile>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
         static test::CString<char> _ptr = test::cstr::Format(
-            (test::type::Name<TM>::CStr().Size() + 12),
-            "%s::*volatile", *(test::type::Name<TM>::CStr()));
+            (test::type::Name<TM>::template CStr<TChar>().Size() + 12),
+            "%s::*volatile", *(test::type::Name<TM>::template CStr<TChar>()));
         return {_ptr};
     }
 };
@@ -119,12 +130,14 @@ struct Pointer<T TM::*volatile>
 template<typename T, typename TM>
 struct Pointer<T TM::*const volatile>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
         static test::CString<char> _ptr = test::cstr::Format(
-            (test::type::Name<TM>::CStr().Size() + 18),
-            "%s::*const volatile", *(test::type::Name<TM>::CStr()));
+            (test::type::Name<TM>::template CStr<TChar>().Size() + 18),
+            "%s::*const volatile", *(test::type::Name<TM>::
+                template CStr<TChar>()));
         return {_ptr};
     }
 };
