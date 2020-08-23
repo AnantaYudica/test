@@ -33,7 +33,7 @@ struct Pointer<T*>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ptr = test::cstr::Format(2 +
+        static test::CString<TChar> _ptr = test::cstr::Format(2 +
             (test::type::name::Pointer<T>::template CStr<TChar>().Size()),
             "%s*", *(test::type::name::Pointer<T>::template CStr<TChar>()));
         return {_ptr};
@@ -47,7 +47,7 @@ struct Pointer<T*const>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ptr = test::cstr::Format(
+        static test::CString<TChar> _ptr = test::cstr::Format(
             (test::type::name::Pointer<T>::template CStr<TChar>().Size() + 7),
             "%s*const", *(test::type::name::Pointer<T>::
                 template CStr<TChar>()));
@@ -62,7 +62,7 @@ struct Pointer<T*volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ptr = test::cstr::Format(
+        static test::CString<TChar> _ptr = test::cstr::Format(
             (test::type::name::Pointer<T>::template CStr<TChar>().Size() + 10),
             "%s*volatile", *(test::type::name::Pointer<T>::
                 template CStr<TChar>()));
@@ -75,9 +75,9 @@ struct Pointer<T*const volatile>
 {
     typedef typename Pointer<T>::Type Type;
     template<typename TChar= char>
-    static test::CString<const char> CStr()
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ptr = test::cstr::Format(
+        static test::CString<TChar> _ptr = test::cstr::Format(
             (test::type::name::Pointer<T>::template CStr<TChar>().Size() + 16),
             "%s*const volatile", *(test::type::name::Pointer<T>::
                 template CStr<TChar>()));
@@ -92,7 +92,7 @@ struct Pointer<T TM::*>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ptr = test::cstr::Format(
+        static test::CString<TChar> _ptr = test::cstr::Format(
             (test::type::Name<TM>::template CStr<TChar>().Size() + 4),
             "%s::*", *(test::type::Name<TM>::template CStr<TChar>()));
         return {_ptr};
@@ -106,7 +106,7 @@ struct Pointer<T TM::*const>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ptr = test::cstr::Format(
+        static test::CString<TChar> _ptr = test::cstr::Format(
             (test::type::Name<TM>::template CStr<TChar>().Size() + 9),
             "%s::*const", *(test::type::Name<TM>::template CStr<TChar>()));
         return {_ptr};
@@ -120,7 +120,7 @@ struct Pointer<T TM::*volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ptr = test::cstr::Format(
+        static test::CString<TChar> _ptr = test::cstr::Format(
             (test::type::Name<TM>::template CStr<TChar>().Size() + 12),
             "%s::*volatile", *(test::type::Name<TM>::template CStr<TChar>()));
         return {_ptr};
@@ -134,7 +134,7 @@ struct Pointer<T TM::*const volatile>
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _ptr = test::cstr::Format(
+        static test::CString<TChar> _ptr = test::cstr::Format(
             (test::type::Name<TM>::template CStr<TChar>().Size() + 18),
             "%s::*const volatile", *(test::type::Name<TM>::
                 template CStr<TChar>()));
