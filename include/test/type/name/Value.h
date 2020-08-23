@@ -20,9 +20,9 @@ struct Value
     static test::CString<const TChar> CStr()
     {
         static test::CString<TChar> _ptr = test::cstr::Format(
-            (test::type::Name<T>::CStr().Size() + 4 + 
+            (test::type::Name<T>::template CStr<TChar>().Size() + 4 + 
                 test::type::name::val::Get<T>::template CStr<TChar>(V).Size()),
-            "(%s) %s", *(test::type::Name<T>::CStr()), 
+            "(%s) %s", *(test::type::Name<T>::template CStr<TChar>()), 
                 *(test::type::name::val::Get<T>::template CStr<TChar>(V)));
         return {_ptr};
     }
