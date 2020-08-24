@@ -29,6 +29,7 @@ struct Array
 template<typename T>
 struct Array<T[]>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -40,11 +41,27 @@ struct Array<T[]>
 template<typename T, std::size_t N>
 struct Array<T[N]>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
         static test::CString<TChar> _arr = test::cstr::Format(
             (static_cast<std::size_t>(log10(N)) + 4), "[%d]", N);
+        return {_arr};
+    }
+};
+
+template<typename T, std::size_t N, std::size_t M>
+struct Array<T[N][M]>
+{
+    typedef typename Array<T[M]>::Type Type;
+    template<typename TChar= char>
+    static test::CString<const TChar> CStr()
+    {
+        static test::CString<TChar> _arr = test::cstr::Format(
+            (static_cast<std::size_t>(log10(N)) +
+                Array<T[M]>::template CStr<TChar>().Size() + 4), "[%d]%s", 
+            N, *(Array<T[M]>::template CStr<TChar>()));
         return {_arr};
     }
 };
