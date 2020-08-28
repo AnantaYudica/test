@@ -118,6 +118,25 @@ struct Parameter<test::type::name::Pointer<T>, TArgs...>
     }
 };
 
+template<typename T1, typename T2, typename... TArgs>
+struct Parameter<test::type::name::Pointer<T1>, 
+    test::type::name::Pointer<T2>, TArgs...>
+{
+    template<typename TChar= char>
+    static test::CString<const TChar> CStr()
+    {
+        typedef test::type::name::Pointer<T1> PointerType;
+        typedef test::type::name::decltor::Parameter<
+            test::type::name::Pointer<T2>, TArgs...> ParamType;
+        static test::CString<TChar> _decltor = test::cstr::Format(
+            (PointerType::template CStr<TChar>().Size() + 
+                ParamType::template CStr<TChar>().Size() + 2),
+            "%s %s", *(PointerType::template CStr<TChar>()), 
+            *(ParamType::template CStr<TChar>()));
+        return {_decltor};
+    }
+};
+
 template<typename T>
 struct Parameter<test::type::name::Reference<T>>
 {
