@@ -17,7 +17,7 @@ namespace name
 template<typename T>
 struct Pointer
 {
-    typedef T Type;
+    typedef T SimpleType;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -29,7 +29,8 @@ struct Pointer
 template<typename T>
 struct Pointer<T*>
 {
-    typedef typename Pointer<T>::Type Type;
+    typedef typename Pointer<T>::SimpleType SimpleType;
+    typedef T* Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -43,7 +44,8 @@ struct Pointer<T*>
 template<typename T>
 struct Pointer<T*const>
 {
-    typedef typename Pointer<T>::Type Type;
+    typedef typename Pointer<T>::SimpleType SimpleType;
+    typedef T*const Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -58,7 +60,8 @@ struct Pointer<T*const>
 template<typename T>
 struct Pointer<T*volatile>
 {
-    typedef typename Pointer<T>::Type Type;
+    typedef typename Pointer<T>::SimpleType SimpleType;
+    typedef T*volatile Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -73,7 +76,8 @@ struct Pointer<T*volatile>
 template<typename T>
 struct Pointer<T*const volatile>
 {
-    typedef typename Pointer<T>::Type Type;
+    typedef typename Pointer<T>::SimpleType SimpleType;
+    typedef T*const volatile Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -88,7 +92,8 @@ struct Pointer<T*const volatile>
 template<typename T, typename TM>
 struct Pointer<T TM::*>
 {
-    typedef T Type;
+    typedef T SimpleType;
+    typedef T TM::* Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -102,7 +107,8 @@ struct Pointer<T TM::*>
 template<typename T, typename TM>
 struct Pointer<T TM::*const>
 {
-    typedef T Type;
+    typedef T SimpleType;
+    typedef T TM::*const Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -116,7 +122,8 @@ struct Pointer<T TM::*const>
 template<typename T, typename TM>
 struct Pointer<T TM::*volatile>
 {
-    typedef T Type;
+    typedef T SimpleType;
+    typedef T TM::*volatile Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -130,7 +137,8 @@ struct Pointer<T TM::*volatile>
 template<typename T, typename TM>
 struct Pointer<T TM::*const volatile>
 {
-    typedef T Type;
+    typedef T SimpleType;
+    typedef T TM::*const volatile Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {

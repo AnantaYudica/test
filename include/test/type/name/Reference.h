@@ -18,7 +18,7 @@ namespace name
 template<typename T>
 struct Reference
 {
-    typedef T Type;
+    typedef T SimpleType;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -30,7 +30,8 @@ struct Reference
 template<typename T>
 struct Reference<T&>
 {
-    typedef typename test::type::name::Pointer<T>::Type Type;
+    typedef typename test::type::name::Pointer<T>::SimpleType SimpleType;
+    typedef T& Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -44,7 +45,8 @@ struct Reference<T&>
 template<typename T>
 struct Reference<T&&>
 {
-    typedef typename test::type::name::Pointer<T>::Type Type;
+    typedef typename test::type::name::Pointer<T>::SimpleType SimpleType;
+    typedef T&& Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {

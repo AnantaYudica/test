@@ -30,6 +30,8 @@ struct Function
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...)>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...);
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -45,6 +47,8 @@ struct Function<T(TArgs...)>
 template<typename T>
 struct Function<T(...)>
 {
+    typedef T SimpleType;
+    typedef T Type(...);
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -56,6 +60,8 @@ struct Function<T(...)>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...)>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...);
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -71,6 +77,8 @@ struct Function<T(TArg, ...)>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...)>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...);
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -86,6 +94,8 @@ struct Function<T(TArg, TArgs..., ...)>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -101,6 +111,8 @@ struct Function<T(TArgs...) &>
 template<typename T>
 struct Function<T(...) &>
 {
+    typedef T SimpleType;
+    typedef T Type(...) &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -116,6 +128,8 @@ struct Function<T(...) &>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -131,6 +145,8 @@ struct Function<T(TArg, ...) &>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -146,6 +162,8 @@ struct Function<T(TArg, TArgs..., ...) &>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -161,6 +179,8 @@ struct Function<T(TArgs...) &&>
 template<typename T>
 struct Function<T(...) &&>
 {
+    typedef T SimpleType;
+    typedef T Type(...) &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -176,6 +196,8 @@ struct Function<T(...) &&>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -191,6 +213,8 @@ struct Function<T(TArg, ...) &&>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -206,6 +230,8 @@ struct Function<T(TArg, TArgs..., ...) &&>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) const>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) const;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -221,6 +247,8 @@ struct Function<T(TArgs...) const>
 template<typename T>
 struct Function<T(...) const>
 {
+    typedef T SimpleType;
+    typedef T Type(...) const;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -236,6 +264,8 @@ struct Function<T(...) const>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) const>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) const;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -251,6 +281,8 @@ struct Function<T(TArg, ...) const>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) const>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) const;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -266,6 +298,8 @@ struct Function<T(TArg, TArgs..., ...) const>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) const &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) const &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -281,6 +315,8 @@ struct Function<T(TArgs...) const &>
 template<typename T>
 struct Function<T(...) const &>
 {
+    typedef T SimpleType;
+    typedef T Type(...) const &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -296,6 +332,8 @@ struct Function<T(...) const &>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) const &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) const &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -311,6 +349,8 @@ struct Function<T(TArg, ...) const &>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) const &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) const &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -326,6 +366,8 @@ struct Function<T(TArg, TArgs..., ...) const &>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) const &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) const &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -341,6 +383,8 @@ struct Function<T(TArgs...) const &&>
 template<typename T>
 struct Function<T(...) const &&>
 {
+    typedef T SimpleType;
+    typedef T Type(...) const &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -356,6 +400,8 @@ struct Function<T(...) const &&>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) const &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) const &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -371,6 +417,8 @@ struct Function<T(TArg, ...) const &&>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) const &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) const &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -386,6 +434,8 @@ struct Function<T(TArg, TArgs..., ...) const &&>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) volatile>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) volatile;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -401,6 +451,8 @@ struct Function<T(TArgs...) volatile>
 template<typename T>
 struct Function<T(...) volatile>
 {
+    typedef T SimpleType;
+    typedef T Type(...) volatile;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -416,6 +468,8 @@ struct Function<T(...) volatile>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) volatile>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) volatile;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -431,6 +485,8 @@ struct Function<T(TArg, ...) volatile>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) volatile>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) volatile;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -446,6 +502,8 @@ struct Function<T(TArg, TArgs..., ...) volatile>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) volatile &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) volatile &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -461,6 +519,8 @@ struct Function<T(TArgs...) volatile &>
 template<typename T>
 struct Function<T(...) volatile &>
 {
+    typedef T SimpleType;
+    typedef T Type(...) volatile &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -476,6 +536,8 @@ struct Function<T(...) volatile &>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) volatile &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) volatile &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -491,6 +553,8 @@ struct Function<T(TArg, ...) volatile &>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) volatile &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) volatile &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -506,6 +570,8 @@ struct Function<T(TArg, TArgs..., ...) volatile &>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) volatile &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) volatile &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -521,6 +587,8 @@ struct Function<T(TArgs...) volatile &&>
 template<typename T>
 struct Function<T(...) volatile &&>
 {
+    typedef T SimpleType;
+    typedef T Type(...) volatile &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -536,6 +604,8 @@ struct Function<T(...) volatile &&>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) volatile &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) volatile &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -551,6 +621,8 @@ struct Function<T(TArg, ...) volatile &&>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) volatile &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) volatile &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -566,6 +638,8 @@ struct Function<T(TArg, TArgs..., ...) volatile &&>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) const volatile>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) const volatile;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -581,6 +655,8 @@ struct Function<T(TArgs...) const volatile>
 template<typename T>
 struct Function<T(...) const volatile>
 {
+    typedef T SimpleType;
+    typedef T Type(...) const volatile;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -596,6 +672,8 @@ struct Function<T(...) const volatile>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) const volatile>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) const volatile;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -611,6 +689,8 @@ struct Function<T(TArg, ...) const volatile>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) const volatile>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) const volatile;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -626,6 +706,8 @@ struct Function<T(TArg, TArgs..., ...) const volatile>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) const volatile &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) const volatile &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -641,6 +723,8 @@ struct Function<T(TArgs...) const volatile &>
 template<typename T>
 struct Function<T(...) const volatile &>
 {
+    typedef T SimpleType;
+    typedef T Type(...) const volatile &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -656,6 +740,8 @@ struct Function<T(...) const volatile &>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) const volatile &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) const volatile &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -671,6 +757,8 @@ struct Function<T(TArg, ...) const volatile &>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) const volatile &>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) const volatile &;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -686,6 +774,8 @@ struct Function<T(TArg, TArgs..., ...) const volatile &>
 template<typename T, typename... TArgs>
 struct Function<T(TArgs...) const volatile &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArgs...) const volatile &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -701,6 +791,8 @@ struct Function<T(TArgs...) const volatile &&>
 template<typename T>
 struct Function<T(...) const volatile &&>
 {
+    typedef T SimpleType;
+    typedef T Type(...) const volatile &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -716,6 +808,8 @@ struct Function<T(...) const volatile &&>
 template<typename T, typename TArg>
 struct Function<T(TArg, ...) const volatile &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, ...) const volatile &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -731,6 +825,8 @@ struct Function<T(TArg, ...) const volatile &&>
 template<typename T, typename TArg, typename... TArgs>
 struct Function<T(TArg, TArgs..., ...) const volatile &&>
 {
+    typedef T SimpleType;
+    typedef T Type(TArg, TArgs..., ...) const volatile &&;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {

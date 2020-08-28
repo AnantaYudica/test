@@ -29,7 +29,8 @@ struct Array
 template<typename T>
 struct Array<T[]>
 {
-    typedef T Type;
+    typedef T SimpleType;
+    typedef T Type[];
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -41,7 +42,8 @@ struct Array<T[]>
 template<typename T, std::size_t N>
 struct Array<T[N]>
 {
-    typedef T Type;
+    typedef T SimpleType;
+    typedef T Type[N];
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -54,7 +56,8 @@ struct Array<T[N]>
 template<typename T, std::size_t N, std::size_t M>
 struct Array<T[N][M]>
 {
-    typedef typename Array<T[M]>::Type Type;
+    typedef typename Array<T[M]>::SimpleType SimpleType;
+    typedef T Type[N][M];
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
