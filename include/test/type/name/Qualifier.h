@@ -15,6 +15,7 @@ template<typename T>
 struct Qualifier
 {
     typedef T SimpleType;
+    typedef T DefaultType;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {

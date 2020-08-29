@@ -25,6 +25,7 @@ namespace name
 template<typename T, typename TB, typename... TArgs>
 struct Declarator
 {
+    typedef T DefaultType;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -38,6 +39,7 @@ struct Declarator
 template<typename T, typename... TArgs>
 struct Declarator<T, typename test::type::name::Array<T>::Type, TArgs...>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -50,6 +52,7 @@ struct Declarator<T, typename test::type::name::Array<T>::Type, TArgs...>
 template<typename T, typename... TArgs>
 struct Declarator<T, typename test::type::name::Function<T>::Type, TArgs...>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -62,6 +65,7 @@ struct Declarator<T, typename test::type::name::Function<T>::Type, TArgs...>
 template<typename T, typename... TArgs>
 struct Declarator<T, typename test::type::name::Pointer<T>::Type, TArgs...>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
@@ -74,6 +78,7 @@ struct Declarator<T, typename test::type::name::Pointer<T>::Type, TArgs...>
 template<typename T, typename... TArgs>
 struct Declarator<T, typename test::type::name::Reference<T>::Type, TArgs...>
 {
+    typedef T Type;
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
     {
