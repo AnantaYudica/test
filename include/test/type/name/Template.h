@@ -15,19 +15,17 @@ namespace type
 namespace name
 {
 
-template<typename T>
+template<typename T, typename TP = 
+    decltype(test::type::name::tmpl::Parameter(std::declval<T*>()))>
 struct Template
 {
     template<typename TChar = char>
     static test::CString<const TChar> CStr()
     {
         static test::CString<char> _tmpl = test::cstr::Format((3 +
-            test::type::name::tmpl::Get<decltype(
-                test::type::name::tmpl::Parameter(std::declval<T*>()))>::
-                template CStr<TChar>().Size()),
-            "<%s>", *( test::type::name::tmpl::Get<decltype(
-                test::type::name::tmpl::Parameter(std::declval<T*>()))>::
-                template CStr<TChar>()));
+            test::type::name::tmpl::Get<TP>::template CStr<TChar>().Size()),
+            "<%s>", *( test::type::name::tmpl::Get<TP>::template
+                CStr<TChar>()));
         return {_tmpl};
     }
 };
