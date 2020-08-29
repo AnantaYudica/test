@@ -9,6 +9,9 @@
 #include "test/Trace.h"
 #include "test/reg/Base.h"
 #include "test/type/Name.h"
+#include "test/type/name/Parameter.h"
+#include "test/type/name/Template.h"
+#include "test/cstr/Format.h"
 
 #include <cstdio>
 #include <cstdlib>
@@ -418,11 +421,32 @@ void operator delete[](void* p) noexcept
 template<>\
 struct test::type::Name<__TYPE__,##__VA_ARGS__>\
 {\
-    static test::CString<const char> CStr()\
+    template<typename TChar = char>\
+    static test::CString<const TChar> CStr()\
     {\
-        static char _cstr[] = __NAME__;\
+        static TChar _cstr[] = __NAME__;\
         return {_cstr};\
     }\
 }
+
+#define TEST_TYPE_NAME_TEMPLATE(__NAME__, __TYPE__, ...)\
+struct test::type::Name<__TYPE__,##__VA_ARGS__>\
+{\
+    template<typename TChar = char>\
+    static test::CString<const TChar> CStr()\
+    {\
+        typedef decltype(test::type::name::tmpl::Parameter(\
+            std::declval<__TYPE__,##__VA_ARGS__*>())) ParamType;\
+        typedef test::type::name::Template<__TYPE__,##__VA_ARGS__,\
+            ParamType> TemplateType;\
+        static test::CString<TChar> _name = test::cstr::Format(\
+            (sizeof(__NAME__) + TemplateType::template CStr<TChar>().Size()),\
+            "%s%s", __NAME__, *(TemplateType::template CStr<TChar>()));\
+        return {_name};\
+    }\
+}
+
+#define TEST_TYPE_NAME_PARAMETER(__TYPE__, ...)\
+inline auto test::type::name::tmpl::Parameter(__TYPE__,##__VA_ARGS__*)\
 
 #endif //!TEST_H_
