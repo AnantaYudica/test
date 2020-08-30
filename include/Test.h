@@ -449,4 +449,16 @@ struct test::type::Name<__TYPE__,##__VA_ARGS__>\
 #define TEST_TYPE_NAME_PARAMETER(__TYPE__, ...)\
 inline auto test::type::name::tmpl::Parameter(__TYPE__,##__VA_ARGS__*)\
 
+#define TEST_TYPE_NAME_VAL_ENUMERATION(__NAME__, __TYPE__, __VALUE__, ...)\
+template<>\
+struct test::type::name::val::Enumeration<__TYPE__, __VALUE__,##__VA_ARGS__>\
+{\
+    template<typename TChar= char>\
+    static test::CString<TChar> CStr()\
+    {\
+        static TChar _val[] = __NAME__;\
+        return {_val};\
+    }\
+}
+
 #endif //!TEST_H_
