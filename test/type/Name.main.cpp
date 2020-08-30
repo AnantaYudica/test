@@ -36,6 +36,30 @@ TEST_TYPE_NAME_TEMPLATE("C", C<T1, F>);
 char Func1() {return 'A';}
 int Func2() {return 1;}
 
+enum EObj1 
+{
+    value_a,
+    value_b,
+    value_c
+};
+
+TEST_TYPE_NAME_VAL_ENUMERATION("value_a", EObj1, EObj1::value_a);
+TEST_TYPE_NAME_VAL_ENUMERATION("value_b", EObj1, EObj1::value_b);
+TEST_TYPE_NAME_VAL_ENUMERATION("value_c", EObj1, EObj1::value_c);
+
+TEST_TYPE_NAME("EObj1", EObj1);
+
+template<typename T,T...I>
+struct D{};
+
+template<typename T, T...I>
+TEST_TYPE_NAME_PARAMETER(D<T, I...>) ->
+    test::type::name::Parameter<T, 
+    test::type::name::Value<T, I>...>;
+  
+template<typename T, T...I>
+TEST_TYPE_NAME_TEMPLATE("D", D<T, I...>);
+
 int main()
 {
     assert(strcmp(*test::type::Name<char>::CStr(), "char") == 0);
@@ -79,6 +103,14 @@ int main()
             *(cstr_out1.Get()), test::type::Name<C<int, 
             &Func2>&&>::CStr().Size()) == 0);
     }
-    
+
+    assert(strcmp(*test::type::Name<EObj1>::CStr(), "EObj1") == 0);
+    assert(strcmp(*test::type::Name<D<EObj1>>::CStr(), "D<EObj1>") == 0);
+    assert(strcmp(*test::type::Name<D<EObj1, EObj1::value_a>>::CStr(), 
+        "D<EObj1, (EObj1) value_a>") == 0);
+    assert(strcmp(*test::type::Name<D<EObj1, EObj1::value_a, 
+        EObj1::value_c>>::CStr(), "D<EObj1, (EObj1) value_a, "
+        "(EObj1) value_c>") == 0);
+
     return TEST::GetInstance().Status().Get();
 }
