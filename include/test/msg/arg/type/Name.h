@@ -112,8 +112,8 @@ template<typename TRet, typename TFuncMmbr, typename TDerived,
     typename... TVarArgs>
 TRet Argument<arg::type::Name<I>, TArgs...>::
     Filler(const test::type::Index<TCaseId, ICaseId>& i_case_id, 
-    TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>& var,
-    TFuncMmbrArgs&&... args)
+        TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>& var,
+        TFuncMmbrArgs&&... args)
 {
     return Argument<TArgs...>::template Filler<TRet>(i_case_id, func_mmbr, d, 
         var, std::forward<TFuncMmbrArgs>(args)..., 
