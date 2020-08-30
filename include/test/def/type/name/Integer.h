@@ -2,142 +2,96 @@
 #define TEST_DEF_TYPE_NAME_INTEGER_H_
 
 #include "../../../type/Name.h"
-#include "../../../cstr/Format.h"
 
 namespace test
 {
 namespace type
 {
 
-template<typename TT>
-struct Name<signed char, test::type::name::Declarator<TT>>
+template<>
+struct Name<short>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 12),
-            "signed char%s", *(test::type::name::Declarator<TT>::CStr()));
+        static TChar _name[] = "short";
         return {_name};
     }
 };
 
-template<typename TT>
-struct Name<char, test::type::name::Declarator<TT>>
+template<>
+struct Name<int>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 5),
-            "char%s", *(test::type::name::Declarator<TT>::CStr()));
+        static TChar _name[] = "int";
         return {_name};
     }
 };
 
-template<typename TT>
-struct Name<short, test::type::name::Declarator<TT>>
+template<>
+struct Name<long>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 6),
-            "short%s", *(test::type::name::Declarator<TT>::CStr()));
+        static TChar _name[] = "long";
         return {_name};
     }
 };
 
-template<typename TT>
-struct Name<int, test::type::name::Declarator<TT>>
+template<>
+struct Name<long long>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 4),
-            "int%s", *(test::type::name::Declarator<TT>::CStr()));
+        static TChar _name[] = "long long";
         return {_name};
     }
 };
 
-template<typename TT>
-struct Name<long, test::type::name::Declarator<TT>>
+template<>
+struct Name<unsigned short>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 5),
-            "long%s", *(test::type::name::Declarator<TT>::CStr()));
+        static TChar _name[] = "unsigned short";
         return {_name};
     }
 };
 
-template<typename TT>
-struct Name<long long, test::type::name::Declarator<TT>>
+template<>
+struct Name<unsigned int>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 10),
-            "long long%s", *(test::type::name::Declarator<TT>::CStr()));
+        static TChar _name[] = "unsigned int";
         return {_name};
     }
 };
 
-template<typename TT>
-struct Name<unsigned char, test::type::name::Declarator<TT>>
+template<>
+struct Name<unsigned long>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 14),
-            "unsigned char%s", *(test::type::name::Declarator<TT>::CStr()));
+        static TChar _name[] =  "unsigned long";
         return {_name};
     }
 };
 
-template<typename TT>
-struct Name<unsigned short, test::type::name::Declarator<TT>>
+template<>
+struct Name<unsigned long long>
 {
-    static test::CString<const char> CStr()
+    template<typename TChar = char>
+    static test::CString<const TChar> CStr()
     {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 15),
-            "unsigned short%s", *(test::type::name::Declarator<TT>::CStr()));
-        return {_name};
-    }
-};
-
-template<typename TT>
-struct Name<unsigned int, test::type::name::Declarator<TT>>
-{
-    static test::CString<const char> CStr()
-    {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 13),
-            "unsigned int%s", *(test::type::name::Declarator<TT>::CStr()));
-        return {_name};
-    }
-};
-
-template<typename TT>
-struct Name<unsigned long, test::type::name::Declarator<TT>>
-{
-    static test::CString<const char> CStr()
-    {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 14),
-            "unsigned long%s", *(test::type::name::Declarator<TT>::CStr()));
-        return {_name};
-    }
-};
-
-template<typename TT>
-struct Name<unsigned long long, test::type::name::Declarator<TT>>
-{
-    static test::CString<const char> CStr()
-    {
-        static test::CString<char> _name = test::cstr::Format(
-            (test::type::name::Declarator<TT>::CStr().Size() + 19),
-            "unsigned long long%s", 
-            *(test::type::name::Declarator<TT>::CStr()));
+        static TChar _name[] = "unsigned long long";
         return {_name};
     }
 };
