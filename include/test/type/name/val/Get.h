@@ -3,6 +3,9 @@
 
 #include "../../../CString.h"
 #include "../../../cstr/Format.h"
+#include "Enumeration.h"
+
+#include <cstdint>
 
 namespace test
 {
@@ -16,22 +19,22 @@ namespace val
 template<typename T>
 struct Get
 {
-    template<typename TChar= char>
-    static test::CString<TChar> CStr(T)
+    template<T V, typename TChar= char>
+    static test::CString<TChar> CStr()
     {
-        static TChar undefined[] = "value-undefined";
-        return {undefined};
+        return {test::type::name::val::Enumeration<T, V>::template
+            CStr<TChar>()};
     }
 };
 
 template<typename T>
 struct Get<T&>
 {
-    template<typename TChar= char>
-    static test::CString<TChar> CStr(T& v)
+    template<T& V, typename TChar= char>
+    static test::CString<TChar> CStr()
     {
         test::CString<TChar> _val = test::cstr::Format(
-            (sizeof(int*) * 2) + 3, "%p", &v);
+            (sizeof(int*) * 2) + 3, "%p", &V);
         return {_val};
     }
 };
@@ -39,14 +42,71 @@ struct Get<T&>
 template<typename T>
 struct Get<T*>
 {
-    template<typename TChar= char>
-    static test::CString<TChar> CStr(T* v)
+    template<T* V, typename TChar= char>
+    static test::CString<TChar> CStr()
     {
         test::CString<TChar> _val = test::cstr::Format(
-            (sizeof(int*) * 2) + 3, "%p", v);
+            (sizeof(int*) * 2) + 3, "%p", V);
         return {_val};
     }
 };
+
+template<typename T, typename TM>
+struct Get<T TM::*>
+{
+    template<T TM::* V, typename TChar= char>
+    static test::CString<TChar> CStr()
+    {
+        auto _v = static_cast<T TM::*>(V);
+        auto p = reinterpret_cast<uintptr_t*>(&_v);
+        test::CString<TChar> _val = test::cstr::Format(
+            (sizeof(uintptr_t*) * 2) + 3, "%p", (void*)*p);
+        return {_val};
+    }
+};
+
+template<typename T, typename TM>
+struct Get<T TM::*const>
+{
+    template<T TM::*const V, typename TChar= char>
+    static test::CString<TChar> CStr()
+    {
+        auto _v = static_cast<T TM::*>(V);
+        auto p = reinterpret_cast<uintptr_t*>(&_v);
+        test::CString<TChar> _val = test::cstr::Format(
+            (sizeof(uintptr_t*) * 2) + 3, "%p", (void*)*p);
+        return {_val};
+    }
+};
+
+template<typename T, typename TM>
+struct Get<T TM::*volatile>
+{
+    template<T TM::*volatile V, typename TChar= char>
+    static test::CString<TChar> CStr()
+    {
+        auto _v = static_cast<T TM::*>(V);
+        auto p = reinterpret_cast<uintptr_t*>(&_v);
+        test::CString<TChar> _val = test::cstr::Format(
+            (sizeof(uintptr_t*) * 2) + 3, "%p", (void*)*p);
+        return {_val};
+    }
+};
+
+template<typename T, typename TM>
+struct Get<T TM::*const volatile>
+{
+    template<T TM::*const volatile V, typename TChar= char>
+    static test::CString<TChar> CStr()
+    {
+        auto _v = static_cast<T TM::*>(V);
+        auto p = reinterpret_cast<uintptr_t*>(&_v);
+        test::CString<TChar> _val = test::cstr::Format(
+            (sizeof(uintptr_t*) * 2) + 3, "%p", (void*)*p);
+        return {_val};
+    }
+};
+
 
 } //!val
 
