@@ -180,10 +180,11 @@ template<std::size_t I, typename... TArgArgs, typename... TArgs>
 template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
     typename TGet>
 TGet Argument<arg::type::Function<I, TArgArgs...>, TArgs...>::
-    Get(const type::Index<TCaseId, ICaseId>&, test::Variable<TVarArgs...>& var)
+    Get(const type::Index<TCaseId, ICaseId>& i_case_id, 
+        test::Variable<TVarArgs...>& var)
 {
     return std::move(Argument<TArgArgs...>{}.template Call<
-        GetType<test::Variable<TVarArgs...>>>(type::Index<TCaseId, ICaseId>{},
+        GetType<test::Variable<TVarArgs...>>>(i_case_id,
             test::var::At<I>(var).Get().Get(), var));
 }
 
