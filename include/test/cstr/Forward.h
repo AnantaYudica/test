@@ -1,45 +1,42 @@
-#ifndef TEST_CSTR_OUT_ARGUMENT_H_
-#define TEST_CSTR_OUT_ARGUMENT_H_
+#ifndef TEST_CSTR_FORWARD_H_
+#define TEST_CSTR_FORWARD_H_
 
-#include "../../out/Argument.h"
-#include "../../CString.h"
+#include "../Forward.h"
+#include "../CString.h"
 
 namespace test
 {
-namespace out
-{
 
 template<typename TChar>
-struct Argument<test::CString<TChar>>
+struct Forward<test::CString<TChar>>
 {
-    static const char* Value(test::CString<TChar> & cstr);
-    static const char* Value(const test::CString<TChar> & cstr);
-    static const char* Value(test::CString<TChar> && cstr);
+    typedef const TChar* Type;
+    static const TChar* Value(test::CString<TChar> & cstr);
+    static const TChar* Value(const test::CString<TChar> & cstr);
+    static const TChar* Value(test::CString<TChar> && cstr);
 };
 
 template<typename TChar>
-const char* Argument<test::CString<TChar>>::
+const TChar* Forward<test::CString<TChar>>::
     Value(test::CString<TChar> & cstr)
 {
     return *cstr;
 }
 
 template<typename TChar>
-const char* Argument<test::CString<TChar>>::
+const TChar* Forward<test::CString<TChar>>::
     Value(const test::CString<TChar> & cstr)
 {
     return *cstr;
 }
 
 template<typename TChar>
-const char* Argument<test::CString<TChar>>::
+const TChar* Forward<test::CString<TChar>>::
     Value(test::CString<TChar> && cstr)
 {
     return *cstr;
 }
 
-} //!out
-
 } //!test
 
-#endif //!TEST_CSTR_OUT_ARGUMENT_H_
+#endif //!TEST_CSTR_FORWARD_H_
