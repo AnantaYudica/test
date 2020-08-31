@@ -114,7 +114,7 @@ int main()
     assert(res_a == res_d);
     assert(res_a == res_e);
     
-    assert(strcmp(arg_name0.Get(test::type::Index<CaseA1, 0>{}, var1), 
+    assert(strcmp(*(arg_name0.Get(test::type::Index<CaseA1, 0>{}, var1)), 
         "long double")== 0);
 
     res_a = out_cstr1.Print("intlong double");
@@ -141,7 +141,7 @@ int main()
     assert(res_d == res_a);
     assert(res_e == res_a);
 
-    assert(strcmp(arg_name1.Get(test::type::Index<CaseA1, 0>{}, var1), 
+    assert(strcmp(*(arg_name1.Get(test::type::Index<CaseA1, 0>{}, var1)), 
         "int")== 0);
         
     return TEST::GetInstance().Status().Get();
