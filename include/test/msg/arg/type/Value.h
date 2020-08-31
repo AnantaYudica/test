@@ -82,20 +82,20 @@ public:
         typename TCaseId, std::size_t ICaseId, typename... TVarArgs,
         typename TFuncMmbr = PointerFunctionMemberType<ICaseId, TRet, TDerived,
             test::Variable<TVarArgs...>, TFuncMmbrArgs...>>
-    TRet Call(const type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr,
+    TRet Call(const test::type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr,
         TDerived& d, test::Variable<TVarArgs...>& var, 
         TFuncMmbrArgs&&... args);
     template<typename TRet, typename... TFuncArgs, typename TCaseId, 
         std::size_t ICaseId, typename... TVarArgs, 
         typename TFunc = PointerFunctionType<ICaseId, TRet, 
             test::Variable<TVarArgs...>, TFuncArgs...>>
-    TRet Call(const type::Index<TCaseId, ICaseId>&, TFunc func,
+    TRet Call(const test::type::Index<TCaseId, ICaseId>&, TFunc func,
         test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
 public:
     template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
         typename TGet = typename Argument<arg::type::Value<I>, 
         TArgs...>::template GetType<test::Variable<TVarArgs...>>>
-    TGet Get(const type::Index<TCaseId, ICaseId>&, 
+    TGet Get(const test::type::Index<TCaseId, ICaseId>&, 
         test::Variable<TVarArgs...>& var);
 };
 
@@ -157,8 +157,9 @@ template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
     typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
     typename TFuncMmbr>
 TRet Argument<arg::type::Value<I>, TArgs...>::
-    Call(const type::Index<TCaseId, ICaseId>& i_case_id, TFuncMmbr func_mmbr,
-        TDerived& d, test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
+    Call(const test::type::Index<TCaseId, ICaseId>& i_case_id, 
+        TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>& var, 
+        TFuncMmbrArgs&&... args)
 {
     return Filler<TRet>(i_case_id, func_mmbr, d, var, 
         std::forward<TFuncMmbrArgs>(args)...);
@@ -168,7 +169,7 @@ template<std::size_t I, typename... TArgs>
 template<typename TRet, typename... TFuncArgs, typename TCaseId, 
     std::size_t ICaseId, typename... TVarArgs, typename TFunc>
 TRet Argument<arg::type::Value<I>, TArgs...>::
-    Call(const type::Index<TCaseId, ICaseId>& i_case_id, TFunc func,
+    Call(const test::type::Index<TCaseId, ICaseId>& i_case_id, TFunc func,
         test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
 {
     return Filler<TRet>(i_case_id, func, var, 
@@ -179,7 +180,8 @@ template<std::size_t I, typename... TArgs>
 template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
     typename TGet>
 TGet Argument<arg::type::Value<I>, TArgs...>::
-    Get(const type::Index<TCaseId, ICaseId>&, test::Variable<TVarArgs...>& var)
+    Get(const test::type::Index<TCaseId, ICaseId>&, 
+        test::Variable<TVarArgs...>& var)
 {
     return std::move(test::var::At<I>(var).Get().Get());
 }

@@ -40,12 +40,12 @@ protected:
     template<typename TRet, typename TFuncMmbr, typename TDerived, 
         typename... TFuncMmbrArgs, typename TCaseId, std::size_t ICaseId, 
         typename... TVarArgs>
-    TRet Filler(const type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr, 
-        TDerived& d, test::Variable<TVarArgs...>& var, 
+    TRet Filler(const test::type::Index<TCaseId, ICaseId>&, 
+        TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>& var, 
         TFuncMmbrArgs&&... args);
     template<typename TRet, typename TFunc, typename... TFuncArgs, 
         typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
-    TRet Filler(const type::Index<TCaseId, ICaseId>&, TFunc func, 
+    TRet Filler(const test::type::Index<TCaseId, ICaseId>&, TFunc func, 
         test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
 public:
     template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
@@ -64,14 +64,14 @@ public:
         typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
         typename TFuncMmbr = PointerFunctionMemberType<ICaseId, TRet, TDerived,
             test::Variable<TVarArgs...>, TFuncMmbrArgs...>>
-    TRet Call(const type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr,
+    TRet Call(const test::type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr,
         TDerived& d, test::Variable<TVarArgs...>& var, 
         TFuncMmbrArgs&&... args);
     template<typename TRet, typename... TFuncArgs, 
         typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
         typename TFunc = PointerFunctionType<ICaseId, TRet, 
             test::Variable<TVarArgs...>, TFuncArgs...>>
-    TRet Call(const type::Index<TCaseId, ICaseId>&, TFunc func,
+    TRet Call(const test::type::Index<TCaseId, ICaseId>&, TFunc func,
         test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
 };
 
@@ -83,7 +83,7 @@ template<typename... TArgs>
 template<typename TRet, typename TFuncMmbr, typename TDerived, 
     typename... TFuncMmbrArgs, typename TCaseId, std::size_t ICaseId, 
     typename... TVarArgs>
-TRet Argument<TArgs...>::Filler(const type::Index<TCaseId, ICaseId>&, 
+TRet Argument<TArgs...>::Filler(const test::type::Index<TCaseId, ICaseId>&, 
     TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>&, 
     TFuncMmbrArgs&&... args)
 {
@@ -93,7 +93,7 @@ TRet Argument<TArgs...>::Filler(const type::Index<TCaseId, ICaseId>&,
 template<typename... TArgs>
 template<typename TRet, typename TFunc, typename... TFuncArgs, 
     typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
-TRet Argument<TArgs...>::Filler(const type::Index<TCaseId, ICaseId>&, 
+TRet Argument<TArgs...>::Filler(const test::type::Index<TCaseId, ICaseId>&, 
     TFunc func, test::Variable<TVarArgs...>&, TFuncArgs&&... args)
 {
     return func(test::out::Argument<TFuncArgs>::Value(args)...);
@@ -123,9 +123,9 @@ template<typename... TArgs>
 template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
     typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
     typename TFuncMmbr>
-TRet Argument<TArgs...>::Call(const type::Index<TCaseId, ICaseId>& i_case_id, 
-    TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>& var, 
-    TFuncMmbrArgs&&... args)
+TRet Argument<TArgs...>::Call(const test::type::Index<TCaseId, 
+    ICaseId>& i_case_id, TFuncMmbr func_mmbr, TDerived& d, 
+    test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
 {
     return Filler<TRet>(i_case_id, func_mmbr, d, var, 
         std::forward<TFuncMmbrArgs>(args)...);
@@ -134,8 +134,9 @@ TRet Argument<TArgs...>::Call(const type::Index<TCaseId, ICaseId>& i_case_id,
 template<typename... TArgs>
 template<typename TRet, typename... TFuncArgs, typename TCaseId, 
     std::size_t ICaseId, typename... TVarArgs, typename TFunc>
-TRet Argument<TArgs...>::Call(const type::Index<TCaseId, ICaseId>& i_case_id, 
-    TFunc func, test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
+TRet Argument<TArgs...>::Call(const test::type::Index<TCaseId, 
+    ICaseId>& i_case_id, TFunc func, test::Variable<TVarArgs...>& var, 
+    TFuncArgs&&... args)
 {
     return Filler<TRet>(i_case_id, func, var, 
         std::forward<TFuncArgs>(args)...);
