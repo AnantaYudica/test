@@ -6,6 +6,7 @@
 #include "../../../Variable.h"
 #include "../../../var/Element.h"
 #include "../../../type/Name.h"
+#include "../../../CString.h"
 
 #include <cstddef>
 #include <type_traits>
@@ -40,6 +41,8 @@ public:
 public:
     template<typename TVar>
     using GetType = const CharType<TVar> *;
+    template<typename TVar>
+    using GetPassType = test::CString<CharType<TVar>>;
 public:
     template<std::size_t IAt, typename TRet, typename TDerived, 
         typename TVar, typename... TFuncMmbrArgs>
@@ -97,7 +100,7 @@ public:
 public:
     template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
         typename TGet = typename Argument<arg::type::Name<I>, 
-        TArgs...>::template GetType<test::Variable<TVarArgs...>>>
+        TArgs...>::template GetPassType<test::Variable<TVarArgs...>>>
     TGet Get(const type::Index<TCaseId, ICaseId>&, 
         test::Variable<TVarArgs...>& var);
 };
@@ -184,8 +187,8 @@ template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs,
 TGet Argument<arg::type::Name<I>, TArgs...>::
     Get(const type::Index<TCaseId, ICaseId>&, test::Variable<TVarArgs...>&)
 {
-    return std::move(*(test::type::Name<typename Argument<>::
-        template ElementType<I, test::Variable<TVarArgs...>>>::CStr()));
+    return std::move(test::type::Name<typename Argument<>::
+        template ElementType<I, test::Variable<TVarArgs...>>>::CStr());
 }
 
 } //!msg
