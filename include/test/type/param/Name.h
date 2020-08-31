@@ -72,18 +72,16 @@ TChar* Name<type::Parameter<TArg, TArgs...>>::Forward(std::size_t& size)
     size += arg_cstr.Size();
     if (arg_cstr.Size() != 0)
     {
-        size += 1;
+        size += 2;
         cstr = Name<type::Parameter<TArgs...>>::template Forward<TChar>(size);
-        memcpy(cstr + (begin + 2), *arg_cstr, (arg_cstr.Size() - 1) * 
-            sizeof(TChar));
+        memcpy(cstr + (begin + 2), *arg_cstr, arg_cstr.Size() * sizeof(TChar));
+        cstr[begin] = ',';
+        cstr[begin + 1] = ' ';
     }
     else
     {
-        size += 2;
         cstr = Name<type::Parameter<TArgs...>>::template Forward<TChar>(size);
     }
-    cstr[begin] = ',';
-    cstr[begin + 1] = ' ';
     return cstr;
 }
 
@@ -96,12 +94,10 @@ test::CString<TChar> Name<type::Parameter<TArg, TArgs...>>::CStr()
     test::CString<typename std::remove_const<TChar>::type> arg_cstr =
         std::move(type::Name<TArg>::CStr());
     size += arg_cstr.Size();
+    cstr = Name<type::Parameter<TArgs...>>::template Forward<TChar>(size);
     if (arg_cstr.Size() != 0)
     {
-        size -= 1;
-        cstr = Name<type::Parameter<TArgs...>>::template Forward<TChar>(size);
-        memcpy(cstr, *arg_cstr, (arg_cstr.Size() - 1) * 
-            sizeof(TChar));
+        memcpy(cstr, *arg_cstr, arg_cstr.Size() * sizeof(TChar));
     }
     return {std::move(cstr), size};
 }
