@@ -4,6 +4,8 @@
 #include "../Variable.h"
 #include "../var/Element.h"
 #include "../type/Index.h"
+#include "../out/Argument.h"
+#include "../cstr/out/Argument.h"
 
 #include <cstddef>
 #include <type_traits>
@@ -85,7 +87,7 @@ TRet Argument<TArgs...>::Filler(const type::Index<TCaseId, ICaseId>&,
     TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>&, 
     TFuncMmbrArgs&&... args)
 {
-    return (d.*func_mmbr)(std::forward<TFuncMmbrArgs>(args)...);
+    return (d.*func_mmbr)(test::out::Argument<TFuncMmbrArgs>::Value(args)...);
 }
 
 template<typename... TArgs>
@@ -94,7 +96,7 @@ template<typename TRet, typename TFunc, typename... TFuncArgs,
 TRet Argument<TArgs...>::Filler(const type::Index<TCaseId, ICaseId>&, 
     TFunc func, test::Variable<TVarArgs...>&, TFuncArgs&&... args)
 {
-    return func(std::forward<TFuncArgs>(args)...);
+    return func(test::out::Argument<TFuncArgs>::Value(args)...);
 }
 
 template<typename... TArgs>
