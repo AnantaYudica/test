@@ -9,6 +9,7 @@
 #include "../../../../../type/param/Element.h"
 #include "../../../../../type/Name.h"
 #include "../../../../../CString.h"
+#include "../../../../../Forward.h"
 
 #include <cstddef>
 #include <type_traits>
@@ -50,20 +51,20 @@ public:
             Type>::CStr())::CharType>::type;
 public:
     template<typename TVar>
-    using GetType = const CharType<TVar> *;
+    using GetType = test::CString<CharType<TVar>>;
     template<typename TVar>
-    using GetPassType = test::CString<CharType<TVar>>;
+    using GetForwardType = typename test::Forward<GetType<TVar>>::Type;
 public:
     template<std::size_t _IAt, typename TRet, typename TDerived, 
         typename TVar, typename... TFuncMmbrArgs>
     using PointerFunctionMemberType = typename Argument<TArgs...>::
         template PointerFunctionMemberType<_IAt, TRet, TDerived, TVar, 
-        TFuncMmbrArgs..., GetType<TVar>&&>;
+        TFuncMmbrArgs..., GetForwardType<TVar>&&>;
     template<std::size_t _IAt, typename TRet, typename TVar, 
         typename... TFuncArgs>
     using PointerFunctionType = typename Argument<TArgs...>::
         template PointerFunctionType<_IAt, TRet, TVar, TFuncArgs..., 
-        GetType<TVar>&&>;
+        GetForwardType<TVar>&&>;
 public:
     Argument();
 protected:
@@ -110,7 +111,7 @@ public:
 public:
     template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
         typename TGet = typename Argument<arg::type::param::name::At<I, IAt>, 
-        TArgs...>::template GetPassType<test::Variable<TVarArgs...>>>
+        TArgs...>::template GetType<test::Variable<TVarArgs...>>>
     TGet Get(const test::type::Index<TCaseId, ICaseId>&, 
         test::Variable<TVarArgs...>& var);
 };

@@ -8,6 +8,7 @@
 #include "../../../../var/Element.h"
 #include "../../../../var/At.h"
 #include "../../../../type/val/Sequence.h"
+#include "../../../../Forward.h"
 
 #include <cstddef>
 #include <type_traits>
@@ -47,6 +48,8 @@ public:
 public:
     template<typename TVar>
     using GetType = typename ElementType<TVar>::Type;
+    template<typename TVar>
+    using GetForwardType = typename test::Forward<GetType<TVar>>::Type;
 public:
     template<std::size_t IAt, typename TRet, typename TDerived, 
         typename TVar, typename... TFuncMmbrArgs>
@@ -142,12 +145,12 @@ struct Argument<arg::type::val::Sequence<I>, TArgs...>::Pointer
 {
     template<std::size_t ICaseId, typename TRet, typename TDerived, 
         typename TVar, typename... TFuncMmbrArgs>
-    using FunctionMemberType = typename Pointer<S - 1, GetType<TVar>&&,
+    using FunctionMemberType = typename Pointer<S - 1, GetForwardType<TVar>&&,
         TSeqArgs...>::template FunctionMemberType<ICaseId, TRet, TDerived, 
             TVar, TFuncMmbrArgs...>;
     template<std::size_t ICaseId, typename TRet, typename TVar, 
         typename... TFuncArgs>
-    using FunctionType = typename Pointer<S - 1, GetType<TVar>&&,
+    using FunctionType = typename Pointer<S - 1, GetForwardType<TVar>&&,
         TSeqArgs...>::template FunctionType<ICaseId, TRet, TVar, TFuncArgs...>;
 };
 

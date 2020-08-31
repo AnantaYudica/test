@@ -8,6 +8,7 @@
 #include "../../../var/Element.h"
 #include "../../../var/At.h"
 #include "../../../type/Value.h"
+#include "../../../Forward.h"
 
 #include <cstddef>
 
@@ -37,17 +38,19 @@ public:
 public:
     template<typename TVar>
     using GetType = typename ElementType<TVar>::Type;
+    template<typename TVar>
+    using GetForwardType = typename test::Forward<GetType<TVar>>::Type;
 public:
     template<std::size_t IAt, typename TRet, typename TDerived, 
         typename TVar, typename... TFuncMmbrArgs>
     using PointerFunctionMemberType = typename Argument<TArgs...>::
         template PointerFunctionMemberType<IAt, TRet, TDerived, TVar, 
-        TFuncMmbrArgs..., GetType<TVar>&&>;
+        TFuncMmbrArgs..., GetForwardType<TVar>&&>;
     template<std::size_t IAt, typename TRet, typename TVar, 
         typename... TFuncArgs>
     using PointerFunctionType = typename Argument<TArgs...>::
         template PointerFunctionType<IAt, TRet, TVar, TFuncArgs..., 
-        GetType<TVar>&&>;
+        GetForwardType<TVar>&&>;
 public:
     Argument();
 protected:
