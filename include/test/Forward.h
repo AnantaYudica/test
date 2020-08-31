@@ -1,34 +1,31 @@
-#ifndef TEST_OUT_ARGUMENT_H_
-#define TEST_OUT_ARGUMENT_H_
+#ifndef TEST_FORWARD_H_
+#define TEST_FORWARD_H_
 
 #include <type_traits>
 
 namespace test
 {
-namespace out
-{
 
 template<typename T>
-struct Argument
+struct Forward
 {
+    typedef T Type;
     static T&& Value(typename std::remove_reference<T>::type & val);
     static T&& Value(typename std::remove_reference<T>::type && val);
 };
 
 template<typename T>
-T&& Argument<T>::Value(typename std::remove_reference<T>::type & val)
+T&& Forward<T>::Value(typename std::remove_reference<T>::type & val)
 {
     return static_cast<T&&>(val);
 }
 
 template<typename T>
-T&& Argument<T>::Value(typename std::remove_reference<T>::type && val)
+T&& Forward<T>::Value(typename std::remove_reference<T>::type && val)
 {
     return static_cast<T&&>(val);
 }
 
-} //!out
-
 } //!test
 
-#endif //!TEST_OUT_ARGUMENT_H_
+#endif //!TEST_FORWARD_H_
