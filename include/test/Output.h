@@ -2,9 +2,7 @@
 #define TEST_OUTPUT_H_
 
 #include "Status.h"
-#include "out/Argument.h"
 #include "out/Base.h"
-#include "cstr/out/Argument.h"
 
 #include <iostream>
 #include <cstdlib>
