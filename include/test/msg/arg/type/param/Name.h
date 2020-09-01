@@ -7,6 +7,8 @@
 #include "../../../../var/Element.h"
 #include "../../../../type/Parameter.h"
 #include "../../../../type/param/Name.h"
+#include "../../../../type/param/Element.h"
+#include "../../../../type/param/Size.h"
 #include "../../../../CString.h"
 #include "../../../../Forward.h"
 #include <cstddef>
@@ -35,6 +37,11 @@ template<std::size_t I, typename... TArgs>
 class Argument<arg::type::param::Name<I>, TArgs...> :
     public Argument<TArgs...>
 {
+private:
+    template<std::size_t S, typename... TParamArgs>
+    struct Pointer;
+    template<typename... TParamArgs>
+    struct Pointer<0, TParamArgs...>;
 public:
     template<typename TVar>
     using ElementType = typename Argument<>::template ElementType<I, TVar>;
@@ -50,16 +57,43 @@ public:
 public:
     template<std::size_t IAt, typename TRet, typename TDerived, 
         typename TVar, typename... TFuncMmbrArgs>
-    using PointerFunctionMemberType = typename Argument<TArgs...>::
-        template PointerFunctionMemberType<IAt, TRet, TDerived, TVar, 
-        TFuncMmbrArgs..., GetForwardType<TVar>&&>;
+    using PointerFunctionMemberType = typename Pointer<test::type::param::
+        Size<ElementType<TVar>>::Value>::template FunctionMemberType<IAt, TRet,
+        TDerived, TVar, TFuncMmbrArgs...>;
     template<std::size_t IAt, typename TRet, typename TVar, 
         typename... TFuncArgs>
-    using PointerFunctionType = typename Argument<TArgs...>::
-        template PointerFunctionType<IAt, TRet, TVar, TFuncArgs...,
-        GetForwardType<TVar>&&>;
+    using PointerFunctionType = typename Pointer<test::type::param::
+        Size<ElementType<TVar>>::Value>::template FunctionType<IAt, TRet, TVar,
+        TFuncArgs...>;
 public:
     Argument();
+protected:
+    template<std::size_t S, typename TRet, std::size_t IAt = S, 
+        typename TFuncMmbr, typename TDerived, typename... TFuncMmbrArgs, 
+        typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
+    typename std::enable_if<IAt != 0, TRet>::type FillerAt(
+        const test::type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr, 
+        TDerived& d, test::Variable<TVarArgs...>& var, 
+        TFuncMmbrArgs&&... args);
+    template<std::size_t S, typename TRet, std::size_t IAt = S, 
+        typename TFuncMmbr, typename TDerived, typename... TFuncMmbrArgs, 
+        typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
+    typename std::enable_if<IAt == 0, TRet>::type FillerAt(
+        const test::type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr, 
+        TDerived& d, test::Variable<TVarArgs...>& var, 
+        TFuncMmbrArgs&&... args);
+    template<std::size_t S, typename TRet, std::size_t IAt = S, 
+        typename TFunc, typename... TFuncArgs, typename TCaseId, 
+        std::size_t ICaseId, typename... TVarArgs>
+    typename std::enable_if<IAt != 0, TRet>::type FillerAt(
+        const test::type::Index<TCaseId, ICaseId>&, TFunc func, 
+        test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
+    template<std::size_t S, typename TRet, std::size_t IAt = S, 
+        typename TFunc, typename... TFuncArgs, typename TCaseId, 
+        std::size_t ICaseId, typename... TVarArgs>
+    typename std::enable_if<IAt == 0, TRet>::type FillerAt(
+        const test::type::Index<TCaseId, ICaseId>&, TFunc func, 
+        test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
 protected:
     template<typename TRet, typename TFuncMmbr, typename TDerived, 
         typename... TFuncMmbrArgs, typename TCaseId, std::size_t ICaseId, 
@@ -102,16 +136,109 @@ public:
     TRet Call(const test::type::Index<TCaseId, ICaseId>&, TFunc func,
         test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
 public:
-    template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
-        typename TGet = typename Argument<arg::type::param::Name<I>, 
-        TArgs...>::template GetType<test::Variable<TVarArgs...>>> 
+    template<std::size_t IAt, typename TCaseId, std::size_t ICaseId, 
+        typename... TVarArgs, typename TGet = typename Argument<
+        arg::type::param::Name<I>, TArgs...>::template 
+        GetType<test::Variable<TVarArgs...>>> 
     TGet Get(const test::type::Index<TCaseId, ICaseId>&, 
         test::Variable<TVarArgs...>& var);
 };
 
 template<std::size_t I, typename... TArgs>
+template<std::size_t S, typename... TParamArgs>
+struct Argument<arg::type::param::Name<I>, TArgs...>::Pointer
+{
+    template<std::size_t ICaseId, typename TRet, typename TDerived, 
+        typename TVar, typename... TFuncMmbrArgs>
+    using FunctionMemberType = typename Pointer<S - 1, GetForwardType<TVar>&&,
+        TParamArgs...>::template FunctionMemberType<ICaseId, TRet, TDerived, 
+            TVar, TFuncMmbrArgs...>;
+    template<std::size_t ICaseId, typename TRet, typename TVar, 
+        typename... TFuncArgs>
+    using FunctionType = typename Pointer<S - 1, GetForwardType<TVar>&&,
+        TParamArgs...>::template FunctionType<ICaseId, TRet, TVar, TFuncArgs...>;
+};
+
+template<std::size_t I, typename... TArgs>
+template<typename... TParamArgs>
+struct Argument<arg::type::param::Name<I>, TArgs...>::
+    Pointer<0, TParamArgs...>
+{
+    template<std::size_t ICaseId, typename TRet, typename TDerived, 
+        typename TVar, typename... TFuncMmbrArgs>
+    using FunctionMemberType = typename Argument<TArgs...>::
+        template PointerFunctionMemberType<ICaseId, TRet, TDerived, TVar, 
+        TFuncMmbrArgs..., TParamArgs&&...>;
+    template<std::size_t ICaseId, typename TRet, typename TVar, 
+        typename... TFuncArgs>
+    using FunctionType = typename Argument<TArgs...>::
+        template PointerFunctionType<ICaseId, TRet, TVar, TFuncArgs..., 
+        TParamArgs&&...>;
+};
+
+template<std::size_t I, typename... TArgs>
 Argument<arg::type::param::Name<I>, TArgs...>::Argument()
 {}
+
+template<std::size_t I, typename... TArgs>
+template<std::size_t S, typename TRet, std::size_t IAt, 
+    typename TFuncMmbr, typename TDerived, typename... TFuncMmbrArgs, 
+    typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
+typename std::enable_if<IAt != 0, TRet>::type 
+    Argument<arg::type::param::Name<I>, TArgs...>::
+        FillerAt(const test::type::Index<TCaseId, ICaseId>& i_case_id, 
+            TFuncMmbr func_mmbr, TDerived& d, 
+            test::Variable<TVarArgs...>& var, 
+            TFuncMmbrArgs&&... args)
+{
+    return FillerAt<S, TRet, IAt - 1>(i_case_id, func_mmbr, d, var,
+        std::forward<TFuncMmbrArgs>(args)..., 
+        std::move(Get<S - IAt>(i_case_id, var)));
+}
+
+template<std::size_t I, typename... TArgs>
+template<std::size_t S, typename TRet, std::size_t IAt, 
+    typename TFuncMmbr, typename TDerived, typename... TFuncMmbrArgs, 
+    typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
+typename std::enable_if<IAt == 0, TRet>::type 
+    Argument<arg::type::param::Name<I>, TArgs...>::
+        FillerAt(const test::type::Index<TCaseId, ICaseId>& i_case_id, 
+            TFuncMmbr func_mmbr, TDerived& d, 
+            test::Variable<TVarArgs...>& var, 
+            TFuncMmbrArgs&&... args)
+{
+    return Argument<TArgs...>:: template Filler<TRet>(i_case_id, func_mmbr, d, 
+        var, std::forward<TFuncMmbrArgs>(args)...);
+}
+
+template<std::size_t I, typename... TArgs>
+template<std::size_t S, typename TRet, std::size_t IAt, 
+    typename TFunc, typename... TFuncArgs, typename TCaseId, 
+    std::size_t ICaseId, typename... TVarArgs>
+typename std::enable_if<IAt != 0, TRet>::type 
+    Argument<arg::type::param::Name<I>, TArgs...>::
+        FillerAt(const test::type::Index<TCaseId, ICaseId>& i_case_id, 
+            TFunc func, test::Variable<TVarArgs...>& var, 
+            TFuncArgs&&... args)
+{
+    return FillerAt<S, TRet, IAt - 1>(i_case_id, func, var,
+        std::forward<TFuncArgs>(args)..., 
+        std::move(Get<S - IAt>(i_case_id, var)));
+}
+
+template<std::size_t I, typename... TArgs>
+template<std::size_t S, typename TRet, std::size_t IAt, 
+    typename TFunc, typename... TFuncArgs, typename TCaseId, 
+    std::size_t ICaseId, typename... TVarArgs>
+typename std::enable_if<IAt == 0, TRet>::type 
+    Argument<arg::type::param::Name<I>, TArgs...>::
+        FillerAt(const test::type::Index<TCaseId, ICaseId>& i_case_id, 
+            TFunc func, test::Variable<TVarArgs...>& var, 
+            TFuncArgs&&... args)
+{
+    return Argument<TArgs...>:: template Filler<TRet>(i_case_id, func, var, 
+        std::forward<TFuncArgs>(args)...);
+}
 
 template<std::size_t I, typename... TArgs>
 template<typename TRet, typename TFuncMmbr, typename TDerived, 
@@ -122,9 +249,9 @@ TRet Argument<arg::type::param::Name<I>, TArgs...>::
         TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>& var, 
         TFuncMmbrArgs&&... args)
 {
-    return Argument<TArgs...>:: template Filler<TRet>(i_case_id, func_mmbr, d,
-        var, std::forward<TFuncMmbrArgs>(args)..., 
-        std::move(Get(i_case_id, var)));
+    return FillerAt<test::type::param::Size<ElementType<test::Variable<
+        TVarArgs...>>>::Value, TRet>(i_case_id, func_mmbr, d, var, 
+        std::forward<TFuncMmbrArgs>(args)...);
 }
 
 template<std::size_t I, typename... TArgs>
@@ -134,8 +261,9 @@ TRet Argument<arg::type::param::Name<I>, TArgs...>::
     Filler(const test::type::Index<TCaseId, ICaseId>& i_case_id, TFunc func, 
         test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
 {
-    return Argument<TArgs...>:: template Filler<TRet>(i_case_id, func, var, 
-        std::forward<TFuncArgs>(args)..., std::move(Get(i_case_id, var)));
+    return FillerAt<test::type::param::Size<ElementType<test::Variable<
+        TVarArgs...>>>::Value, TRet>(i_case_id, func, var, 
+        std::forward<TFuncArgs>(args)...);
 }
 
 template<std::size_t I, typename... TArgs>
@@ -187,14 +315,14 @@ TRet Argument<arg::type::param::Name<I>, TArgs...>::
 }
 
 template<std::size_t I, typename... TArgs>
-template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
-    typename TGet>
+template<std::size_t IAt, typename TCaseId, std::size_t ICaseId, 
+    typename... TVarArgs, typename TGet>
 TGet Argument<arg::type::param::Name<I>, TArgs...>::
     Get(const test::type::Index<TCaseId, ICaseId>&, 
         test::Variable<TVarArgs...>&)
 {
-    return std::move(test::type::param::Name<typename Argument<>::
-        template ElementType<I, test::Variable<TVarArgs...>>>::CStr());
+    return std::move(test::type::Name<typename test::type::param::Element<IAt, 
+        ElementType<test::Variable<TVarArgs...>>>::Type>::CStr());
 }
 
 } //!msg
