@@ -20,361 +20,412 @@ TEST_CONSTRUCT;
 #include "test/msg/arg/type/Index.h"
 #include "test/type/Index.h"
 
+#include "test/def/type/Name.h"
 #include "test/CString.h"
-#include "test/cstr/out/Argument.h"
+#include "test/out/CString.h"
 
 #include <cstdio>
+#include <cassert>
+#include <cstring>
+#include <cstdarg>
 
 struct TestA1 {};
+
+test::out::CString<char> gl_out_cstr1;
 
 class ATest
 {
 public:
-    template<typename... TArgs>
-    void Foo1(int, TArgs&&...)
+    std::size_t Print1(test::out::CString<char>&)
     {
-        printf("foo1(int, ...)\n");
+        return 0;
     }
-    template<typename TArg, typename... TArgs>
-    void Foo2(int, TArg&& arg, TArgs&&...)
+    std::size_t VPrint1(test::out::CString<char>&, ...)
     {
-        printf("foo2(int, %s)\n", std::forward<TArg>(arg));
-    }
-    template<typename TArg, typename... TArgs>
-    void Foo3(int, TArg&& arg, TArgs&&...)
-    {
-        printf("foo3(int, %s)\n", std::forward<TArg>(arg));
-    }
-    template<typename TArg, typename... TArgs>
-    void Foo4(int, TArg&& arg, TArgs&&...)
-    {
-        printf("foo4(int, %d)\n", std::forward<TArg>(arg));
-    }
-    template<typename TArg, typename... TArgs>
-    void Foo4l(int, TArg&& arg, TArgs&&...)
-    {
-        printf("foo4(int, %ld)\n", std::forward<TArg>(arg));
-    }
-    template<typename TArg, typename... TArgs>
-    void Foo4f(int, TArg&& arg, TArgs&&...)
-    {
-        printf("foo4(int, %f)\n", std::forward<TArg>(arg));
+        return 0;
     }
     template<typename... TArgs>
-    void Foo5(int, TArgs&&... args)
+    std::size_t Print2(test::out::CString<char>& out, TArgs&&... args)
     {
-        printf("foo5(int, %d %d %d %d)\n", std::forward<TArgs>(args)...);
+        auto ret =  out.Print("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
+        "pn3a0: %s, pn3a2: %s, tv4: %d, tv5: %c, tvs6: [%d, %d, %d, %d, %d], "
+        "tvs6a0 : %d, tvs6a4: %d, tf7n2: %d, tf8tv4: %d, tf9v5: %d, "
+        "v10: %d, vp11: [%d, %c], vp11a0: %d, vp11a1: %c, "
+        "vs12: [%d, %d, %d, %d, %d], vs12a0: %d, vs12a4: %d, vf13pn3a1: %d, "
+        "vf14v10: %d, vf14vp11a1: %d\n", std::forward<TArgs>(args)...);
+        return ret;
     }
-    template<typename... TArgs>
-    void Foo6(int, TArgs&&... args)
+    std::size_t VPrint2(test::out::CString<char>& out, ...)
     {
-        printf("foo5(int, %d %f %ld %f)\n", std::forward<TArgs>(args)...);
+        va_list args;
+        va_start(args, out);
+        auto ret =  out.VPrint("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
+        "pn3a0: %s, pn3a2: %s, tv4: %d, tv5: %c, tvs6: [%d, %d, %d, %d, %d], "
+        "tvs6a0 : %d, tvs6a4: %d, tf7n2: %d, tf8tv4: %d, tf9v5: %d, "
+        "v10: %d, vp11: [%d, %c], vp11a0: %d, vp11a1: %c, "
+        "vs12: [%d, %d, %d, %d, %d], vs12a0: %d, vs12a4: %d, vf13pn3a1: %d, "
+        "vf14v10: %d, vf14vp11a1: %d\n", args);
+        va_end(args);
+        return ret;
     }
-    template<typename TChar>
-    void Foo7(int, test::CString<TChar>&& cstr)
+    std::size_t Print3(test::out::CString<char>& out, const char* && s,
+        int&& i1 , char&& p, int&& i2)
     {
-        printf("foo7(int, %s)\n", *cstr);
+        return out.Print("%s, %d, %c, %d", s, i1, p, i2);
+    }
+    std::size_t Print3(test::out::CString<char>& out, const char* && s,
+        int&& i1 , short&& p, int&& i2)
+    {
+        return out.Print("%s, %d, %hd, %d", s, i1, p, i2);
+    }
+    std::size_t Print3(test::out::CString<char>& out, const char* && s,
+        int&& i1 , int&& p, int&& i2)
+    {
+        return out.Print("%s, %d, %d, %d", s, i1, p, i2);
+    }
+    std::size_t Print3(test::out::CString<char>& out, const char* && s,
+        int&& i1 , long&& p, int&& i2)
+    {
+        return out.Print("%s, %d, %ld, %d", s, i1, p, i2);
     }
 };
 
-struct A
-{};
+std::size_t Print1(test::out::CString<char>&)
+{
+    return 0;
+}
+
+std::size_t VPrint1(test::out::CString<char>&, ...)
+{
+    return 0;
+}
 
 template<typename... TArgs>
-struct ParamA
-{};
-
-TEST_TYPE_NAME("int", int);
-TEST_TYPE_NAME("char", char);
-
-template<>
-struct test::type::Name<A>
+std::size_t Print2(test::out::CString<char>& out, TArgs&&... args)
 {
-    static test::CString<char> CStr()
-    {
-        static char _A[] = "A";
-        return {_A};
-    }
-};
-
-template<typename... TArgs>
-struct test::type::Name<ParamA<TArgs...>>
-{
-    static test::CString<const char> CStr()
-    {
-        static char _ParamA[] = "ParamA";
-        return {_ParamA};
-    }
-};
-
-template<typename... TArgs>
-int Print(const char* format, TArgs&&... args)
-{
-    return printf(format, 
-        test::out::Argument<TArgs>::Value(args)...);
+    auto ret =  out.Print("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
+        "pn3a0: %s, pn3a2: %s, tv4: %d, tv5: %c, tvs6: [%d, %d, %d, %d, %d], "
+        "tvs6a0 : %d, tvs6a4: %d, tf7n2: %d, tf8tv4: %d, tf9v5: %d, "
+        "v10: %d, vp11: [%d, %c], vp11a0: %d, vp11a1: %c, "
+        "vs12: [%d, %d, %d, %d, %d], vs12a0: %d, vs12a4: %d, vf13pn3a1: %d, "
+        "vf14v10: %d, vf14vp11a1: %d\n", std::forward<TArgs>(args)...);
+    return ret;
 }
 
-int Foo1()
+std::size_t VPrint2(test::out::CString<char>& out, ...)
 {
-    return printf("Print Foo1()\n");
+    va_list args;
+    va_start(args, out);
+    auto ret =  out.VPrint("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
+    "pn3a0: %s, pn3a2: %s, tv4: %d, tv5: %c, tvs6: [%d, %d, %d, %d, %d], "
+    "tvs6a0 : %d, tvs6a4: %d, tf7n2: %d, tf8tv4: %d, tf9v5: %d, "
+    "v10: %d, vp11: [%d, %c], vp11a0: %d, vp11a1: %c, "
+    "vs12: [%d, %d, %d, %d, %d], vs12a0: %d, vs12a4: %d, vf13pn3a1: %d, "
+    "vf14v10: %d, vf14vp11a1: %d\n", args);
+    va_end(args);
+    return ret;
 }
 
-int Foo2(int&& i)
+std::size_t Print3(test::out::CString<char>& out, const char* && s,
+    int&& i1 , char&& p, int&& i2)
 {
-    return printf("Print Foo2(i = %d)\n", i);
+    return out.Print("%s, %d, %c, %d", s, i1, p, i2);
+}
+std::size_t Print3(test::out::CString<char>& out, const char* && s,
+    int&& i1 , short&& p, int&& i2)
+{
+    return out.Print("%s, %d, %hd, %d", s, i1, p, i2);
+}
+std::size_t Print3(test::out::CString<char>& out, const char* && s,
+    int&& i1 , int&& p, int&& i2)
+{
+    return out.Print("%s, %d, %d, %d", s, i1, p, i2);
+}
+std::size_t Print3(test::out::CString<char>& out, const char* && s,
+    int&& i1 , long&& p, int&& i2)
+{
+    return out.Print("%s, %d, %ld, %d", s, i1, p, i2);
 }
 
-int Foo3(int&& i1, float&& f, long&& l, int&& i2)
+int Func1(const char* && cstr)
 {
-    return printf("Print Foo3(i1 = %d, f = %f, l = %ld, "
-        "i2 = %d)\n", i1, f, l, i2);
+    return strlen(cstr);
 }
 
-int Foo3(int&& i1, int&& i2, int&& i3, int&& i4)
+int Func2(int&& i)
 {
-    return printf("Print Foo3(i1 = %d, i2 = %d, i3 = %d, "
-        "i4 = %d)\n", i1, i2, i3, i4);
+    return i;
+}
+
+int Func3(char&& c)
+{
+    return (int)c;
 }
 
 int main()
 {
+    test::out::CString<char> out_cstr1, out_cstr2, out_cstr3, out_cstr4;
+
     ATest a1;
     test::Variable<> var1;
-    test::msg::Argument<TestA1> arg1;
-    arg1.Call<void>(&ATest::Foo1, a1, var1, 2);
-    arg1.Call<int>(&Print, var1, std::move("print\n"));
+    test::msg::Argument<> arg1;
+    std::size_t res_a = 0;
+    auto res_b = arg1.Call<std::size_t>(TestA1{}, &Print1, 
+        var1, out_cstr1);
+    auto res_c = arg1.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &Print1, var1, out_cstr2);
+    auto res_d = arg1.Call<std::size_t>(TestA1{}, &ATest::Print1, a1,
+        var1, out_cstr3);
+    auto res_e = arg1.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &ATest::Print1, a1, var1, out_cstr4);
 
-    test::Variable<int, char> var2;
-    test::msg::Argument<TestA1, test::msg::arg::type::Name<0>> arg2;
-    printf("get arg2 value from var2 : %s\n", *arg2.Get(var2));
-    arg2.Call<void>(&ATest::Foo7, a1, var2, 2);
-    arg2.Call<int>(&Print, var2, std::move("Print Name : %s\n"));
+    assert(res_a == res_b);
+    assert(res_a == res_c);
+    assert(res_a == res_d);
+    assert(res_a == res_e);
 
-    test::Variable<int, char> var3;
-    test::msg::Argument<TestA1, test::msg::arg::type::Name<1>> arg3;
-    printf("get arg3 value from var3 : %s\n", *arg3.Get(var3));
-    arg3.Call<void>(&ATest::Foo7, a1, var3, 2);
-    arg3.Call<int>(&Print, var3, std::move("Print Name : %s\n"));
-
-    test::Variable<A, char> var4;
-    test::msg::Argument<TestA1, test::msg::arg::type::Name<0>> arg4;
-    printf("get arg4 value from var4 : %s\n", *arg4.Get(var4));
-    arg4.Call<void>(&ATest::Foo7, a1, var4, 2);
-    arg4.Call<int>(&Print, var4, std::move("Print Name : %s\n"));
-    
-    test::Variable<test::type::Parameter<int, char>> var5;
-    test::msg::Argument<TestA1, test::msg::arg::type::param::Name<0>> arg5;
-    printf("get arg5 value from var5 : %s\n", *arg5.Get(var5));
-    arg5.Call<void>(&ATest::Foo7, a1, var5, 2);
-    arg5.Call<int>(&Print, var5, std::move("Print param Name : %s\n"));
-
-    test::msg::Argument<TestA1, 
-        test::msg::arg::type::param::name::At<0, 0>> arg5_0_0;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::type::param::name::At<0, 1>> arg5_0_1;
-    printf("get arg5_0_0 value from var5 : %s\n", *arg5_0_0.Get(var5));
-    arg5_0_0.Call<int>(&Print, var5, 
-        std::move("Print get arg5_0_0 from var5 at 0 : %s\n"));
-
-    arg5_0_0.Call<void>(&ATest::Foo7, a1, var5, 2);
-    printf("get arg5_0_1 value from var5 : %s\n", *arg5_0_1.Get(var5));
-    arg5_0_1.Call<void>(&ATest::Foo7, a1, var5, 2);
-    arg5_0_1.Call<int>(&Print, var5, 
-        std::move("Print get arg5_0_1 from var5 at 1 : %s\n"));
-    
-    test::Variable<test::type::Value<int, 14>, char> var6;
-    test::msg::Argument<TestA1, test::msg::arg::type::Value<0>> arg6;
-    printf("get arg6 value from var6 : %d\n", arg6.Get(var6));
-    arg6.Call<void>(&ATest::Foo4, a1, var6, 2);
-    arg6.Call<int>(&Print, var6, std::move("Print type value : %d\n"));
-    
-    test::Variable<test::type::val::Sequence<int, 
-        14, 4, 6, 11>, char> var7;
-    test::msg::Argument<TestA1, test::msg::arg::type::
-        val::Sequence<0>> arg7;
-    printf("get arg7 at 0 value from var7 : %d\n", arg7.Get<0>(var7));
-    printf("get arg7 at 1 value from var7 : %d\n", arg7.Get<1>(var7));
-    printf("get arg7 at 2 value from var7 : %d\n", arg7.Get<2>(var7));
-    printf("get arg7 at 3 value from var7 : %d\n", arg7.Get<3>(var7));
-    arg7.Call<void>(&ATest::Foo5, a1, var7, 2);
-    arg7.Call<int>(&Print, var7, 
-        std::move("Print type val sequence : %d %d %d %d\n"));
-    
-    test::msg::Argument<TestA1, 
-        test::msg::arg::type::val::seq::At<0, 0>> arg7_0_0;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::type::val::seq::At<0, 1>> arg7_0_1;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::type::val::seq::At<0, 2>> arg7_0_2;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::type::val::seq::At<0, 3>> arg7_0_3;
-    printf("get arg7_0_0 value from var7 : %d\n", arg7_0_0.Get(var7));
-    arg7_0_0.Call<void>(&ATest::Foo4, a1, var7, 2);
-    arg7_0_0.Call<int>(&Print, var7, std::move("Print type value at 0 : %d\n"));
-    printf("get arg7_0_1 value from var7 : %d\n", arg7_0_1.Get(var7));
-    arg7_0_1.Call<void>(&ATest::Foo4, a1, var7, 2);
-    arg7_0_1.Call<int>(&Print, var7, std::move("Print type value at 1 : %d\n"));
-    printf("get arg7_0_2 value from var7 : %d\n", arg7_0_2.Get(var7));
-    arg7_0_2.Call<void>(&ATest::Foo4, a1, var7, 2);
-    arg7_0_2.Call<int>(&Print, var7, std::move("Print type value at 2 : %d\n"));
-    printf("get arg7_0_3 value from var7 : %d\n", arg7_0_3.Get(var7));
-    arg7_0_3.Call<void>(&ATest::Foo4, a1, var7, 2);
-    arg7_0_3.Call<int>(&Print, var7, std::move("Print type value at 3 : %d\n"));
-
-    test::Variable<test::Value<int>, char> var8(4);
-    test::msg::Argument<TestA1, test::msg::arg::Value<0>> arg8;
-    printf("get arg8 value from var8  : %d\n", arg8.Get(var8));
-    arg8.Call<void>(&ATest::Foo4, a1, var8, 2);
-    arg8.Call<int>(&Print, var8, std::move("Print var value : %d\n"));
-    
-    test::Variable<test::val::Sequence<int, 4>, char> var9(4, 2, 10, 1);
-    test::msg::Argument<TestA1, test::msg::arg::val::Sequence<0>> arg9;
-    printf("get arg9 at 0 value from var9 : %d\n", arg9.Get<0>(var9));
-    printf("get arg9 at 1 value from var9 : %d\n", arg9.Get<1>(var9));
-    printf("get arg9 at 2 value from var9 : %d\n", arg9.Get<2>(var9));
-    printf("get arg9 at 3 value from var9 : %d\n", arg9.Get<3>(var9));
-    arg9.Call<void>(&ATest::Foo5, a1, var9, 2);
-    arg9.Call<int>(&Print, var9, 
-        std::move("Print var value : %d %d %d %d\n"));
-    
-    test::msg::Argument<TestA1, 
-        test::msg::arg::val::seq::At<0, 0>> arg9_0_0;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::val::seq::At<0, 1>> arg9_0_1;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::val::seq::At<0, 2>> arg9_0_2;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::val::seq::At<0, 3>> arg9_0_3;
+    assert(gl_out_cstr1.Size() == out_cstr1.Size());
+    assert(gl_out_cstr1.Size() == out_cstr2.Size());
+    assert(gl_out_cstr1.Size() == out_cstr3.Size());
+    assert(gl_out_cstr1.Size() == out_cstr4.Size());
+    assert(strncmp(*(out_cstr1.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr2.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr3.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
         
-    printf("get arg9_0_0 value from var9 : %d\n", arg9_0_0.Get(var9));
-    arg9_0_0.Call<void>(&ATest::Foo4, a1, var9, 2);
-    arg9_0_0.Call<int>(&Print, var9, std::move("Print type value at 0 : %d\n"));
-    
-    printf("get arg9_0_1 value from var9 : %d\n", arg9_0_1.Get(var9));
-    arg9_0_1.Call<void>(&ATest::Foo4, a1, var9, 2);
-    arg9_0_1.Call<int>(&Print, var9, std::move("Print type value at 1 : %d\n"));
-    
-    printf("get arg9_0_2 value from var9 : %d\n", arg9_0_2.Get(var9));
-    arg9_0_2.Call<void>(&ATest::Foo4, a1, var9, 2);
-    arg9_0_2.Call<int>(&Print, var9, std::move("Print type value at 2 : %d\n"));
-    
-    printf("get arg9_0_3 value from var9 : %d\n", arg9_0_3.Get(var9));
-    arg9_0_3.Call<void>(&ATest::Foo4, a1, var9, 2);
-    arg9_0_3.Call<int>(&Print, var9, std::move("Print type value at 3 : %d\n"));
+    res_a = 0;
+    res_b = arg1.Call<std::size_t>(TestA1{}, &VPrint1, 
+        var1, out_cstr1);
+    res_c = arg1.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &VPrint1, var1, out_cstr2);
+    res_d = arg1.Call<std::size_t>(TestA1{}, &ATest::VPrint1, a1,
+        var1, out_cstr3);
+    res_e = arg1.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &ATest::VPrint1, a1, var1, out_cstr4);
 
-    test::Variable<test::type::Function<int(), &Foo1>> var10;
-    test::msg::Argument<TestA1, test::msg::arg::type::
-        Function<0>> arg10;
-    printf("get arg10 value from var10  : %d\n", arg10.Get(var10));
-    arg10.Call<void>(&ATest::Foo4, a1, var10, 2);
-    arg10.Call<int>(&Print, var10, std::move("Print var value : %d\n"));
-    
-    test::Variable<test::Value<int>,
-        test::type::Function<int(int&&), &Foo2>> var11(4);
-    test::msg::Argument<TestA1, test::msg::arg::type::
-        Function<1, test::msg::arg::Value<0>>> arg11;
-    printf("get arg11 value from var11  : %d\n", arg11.Get(var11));
-    arg11.Call<void>(&ATest::Foo4, a1, var11, 2);
-    arg11.Call<int>(&Print, var11, std::move("Print var value : %d\n"));
-    
-    test::Variable<test::val::Function<int()>> var12(&Foo1);
-    test::msg::Argument<TestA1, test::msg::arg::type::
-        Function<0>> arg12;
-    
-    printf("get arg12 value from var12  : %d\n", arg12.Get(var12));
-    arg12.Call<void>(&ATest::Foo4, a1, var12, 2);
-    arg12.Call<int>(&Print, var12, std::move("Print var value : %d\n"));
-    
-    test::Variable<test::Value<int>,
-        test::val::Function<int(int&&)>> var13(14, &Foo2);
-    test::msg::Argument<TestA1, test::msg::arg::type::
-        Function<1, test::msg::arg::Value<0>>> arg13;
+    assert(res_a == res_b);
+    assert(res_a == res_c);
+    assert(res_a == res_d);
+    assert(res_a == res_e);
+
+    assert(gl_out_cstr1.Size() == out_cstr1.Size());
+    assert(gl_out_cstr1.Size() == out_cstr2.Size());
+    assert(gl_out_cstr1.Size() == out_cstr3.Size());
+    assert(gl_out_cstr1.Size() == out_cstr4.Size());
+    assert(strncmp(*(out_cstr1.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr2.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr3.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
         
-    printf("get arg13 value from var13  : %d\n", arg13.Get(var13));
-    arg13.Call<void>(&ATest::Foo4, a1, var13, 2);
-    arg13.Call<int>(&Print, var13, std::move("Print var value : %d\n"));
-
-
-    test::Variable<test::val::Parameter<int, float, long, 
-        double>, char> var14(1, 3.14f, 14, double(22/7.0));
-    test::msg::Argument<TestA1, test::msg::arg::
-        val::Parameter<0>> arg14;
-        
-    printf("get arg14 value at 0 from var14  : %d\n", arg14.Get<0>(var14));
-    printf("get arg14 value at 1 from var14  : %f\n", arg14.Get<1>(var14));
-    printf("get arg14 value at 2 from var14  : %ld\n", arg14.Get<2>(var14));
-    printf("get arg14 value at 3 from var14  : %f\n", arg14.Get<3>(var14));
-    arg14.Call<void>(&ATest::Foo6, a1, var14, 2);
-    arg14.Call<int>(&Print, var14, 
-        std::move("Print type val parameter : %d %f %d %f\n"));
-    
-    test::msg::Argument<TestA1, 
-        test::msg::arg::val::param::At<0, 0>> arg14_0_0;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::val::param::At<0, 1>> arg14_0_1;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::val::param::At<0, 2>> arg14_0_2;
-    test::msg::Argument<TestA1, 
-        test::msg::arg::val::param::At<0, 3>> arg14_0_3;
-        
-    printf("get arg14_0_0 value from var14  : %d\n", arg14_0_0.Get(var14));
-    arg14_0_0.Call<void>(&ATest::Foo4, a1, var14, 2);
-    arg14_0_0.Call<int>(&Print, var14, std::move("Print type value at 0 : %d\n"));
-    
-    printf("get arg14_0_1 value from var14  : %f\n", arg14_0_1.Get(var14));
-    arg14_0_1.Call<void>(&ATest::Foo4f, a1, var14, 2);
-    arg14_0_1.Call<int>(&Print, var14, std::move("Print type value at 1 : %f\n"));
-    
-    printf("get arg14_0_2 value from var14  : %ld\n", arg14_0_2.Get(var14));
-    arg14_0_2.Call<void>(&ATest::Foo4l, a1, var14, 2);
-    arg14_0_2.Call<int>(&Print, var14, std::move("Print type value at 2 : %d\n"));
-    
-    printf("get arg14_0_3 value from var14  : %f\n", arg14_0_3.Get(var14));
-    arg14_0_3.Call<void>(&ATest::Foo4f, a1, var14, 2);
-    arg14_0_3.Call<int>(&Print, var14, std::move("Print type value at 3 : %f\n"));
-
-    test::Variable<test::type::Function<int(int&&, float&&, 
-        long&&, int&&), &Foo3>, test::val::Parameter<int, float, long>,
-        test::type::Value<int, 22>> var15(1, 3.14f, 11);
-    test::msg::Argument<TestA1, test::msg::arg::type::
-        Function<0, test::msg::arg::val::Parameter<1>,
-            test::msg::arg::type::Value<2>>> arg15;
-    printf("get arg15 value from arg15  : %d\n", arg15.Get(var15));
-    arg15.Call<void>(&ATest::Foo4, a1, var15, 2);
-    arg15.Call<int>(&Print, var15, std::move("Print var value : %d\n"));
-    
-    test::Variable<test::type::Function<int(int&&, int&&, 
-        int&&, int&&), &Foo3>, test::val::Sequence<int, 3>,
-        test::Value<int>> var16(1, 2, 3, 4);
-    test::msg::Argument<TestA1, test::msg::arg::type::
-        Function<0, test::msg::arg::val::Sequence<1>,
-            test::msg::arg::Value<2>>> arg16;
-    printf("get arg16 value from var16  : %d\n", arg16.Get(var16));
-    arg16.Call<void>(&ATest::Foo4, a1, var16, 2);
-    arg16.Call<int>(&Print, var16, std::move("Print var value : %d\n"));
-    
-    typedef test::type::Index<TestA1, 0> TestAt_at0;
-    test::msg::Argument<TestA1, test::msg::arg::type::Index<0,
-        test::msg::arg::val::seq::At>> arg17;
-    printf("get arg17 at 0 value from var16  : %d\n", arg17.Get<0>(var9));
-    arg17.Call<void>(TestAt_at0{}, &ATest::Foo4, a1, var9, 2);
-    arg17.Call<int>(TestAt_at0{}, 
-        &Print, var9, std::move("Print var value : %d\n"));
-    
-    typedef test::type::Index<TestA1, 1> TestAt_at1;
-    test::Variable<
+    test::Variable<int, char, double,
+        test::type::Parameter<int, char, double>,
+        test::type::Value<int, 1234>,
+        test::type::Value<char, 'B'>,
+        test::type::val::Sequence<int, 10, 11, 12, 13, 14>,
+        test::type::Function<decltype(Func1), &Func1>,
+        test::type::Function<decltype(Func2), &Func2>,
+        test::type::Function<decltype(Func3), &Func3>,
         test::Value<int>,
-        test::val::Sequence<int, 4>,
-        test::type::Value<int, 1>,
-        test::type::val::Sequence<int, 144, 4, 44, 441>> var18(4, 11, 14, 6, 22);
-    test::msg::Argument<TestA1, 
-        test::msg::arg::Value<0>,
+        test::val::Parameter<int, char>,
+        test::val::Sequence<int, 5>,
+        test::val::Function<decltype(Func1)>,
+        test::val::Function<decltype(Func2)>,
+        test::val::Function<decltype(Func3)>> var2{5678, -3210, 'Y', 
+            90, 91, 92, 93, 94, &Func1, &Func2, &Func3};
+
+    test::msg::Argument<
+        test::msg::arg::type::Name<0>,
+        test::msg::arg::type::Name<1>,
+        test::msg::arg::type::Name<2>,
+        test::msg::arg::type::param::Name<3>,
+        test::msg::arg::type::param::name::At<3, 0>,
+        test::msg::arg::type::param::name::At<3, 2>,
+        test::msg::arg::type::Value<4>,
+        test::msg::arg::type::Value<5>,
+        test::msg::arg::type::val::Sequence<6>,
+        test::msg::arg::type::val::seq::At<6, 0>,
+        test::msg::arg::type::val::seq::At<6, 4>,
+        test::msg::arg::type::Function<7, 
+            test::msg::arg::type::Name<2>>,
+        test::msg::arg::type::Function<8,
+            test::msg::arg::type::Value<4>>,
+        test::msg::arg::type::Function<9,
+            test::msg::arg::type::Value<5>>,
+        test::msg::arg::Value<10>,
+        test::msg::arg::val::Parameter<11>,
+        test::msg::arg::val::param::At<11, 0>,
+        test::msg::arg::val::param::At<11, 1>,
+        test::msg::arg::val::Sequence<12>,
+        test::msg::arg::val::seq::At<12, 0>,
+        test::msg::arg::val::seq::At<12, 4>,
+        test::msg::arg::val::Function<13,
+            test::msg::arg::type::param::name::At<3, 1>>,
+        test::msg::arg::val::Function<14,
+            test::msg::arg::Value<10>>,
+        test::msg::arg::val::Function<15,
+            test::msg::arg::val::param::At<11, 1>>> arg2;
+    
+    res_a = Print2(gl_out_cstr1, "int", "char", "double", "int", "char", 
+        "double", "int", "double", 1234, 'B', 10, 11, 12, 13, 14, 10, 14, 
+        strlen("double"), 1234, (int)'B', 5678, -3210, 'Y', -3210, 'Y',
+        90, 91, 92, 93, 94, 90, 94, strlen("char"), 5678, (int)'Y');
+    res_b = arg2.Call<std::size_t>(TestA1{}, &Print2, 
+        var2, out_cstr1);
+    res_c = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &Print2, var2, out_cstr2);
+    res_d = arg2.Call<std::size_t>(TestA1{}, &ATest::Print2, a1,
+        var2, out_cstr3);
+    res_e = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &ATest::Print2, a1, var2, out_cstr4);
+    
+    assert(res_a == res_b);
+    assert(res_a == res_c);
+    assert(res_a == res_d);
+    assert(res_a == res_e);
+
+    assert(gl_out_cstr1.Size() == out_cstr1.Size());
+    assert(gl_out_cstr1.Size() == out_cstr2.Size());
+    assert(gl_out_cstr1.Size() == out_cstr3.Size());
+    assert(gl_out_cstr1.Size() == out_cstr4.Size());
+    assert(strncmp(*(out_cstr1.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr2.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr3.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+
+    res_a = Print2(gl_out_cstr1, "int", "char", "double", "int", "char", 
+        "double", "int", "double", 1234, 'B', 10, 11, 12, 13, 14, 10, 14, 
+        strlen("double"), 1234, (int)'B', 5678, -3210, 'Y', -3210, 'Y',
+        90, 91, 92, 93, 94, 90, 94, strlen("char"), 5678, (int)'Y');
+    res_b = arg2.Call<std::size_t>(TestA1{}, &VPrint2, 
+        var2, out_cstr1);
+    res_c = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &VPrint2, var2, out_cstr2);
+    res_d = arg2.Call<std::size_t>(TestA1{}, &ATest::VPrint2, a1,
+        var2, out_cstr3);
+    res_e = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &ATest::VPrint2, a1, var2, out_cstr4);
+    
+    assert(res_a == res_b);
+    assert(res_a == res_c);
+    assert(res_a == res_d);
+    assert(res_a == res_e);
+
+    assert(gl_out_cstr1.Size() == out_cstr1.Size());
+    assert(gl_out_cstr1.Size() == out_cstr2.Size());
+    assert(gl_out_cstr1.Size() == out_cstr3.Size());
+    assert(gl_out_cstr1.Size() == out_cstr4.Size());
+    assert(strncmp(*(out_cstr1.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr2.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr3.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+
+    test::Variable<test::type::Parameter<char, short, int, long>,
+        test::type::val::Sequence<int, 0, 1, 2, 3>,
+        test::val::Parameter<char, short, int, long>,
+        test::val::Sequence<int, 4>> var3{'A', 1000, 2000, 3000,
+            3, 2, 1, 0};
+    
+    test::msg::Argument<
+        test::msg::arg::type::Index<0,
+            test::msg::arg::type::param::name::At>,
         test::msg::arg::type::Index<1,
-            test::msg::arg::val::seq::At>,
-        test::msg::arg::type::Value<2>,
+            test::msg::arg::type::val::seq::At>,
+        test::msg::arg::type::Index<2,
+            test::msg::arg::val::param::At>,
         test::msg::arg::type::Index<3,
-            test::msg::arg::type::val::seq::At>> arg18;
-    arg18.Call<void>(TestAt_at1{}, &ATest::Foo4, a1, var18, 2);
-    arg18.Call<int>(TestAt_at1{}, &Print, var18, 
-        std::move("Print var value : %d %d %d %d\n"));
+            test::msg::arg::val::seq::At>> arg3;
+
+    res_a = Print3(gl_out_cstr1, "char", 0, 'A', 3);
+    res_b = arg3.Call<std::size_t>(TestA1{}, &Print3, 
+        var3, out_cstr1);
+    res_c = arg3.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &Print3, var3, out_cstr2);
+    res_d = arg3.Call<std::size_t>(TestA1{}, &ATest::Print3, a1,
+        var3, out_cstr3);
+    res_e = arg3.Call<std::size_t>(test::type::Index<TestA1, 0>{},
+        &ATest::Print3, a1, var3, out_cstr4);
+    
+    assert(res_a == res_b);
+    assert(res_a == res_c);
+    assert(res_a == res_d);
+    assert(res_a == res_e);
+
+    assert(gl_out_cstr1.Size() == out_cstr1.Size());
+    assert(gl_out_cstr1.Size() == out_cstr2.Size());
+    assert(gl_out_cstr1.Size() == out_cstr3.Size());
+    assert(gl_out_cstr1.Size() == out_cstr4.Size());
+    assert(strncmp(*(out_cstr1.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr2.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr3.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+
+    res_a = Print3(gl_out_cstr1, "short", 1, 1000, 2);
+    res_c = arg3.Call<std::size_t>(test::type::Index<TestA1, 1>{},
+        &Print3, var3, out_cstr2);
+    res_e = arg3.Call<std::size_t>(test::type::Index<TestA1, 1>{},
+        &ATest::Print3, a1, var3, out_cstr4);
+    
+    assert(res_a == res_c);
+    assert(res_a == res_e);
+
+    assert(gl_out_cstr1.Size() == out_cstr2.Size());
+    assert(gl_out_cstr1.Size() == out_cstr4.Size());
+    assert(strncmp(*(out_cstr2.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+
+    res_a = Print3(gl_out_cstr1, "int", 2, 2000, 1);
+    res_c = arg3.Call<std::size_t>(test::type::Index<TestA1, 2>{},
+        &Print3, var3, out_cstr2);
+    res_e = arg3.Call<std::size_t>(test::type::Index<TestA1, 2>{},
+        &ATest::Print3, a1, var3, out_cstr4);
+    
+    assert(res_a == res_c);
+    assert(res_a == res_e);
+
+    assert(gl_out_cstr1.Size() == out_cstr2.Size());
+    assert(gl_out_cstr1.Size() == out_cstr4.Size());
+    assert(strncmp(*(out_cstr2.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+
+    res_a = Print3(gl_out_cstr1, "long", 3, 3000, 0);
+    res_c = arg3.Call<std::size_t>(test::type::Index<TestA1, 3>{},
+        &Print3, var3, out_cstr2);
+    res_e = arg3.Call<std::size_t>(test::type::Index<TestA1, 3>{},
+        &ATest::Print3, a1, var3, out_cstr4);
+    
+    assert(res_a == res_c);
+    assert(res_a == res_e);
+
+    assert(gl_out_cstr1.Size() == out_cstr2.Size());
+    assert(gl_out_cstr1.Size() == out_cstr4.Size());
+    assert(strncmp(*(out_cstr2.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+    assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
+        gl_out_cstr1.Size()) == 0);
+
+    return TEST::GetInstance().Status().Get();
 }
