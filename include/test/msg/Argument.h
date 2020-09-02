@@ -6,6 +6,7 @@
 #include "../type/Index.h"
 #include "../Forward.h"
 #include "../cstr/Forward.h"
+#include "../trait/type/index/IsBaseOf.h"
 
 #include <cstddef>
 #include <type_traits>
@@ -30,11 +31,6 @@ public:
         typename... TFuncArgs>
     using PointerFunctionType = TRet(*)(TFuncArgs...);
 public:
-    template<typename TCaseId, std::size_t ICaseId>
-    static constexpr std::true_type 
-        IsCaseIdIndex(const test::type::Index<TCaseId, ICaseId>&);
-    static constexpr std::false_type IsCaseIdIndex(...);
-public:
     Argument();
 protected:
     template<typename TRet, typename TFuncMmbr, typename TDerived, 
@@ -51,12 +47,16 @@ public:
     template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
         typename TCaseId, typename... TVarArgs, 
         typename TFuncMmbr = PointerFunctionMemberType<0, TRet, TDerived, 
-            test::Variable<TVarArgs...>, TFuncMmbrArgs...>>
+            test::Variable<TVarArgs...>, TFuncMmbrArgs...>,
+        typename std::enable_if<!test::trait::type::index::
+            IsBaseOf<TCaseId>::Value, int>::type = 0>
     TRet Call(const TCaseId&, TFuncMmbr func_mmbr, TDerived& d,
         test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args);
-    template<typename TRet, typename... TFuncArgs, typename TCaseId,
+    template<typename TRet, typename... TFuncArgs, typename TCaseId, 
         typename... TVarArgs, typename TFunc = PointerFunctionType<0, TRet, 
-            test::Variable<TVarArgs...>, TFuncArgs...>>
+            test::Variable<TVarArgs...>, TFuncArgs...>,
+        typename std::enable_if<!test::trait::type::index::
+            IsBaseOf<TCaseId>::Value, int>::type = 0>
     TRet Call(const TCaseId&, TFunc func, test::Variable<TVarArgs...>& var,
         TFuncArgs&&... args);
 public:
@@ -101,7 +101,9 @@ TRet Argument<TArgs...>::Filler(const test::type::Index<TCaseId, ICaseId>&,
 
 template<typename... TArgs>
 template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
-    typename TCaseId, typename... TVarArgs, typename TFuncMmbr>
+    typename TCaseId, typename... TVarArgs, typename TFuncMmbr,
+    typename std::enable_if<!test::trait::type::index::
+        IsBaseOf<TCaseId>::Value, int>::type>
 TRet Argument<TArgs...>::Call(const TCaseId&, TFuncMmbr func_mmbr,
     TDerived& d, test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
 {
@@ -111,7 +113,8 @@ TRet Argument<TArgs...>::Call(const TCaseId&, TFuncMmbr func_mmbr,
 
 template<typename... TArgs>
 template<typename TRet, typename... TFuncArgs, typename TCaseId,
-    typename... TVarArgs, typename TFunc>
+    typename... TVarArgs, typename TFunc, typename std::enable_if<
+        !test::trait::type::index::IsBaseOf<TCaseId>::Value, int>::type>
 TRet Argument<TArgs...>::Call(const TCaseId&, TFunc func,
     test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
 {
