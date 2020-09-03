@@ -370,7 +370,7 @@ template<typename _TTag, typename std::enable_if<!test::trait::type::
 typename Case<TId, TChar, test::msg::Tag<test::type::Index<TTag, IAt>, 
     TArg>, TTagArgs...>::FormatType 
 Case<TId, TChar, test::msg::Tag<test::type::Index<TTag, IAt>, 
-    TArg>, TTagArgs...>::GetFormat(const _TTag& tag) const
+    TArg>, TTagArgs...>::GetFormat(const _TTag&) const
 {
     return GetTagCaseType<_TTag>::m_format;
 }
@@ -381,7 +381,7 @@ template<typename _TTag, std::size_t _IAt>
 typename Case<TId, TChar, test::msg::Tag<test::type::Index<TTag, IAt>, 
     TArg>, TTagArgs...>::FormatType 
 Case<TId, TChar, test::msg::Tag<test::type::Index<TTag, IAt>, TArg>, 
-    TTagArgs...>::GetFormat(const test::type::Index<_TTag, _IAt>& tag) const
+    TTagArgs...>::GetFormat(const test::type::Index<_TTag, _IAt>&) const
 {
     return GetTagIndexCaseType<_TTag, _IAt>::m_format;
 }
@@ -393,14 +393,18 @@ template<typename _TTag, typename _TRet,
         index::IsBaseOf<_TTag>::Value, int>::type>
 _TRet Case<TId, TChar, test::msg::Tag<test::type::Index<TTag, IAt>, TArg>, 
     TTagArgs...>::GetArgument(const _TTag&) const
-{}
+{
+    return {};
+}
 
 template<typename TId, typename TChar, typename TTag, std::size_t IAt,
     typename TArg,  typename... TTagArgs>
 template<typename _TTag, std::size_t _IAt, typename _TRet>
 _TRet Case<TId, TChar, test::msg::Tag<test::type::Index<TTag, IAt>, TArg>, 
     TTagArgs...>::GetArgument(const test::type::Index<_TTag, _IAt>&) const
-{}
+{
+    return {};
+}
 
 } //!msg
 
