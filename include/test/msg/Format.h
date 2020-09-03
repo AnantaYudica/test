@@ -166,6 +166,16 @@ Format<TChar>::Output(OutputInterfaceType& out)
 }
 
 template<typename TChar>
+template<typename TArg, typename... TArgs>
+typename Format<TChar>::SizeType 
+Format<TChar>::Output(OutputInterfaceType& out, TArg&& arg, TArgs&&... args)
+{
+    m_param->Load(sizeof...(TArgs) + 1, std::forward<TArg>(arg),
+        std::forward<TArgs>(args)...);
+    return m_param->Output(out);
+}
+
+template<typename TChar>
 void Format<TChar>::Unset()
 {
     m_param->Unset();
