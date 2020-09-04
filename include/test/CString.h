@@ -39,6 +39,9 @@ public:
     const TChar& operator[](const std::size_t& index) const;
     const TChar* operator*() const;
     const std::size_t& Size() const;
+public:
+    TChar*& Get();
+    const TChar*& Get() const;
 };
 
 template<typename TChar>
@@ -64,6 +67,8 @@ public:
     const TChar& operator[](const std::size_t& index) const;
     const TChar* operator*() const;
     const std::size_t& Size() const;
+public:
+    const TChar*& Get() const;
 };
 
 template<typename TChar>
@@ -241,6 +246,18 @@ const std::size_t& CString<TChar>::Size() const
 }
 
 template<typename TChar>
+TChar*& CString<TChar>::Get()
+{
+    return m_cstr;
+}
+
+template<typename TChar>
+const TChar*& CString<TChar>::Get() const
+{
+    return m_cstr;
+}
+
+template<typename TChar>
 template<std::size_t S>
 CString<const TChar>::CString(const TChar(&cstr)[S]) :
     m_cstr(cstr),
@@ -287,6 +304,12 @@ template<typename TChar>
 const std::size_t& CString<const TChar>::Size() const
 {
     return m_size;
+}
+
+template<typename TChar>
+const TChar*& CString<const TChar>::Get() const
+{
+    return m_cstr;
 }
 
 } //!test
