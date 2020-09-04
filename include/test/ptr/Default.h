@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <type_traits>
 #include <utility>
+#include <new>
 
 namespace test
 {
