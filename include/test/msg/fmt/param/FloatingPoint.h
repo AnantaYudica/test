@@ -30,6 +30,7 @@ private:
     test::msg::fmt::var::FloatingPoint<TChar> m_value;
 public:
     Parameter();
+    Parameter(const test::msg::fmt::var::FloatingPoint<TChar>& fpoint_var);
     Parameter(test::msg::fmt::var::FloatingPoint<TChar>&& fpoint_var);
 public:
     Parameter(StatusPointerType&& status);
@@ -89,6 +90,9 @@ public:
             !std::is_same<_TArg, _TStatusPointer>::value, int>::type = 0>
     Parameter(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
+    Parameter(const test::msg::fmt::var::FloatingPoint<TChar>& fpoint_var, 
+        TArgs&&... args);
+    template<typename... TArgs>
     Parameter(test::msg::fmt::var::FloatingPoint<TChar>&& fpoint_var, 
         TArgs&&... args);
 public:
@@ -130,12 +134,20 @@ public:
     virtual bool IsSet() const override;
 };
 
-
 template<typename TChar>
 Parameter<TChar, test::msg::fmt::var::FloatingPoint<TChar>>::Parameter() :
     Parameter<TChar>(),
     m_value(Parameter<TChar>::GetStatusPointer())
 {}
+
+template<typename TChar>
+Parameter<TChar, test::msg::fmt::var::FloatingPoint<TChar>>::
+    Parameter(const test::msg::fmt::var::FloatingPoint<TChar>& fpoint_var) :
+        Parameter<TChar>(),
+        m_value(Parameter<TChar>::GetStatusPointer())
+{
+    m_value = fpoint_var;
+}
 
 template<typename TChar>
 Parameter<TChar, test::msg::fmt::var::FloatingPoint<TChar>>::
@@ -265,6 +277,17 @@ Parameter<TChar, test::msg::fmt::var::FloatingPoint<TChar>, TParam...>::
             std::forward<TArgs>(args)...),
         m_value(Parameter<TChar>::GetStatusPointer())
 {}
+
+template<typename TChar, typename... TParam>
+template<typename... TArgs>
+Parameter<TChar, test::msg::fmt::var::FloatingPoint<TChar>, TParam...>::
+    Parameter(const test::msg::fmt::var::FloatingPoint<TChar>& fpoint_var, 
+        TArgs&&... args) :
+            Parameter<TChar, TParam...>(std::forward<TArgs>(args)...),
+            m_value(Parameter<TChar>::GetStatusPointer())
+{
+    m_value = fpoint_var;
+}
 
 template<typename TChar, typename... TParam>
 template<typename... TArgs>
