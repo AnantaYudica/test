@@ -33,12 +33,12 @@ private:
 public:
     Pointer();
     template<typename TArg, typename... TArgs, typename _TArg = 
-        typename std::remove_pointer<typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type>::type, 
-        typename std::enable_if<!std::is_same<_TArg, 
-                Pointer<T, TDefault>>::value &&
-            !std::is_same<_TArg, test::ptr::Base>::value &&
-            !std::is_same<_TArg, test::ptr::arg::Array>::value, int>::type = 0>
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type, 
+        typename std::enable_if<
+            !std::is_base_of<Pointer<T, TDefault>, _TArg>::value &&
+            !std::is_base_of<test::ptr::Base, _TArg>::value &&
+            !std::is_base_of<test::ptr::arg::Array, _TArg>::value, int>::type = 0>
     Pointer(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     Pointer(test::ptr::arg::Array&& array, TArgs&&... args);
@@ -122,10 +122,10 @@ Pointer<T, TDefault>::Pointer() :
 
 template<typename T, typename TDefault>
 template<typename TArg, typename... TArgs, typename _TArg, 
-    typename std::enable_if<!std::is_same<_TArg, 
-            Pointer<T, TDefault>>::value &&
-        !std::is_same<_TArg, test::ptr::Base>::value &&
-        !std::is_same<_TArg, test::ptr::arg::Array>::value, int>::type>
+    typename std::enable_if<
+        !std::is_base_of<Pointer<T, TDefault>, _TArg>::value &&
+        !std::is_base_of<test::ptr::Base, _TArg>::value &&
+        !std::is_base_of<test::ptr::arg::Array, _TArg>::value, int>::type>
 Pointer<T, TDefault>::Pointer(TArg&& arg, TArgs&&... args) :
     BaseType(),
     m_step(sizeof(typename TDefault::ValueType))
