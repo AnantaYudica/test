@@ -117,8 +117,11 @@ template<typename TArg, typename... TArgs, typename _TArg,
 Format<TChar>::Format(TArg&& arg, TArgs&&... args) :
     m_param()
 {
-    test::Pointer<ParameterType<TArg, TArgs...>> ptr{
-        std::forward<TArg>(arg), std::forward<TArgs>(args)...};
+    test::Pointer<ParameterType<typename std::remove_cv<
+        typename std::remove_reference<TArg>::type>::type, 
+        typename std::remove_cv<typename std::remove_reference<TArgs>::
+        type>::type...>> ptr{std::forward<TArg>(arg), 
+            std::forward<TArgs>(args)...};
     m_param = ptr.template DynamicCast<test::msg::fmt::Parameter<TChar>, 
         PointerDefaultType<_DefaultParamConstructor>>();
 }
