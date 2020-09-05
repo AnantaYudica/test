@@ -1,178 +1,343 @@
 #ifndef TEST_MSG_BASE_H_
 #define TEST_MSG_BASE_H_
 
+#include "../type/Index.h"
+#include "../trait/type/index/IsBaseOf.h"
 #include "Format.h"
 #include "Argument.h"
-#include "arg/Value.h"
-#include "arg/type/Function.h"
-#include "arg/type/Index.h"
-#include "arg/type/Name.h"
-#include "arg/type/Value.h"
-#include "arg/type/param/Name.h"
-#include "arg/type/param/name/At.h"
-#include "arg/type/val/Sequence.h"
-#include "arg/type/val/seq/At.h"
-#include "arg/val/Function.h"
-#include "arg/val/Parameter.h"
-#include "arg/val/Sequence.h"
-#include "arg/val/param/At.h"
-#include "arg/val/seq/At.h"
+#include "Tag.h"
+#include "Case.h"
+
+#include <type_traits>
 
 namespace test
 {
 namespace msg
 {
 
-namespace base
-{
-
-struct Info {};
-struct Debug {};
-struct Error {};
-
-}
-
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
+template<typename TChar, typename... TCaseArgs>
 class Base
 {
-private:
-    msg::Format<TChar> m_infoFormat;
-    msg::Format<TChar> m_debugFormat;
-    msg::Format<TChar> m_errFormat;
+public:
+    typedef test::msg::Format<TChar> FormatType;
+    typedef void CaseType;
+    typedef test::msg::Argument<> ArgumentType;
+public:
+    template<typename _TCaseId>
+    using HasCaseType = std::false_type;
+protected:
+    template<typename _TCaseId>
+    using GetBaseType = Base<TChar, TCaseArgs...>;
 protected:
     Base();
 public:
     ~Base();
 protected:
-    void SetFormat(const base::Info&, const TCaseId&, 
-        const msg::Format<TChar>& format);
-    void SetFormat(const base::Debug&, const TCaseId&, 
-        const msg::Format<TChar>& format);
-    void SetFormat(const base::Error&, const TCaseId&, 
-        const msg::Format<TChar>& format);
-    void SetFormat(const base::Info&, const TCaseId&, 
-        msg::Format<TChar>&& format);
-    void SetFormat(const base::Debug&, const TCaseId&, 
-        msg::Format<TChar>&& format);
-    void SetFormat(const base::Error&, const TCaseId&, 
-        msg::Format<TChar>&& format);
+    void GetCase();
+protected:
+    template<typename TCaseId, typename TTag, typename... TArgs>
+    void SetFormat(...);
 public:
-    const msg::Format<TChar>& Format(const base::Info&, const TCaseId&) const;
-    const msg::Format<TChar>& Format(const base::Debug&, const TCaseId&) const;
-    const msg::Format<TChar>& Format(const base::Error&, const TCaseId&) const;
-    TArgInfo Argument(const base::Info&, const TCaseId&) const;
-    TArgDebug Argument(const base::Debug&, const TCaseId&) const;
-    TArgError Argument(const base::Error&, const TCaseId&) const;
+    template<typename TCaseId, typename TTag>
+    FormatType GetFormat(...) const;
+public:
+    template<typename TCaseId, typename TTag>
+    ArgumentType GetArgument(...) const;
 };
 
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::Base()
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+class Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...> : public Base<TChar, TCaseArgs...>,
+        public test::msg::Case<TId, TChar, TTagArgs...>
+{
+public:
+    typedef test::msg::Format<TChar> FormatType;
+    typedef test::msg::Case<TId, TChar, TTagArgs...> CaseType;
+    typedef typename CaseType::ArgumentType ArgumentType;
+public:
+    template<typename _TCaseId>
+    using HasCaseType = typename std::conditional<
+        std::is_same<_TCaseId, TId>::value, std::true_type,
+        typename Base<TChar, TCaseArgs...>::template HasCaseType<
+            _TCaseId>>::type;
+protected:
+    template<typename _TCaseId>
+    using GetBaseType = typename std::conditional<
+        std::is_same<_TCaseId, TId>::value,
+        Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+            TCaseArgs...>,
+        typename Base<TChar, TCaseArgs...>::template GetBaseType<
+            _TCaseId>>::type;
+protected:
+    template<typename _TCaseId, typename _TTag>
+    using GetArgumentType = decltype(std::declval<typename GetBaseType<
+        _TCaseId>::CaseType*>()->GetArgument(std::declval<_TTag>()));
+protected:
+    Base();
+public:
+    ~Base();
+protected:
+    CaseType& GetCase();
+    const CaseType& GetCase() const;
+protected:
+    template<typename TTag, typename... TArgs,
+        typename _TTag = typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TTag>::type>::type>::type,
+        typename _THasCase = HasCaseType<_TTag>,
+        typename std::enable_if<!_THasCase::value, int>::type = 0>
+    void SetFormat(TTag&&, TArgs&&...);
+    template<typename TCaseId, typename TTag, typename... TArgs,
+        typename _THasCase = HasCaseType<TCaseId>,
+        typename std::enable_if<_THasCase::value, int>::type = 0>
+    void SetFormat(const TCaseId&, TTag&&, TArgs&&...);
+public:
+    template<typename TCaseId, typename TTag, typename _THasCase = 
+        HasCaseType<TCaseId>, typename std::enable_if<
+        (!test::trait::type::index::IsBaseOf<TCaseId>::Value &&
+        !test::trait::type::index::IsBaseOf<TTag>::Value) &&
+        _THasCase::value, int>::type = 0>
+    FormatType GetFormat(const TCaseId&, const TTag&) const;
+    template<typename TCaseId, typename TTag, std::size_t ITAgAt, 
+        typename _THasCase = HasCaseType<TCaseId>,
+        typename std::enable_if<!test::trait::type::index::IsBaseOf<
+            TCaseId>::Value && _THasCase::value, int>::type = 0>
+    FormatType GetFormat(const TCaseId&, 
+        const test::type::Index<TTag, ITAgAt>&) const;
+    template<typename TCaseId, typename TTag, std::size_t ICaseId, 
+        typename _THasCase = HasCaseType<TCaseId>,
+        typename std::enable_if<!test::trait::type::index::IsBaseOf<
+            TTag>::Value && _THasCase::value, int>::type = 0>
+    FormatType GetFormat(const test::type::Index<TCaseId, ICaseId>&, 
+        const TTag&) const;
+    template<typename TCaseId, typename TTag, std::size_t ICaseId, 
+        std::size_t ITAgAt, typename _THasCase = HasCaseType<TCaseId>,
+        typename std::enable_if<_THasCase::value, int>::type = 0>
+    FormatType GetFormat(const test::type::Index<TCaseId, ICaseId>&, 
+        const test::type::Index<TTag, ITAgAt>&) const;
+public:
+    template<typename TCaseId, typename TTag, typename _TRet = 
+        GetArgumentType<TCaseId, TTag>, typename _THasCase = 
+        HasCaseType<TCaseId>, typename std::enable_if<
+        (!test::trait::type::index::IsBaseOf<TCaseId>::Value &&
+        !test::trait::type::index::IsBaseOf<TTag>::Value) &&
+        _THasCase::value, int>::type = 0>
+    _TRet GetArgument(const TCaseId&, const TTag&) const;
+    template<typename TCaseId, typename TTag, std::size_t ITAgAt, 
+        typename _TRet = GetArgumentType<TCaseId, test::type::Index<TTag, 
+        ITAgAt>>, typename _THasCase = HasCaseType<TCaseId>, 
+        typename std::enable_if<!test::trait::type::index::IsBaseOf<
+            TCaseId>::Value && _THasCase::value, int>::type = 0>
+    _TRet GetArgument(const TCaseId&, 
+        const test::type::Index<TTag, ITAgAt>&) const;
+    template<typename TCaseId, typename TTag, std::size_t ICaseId, 
+        typename _TRet = GetArgumentType<TCaseId, TTag>, 
+        typename _THasCase = HasCaseType<TCaseId>, 
+        typename std::enable_if<!test::trait::type::index::IsBaseOf<
+            TTag>::Value && _THasCase::value, int>::type = 0>
+    _TRet GetArgument(const test::type::Index<TCaseId, ICaseId>&, 
+        const TTag&) const;
+    template<typename TCaseId, typename TTag, std::size_t ICaseId, 
+        std::size_t ITAgAt, typename _TRet = GetArgumentType<TCaseId, 
+            test::type::Index<TTag, ITAgAt>>, 
+        typename _THasCase = HasCaseType<TCaseId>, 
+        typename std::enable_if<_THasCase::value, int>::type = 0>
+    _TRet GetArgument(const test::type::Index<TCaseId, ICaseId>&, 
+        const test::type::Index<TTag, ITAgAt>&) const;
+};
+
+template<typename TChar, typename... TCaseArgs>
+Base<TChar, TCaseArgs...>::Base()
 {}
 
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::~Base()
+template<typename TChar, typename... TCaseArgs>
+Base<TChar, TCaseArgs...>::~Base()
 {}
 
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-void Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
-    SetFormat(const base::Info&, const TCaseId&, 
-        const msg::Format<TChar>& format)
-{
-    m_infoFormat = format;
-}
+template<typename TChar, typename... TCaseArgs>
+void Base<TChar, TCaseArgs...>::GetCase()
+{}
 
-template<typename TCaseId, typename TChar, typename TArgInfo,
-    typename TArgDebug, typename TArgError>
-void Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
-    SetFormat(const base::Debug&, const TCaseId&, 
-        const msg::Format<TChar>& format)
-{
-    m_debugFormat = format;
-}
+template<typename TChar, typename... TCaseArgs>
+template<typename TCaseId, typename TTag, typename... TArgs>
+void Base<TChar, TCaseArgs...>::SetFormat(...)
+{}
 
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-void Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
-    SetFormat(const base::Error&, const TCaseId&, 
-        const msg::Format<TChar>& format)
-{
-    m_errFormat = format;
-}
-
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-void Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
-    SetFormat(const base::Info&, const TCaseId&, msg::Format<TChar>&& format)
-{
-    m_infoFormat = std::move(format);
-}
-
-template<typename TCaseId, typename TChar, typename TArgInfo,
-    typename TArgDebug, typename TArgError>
-void Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
-    SetFormat(const base::Debug&, const TCaseId&, msg::Format<TChar>&& format)
-{
-    m_debugFormat = std::move(format);
-}
-
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-void Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
-    SetFormat(const base::Error&, const TCaseId&, msg::Format<TChar>&& format)
-{
-    m_errFormat = std::move(format);
-}
-
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-const msg::Format<TChar>& Base<TCaseId, TChar, TArgInfo, TArgDebug, 
-    TArgError>::Format(const base::Info&, const TCaseId&) const
-{
-    return m_infoFormat;
-}
-
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-const msg::Format<TChar>& Base<TCaseId, TChar, TArgInfo, TArgDebug, 
-    TArgError>::Format(const base::Debug&, const TCaseId&) const
-{
-    return m_debugFormat;
-}
-
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-const msg::Format<TChar>& Base<TCaseId, TChar, TArgInfo, TArgDebug, 
-    TArgError>::Format(const base::Error&, const TCaseId&) const
-{
-    return m_errFormat;
-}
-
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-TArgInfo Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
-    Argument(const base::Info&, const TCaseId&) const
+template<typename TChar, typename... TCaseArgs>
+template<typename TCaseId, typename TTag>
+typename Base<TChar, TCaseArgs...>::FormatType 
+Base<TChar, TCaseArgs...>::GetFormat(...) const
 {
     return {};
 }
 
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-TArgDebug Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
-    Argument(const base::Debug&, const TCaseId&) const
+template<typename TChar, typename... TCaseArgs>
+template<typename TCaseId, typename TTag>
+typename Base<TChar, TCaseArgs...>::ArgumentType 
+Base<TChar, TCaseArgs...>::GetArgument(...) const
 {
     return {};
 }
 
-template<typename TCaseId, typename TChar, typename TArgInfo, 
-    typename TArgDebug, typename TArgError>
-TArgError Base<TCaseId, TChar, TArgInfo, TArgDebug, TArgError>::
-    Argument(const base::Error&, const TCaseId&) const
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::Base()
+{}
+
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::~Base()
+{}
+
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+typename Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::CaseType&
+Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetCase()
 {
-    return {};
+    return *this;
+}
+
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+const typename Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::CaseType& 
+Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetCase() const
+{
+    return *this;
+}
+
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TTag, typename... TArgs, typename _TTag,
+    typename _THasCase, typename std::enable_if<!_THasCase::value, 
+        int>::type>
+void Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::SetFormat(TTag&& tag, TArgs&&... args)
+{
+    test::msg::Case<TId, TChar, TTagArgs...>::SetFormat(
+        std::forward<TTag>(tag), std::forward<TArgs>(args)...);
+}
+
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TCaseId, typename TTag, typename... TArgs,
+    typename _THasCase, typename std::enable_if<_THasCase::value, int>::type>
+void Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::SetFormat(const TCaseId &, TTag&& tag, TArgs&&... args)
+{
+    GetBaseType<TCaseId>::SetFormat(std::forward<TTag>(tag),
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TCaseId, typename TTag, 
+    typename _THasCase, typename std::enable_if<
+    (!test::trait::type::index::IsBaseOf<TCaseId>::Value &&
+    !test::trait::type::index::IsBaseOf<TTag>::Value) &&
+    _THasCase::value, int>::type = 0>
+typename Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::FormatType 
+Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetFormat(const TCaseId&, const TTag& tag) const
+{
+    return GetBaseType<TCaseId>::GetCase().GetFormat(tag);
+}
+
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TCaseId, typename TTag, std::size_t ITAgAt, 
+    typename _THasCase, typename std::enable_if<!test::trait::type::index::
+        IsBaseOf<TCaseId>::Value && _THasCase::value, int>::type = 0>
+typename Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::FormatType 
+Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetFormat(const TCaseId&, 
+        const test::type::Index<TTag, ITAgAt>& tag) const
+{
+    return GetBaseType<TCaseId>::GetCase().GetFormat(tag);
+}
+    
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TCaseId, typename TTag, std::size_t ICaseId, 
+    typename _THasCase, typename std::enable_if<!test::trait::type::index::
+        IsBaseOf<TTag>::Value && _THasCase::value, int>::type = 0>
+typename Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::FormatType 
+Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetFormat(const test::type::Index<TCaseId, ICaseId>&, 
+        const TTag& tag) const
+{
+    return GetBaseType<TCaseId>::GetCase().GetFormat(tag);
+}
+    
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TCaseId, typename TTag, std::size_t ICaseId, 
+    std::size_t ITAgAt, typename _THasCase,
+    typename std::enable_if<_THasCase::value, int>::type>
+typename Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::FormatType 
+Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetFormat(const test::type::Index<TCaseId, ICaseId>&, 
+        const test::type::Index<TTag, ITAgAt>& tag) const
+{
+    return GetBaseType<TCaseId>::GetCase().GetFormat(tag);
+}
+
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TCaseId, typename TTag, typename _TRet, typename _THasCase, 
+    typename std::enable_if<
+        (!test::trait::type::index::IsBaseOf<TCaseId>::Value &&
+        !test::trait::type::index::IsBaseOf<TTag>::Value) &&
+        _THasCase::value, int>::type>
+_TRet Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetArgument(const TCaseId&, const TTag& tag) const
+{
+    return GetBaseType<TCaseId>::GetCase().GetArgument(tag);
+}
+
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TCaseId, typename TTag, std::size_t ITAgAt, typename _TRet, 
+    typename _THasCase, typename std::enable_if<!test::trait::type::index::
+        IsBaseOf<TCaseId>::Value && _THasCase::value, int>::type>
+_TRet Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetArgument(const TCaseId&, 
+        const test::type::Index<TTag, ITAgAt>& tag) const
+{
+    return GetBaseType<TCaseId>::GetCase().GetArgument(tag);
+}
+    
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TCaseId, typename TTag, std::size_t ICaseId, typename _TRet, 
+    typename _THasCase, typename std::enable_if<!test::trait::type::index::
+        IsBaseOf<TTag>::Value && _THasCase::value, int>::type>
+_TRet Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetArgument(const test::type::Index<TCaseId, ICaseId>&, 
+        const TTag& tag) const
+{
+    return GetBaseType<TCaseId>::GetCase().GetArgument(tag);
+}
+    
+template<typename TChar, typename TId, typename... TTagArgs, 
+    typename... TCaseArgs>
+template<typename TCaseId, typename TTag, std::size_t ICaseId, 
+    std::size_t ITAgAt, typename _TRet, typename _THasCase, 
+    typename std::enable_if<_THasCase::value, int>::type>
+_TRet Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
+    TCaseArgs...>::GetArgument(const test::type::Index<TCaseId, ICaseId>&, 
+        const test::type::Index<TTag, ITAgAt>& tag) const
+{
+    return GetBaseType<TCaseId>::GetCase().GetArgument(tag);
 }
 
 } //!msg
