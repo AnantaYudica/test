@@ -49,7 +49,6 @@ namespace tag
 
 typedef test::out::log::Tag Unknown;
 
-
 } //!tag
 
 } //!log
