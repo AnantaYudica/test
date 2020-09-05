@@ -84,7 +84,8 @@ Status<TValue, TIntegerValue>&
 Status<TValue, TIntegerValue>::
     operator=(const Status<TValue, TIntegerValue>& cpy)
 {
-    m_value = (TIntegerValue)cpy.m_value;
+    if (!(m_value & bad))
+        m_value = (TIntegerValue)cpy.m_value;
     return *this;
 }
     
@@ -92,7 +93,8 @@ template<typename TValue, typename TIntegerValue>
 Status<TValue, TIntegerValue>& 
 Status<TValue, TIntegerValue>::operator=(Status<TValue, TIntegerValue>&& mov)
 {
-    m_value = (TIntegerValue)mov.m_value;
+    if (!(m_value & bad))
+        m_value = (TIntegerValue)mov.m_value;
     mov.m_value = good;
     return *this;
 }
