@@ -63,5 +63,5 @@ int main()
         assert(s6.GetBadCode() == StatusType::good);
         
     }
-    return 1;
+    return 0;
 }

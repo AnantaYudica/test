@@ -604,5 +604,5 @@ int main()
         assert(st5.GetValue() == (String::define_wchar |
             String::width | String::length));
     }
-    return 1;
+    return 0;
 }

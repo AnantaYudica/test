@@ -152,5 +152,5 @@ int main()
     assert(obj1_1.call_puts == true);
     assert(obj1_1.call_buffer == true);
     
-    return 1;
+    return 0;
 }

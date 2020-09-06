@@ -27,5 +27,5 @@ int main()
     assert(FloatingPoint::CastTo<double>(ff3) == pi_d);
     assert(FloatingPoint::CastTo<long double>(ff3) == pi_ld);
     
-    return 1;
+    return 0;
 }

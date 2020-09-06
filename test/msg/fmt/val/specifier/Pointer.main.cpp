@@ -1116,5 +1116,5 @@ int main()
         assert(po4.IsBad() == false);
         assert(po4.GetBadCode() == Pointer<char>::StatusType::good);
     }
-    return 1;
+    return 0;
 }

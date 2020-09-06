@@ -1877,5 +1877,5 @@ int main()
         assert(nt4.GetValue() == (Nothing::define_pointer | 
             Nothing::precision));
     }
-    return 1;
+    return 0;
 }

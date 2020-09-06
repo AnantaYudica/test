@@ -50014,5 +50014,5 @@ int main()
             FloatingPoint::width | FloatingPoint::precision));
     }
 
-    return 1;
+    return 0;
 }

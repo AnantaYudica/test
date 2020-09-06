@@ -703,5 +703,5 @@ int main()
         assert(size == 2);
         assert(strncmp(*(out_cstr1.Get()), "vWvWvWvWvWvW", 13) == 0);
     }
-    return 1;
+    return 0;
 };

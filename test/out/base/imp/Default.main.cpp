@@ -61,5 +61,5 @@ int main()
     auto res = obj1_1.Cast().Finalize(1);
     assert(res == true);
 
-    return 1;
+    return 0;
 }

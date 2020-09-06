@@ -121,5 +121,5 @@ int main()
         assert(size_a == 0);
         assert(out_cstr1.Size() == 0);
     }
-    return 1;
+    return 0;
 }

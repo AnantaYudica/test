@@ -11560,5 +11560,5 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
     }
-    return 1;
+    return 0;
 }

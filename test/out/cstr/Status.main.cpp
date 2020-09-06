@@ -284,5 +284,5 @@ int main()
     assert(s9.IsRequire(Status::require_initialize | 
         Status::require_allocation | Status::require_reallocation) == false);
 
-    return 1;
+    return 0;
 }

@@ -128,5 +128,5 @@ int main()
 
     assert(ch8.GetValue() == (Character::define_char | Character::width));
 
-    return 1;
+    return 0;
 }

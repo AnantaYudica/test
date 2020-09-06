@@ -174,6 +174,5 @@ int main()
         assert((bool)guard == false);
     }
     assert(obj1_12.call_end == false);
-
-    return 1;
+    return 0;
 }

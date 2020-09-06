@@ -158,5 +158,5 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), *(out_cstr2.Get()), 
             out_cstr2.Size()) == 0);
     }
-    return 1;
+    return 0;
 }

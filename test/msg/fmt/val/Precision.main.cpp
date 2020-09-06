@@ -125,5 +125,5 @@ using namespace test::msg::fmt::val;
     assert(prec9.GetValue() == 10);
     assert(prec9.IsSet() == true);
 
-    return 1;
+    return 0;
 }

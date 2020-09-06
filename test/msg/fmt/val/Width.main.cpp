@@ -126,5 +126,5 @@ int main()
     assert(wd9.IsSet() == true);
     
 
-    return 1;
+    return 0;
 }

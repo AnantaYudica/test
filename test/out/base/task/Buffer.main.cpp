@@ -121,5 +121,5 @@ int main()
     assert(obj1_3.call_begin == true);
     assert(obj1_3.call_end == true);
 
-    return 1;
+    return 0;
 }

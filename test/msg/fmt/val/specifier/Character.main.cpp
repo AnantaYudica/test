@@ -1131,5 +1131,5 @@ int main()
         assert(ch4.GetBadCode() == Character<char>::StatusType::good);
     }
     
-    return 1;
+    return 0;
 }

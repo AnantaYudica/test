@@ -359,5 +359,5 @@ int main()
         assert(s8.IsRemove() == false);
         assert(s8.GetBadCode() == StatusType::good);
     }
-    return 1;
+    return 0;
 }

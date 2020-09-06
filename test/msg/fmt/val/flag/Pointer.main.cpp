@@ -116,5 +116,5 @@ int main()
         assert(po5.GetValue() == Pointer::width);
     }
 
-    return 1;
+    return 0;
 }

@@ -143,5 +143,5 @@ int main()
     assert(cstr10.IsGood() == true);
     assert(cstr10.IsBad() == false);
 
-    return 1;
+    return 0;
 }

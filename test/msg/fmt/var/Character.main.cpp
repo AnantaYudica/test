@@ -117,5 +117,5 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "YYYYY", 6) == 0);
 
     }
-    return 1;
+    return 0;
 }

@@ -104,5 +104,5 @@ int main()
         assert(s9.IsSetValue() == true);
     }
     
-    return 1;
+    return 0;
 }

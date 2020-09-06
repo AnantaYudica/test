@@ -35,5 +35,5 @@ int main()
         assert(strncmp(*(out_cstr1_a.Get()), *(out_cstr1_b.Get()), 
             out_cstr1_b.Size()) == 0);
     }
-    return 1;
+    return 0;
 }

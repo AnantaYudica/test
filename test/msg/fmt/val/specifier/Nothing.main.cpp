@@ -15268,5 +15268,5 @@ int main()
         assert(nt4.GetBadCode() == Nothing<char>::StatusType::good);
     }
 
-    return 1;
+    return 0;
 }

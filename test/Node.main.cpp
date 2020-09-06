@@ -338,5 +338,5 @@ int main()
         assert(obj2.val1 == 0);
     }
 
-    return 1;
+    return 0;
 }
