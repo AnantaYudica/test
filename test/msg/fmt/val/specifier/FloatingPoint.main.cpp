@@ -17457,7 +17457,13 @@ int main()
                     FloatingPoint<char>::StatusType::value_not_set);
             }
         }
-
+        ff1_c.Reset();
+        ff2_c.Reset();
+        ff3_c.Reset();
+        ff4_c.Reset();
+        ff5_c.Reset();
+        ff6_c.Reset();
+        ff7_c.Reset();
         
         ff1_c = ff1;
         ff2_c = ff2;
