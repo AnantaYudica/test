@@ -43,7 +43,6 @@ int main()
 
         const test::node::Data<Obj1>& cd1 = d1;
         assert((*cd1).val1 == 0);
-        assert(cd1->val1 == 0);
 
         test::node::Data<Obj1> d2{Obj1(4)};
         assert((*d2).val1 == 4);
@@ -51,7 +50,6 @@ int main()
 
         const test::node::Data<Obj1>& cd2 = d2;
         assert((*cd2).val1 == 4);
-        assert(cd2->val1 == 4);
         
         Obj1 obj1(22);
         test::node::Data<Obj1> d3{std::move(obj1)};
@@ -60,7 +58,6 @@ int main()
             
         const test::node::Data<Obj1>& cd3 = d3;
         assert((*cd3).val1 == 22);
-        assert(cd3->val1 == 22);
 
         assert(obj1.val1 == 0);
 
@@ -70,7 +67,6 @@ int main()
 
         const test::node::Data<Obj1>& cd4 = d4;
         assert((*cd4).val1 == 144);
-        assert(cd4->val1 == 144);
 
         test::node::Data<Obj1> d5{d3};
         assert((*d5).val1 == 22);
@@ -78,7 +74,6 @@ int main()
         
         const test::node::Data<Obj1>& cd5 = d5;
         assert((*cd5).val1 == 22);
-        assert(cd5->val1 == 22);
 
         test::node::Data<Obj1> d6{std::move(d4)};
         assert((*d6).val1 == 144);
@@ -86,13 +81,11 @@ int main()
 
         const test::node::Data<Obj1>& cd6 = d6;
         assert((*cd6).val1 == 144);
-        assert(cd6->val1 == 144);
         
         assert((*d4).val1 == 0);
         assert(d4->val1 == 0);
 
         assert((*cd4).val1 == 0);
-        assert(cd4->val1 == 0);
 
         test::node::Data<Obj1> d7;
         d7 = d3;
@@ -101,7 +94,6 @@ int main()
 
         const test::node::Data<Obj1>& cd7 = d7;
         assert((*cd7).val1 == 22);
-        assert(cd7->val1 == 22);
 
         test::node::Data<Obj1> d8;
         d8 = std::move(d6);
@@ -110,13 +102,11 @@ int main()
 
         const test::node::Data<Obj1>& cd8 = d8;
         assert((*cd8).val1 == 144);
-        assert(cd8->val1 == 144);
         
         assert((*d6).val1 == 0);
         assert(d6->val1 == 0);
 
         assert((*cd6).val1 == 0);
-        assert(cd6->val1 == 0);
 
         Obj1 obj2{123};
         test::node::Data<Obj1> d9;
@@ -126,7 +116,6 @@ int main()
 
         const test::node::Data<Obj1>& cd9 = d9;
         assert((*cd9).val1 == 123);
-        assert(cd9->val1 == 123);
         
         test::node::Data<Obj1> d10;
         d10 = std::move(obj2);
@@ -135,7 +124,6 @@ int main()
 
         const test::node::Data<Obj1>& cd10 = d10;
         assert((*cd10).val1 == 123);
-        assert(cd10->val1 == 123);
 
         assert(obj2.val1 == 0);
     }
@@ -204,7 +192,6 @@ int main()
 
         const test::node::Data<const Obj1>& cd1 = d1;
         assert((*cd1).val1 == 0);
-        assert(cd1->val1 == 0);
         
         test::node::Data<const Obj1> d2{Obj1{5}};
         assert((*d2).val1 == 5);
@@ -212,7 +199,6 @@ int main()
 
         const test::node::Data<const Obj1>& cd2 = d2;
         assert((*cd2).val1 == 5);
-        assert(cd2->val1 == 5);
         
         Obj1 obj1{15};
         test::node::Data<const Obj1> d3{std::move(obj1)};
@@ -221,7 +207,6 @@ int main()
 
         const test::node::Data<const Obj1>& cd3 = d3;
         assert((*cd3).val1 == 15);
-        assert(cd3->val1 == 15);
 
         assert(obj1.val1 == 0);
 
@@ -231,7 +216,6 @@ int main()
 
         const test::node::Data<const Obj1>& cd4 = d4;
         assert((*cd4).val1 == 255);
-        assert(cd4->val1 == 255);
 
         test::node::Data<const Obj1> d5{d2};
         assert((*d5).val1 == 5);
@@ -239,7 +223,6 @@ int main()
 
         const test::node::Data<const Obj1>& cd5 = d5;
         assert((*cd5).val1 == 5);
-        assert(cd5->val1 == 5);
 
         test::node::Data<const Obj1> d6{std::move(d3)};
         assert((*d6).val1 == 15);
@@ -247,13 +230,11 @@ int main()
 
         const test::node::Data<const Obj1>& cd6 = d6;
         assert((*cd6).val1 == 15);
-        assert(cd6->val1 == 15);
         
         assert((*d3).val1 == 15);
         assert(d3->val1 == 15);
 
         assert((*cd3).val1 == 15);
-        assert(cd3->val1 == 15);
 
         test::node::Data<const Obj1> d7;
         d7 = d5;
@@ -262,7 +243,6 @@ int main()
 
         const test::node::Data<const Obj1>& cd7 = d7;
         assert((*cd7).val1 == 0);
-        assert(cd7->val1 == 0);
         
         test::node::Data<const Obj1> d8;
         d8 = std::move(d6);
@@ -271,12 +251,10 @@ int main()
 
         const test::node::Data<const Obj1>& cd8 = d8;
         assert((*cd8).val1 == 0);
-        assert(cd8->val1 == 0);
         
         assert((*d6).val1 == 15);
         assert(d6->val1 == 15);
         assert((*cd6).val1 == 15);
-        assert(cd6->val1 == 15);
 
         test::node::Data<const Obj1> d9;
         d9 = Obj1{17};
@@ -285,7 +263,6 @@ int main()
 
         const test::node::Data<const Obj1>& cd9 = d9;
         assert((*cd9).val1 == 0);
-        assert(cd9->val1 == 0);
         
         Obj1 obj2{222};
         test::node::Data<const Obj1> d10;
@@ -295,7 +272,6 @@ int main()
 
         const test::node::Data<const Obj1>& cd10 = d10;
         assert((*cd10).val1 == 0);
-        assert(cd10->val1 == 0);
 
         assert(obj2.val1 == 222);
 
@@ -364,7 +340,6 @@ int main()
 
         const test::node::Data<Obj1*>& cd1 = d1;
         assert((*cd1).val1 == 0);
-        assert(cd1->val1 == 0);
 
         test::node::Data<Obj1*> d2{Obj1(4)};
         assert((*d2).val1 == 4);
@@ -372,7 +347,6 @@ int main()
 
         const test::node::Data<Obj1*>& cd2 = d2;
         assert((*cd2).val1 == 4);
-        assert(cd2->val1 == 4);
         
         Obj1 obj1(22);
         test::node::Data<Obj1*> d3{std::move(obj1)};
@@ -381,7 +355,6 @@ int main()
             
         const test::node::Data<Obj1*>& cd3 = d3;
         assert((*cd3).val1 == 22);
-        assert(cd3->val1 == 22);
 
         assert(obj1.val1 == 0);
 
@@ -391,7 +364,6 @@ int main()
 
         const test::node::Data<Obj1*>& cd4 = d4;
         assert((*cd4).val1 == 144);
-        assert(cd4->val1 == 144);
 
         test::node::Data<Obj1*> d5{d3};
         assert((*d5).val1 == 22);
@@ -399,7 +371,6 @@ int main()
         
         const test::node::Data<Obj1*>& cd5 = d5;
         assert((*cd5).val1 == 22);
-        assert(cd5->val1 == 22);
 
         test::node::Data<Obj1*> d6{std::move(d4)};
         assert((*d6).val1 == 144);
@@ -407,13 +378,11 @@ int main()
 
         const test::node::Data<Obj1*>& cd6 = d6;
         assert((*cd6).val1 == 144);
-        assert(cd6->val1 == 144);
         
         assert((*d4).val1 == 0);
         assert(d4->val1 == 0);
 
         assert((*cd4).val1 == 0);
-        assert(cd4->val1 == 0);
 
         test::node::Data<Obj1*> d7;
         d7 = d3;
@@ -422,7 +391,6 @@ int main()
 
         const test::node::Data<Obj1*>& cd7 = d7;
         assert((*cd7).val1 == 22);
-        assert(cd7->val1 == 22);
 
         test::node::Data<Obj1*> d8;
         d8 = std::move(d6);
@@ -431,13 +399,11 @@ int main()
 
         const test::node::Data<Obj1*>& cd8 = d8;
         assert((*cd8).val1 == 144);
-        assert(cd8->val1 == 144);
         
         assert((*d6).val1 == 0);
         assert(d6->val1 == 0);
 
         assert((*cd6).val1 == 0);
-        assert(cd6->val1 == 0);
 
         Obj1 obj2{123};
         test::node::Data<Obj1*> d9;
@@ -447,7 +413,6 @@ int main()
 
         const test::node::Data<Obj1*>& cd9 = d9;
         assert((*cd9).val1 == 123);
-        assert(cd9->val1 == 123);
         
         test::node::Data<Obj1*> d10;
         d10 = std::move(obj2);
@@ -456,7 +421,6 @@ int main()
 
         const test::node::Data<Obj1*>& cd10 = d10;
         assert((*cd10).val1 == 123);
-        assert(cd10->val1 == 123);
 
         assert(obj2.val1 == 0);
     }
@@ -524,7 +488,6 @@ int main()
 
         const test::node::Data<const Obj1*>& cd1 = d1;
         assert((*cd1).val1 == 0);
-        assert(cd1->val1 == 0);
 
         test::node::Data<const Obj1*> d2{Obj1(4)};
         assert((*d2).val1 == 4);
@@ -532,7 +495,6 @@ int main()
 
         const test::node::Data<const Obj1*>& cd2 = d2;
         assert((*cd2).val1 == 4);
-        assert(cd2->val1 == 4);
         
         Obj1 obj1(22);
         test::node::Data<const Obj1*> d3{std::move(obj1)};
@@ -541,7 +503,6 @@ int main()
             
         const test::node::Data<const Obj1*>& cd3 = d3;
         assert((*cd3).val1 == 22);
-        assert(cd3->val1 == 22);
 
         assert(obj1.val1 == 0);
 
@@ -551,7 +512,6 @@ int main()
 
         const test::node::Data<const Obj1*>& cd4 = d4;
         assert((*cd4).val1 == 144);
-        assert(cd4->val1 == 144);
 
         test::node::Data<const Obj1*> d5{d3};
         assert((*d5).val1 == 22);
@@ -559,7 +519,6 @@ int main()
         
         const test::node::Data<const Obj1*>& cd5 = d5;
         assert((*cd5).val1 == 22);
-        assert(cd5->val1 == 22);
 
         test::node::Data<const Obj1*> d6{std::move(d4)};
         assert((*d6).val1 == 144);
@@ -567,13 +526,11 @@ int main()
 
         const test::node::Data<const Obj1*>& cd6 = d6;
         assert((*cd6).val1 == 144);
-        assert(cd6->val1 == 144);
         
         assert((*d4).val1 == 0);
         assert(d4->val1 == 0);
 
         assert((*cd4).val1 == 0);
-        assert(cd4->val1 == 0);
 
         test::node::Data<const Obj1*> d7;
         d7 = d3;
@@ -582,7 +539,6 @@ int main()
 
         const test::node::Data<const Obj1*>& cd7 = d7;
         assert((*cd7).val1 == 22);
-        assert(cd7->val1 == 22);
 
         test::node::Data<const Obj1*> d8;
         d8 = std::move(d6);
@@ -591,13 +547,11 @@ int main()
 
         const test::node::Data<const Obj1*>& cd8 = d8;
         assert((*cd8).val1 == 144);
-        assert(cd8->val1 == 144);
         
         assert((*d6).val1 == 0);
         assert(d6->val1 == 0);
 
         assert((*cd6).val1 == 0);
-        assert(cd6->val1 == 0);
 
         Obj1 obj2{123};
         test::node::Data<const Obj1*> d9;
@@ -607,7 +561,6 @@ int main()
 
         const test::node::Data<const Obj1*>& cd9 = d9;
         assert((*cd9).val1 == 123);
-        assert(cd9->val1 == 123);
         
         test::node::Data<const Obj1*> d10;
         d10 = std::move(obj2);
@@ -616,7 +569,6 @@ int main()
 
         const test::node::Data<const Obj1*>& cd10 = d10;
         assert((*cd10).val1 == 123);
-        assert(cd10->val1 == 123);
 
         assert(obj2.val1 == 0);
     }
@@ -684,7 +636,6 @@ int main()
 
         const test::node::Data<Obj1*const>& cd1 = d1;
         assert((*cd1).val1 == 0);
-        assert(cd1->val1 == 0);
 
         test::node::Data<Obj1*const> d2{Obj1(4)};
         assert((*d2).val1 == 4);
@@ -692,7 +643,6 @@ int main()
 
         const test::node::Data<Obj1*const>& cd2 = d2;
         assert((*cd2).val1 == 4);
-        assert(cd2->val1 == 4);
         
         Obj1 obj1(22);
         test::node::Data<Obj1*const> d3{std::move(obj1)};
@@ -701,7 +651,6 @@ int main()
             
         const test::node::Data<Obj1*const>& cd3 = d3;
         assert((*cd3).val1 == 22);
-        assert(cd3->val1 == 22);
 
         assert(obj1.val1 == 0);
 
@@ -711,7 +660,6 @@ int main()
 
         const test::node::Data<Obj1*const>& cd4 = d4;
         assert((*cd4).val1 == 144);
-        assert(cd4->val1 == 144);
 
         test::node::Data<Obj1*const> d5{d3};
         assert((*d5).val1 == 22);
@@ -719,7 +667,6 @@ int main()
         
         const test::node::Data<Obj1*const>& cd5 = d5;
         assert((*cd5).val1 == 22);
-        assert(cd5->val1 == 22);
 
         test::node::Data<Obj1*const> d6{std::move(d4)};
         assert((*d6).val1 == 144);
@@ -727,13 +674,11 @@ int main()
 
         const test::node::Data<Obj1*const>& cd6 = d6;
         assert((*cd6).val1 == 144);
-        assert(cd6->val1 == 144);
         
         assert((*d4).val1 == 144);
         assert(d4->val1 == 144);
 
         assert((*cd4).val1 == 144);
-        assert(cd4->val1 == 144);
 
         test::node::Data<Obj1*const> d7;
         d7 = d3;
@@ -742,7 +687,6 @@ int main()
 
         const test::node::Data<Obj1*const>& cd7 = d7;
         assert((*cd7).val1 == 0);
-        assert(cd7->val1 == 0);
 
         test::node::Data<Obj1*const> d8;
         d8 = std::move(d6);
@@ -751,13 +695,11 @@ int main()
 
         const test::node::Data<Obj1*const>& cd8 = d8;
         assert((*cd8).val1 == 0);
-        assert(cd8->val1 == 0);
         
         assert((*d6).val1 == 144);
         assert(d6->val1 == 144);
 
         assert((*cd6).val1 == 144);
-        assert(cd6->val1 == 144);
 
         Obj1 obj2{123};
         test::node::Data<Obj1*const> d9;
@@ -767,7 +709,6 @@ int main()
 
         const test::node::Data<Obj1*const>& cd9 = d9;
         assert((*cd9).val1 == 0);
-        assert(cd9->val1 == 0);
         
         test::node::Data<Obj1*const> d10;
         d10 = std::move(obj2);
@@ -776,7 +717,6 @@ int main()
 
         const test::node::Data<Obj1*const>& cd10 = d10;
         assert((*cd10).val1 == 0);
-        assert(cd10->val1 == 0);
 
         assert(obj2.val1 == 123);
     }
@@ -844,7 +784,6 @@ int main()
 
         const test::node::Data<const Obj1*const>& cd1 = d1;
         assert((*cd1).val1 == 0);
-        assert(cd1->val1 == 0);
 
         test::node::Data<const Obj1*const> d2{Obj1(4)};
         assert((*d2).val1 == 4);
@@ -852,7 +791,6 @@ int main()
 
         const test::node::Data<const Obj1*const>& cd2 = d2;
         assert((*cd2).val1 == 4);
-        assert(cd2->val1 == 4);
         
         Obj1 obj1(22);
         test::node::Data<const Obj1*const> d3{std::move(obj1)};
@@ -861,7 +799,6 @@ int main()
             
         const test::node::Data<const Obj1*const>& cd3 = d3;
         assert((*cd3).val1 == 22);
-        assert(cd3->val1 == 22);
 
         assert(obj1.val1 == 0);
 
@@ -871,7 +808,6 @@ int main()
 
         const test::node::Data<const Obj1*const>& cd4 = d4;
         assert((*cd4).val1 == 144);
-        assert(cd4->val1 == 144);
 
         test::node::Data<const Obj1*const> d5{d3};
         assert((*d5).val1 == 22);
@@ -879,7 +815,6 @@ int main()
         
         const test::node::Data<const Obj1*const>& cd5 = d5;
         assert((*cd5).val1 == 22);
-        assert(cd5->val1 == 22);
 
         test::node::Data<const Obj1*const> d6{std::move(d4)};
         assert((*d6).val1 == 144);
@@ -887,13 +822,11 @@ int main()
 
         const test::node::Data<const Obj1*const>& cd6 = d6;
         assert((*cd6).val1 == 144);
-        assert(cd6->val1 == 144);
         
         assert((*d4).val1 == 144);
         assert(d4->val1 == 144);
 
         assert((*cd4).val1 == 144);
-        assert(cd4->val1 == 144);
 
         test::node::Data<const Obj1*const> d7;
         d7 = d3;
@@ -902,7 +835,6 @@ int main()
 
         const test::node::Data<const Obj1*const>& cd7 = d7;
         assert((*cd7).val1 == 0);
-        assert(cd7->val1 == 0);
 
         test::node::Data<const Obj1*const> d8;
         d8 = std::move(d6);
@@ -911,13 +843,11 @@ int main()
 
         const test::node::Data<const Obj1*const>& cd8 = d8;
         assert((*cd8).val1 == 0);
-        assert(cd8->val1 == 0);
         
         assert((*d6).val1 == 144);
         assert(d6->val1 == 144);
 
         assert((*cd6).val1 == 144);
-        assert(cd6->val1 == 144);
 
         Obj1 obj2{123};
         test::node::Data<const Obj1*const> d9;
@@ -927,7 +857,6 @@ int main()
 
         const test::node::Data<const Obj1*const>& cd9 = d9;
         assert((*cd9).val1 == 0);
-        assert(cd9->val1 == 0);
         
         test::node::Data<const Obj1*const> d10;
         d10 = std::move(obj2);
@@ -936,7 +865,6 @@ int main()
 
         const test::node::Data<const Obj1*const>& cd10 = d10;
         assert((*cd10).val1 == 0);
-        assert(cd10->val1 == 0);
 
         assert(obj2.val1 == 123);
     }
