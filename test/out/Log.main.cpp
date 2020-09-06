@@ -1046,11 +1046,6 @@ int main()
         assert(strncmp(*(log2.GetTag()), test::out::log::tag::Debug{}.GetName(), 
             test::out::log::tag::Debug{}.GetNameSize()) == 0);
 
-        Log log3(test::out::log::tag::Emerg{});
-        
-        assert(strncmp(*(log3.GetTag()), test::out::log::tag::Emerg{}.GetName(), 
-            test::out::log::tag::Emerg{}.GetNameSize()) == 0);
-
         Log log4(test::out::log::tag::Error{});
         
         assert(strncmp(*(log4.GetTag()), test::out::log::tag::Error{}.GetName(), 
@@ -1080,11 +1075,6 @@ int main()
             assert(strncmp(*(log2.GetTag()), test::out::log::tag::Debug{}.GetName(), 
                 test::out::log::tag::Debug{}.GetNameSize()) == 0);
 
-            Log log3(&out_cstr1_1, test::out::log::tag::Emerg{});
-            
-            assert(strncmp(*(log3.GetTag()), test::out::log::tag::Emerg{}.GetName(), 
-                test::out::log::tag::Emerg{}.GetNameSize()) == 0);
-
             Log log4(&out_cstr1_1, test::out::log::tag::Error{});
             
             assert(strncmp(*(log4.GetTag()), test::out::log::tag::Error{}.GetName(), 
@@ -1111,11 +1101,6 @@ int main()
         
         assert(strncmp(*(log2.GetTag()), test::out::log::tag::Debug{}.GetName(), 
             test::out::log::tag::Debug{}.GetNameSize()) == 0);
-
-        Log log3(new Out(), &Deleter, test::out::log::tag::Emerg{});
-        
-        assert(strncmp(*(log3.GetTag()), test::out::log::tag::Emerg{}.GetName(), 
-            test::out::log::tag::Emerg{}.GetNameSize()) == 0);
 
         Log log4(new Out(), &Deleter, test::out::log::tag::Error{});
         
