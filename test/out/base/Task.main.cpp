@@ -46,6 +46,8 @@ struct Out : test::out::Interface<char>
     {
         return this->cstr.Puts(cstr);
     }
+    bool IsBad() const{return cstr.IsBad();};
+    bool IsGood() const{return cstr.IsGood();};
 };
 
 int main()
@@ -105,5 +107,5 @@ int main()
     assert(t1.IsRelease() == false);
     assert(t1.IsDone() == false);
     
-    return 1;
+    return 0;
 }
