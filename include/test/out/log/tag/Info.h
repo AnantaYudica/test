@@ -1,7 +1,9 @@
 #ifndef TEST_OUT_LOG_TAG_INFO_H_
 #define TEST_OUT_LOG_TAG_INFO_H_
 
+#include "../../Tag.h"
 #include "../Tag.h"
+#include "../make/Tag.h"
 
 namespace test
 {
@@ -16,6 +18,9 @@ class Info : public test::out::log::Tag
 {
 public:
     typedef typename test::out::log::Tag::SizeType SizeType;
+    typedef test::out::tag::Info OutTagType;
+private:
+    static inline const char (&_Name())[14];
 public:
     Info() = default;
 public:
@@ -25,17 +30,33 @@ public:
     inline SizeType GetNameSize() const override;
 };
 
+inline const char (&Info::_Name())[14]
+{
+    static const char name[] = "Informational";
+    return name;
+}
+
 inline const char * Info::GetName() const
 {
-    return "Informational";
+    return _Name();
 }
 
 inline typename Info::SizeType Info::GetNameSize() const
 {
-    return sizeof("Informational") - 1;
+    return sizeof(_Name()) - 1;
 }
 
 } //!tag
+
+namespace make
+{
+
+inline test::out::log::tag::Info Tag(const test::out::tag::Info&)
+{
+    return {};
+}
+
+} //!make
 
 } //!log
 
