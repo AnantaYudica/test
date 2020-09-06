@@ -635,19 +635,19 @@ Data<T*const>::Data(Data<T*const>&& mov) :
 {}
 
 template<typename T>
-Data<T*const>& Data<T*const>::operator=(const Data<T*const>& cpy)
+Data<T*const>& Data<T*const>::operator=(const Data<T*const>&)
 {
     return *this;
 }
 
 template<typename T>
-Data<T*const>& Data<T*const>::operator=(Data<T*const>&& mov)
+Data<T*const>& Data<T*const>::operator=(Data<T*const>&&)
 {
     return *this;
 }
 
 template<typename T>
-Data<T*const>& Data<T*const>::operator=(const T& cpy)
+Data<T*const>& Data<T*const>::operator=(const T&)
 {
     return *this;
 }
@@ -714,27 +714,27 @@ Data<const T*const>::Data(Data<const T*const>&& mov) :
 
 template<typename T>
 Data<const T*const>& 
-Data<const T*const>::operator=(const Data<const T*const>& cpy)
+Data<const T*const>::operator=(const Data<const T*const>&)
 {
     return *this;
 }
 
 template<typename T>
 Data<const T*const>& 
-Data<const T*const>::operator=(Data<const T*const>&& mov)
+Data<const T*const>::operator=(Data<const T*const>&&)
 {
     return *this;
 }
 
 template<typename T>
 Data<const T*const>& 
-Data<const T*const>::operator=(const T& cpy)
+Data<const T*const>::operator=(const T&)
 {
     return *this;
 }
 
 template<typename T>
-Data<const T*const>& Data<const T*const>::operator=(T&& mov)
+Data<const T*const>& Data<const T*const>::operator=(T&&)
 {
     return *this;
 }
