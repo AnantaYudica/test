@@ -22,12 +22,12 @@ struct test::type::Name<int>
 template<>
 struct test::type::name::val::Get<int>
 {
-    template<typename TChar = char>
-    static test::CString<TChar> CStr(int v)
+    template<int V, typename TChar = char>
+    static test::CString<TChar> CStr()
     {
         test::CString<TChar> _val = test::cstr::Format(
-            (v > 0 ? (log10(v) + 1) : (v < 0 ? (log10(abs(v)) + 2) : 1)) + 1, 
-            "%d", v);
+            (V > 0 ? (log10(V) + 1) : (V < 0 ? (log10(abs(V)) + 2) : 1)) + 1, 
+            "%d", V);
         return {_val};
     }
 };
