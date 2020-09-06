@@ -8,6 +8,7 @@
 #include "base/Task.h"
 #include "../Queue.h"
 #include "log/Tag.h"
+#include "log/make/Tag.h"
 #include "log/tag/Debug.h"
 #include "log/tag/Info.h"
 #include "log/tag/Error.h"
@@ -51,11 +52,11 @@ public:
     typedef typename test::out::log::Tag LogTagType;
     typedef typename FileType::ModeType ModeType;
     typedef typename FileType::StatusType FileStatusType;
-    typedef typename test::out::log::tag::Crit LogTagCritType;
-    typedef typename test::out::log::tag::Debug LogTagDebugType;
-    typedef typename test::out::log::tag::Error LogTagErrorType;
-    typedef typename test::out::log::tag::Info LogTagInfoType;
-    typedef typename test::out::log::tag::Warn LogTagWarnType;
+    typedef typename test::out::tag::Crit TagCritType;
+    typedef typename test::out::tag::Debug TagDebugType;
+    typedef typename test::out::tag::Error TagErrorType;
+    typedef typename test::out::tag::Info TagInfoType;
+    typedef typename test::out::tag::Warn TagWarnType;
 private:
     typedef test::out::base::Task<TChar> TaskType;
 private:
@@ -92,17 +93,26 @@ protected:
     virtual SizeType Puts(const test::CString<TChar>& cstr) override;
     virtual SizeType Puts(const test::CString<const TChar>& cstr) override;
 public:
-    SizeType VPrint(const LogTagType& tag, const char * format, 
+    template<typename TOutTag>
+    SizeType VPrint(const TOutTag& tag, const char * format, 
         va_list var_args) __ATTRIBUTE__((__format__ (__printf__, 4, 0)));
-    SizeType Print(const LogTagType& tag, const char * format, ...)
+    template<typename TOutTag>
+    SizeType Print(const TOutTag& tag, const char * format, ...)
          __ATTRIBUTE__((__format__ (__printf__, 3, 4)));
 public:
-    SizeType Puts(const LogTagType& tag, const TChar * cstr, 
+    template<typename TOutTag>
+    SizeType Puts(const TOutTag& tag, const TChar * cstr, 
         const SizeType& size);
-    SizeType Puts(const LogTagType& tag, const TChar * cstr);
-    SizeType Puts(const LogTagType& tag, const test::CString<TChar>& cstr);
-    SizeType Puts(const LogTagType& tag, 
+    template<typename TOutTag>
+    SizeType Puts(const TOutTag& tag, const TChar * cstr);
+    template<typename TOutTag>
+    SizeType Puts(const TOutTag& tag, const test::CString<TChar>& cstr);
+    template<typename TOutTag>
+    SizeType Puts(const TOutTag& tag, 
         const test::CString<const TChar>& cstr);
+public:
+    template<typename TOutTag>
+    LogType Log(const TOutTag& tag);
 public:
     LogType Debug();
 public:
@@ -303,8 +313,9 @@ Base<TChar, MaximumQueue>::Puts(const test::CString<const TChar>& cstr)
 }
 
 template<typename TChar, std::size_t MaximumQueue>
+template<typename TOutTag>
 typename Base<TChar, MaximumQueue>::SizeType 
-Base<TChar, MaximumQueue>::VPrint(const LogTagType& tag, const char * format,
+Base<TChar, MaximumQueue>::VPrint(const TOutTag& tag, const char * format,
     va_list var_args)
 {
     auto* task = RequestTask();
@@ -313,7 +324,7 @@ Base<TChar, MaximumQueue>::VPrint(const LogTagType& tag, const char * format,
     {
         DelegateType deleg(this, task);
         {
-            LogType log(&deleg, tag);
+            LogType log(&deleg, test::out::log::make::Tag(tag));
             ret = log.VPrint(format, var_args);
         }
     }
@@ -321,8 +332,9 @@ Base<TChar, MaximumQueue>::VPrint(const LogTagType& tag, const char * format,
 }
 
 template<typename TChar, std::size_t MaximumQueue>
+template<typename TOutTag>
 typename Base<TChar, MaximumQueue>::SizeType 
-Base<TChar, MaximumQueue>::Print(const LogTagType& tag, const char * format, ...)
+Base<TChar, MaximumQueue>::Print(const TOutTag& tag, const char * format, ...)
 {
     auto* task = RequestTask();
     SizeType ret = 0;
@@ -330,7 +342,7 @@ Base<TChar, MaximumQueue>::Print(const LogTagType& tag, const char * format, ...
     {
         DelegateType deleg(this, task);
         {
-            LogType log(&deleg, tag);
+            LogType log(&deleg, test::out::log::make::Tag(tag));
             va_list args;
             va_start(args, format);
             ret = log.VPrint(format, args);
@@ -341,8 +353,9 @@ Base<TChar, MaximumQueue>::Print(const LogTagType& tag, const char * format, ...
 }
 
 template<typename TChar, std::size_t MaximumQueue>
+template<typename TOutTag>
 typename Base<TChar, MaximumQueue>::SizeType 
-Base<TChar, MaximumQueue>::Puts(const LogTagType& tag, const TChar * cstr, 
+Base<TChar, MaximumQueue>::Puts(const TOutTag& tag, const TChar * cstr, 
     const SizeType& size)
 {
     auto* task = RequestTask();
@@ -351,7 +364,7 @@ Base<TChar, MaximumQueue>::Puts(const LogTagType& tag, const TChar * cstr,
     {
         DelegateType deleg(this, task);
         {
-            LogType log(&deleg, tag);
+            LogType log(&deleg, test::out::log::make::Tag(tag));
             ret = log.Puts(cstr, size);
         }
     }
@@ -359,8 +372,9 @@ Base<TChar, MaximumQueue>::Puts(const LogTagType& tag, const TChar * cstr,
 }
 
 template<typename TChar, std::size_t MaximumQueue>
+template<typename TOutTag>
 typename Base<TChar, MaximumQueue>::SizeType 
-Base<TChar, MaximumQueue>::Puts(const LogTagType& tag, const TChar * cstr)
+Base<TChar, MaximumQueue>::Puts(const TOutTag& tag, const TChar * cstr)
 {
     auto* task = RequestTask();
     SizeType ret = 0;
@@ -368,7 +382,7 @@ Base<TChar, MaximumQueue>::Puts(const LogTagType& tag, const TChar * cstr)
     {
         DelegateType deleg(this, task);
         {
-            LogType log(&deleg, tag);
+            LogType log(&deleg, test::out::log::make::Tag(tag));
             ret = log.Puts(cstr);
         }
     }
@@ -376,8 +390,9 @@ Base<TChar, MaximumQueue>::Puts(const LogTagType& tag, const TChar * cstr)
 }
 
 template<typename TChar, std::size_t MaximumQueue>
+template<typename TOutTag>
 typename Base<TChar, MaximumQueue>::SizeType 
-Base<TChar, MaximumQueue>::Puts(const LogTagType& tag, 
+Base<TChar, MaximumQueue>::Puts(const TOutTag& tag, 
     const test::CString<TChar>& cstr)
 {
     auto* task = RequestTask();
@@ -386,7 +401,7 @@ Base<TChar, MaximumQueue>::Puts(const LogTagType& tag,
     {
         DelegateType deleg(this, task);
         {
-            LogType log(&deleg, tag);
+            LogType log(&deleg, test::out::log::make::Tag(tag));
             ret = log.Puts(cstr);
         }
     }
@@ -394,8 +409,9 @@ Base<TChar, MaximumQueue>::Puts(const LogTagType& tag,
 }
 
 template<typename TChar, std::size_t MaximumQueue>
+template<typename TOutTag>
 typename Base<TChar, MaximumQueue>::SizeType 
-Base<TChar, MaximumQueue>::Puts(const LogTagType& tag, 
+Base<TChar, MaximumQueue>::Puts(const TOutTag& tag, 
     const test::CString<const TChar>& cstr)
 {
     auto* task = RequestTask();
@@ -404,11 +420,21 @@ Base<TChar, MaximumQueue>::Puts(const LogTagType& tag,
     {
         DelegateType deleg(this, task);
         {
-            LogType log(&deleg, tag);
+            LogType log(&deleg, test::out::log::make::Tag(tag));
             ret = log.Puts(cstr);
         }
     }
     return ret;
+}
+
+template<typename TChar, std::size_t MaximumQueue>
+template<typename TOutTag>
+typename Base<TChar, MaximumQueue>::LogType 
+Base<TChar, MaximumQueue>::Log(const TOutTag& tag)
+{
+    auto* task = RequestTask();
+    DelegateType * deleg = new DelegateType(this, task);
+    return {deleg, &LogType::Deleter, test::out::log::make::Tag(tag)};
 }
 
 template<typename TChar, std::size_t MaximumQueue>
