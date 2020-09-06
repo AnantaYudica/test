@@ -22687,6 +22687,17 @@ int main()
                 assert(i44.GetBadCode() == Integer<char>::StatusType::good);
             }
         }
+        i1_c.Reset();
+        i2_c.Reset();
+        i3_c.Reset();
+        i4_c.Reset();
+        i5_c.Reset();
+        i6_c.Reset();
+        i7_c.Reset();
+        i8_c.Reset();
+        i9_c.Reset();
+        i10_c.Reset();
+        i11_c.Reset();
 
         i1_c = i1;
         i2_c = i2;
