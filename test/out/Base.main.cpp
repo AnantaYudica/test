@@ -74,11 +74,11 @@ int main()
     }
     {
         typedef typename Out1::StatusType StatusType;
-        typedef typename Out1::LogTagCritType CritType;
-        typedef typename Out1::LogTagDebugType DebugType;
-        typedef typename Out1::LogTagErrorType ErrorType;
-        typedef typename Out1::LogTagInfoType InfoType;
-        typedef typename Out1::LogTagWarnType WarnType;
+        typedef typename Out1::TagCritType CritType;
+        typedef typename Out1::TagDebugType DebugType;
+        typedef typename Out1::TagErrorType ErrorType;
+        typedef typename Out1::TagInfoType InfoType;
+        typedef typename Out1::TagWarnType WarnType;
         Out1 out1;
         {
             assert(Print(out1, CritType{}, "test : %d", 1) == 8);
@@ -150,6 +150,17 @@ int main()
             assert(out1.IsGood() == true);
             assert(out1.IsBad() == false);
             assert(out1.GetBadCode() == StatusType::good);
+
+            auto crit1 = out1.Log(test::out::tag::Crit{});
+            assert(Print(crit1, "test%d,", 1) == 6);
+            assert(crit1.Print("test%d,", 2) == 6);
+            assert(crit1.Puts("test3,") == 6);
+            assert(crit1.Puts("test4,", 6) == 6);
+            assert(crit1.Puts(test::CString<char>("test5,", 6)) == 6);
+            assert(crit1.Puts(test::CString<const char>("test6")) == 5);
+            assert(out1.IsGood() == true);
+            assert(out1.IsBad() == false);
+            assert(out1.GetBadCode() == StatusType::good);
         }
         {
             auto debug = out1.Debug();
@@ -159,6 +170,17 @@ int main()
             assert(debug.Puts("test4,", 6) == 6);
             assert(debug.Puts(test::CString<char>("test5,", 6)) == 6);
             assert(debug.Puts(test::CString<const char>("test6")) == 5);
+            assert(out1.IsGood() == true);
+            assert(out1.IsBad() == false);
+            assert(out1.GetBadCode() == StatusType::good);
+
+            auto debug1 = out1.Log(test::out::tag::Debug{});
+            assert(Print(debug1, "test%d,", 1) == 6);
+            assert(debug1.Print("test%d,", 2) == 6);
+            assert(debug1.Puts("test3,") == 6);
+            assert(debug1.Puts("test4,", 6) == 6);
+            assert(debug1.Puts(test::CString<char>("test5,", 6)) == 6);
+            assert(debug1.Puts(test::CString<const char>("test6")) == 5);
             assert(out1.IsGood() == true);
             assert(out1.IsBad() == false);
             assert(out1.GetBadCode() == StatusType::good);
@@ -174,6 +196,17 @@ int main()
             assert(out1.IsGood() == true);
             assert(out1.IsBad() == false);
             assert(out1.GetBadCode() == StatusType::good);
+            
+            auto error1 = out1.Log(test::out::tag::Error{});
+            assert(Print(error1, "test%d,", 1) == 6);
+            assert(error1.Print("test%d,", 2) == 6);
+            assert(error1.Puts("test3,") == 6);
+            assert(error1.Puts("test4,", 6) == 6);
+            assert(error1.Puts(test::CString<char>("test5,", 6)) == 6);
+            assert(error1.Puts(test::CString<const char>("test6")) == 5);
+            assert(out1.IsGood() == true);
+            assert(out1.IsBad() == false);
+            assert(out1.GetBadCode() == StatusType::good);
         }
         {
             auto info = out1.Info();
@@ -183,6 +216,17 @@ int main()
             assert(info.Puts("test4,", 6) == 6);
             assert(info.Puts(test::CString<char>("test5,", 6)) == 6);
             assert(info.Puts(test::CString<const char>("test6")) == 5);
+            assert(out1.IsGood() == true);
+            assert(out1.IsBad() == false);
+            assert(out1.GetBadCode() == StatusType::good);
+
+            auto info1 = out1.Log(test::out::tag::Info{});
+            assert(Print(info1, "test%d,", 1) == 6);
+            assert(info1.Print("test%d,", 2) == 6);
+            assert(info1.Puts("test3,") == 6);
+            assert(info1.Puts("test4,", 6) == 6);
+            assert(info1.Puts(test::CString<char>("test5,", 6)) == 6);
+            assert(info1.Puts(test::CString<const char>("test6")) == 5);
             assert(out1.IsGood() == true);
             assert(out1.IsBad() == false);
             assert(out1.GetBadCode() == StatusType::good);
@@ -198,20 +242,33 @@ int main()
             assert(out1.IsGood() == true);
             assert(out1.IsBad() == false);
             assert(out1.GetBadCode() == StatusType::good);
+
+            auto warn1 = out1.Log(test::out::tag::Warn{});
+            assert(Print(warn1, "test%d,", 1) == 6);
+            assert(warn1.Print("test%d,", 2) == 6);
+            assert(warn1.Puts("test3,") == 6);
+            assert(warn1.Puts("test4,", 6) == 6);
+            assert(warn1.Puts(test::CString<char>("test5,", 6)) == 6);
+            assert(warn1.Puts(test::CString<const char>("test6")) == 5);
+            assert(out1.IsGood() == true);
+            assert(out1.IsBad() == false);
+            assert(out1.GetBadCode() == StatusType::good);
         }
     }
     {
         typedef typename Out1::StatusType StatusType;
-        typedef typename Out1::LogTagDebugType DebugType;
+        typedef typename Out1::TagDebugType DebugType;
         Out1 out1;
         {
             auto debug1 = out1.Debug();
             out1.Print(DebugType{}, "test-2");
             auto debug2 = out1.Debug();
             out1.Print(DebugType{}, "test-4");
-            out1.Print(DebugType{}, "test-5");
+            auto debug3 = out1.Log(DebugType{});
+            out1.Print(DebugType{}, "test-6");
             debug1.Print("test-1");
             debug2.Print("test-3");
+            debug3.Print("test-5");
         }
         assert(out1.IsGood() == true);
         assert(out1.IsBad() == false);
@@ -300,6 +357,18 @@ int main()
                     assert(out1.IsBad() == false);
                     assert(out1.GetBadCode() == StatusType::good);
                     crit.Output(out_cstr);
+
+                    auto crit1 = out1.Log(test::out::tag::Crit());
+                    assert(Print(crit1, "test%d,", 1) == 6);
+                    assert(crit1.Print("test%d,", 2) == 6);
+                    assert(crit1.Puts("test3,") == 6);
+                    assert(crit1.Puts("test4,", 6) == 6);
+                    assert(crit1.Puts(test::CString<char>("test5,", 6)) == 6);
+                    assert(crit1.Puts(test::CString<const char>("test6")) == 5);
+                    assert(out1.IsGood() == true);
+                    assert(out1.IsBad() == false);
+                    assert(out1.GetBadCode() == StatusType::good);
+                    crit1.Output(out_cstr);
                 }
                 
             }
@@ -338,6 +407,18 @@ int main()
                     assert(out1.IsBad() == false);
                     assert(out1.GetBadCode() == StatusType::good);
                     debug.Output(out_cstr);
+
+                    auto debug2 = out1.Log(test::out::tag::Debug{});
+                    assert(Print(debug2, "test%d,", 1) == 6);
+                    assert(debug2.Print("test%d,", 2) == 6);
+                    assert(debug2.Puts("test3,") == 6);
+                    assert(debug2.Puts("test4,", 6) == 6);
+                    assert(debug2.Puts(test::CString<char>("test5,", 6)) == 6);
+                    assert(debug2.Puts(test::CString<const char>("test6")) == 5);
+                    assert(out1.IsGood() == true);
+                    assert(out1.IsBad() == false);
+                    assert(out1.GetBadCode() == StatusType::good);
+                    debug2.Output(out_cstr);
                 }
             }
             auto cstr = out_cstr.Get();
@@ -374,6 +455,19 @@ int main()
                     assert(out1.IsGood() == true);
                     assert(out1.IsBad() == false);
                     assert(out1.GetBadCode() == StatusType::good);
+                    error.Output(out_cstr);
+
+                    auto error1 = out1.Log(test::out::tag::Error{});
+                    assert(Print(error1, "test%d,", 1) == 6);
+                    assert(error1.Print("test%d,", 2) == 6);
+                    assert(error1.Puts("test3,") == 6);
+                    assert(error1.Puts("test4,", 6) == 6);
+                    assert(error1.Puts(test::CString<char>("test5,", 6)) == 6);
+                    assert(error1.Puts(test::CString<const char>("test6")) == 5);
+                    assert(out1.IsGood() == true);
+                    assert(out1.IsBad() == false);
+                    assert(out1.GetBadCode() == StatusType::good);
+                    error1.Output(out_cstr);
                 }
             }
             auto cstr = out_cstr.Get();
@@ -410,6 +504,19 @@ int main()
                     assert(out1.IsGood() == true);
                     assert(out1.IsBad() == false);
                     assert(out1.GetBadCode() == StatusType::good);
+                    info.Output(out_cstr);
+
+                    auto info1 = out1.Log(test::out::tag::Info{});
+                    assert(Print(info1, "test%d,", 1) == 6);
+                    assert(info1.Print("test%d,", 2) == 6);
+                    assert(info1.Puts("test3,") == 6);
+                    assert(info1.Puts("test4,", 6) == 6);
+                    assert(info1.Puts(test::CString<char>("test5,", 6)) == 6);
+                    assert(info1.Puts(test::CString<const char>("test6")) == 5);
+                    assert(out1.IsGood() == true);
+                    assert(out1.IsBad() == false);
+                    assert(out1.GetBadCode() == StatusType::good);
+                    info1.Output(out_cstr);
                 }
             }
             auto cstr = out_cstr.Get();
@@ -446,6 +553,19 @@ int main()
                     assert(out1.IsGood() == true);
                     assert(out1.IsBad() == false);
                     assert(out1.GetBadCode() == StatusType::good);
+                    warn.Output(out_cstr);
+
+                    auto warn1 = out1.Log(test::out::tag::Warn{});
+                    assert(Print(warn1, "test%d,", 1) == 6);
+                    assert(warn1.Print("test%d,", 2) == 6);
+                    assert(warn1.Puts("test3,") == 6);
+                    assert(warn1.Puts("test4,", 6) == 6);
+                    assert(warn1.Puts(test::CString<char>("test5,", 6)) == 6);
+                    assert(warn1.Puts(test::CString<const char>("test6")) == 5);
+                    assert(out1.IsGood() == true);
+                    assert(out1.IsBad() == false);
+                    assert(out1.GetBadCode() == StatusType::good);
+                    warn1.Output(out_cstr);
                 }
             }
             auto cstr = out_cstr.Get();
@@ -483,6 +603,7 @@ int main()
                 assert(debug.Puts("test4,", 6) == 6);
                 assert(debug.Puts(test::CString<char>("test5,", 6)) == 6);
                 assert(debug.Puts(test::CString<const char>("test6")) == 5);
+                debug.Output(out_cstr);
             }
             assert(out1.IsGood() == false);
             assert(out1.IsBad() == true);
