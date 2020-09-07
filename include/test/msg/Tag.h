@@ -2,6 +2,7 @@
 #define TEST_MSG_TAG_H_
 
 #include "../type/Index.h"
+#include "../out/Tag.h"
 
 namespace test
 {
@@ -10,10 +11,13 @@ namespace msg
 namespace tag
 {
 
-struct Debug{};
-struct Error{};
-struct Info{};
-struct Unknown{};
+typedef test::out::tag::Debug Debug;
+
+typedef test::out::tag::Error Error;
+
+typedef test::out::tag::Info Info;
+
+typedef test::out::tag::Unknown Unknown;
 
 } //!tag
 
