@@ -2,6 +2,8 @@
 #define TEST_TYPE_NAME_H_
 
 #include "../CString.h"
+#include "../trait/type/name/decltor/Enable.decl.h"
+#include "name/Declarator.decl.h"
 
 #include <cstddef>
 
@@ -9,21 +11,6 @@ namespace test
 {
 namespace type
 {
-namespace name
-{
-
-template<typename T, typename TB = T, typename... TArgs>
-struct Declarator;
-
-namespace decltor
-{
-
-template<typename T, typename TQ = T, typename TD = T>
-struct Enable;
-
-} //!decltor
-
-} //!name
 
 template<typename T, typename TDeclarator = test::type::name::Declarator<T>>
 struct Name
@@ -37,7 +24,7 @@ struct Name
 };
 
 template<typename T>
-struct Name<T, typename test::type::name::decltor::Enable<T>::Type>
+struct Name<T, typename test::trait::type::name::decltor::Enable<T>::Type>
 {
     template<typename TChar= char>
     static test::CString<const TChar> CStr()
@@ -51,6 +38,6 @@ struct Name<T, typename test::type::name::decltor::Enable<T>::Type>
 } //!test
 
 #include "name/Declarator.h"
-#include "name/decltor/Enable.h"
+#include "../trait/type/name/decltor/Enable.h"
 
 #endif //!TEST_TYPE_NAME_H_
