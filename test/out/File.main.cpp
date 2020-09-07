@@ -1294,7 +1294,7 @@ int main()
         
         {
             Out4 out4_1(fname, Out4::mode_write, 32, 
-                [&](test::CString<char> old_fn, test::CString<char>& new_fn, 
+                [&](test::CString<char>, test::CString<char>& new_fn, 
                     typename Out4::ModeType& mod)
                 {
                     new_fn = test::CString<char>(fname_next, fname_next_size);
@@ -1339,7 +1339,7 @@ int main()
 
         {
             Out4 out4_1(fname, Out4::mode_append, 64, 
-                [&](test::CString<char> old_fn, test::CString<char>& new_fn, 
+                [&](test::CString<char>, test::CString<char>& new_fn, 
                     typename Out4::ModeType& mod)
                 {
                     new_fn = test::CString<char>(fname_next, fname_next_size);
@@ -1386,7 +1386,7 @@ int main()
        
         {
             Out4 out4_1(fname, Out4::mode_write, 32, 
-                [&](test::CString<char> old_fn, test::CString<char>& new_fn, 
+                [&](test::CString<char>, test::CString<char>& new_fn, 
                     typename Out4::ModeType& mod)
                 {
                     new_fn = test::CString<char>(fname_next, fname_next_size);
@@ -1431,7 +1431,7 @@ int main()
 
         {
             Out4 out4_1(fname, Out4::mode_append, 64, 
-                [&](test::CString<char> old_fn, test::CString<char>& new_fn, 
+                [&](test::CString<char>, test::CString<char>& new_fn, 
                     typename Out4::ModeType& mod)
                 {
                     new_fn = test::CString<char>(fname_next, fname_next_size);
