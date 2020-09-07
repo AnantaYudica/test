@@ -111,9 +111,9 @@ protected:
 public:
     ~Case();
 protected:
-    template<typename TFArg, typename... TFArgs, 
-        typename _TFArg = typename std::remove_reference<
-            typename std::remove_cv<TFArg>::type>::type,
+    template<typename TFArg, typename... TFArgs, typename _TFArg = 
+        typename std::remove_cv<typename std::remove_reference<TFArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TFArg, 
             test::msg::Format<TChar>>::value, int>::type = 0>
     void SetFormat(const TagType&, TFArg&& arg, TFArgs&&... args);
@@ -183,9 +183,9 @@ protected:
 public:
     ~Case();
 protected:
-    template<typename TFArg, typename... TFArgs, 
-        typename _TFArg = typename std::remove_reference<
-            typename std::remove_cv<TFArg>::type>::type,
+    template<typename TFArg, typename... TFArgs, typename _TFArg = 
+        typename std::remove_cv<typename std::remove_reference<TFArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TFArg, 
             test::msg::Format<TChar>>::value, int>::type = 0>
     void SetFormat(const test::type::Index<TagType, IAt>&, 
