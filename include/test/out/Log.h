@@ -452,7 +452,11 @@ Log<TChar>::GetBadCode() const
 template<typename TChar>
 bool Log<TChar>::End()
 {
-    if (m_out == nullptr) return false;
+    if (m_out == nullptr)
+    {
+        m_status.Bad(StatusType::output_undefined);
+        return false;
+    }
     if (!m_status.IsBad() && !m_status.IsBegin())
     {
         return _Output(*m_out, m_status);
@@ -483,7 +487,7 @@ template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::VPrint(const char * format, va_list var_args)
 {
-    if (m_status.IsEnd()) return 0;
+    if (m_status.IsBad() || m_status.IsEnd()) return 0;
     return m_message.VPrint(format, var_args);
 }
 
@@ -491,7 +495,7 @@ template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Print(const char * format, ...)
 {
-    if (m_status.IsEnd()) return 0;
+    if (m_status.IsBad() || m_status.IsEnd()) return 0;
     va_list args;
     va_start(args, format);
     const auto ret = m_message.VPrint(format, args);
@@ -503,7 +507,7 @@ template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Puts(const TChar * cstr, const SizeType& size)
 {
-    if (m_status.IsEnd()) return 0;
+    if (m_status.IsBad() || m_status.IsEnd()) return 0;
     return m_message.Puts(cstr, size);
 }
 
@@ -511,7 +515,7 @@ template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Puts(const TChar * cstr)
 {
-    if (m_status.IsEnd()) return 0;
+    if (m_status.IsBad() || m_status.IsEnd()) return 0;
     return m_message.Puts(cstr);
 }
 
@@ -519,7 +523,7 @@ template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Puts(const test::CString<TChar>& cstr)
 {
-    if (m_status.IsEnd()) return 0;
+    if (m_status.IsBad() || m_status.IsEnd()) return 0;
     return m_message.Puts(cstr);
 }
 
@@ -527,7 +531,7 @@ template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Puts(const test::CString<const TChar>& cstr)
 {
-    if (m_status.IsEnd()) return 0;
+    if (m_status.IsBad() || m_status.IsEnd()) return 0;
     return m_message.Puts(cstr);
 }
 
