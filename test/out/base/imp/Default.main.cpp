@@ -24,7 +24,7 @@ struct Obj1 :
             call_request_task = false;
         }
     }
-    bool ExecuteTask(const std::intptr_t& id)
+    bool ExecuteTask(const std::intptr_t&)
     {
         auto guard = RequestTaskGuard();
         if (guard)
