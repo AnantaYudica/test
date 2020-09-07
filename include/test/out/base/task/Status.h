@@ -128,7 +128,7 @@ Status<TValue, TIntegerValue>::operator=(Status<TValue, TIntegerValue>&& mov)
 template<typename TValue, typename TIntegerValue>
 bool Status<TValue, TIntegerValue>::IsGood() const
 {
-    return (m_val & (bad | remove)) == good; 
+    return !(m_val & bad);
 }
 
 template<typename TValue, typename TIntegerValue>
