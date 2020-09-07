@@ -151,7 +151,7 @@ bool Log<TChar>::DefaultOnBegin(test::out::Interface<TChar>& out,
     auto d_sec = duration_cast<seconds>(tp_sec.time_since_epoch());
     std::chrono::milliseconds::rep msec = d_msec.count() - 
         std::chrono::milliseconds::rep(d_sec.count() * 1000);
-    out_size = out.Print(".%lld [%s] : ", msec, *tag);
+    out_size = out.Print(".%03llu [%s] : ", msec, *tag);
     return out_size != 0;
 }
 
