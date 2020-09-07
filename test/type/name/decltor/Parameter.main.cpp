@@ -78,7 +78,7 @@ int main()
         test::type::name::Pointer<int Obj1::*>>::CStr()), "Obj1::*") == 0);
     assert(strcmp(*(test::type::name::decltor::Parameter<
         test::type::name::Pointer<int*>,
-        test::type::name::Pointer<int* Obj1::*>>::CStr()), "*Obj1::*") == 0);
+        test::type::name::Pointer<int* Obj1::*>>::CStr()), "* Obj1::*") == 0);
     assert(strcmp(*(test::type::name::decltor::Parameter<
         test::type::name::Pointer<int*>,
         test::type::name::Array<int*[]>,
