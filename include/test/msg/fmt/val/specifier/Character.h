@@ -51,9 +51,9 @@ private:
         TArgs&&... args);
 private:
     static bool _SetWidth(WidthType& width);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Width>::value, 
             int>::type = 0>
@@ -72,27 +72,39 @@ private:
     OutputPrintFunctionType* m_print_out;
 public:
     Character();
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename _TStatusPointer = 
             typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_integral<_TArg>::value &&
-            !std::is_same<_TArg, Character<TChar>>::value &&
-            !std::is_same<_TArg, _TStatusPointer>::value,
+            !std::is_base_of<Character<TChar>, _TArg>::value &&
+            !std::is_base_of<_TStatusPointer, _TArg>::value,
         int>::type = 0>
     Character(TArg&& arg, TArgs&&... args);
-    template<typename... TArgs>
-    Character(const char& val, TArgs&&... args);
+    
+    Character(const char& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value,
+            int>::type = 0>
+    Character(const char& val, TArg&& arg, TArgs&&... args);
+
     template<typename... TArgs, typename Twchar = wchar_t,
+        typename std::enable_if<(std::is_same<Twchar, wchar_t>::value &&
+            !std::is_same<Twchar, char>::value) &&
+            sizeof...(TArgs) == 0, int>::type = 0>
+    Character(const Twchar& w_val, TArgs&&...);
+    template<typename TArg, typename... TArgs, typename Twchar = wchar_t,
         typename std::enable_if<std::is_same<Twchar, wchar_t>::value &&
             !std::is_same<Twchar, char>::value, int>::type = 0>
-    Character(const Twchar& w_val, TArgs&&... args);
+    Character(const Twchar& w_val, TArg&& arg, TArgs&&... args);
 public:
     Character(StatusPointerType&& status);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_integral<_TArg>::value,
             int>::type = 0>
     Character(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
@@ -190,8 +202,8 @@ template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename _TStatusPointer,
     typename std::enable_if<!std::is_integral<_TArg>::value &&
-        !std::is_same<_TArg, Character<TChar>>::value &&
-        !std::is_same<_TArg, _TStatusPointer>::value, 
+        !std::is_base_of<Character<TChar>, _TArg>::value &&
+        !std::is_base_of<_TStatusPointer, _TArg>::value, 
     int>::type>
 Character<TChar>::Character(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
@@ -204,30 +216,61 @@ Character<TChar>::Character(TArg&& arg, TArgs&&... args) :
         std::forward<TArgs>(args)...);
 }
 
+
 template<typename TChar>
-template<typename... TArgs>
-Character<TChar>::Character(const char& val, TArgs&&... args) :
+Character<TChar>::Character(const char& val) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.char_value = (unsigned char)val},
     m_width(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_print_out);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value,
+        int>::type>
+Character<TChar>::Character(const char& val, TArg&& arg, TArgs&&... args) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+    m_value{.char_value = (unsigned char)val},
+    m_width(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_print_out, std::forward<TArg>(arg),
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
 template<typename... TArgs, typename Twchar,
-    typename std::enable_if<std::is_same<Twchar, wchar_t>::value &&
-        !std::is_same<Twchar, char>::value, int>::type>
-Character<TChar>::Character(const Twchar& w_val, TArgs&&... args) :
+    typename std::enable_if<(std::is_same<Twchar, wchar_t>::value &&
+        !std::is_same<Twchar, char>::value) &&
+        sizeof...(TArgs) == 0, int>::type>
+Character<TChar>::Character(const Twchar& w_val, TArgs&&...) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.wchar_value = w_val},
     m_width(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_print_out);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename Twchar,
+    typename std::enable_if<std::is_same<Twchar, wchar_t>::value &&
+        !std::is_same<Twchar, char>::value, int>::type>
+Character<TChar>::Character(const Twchar& w_val, TArg&& arg, TArgs&&... args) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+    m_value{.wchar_value = w_val},
+    m_width(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>

@@ -51,9 +51,9 @@ private:
         TArgs&&... args);
 private:
     static bool _SetWidth(WidthType& width);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Width>::value, 
             int>::type = 0>
@@ -72,25 +72,23 @@ private:
     OutputPrintFunctionType* m_print_out;
 public:
     Pointer();
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_pointer<typename 
-            std::remove_reference<typename std::remove_cv<TArg>
-                ::type>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
         typename _TStatusPointer = 
             typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_void<_TArg>::value &&
-            !std::is_same<_TArg, Pointer<TChar>>::value &&
-            !std::is_same<_TArg, _TStatusPointer>::value, 
+            !std::is_base_of<Pointer<TChar>, _TArg>::value &&
+            !std::is_base_of<_TStatusPointer, _TArg>::value, 
         int>::type = 0>
     Pointer(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     Pointer(const void* val, TArgs&&... args);
 public:
     Pointer(StatusPointerType&& status);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_pointer<typename 
-            std::remove_reference<typename std::remove_cv<TArg>
-                ::type>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
         typename std::enable_if<!std::is_void<_TArg>::value, int>::type = 0>
     Pointer(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
@@ -180,8 +178,8 @@ template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename _TStatusPointer,
     typename std::enable_if<!std::is_void<_TArg>::value &&
-        !std::is_same<_TArg, Pointer<TChar>>::value &&
-        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
+        !std::is_base_of<Pointer<TChar>, _TArg>::value &&
+        !std::is_base_of<_TStatusPointer, _TArg>::value, int>::type>
 Pointer<TChar>::Pointer(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},

@@ -54,9 +54,9 @@ private:
         TArgs&&... args);
 private:
     static bool _SetWidth(WidthType& width);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Width>::value, 
             int>::type = 0>
@@ -66,9 +66,9 @@ private:
         test::msg::fmt::var::arg::Width&& set, TArgs&&... args);
 private:   
     static bool _SetLength(LengthType& length);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Length>::value, 
             int>::type = 0>
@@ -88,41 +88,102 @@ private:
     OutputPrintFunctionType* m_print_out;
 public:
     Integer();
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename _TStatusPointer = 
             typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_integral<_TArg>::value &&
-            !std::is_same<Integer<TChar>, _TArg>::value &&
-            !std::is_same<_TArg, _TStatusPointer>::value, 
+            !std::is_base_of<Integer<TChar>, _TArg>::value &&
+            !std::is_base_of<_TStatusPointer, _TArg>::value, 
             int>::type = 0>
     Integer(TArg&& arg, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const char& val, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const short& val, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const int& val, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const long& val, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const long long& val, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const unsigned char& val, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const unsigned short& val, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const unsigned int& val, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const unsigned long& val, TArgs&&... args);
-    template<typename... TArgs>
-    Integer(const unsigned long long& val, TArgs&&... args);
+
+    Integer(const char& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const char& val, TArg&& arg, TArgs&&... args);
+
+    Integer(const short& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const short& val, TArg&& arg, TArgs&&... args);
+
+    Integer(const int& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const int& val, TArg&& arg, TArgs&&... args);
+
+    Integer(const long& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const long& val, TArg&& arg, TArgs&&... args);
+
+    Integer(const long long& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const long long& val, TArg&& arg, TArgs&&... args);
+
+    Integer(const unsigned char& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const unsigned char& val, TArg&& arg, TArgs&&... args);
+
+    Integer(const unsigned short& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const unsigned short& val, TArg&& arg, TArgs&&... args);
+    
+    Integer(const unsigned int& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const unsigned int& val, TArg&& arg, TArgs&&... args);
+
+    Integer(const unsigned long& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const unsigned long& val, TArg&& arg, TArgs&&... args);
+
+    Integer(const unsigned long long& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value, 
+            int>::type = 0>
+    Integer(const unsigned long long& val, TArg&& arg, TArgs&&... args);
+
 public:
     Integer(StatusPointerType&& status);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_integral<_TArg>::value, 
             int>::type = 0>
     Integer(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
@@ -264,8 +325,8 @@ template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename _TStatusPointer,
     typename std::enable_if<!std::is_integral<_TArg>::value &&
-        !std::is_same<Integer<TChar>, _TArg>::value &&
-        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
+        !std::is_base_of<Integer<TChar>, _TArg>::value &&
+        !std::is_base_of<_TStatusPointer, _TArg>::value, int>::type>
 Integer<TChar>::Integer(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
@@ -279,133 +340,288 @@ Integer<TChar>::Integer(TArg&& arg, TArgs&&... args) :
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const char& val, TArgs&&... args) :
+Integer<TChar>::Integer(const char& val) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.char_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
+}
+
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const char& val, TArg&& arg, TArgs&&... args) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+    m_value{.char_value = val},
+    m_width(),
+    m_length(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const short& val, TArgs&&... args) :
+Integer<TChar>::Integer(const short& val) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.short_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const int& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const short& val, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+    m_value{.short_value = val},
+    m_width(),
+    m_length(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Integer<TChar>::Integer(const int& val) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{},
     m_value{.int_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const long& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const int& val, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+    m_value{.int_value = val},
+    m_width(),
+    m_length(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Integer<TChar>::Integer(const long& val) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{},
     m_value{.long_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const long long& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const long& val, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+    m_value{.long_value = val},
+    m_width(),
+    m_length(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Integer<TChar>::Integer(const long long& val) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{},
     m_value{.long_long_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const unsigned char& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const long long& val, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+    m_value{.long_long_value = val},
+    m_width(),
+    m_length(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Integer<TChar>::Integer(const unsigned char& val) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{},
     m_value{.unsigned_char_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const unsigned short& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const unsigned char& val, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(ValueStatusType::default_value),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{.unsigned_char_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Integer<TChar>::Integer(const unsigned short& val) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.unsigned_short_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const unsigned int& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const unsigned short& val, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(ValueStatusType::default_value),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{.unsigned_short_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Integer<TChar>::Integer(const unsigned int& val) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.unsigned_int_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const unsigned long& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const unsigned int& val, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+    m_value{.unsigned_int_value = val},
+    m_width(),
+    m_length(),
+    m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Integer<TChar>::Integer(const unsigned long& val) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{},
     m_value{.unsigned_long_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Integer<TChar>::Integer(const unsigned long long& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const unsigned long& val, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(ValueStatusType::default_value),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{.unsigned_long_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Integer<TChar>::Integer(const unsigned long long& val) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.unsigned_long_long_value = val},
     m_width(),
     m_length(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_length, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_length, m_print_out);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value, 
+        int>::type>
+Integer<TChar>::Integer(const unsigned long long& val, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(ValueStatusType::default_value),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{.unsigned_long_long_value = val},
+        m_width(),
+        m_length(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_length, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>

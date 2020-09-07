@@ -55,9 +55,9 @@ private:
         TArgs&&... args);
 private:
     static bool _SetWidth(WidthType& width);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Width>::value, 
             int>::type = 0>
@@ -67,9 +67,9 @@ private:
         test::msg::fmt::var::arg::Width&& set, TArgs&&... args);
 private:   
     static bool _SetLength(LengthType& length);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_cv<
-            typename std::remove_reference<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Length>::value, 
             int>::type = 0>
@@ -95,8 +95,8 @@ public:
         typename _TStatusPointer = 
             typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_integral<_TArg>::value &&
-            !std::is_same<_TArg, String<TChar>>::value &&
-            !std::is_same<_TArg, _TStatusPointer>::value, 
+            !std::is_base_of<String<TChar>, _TArg>::value &&
+            !std::is_base_of<_TStatusPointer, _TArg>::value, 
         int>::type = 0>
     String(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
@@ -113,10 +113,9 @@ public:
     String(const Twchar *& w_val, TArgs&&... args);
 public:
     String(StatusPointerType&& status);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_pointer<typename 
-            std::remove_reference<typename std::remove_cv<TArg>
-                ::type>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
         typename std::enable_if<!std::is_integral<_TArg>::value, 
         int>::type = 0>
     String(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
@@ -244,8 +243,8 @@ template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename _TStatusPointer,
     typename std::enable_if<!std::is_integral<_TArg>::value &&
-        !std::is_same<_TArg, String<TChar>>::value &&
-        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
+        !std::is_base_of<String<TChar>, _TArg>::value &&
+        !std::is_base_of<_TStatusPointer, _TArg>::value, int>::type>
 String<TChar>::String(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},

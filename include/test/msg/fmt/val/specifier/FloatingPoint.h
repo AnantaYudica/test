@@ -54,9 +54,9 @@ private:
         TArgs&&... args);
 private:
     static bool _SetWidth(WidthType& width);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Width>::value, 
             int>::type = 0>
@@ -67,9 +67,9 @@ private:
         
 private:
     static bool _SetPrecision(PrecisionType& precision);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Precision>::value, 
             int>::type = 0>
@@ -90,26 +90,42 @@ private:
     OutputPrintFunctionType* m_print_out;
 public:
     FloatingPoint();
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename _TStatusPointer = 
             typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_floating_point<_TArg>::value &&
-            !std::is_same<FloatingPoint<TChar>, _TArg>::value &&
-            !std::is_same<_TArg, _TStatusPointer>::value, int>::type = 0>
+            !std::is_base_of<FloatingPoint<TChar>, _TArg>::value &&
+            !std::is_base_of<_TStatusPointer, _TArg>::value, int>::type = 0>
     FloatingPoint(TArg&& arg, TArgs&&... args);
-    template<typename... TArgs>
-    FloatingPoint(const float& val, TArgs&&... args);
-    template<typename... TArgs>
-    FloatingPoint(const double& val, TArgs&&... args);
-    template<typename... TArgs>
-    FloatingPoint(const long double& val, TArgs&&... args);
+    
+    FloatingPoint(const float& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_floating_point<_TArg>::value,
+            int>::type = 0>
+    FloatingPoint(const float& val, TArg&& arg, TArgs&&... args);
+    FloatingPoint(const double& val);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_floating_point<_TArg>::value,
+            int>::type = 0>
+    FloatingPoint(const double& val, TArg&& arg, TArgs&&... args);
+    FloatingPoint(const long double& val); 
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
+        typename std::enable_if<!std::is_floating_point<_TArg>::value,
+            int>::type = 0>
+    FloatingPoint(const long double& val, TArg&& arg, TArgs&&... args); 
 public:
     FloatingPoint(StatusPointerType&& status);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_floating_point<_TArg>::value, 
             int>::type = 0>
     FloatingPoint(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
@@ -235,8 +251,8 @@ template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename _TStatusPointer,
     typename std::enable_if<!std::is_floating_point<_TArg>::value &&
-        !std::is_same<FloatingPoint<TChar>, _TArg>::value &&
-        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
+        !std::is_base_of<FloatingPoint<TChar>, _TArg>::value &&
+        !std::is_base_of<_TStatusPointer, _TArg>::value, int>::type>
 FloatingPoint<TChar>::FloatingPoint(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
@@ -250,42 +266,90 @@ FloatingPoint<TChar>::FloatingPoint(TArg&& arg, TArgs&&... args) :
 }
 
 template<typename TChar>
-template<typename... TArgs>
-FloatingPoint<TChar>::FloatingPoint(const float& val, TArgs&&... args) :
+FloatingPoint<TChar>::FloatingPoint(const float& val) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.float_value = val},
     m_width(),
     m_precision(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_precision, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-FloatingPoint<TChar>::FloatingPoint(const double& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_floating_point<_TArg>::value,
+        int>::type>
+FloatingPoint<TChar>::FloatingPoint(const float& val, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(ValueStatusType::default_value),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{.float_value = val},
+        m_width(),
+        m_precision(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_precision, m_print_out, std::forward<TArg>(arg),
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+FloatingPoint<TChar>::FloatingPoint(const double& val) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.double_value = val},
     m_width(),
     m_precision(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_precision, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, m_print_out);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-FloatingPoint<TChar>::FloatingPoint(const long double& val, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_floating_point<_TArg>::value,
+        int>::type>
+FloatingPoint<TChar>::FloatingPoint(const double& val, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(ValueStatusType::default_value),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{.double_value = val},
+        m_width(),
+        m_precision(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_precision, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+FloatingPoint<TChar>::FloatingPoint(const long double& val) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{std::forward<TArgs>(args)...},
+    m_flag{},
     m_value{.long_double_value = val},
     m_width(),
     m_precision(),
     m_print_out(nullptr)
 {
-    _Set(m_width, m_precision, m_print_out, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, m_print_out);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_floating_point<_TArg>::value,
+        int>::type>
+FloatingPoint<TChar>::FloatingPoint(const long double& val, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(ValueStatusType::default_value),
+        m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_value{.long_double_value = val},
+        m_width(),
+        m_precision(),
+        m_print_out(nullptr)
+{
+    _Set(m_width, m_precision, m_print_out, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>

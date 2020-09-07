@@ -41,9 +41,9 @@ public:
     typedef test::msg::fmt::val::Precision<TChar> PrecisionType;
 private:
     static bool _SetWidth(WidthType& width);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Width>::value, 
             int>::type = 0>
@@ -54,9 +54,9 @@ private:
         test::msg::fmt::var::arg::Width&& set, TArgs&&... args);
 private:
     static bool _SetPrecision(PrecisionType& precision);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
                 test::msg::fmt::var::arg::Precision>::value, 
             int>::type = 0>
@@ -75,57 +75,168 @@ private:
     PrecisionType m_precision;
 public:
     Nothing();
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_pointer<typename 
-            std::remove_reference<typename std::remove_cv<TArg>
-                ::type>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
         typename _TStatusPointer = 
             typename test::msg::fmt::val::Specifier<TChar>::StatusPointerType,
         typename std::enable_if<!std::is_integral<_TArg>::value &&
             !std::is_floating_point<_TArg>::value &&
             !std::is_void<_TArg>::value &&
-            !std::is_same<_TArg, Nothing<TChar>>::value &&
-            !std::is_same<_TArg, _TStatusPointer>::value, 
+            !std::is_base_of<Nothing<TChar>, _TArg>::value &&
+            !std::is_base_of<_TStatusPointer, _TArg>::value, 
             int>::type = 0>
     Nothing(TArg&& arg, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const char&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const signed char&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const short&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const int&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const long&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const long long&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const unsigned char&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const unsigned short&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const unsigned int&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const unsigned long&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const unsigned long long&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const float&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const double&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const long double&, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const void*, TArgs&&... args);
-    template<typename... TArgs>
-    Nothing(const char*, TArgs&&... args);
+
+    Nothing(const char&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const char&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const signed char&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const signed char&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const short&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const short&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const int&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const int&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const long&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const long&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const long long&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const long long&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const unsigned char&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const unsigned char&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const unsigned short&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const unsigned short&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const unsigned int&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const unsigned int&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const unsigned long&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const unsigned long&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const unsigned long long&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const unsigned long long&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const float&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const float&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const double&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const double&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const long double&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const long double&, TArg&& arg, TArgs&&... args);
+
+    Nothing(const void*);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const void*, TArg&& arg, TArgs&&... args);
+
+    Nothing(const char*);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_integral<_TArg>::value &&
+            !std::is_floating_point<_TArg>::value &&
+            !std::is_void<_TArg>::value, int>::type = 0>
+    Nothing(const char*, TArg&& arg, TArgs&&... args);
+
 public:
     Nothing(StatusPointerType&& status);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = typename std::remove_pointer<typename 
-            std::remove_reference<typename std::remove_cv<TArg>
-                ::type>::type>::type,
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<typename 
+            std::remove_reference<TArg>::type>::type>::type,
         typename std::enable_if<!std::is_integral<_TArg>::value &&
             !std::is_floating_point<_TArg>::value &&
             !std::is_void<_TArg>::value, int>::type = 0>
@@ -265,8 +376,8 @@ template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<!std::is_integral<_TArg>::value &&
         !std::is_floating_point<_TArg>::value &&
         !std::is_void<_TArg>::value &&
-        !std::is_same<_TArg, Nothing<TChar>>::value &&
-        !std::is_same<_TArg, _TStatusPointer>::value, 
+        !std::is_base_of<Nothing<TChar>, _TArg>::value &&
+        !std::is_base_of<_TStatusPointer, _TArg>::value, 
         int>::type>
 Nothing<TChar>::Nothing(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
@@ -279,195 +390,420 @@ Nothing<TChar>::Nothing(TArg&& arg, TArgs&&... args) :
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const char&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const char&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<char>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const char&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<char>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const signed char&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const signed char&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<signed char>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const signed char&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<signed char>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const short&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const short&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<short>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const short&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<short>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const int&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const int&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<int>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const int&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<int>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const long&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const long&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<long>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const long&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<long>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const long long&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const long long&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<long long>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const long long&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<long long>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const unsigned char&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const unsigned char&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<unsigned char>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const unsigned char&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<unsigned char>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const unsigned short&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const unsigned short&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<unsigned short>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const unsigned short&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<unsigned short>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const unsigned int&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const unsigned int&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<unsigned int>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const unsigned int&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<unsigned int>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const unsigned long&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const unsigned long&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<unsigned long>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const unsigned long&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<unsigned long>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const unsigned long long&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const unsigned long long&) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{test::msg::fmt::var::arg::Define<unsigned long long>{},
-        std::forward<TArgs>(args)...},
+    m_flag{test::msg::fmt::var::arg::Define<unsigned long long>{}},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const float&, TArgs&&... args) :
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const unsigned long long&, TArg&& arg, 
+    TArgs&&... args) :
+        SpecifierBaseType(ValueStatusType::default_value),
+        m_flag{test::msg::fmt::var::arg::Define<unsigned long long>{},
+            std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+        m_width(),
+        m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+Nothing<TChar>::Nothing(const float&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<float>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const float&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<float>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const double&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const double&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<double>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const double&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<double>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const long double&, TArgs&&... args) :
+Nothing<TChar>::Nothing(const long double&) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<long double>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const long double&, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<long double>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const void*, TArgs&&... args) :
+Nothing<TChar>::Nothing(const void*) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<const void*>{}},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const void*, TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{test::msg::fmt::var::arg::Define<const void*>{},
-        std::forward<TArgs>(args)...},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
-template<typename... TArgs>
-Nothing<TChar>::Nothing(const char*, TArgs&&... args) :
+Nothing<TChar>::Nothing(const char*) :
     SpecifierBaseType(ValueStatusType::default_value),
-    m_flag{test::msg::fmt::var::arg::Define<const char*>{},
-        std::forward<TArgs>(args)...},
+    m_flag{test::msg::fmt::var::arg::Define<const char*>{}},
     m_width(),
     m_precision()
 {
-    _Set(m_width, m_precision, std::forward<TArgs>(args)...);
+    _Set(m_width, m_precision);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_integral<_TArg>::value &&
+        !std::is_floating_point<_TArg>::value &&
+        !std::is_void<_TArg>::value, int>::type>
+Nothing<TChar>::Nothing(const char*, TArg&& arg, TArgs&&... args) :
+    SpecifierBaseType(ValueStatusType::default_value),
+    m_flag{test::msg::fmt::var::arg::Define<const char*>{},
+        std::forward<TArg>(arg), std::forward<TArgs>(args)...},
+    m_width(),
+    m_precision()
+{
+    _Set(m_width, m_precision, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TChar>
