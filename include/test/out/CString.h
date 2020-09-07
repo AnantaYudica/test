@@ -378,8 +378,8 @@ CString<TChar>::~CString()
 
 template<typename TChar>
 CString<TChar>::CString(const CString<TChar>& cpy) :
-    m_cstr(nullptr),
     m_status(),
+    m_cstr(nullptr),
     m_size(0),
     m_capacity(0),
     m_minimum_capacity(cpy.m_minimum_capacity), 
