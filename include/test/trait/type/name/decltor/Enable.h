@@ -1,10 +1,13 @@
-#ifndef TEST_TYPE_NAME_DECLTOR_ENABLE_H_
-#define TEST_TYPE_NAME_DECLTOR_ENABLE_H_
+#ifndef TEST_TRAIT_TYPE_NAME_DECLTOR_ENABLE_H_
+#define TEST_TRAIT_TYPE_NAME_DECLTOR_ENABLE_H_
 
-#include "../Qualifier.h"
-#include "../Declarator.h"
+#include "Enable.decl.h"
+#include "../../../../type/name/Qualifier.h"
+#include "../../../../type/name/Declarator.h"
 
 namespace test
+{
+namespace trait
 {
 namespace type
 {
@@ -44,6 +47,8 @@ struct Enable<T, typename test::type::name::Qualifier<T>::DefaultType,
 
 } //!type
 
+} //!trait
+
 } //!test
 
-#endif //!TEST_TYPE_NAME_DECLTOR_ENABLE_H_
+#endif //!TEST_TRAIT_TYPE_NAME_DECLTOR_ENABLE_H_
