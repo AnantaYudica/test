@@ -64,10 +64,9 @@ public:
     String(test::CString<const TChar>&& str, TArgs&&... args);
 public:
     String(StatusPointerType&& status);
-    template<typename TArg, typename... TArgs, 
-        typename _TArg = 
-            typename std::remove_cv<typename std::remove_extent<
-            typename std::remove_pointer<typename std::remove_reference<TArg>::
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_extent<
+        typename std::remove_pointer<typename std::remove_reference<TArg>::
             type>::type>::type>::type, 
         typename std::enable_if<
             !std::is_same<_TArg, TChar>::value &&

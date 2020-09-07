@@ -31,13 +31,13 @@ private:
 public:
     Pointer();
     template<typename TArg, typename... TArgs, typename _TArg = 
-        typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename _TStatusPointer = 
             typename test::msg::fmt::Parameter<TChar>::StatusPointerType,
-        typename std::enable_if<!std::is_same<_TArg, 
-                Pointer<TChar>>::value &&
-            !std::is_same<_TArg, _TStatusPointer>::value, int>::type = 0>
+        typename std::enable_if<
+            !std::is_base_of<Pointer<TChar>, _TArg>::value &&
+            !std::is_base_of<_TStatusPointer, _TArg>::value, int>::type = 0>
     Pointer(TArg&& arg, TArgs&&... args);
 public:
     template<typename... TArgs>
@@ -70,9 +70,9 @@ Pointer<TChar>::Pointer() :
 template<typename TChar>
 template<typename TArg, typename... TArgs, typename _TArg,
     typename _TStatusPointer,
-    typename std::enable_if<!std::is_same<_TArg, 
-            Pointer<TChar>>::value &&
-        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
+    typename std::enable_if<
+        !std::is_base_of<Pointer<TChar>, _TArg>::value &&
+        !std::is_base_of<_TStatusPointer, _TArg>::value, int>::type>
 Pointer<TChar>::Pointer(TArg&& arg, TArgs&&... args) :
     BaseType(),
     m_specifier(BaseType::GetStatusPointer(), 
