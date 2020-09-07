@@ -61,8 +61,8 @@ private:
 public:
     Format();
     template<typename TArg, typename... TArgs, typename _TArg = 
-        typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type, 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type, 
         typename std::enable_if<!std::is_same<_TArg, Format<TChar>>::value, 
             int>::type = 0>
     Format(TArg&& arg, TArgs&&... args);
