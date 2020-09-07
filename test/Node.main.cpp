@@ -315,6 +315,8 @@ int main()
             auto cnode9_next = cnode9.Link();
             auto cnode9_prev = static_cast<const test::Node<Obj1, 2, 0>&>(cnode9).Link();
             assert(node9->val1 == 9);
+            assert(node9_next == nullptr);
+            assert(node9_prev == nullptr);
             assert(cnode9_next == nullptr);
             assert(cnode9_prev == nullptr);
         }
