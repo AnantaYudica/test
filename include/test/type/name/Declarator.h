@@ -9,6 +9,7 @@
 #include "Array.h"
 #include "Function.h"
 #include "Qualifier.h"
+#include "Declarator.decl.h"
 #include "decltor/Format.h"
 #include "decltor/Parameter.h"
 
