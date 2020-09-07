@@ -79,15 +79,15 @@ private:
 public:
     Parameter();
     template<typename TArg, typename... TArgs, typename _TArg = 
-        typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename _TStatusPointer = 
             typename Parameter<TChar>::StatusPointerType,
         typename std::enable_if<
             !std::is_base_of<Parameter<TChar>, _TArg>::value && 
-            !std::is_same<_TArg, 
-                test::msg::fmt::var::FloatingPoint<TChar>>::value &&
-            !std::is_same<_TArg, _TStatusPointer>::value, int>::type = 0>
+            !std::is_base_of<test::msg::fmt::var::FloatingPoint<TChar>, 
+                _TArg>::value &&
+            !std::is_base_of<_TStatusPointer, _TArg>::value, int>::type = 0>
     Parameter(TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
     Parameter(const test::msg::fmt::var::FloatingPoint<TChar>& fpoint_var, 
@@ -98,8 +98,8 @@ public:
 public:
     Parameter(StatusPointerType&& status);
     template<typename TArg, typename... TArgs, typename _TArg = 
-        typename std::remove_reference<
-            typename std::remove_cv<TArg>::type>::type,
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type,
         typename std::enable_if<!std::is_same<_TArg, 
             test::msg::fmt::var::FloatingPoint<TChar>>::value, int>::type = 0>
     Parameter(StatusPointerType&& status, TArg&& arg, TArgs&&... args);
@@ -268,9 +268,9 @@ template<typename TArg, typename... TArgs, typename _TArg,
     typename _TStatusPointer,
     typename std::enable_if<
         !std::is_base_of<Parameter<TChar>, _TArg>::value && 
-        !std::is_same<_TArg, 
-            test::msg::fmt::var::FloatingPoint<TChar>>::value &&
-        !std::is_same<_TArg, _TStatusPointer>::value, int>::type>
+        !std::is_base_of<test::msg::fmt::var::FloatingPoint<TChar>,
+            _TArg>::value &&
+        !std::is_base_of<_TStatusPointer, _TArg>::value, int>::type>
 Parameter<TChar, test::msg::fmt::var::FloatingPoint<TChar>, TParam...>::
     Parameter(TArg&& arg, TArgs&&... args) :
         Parameter<TChar, TParam...>(std::forward<TArg>(arg), 
