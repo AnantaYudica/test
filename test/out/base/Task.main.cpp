@@ -101,7 +101,7 @@ int main()
     assert(t2.IsRelease() == true);
     assert(t2.IsDone() == true);
 
-    assert(t1.IsGood() == false);
+    assert(t1.IsGood() == true);
     assert(t1.IsBad() == false);
     assert(t1.IsAssign() == false);
     assert(t1.IsRelease() == false);
