@@ -88,7 +88,7 @@ Memory<TStatus>::Memory(StatusType& status) :
     const auto && _default = mem::Block();
     for (std::size_t i = 0; i < m_blocksLength; ++i)
         memcpy((void*)(m_blocks + i), (void*)&_default, sizeof(mem::Block));
-    Debug("Memory Register Begin {length : %zu, size : %d bytes}\n",
+    Debug("Memory Register Begin {length : %zu, size : %zu bytes}\n",
         m_blocksLength, m_blocksLength * sizeof(mem::Block));
 }
 
@@ -118,7 +118,7 @@ Memory<TStatus>::~Memory()
                     (m_blocks + i)->Size());
                 if ((m_blocks + i)->File() != nullptr)
                 {
-                    Error(" in file %s, line %zu\n",
+                    Error(" in file %s, line %d\n",
                         (m_blocks + i)->File(), (m_blocks + i)->Line());
                 }
             }
