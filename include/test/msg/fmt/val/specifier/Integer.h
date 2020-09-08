@@ -241,9 +241,9 @@ public:
 template<typename TChar>
 template<typename... TArgs>
 bool Integer<TChar>::_SetPrintOutput(OutputPrintFunctionType*& print_out, 
-    TArgs&&... args)
+    TArgs&&...)
 {
-    constexpr FlagType flag{std::forward<TArgs>(args)...};
+    constexpr FlagType flag{TArgs()...};
     print_out = &PrintType<flag.GetValue()>::Print;
     return true;
 }
