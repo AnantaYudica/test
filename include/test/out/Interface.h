@@ -38,7 +38,7 @@ public:
     Interface<TChar>& operator=(Interface<TChar>&&) = delete;
 public:
     virtual SizeType VPrint(const char * format, va_list var_args) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0))) = 0;
+        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0))) = 0;
     virtual SizeType Print(const char * format, ...) 
         __ATTRIBUTE__((format(printf, 2, 3))) = 0;
 public:
