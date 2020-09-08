@@ -1,6 +1,7 @@
 #ifndef TEST_MESSAGE_H_
 #define TEST_MESSAGE_H_
 
+#include "trait/type/index/IsBaseOf.h"
 #include "Variable.h"
 #include "var/Value.h"
 #include "var/type/Function.h"
@@ -15,6 +16,7 @@
 #include "type/Index.h"
 
 #include <cstddef>
+#include <type_traits>
 
 namespace test
 {
@@ -27,22 +29,38 @@ private:
 protected:
     Message(TDerived& d);
 public:
-    template<typename TCaseId, typename... TVarArgs>
-    void Info(const TCaseId&, test::Variable<TVarArgs...>& var);
-    template<typename TCaseId, typename... TVarArgs>
-    void Debug(const TCaseId&, test::Variable<TVarArgs...>& var);
-    template<typename TCaseId, typename... TVarArgs>
-    void Error(const TCaseId&, test::Variable<TVarArgs...>& var);
+    template<typename TTag, typename TCaseId, typename... TVarArgs, 
+        typename... TArgs, typename std::enable_if<
+        !test::trait::type::index::IsBaseOf<TTag>::Value, int>::type = 0>
+    std::size_t Output(const TTag & tag, const TCaseId&, 
+        test::Variable<TVarArgs...>& var, TArgs&&... args);
+    template<typename TTag, typename TCaseId, std::size_t IAt,
+        typename... TVarArgs, typename... TArgs>
+    std::size_t Output(const test::type::Index<TTag, IAt> & index_tag, 
+        const TCaseId&, test::Variable<TVarArgs...>& var, TArgs&&... args);
 public:
-    template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
-    void Info(const type::Index<TCaseId, ICaseId>&, 
-        test::Variable<TVarArgs...>& var);
-    template<typename TCaseId, std::size_t ICaseId,  typename... TVarArgs>
-    void Debug(const type::Index<TCaseId, ICaseId>&, 
-        test::Variable<TVarArgs...>& var);
-    template<typename TCaseId, std::size_t ICaseId,  typename... TVarArgs>
-    void Error(const type::Index<TCaseId, ICaseId>&, 
-        test::Variable<TVarArgs...>& var);
+    template<typename TCaseId, typename... TVarArgs, typename... TArgs>
+    std::size_t Info(const TCaseId&, test::Variable<TVarArgs...>& var,
+        TArgs&&... args);
+    template<typename TCaseId, typename... TVarArgs, typename... TArgs>
+    std::size_t Debug(const TCaseId&, test::Variable<TVarArgs...>& var,
+        TArgs&&... args);
+    template<typename TCaseId, typename... TVarArgs, typename... TArgs>
+    std::size_t Error(const TCaseId&, test::Variable<TVarArgs...>& var,
+        TArgs&&... args);
+public:
+    template<std::size_t I, typename TCaseId, typename... TVarArgs, 
+        typename... TArgs>
+    std::size_t IndexInfo(const TCaseId&, test::Variable<TVarArgs...>& var,
+        TArgs&&... args);
+    template<std::size_t I, typename TCaseId, typename... TVarArgs, 
+        typename... TArgs>
+    std::size_t IndexDebug(const TCaseId&, test::Variable<TVarArgs...>& var,
+        TArgs&&... args);
+    template<std::size_t I, typename TCaseId, typename... TVarArgs, 
+        typename... TArgs>
+    std::size_t IndexError(const TCaseId&, test::Variable<TVarArgs...>& var,
+        TArgs&&... args);
 };
 
 template<typename TTest, typename TDerived>
@@ -51,70 +69,108 @@ Message<TTest, TDerived>::Message(TDerived& d) :
 {}
 
 template<typename TTest, typename TDerived>
-template<typename TCaseId, typename... TVarArgs>
-void Message<TTest, TDerived>::
-    Info(const TCaseId& case_id, test::Variable<TVarArgs...>& var)
+template<typename TTag, typename TCaseId, typename... TVarArgs, 
+    typename... TArgs, typename std::enable_if<
+    !test::trait::type::index::IsBaseOf<TTag>::Value, int>::type>
+std::size_t Message<TTest, TDerived>::Output(const TTag & tag, 
+    const TCaseId& case_id, test::Variable<TVarArgs...>& var, TArgs&&... args)
 {
-    msg::base::Info info;
-    m_derived.Argument(info, case_id).template Call<void, 
-        const char*>(&TTest::Info, var, std::move(*m_derived.Format(info, 
-            case_id)));
+    auto& out = TTest::GetInstance().Output();
+    auto fmt = m_derived.GetFormat(case_id, tag);
+    std::size_t ret = 0;
+    {
+        auto log = out.Log(tag);
+        if (log.IsBad()) return 0;
+        auto arg = m_derived.GetArgument(case_id, tag);
+        ret = arg.template Call<std::size_t>(case_id, 
+            &test::msg::Format<char>::Output, 
+            fmt, var, (test::out::Interface<char>&)log, 
+            std::forward<TArgs>(args)...);
+    }
+    fmt.Unset();
+    return ret;
 }
 
 template<typename TTest, typename TDerived>
-template<typename TCaseId, typename... TVarArgs>
-void Message<TTest, TDerived>::Debug(const TCaseId& case_id,
-    test::Variable<TVarArgs...>& var)
+template<typename TTag, typename TCaseId, std::size_t IAt,
+    typename... TVarArgs, typename... TArgs>
+std::size_t Message<TTest, TDerived>::Output(const test::type::Index<TTag, 
+    IAt> & index_tag, const TCaseId& case_id, test::Variable<TVarArgs...>& var,
+    TArgs&&... args)
 {
-    msg::base::Debug debug;
-    m_derived.Argument(debug, case_id).template Call<void, 
-        const char*>(&TTest::Debug, var, std::move(*m_derived.Format(debug,
-            case_id)));
+    auto& out = TTest::GetInstance().Output();
+    auto fmt = m_derived.GetFormat(case_id, index_tag);
+    std::size_t ret = 0;
+    {
+        auto log = out.Log(TTag{});
+        if (log.IsBad()) return 0;
+        auto arg = m_derived.GetArgument(case_id, index_tag);
+        ret = arg.template Call<std::size_t>(case_id, 
+            &test::msg::Format<char>::Output, 
+            fmt, var, (test::out::Interface<char>&)log, 
+            std::forward<TArgs>(args)...);
+    }
+    fmt.Unset();
+    return ret;
 }
 
 template<typename TTest, typename TDerived>
-template<typename TCaseId, typename... TVarArgs>
-void Message<TTest, TDerived>::Error(const TCaseId& case_id,
-    test::Variable<TVarArgs...>& var)
+template<typename TCaseId, typename... TVarArgs, typename... TArgs>
+std::size_t Message<TTest, TDerived>::Info(const TCaseId& case_id, 
+    test::Variable<TVarArgs...>& var, TArgs&&... args)
 {
-    msg::base::Error err;
-    m_derived.Argument(err, case_id).template Call<void, 
-        const char*>(&TTest::Error, var, std::move(*m_derived.Format(err,
-            case_id)));
+    return Output(test::out::tag::Info{}, case_id, var,
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TTest, typename TDerived>
-template<typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
-void Message<TTest, TDerived>::Info(const test::type::Index<TCaseId, 
-    ICaseId>& case_id, test::Variable<TVarArgs...>& var)
+template<typename TCaseId, typename... TVarArgs, typename... TArgs>
+std::size_t Message<TTest, TDerived>::Debug(const TCaseId& case_id,
+    test::Variable<TVarArgs...>& var, TArgs&&... args)
 {
-    msg::base::Info info;
-    m_derived.Argument(info, TCaseId{}).template Call<void, 
-        const char*>(case_id, &TTest::Info, var, 
-            std::move(*m_derived.Format(info, TCaseId{})));
+    return Output(test::out::tag::Debug{}, case_id, var,
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TTest, typename TDerived>
-template<typename TCaseId, std::size_t ICaseId,  typename... TVarArgs>
-void Message<TTest, TDerived>::Debug(const test::type::Index<TCaseId, 
-    ICaseId>& case_id, test::Variable<TVarArgs...>& var)
+template<typename TCaseId, typename... TVarArgs, typename... TArgs>
+std::size_t Message<TTest, TDerived>::Error(const TCaseId& case_id,
+    test::Variable<TVarArgs...>& var, TArgs&&... args)
 {
-    msg::base::Debug debug;
-    m_derived.Argument(debug, TCaseId{}).template Call<void, 
-        const char*>(case_id, &TTest::Debug, var, 
-            std::move(*m_derived.Format(debug, TCaseId{})));}
-
-template<typename TTest, typename TDerived>
-template<typename TCaseId, std::size_t ICaseId,  typename... TVarArgs>
-void Message<TTest, TDerived>::Error(const test::type::Index<TCaseId, 
-    ICaseId>& case_id, test::Variable<TVarArgs...>& var)
-{
-    msg::base::Error err;
-    m_derived.Argument(err, TCaseId{}).template Call<void, 
-        const char*>(case_id, &TTest::Error, var, 
-            std::move(*m_derived.Format(err, TCaseId{})));
+    return Output(test::out::tag::Error{}, case_id, var,
+        std::forward<TArgs>(args)...);
 }
 
+template<typename TTest, typename TDerived>
+template<std::size_t I, typename TCaseId, typename... TVarArgs, 
+    typename... TArgs>
+std::size_t Message<TTest, TDerived>::IndexInfo(const TCaseId& case_id, 
+    test::Variable<TVarArgs...>& var, TArgs&&... args)
+{
+    return Output(test::type::Index<test::out::tag::Info, I>{}, case_id, var,
+        std::forward<TArgs>(args)...);
+}
+    
+template<typename TTest, typename TDerived>
+template<std::size_t I, typename TCaseId, typename... TVarArgs, 
+    typename... TArgs>
+std::size_t Message<TTest, TDerived>::IndexDebug(const TCaseId& case_id, 
+    test::Variable<TVarArgs...>& var, TArgs&&... args)
+{
+    return Output(test::type::Index<test::out::tag::Debug, I>{}, case_id, var,
+        std::forward<TArgs>(args)...);
+}
+    
+template<typename TTest, typename TDerived>
+template<std::size_t I, typename TCaseId, typename... TVarArgs, 
+    typename... TArgs>
+std::size_t Message<TTest, TDerived>::IndexError(const TCaseId& case_id, 
+    test::Variable<TVarArgs...>& var, TArgs&&... args)
+{
+    return Output(test::type::Index<test::out::tag::Error, I>{}, case_id, var,
+        std::forward<TArgs>(args)...);
+}
+    
 } //!test
 
 #endif //!TEST_MESSAGE_H_

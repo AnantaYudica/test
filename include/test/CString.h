@@ -39,6 +39,9 @@ public:
     const TChar& operator[](const std::size_t& index) const;
     const TChar* operator*() const;
     const std::size_t& Size() const;
+public:
+    TChar*& Get();
+    const TChar*& Get() const;
 };
 
 template<typename TChar>
@@ -56,7 +59,7 @@ public:
     CString(const TChar* cstr, const std::size_t& size);
     CString(const CString<TChar>& cpy);
     CString(const CString<const TChar>& cpy);
-    CString(CString<const TChar>&& mov) = delete;
+    CString(CString<const TChar>&& mov);
 public:
     CString<TChar>& operator=(const CString<const TChar>& cpy) = delete;
     CString<TChar>& operator=(CString<const TChar>&& mov) = delete;
@@ -64,6 +67,8 @@ public:
     const TChar& operator[](const std::size_t& index) const;
     const TChar* operator*() const;
     const std::size_t& Size() const;
+public:
+    const TChar*& Get() const;
 };
 
 template<typename TChar>
@@ -76,7 +81,7 @@ template<typename TChar>
 template<std::size_t S>
 CString<TChar>::CString(const TChar(&cstr)[S]) :
     m_cstr(new TChar[S]),
-    m_size(S)
+    m_size(S - 1)
 {
     memcpy(m_cstr, cstr, S * sizeof(TChar));
 }
@@ -91,26 +96,29 @@ CString<TChar>::CString(TChar*&& cstr, const std::size_t& size) :
 
 template<typename TChar>
 CString<TChar>::CString(const TChar* cstr, const std::size_t& size) :
-    m_cstr(new TChar[size]),
+    m_cstr(new TChar[size + 1]),
     m_size(size)
 {
     memcpy(m_cstr, cstr, size * sizeof(TChar));
+    memset(m_cstr + size, 0, sizeof(TChar));
 }
 
 template<typename TChar>
 CString<TChar>::CString(const CString<TChar>& cpy) :
-    m_cstr(new TChar[cpy.m_size]),
+    m_cstr(new TChar[cpy.m_size + 1]),
     m_size(cpy.m_size)
 {
     memcpy(m_cstr, cpy.m_cstr, cpy.m_size * sizeof(TChar));
+    memset(m_cstr + m_size, 0, sizeof(TChar));
 }
 
 template<typename TChar>
 CString<TChar>::CString(const CString<const TChar>& cpy) :
-    m_cstr(new TChar[cpy.Size()]),
+    m_cstr(new TChar[cpy.Size() + 1]),
     m_size(cpy.Size())
 {
     memcpy(m_cstr, *cpy, cpy.Size() * sizeof(TChar));
+    memset(m_cstr + m_size, 0, sizeof(TChar));
 }
 
 template<typename TChar>
@@ -124,10 +132,11 @@ CString<TChar>::CString(CString<TChar>&& mov) :
 
 template<typename TChar>
 CString<TChar>::CString(CString<const TChar>&& mov) :
-    m_cstr(new TChar[mov.Size()]),
+    m_cstr(new TChar[mov.Size() + 1]),
     m_size(mov.Size())
 {
     memcpy(m_cstr, *mov, mov.Size() * sizeof(TChar));
+    memset(m_cstr + m_size, 0, sizeof(TChar));
 }
 
 template<typename TChar>
@@ -153,9 +162,10 @@ CString<TChar>& CString<TChar>::
     }
     if (*cpy != nullptr)
     {
-        m_cstr = new char[cpy.Size()];
+        m_cstr = new char[cpy.Size() + 1];
         m_size = cpy.Size();
         memcpy(m_cstr, *cpy, cpy.Size() * sizeof(TChar));
+        memset(m_cstr + m_size, 0, sizeof(TChar));
     }
     return *this;
 }
@@ -203,9 +213,10 @@ CString<TChar>& CString<TChar>::operator=(CString<const TChar>&& mov)
     }
     if (*mov != nullptr)
     {
-        m_cstr = new char[mov.Size()];
+        m_cstr = new char[mov.Size() + 1];
         m_size = mov.Size();
         memcpy(m_cstr, *mov, mov.Size() * sizeof(TChar));
+        memset(m_cstr + m_size, 0, sizeof(TChar));
     }
     return *this;
 }
@@ -235,10 +246,22 @@ const std::size_t& CString<TChar>::Size() const
 }
 
 template<typename TChar>
+TChar*& CString<TChar>::Get()
+{
+    return m_cstr;
+}
+
+template<typename TChar>
+const TChar*& CString<TChar>::Get() const
+{
+    return m_cstr;
+}
+
+template<typename TChar>
 template<std::size_t S>
 CString<const TChar>::CString(const TChar(&cstr)[S]) :
     m_cstr(cstr),
-    m_size(S)
+    m_size(S - 1)
 {}
 
 template<typename TChar>
@@ -260,6 +283,12 @@ CString<const TChar>::CString(const CString<const TChar>& cpy) :
 {}
 
 template<typename TChar>
+CString<const TChar>::CString(CString<const TChar>&& mov) :
+    m_cstr(mov.m_cstr),
+    m_size(mov.m_size)
+{}
+
+template<typename TChar>
 const TChar& CString<const TChar>::operator[](const std::size_t& index) const
 {
     return m_cstr[index];
@@ -275,6 +304,12 @@ template<typename TChar>
 const std::size_t& CString<const TChar>::Size() const
 {
     return m_size;
+}
+
+template<typename TChar>
+const TChar*& CString<const TChar>::Get() const
+{
+    return m_cstr;
 }
 
 } //!test

@@ -9,17 +9,28 @@
 #include "test/Trace.h"
 #include "test/reg/Base.h"
 #include "test/type/Name.h"
+#include "test/type/name/Parameter.h"
+#include "test/type/name/Template.h"
+#include "test/cstr/Format.h"
 
 #include <cstdio>
 #include <cstdlib>
 #include <utility>
 #include <vector>
 #include <stack>
+#include <cstdarg>
 
 #ifndef TEST_OUTPUT_FILENAME
 #define TEST_OUTPUT_FILENAME_EMPTY
 #endif //!TEST_OUTPUT_FILENAME
 
+#ifndef __ATTRIBUTE__
+#ifdef __GNUC__
+#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#else
+#define __ATTRIBUTE__(...)
+#endif
+#endif //!__ATTRIBUTE__
 
 namespace _helper
 {
@@ -41,7 +52,7 @@ class Test
 public:
     typedef Ts StatusType;
     typedef To<StatusType> OutputType;
-    typedef Tmem<OutputType> MemoryType;
+    typedef Tmem<StatusType> MemoryType;
 private:
     static Test<Ts, To, Tmem>* ms_instance;
 private:
@@ -49,8 +60,8 @@ private:
     std::vector<test::reg::Base*>* m_list;
     std::stack<test::Trace>* m_traces;
     StatusType m_status;
-    OutputType m_output;
     MemoryType m_memory;
+    OutputType m_output;
 private:
     Test();
     Test(const Test<Ts, To, Tmem>& cpy) = delete;
@@ -61,12 +72,12 @@ public:
     Test<Ts, To, Tmem>& operator=(const Test<Ts, To, Tmem>& cpy) = delete;
     Test<Ts, To, Tmem>& operator=(Test<Ts, To, Tmem>&& mov) = delete;
 public:
-    template<typename... Targs>
-    static void Info(const char* info_msg_cstr, Targs&&... args);
-    template<typename... Targs>
-    static void Debug(const char* debug_msg_cstr, Targs&&... args);
-    template<typename... Targs>
-    static void Error(const char* err_msg_cstr, Targs&&... args);
+    static void Info(const char* info_msg_cstr, ...)
+        __ATTRIBUTE__((__format__ (__printf__, 1, 2)));
+    static void Debug(const char* debug_msg_cstr, ...)
+        __ATTRIBUTE__((__format__ (__printf__, 1, 2)));
+    static void Error(const char* err_msg_cstr, ...)
+        __ATTRIBUTE__((__format__ (__printf__, 1, 2)));
     static bool Assert(bool test, const char* err_msg_cstr, 
         const char* file, const int& line);
 public:
@@ -99,14 +110,14 @@ Test<Ts, To, Tmem>::Test() :
     m_list(NULL),
     m_traces(NULL),
     m_status(),
+#ifdef USING_TEST_MEMORY
+    m_memory(m_status),
+#endif //USING_TEST_MEMORY
 #ifdef TEST_OUTPUT_FILENAME_EMPTY
     m_output(m_status)
 #else //!TEST_OUTPUT_FILENAME_EMPTY
     m_output(m_status, TEST_OUTPUT_FILENAME)
 #endif
-#ifdef USING_TEST_MEMORY
-    ,m_memory(m_output)
-#endif //USING_TEST_MEMORY
 {
 }
 
@@ -117,14 +128,14 @@ Test<Ts, To, Tmem>::Test(Test<Ts, To, Tmem>&& mov) :
     m_list(std::move(mov.m_list)),
     m_traces(std::move(mov.m_traces)),
     m_status(std::move(mov.m_status)),
-    m_output(std::move(mov.m_output))
 #ifdef USING_TEST_MEMORY
-    ,m_memory(std::move(mov.m_memory))
+    m_memory(std::move(mov.m_memory)),
 #endif //USING_TEST_MEMORY
+    m_output(std::move(mov.m_output))
 {
     m_output.Set(m_status);
 #ifdef USING_TEST_MEMORY
-    m_memory.Set(m_output);
+    m_memory.Set(m_status);
 #endif //USING_TEST_MEMORY
     mov.m_list = NULL;
     mov.m_traces = NULL;
@@ -140,37 +151,37 @@ Test<Ts, To, Tmem>::~Test()
 
 template<typename Ts, template<typename> class To,
     template<typename> class Tmem>
-template<typename... Targs>
-void Test<Ts, To, Tmem>::Info(const char* info_msg_cstr,
-    Targs&&... args)
+void Test<Ts, To, Tmem>::Info(const char* info_msg_cstr, ...)
 {
-    GetInstance().Output().Info(info_msg_cstr, 
-        std::forward<Targs>(args)...);
+    va_list args;
+    va_start(args, info_msg_cstr);
+    GetInstance().Output().VInfo(info_msg_cstr, args);
+    va_end(args);
 }
 
 template<typename Ts, template<typename> class To,
     template<typename> class Tmem>
-template<typename... Targs>
-void Test<Ts, To, Tmem>::Debug(const char* debug_msg_cstr, 
-    Targs&&...args)
+void Test<Ts, To, Tmem>::Debug(const char* debug_msg_cstr, ...)
 {
-    GetInstance().Output().Debug(debug_msg_cstr,
-        std::forward<Targs>(args)...);
+    va_list args;
+    va_start(args, debug_msg_cstr);
+    GetInstance().Output().VDebug(debug_msg_cstr, args);
+    va_end(args);
 }
 
 template<typename Ts, template<typename> class To,
     template<typename> class Tmem>
-template<typename... Targs>
-void Test<Ts, To, Tmem>::Error(const char* err_msg_cstr, 
-    Targs&&... args)
+void Test<Ts, To, Tmem>::Error(const char* err_msg_cstr, ...)
 {
-    GetInstance().Output().Error(err_msg_cstr,
-        std::forward<Targs>(args)...);
+    va_list args;
+    va_start(args, err_msg_cstr);
+    GetInstance().Output().VError(err_msg_cstr, args);
+    va_end(args);
     auto trace = GetInstance().GetTrace();
     while (!trace.empty())
     {
         GetInstance().Output().Error(" from file %s line %i\n",
-        trace.top().File, trace.top().Line);
+            trace.top().File, trace.top().Line);
         trace.pop();
     }
 }
@@ -338,7 +349,7 @@ void* operator new[]( std::size_t sz, const char (&file)[N], const int& line)
 
 template<std::size_t N>
 void* operator new ( std::size_t sz, void* ptr,
-    const char (&file)[N], const int& line)
+    const char (&)[N], const int&)
 {
     auto p = ::operator new(sz, ptr);
     return p;
@@ -346,7 +357,7 @@ void* operator new ( std::size_t sz, void* ptr,
 
 template<std::size_t N>
 void* operator new[]( std::size_t sz, void* ptr,
-    const char (&file)[N], const int& line)
+    const char (&)[N], const int& )
 {
     auto p = ::operator new[](sz, ptr);
     return p;
@@ -410,10 +421,43 @@ void operator delete[](void* p) noexcept
 template<>\
 struct test::type::Name<__TYPE__,##__VA_ARGS__>\
 {\
-    static test::CString<const char> CStr()\
+    template<typename TChar = char>\
+    static test::CString<const TChar> CStr()\
     {\
-        static char _cstr[] = __NAME__;\
+        static TChar _cstr[] = __NAME__;\
         return {_cstr};\
+    }\
+}
+
+#define TEST_TYPE_NAME_TEMPLATE(__NAME__, __TYPE__, ...)\
+struct test::type::Name<__TYPE__,##__VA_ARGS__>\
+{\
+    template<typename TChar = char>\
+    static test::CString<const TChar> CStr()\
+    {\
+        typedef decltype(test::type::name::tmpl::Parameter(\
+            std::declval<__TYPE__,##__VA_ARGS__*>())) ParamType;\
+        typedef test::type::name::Template<__TYPE__,##__VA_ARGS__,\
+            ParamType> TemplateType;\
+        static test::CString<TChar> _name = test::cstr::Format(\
+            (sizeof(__NAME__) + TemplateType::template CStr<TChar>().Size()),\
+            "%s%s", __NAME__, *(TemplateType::template CStr<TChar>()));\
+        return {_name};\
+    }\
+}
+
+#define TEST_TYPE_NAME_PARAMETER(__TYPE__, ...)\
+inline auto test::type::name::tmpl::Parameter(__TYPE__,##__VA_ARGS__*)\
+
+#define TEST_TYPE_NAME_VAL_ENUMERATION(__NAME__, __TYPE__, __VALUE__, ...)\
+template<>\
+struct test::type::name::val::Enumeration<__TYPE__, __VALUE__,##__VA_ARGS__>\
+{\
+    template<typename TChar= char>\
+    static test::CString<TChar> CStr()\
+    {\
+        static TChar _val[] = __NAME__;\
+        return {_val};\
     }\
 }
 

@@ -4,8 +4,12 @@
 #include "../Variable.h"
 #include "../var/Element.h"
 #include "../type/Index.h"
+#include "../Forward.h"
+#include "../cstr/Forward.h"
+#include "../trait/type/index/IsBaseOf.h"
 
 #include <cstddef>
+#include <type_traits>
 #include <utility>
 
 namespace test
@@ -13,180 +17,132 @@ namespace test
 namespace msg
 {
 
-template<typename TCaseId, typename... TArgs>
+template<typename... TArgs>
 class Argument
 {
 public:
     template<std::size_t I, typename TVar>
     using ElementType = typename test::var::Element<I, TVar>::Type;
 public:
-    template<std::size_t ICaseId, typename TRet, typename TDerived, 
-        typename TVar, typename... TFuncMmbrArgs>
+    template<std::size_t IAt, typename TRet, typename TDerived, typename TVar, 
+        typename... TFuncMmbrArgs>
     using PointerFunctionMemberType = TRet(TDerived::*)(TFuncMmbrArgs...);
-    template<std::size_t ICaseId, typename TRet, typename TVar, 
+    template<std::size_t IAt, typename TRet, typename TVar, 
         typename... TFuncArgs>
     using PointerFunctionType = TRet(*)(TFuncArgs...);
 public:
     Argument();
 protected:
-    template<std::size_t ICaseId, typename TRet, typename TFuncMmbr, 
-        typename TDerived, typename... TFuncMmbrArgs, typename... TVarArgs>
-    TRet Filler(TFuncMmbr func_mmbr, TDerived& d,
+    template<typename TRet, typename TFuncMmbr, typename TDerived, 
+        typename... TFuncMmbrArgs, typename TCaseId, std::size_t ICaseId, 
+        typename... TVarArgs>
+    TRet Filler(const test::type::Index<TCaseId, ICaseId>&, 
+        TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>& var, 
+        TFuncMmbrArgs&&... args);
+    template<typename TRet, typename TFunc, typename... TFuncArgs, 
+        typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
+    TRet Filler(const test::type::Index<TCaseId, ICaseId>&, TFunc func, 
+        test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
+public:
+    template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
+        typename TCaseId, typename... TVarArgs, 
+        typename TFuncMmbr = PointerFunctionMemberType<0, TRet, TDerived, 
+            test::Variable<TVarArgs...>, TFuncMmbrArgs...>,
+        typename std::enable_if<!test::trait::type::index::
+            IsBaseOf<TCaseId>::Value, int>::type = 0>
+    TRet Call(const TCaseId&, TFuncMmbr func_mmbr, TDerived& d,
         test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args);
-    template<std::size_t ICaseId, typename TRet, typename TFunc, 
-        typename... TFuncArgs, typename... TVarArgs>
-    TRet Filler(TFunc func, test::Variable<TVarArgs...>& var, 
+    template<typename TRet, typename... TFuncArgs, typename TCaseId, 
+        typename... TVarArgs, typename TFunc = PointerFunctionType<0, TRet, 
+            test::Variable<TVarArgs...>, TFuncArgs...>,
+        typename std::enable_if<!test::trait::type::index::
+            IsBaseOf<TCaseId>::Value, int>::type = 0>
+    TRet Call(const TCaseId&, TFunc func, test::Variable<TVarArgs...>& var,
         TFuncArgs&&... args);
 public:
-#ifdef _MSC_BUILD 
-    template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
-        typename... TVarArgs, typename TFuncMmbr = PointerFunctionMemberType<0,
-        TRet, TDerived, test::Variable<TVarArgs...>, TFuncMmbrArgs...>>
-    TRet Call(TFuncMmbr func_mmbr, TDerived& d,
-        test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args);
-#else
-    template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
-        typename... TVarArgs>
-    TRet Call(PointerFunctionMemberType<0, TRet, TDerived, 
-        test::Variable<TVarArgs...>, TFuncMmbrArgs...> func_mmbr, TDerived& d,
-        test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args);
-#endif
-#ifdef _MSC_BUILD 
-    template<typename TRet, typename... TFuncArgs, typename... TVarArgs,
-        typename TFunc = PointerFunctionType<0, TRet, 
-        test::Variable<TVarArgs...>, TFuncArgs...>>
-    TRet Call(TFunc func, test::Variable<TVarArgs...>& var,
-        TFuncArgs&&... args);
-#else
-    template<typename TRet, typename... TFuncArgs, typename... TVarArgs>
-    TRet Call(PointerFunctionType<0, TRet, test::Variable<TVarArgs...>, 
-        TFuncArgs...> func, test::Variable<TVarArgs...>& var, 
-        TFuncArgs&&... args);
-#endif
-public:
-#ifdef _MSC_BUILD 
     template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
-        std::size_t ICaseId, typename... TVarArgs, typename TFuncMmbr = 
-        PointerFunctionMemberType<ICaseId, TRet, TDerived,
-        test::Variable<TVarArgs...>, TFuncMmbrArgs...>>
-    TRet Call(const type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr,
+        typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
+        typename TFuncMmbr = PointerFunctionMemberType<ICaseId, TRet, TDerived,
+            test::Variable<TVarArgs...>, TFuncMmbrArgs...>>
+    TRet Call(const test::type::Index<TCaseId, ICaseId>&, TFuncMmbr func_mmbr,
         TDerived& d, test::Variable<TVarArgs...>& var, 
         TFuncMmbrArgs&&... args);
-#else
-    template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
-        std::size_t ICaseId, typename... TVarArgs>
-    TRet Call(const type::Index<TCaseId, ICaseId>&, 
-        PointerFunctionMemberType<ICaseId, TRet, TDerived, 
-            test::Variable<TVarArgs...>, TFuncMmbrArgs...> func_mmbr, 
-        TDerived& d, test::Variable<TVarArgs...>& var, 
-        TFuncMmbrArgs&&... args);
-#endif
-#ifdef _MSC_BUILD 
-    template<typename TRet, typename... TFuncArgs, std::size_t ICaseId, 
-        typename... TVarArgs, typename TFunc = PointerFunctionType<ICaseId,
-        TRet, test::Variable<TVarArgs...>, TFuncArgs...>>
-    TRet Call(const type::Index<TCaseId, ICaseId>&, TFunc func,
+    template<typename TRet, typename... TFuncArgs, 
+        typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
+        typename TFunc = PointerFunctionType<ICaseId, TRet, 
+            test::Variable<TVarArgs...>, TFuncArgs...>>
+    TRet Call(const test::type::Index<TCaseId, ICaseId>&, TFunc func,
         test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
-#else
-    template<typename TRet, typename... TFuncArgs, std::size_t ICaseId, 
-        typename... TVarArgs>
-    TRet Call(const type::Index<TCaseId, ICaseId>&, PointerFunctionType<ICaseId, 
-        TRet, test::Variable<TVarArgs...>, TFuncArgs...> func, 
-        test::Variable<TVarArgs...>& var, TFuncArgs&&... args);
-#endif
 };
 
-template<typename TCaseId, typename... TArgs>
-Argument<TCaseId, TArgs...>::Argument()
+template<typename... TArgs>
+Argument<TArgs...>::Argument()
 {};
 
-template<typename TCaseId, typename... TArgs>
-template<std::size_t ICaseId, typename TRet, typename TFuncMmbr, 
-    typename TDerived, typename... TFuncMmbrArgs, typename... TVarArgs>
-TRet Argument<TCaseId, TArgs...>::Filler(TFuncMmbr func_mmbr, TDerived& d,
-    test::Variable<TVarArgs...>&, TFuncMmbrArgs&&... args)
-{
-    return (d.*func_mmbr)(std::forward<TFuncMmbrArgs>(args)...);
-}
-
-template<typename TCaseId, typename... TArgs>
-template<std::size_t ICaseId, typename TRet, typename TFunc, 
-    typename... TFuncArgs, typename... TVarArgs>
-TRet Argument<TCaseId, TArgs...>::Filler(TFunc func, 
-    test::Variable<TVarArgs...>&, TFuncArgs&&... args)
-{
-    return func(std::forward<TFuncArgs>(args)...);
-}
-
-template<typename TCaseId, typename... TArgs>
-#ifdef _MSC_BUILD 
-template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
-    typename... TVarArgs, typename TFuncMmbr>
-TRet Argument<TCaseId, TArgs...>::Call(TFuncMmbr func_mmbr,
-    TDerived& d, test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
-#else
-template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
+template<typename... TArgs>
+template<typename TRet, typename TFuncMmbr, typename TDerived, 
+    typename... TFuncMmbrArgs, typename TCaseId, std::size_t ICaseId, 
     typename... TVarArgs>
-TRet Argument<TCaseId, TArgs...>::Call(PointerFunctionMemberType<0, TRet, 
-    TDerived, test::Variable<TVarArgs...>, TFuncMmbrArgs...> func_mmbr, 
-    TDerived& d, test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
-#endif
-{
-    return Filler<0, TRet>(func_mmbr, d, var, 
-        std::forward<TFuncMmbrArgs>(args)...);
-}
-
-template<typename TCaseId, typename... TArgs>
-#ifdef _MSC_BUILD 
-template<typename TRet, typename... TFuncArgs, typename... TVarArgs,
-    typename TFunc>
-TRet Argument<TCaseId, TArgs...>::Call(TFunc func,
-    test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
-#else
-template<typename TRet, typename... TFuncArgs, typename... TVarArgs>
-TRet Argument<TCaseId, TArgs...>::Call(PointerFunctionType<0, TRet, 
-    test::Variable<TVarArgs...>, TFuncArgs...> func, 
-    test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
-#endif
-{
-    return Filler<0, TRet>(func, var, std::forward<TFuncArgs>(args)...);
-}
-
-template<typename TCaseId, typename... TArgs>
-#ifdef _MSC_BUILD
-template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
-    std::size_t ICaseId, typename... TVarArgs, typename TFuncMmbr>
-TRet Argument<TCaseId, TArgs...>::Call(const type::Index<TCaseId, ICaseId>&, 
-    TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>& var, 
+TRet Argument<TArgs...>::Filler(const test::type::Index<TCaseId, ICaseId>&, 
+    TFuncMmbr func_mmbr, TDerived& d, test::Variable<TVarArgs...>&, 
     TFuncMmbrArgs&&... args)
-#else
-template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
-    std::size_t ICaseId, typename... TVarArgs>
-TRet Argument<TCaseId, TArgs...>::Call(const type::Index<TCaseId, ICaseId>&, 
-    PointerFunctionMemberType<ICaseId, TRet, TDerived, 
-        test::Variable<TVarArgs...>, TFuncMmbrArgs...> func_mmbr, 
-    TDerived& d, test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
-#endif
 {
-    return Filler<ICaseId, TRet>(func_mmbr, d, var, 
+    return (d.*func_mmbr)(test::Forward<TFuncMmbrArgs>::Value(args)...);
+}
+
+template<typename... TArgs>
+template<typename TRet, typename TFunc, typename... TFuncArgs, 
+    typename TCaseId, std::size_t ICaseId, typename... TVarArgs>
+TRet Argument<TArgs...>::Filler(const test::type::Index<TCaseId, ICaseId>&, 
+    TFunc func, test::Variable<TVarArgs...>&, TFuncArgs&&... args)
+{
+    return func(test::Forward<TFuncArgs>::Value(args)...);
+}
+
+template<typename... TArgs>
+template<typename TRet, typename TDerived, typename... TFuncMmbrArgs,
+    typename TCaseId, typename... TVarArgs, typename TFuncMmbr,
+    typename std::enable_if<!test::trait::type::index::
+        IsBaseOf<TCaseId>::Value, int>::type>
+TRet Argument<TArgs...>::Call(const TCaseId&, TFuncMmbr func_mmbr,
+    TDerived& d, test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
+{
+    return Filler<TRet>(test::type::Index<TCaseId, 0>{}, func_mmbr, d, var, 
         std::forward<TFuncMmbrArgs>(args)...);
 }
 
-template<typename TCaseId, typename... TArgs>
-#ifdef _MSC_BUILD 
-template<typename TRet, typename... TFuncArgs, std::size_t ICaseId, 
-    typename... TVarArgs, typename TFunc>
-TRet Argument<TCaseId, TArgs...>::Call(const type::Index<TCaseId, ICaseId>&, 
-    TFunc func, test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
-#else
-template<typename TRet, typename... TFuncArgs, std::size_t ICaseId, 
-    typename... TVarArgs>
-TRet Argument<TCaseId, TArgs...>::Call(const type::Index<TCaseId, ICaseId>&, 
-    PointerFunctionType<ICaseId, TRet, test::Variable<TVarArgs...>, 
-    TFuncArgs...> func, test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
-#endif
+template<typename... TArgs>
+template<typename TRet, typename... TFuncArgs, typename TCaseId,
+    typename... TVarArgs, typename TFunc, typename std::enable_if<
+        !test::trait::type::index::IsBaseOf<TCaseId>::Value, int>::type>
+TRet Argument<TArgs...>::Call(const TCaseId&, TFunc func,
+    test::Variable<TVarArgs...>& var, TFuncArgs&&... args)
 {
-    return Filler<ICaseId, TRet>(func, var, std::forward<TFuncArgs>(args)...);
+    return Filler<TRet>(test::type::Index<TCaseId, 0>{}, func, var, 
+        std::forward<TFuncArgs>(args)...);
+}
+
+template<typename... TArgs>
+template<typename TRet, typename TDerived, typename... TFuncMmbrArgs, 
+    typename TCaseId, std::size_t ICaseId, typename... TVarArgs, 
+    typename TFuncMmbr>
+TRet Argument<TArgs...>::Call(const test::type::Index<TCaseId, 
+    ICaseId>& i_case_id, TFuncMmbr func_mmbr, TDerived& d, 
+    test::Variable<TVarArgs...>& var, TFuncMmbrArgs&&... args)
+{
+    return Filler<TRet>(i_case_id, func_mmbr, d, var, 
+        std::forward<TFuncMmbrArgs>(args)...);
+}
+
+template<typename... TArgs>
+template<typename TRet, typename... TFuncArgs, typename TCaseId, 
+    std::size_t ICaseId, typename... TVarArgs, typename TFunc>
+TRet Argument<TArgs...>::Call(const test::type::Index<TCaseId, 
+    ICaseId>& i_case_id, TFunc func, test::Variable<TVarArgs...>& var, 
+    TFuncArgs&&... args)
+{
+    return Filler<TRet>(i_case_id, func, var, 
+        std::forward<TFuncArgs>(args)...);
 }
 
 } //!msg

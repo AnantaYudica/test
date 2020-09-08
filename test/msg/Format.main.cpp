@@ -3,72 +3,151 @@
 TEST_CONSTRUCT;
 
 #include "test/msg/Format.h"
+#include "test/out/CString.h"
 
-#include <cstdio>
-
-char _true_cstr[] = "true";
-char _false_cstr[] = "false";
-
-#define PRINT_FORMAT(__VAR_NAME__)\
-printf("name : %s, size : %d, cstr : \"%s\", IsNull : %s, IsEmpty : %s\n",\
-    #__VAR_NAME__, __VAR_NAME__.Size(), *__VAR_NAME__,\
-    (!__VAR_NAME__ ? _true_cstr : _false_cstr),\
-    (__VAR_NAME__.IsEmpty() ? _true_cstr : _false_cstr))
-
+#include <cassert>
+#include <cstring>
+#include <utility>
 
 int main()
 {
-    test::msg::Format<char> f1;
-    PRINT_FORMAT(f1);
+    {
+        test::msg::Format<char> f1{
+            test::msg::fmt::var::String<char>{},
+            test::msg::fmt::var::Integer<char>{}
+        };
 
-    test::msg::Format<char> f1_1("");
-    PRINT_FORMAT(f1_1);
+        assert(f1 == true);
+        assert(f1.IsSet() == false);
+        assert(f1.IsGood() == true);
+        assert(f1.IsBad() == false);
+        assert(f1.GetBadCode() == test::msg::Format<char>::StatusType::good);
 
-    test::msg::Format<char> f2("format : %s");
-    PRINT_FORMAT(f2);
+        assert(f1.Load("test : ", 4000) == 2);
+        assert(f1.IsSet() == true);
+        assert(f1.IsGood() == true);
+        assert(f1.IsBad() == false);
+        assert(f1.GetBadCode() == test::msg::Format<char>::StatusType::good);
 
-    test::msg::Format<char> f3(f2, f2.Size() + 4, "%s::%s");
-    PRINT_FORMAT(f3);
+        test::out::CString<char> out_cstr1, out_cstr2;
+        auto size_a = out_cstr2.Print("%s%d", "test : ", 4000);
+        auto size_b = f1.Output(out_cstr1);
+        assert(size_a == size_b);
+        assert(out_cstr1.Size() == out_cstr2.Size());
+        assert(strncmp(*(out_cstr1.Get()), *(out_cstr2.Get()), 
+            out_cstr2.Size()) == 0);
 
-    test::msg::Format<char> f4(f2, f2.Size() + 25, 
-        "Type<%s>", "template Foo1<%s>(%s)");
-    PRINT_FORMAT(f4);
+        f1.Unset();
+        assert(f1.IsSet() == false);
+        assert(f1.IsGood() == true);
+        assert(f1.IsBad() == false);
+        assert(f1.GetBadCode() == test::msg::Format<char>::StatusType::good);
+        
+        assert(f1.Load("test ? ", -4000) == 2);
+        assert(f1.IsSet() == true);
+        assert(f1.IsGood() == true);
+        assert(f1.IsBad() == false);
+        assert(f1.GetBadCode() == test::msg::Format<char>::StatusType::good);
+        
+        size_a = out_cstr2.Print("%s%d", "test ? ", -4000);
+        size_b = f1.Output(out_cstr1);
+        assert(size_a == size_b);
+        assert(out_cstr1.Size() == out_cstr2.Size());
+        assert(strncmp(*(out_cstr1.Get()), *(out_cstr2.Get()), 
+            out_cstr2.Size()) == 0);
+        
+        f1.Reset();
+        assert(f1.IsSet() == false);
+        assert(f1.IsGood() == true);
+        assert(f1.IsBad() == false);
+        assert(f1.GetBadCode() == test::msg::Format<char>::StatusType::good);
 
-    test::msg::Format<char> f5("format : %d");
-    PRINT_FORMAT(f5);
+        assert(f1.Load("test ? ", 6000) == 2);
+        assert(f1.IsSet() == true);
+        assert(f1.IsGood() == true);
+        assert(f1.IsBad() == false);
+        assert(f1.GetBadCode() == test::msg::Format<char>::StatusType::good);
+        
+        size_a = out_cstr2.Print("%s%d", "test ? ", 6000);
+        size_b = f1.Output(out_cstr1);
+        assert(size_a == size_b);
+        assert(out_cstr1.Size() == out_cstr2.Size());
+        assert(strncmp(*(out_cstr1.Get()), *(out_cstr2.Get()), 
+            out_cstr2.Size()) == 0);
+        
+        test::msg::Format<char> f2{f1};
+        assert(f2 == true);
+        assert(f2.IsSet() == true);
+        assert(f2.IsGood() == true);
+        assert(f2.IsBad() == false);
+        assert(f2.GetBadCode() == test::msg::Format<char>::StatusType::good);
+        
+        size_a = out_cstr2.Print("%s%d", "test ? ", 6000);
+        size_b = f2.Output(out_cstr1);
+        assert(size_a == size_b);
+        assert(out_cstr1.Size() == out_cstr2.Size());
+        assert(strncmp(*(out_cstr1.Get()), *(out_cstr2.Get()), 
+            out_cstr2.Size()) == 0);
+
+        test::msg::Format<char> f3{std::move(f2)};
+        assert(f3 == true);
+        assert(f3.IsSet() == true);
+        assert(f3.IsGood() == true);
+        assert(f3.IsBad() == false);
+        assert(f3.GetBadCode() == test::msg::Format<char>::StatusType::good);
+
+        assert(f2 == false);
+        assert(f2.IsSet() == false);
+        assert(f2.IsGood() == true);
+        assert(f2.IsBad() == false);
+        assert(f2.GetBadCode() == test::msg::Format<char>::StatusType::good);
+        
+        size_a = out_cstr2.Print("%s%d", "test ? ", 6000);
+        size_b = f3.Output(out_cstr1);
+        assert(size_a == size_b);
+        assert(out_cstr1.Size() == out_cstr2.Size());
+        assert(strncmp(*(out_cstr1.Get()), *(out_cstr2.Get()), 
+            out_cstr2.Size()) == 0);
+
+        test::msg::Format<char> f4;
+        f4 = f3;
+
+        assert(f4 == true);
+        assert(f4.IsSet() == true);
+        assert(f4.IsGood() == true);
+        assert(f4.IsBad() == false);
+        assert(f4.GetBadCode() == test::msg::Format<char>::StatusType::good);
+        
+        size_a = out_cstr2.Print("%s%d", "test ? ", 6000);
+        size_b = f4.Output(out_cstr1);
+        assert(size_a == size_b);
+        assert(out_cstr1.Size() == out_cstr2.Size());
+        assert(strncmp(*(out_cstr1.Get()), *(out_cstr2.Get()), 
+            out_cstr2.Size()) == 0);
+
+        test::msg::Format<char> f5;
+        f5 = std::move(f4);
+        
+        assert(f5 == true);
+        assert(f5.IsSet() == true);
+        assert(f5.IsGood() == true);
+        assert(f5.IsBad() == false);
+        assert(f5.GetBadCode() == test::msg::Format<char>::StatusType::good);
+
+        assert(f4 == false);
+        assert(f4.IsSet() == false);
+        assert(f4.IsGood() == true);
+        assert(f4.IsBad() == false);
+        assert(f4.GetBadCode() == test::msg::Format<char>::StatusType::good);
+        
+        size_a = out_cstr2.Print("%s%d", "test ? ", 6000);
+        size_b = f5.Output(out_cstr1);
+        assert(size_a == size_b);
+        assert(out_cstr1.Size() == out_cstr2.Size());
+        assert(strncmp(*(out_cstr1.Get()), *(out_cstr2.Get()), 
+            out_cstr2.Size()) == 0);
+        
+    }
     
-    test::msg::Format<char> f6(f5, f5.Size() + 10, 4);
-    PRINT_FORMAT(f6);
-
-    test::msg::Format<char> f7(f4);
-    PRINT_FORMAT(f7);
-
-    test::msg::Format<char> f8(std::move(f7));
-    PRINT_FORMAT(f8);
-    PRINT_FORMAT(f7);
-
-    test::msg::Format<char> f9("test");
-    PRINT_FORMAT(f9);
-    f9 = f4;
-    PRINT_FORMAT(f9);
-
-    test::msg::Format<char> f10;
-    f10 = std::move(f9);
-    PRINT_FORMAT(f10);
-    PRINT_FORMAT(f9);
-
-    test::msg::Format<char> f11("testddd : %d", 14);
-    PRINT_FORMAT(f11);
-
-    test::msg::Format<char> f12(test::CString<char>("test cstr"));
-    PRINT_FORMAT(f12);
-
-    test::msg::Format<char> f13(test::CString<const char>("test cstr const"));
-    PRINT_FORMAT(f13);
-    
-    test::msg::Format<char> f14(std::move(test::CString<char>("test cstr")));
-    PRINT_FORMAT(f14);
-
-    test::msg::Format<char> f15(std::move(test::CString<const char>("test cstr const")));
-    PRINT_FORMAT(f15);
+    return TEST::GetInstance().Status().Get();
 }

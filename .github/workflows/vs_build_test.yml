@@ -3,7 +3,11 @@ name: Visual Studio Build Test
 
 on:
   push:
-    branches: [ beta ]
+    branches: 
+      - beta
+      - master
+    tags:
+      - v*
 jobs:
   build_test:
     runs-on: windows-latest
@@ -14,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: beta
+        ref: ${{ github.ref }}
         submodules: true
 
     - name: Get msbuild executable

@@ -1,8 +1,16 @@
 #ifndef TEST_MSG_FORMAT_H_
 #define TEST_MSG_FORMAT_H_
 
-#include "../CString.h"
-#include "../cstr/Format.h"
+#include "../out/Interface.h"
+#include "../Pointer.h"
+#include "fmt/Parameter.h"
+#include "fmt/param/Character.h"
+#include "fmt/param/FloatingPoint.h"
+#include "fmt/param/Integer.h"
+#include "fmt/param/Nothing.h"
+#include "fmt/param/Pointer.h"
+#include "fmt/param/String.h"
+#include "fmt/param/Empty.h"
 
 #include <cstddef>
 #include <cstring>
@@ -20,133 +28,201 @@ class Format
 {
 public:
     typedef typename std::remove_const<TChar>::type CharType;
-    typedef std::size_t SizeType;
+    typedef test::out::Interface<TChar> OutputInterfaceType;
+    typedef typename OutputInterfaceType::SizeType SizeType;
+    typedef typename test::msg::fmt::Parameter<TChar>::StatusType StatusType;
+    typedef typename StatusType::IntegerValueType BadValueType;
+    typedef test::msg::fmt::var::Character<TChar> VarCharacterType;
+    typedef test::msg::fmt::var::FloatingPoint<TChar> VarFloatingPointType;
+    typedef test::msg::fmt::var::Integer<TChar> VarIntegerType;
+    typedef test::msg::fmt::var::Nothing<TChar> VarNothingType;
+    typedef test::msg::fmt::var::Pointer<TChar> VarPointerType;
+    typedef test::msg::fmt::var::String<TChar> VarStringType;
+    template<typename... TArgs>
+    using ParameterType = test::msg::fmt::Parameter<TChar, TArgs...>;
 private:
-    test::CString<CharType> m_cstr;
+    template<test::msg::fmt::Parameter<TChar, 
+        test::msg::fmt::var::Empty> (*DefaultConstructorFunc)()>
+    using PointerDefaultType = test::ptr::Default<
+        test::msg::fmt::Parameter<TChar, test::msg::fmt::var::Empty>,
+        DefaultConstructorFunc>;
+    template<test::msg::fmt::Parameter<TChar, 
+        test::msg::fmt::var::Empty> (*DefaultConstructorFunc)()>
+    using ParameterPointerType = test::Pointer<
+        test::msg::fmt::Parameter<TChar>,
+        test::ptr::Default<
+            test::msg::fmt::Parameter<TChar, test::msg::fmt::var::Empty>,
+            DefaultConstructorFunc>>;
+public:
+    static test::msg::fmt::Parameter<TChar, 
+        test::msg::fmt::var::Empty> _DefaultParamConstructor();
+private:
+    ParameterPointerType<_DefaultParamConstructor> m_param;
 public:
     Format();
-    template<std::size_t S>
-    Format(const CharType (&cstr)[S]);
-    Format(const CharType* cstr, const SizeType& size);
-    Format(const test::CString<CharType>& cstr);
-    Format(const test::CString<const CharType>& cstr);
-    Format(test::CString<CharType>&& cstr);
-    Format(test::CString<const CharType>&& cstr);
-    template<typename... TArgs>
-    Format(const Format<TChar>& format, const SizeType& size,
-        TArgs&&... args);
-    Format(const Format<TChar>&);
-    Format(Format<TChar>&&);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_reference<TArg>::
+            type>::type, 
+        typename std::enable_if<!std::is_same<_TArg, Format<TChar>>::value, 
+            int>::type = 0>
+    Format(TArg&& arg, TArgs&&... args);
+public:
     ~Format();
 public:
-    Format<TChar>& operator=(const Format<TChar>&);
-    Format<TChar>& operator=(Format<TChar>&&);
+    Format(const Format<TChar>& cpy);
+    Format(Format<TChar>&& mov);
 public:
-    operator bool() const;
-    const TChar* operator*() const;
-    typename Format<TChar>::SizeType Size() const;
-    bool IsEmpty() const;
+    Format<TChar>& operator=(const Format<TChar>& cpy);
+    Format<TChar>& operator=(Format<TChar>&& mov);
+public:
+    template<typename... TArgs>
+    std::size_t Load(TArgs&&... args);
+public:
+    SizeType Output(OutputInterfaceType& out);
+    template<typename TArg, typename... TArgs>
+    SizeType Output(OutputInterfaceType& out, TArg&& arg, TArgs&&... args);
+public:
+    void Unset();
+public:
+    bool IsSet() const;
+public:
+    bool IsGood() const;
+    bool IsBad() const;
+public:
+    void Reset();
+public:
+    BadValueType GetBadCode() const;
+public:
+    operator bool() const; 
 };
 
 template<typename TChar>
-Format<TChar>::Format()
+test::msg::fmt::Parameter<TChar, test::msg::fmt::var::Empty>
+Format<TChar>::_DefaultParamConstructor()
+{
+    static test::msg::fmt::Parameter<TChar, 
+        test::msg::fmt::var::Empty> def;
+    return def;
+}
+
+template<typename TChar>
+Format<TChar>::Format() :
+    m_param()
 {}
 
 template<typename TChar>
-template<std::size_t S>
-Format<TChar>::Format(const CharType (&cstr)[S]) :
-    m_cstr(cstr)
-{}
-
-template<typename TChar>
-Format<TChar>::Format(const CharType* cstr, const SizeType& size) :
-    m_cstr(cstr, size)
-{}
-
-template<typename TChar>
-Format<TChar>::Format(const test::CString<CharType>& cstr) :
-    m_cstr(cstr)
-{}
-
-template<typename TChar>
-Format<TChar>::Format(const test::CString<const CharType>& cstr) :
-    m_cstr(cstr)
-{}
-
-template<typename TChar>
-Format<TChar>::Format(test::CString<CharType>&& cstr) :
-    m_cstr(std::move(cstr))
-{}
-
-template<typename TChar>
-Format<TChar>::Format(test::CString<const CharType>&& cstr) :
-    m_cstr(std::move(cstr))
-{}
-
-template<typename TChar>
-template<typename... TArgs>
-Format<TChar>::Format(const Format<TChar>& format, const SizeType& size, 
-    TArgs&&... args) : 
-        m_cstr(std::move(test::cstr::Format<CharType>(size, *format, 
-            std::forward<TArgs>(args)...)))
-{}
-
-template<typename TChar>
-Format<TChar>::Format(const Format<TChar>& cpy) :
-    m_cstr(cpy.m_cstr)
-{}
-
-template<typename TChar>
-Format<TChar>::Format(Format<TChar>&& mov) :
-    m_cstr(std::move(mov.m_cstr))
-{}
+template<typename TArg, typename... TArgs, typename _TArg, 
+    typename std::enable_if<!std::is_same<_TArg, Format<TChar>>::value, 
+        int>::type>
+Format<TChar>::Format(TArg&& arg, TArgs&&... args) :
+    m_param()
+{
+    test::Pointer<ParameterType<typename std::remove_cv<
+        typename std::remove_reference<TArg>::type>::type, 
+        typename std::remove_cv<typename std::remove_reference<TArgs>::
+        type>::type...>> ptr{std::forward<TArg>(arg), 
+            std::forward<TArgs>(args)...};
+    m_param = ptr.template DynamicCast<test::msg::fmt::Parameter<TChar>, 
+        PointerDefaultType<_DefaultParamConstructor>>();
+}
 
 template<typename TChar>
 Format<TChar>::~Format()
 {}
 
 template<typename TChar>
+Format<TChar>::Format(const Format<TChar>& cpy) :
+    m_param(cpy.m_param)
+{}
+
+template<typename TChar>
+Format<TChar>::Format(Format<TChar>&& mov) :
+    m_param(std::move(mov.m_param))
+{}
+
+template<typename TChar>
 Format<TChar>& Format<TChar>::operator=(const Format<TChar>& cpy)
 {
-    m_cstr = cpy.m_cstr;
+    m_param = cpy.m_param;
     return *this;
 }
 
 template<typename TChar>
 Format<TChar>& Format<TChar>::operator=(Format<TChar>&& mov)
 {
-    m_cstr = std::move(mov.m_cstr);
+    m_param = std::move(mov.m_param);
     return *this;
+}
+
+template<typename TChar>
+template<typename... TArgs>
+std::size_t Format<TChar>::Load(TArgs&&... args)
+{
+    return m_param->Load(sizeof...(TArgs), std::forward<TArgs>(args)...);
+}
+
+template<typename TChar>
+typename Format<TChar>::SizeType 
+Format<TChar>::Output(OutputInterfaceType& out)
+{
+    return m_param->Output(out);
+}
+
+template<typename TChar>
+template<typename TArg, typename... TArgs>
+typename Format<TChar>::SizeType 
+Format<TChar>::Output(OutputInterfaceType& out, TArg&& arg, TArgs&&... args)
+{
+    m_param->Load(sizeof...(TArgs) + 1, std::forward<TArg>(arg),
+        std::forward<TArgs>(args)...);
+    return m_param->Output(out);
+}
+
+template<typename TChar>
+void Format<TChar>::Unset()
+{
+    m_param->Unset();
+}
+
+template<typename TChar>
+bool Format<TChar>::IsSet() const
+{
+    return (*m_param).IsSet();
+}
+
+template<typename TChar>
+bool Format<TChar>::IsGood() const
+{
+    return (*m_param).IsGood();
+}
+
+template<typename TChar>
+bool Format<TChar>::IsBad() const
+{
+    return (*m_param).IsBad();
+}
+
+template<typename TChar>
+void Format<TChar>::Reset()
+{
+    m_param->Reset();
+}
+
+template<typename TChar>
+typename Format<TChar>::BadValueType Format<TChar>::GetBadCode() const
+{
+    return (*m_param).GetBadCode();
 }
 
 template<typename TChar>
 Format<TChar>::operator bool() const
 {
-    return *m_cstr != nullptr; 
+    auto pthis = const_cast<Format<TChar>*>(this);
+    auto cast = pthis->m_param.template DynamicCast<
+        test::msg::fmt::Parameter<TChar, test::msg::fmt::var::Empty>, 
+        PointerDefaultType<_DefaultParamConstructor>>();
+    return cast != m_param;
 }
-
-template<typename TChar>
-const TChar* Format<TChar>::operator*() const
-{
-    if (operator bool())
-        return *m_cstr;
-    return "";
-}
-
-template<typename TChar>
-typename Format<TChar>::SizeType Format<TChar>::Size() const
-{
-    return m_cstr.Size();
-}
-
-template<typename TChar>
-bool Format<TChar>::IsEmpty() const
-{
-    if (!operator bool() || m_cstr[0] != '\0')
-        return false;
-    return true;
-}
-
 
 } //!msg
 
