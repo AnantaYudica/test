@@ -2,6 +2,7 @@
 #define TEST_OUT_CSTRING_H_
 
 #include "../CString.h"
+#include "../cstr/Length.h"
 #include "cstr/Status.h"
 #include "Interface.h"
 
@@ -586,7 +587,8 @@ CString<TChar>::Puts(const TChar * cstr)
 {
     if (m_status.IsBad()) return 0;
     if (cstr == nullptr) return 0;
-    const SizeType size = strnlen(cstr, m_maximum_capacity - 1);
+    const SizeType size = test::cstr::Length<TChar>::Value(cstr, 
+        m_maximum_capacity - 1);
     if (size == 0) return 0;
     return _Set(m_size, cstr, size);
 }

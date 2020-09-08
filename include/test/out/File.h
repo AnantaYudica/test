@@ -2,6 +2,7 @@
 #define TEST_OUT_FILE_H_
 
 #include "../CString.h"
+#include "../cstr/Length.h"
 #include "file/Status.h"
 #include "file/Base.h"
 #include "Interface.h"
@@ -341,7 +342,8 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::
     _SetFilename(const char * filename)
 {
     auto& status = GetStatus();
-    const SizeType len = strnlen(filename, filename_maximum_size);
+    const SizeType len = test::cstr::Length<TChar>::Value(filename, 
+        filename_maximum_size);
     if (len >= filename_maximum_size)
     {
         status.Bad(StatusType::filename_size_overflow);
@@ -556,7 +558,7 @@ template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
 typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
 File<TChar, MinimumBuffer, MaximumBuffer>::Puts(const TChar * cstr)
 {
-    const auto size = strnlen(cstr, MaximumBuffer);
+    const auto size = test::cstr::Length<TChar>::Value(cstr, MaximumBuffer);
     return Puts(cstr, size);
 }
 
