@@ -3,11 +3,13 @@
 
 #include "Status.h"
 #include "out/Base.h"
+#include "out/Tag.h"
 
 #include <iostream>
 #include <cstdlib>
 #include <cassert>
 #include <cstdarg>
+#include <type_traits>
 
 #ifndef __ATTRIBUTE__
 #ifdef __GNUC__
@@ -23,6 +25,8 @@ namespace test
 template<typename Ts = Status>
 class Output : protected test::out::Base<char>
 {
+public:
+    typedef typename test::out::Base<char>::LogType LogType;
 private:
     bool m_enable;
     bool m_infoEnable;
@@ -42,22 +46,36 @@ public:
 public:
     void Set(Ts& status);
 public:
-    void VError(const char* format, va_list args) 
+    std::size_t VError(const char* format, va_list args) 
         __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
-    void VInfo(const char* format, va_list args) 
+    std::size_t VInfo(const char* format, va_list args) 
         __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
-    void VDebug(const char* format, va_list args)
+    std::size_t VDebug(const char* format, va_list args)
         __ATTRIBUTE__((__format__ (__printf__, 3, 0)));
 public:
-    void Error(const char* format, ...) 
+    std::size_t Error(const char* format, ...) 
         __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
-    void Info(const char* format, ...)
+    std::size_t Info(const char* format, ...)
         __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
-    void Debug(const char* format, ...)
+    std::size_t Debug(const char* format, ...)
         __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
 public:
-    bool Enable();
-    void Enable(bool enable);
+    template<typename TOutTag>
+    LogType Log(const TOutTag& tag);
+public:
+    LogType Error();
+    LogType Info();
+    LogType Debug();
+public:
+    bool Enable() const;
+    bool Enable(const test::out::tag::Error& tag) const;
+    bool Enable(const test::out::tag::Info& tag) const;
+    bool Enable(const test::out::tag::Debug& tag) const;
+    void Enable(const bool& enable);
+    void Enable(const test::out::tag::Error& tag, const bool& enable);
+    void Enable(const test::out::tag::Info& tag, const bool& enable);
+    void Enable(const test::out::tag::Debug& tag, const bool& enable);
+public:
     bool InfoEnable();
     void InfoEnable(bool info_enable);
     bool DebugEnable();
@@ -106,74 +124,159 @@ void Output<Ts>::Set(Ts& status)
 }
 
 template<typename Ts>
-void Output<Ts>::VError(const char* format, va_list args)
+std::size_t Output<Ts>::VError(const char* format, va_list args)
 {
     assert(m_status != NULL);
     m_status->Error();
     if (m_enable)
     {
         auto&& err = test::out::Base<char>::Error();
-        err.VPrint(format, args);
+        return err.VPrint(format, args);
     }
+    return 0;
 }
 
 template<typename Ts>
-void Output<Ts>::VInfo(const char* format, va_list args) 
+std::size_t Output<Ts>::VInfo(const char* format, va_list args) 
 {
     if (m_enable && m_infoEnable)
     {
         auto&& info = test::out::Base<char>::Info();
-        info.VPrint(format, args);
+        return info.VPrint(format, args);
     }
+    return 0;
 }
 
 template<typename Ts>
-void Output<Ts>::VDebug(const char* format, va_list args)
+std::size_t Output<Ts>::VDebug(const char* format, va_list args)
 {
     if (m_enable && m_debugEnable)
     {
         auto&& debug = test::out::Base<char>::Debug();
-        debug.VPrint(format, args);
+        return debug.VPrint(format, args);
     }
+    return 0;
 }
 
 template<typename Ts>
-void Output<Ts>::Error(const char* format, ...)
+std::size_t Output<Ts>::Error(const char* format, ...)
 {
     va_list args;
     va_start(args, format);
-    VError(format, args);
+    auto ret = VError(format, args);
     va_end(args);
+    return ret;
 }
 
 template<typename Ts>
-void Output<Ts>::Info(const char* format, ...)
+std::size_t Output<Ts>::Info(const char* format, ...)
 {
     va_list args;
     va_start(args, format);
-    VInfo(format, args);
+    auto ret = VInfo(format, args);
     va_end(args);
+    return ret;
 }
 
 template<typename Ts>
-void Output<Ts>::Debug(const char* format, ...)
+std::size_t Output<Ts>::Debug(const char* format, ...)
 {
     va_list args;
     va_start(args, format);
-    VDebug(format, args);
+    auto ret = VDebug(format, args);
     va_end(args);
+    return ret;
 }
 
 template<typename Ts>
-bool Output<Ts>::Enable()
+template<typename TOutTag>
+typename Output<Ts>::LogType Output<Ts>::Log(const TOutTag& tag)
+{
+    if (Enable(tag))
+        return test::out::Base<char>::Log(tag);
+    LogType out;
+    out.End();
+    return out;
+}
+
+template<typename Ts>
+typename Output<Ts>::LogType Output<Ts>::Error()
+{
+    assert(m_status != NULL);
+    m_status->Error();
+    if (m_enable)
+        return test::out::Base<char>::Error();
+    LogType out;
+    out.End();
+    return out;
+}
+
+template<typename Ts>
+typename Output<Ts>::LogType Output<Ts>::Info()
+{
+    if (InfoEnable())
+        return test::out::Base<char>::Info();
+    LogType out;
+    out.End();
+    return out;
+}
+
+template<typename Ts>
+typename Output<Ts>::LogType Output<Ts>::Debug()
+{
+    if (DebugEnable())
+        return test::out::Base<char>::Debug();
+    LogType out;
+    out.End();
+    return out;
+}
+
+template<typename Ts>
+bool Output<Ts>::Enable() const
 {
     return m_enable;
 }
 
 template<typename Ts>
-void Output<Ts>::Enable(bool enable)
+bool Output<Ts>::Enable(const test::out::tag::Error&) const
+{
+    return m_enable;
+}
+
+template<typename Ts>
+bool Output<Ts>::Enable(const test::out::tag::Info&) const
+{
+    return m_infoEnable;
+}
+
+template<typename Ts>
+bool Output<Ts>::Enable(const test::out::tag::Debug&) const
+{
+    return m_debugEnable;
+}
+
+template<typename Ts>
+void Output<Ts>::Enable(const bool& enable)
 {
     m_enable = enable;
+}
+
+template<typename Ts>
+void Output<Ts>::Enable(const test::out::tag::Error&, const bool&)
+{}
+
+template<typename Ts>
+void Output<Ts>::Enable(const test::out::tag::Info&, 
+    const bool& enable)
+{
+    m_infoEnable = enable;
+}
+
+template<typename Ts>
+void Output<Ts>::Enable(const test::out::tag::Debug&, 
+    const bool& enable)
+{
+    m_debugEnable = enable;
 }
 
 template<typename Ts>
