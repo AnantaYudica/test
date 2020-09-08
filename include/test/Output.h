@@ -47,11 +47,11 @@ public:
     void Set(Ts& status);
 public:
     std::size_t VError(const char* format, va_list args) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
+        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0)));
     std::size_t VInfo(const char* format, va_list args) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
+        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0)));
     std::size_t VDebug(const char* format, va_list args)
-        __ATTRIBUTE__((__format__ (__printf__, 3, 0)));
+        __ATTRIBUTE__((__format__ (__printf__, 2, 0)));
 public:
     std::size_t Error(const char* format, ...) 
         __ATTRIBUTE__((__format__ (__printf__, 2, 3)));

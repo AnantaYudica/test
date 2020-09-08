@@ -95,7 +95,7 @@ protected:
 public:
     template<typename TOutTag>
     SizeType VPrint(const TOutTag& tag, const char * format, 
-        va_list var_args) __ATTRIBUTE__((__format__ (__printf__, 4, 0)));
+        va_list var_args) __ATTRIBUTE__((__format__ (__printf__, 3, 0)));
     template<typename TOutTag>
     SizeType Print(const TOutTag& tag, const char * format, ...)
          __ATTRIBUTE__((__format__ (__printf__, 3, 4)));
