@@ -1,5 +1,5 @@
 #include "test/msg/fmt/val/specifier/String.h"
-#include "test/out/Cstring.h"
+#include "test/out/CSstring.h"
 
 #include <cassert>
 

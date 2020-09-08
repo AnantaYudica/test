@@ -2,8 +2,8 @@
 #define TEST_OUT_LOG_H_
 
 #include "Interface.h"
-#include "Cstring.h"
-#include "../Cstring.h"
+#include "CString.h"
+#include "../CString.h"
 #include "log/Status.h"
 #include "log/Tag.h"
 
