@@ -30,6 +30,7 @@
 *.exe
 *.out
 *.app
+*.stackdump
 
 # Build 
 /.build*
@@ -37,3 +38,6 @@
 
 # vscode
 /.vscode
+
+# vs
+/.vs
