@@ -33,16 +33,9 @@ public:
     typedef typename std::remove_cv<TChar>::type CharType;
     typedef std::size_t SizeType; 
     typedef test::out::cstr::Status StatusType;
-public:
-    static constexpr SizeType default_maximum_capacity = 
-        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
-        << ((sizeof(SizeType) / 2) * 8)));
-    static constexpr SizeType default_minimum_capacity =
-        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
-        << (sizeof(SizeType))));
 private:
     static constexpr SizeType _Capacity(const SizeType & capacity,
-        SizeType offset = static_cast<SizeType>(-1) << 1);
+        SizeType offset = (static_cast<SizeType>(-1) << 1));
     static SizeType _Predict(const SizeType & capacity, StatusType& status);
     static SizeType _Predict(const SizeType & capacity, 
         const SizeType & need_capacity, const SizeType & minimum_capacity, 
@@ -59,6 +52,13 @@ private:
         const SizeType& new_capacity = static_cast<SizeType>(0));
     static void _Reset(CharType * &cstr, SizeType& size, 
         SizeType & capacity);
+public:
+    static constexpr SizeType default_maximum_capacity = 
+        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
+        << ((sizeof(SizeType) / 2) * 8)), (static_cast<SizeType>(-1) << 1));
+    static constexpr SizeType default_minimum_capacity =
+        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
+        << (sizeof(SizeType))), (static_cast<SizeType>(-1) << 1));
 private:
     StatusType m_status;
     CharType * m_cstr;
