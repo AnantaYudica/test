@@ -10,6 +10,8 @@
 #include "test/reg/Base.h"
 #include "test/type/Name.h"
 #include "test/type/name/Parameter.h"
+#include "test/type/name/tmpl/Define.h"
+#include "test/type/name/tmpl/Parameter.h"
 #include "test/type/name/Template.h"
 #include "test/cstr/Format.h"
 
@@ -446,8 +448,11 @@ struct test::type::Name<__TYPE__,##__VA_ARGS__>\
     }\
 }
 
-#define TEST_TYPE_NAME_PARAMETER(__TYPE__, ...)\
-inline auto test::type::name::tmpl::Parameter(__TYPE__,##__VA_ARGS__*)\
+#define TEST_TYPE_NAME_TMPL_DEFINE(__TYPE__, __PARAM_TYPE__,...)\
+struct test::type::name::tmpl::Define<void(__TYPE__)>\
+{\
+    typedef __PARAM_TYPE__,##__VA_ARGS__ ParameterType;\
+}
 
 #define TEST_TYPE_NAME_VAL_ENUMERATION(__NAME__, __TYPE__, __VALUE__, ...)\
 template<>\

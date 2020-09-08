@@ -21,9 +21,9 @@ struct Obj2
 {};
 
 template<typename T, T V>
-TEST_TYPE_NAME_PARAMETER(Obj2<T, V>) ->
+TEST_TYPE_NAME_TMPL_DEFINE((Obj2<T, V>),
     test::type::name::Parameter<T,
-        test::type::name::Value<T, V>>;
+        test::type::name::Value<T, V>>);
 
 template<typename T, T V>
 TEST_TYPE_NAME_TEMPLATE("Obj2", Obj2<T, V>);
