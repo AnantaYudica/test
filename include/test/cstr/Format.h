@@ -25,7 +25,7 @@ test::CString<typename std::remove_const<TChar>::type>
     Format(const std::size_t& size, const char* format, ...)
         __ATTRIBUTE__((format(printf, 2, 3)));
 
-template<typename TChar = char>
+template<typename TChar>
 test::CString<typename std::remove_const<TChar>::type> 
     Format(const std::size_t& size, const char* format, ...)
 {
