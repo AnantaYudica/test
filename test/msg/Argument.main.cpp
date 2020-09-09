@@ -36,18 +36,18 @@ test::out::CString<char> gl_out_cstr1;
 class ATest
 {
 public:
-    std::size_t Print1(test::out::CString<char>&)
+    std::size_t Print1(test::out::CString<char>*)
     {
         return 0;
     }
-    std::size_t VPrint1(test::out::CString<char>&, ...)
+    std::size_t VPrint1(test::out::CString<char>*, ...)
     {
         return 0;
     }
     template<typename... TArgs>
-    std::size_t Print2(test::out::CString<char>& out, TArgs&&... args)
+    std::size_t Print2(test::out::CString<char>* out, TArgs&&... args)
     {
-        auto ret =  out.Print("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
+        auto ret =  out->Print("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
         "pn3a0: %s, pn3a2: %s, tv4: %d, tv5: %c, tvs6: [%d, %d, %d, %d, %d], "
         "tvs6a0 : %d, tvs6a4: %d, tf7n2: %d, tf8tv4: %d, tf9v5: %d, "
         "v10: %d, vp11: [%d, %c], vp11a0: %d, vp11a1: %c, "
@@ -55,11 +55,11 @@ public:
         "vf14v10: %d, vf14vp11a1: %d\n", std::forward<TArgs>(args)...);
         return ret;
     }
-    std::size_t VPrint2(test::out::CString<char>& out, ...)
+    std::size_t VPrint2(test::out::CString<char>* out, ...)
     {
         va_list args;
         va_start(args, out);
-        auto ret =  out.VPrint("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
+        auto ret =  out->VPrint("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
         "pn3a0: %s, pn3a2: %s, tv4: %d, tv5: %c, tvs6: [%d, %d, %d, %d, %d], "
         "tvs6a0 : %d, tvs6a4: %d, tf7n2: %d, tf8tv4: %d, tf9v5: %d, "
         "v10: %d, vp11: [%d, %c], vp11a0: %d, vp11a1: %c, "
@@ -68,42 +68,42 @@ public:
         va_end(args);
         return ret;
     }
-    std::size_t Print3(test::out::CString<char>& out, const char* && s,
+    std::size_t Print3(test::out::CString<char>* out, const char* && s,
         int&& i1 , char&& p, int&& i2)
     {
-        return out.Print("%s, %d, %c, %d", s, i1, p, i2);
+        return out->Print("%s, %d, %c, %d", s, i1, p, i2);
     }
-    std::size_t Print3(test::out::CString<char>& out, const char* && s,
+    std::size_t Print3(test::out::CString<char>* out, const char* && s,
         int&& i1 , short&& p, int&& i2)
     {
-        return out.Print("%s, %d, %hd, %d", s, i1, p, i2);
+        return out->Print("%s, %d, %hd, %d", s, i1, p, i2);
     }
-    std::size_t Print3(test::out::CString<char>& out, const char* && s,
+    std::size_t Print3(test::out::CString<char>* out, const char* && s,
         int&& i1 , int&& p, int&& i2)
     {
-        return out.Print("%s, %d, %d, %d", s, i1, p, i2);
+        return out->Print("%s, %d, %d, %d", s, i1, p, i2);
     }
-    std::size_t Print3(test::out::CString<char>& out, const char* && s,
+    std::size_t Print3(test::out::CString<char>* out, const char* && s,
         int&& i1 , long&& p, int&& i2)
     {
-        return out.Print("%s, %d, %ld, %d", s, i1, p, i2);
+        return out->Print("%s, %d, %ld, %d", s, i1, p, i2);
     }
 };
 
-std::size_t Print1(test::out::CString<char>&)
+std::size_t Print1(test::out::CString<char>*)
 {
     return 0;
 }
 
-std::size_t VPrint1(test::out::CString<char>&, ...)
+std::size_t VPrint1(test::out::CString<char>*, ...)
 {
     return 0;
 }
 
 template<typename... TArgs>
-std::size_t Print2(test::out::CString<char>& out, TArgs&&... args)
+std::size_t Print2(test::out::CString<char>* out, TArgs&&... args)
 {
-    auto ret =  out.Print("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
+    auto ret =  out->Print("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
         "pn3a0: %s, pn3a2: %s, tv4: %d, tv5: %c, tvs6: [%d, %d, %d, %d, %d], "
         "tvs6a0 : %d, tvs6a4: %d, tf7n2: %d, tf8tv4: %d, tf9v5: %d, "
         "v10: %d, vp11: [%d, %c], vp11a0: %d, vp11a1: %c, "
@@ -112,11 +112,11 @@ std::size_t Print2(test::out::CString<char>& out, TArgs&&... args)
     return ret;
 }
 
-std::size_t VPrint2(test::out::CString<char>& out, ...)
+std::size_t VPrint2(test::out::CString<char>* out, ...)
 {
     va_list args;
     va_start(args, out);
-    auto ret =  out.VPrint("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
+    auto ret =  out->VPrint("n0: %s, n1: %s, n2: %s, pn3: [%s, %s, %s], "
     "pn3a0: %s, pn3a2: %s, tv4: %d, tv5: %c, tvs6: [%d, %d, %d, %d, %d], "
     "tvs6a0 : %d, tvs6a4: %d, tf7n2: %d, tf8tv4: %d, tf9v5: %d, "
     "v10: %d, vp11: [%d, %c], vp11a0: %d, vp11a1: %c, "
@@ -126,25 +126,25 @@ std::size_t VPrint2(test::out::CString<char>& out, ...)
     return ret;
 }
 
-std::size_t Print3(test::out::CString<char>& out, const char* && s,
+std::size_t Print3(test::out::CString<char>* out, const char* && s,
     int&& i1 , char&& p, int&& i2)
 {
-    return out.Print("%s, %d, %c, %d", s, i1, p, i2);
+    return out->Print("%s, %d, %c, %d", s, i1, p, i2);
 }
-std::size_t Print3(test::out::CString<char>& out, const char* && s,
+std::size_t Print3(test::out::CString<char>* out, const char* && s,
     int&& i1 , short&& p, int&& i2)
 {
-    return out.Print("%s, %d, %hd, %d", s, i1, p, i2);
+    return out->Print("%s, %d, %hd, %d", s, i1, p, i2);
 }
-std::size_t Print3(test::out::CString<char>& out, const char* && s,
+std::size_t Print3(test::out::CString<char>* out, const char* && s,
     int&& i1 , int&& p, int&& i2)
 {
-    return out.Print("%s, %d, %d, %d", s, i1, p, i2);
+    return out->Print("%s, %d, %d, %d", s, i1, p, i2);
 }
-std::size_t Print3(test::out::CString<char>& out, const char* && s,
+std::size_t Print3(test::out::CString<char>* out, const char* && s,
     int&& i1 , long&& p, int&& i2)
 {
-    return out.Print("%s, %d, %ld, %d", s, i1, p, i2);
+    return out->Print("%s, %d, %ld, %d", s, i1, p, i2);
 }
 
 int Func1(const char* && cstr)
@@ -171,13 +171,13 @@ int main()
     test::msg::Argument<> arg1;
     std::size_t res_a = 0;
     auto res_b = arg1.Call<std::size_t>(TestA1{}, &Print1, 
-        var1, out_cstr1);
+        var1, &out_cstr1);
     auto res_c = arg1.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &Print1, var1, out_cstr2);
+        &Print1, var1, &out_cstr2);
     auto res_d = arg1.Call<std::size_t>(TestA1{}, &ATest::Print1, a1,
-        var1, out_cstr3);
+        var1, &out_cstr3);
     auto res_e = arg1.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &ATest::Print1, a1, var1, out_cstr4);
+        &ATest::Print1, a1, var1, &out_cstr4);
 
     assert(res_a == res_b);
     assert(res_a == res_c);
@@ -199,13 +199,13 @@ int main()
         
     res_a = 0;
     res_b = arg1.Call<std::size_t>(TestA1{}, &VPrint1, 
-        var1, out_cstr1);
+        var1, &out_cstr1);
     res_c = arg1.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &VPrint1, var1, out_cstr2);
+        &VPrint1, var1, &out_cstr2);
     res_d = arg1.Call<std::size_t>(TestA1{}, &ATest::VPrint1, a1,
-        var1, out_cstr3);
+        var1, &out_cstr3);
     res_e = arg1.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &ATest::VPrint1, a1, var1, out_cstr4);
+        &ATest::VPrint1, a1, var1, &out_cstr4);
 
     assert(res_a == res_b);
     assert(res_a == res_c);
@@ -273,18 +273,18 @@ int main()
         test::msg::arg::val::Function<15,
             test::msg::arg::val::param::At<11, 1>>> arg2;
     
-    res_a = Print2(gl_out_cstr1, "int", "char", "double", "int", "char", 
+    res_a = Print2(&gl_out_cstr1, "int", "char", "double", "int", "char", 
         "double", "int", "double", 1234, 'B', 10, 11, 12, 13, 14, 10, 14, 
         strlen("double"), 1234, (int)'B', 5678, -3210, 'Y', -3210, 'Y',
         90, 91, 92, 93, 94, 90, 94, strlen("char"), 5678, (int)'Y');
     res_b = arg2.Call<std::size_t>(TestA1{}, &Print2, 
-        var2, out_cstr1);
+        var2, &out_cstr1);
     res_c = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &Print2, var2, out_cstr2);
+        &Print2, var2, &out_cstr2);
     res_d = arg2.Call<std::size_t>(TestA1{}, &ATest::Print2, a1,
-        var2, out_cstr3);
+        var2, &out_cstr3);
     res_e = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &ATest::Print2, a1, var2, out_cstr4);
+        &ATest::Print2, a1, var2, &out_cstr4);
     
     assert(res_a == res_b);
     assert(res_a == res_c);
@@ -304,18 +304,18 @@ int main()
     assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
         gl_out_cstr1.Size()) == 0);
 
-    res_a = Print2(gl_out_cstr1, "int", "char", "double", "int", "char", 
+    res_a = Print2(&gl_out_cstr1, "int", "char", "double", "int", "char", 
         "double", "int", "double", 1234, 'B', 10, 11, 12, 13, 14, 10, 14, 
         strlen("double"), 1234, (int)'B', 5678, -3210, 'Y', -3210, 'Y',
         90, 91, 92, 93, 94, 90, 94, strlen("char"), 5678, (int)'Y');
     res_b = arg2.Call<std::size_t>(TestA1{}, &VPrint2, 
-        var2, out_cstr1);
+        var2, &out_cstr1);
     res_c = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &VPrint2, var2, out_cstr2);
+        &VPrint2, var2, &out_cstr2);
     res_d = arg2.Call<std::size_t>(TestA1{}, &ATest::VPrint2, a1,
-        var2, out_cstr3);
+        var2, &out_cstr3);
     res_e = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &ATest::VPrint2, a1, var2, out_cstr4);
+        &ATest::VPrint2, a1, var2, &out_cstr4);
     
     assert(res_a == res_b);
     assert(res_a == res_c);
@@ -351,15 +351,15 @@ int main()
         test::msg::arg::type::Index<3,
             test::msg::arg::val::seq::At>> arg3;
 
-    res_a = Print3(gl_out_cstr1, "char", 0, 'A', 3);
+    res_a = Print3(&gl_out_cstr1, "char", 0, 'A', 3);
     res_b = arg3.Call<std::size_t>(TestA1{}, &Print3, 
-        var3, out_cstr1);
+        var3, &out_cstr1);
     res_c = arg3.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &Print3, var3, out_cstr2);
+        &Print3, var3, &out_cstr2);
     res_d = arg3.Call<std::size_t>(TestA1{}, &ATest::Print3, a1,
-        var3, out_cstr3);
+        var3, &out_cstr3);
     res_e = arg3.Call<std::size_t>(test::type::Index<TestA1, 0>{},
-        &ATest::Print3, a1, var3, out_cstr4);
+        &ATest::Print3, a1, var3, &out_cstr4);
     
     assert(res_a == res_b);
     assert(res_a == res_c);
@@ -379,11 +379,11 @@ int main()
     assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
         gl_out_cstr1.Size()) == 0);
 
-    res_a = Print3(gl_out_cstr1, "short", 1, 1000, 2);
+    res_a = Print3(&gl_out_cstr1, "short", 1, 1000, 2);
     res_c = arg3.Call<std::size_t>(test::type::Index<TestA1, 1>{},
-        &Print3, var3, out_cstr2);
+        &Print3, var3, &out_cstr2);
     res_e = arg3.Call<std::size_t>(test::type::Index<TestA1, 1>{},
-        &ATest::Print3, a1, var3, out_cstr4);
+        &ATest::Print3, a1, var3, &out_cstr4);
     
     assert(res_a == res_c);
     assert(res_a == res_e);
@@ -395,11 +395,11 @@ int main()
     assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
         gl_out_cstr1.Size()) == 0);
 
-    res_a = Print3(gl_out_cstr1, "int", 2, 2000, 1);
+    res_a = Print3(&gl_out_cstr1, "int", 2, 2000, 1);
     res_c = arg3.Call<std::size_t>(test::type::Index<TestA1, 2>{},
-        &Print3, var3, out_cstr2);
+        &Print3, var3, &out_cstr2);
     res_e = arg3.Call<std::size_t>(test::type::Index<TestA1, 2>{},
-        &ATest::Print3, a1, var3, out_cstr4);
+        &ATest::Print3, a1, var3, &out_cstr4);
     
     assert(res_a == res_c);
     assert(res_a == res_e);
@@ -411,11 +411,11 @@ int main()
     assert(strncmp(*(out_cstr4.Get()), *(gl_out_cstr1.Get()),
         gl_out_cstr1.Size()) == 0);
 
-    res_a = Print3(gl_out_cstr1, "long", 3, 3000, 0);
+    res_a = Print3(&gl_out_cstr1, "long", 3, 3000, 0);
     res_c = arg3.Call<std::size_t>(test::type::Index<TestA1, 3>{},
-        &Print3, var3, out_cstr2);
+        &Print3, var3, &out_cstr2);
     res_e = arg3.Call<std::size_t>(test::type::Index<TestA1, 3>{},
-        &ATest::Print3, a1, var3, out_cstr4);
+        &ATest::Print3, a1, var3, &out_cstr4);
     
     assert(res_a == res_c);
     assert(res_a == res_e);
