@@ -13,6 +13,14 @@
 #include <utility>
 #include <cstdint>
 
+#ifndef __ATTRIBUTE__
+#ifdef __GNUC__
+#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#else
+#define __ATTRIBUTE__(...)
+#endif
+#endif //!__ATTRIBUTE__
+
 namespace test
 {
 namespace out
@@ -94,8 +102,10 @@ public:
 public:
     test::CString<char> Filename() const;
 protected:
-    SizeType VPrint(const char * format, va_list var_args) override;
-    SizeType Print(const char * format, ...) override;
+    SizeType VPrint(const char * format, va_list var_args) override
+        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0)));
+    SizeType Print(const char * format, ...) override
+        __ATTRIBUTE__ ((__format__ (__printf__, 2, 3)));
 protected:
     SizeType Puts(const TChar * cstr, const SizeType& size) override;
     SizeType Puts(const TChar * cstr) override;

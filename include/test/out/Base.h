@@ -85,8 +85,10 @@ private:
 private:
     bool ExecuteTask(const std::intptr_t& id) override;
 protected:
-    virtual SizeType VPrint(const char * format, va_list var_args) override;
-    virtual SizeType Print(const char * format, ...) override;
+    virtual SizeType VPrint(const char * format, va_list var_args) override
+        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0)));
+    virtual SizeType Print(const char * format, ...) override
+        __ATTRIBUTE__ ((__format__ (__printf__, 2, 3)));
 protected:
     virtual SizeType Puts(const TChar * cstr, const SizeType& size) override;
     virtual SizeType Puts(const TChar * cstr) override;

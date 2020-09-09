@@ -88,8 +88,10 @@ private:
     SizeType _Set(const SizeType& index, const char * format, va_list var_args)
         __ATTRIBUTE__ ((__format__ (__printf__, 3, 0)));
 public:
-    SizeType VPrint(const char * format, va_list var_args) override;
-    SizeType Print(const char * format, ...) override;
+    SizeType VPrint(const char * format, va_list var_args) override
+        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0)));
+    SizeType Print(const char * format, ...) override
+        __ATTRIBUTE__ ((__format__ (__printf__, 2, 3)));
 public:
     SizeType Puts(const TChar * cstr, const SizeType& size) override;
     SizeType Puts(const TChar * cstr) override;
