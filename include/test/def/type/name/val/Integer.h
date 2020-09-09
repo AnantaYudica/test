@@ -23,9 +23,10 @@ struct Get<short>
     template<short V, typename TChar= char>
     static test::CString<TChar> CStr()
     {
+        const auto val = static_cast<unsigned short>(std::abs(V));
         test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : (V < 0 ? (log10(fabs(V)) + 3) : 2)), 
-            "%hd", V);
+            (V > 0 ? (std::log10(V) + 2) : (V < 0 ? 
+                (std::log10(val) + 3) : 2)), "%hd", V);
         return {_val};
     }
 };
@@ -37,7 +38,7 @@ struct Get<unsigned short>
     static test::CString<TChar> CStr()
     {
         test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : 2), "%hu", V);
+            (V > 0 ? (std::log10(V) + 2) : 2), "%hu", V);
         return {_val};
     }
 };
@@ -48,9 +49,10 @@ struct Get<int>
     template<int V, typename TChar= char>
     static test::CString<TChar> CStr()
     {
+        const auto val = static_cast<unsigned int>(std::abs(V));
         test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : (V < 0 ? (log10(fabs(V)) + 3) : 2)), 
-            "%d", V);
+            (V > 0 ? (std::log10(V) + 2) : (V < 0 ? 
+                (std::log10(val) + 3) : 2)), "%d", V);
         return {_val};
     }
 };
@@ -62,7 +64,7 @@ struct Get<unsigned int>
     static test::CString<TChar> CStr()
     {
         test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : 2), "%u", V);
+            (V > 0 ? (std::log10(V) + 2) : 2), "%u", V);
         return {_val};
     }
 };
@@ -73,9 +75,10 @@ struct Get<long>
     template<long V, typename TChar= char>
     static test::CString<TChar> CStr()
     {
+        const auto val = static_cast<unsigned long>(std::abs(V));
         test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : (V < 0 ? (log10(fabs(V)) + 3) : 2)), 
-            "%ld", V);
+            (V > 0 ? (std::log10(V) + 2) : (V < 0 ? 
+                (std::log10(val) + 3) : 2)), "%ld", V);
         return {_val};
     }
 };
@@ -87,7 +90,7 @@ struct Get<unsigned long>
     static test::CString<TChar> CStr()
     {
         test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : 2), "%lu", V);
+            (V > 0 ? (std::log10(V) + 2) : 2), "%lu", V);
         return {_val};
     }
 };
@@ -98,9 +101,10 @@ struct Get<long long>
     template<long long V, typename TChar= char>
     static test::CString<TChar> CStr()
     {
+        const auto val = static_cast<unsigned long long>(std::abs(V));
        test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : (V < 0 ? (log10(fabs(V)) + 3) : 2)), 
-            "%lld", V);
+            (V > 0 ? (std::log10(V) + 2) : (V < 0 ? 
+                (std::log10(val) + 3) : 2)), "%lld", V);
         return {_val};
     }
 };
@@ -112,7 +116,7 @@ struct Get<unsigned long long>
     static test::CString<TChar> CStr()
     {
         test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : 2), "%llu", V);
+            (V > 0 ? (std::log10(V) + 2) : 2), "%llu", V);
         return {_val};
     }
 };

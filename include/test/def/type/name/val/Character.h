@@ -23,9 +23,10 @@ struct Get<signed char>
     template<signed char V, typename TChar= char>
     static test::CString<TChar> CStr()
     {
+        const auto val = static_cast<unsigned char>(std::abs(V));
         test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : (V < 0 ? (log10(fabs(V)) + 3) : 2)), 
-            "%hhd", V);
+            (V > 0 ? (std::log10(V) + 2) : (V < 0 ? 
+                (std::log10(val) + 3) : 2)), "%hhd", V);
         return {_val};
     }
 };
@@ -48,7 +49,7 @@ struct Get<unsigned char>
     static test::CString<TChar> CStr()
     {
         test::CString<TChar> _val = test::cstr::Format(
-            (V > 0 ? (log10(V) + 2) : 2), "%hhu", V);
+            (V > 0 ? (std::log10(V) + 2) : 2), "%hhu", V);
         return {_val};
     }
 };
