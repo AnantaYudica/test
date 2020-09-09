@@ -313,7 +313,7 @@ template<typename TChar>
 Integer<TChar>::Integer() :
     SpecifierBaseType(),
     m_flag(),
-    m_value{},
+    m_value{.unsigned_long_long_value=0ULL},
     m_width(),
     m_length(),
     m_print_out(nullptr)
@@ -330,7 +330,7 @@ template<typename TArg, typename... TArgs, typename _TArg,
 Integer<TChar>::Integer(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
-    m_value{},
+    m_value{.unsigned_long_long_value=0ULL},
     m_width(),
     m_length(),
     m_print_out(nullptr)
@@ -628,7 +628,7 @@ template<typename TChar>
 Integer<TChar>::Integer(StatusPointerType&& status) :
     SpecifierBaseType(std::forward<StatusPointerType>(status)),
     m_flag(),
-    m_value{},
+    m_value{.unsigned_long_long_value=0ULL},
     m_width(),
     m_length(),
     m_print_out(nullptr)
@@ -643,7 +643,7 @@ Integer<TChar>::Integer(StatusPointerType&& status, TArg&& arg,
     TArgs&&... args) :
         SpecifierBaseType(std::forward<StatusPointerType>(status)),
         m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
-        m_value{},
+        m_value{.unsigned_long_long_value=0ULL},
         m_width(),
         m_length(),
         m_print_out(nullptr)
@@ -826,7 +826,7 @@ Integer<TChar>::Integer(Integer<TChar>&& mov) :
     m_print_out(mov.m_print_out)
 {
     if (!mov.GetValueStatus().IsDefaultValue())
-        mov.m_value = ValueType{0};
+        mov.m_value = ValueType{.unsigned_long_long_value=0ULL};
 }
 
 template<typename TChar>
@@ -851,7 +851,7 @@ Integer<TChar>& Integer<TChar>::operator=(Integer<TChar>&& mov)
     m_length = std::move(mov.m_length);
     m_print_out = mov.m_print_out;
     if (!mov.GetValueStatus().IsDefaultValue())
-        mov.m_value = ValueType{0};
+        mov.m_value = ValueType{.unsigned_long_long_value=0ULL};
     return *this;
 }
 
@@ -988,7 +988,7 @@ void Integer<TChar>::Unset()
 {
     SpecifierBaseType::GetValueStatus().UnsetValue();
     if (!SpecifierBaseType::GetValueStatus().IsSetValue())
-        m_value = ValueType{};
+        m_value = ValueType{.unsigned_long_long_value=0ULL};
     m_width.Unset();
     m_length.Unset();
 }

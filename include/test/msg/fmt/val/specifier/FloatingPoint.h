@@ -239,7 +239,7 @@ template<typename TChar>
 FloatingPoint<TChar>::FloatingPoint() :
     SpecifierBaseType(),
     m_flag(),
-    m_value{},
+    m_value{.long_double_value=0.0L},
     m_width(),
     m_precision(),
     m_print_out(nullptr)
@@ -256,7 +256,7 @@ template<typename TArg, typename... TArgs, typename _TArg,
 FloatingPoint<TChar>::FloatingPoint(TArg&& arg, TArgs&&... args) :
     SpecifierBaseType(),
     m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
-    m_value{},
+    m_value{.long_double_value=0.0L},
     m_width(),
     m_precision(),
     m_print_out(nullptr)
@@ -274,6 +274,8 @@ FloatingPoint<TChar>::FloatingPoint(const float& val) :
     m_precision(),
     m_print_out(nullptr)
 {
+    m_value._float_aligned.double_padding = 0;
+    m_value._float_aligned.long_double_padding = 0;
     _Set(m_width, m_precision, m_print_out);
 }
 
@@ -285,11 +287,13 @@ FloatingPoint<TChar>::FloatingPoint(const float& val, TArg&& arg,
     TArgs&&... args) :
         SpecifierBaseType(ValueStatusType::default_value),
         m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
-        m_value{.float_value = val},
+        m_value{.float_value=val},
         m_width(),
         m_precision(),
         m_print_out(nullptr)
 {
+    m_value._float_aligned.double_padding = 0;
+    m_value._float_aligned.long_double_padding = 0;
     _Set(m_width, m_precision, m_print_out, std::forward<TArg>(arg),
         std::forward<TArgs>(args)...);
 }
@@ -298,11 +302,12 @@ template<typename TChar>
 FloatingPoint<TChar>::FloatingPoint(const double& val) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{},
-    m_value{.double_value = val},
+    m_value{.double_value=val},
     m_width(),
     m_precision(),
     m_print_out(nullptr)
 {
+    m_value._float_aligned.long_double_padding = 0;
     _Set(m_width, m_precision, m_print_out);
 }
 
@@ -314,11 +319,12 @@ FloatingPoint<TChar>::FloatingPoint(const double& val, TArg&& arg,
     TArgs&&... args) :
         SpecifierBaseType(ValueStatusType::default_value),
         m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
-        m_value{.double_value = val},
+        m_value{.double_value=val},
         m_width(),
         m_precision(),
         m_print_out(nullptr)
 {
+    m_value._float_aligned.long_double_padding = 0;
     _Set(m_width, m_precision, m_print_out, std::forward<TArg>(arg), 
         std::forward<TArgs>(args)...);
 }
@@ -327,7 +333,7 @@ template<typename TChar>
 FloatingPoint<TChar>::FloatingPoint(const long double& val) :
     SpecifierBaseType(ValueStatusType::default_value),
     m_flag{},
-    m_value{.long_double_value = val},
+    m_value{.long_double_value=val},
     m_width(),
     m_precision(),
     m_print_out(nullptr)
@@ -343,7 +349,7 @@ FloatingPoint<TChar>::FloatingPoint(const long double& val, TArg&& arg,
     TArgs&&... args) :
         SpecifierBaseType(ValueStatusType::default_value),
         m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
-        m_value{.long_double_value = val},
+        m_value{.long_double_value=val},
         m_width(),
         m_precision(),
         m_print_out(nullptr)
@@ -356,7 +362,7 @@ template<typename TChar>
 FloatingPoint<TChar>::FloatingPoint(StatusPointerType&& status) :
     SpecifierBaseType(std::forward<StatusPointerType>(status)),
     m_flag(),
-    m_value{},
+    m_value{.long_double_value=0.0L},
     m_width(),
     m_precision(),
     m_print_out(nullptr)
@@ -371,7 +377,7 @@ FloatingPoint<TChar>::FloatingPoint(StatusPointerType&& status, TArg&& arg,
     TArgs&&... args) :
         SpecifierBaseType(std::forward<StatusPointerType>(status)),
         m_flag{std::forward<TArg>(arg), std::forward<TArgs>(args)...},
-        m_value{},
+        m_value{.long_double_value=0.0L},
         m_width(),
         m_precision(),
         m_print_out(nullptr)
@@ -387,11 +393,13 @@ FloatingPoint<TChar>::FloatingPoint(StatusPointerType&& status,
         SpecifierBaseType(std::forward<StatusPointerType>(status),
             ValueStatusType::default_value),
         m_flag{std::forward<TArgs>(args)...},
-        m_value{.float_value = val},
+        m_value{.float_value=val},
         m_width(),
         m_precision(),
         m_print_out(nullptr)
 {
+    m_value._float_aligned.double_padding = 0;
+    m_value._float_aligned.long_double_padding = 0;
     _Set(m_width, m_precision, m_print_out, std::forward<TArgs>(args)...);
 }
     
@@ -402,11 +410,12 @@ FloatingPoint<TChar>::FloatingPoint(StatusPointerType&& status,
         SpecifierBaseType(std::forward<StatusPointerType>(status),
             ValueStatusType::default_value),
         m_flag{std::forward<TArgs>(args)...},
-        m_value{.double_value = val},
+        m_value{.double_value=val},
         m_width(),
         m_precision(),
         m_print_out(nullptr)
 {
+    m_value._float_aligned.long_double_padding = 0;
     _Set(m_width, m_precision, m_print_out, std::forward<TArgs>(args)...);
 }
     
@@ -449,7 +458,7 @@ FloatingPoint<TChar>::FloatingPoint(FloatingPoint<TChar>&& mov) :
     m_print_out(mov.m_print_out)
 {
     if (!mov.GetValueStatus().IsDefaultValue())
-        mov.m_value = ValueType{0};
+        mov.m_value = ValueType{.long_double_value=0.0L};
 }
 
 template<typename TChar>
@@ -476,7 +485,7 @@ FloatingPoint<TChar>::operator=(FloatingPoint<TChar>&& mov)
     m_precision = std::move(mov.m_precision);
     m_print_out = mov.m_print_out;
     if (!mov.GetValueStatus().IsDefaultValue())
-        mov.m_value = ValueType{0};
+        mov.m_value = ValueType{.long_double_value=0.0L};
     return *this;
 }
 
@@ -593,7 +602,7 @@ void FloatingPoint<TChar>::Unset()
 {
     SpecifierBaseType::GetValueStatus().UnsetValue();
     if (!SpecifierBaseType::GetValueStatus().IsSetValue())
-        m_value = ValueType{};
+        m_value = ValueType{.long_double_value=0.0L};
     m_width.Unset();
     m_precision.Unset();
 }
