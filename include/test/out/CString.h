@@ -101,8 +101,8 @@ public:
 public:
     test::CString<TChar> Get() const; 
 public:
-    bool IsGood() const;
-    bool IsBad() const;
+    bool IsGood() const override;
+    bool IsBad() const override;
     StatusType::ValueType GetBadCode() const;
 public:
     bool Output(test::out::Interface<TChar>& out) const;

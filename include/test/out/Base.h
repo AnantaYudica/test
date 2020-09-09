@@ -83,7 +83,7 @@ protected:
 private:
     TaskType * RequestTask();
 private:
-    bool ExecuteTask(const std::intptr_t& id);
+    bool ExecuteTask(const std::intptr_t& id) override;
 protected:
     virtual SizeType VPrint(const char * format, va_list var_args) override;
     virtual SizeType Print(const char * format, ...) override;

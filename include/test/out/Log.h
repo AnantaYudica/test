@@ -105,8 +105,8 @@ public:
     OnEndFunctionType * GetOnEnd() const;
 public:
     bool IsEnd() const;
-    bool IsGood() const;
-    bool IsBad() const;
+    bool IsGood() const override;
+    bool IsBad() const override;
     typename StatusType::IntegerValueType GetBadCode() const;
 public:
     bool Output(test::out::Interface<TChar>& out);
