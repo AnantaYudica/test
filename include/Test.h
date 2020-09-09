@@ -264,7 +264,7 @@ template<typename Ts, template<typename> class To,
 std::stack<test::Trace> Test<Ts, To, Tmem>::GetTrace()
 {
     if (m_traces == NULL)
-        return std::move(std::stack<test::Trace>());
+        return {};
     return *m_traces;
 }
 
@@ -406,8 +406,8 @@ void operator delete[](void* p) noexcept
 
 #ifndef REGISTER_TEST
 #define REGISTER_TEST(Name, Test, ...) auto Name =\
-    std::move(test::reg::Make<TEST>(Test,##__VA_ARGS__, \
-        __FILE__, __LINE__));
+    test::reg::Make<TEST>(Test,##__VA_ARGS__, \
+        __FILE__, __LINE__);
 #endif //!REGISTER_TEST
 
 #ifndef RUN_TEST
