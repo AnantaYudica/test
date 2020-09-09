@@ -64,9 +64,8 @@ Parameter<TChar, test::msg::fmt::var::Empty>::Parameter() :
 {}
 
 template<typename TChar>
-Parameter<TChar, test::msg::fmt::var::Empty>::
-    Parameter(StatusPointerType&& status) :
-        Parameter<TChar>()
+Parameter<TChar, test::msg::fmt::var::Empty>::Parameter(StatusPointerType&&) :
+    Parameter<TChar>()
 {}
 
 template<typename TChar>

@@ -155,19 +155,19 @@ Sequence<T, 0>::Sequence()
 {}
 
 template<typename T>
-Sequence<T, 0>::Sequence(const Sequence<T, 0>& cpy)
+Sequence<T, 0>::Sequence(const Sequence<T, 0>&)
 {}
 
 template<typename T>
-Sequence<T, 0>::Sequence(Sequence<T, 0>&& mov)
+Sequence<T, 0>::Sequence(Sequence<T, 0>&&)
 {}
 
 template<typename T>
-Sequence<T, 0>& Sequence<T, 0>::operator=(const Sequence<T, 0>& cpy)
+Sequence<T, 0>& Sequence<T, 0>::operator=(const Sequence<T, 0>&)
 {}
 
 template<typename T>
-Sequence<T, 0>& Sequence<T, 0>::operator=(Sequence<T, 0>&& mov)
+Sequence<T, 0>& Sequence<T, 0>::operator=(Sequence<T, 0>&&)
 {}
 
 } //!val
