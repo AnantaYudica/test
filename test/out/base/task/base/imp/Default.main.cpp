@@ -16,6 +16,7 @@ public:
         call_release(false),
         call_buffer(false)
     {}
+    using BaseType::Execute;
     void Execute()
     {
         auto guard = BaseType::ExecuteGuard();
@@ -24,6 +25,7 @@ public:
         else
             call_execute = false;
     }
+    using BaseType::Assign;
     void Assign()
     {
         auto guard = BaseType::AssignGuard();
@@ -32,6 +34,7 @@ public:
         else
             call_assign = false;
     }
+    using BaseType::Release;
     void Release()
     {
         auto guard = BaseType::ReleaseGuard();
@@ -40,6 +43,7 @@ public:
         else
             call_release = false;
     }
+    using BaseType::Buffer;
     void Buffer()
     {
         auto guard = BaseType::BufferGuard();
