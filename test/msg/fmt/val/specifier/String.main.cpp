@@ -1,5 +1,6 @@
 #include "test/msg/fmt/val/specifier/String.h"
 #include "test/out/CString.h"
+#include "test/def/cstr/val/Nullptr.h"
 
 #include <cassert>
 
@@ -43,7 +44,8 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%s", nullptr);
+        auto len_a = out_cstr1_a.Print("%s",
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -172,7 +174,8 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%s", nullptr);
+        len_a = out_cstr1_a.Print("%s",
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -233,7 +236,8 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%s", nullptr);
+        len_a = out_cstr1_a.Print("%s",
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -258,7 +262,8 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*s", 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%*s", 0,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -387,7 +392,8 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*s", 0, nullptr);
+        len_a = out_cstr1_a.Print("%*s", 0,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -448,7 +454,8 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*s", 0, nullptr);
+        len_a = out_cstr1_a.Print("%*s", 0,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -474,7 +481,8 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*s", wd1, nullptr);
+        auto len_a = out_cstr1_a.Print("%*s", wd1,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -603,7 +611,8 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*s", wd1, nullptr);
+        len_a = out_cstr1_a.Print("%*s", wd1,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -664,7 +673,8 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*s", wd1, nullptr);
+        len_a = out_cstr1_a.Print("%*s", wd1,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -689,7 +699,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%.*s", 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -818,7 +830,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*s", 0, nullptr);
+        len_a = out_cstr1_a.Print("%.*s",
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -879,7 +893,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*s", 0, nullptr);
+        len_a = out_cstr1_a.Print("%.*s",   
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -905,7 +921,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%.*s", ln1, nullptr);
+        auto len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1034,7 +1052,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*s", ln1, nullptr);
+        len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1095,7 +1115,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*s", ln1, nullptr);
+        len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1121,7 +1143,10 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*s", 0, 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1250,7 +1275,10 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", 0, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1311,7 +1339,10 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", 0, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1336,7 +1367,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*s", wd1, 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1465,7 +1498,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", wd1, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1526,7 +1561,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", wd1, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1551,7 +1588,10 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*s", 0, ln1, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1680,7 +1720,10 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", 0, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1741,7 +1784,10 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", 0, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1766,7 +1812,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*s", wd1, ln1, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1895,7 +1943,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", wd1, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -1956,7 +2006,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", wd1, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -3883,7 +3935,8 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%s", nullptr);
+        auto len_a = out_cstr1_a.Print("%s",
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4012,7 +4065,8 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%s", nullptr);
+        len_a = out_cstr1_a.Print("%s",
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4073,7 +4127,8 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%s", nullptr);
+        len_a = out_cstr1_a.Print("%s",
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4098,7 +4153,8 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*s", 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%*s", 0,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4227,7 +4283,8 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*s", 0, nullptr);
+        len_a = out_cstr1_a.Print("%*s", 0,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4288,7 +4345,8 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*s", 0, nullptr);
+        len_a = out_cstr1_a.Print("%*s", 0,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4314,7 +4372,8 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*s", wd1, nullptr);
+        auto len_a = out_cstr1_a.Print("%*s", wd1,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4443,7 +4502,8 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*s", wd1, nullptr);
+        len_a = out_cstr1_a.Print("%*s", wd1,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4504,7 +4564,8 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*s", wd1, nullptr);
+        len_a = out_cstr1_a.Print("%*s", wd1,
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4529,7 +4590,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%.*s", 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4658,7 +4721,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*s", 0, nullptr);
+        len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4719,7 +4784,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*s", 0, nullptr);
+        len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4745,7 +4812,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%.*s", ln1, nullptr);
+        auto len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4874,7 +4943,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*s", ln1, nullptr);
+        len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4935,7 +5006,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*s", ln1, nullptr);
+        len_a = out_cstr1_a.Print("%.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -4961,7 +5034,10 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*s", 0, 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5090,7 +5166,10 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", 0, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5151,7 +5230,10 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", 0, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5176,7 +5258,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*s", wd1, 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5305,7 +5389,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", wd1, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5366,7 +5452,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", wd1, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5391,7 +5479,10 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*s", 0, ln1, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5520,7 +5611,10 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", 0, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5581,7 +5675,10 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", 0, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5607,7 +5704,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*s", wd1, ln1, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5736,7 +5835,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", wd1, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -5797,7 +5898,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*s", wd1, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*s", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<char>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<char>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -7729,7 +7832,8 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%ls", nullptr);
+        auto len_a = out_cstr1_a.Print("%ls",
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -7858,7 +7962,8 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%ls", nullptr);
+        len_a = out_cstr1_a.Print("%ls",
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -7919,7 +8024,8 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%ls", nullptr);
+        len_a = out_cstr1_a.Print("%ls",
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -7944,7 +8050,8 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*ls", 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%*ls", 0,
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8073,7 +8180,8 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*ls", 0, nullptr);
+        len_a = out_cstr1_a.Print("%*ls", 0,
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8134,7 +8242,8 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*ls", 0, nullptr);
+        len_a = out_cstr1_a.Print("%*ls", 0,
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8160,7 +8269,8 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*ls", wd1, nullptr);
+        auto len_a = out_cstr1_a.Print("%*ls", wd1,
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8289,7 +8399,8 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*ls", wd1, nullptr);
+        len_a = out_cstr1_a.Print("%*ls", wd1,
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8350,7 +8461,8 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*ls", wd1, nullptr);
+        len_a = out_cstr1_a.Print("%*ls", wd1,
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8375,7 +8487,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%.*ls", 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%.*ls", 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8504,7 +8618,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*ls", 0, nullptr);
+        len_a = out_cstr1_a.Print("%.*ls", 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8565,7 +8681,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*ls", 0, nullptr);
+        len_a = out_cstr1_a.Print("%.*ls", 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8591,7 +8709,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%.*ls", ln1, nullptr);
+        auto len_a = out_cstr1_a.Print("%.*ls", 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8720,7 +8840,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*ls", ln1, nullptr);
+        len_a = out_cstr1_a.Print("%.*ls", 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8781,7 +8903,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%.*ls", ln1, nullptr);
+        len_a = out_cstr1_a.Print("%.*ls", 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8807,7 +8931,10 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*ls", 0, 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*ls", 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8936,7 +9063,10 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*ls", 0, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*ls", 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -8997,7 +9127,10 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*ls", 0, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*ls", 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(), 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -9023,7 +9156,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*ls", wd1, 0, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*ls", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -9152,7 +9287,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*ls", wd1, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*ls", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -9213,7 +9350,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*ls", wd1, 0, nullptr);
+        len_a = out_cstr1_a.Print("%*.*ls", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -9239,7 +9378,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*ls", 0, ln1, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*ls", 0, 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -9368,7 +9509,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*ls", 0, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*ls", 0, 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -9429,7 +9572,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*ls", 0, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*ls", 0, 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -9455,7 +9600,9 @@ int main()
         assert(st1.IsBad() == false);
         assert(st1.GetBadCode() == String<char>::StatusType::good);
         
-        auto len_a = out_cstr1_a.Print("%*.*ls", wd1, ln1, nullptr);
+        auto len_a = out_cstr1_a.Print("%*.*ls", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         auto len_b = st1.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -9584,7 +9731,9 @@ int main()
         assert(st2.IsBad() == false);
         assert(st2.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*ls", wd1, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*ls", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st2.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -9645,7 +9794,9 @@ int main()
         assert(st4.IsBad() == false);
         assert(st4.GetBadCode() == String<char>::StatusType::good);
 
-        len_a = out_cstr1_a.Print("%*.*ls", wd1, ln1, nullptr);
+        len_a = out_cstr1_a.Print("%*.*ls", wd1, 
+            (int)test::def::cstr::val::Nullptr::CStr<wchar_t>().Size(),
+            *(test::def::cstr::val::Nullptr::CStr<wchar_t>()));
         len_b = st4.Output(out_cstr1_b);
         assert(len_a == len_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
