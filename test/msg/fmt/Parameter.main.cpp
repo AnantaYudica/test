@@ -598,8 +598,8 @@ int main()
         assert(p2.IsSet() == false);
         assert(pp2->IsSet() == false);
         
-        size_a = out_cstr1_a.Print("%c%Lf%s%lld", 
-            ch2, ld2, cstr2, ll2, vo2);
+        size_a = out_cstr1_a.Print("%c%Lf%s%lld%n", 
+            ch2, ld2, cstr2, ll2, (int*)vo2);
         size_b = pp3->Output(out_cstr1_b);
         assert(size_a == size_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());
@@ -613,8 +613,8 @@ int main()
         assert(p4.IsSet() == true);
         assert(pp4->IsSet() == true);
         
-        size_a = out_cstr1_a.Print("%c%Lf%s%lld", 
-            ch2, ld2, cstr2, ll2, vo2);
+        size_a = out_cstr1_a.Print("%c%Lf%s%lld%n", 
+            ch2, ld2, cstr2, ll2, (int*)vo2);
         size_b = pp4->Output(out_cstr1_b);
         assert(size_a == size_b);
         assert(out_cstr1_a.Size() == out_cstr1_b.Size());

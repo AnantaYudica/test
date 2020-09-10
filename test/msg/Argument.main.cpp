@@ -275,8 +275,8 @@ int main()
     
     res_a = Print2(&gl_out_cstr1, "int", "char", "double", "int", "char", 
         "double", "int", "double", 1234, 'B', 10, 11, 12, 13, 14, 10, 14, 
-        strlen("double"), 1234, (int)'B', 5678, -3210, 'Y', -3210, 'Y',
-        90, 91, 92, 93, 94, 90, 94, strlen("char"), 5678, (int)'Y');
+        (int)strlen("double"), 1234, (int)'B', 5678, -3210, 'Y', -3210, 'Y',
+        90, 91, 92, 93, 94, 90, 94, (int)strlen("char"), 5678, (int)'Y');
     res_b = arg2.Call<std::size_t>(TestA1{}, &Print2, 
         var2, &out_cstr1);
     res_c = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},
@@ -306,8 +306,8 @@ int main()
 
     res_a = Print2(&gl_out_cstr1, "int", "char", "double", "int", "char", 
         "double", "int", "double", 1234, 'B', 10, 11, 12, 13, 14, 10, 14, 
-        strlen("double"), 1234, (int)'B', 5678, -3210, 'Y', -3210, 'Y',
-        90, 91, 92, 93, 94, 90, 94, strlen("char"), 5678, (int)'Y');
+        (int)strlen("double"), 1234, (int)'B', 5678, -3210, 'Y', -3210, 'Y',
+        90, 91, 92, 93, 94, 90, 94, (int)strlen("char"), 5678, (int)'Y');
     res_b = arg2.Call<std::size_t>(TestA1{}, &VPrint2, 
         var2, &out_cstr1);
     res_c = arg2.Call<std::size_t>(test::type::Index<TestA1, 0>{},

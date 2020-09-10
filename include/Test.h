@@ -182,7 +182,7 @@ void Test<Ts, To, Tmem>::Error(const char* err_msg_cstr, ...)
     auto trace = GetInstance().GetTrace();
     while (!trace.empty())
     {
-        GetInstance().Output().Error(" from file %s line %i\n",
+        GetInstance().Output().Error(" from file %s line %zi\n",
             trace.top().File, trace.top().Line);
         trace.pop();
     }
@@ -224,7 +224,7 @@ const int& Test<Ts, To, Tmem>::Run()
     std::size_t i = 0, s = GetInstance().List().size();
     for (auto t : GetInstance().List())
     {
-        Debug("Test %u of %u : \n", i + 1, s);
+        Debug("Test %zu of %zu : \n", i + 1, s);
         GetInstance().Push(test::Trace(t->File(), t->Line()));
         t->Run();
         GetInstance().Pop();

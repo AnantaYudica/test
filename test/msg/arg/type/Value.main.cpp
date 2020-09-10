@@ -116,7 +116,7 @@ int main()
 
     assert(arg_value0.Get(test::type::Index<CaseA1, 0>{}, var1) == -4000);
 
-    res_a = out_cstr1.Print("%lu%d", 30000, -4000);
+    res_a = out_cstr1.Print("%lu%d", 30000UL, -4000);
     res_b = arg_value1.Call<std::size_t>(CaseA1{}, Func1, var1);
     res_c = arg_value1.Call<std::size_t>(CaseA1{}, Func3, var1, 2);
     res_d = arg_value1.Call<std::size_t>(test::type::Index<CaseA1, 0>{}, 

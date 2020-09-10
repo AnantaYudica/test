@@ -48,7 +48,7 @@ struct Array<T[N]>
     static test::CString<const TChar> CStr()
     {
         static test::CString<TChar> _arr = test::cstr::Format(
-            (static_cast<std::size_t>(log10(N)) + 4), "[%d]", N);
+            (static_cast<std::size_t>(log10(N)) + 4), "[%zd]", N);
         return {_arr};
     }
 };
@@ -63,7 +63,7 @@ struct Array<T[N][M]>
     {
         static test::CString<TChar> _arr = test::cstr::Format(
             (static_cast<std::size_t>(log10(N)) +
-                Array<T[M]>::template CStr<TChar>().Size() + 4), "[%d]%s", 
+                Array<T[M]>::template CStr<TChar>().Size() + 4), "[%zd]%s", 
             N, *(Array<T[M]>::template CStr<TChar>()));
         return {_arr};
     }
