@@ -10,3 +10,4 @@ int main()
     printf("%s %zd", typeid(typename Int_At2::Type).name(), 
         Int_At2::Value);
 }
+

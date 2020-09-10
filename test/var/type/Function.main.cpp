@@ -19,3 +19,4 @@ int main()
     test::Variable<test::type::Function<void(), &Foo1>, int,
         test::type::Function<void(), &Foo1>, char> var3;
 }
+

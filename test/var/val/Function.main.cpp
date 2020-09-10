@@ -24,3 +24,4 @@ int main()
     var3.Get().Call(4, 'a', 3.14f);
 
 }
+

@@ -25,3 +25,4 @@ int main()
     F1::template Type<A>::Print();
 
 }
+

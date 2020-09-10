@@ -48,4 +48,3 @@ test::CString<typename std::remove_const<TChar>::type>
 } //!test
 
 #endif //!TEST_CSTR_FORMAT_H_
-

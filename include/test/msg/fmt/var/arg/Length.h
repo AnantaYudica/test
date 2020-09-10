@@ -27,4 +27,3 @@ typedef test::msg::fmt::var::arg::Precision Length;
 } //!test
 
 #endif //!TEST_MSG_FMT_VAR_ARG_LENGTH_H_
-

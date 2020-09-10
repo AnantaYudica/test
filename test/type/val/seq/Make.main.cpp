@@ -27,3 +27,4 @@ int main()
     printf("Size : %zd\n", SequenceInt10::Size);
     
 }
+

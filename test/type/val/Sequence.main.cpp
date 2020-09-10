@@ -27,3 +27,4 @@ int main()
     printf("[3] : %d\n", i4.At<3>());
     printf("Size : %zd\n", ValSeqInt4::Size);
 }
+

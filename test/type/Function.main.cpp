@@ -29,3 +29,4 @@ int main()
     Function2 f2;
     f2.Call(4);
 }
+

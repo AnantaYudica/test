@@ -34,3 +34,4 @@ int main()
         test::type::Name<A<int, int, int>>::CStr();
     printf("%s\n", *ch1);
 }
+

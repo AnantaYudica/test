@@ -34,4 +34,3 @@ constexpr typename Value<T, ValueT>::ConstGetType
 } //!test
 
 #endif //!TEST_TYPE_VALUE_H_
-

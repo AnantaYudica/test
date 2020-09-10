@@ -16,3 +16,4 @@ int main()
         Size<Param1<int, int, char>>::Value);
 
 }
+

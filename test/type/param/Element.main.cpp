@@ -59,3 +59,4 @@ int main()
     printf("%s == %s?\n", typeid(long).name(), typeid(P1_I3).name());
     assert(typeid(long).hash_code() == typeid(P1_I3).hash_code());
 }
+

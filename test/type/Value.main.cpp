@@ -12,3 +12,4 @@ int main()
 
     printf("%d\n", ValueInt4{}.Get());
 }
+

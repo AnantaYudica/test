@@ -15,4 +15,3 @@ struct Parameter
 } //!test
 
 #endif //!TEST_TYPE_PARAMETER_H_
-

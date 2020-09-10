@@ -29,4 +29,3 @@ public:
 } //!test
 
 #endif //!TEST_MSG_FMT_VAR_ARG_UNSIGNED_H_
-

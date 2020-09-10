@@ -61,4 +61,3 @@ constexpr typename std::enable_if<I != 0,
 } //!test
 
 #endif //!TEST_TYPE_VAL_SEQUENCE_H_
-

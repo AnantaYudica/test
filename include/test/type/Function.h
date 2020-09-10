@@ -49,4 +49,3 @@ constexpr typename Function<TRet(TArgs...), Func>::ConstGetType
 } //!test
 
 #endif //!TEST_TYPE_FUNCTION_H_
-

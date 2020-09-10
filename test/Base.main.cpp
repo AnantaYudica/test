@@ -40,3 +40,4 @@ int main()
         Variable1<short, char>> a1(var1_1, var1_2, var1_3);
     a1.Run();
 }
+
