@@ -9,7 +9,7 @@
 using namespace test::out;
 
 std::size_t Print(CString<char>& cstr, const char * format, ...) 
-    __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+    TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
     
 std::size_t Print(CString<char>& cstr, const char * format, ...) 
 {

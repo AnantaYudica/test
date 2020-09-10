@@ -8,13 +8,13 @@
 #include <cstdarg>
 #include <utility>
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 namespace test
 {
@@ -38,9 +38,9 @@ public:
     Interface<TChar>& operator=(Interface<TChar>&&) = delete;
 public:
     virtual SizeType VPrint(const char * format, va_list var_args) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0))) = 0;
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0))) = 0;
     virtual SizeType Print(const char * format, ...) 
-        __ATTRIBUTE__((format(printf, 2, 3))) = 0;
+        TEST_ATTRIBUTE((format(printf, 2, 3))) = 0;
 public:
     virtual SizeType Puts(const TChar * cstr, const SizeType& size) = 0;
     virtual SizeType Puts(const TChar * cstr) = 0;

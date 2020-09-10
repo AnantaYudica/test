@@ -26,13 +26,13 @@
 #define TEST_OUTPUT_FILENAME_EMPTY
 #endif //!TEST_OUTPUT_FILENAME
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 namespace _helper
 {
@@ -75,11 +75,11 @@ public:
     Test<Ts, To, Tmem>& operator=(Test<Ts, To, Tmem>&& mov) = delete;
 public:
     static void Info(const char* info_msg_cstr, ...)
-        __ATTRIBUTE__((__format__ (__printf__, 1, 2)));
+        TEST_ATTRIBUTE((__format__ (__printf__, 1, 2)));
     static void Debug(const char* debug_msg_cstr, ...)
-        __ATTRIBUTE__((__format__ (__printf__, 1, 2)));
+        TEST_ATTRIBUTE((__format__ (__printf__, 1, 2)));
     static void Error(const char* err_msg_cstr, ...)
-        __ATTRIBUTE__((__format__ (__printf__, 1, 2)));
+        TEST_ATTRIBUTE((__format__ (__printf__, 1, 2)));
     static bool Assert(bool test, const char* err_msg_cstr, 
         const char* file, const int& line);
 public:

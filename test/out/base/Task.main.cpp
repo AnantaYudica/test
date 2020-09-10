@@ -6,13 +6,13 @@
 #include <cassert>
 #include <cstdint>
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 struct Out : test::out::Interface<char>
 {
@@ -22,13 +22,13 @@ struct Out : test::out::Interface<char>
     ~Out()
     {}
     SizeType VPrint(const char * format, va_list var_args) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0)))
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)))
     {
         return cstr.VPrint(format, var_args);
     }
 
     SizeType Print(const char * format, ...) 
-        __ATTRIBUTE__ ((__format__ (__printf__, 2, 3)))
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)))
     {
         va_list args;
         va_start(args, format);

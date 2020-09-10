@@ -11,13 +11,13 @@
 #include <cstdint>
 #include <cstdarg>
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 namespace test
 {
@@ -59,9 +59,9 @@ protected:
     BufferType GetBuffer();
 public:
     virtual SizeType VPrint(const char * format, va_list var_args) override
-        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0)));;
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));;
     virtual SizeType Print(const char * format, ...) override
-        __ATTRIBUTE__ ((__format__ (__printf__, 2, 3)));;
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));;
 public:
     virtual SizeType Puts(const TChar * cstr, const SizeType& size) override;
     virtual SizeType Puts(const TChar * cstr) override;

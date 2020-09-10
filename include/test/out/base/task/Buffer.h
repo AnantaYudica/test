@@ -8,13 +8,13 @@
 #include <utility>
 #include <cstdarg>
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 namespace test
 {
@@ -64,9 +64,9 @@ public:
     SizeType Size() const;
 public:
     SizeType VPrint(const char * format, va_list var_args) override
-        __ATTRIBUTE__ ((__format__ (__printf__, 2, 0)));
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
     SizeType Print(const char * format, ...) override
-        __ATTRIBUTE__ ((__format__ (__printf__, 2, 3)));
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
 public:
     SizeType Puts(const TChar * cstr, const SizeType& size) override;
     SizeType Puts(const TChar * cstr) override;

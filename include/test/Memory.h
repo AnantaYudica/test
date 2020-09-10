@@ -23,13 +23,13 @@
 
 #include <cstdio>
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 namespace test
 {
@@ -58,11 +58,11 @@ public:
     void Set(StatusType& status);
 private:
     void Info(const char* format, ...) 
-        __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+        TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
     void Debug(const char* format, ...)
-        __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+        TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
     void Error(const char* format, ...)
-        __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+        TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
 private:
     void ReallocationBlock();
     void AppendBlock(mem::Block& b);

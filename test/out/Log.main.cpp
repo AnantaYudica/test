@@ -25,7 +25,7 @@ struct Out : test::out::CString<char>
 };
 
 std::size_t Print(test::out::Log<char>& cstr, const char * format, ...) 
-    __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+    TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
 
 std::size_t Print(test::out::Log<char>& log, const char * format, ...) 
 {
