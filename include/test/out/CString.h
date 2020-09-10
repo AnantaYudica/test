@@ -381,6 +381,7 @@ CString<TChar>::~CString()
 
 template<typename TChar>
 CString<TChar>::CString(const CString<TChar>& cpy) :
+    test::out::Interface<TChar>(),
     m_status(),
     m_cstr(nullptr),
     m_size(0),
@@ -401,7 +402,8 @@ CString<TChar>::CString(const CString<TChar>& cpy) :
 }
 
 template<typename TChar>
-CString<TChar>::CString(CString<TChar>&& mov):
+CString<TChar>::CString(CString<TChar>&& mov) :
+    test::out::Interface<TChar>(),
     m_status(std::move(mov.m_status)),
     m_cstr(mov.m_cstr),
     m_size(mov.m_size),
