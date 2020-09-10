@@ -1,6 +1,7 @@
 #ifndef TEST_MSG_FMT_VAL_SPECIFIER_STRING_H_
 #define TEST_MSG_FMT_VAL_SPECIFIER_STRING_H_
 
+#include "../../../../def/cstr/val/Nullptr.h"
 #include "../Specifier.h"
 #include "../Width.h"
 #include "../Length.h"
@@ -534,8 +535,32 @@ typename String<TChar>::OutputInterfaceType::SizeType
 String<TChar>::Output(OutputInterfaceType& out)
 {
     if (!IsSet())
+         SpecifierBaseType::GetStatus().Bad(StatusType::value_not_set);
+    if (!SpecifierBaseType::GetValueStatus().IsSetValue() ||
+        m_value.char_ptr_value == nullptr)
     {
-        SpecifierBaseType::GetStatus().Bad(StatusType::value_not_set);
+        WidthType width = m_width;
+        LengthType length = m_length;
+        ValueType val = m_value;
+        if (m_flag.GetValue() & FlagType::define_char)
+        {
+            const auto def_nullptr =
+                test::def::cstr::val::Nullptr::CStr<char>();
+            if (!m_width.IsSet())
+                width = WidthType((int)def_nullptr.Size());
+            length = LengthType((int)def_nullptr.Size());
+            val = ValueType{.char_ptr_value = *def_nullptr};
+        }
+        else if (m_flag.GetValue() & FlagType::define_wchar)
+        {
+            const auto def_nullptr =
+                test::def::cstr::val::Nullptr::CStr<wchar_t>();
+            if (!m_width.IsSet())
+                width = WidthType((int)def_nullptr.Size());
+            length = LengthType((int)def_nullptr.Size());
+            val = ValueType{.wchar_ptr_value = *def_nullptr};
+        }
+        return m_print_out(out, width, length, val);
     }
     return m_print_out(out, m_width, m_length, m_value);
 }
