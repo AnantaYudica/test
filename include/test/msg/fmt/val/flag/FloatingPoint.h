@@ -936,52 +936,52 @@ public:
     inline FloatingPoint& operator=(const FloatingPoint& cpy);
     inline FloatingPoint& operator=(FloatingPoint&& mov);
 private:
-    inline constexpr ValueType _Value(ValueType val);
+    inline constexpr ValueType _Value(ValueType val) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<float>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<double>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<long double>&&,
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DecimalType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, HexadecimalType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, FixedType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, ExponentType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, LowerType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, UpperType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrefixType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrefixPlusType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrefixSpaceType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrefixZeroType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, WidthType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrecisionType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
 public:
     inline constexpr ValueType GetValue() const;
 };
@@ -1019,7 +1019,7 @@ inline FloatingPoint& FloatingPoint::operator=(FloatingPoint&& mov)
 }
 
 inline constexpr typename FloatingPoint::ValueType 
-FloatingPoint::_Value(ValueType val)
+FloatingPoint::_Value(ValueType val) const
 {
     return ((val & notation_mask) != good) ? val :
         ((val & decimal) ? (val | fixed) : (val | exponent));
@@ -1028,7 +1028,7 @@ FloatingPoint::_Value(ValueType val)
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
 FloatingPoint::_Value(ValueType val, DefineType<float>&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_double, 
         std::forward<TArgs>(args)...);
@@ -1037,7 +1037,7 @@ FloatingPoint::_Value(ValueType val, DefineType<float>&&,
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
 FloatingPoint::_Value(ValueType val, DefineType<double>&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_double, 
         std::forward<TArgs>(args)...);
@@ -1046,7 +1046,7 @@ FloatingPoint::_Value(ValueType val, DefineType<double>&&,
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
 FloatingPoint::_Value(ValueType val, DefineType<long double>&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return  _Value(val | (define_long | define_double), 
         std::forward<TArgs>(args)...);
@@ -1054,7 +1054,7 @@ FloatingPoint::_Value(ValueType val, DefineType<long double>&&,
 
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
-FloatingPoint::_Value(ValueType val, DecimalType&&, TArgs&&... args)
+FloatingPoint::_Value(ValueType val, DecimalType&&, TArgs&&... args) const
 {
     return _Value((val & ~base_mask) | decimal, std::forward<TArgs>(args)...);
 }
@@ -1062,7 +1062,7 @@ FloatingPoint::_Value(ValueType val, DecimalType&&, TArgs&&... args)
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
 FloatingPoint::_Value(ValueType val, HexadecimalType&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val & ~base_mask) | hexadecimal, 
         std::forward<TArgs>(args)...);
@@ -1070,35 +1070,35 @@ FloatingPoint::_Value(ValueType val, HexadecimalType&&,
 
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
-FloatingPoint::_Value(ValueType val, FixedType&&, TArgs&&... args)
+FloatingPoint::_Value(ValueType val, FixedType&&, TArgs&&... args) const
 {
     return _Value(val | fixed, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
-FloatingPoint::_Value(ValueType val, ExponentType&&, TArgs&&... args)
+FloatingPoint::_Value(ValueType val, ExponentType&&, TArgs&&... args) const
 {
     return _Value(val | exponent, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
-FloatingPoint::_Value(ValueType val, LowerType&&, TArgs&&... args)
+FloatingPoint::_Value(ValueType val, LowerType&&, TArgs&&... args) const
 {
     return _Value((val & ~letter_mask) | lower, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
-FloatingPoint::_Value(ValueType val, UpperType&&, TArgs&&... args)
+FloatingPoint::_Value(ValueType val, UpperType&&, TArgs&&... args) const
 {
     return _Value((val & ~letter_mask) | upper, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
-FloatingPoint::_Value(ValueType val, PrefixType&&, TArgs&&... args)
+FloatingPoint::_Value(ValueType val, PrefixType&&, TArgs&&... args) const
 {
     return _Value(val | prefix, std::forward<TArgs>(args)...);
 }
@@ -1106,7 +1106,7 @@ FloatingPoint::_Value(ValueType val, PrefixType&&, TArgs&&... args)
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
 FloatingPoint::_Value(ValueType val, PrefixPlusType&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val & ~prefix_mask) | (plus | prefix), 
         std::forward<TArgs>(args)...);
@@ -1115,7 +1115,7 @@ FloatingPoint::_Value(ValueType val, PrefixPlusType&&,
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
 FloatingPoint::_Value(ValueType val, PrefixSpaceType&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val & ~prefix_mask) | (space | prefix), 
         std::forward<TArgs>(args)...);
@@ -1123,7 +1123,7 @@ FloatingPoint::_Value(ValueType val, PrefixSpaceType&&,
 
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
-FloatingPoint::_Value(ValueType val, PrefixZeroType&&, TArgs&&... args)
+FloatingPoint::_Value(ValueType val, PrefixZeroType&&, TArgs&&... args) const
 {
     return _Value((val & ~prefix_mask) | (zero | prefix), 
         std::forward<TArgs>(args)...);
@@ -1131,7 +1131,7 @@ FloatingPoint::_Value(ValueType val, PrefixZeroType&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
-FloatingPoint::_Value(ValueType val, WidthType&&, TArgs&&... args)
+FloatingPoint::_Value(ValueType val, WidthType&&, TArgs&&... args) const
 {
     return _Value((val | width), std::forward<TArgs>(args)...);
 }
@@ -1139,7 +1139,7 @@ FloatingPoint::_Value(ValueType val, WidthType&&, TArgs&&... args)
 template<typename... TArgs>
 inline constexpr typename FloatingPoint::ValueType 
 FloatingPoint::_Value(ValueType val, PrecisionType&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val | precision), std::forward<TArgs>(args)...);
 }
