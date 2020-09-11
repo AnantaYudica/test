@@ -704,4 +704,4 @@ int main()
         assert(strncmp(*(out_cstr1.Get()), "vWvWvWvWvWvW", 13) == 0);
     }
     return 0;
-};
+}

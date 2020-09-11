@@ -26,10 +26,10 @@ struct Out2 : test::out::Base<char, N>
 
 template<typename T>
 std::size_t Print(T& out, const char * format, ...) 
-    __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+    TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
 template<typename T, typename TT>
 std::size_t Print(T& out, const TT& tag, const char * format, ...) 
-    __ATTRIBUTE__((__format__ (__printf__, 3, 4)));
+    TEST_ATTRIBUTE((__format__ (__printf__, 3, 4)));
 
 template<typename T>
 std::size_t Print(T& out, const char * format, ...) 
@@ -661,4 +661,5 @@ bool ReadFile(const char * fname, const char * str,
     }
     return false;
 }
+
 

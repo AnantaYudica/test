@@ -27,3 +27,4 @@ int main()
     var3.Get().Fill<void>(&Print2);
 
 }
+

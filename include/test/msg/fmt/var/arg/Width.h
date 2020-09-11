@@ -56,4 +56,3 @@ inline constexpr int Width::GetValue() const
 } //!test
 
 #endif //!TEST_MSG_FMT_VAR_ARG_WIDTH_H_
-

@@ -118,102 +118,148 @@ struct Obj21
 {};
 
 template<int... I>
-inline auto test::type::name::tmpl::Parameter(Obj1<I...>*) -> 
-    test::type::name::Parameter<test::type::name::Value<int, I>...>;
+struct test::type::name::tmpl::Define<Obj1<I...>>
+{
+    typedef test::type::name::Parameter<
+        test::type::name::Value<int, I>...> ParameterType;
+};
 
 template<typename T, int I, int (&F)()>
-inline auto test::type::name::tmpl::Parameter(Obj3<T, I, F>*) -> 
-    test::type::name::Parameter<T, test::type::name::Value<int, I>,
-        test::type::name::Value<int (&)(), F>>;
+struct test::type::name::tmpl::Define<Obj3<T, I, F>>
+{
+    typedef test::type::name::Parameter<T, 
+        test::type::name::Value<int, I>,
+        test::type::name::Value<int (&)(), F>> ParameterType;
+};
 
 template<typename T, int I, int (*F)()>
-inline auto test::type::name::tmpl::Parameter(Obj4<T, I, F>*) -> 
-    test::type::name::Parameter<T, test::type::name::Value<int, I>,
-        test::type::name::Value<int (*)(), F>>;
+struct test::type::name::tmpl::Define<Obj4<T, I, F>>
+{
+    typedef test::type::name::Parameter<T, 
+        test::type::name::Value<int, I>,
+        test::type::name::Value<int (*)(), F>> ParameterType;
+};
 
 template<typename T, int T::* V>
-inline auto test::type::name::tmpl::Parameter(Obj5<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int T::*, V>>;
+struct test::type::name::tmpl::Define<Obj5<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int T::*, V>> ParameterType;
+};
 
 template<typename T, int T::*const V>
-inline auto test::type::name::tmpl::Parameter(Obj6<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int T::*const, V>>;
+struct test::type::name::tmpl::Define<Obj6<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int T::*const, V>> ParameterType;
+};
         
 template<typename T, int T::*volatile V>
-inline auto test::type::name::tmpl::Parameter(Obj7<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int T::*volatile, V>>;
+struct test::type::name::tmpl::Define<Obj7<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int T::*volatile, V>> ParameterType;
+};
         
 template<typename T, int T::*const volatile V>
-inline auto test::type::name::tmpl::Parameter(Obj8<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int T::*const volatile, V>>;
+struct test::type::name::tmpl::Define<Obj8<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int T::*const volatile, V>> ParameterType;
+};
         
 template<typename T, int (T::* V)()>
-inline auto test::type::name::tmpl::Parameter(Obj9<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)(), V>>;
+struct test::type::name::tmpl::Define<Obj9<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)(), V>> ParameterType;
+};
         
 template<typename T, int (T::* V)() &>
-inline auto test::type::name::tmpl::Parameter(Obj10<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() &, V>>;
+struct test::type::name::tmpl::Define<Obj10<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() &, V>> ParameterType;
+};
 
 template<typename T, int (T::* V)() &&>
-inline auto test::type::name::tmpl::Parameter(Obj11<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() &&, V>>;
+struct test::type::name::tmpl::Define<Obj11<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() &&, V>> ParameterType;
+};
         
 template<typename T, int (T::* V)() const>
-inline auto test::type::name::tmpl::Parameter(Obj12<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() const, V>>;
+struct test::type::name::tmpl::Define<Obj12<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() const, V>> ParameterType;
+};
 
 template<typename T, int (T::* V)() const &>
-inline auto test::type::name::tmpl::Parameter(Obj13<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() const &, V>>;
+struct test::type::name::tmpl::Define<Obj13<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() const &, V>> ParameterType;
+};
 
 template<typename T, int (T::* V)() const &&>
-inline auto test::type::name::tmpl::Parameter(Obj14<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() const &&, V>>;
+struct test::type::name::tmpl::Define<Obj14<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() const &&, V>> ParameterType;
+};
 
 template<typename T, int (T::* V)() volatile>
-inline auto test::type::name::tmpl::Parameter(Obj15<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() volatile, V>>;
+struct test::type::name::tmpl::Define<Obj15<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() volatile, V>> ParameterType;
+};
 
 template<typename T, int (T::* V)() volatile &>
-inline auto test::type::name::tmpl::Parameter(Obj16<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() volatile &, V>>;
+struct test::type::name::tmpl::Define<Obj16<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() volatile &, V>> ParameterType;
+};
 
 template<typename T, int (T::* V)() volatile &&>
-inline auto test::type::name::tmpl::Parameter(Obj17<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() volatile &&, V>>;
+struct test::type::name::tmpl::Define<Obj17<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() volatile &&, V>> ParameterType;
+};
 
 template<typename T, int (T::* V)() const volatile>
-inline auto test::type::name::tmpl::Parameter(Obj18<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() const volatile, V>>;
+struct test::type::name::tmpl::Define<Obj18<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() const volatile, V>> ParameterType;
+};
 
 template<typename T, int (T::* V)() const volatile &>
-inline auto test::type::name::tmpl::Parameter(Obj19<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() const volatile &, V>>;
+struct test::type::name::tmpl::Define<Obj19<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() 
+        const volatile &, V>> ParameterType;
+};
 
 template<typename T, int (T::* V)() const volatile &&>
-inline auto test::type::name::tmpl::Parameter(Obj20<T, V>*) -> 
-    test::type::name::Parameter<T,
-        test::type::name::Value<int (T::*)() const volatile &&, V>>;
+struct test::type::name::tmpl::Define<Obj20<T, V>>
+{
+    typedef test::type::name::Parameter<T,
+        test::type::name::Value<int (T::*)() 
+        const volatile &&, V>> ParameterType;
+};
 
 template<typename T, T... I>
-inline auto test::type::name::tmpl::Parameter(Obj21<T, I...>*) -> 
-    test::type::name::Parameter<T, test::type::name::Value<T, I>...>;
+struct test::type::name::tmpl::Define<Obj21<T, I...>>
+{
+    typedef test::type::name::Parameter<T, 
+        test::type::name::Value<T, I>...> ParameterType;
+};
 
 
 template<>

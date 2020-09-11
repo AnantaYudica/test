@@ -21,13 +21,13 @@
 #include <cstddef>
 #include <utility>
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 namespace test
 {
@@ -83,10 +83,12 @@ protected:
 private:
     TaskType * RequestTask();
 private:
-    bool ExecuteTask(const std::intptr_t& id);
+    bool ExecuteTask(const std::intptr_t& id) override;
 protected:
-    virtual SizeType VPrint(const char * format, va_list var_args) override;
-    virtual SizeType Print(const char * format, ...) override;
+    virtual SizeType VPrint(const char * format, va_list var_args) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
+    virtual SizeType Print(const char * format, ...) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
 protected:
     virtual SizeType Puts(const TChar * cstr, const SizeType& size) override;
     virtual SizeType Puts(const TChar * cstr) override;
@@ -95,10 +97,10 @@ protected:
 public:
     template<typename TOutTag>
     SizeType VPrint(const TOutTag& tag, const char * format, 
-        va_list var_args) __ATTRIBUTE__((__format__ (__printf__, 4, 0)));
+        va_list var_args) TEST_ATTRIBUTE((__format__ (__printf__, 3, 0)));
     template<typename TOutTag>
     SizeType Print(const TOutTag& tag, const char * format, ...)
-         __ATTRIBUTE__((__format__ (__printf__, 3, 4)));
+         TEST_ATTRIBUTE((__format__ (__printf__, 3, 4)));
 public:
     template<typename TOutTag>
     SizeType Puts(const TOutTag& tag, const TChar * cstr, 

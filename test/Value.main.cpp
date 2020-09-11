@@ -20,3 +20,4 @@ int main()
     std::cout << "a_int4.Get() : " << a_int4.Get() << std::endl;
 
 }
+

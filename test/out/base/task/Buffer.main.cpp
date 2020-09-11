@@ -23,11 +23,11 @@ struct Obj1
 
 template<typename TChar, typename TInterface>
 std::size_t Print(test::out::base::task::Buffer<TChar, TInterface>& o,
-    const char * format, ...) __ATTRIBUTE__((format(printf, 2, 3)));
+    const char * format, ...) TEST_ATTRIBUTE((format(printf, 2, 3)));
     
 template<typename TChar>
 std::size_t Print(test::out::Interface<TChar>& o,
-    const char * format, ...) __ATTRIBUTE__((format(printf, 2, 3)));
+    const char * format, ...) TEST_ATTRIBUTE((format(printf, 2, 3)));
 
 template<typename TChar, typename TInterface>
 std::size_t Print(test::out::base::task::Buffer<TChar, TInterface>& o,

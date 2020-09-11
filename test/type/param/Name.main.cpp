@@ -31,6 +31,7 @@ TEST_TYPE_NAME("int", int);
 int main()
 {
     test::CString<char> ch1 = 
-        std::move(test::type::Name<A<int, int, int>>::CStr());
+        test::type::Name<A<int, int, int>>::CStr();
     printf("%s\n", *ch1);
 }
+

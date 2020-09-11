@@ -291,9 +291,9 @@ public:
     typename OutputInterfaceType::SizeType
         Output(OutputInterfaceType& out) override;
 public:
-    void Unset();
+    void Unset() override;
 public:
-    bool IsSet() const;
+    bool IsSet() const override;
 public:
     IntegerFlagType GetFlag() const;
 };

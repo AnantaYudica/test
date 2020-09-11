@@ -7,13 +7,13 @@
 #include <utility>
 #include <type_traits>
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 namespace test
 {
@@ -23,9 +23,9 @@ namespace cstr
 template<typename TChar = char>
 test::CString<typename std::remove_const<TChar>::type> 
     Format(const std::size_t& size, const char* format, ...)
-        __ATTRIBUTE__((format(printf, 2, 3)));
+        TEST_ATTRIBUTE((format(printf, 2, 3)));
 
-template<typename TChar = char>
+template<typename TChar>
 test::CString<typename std::remove_const<TChar>::type> 
     Format(const std::size_t& size, const char* format, ...)
 {
@@ -48,4 +48,3 @@ test::CString<typename std::remove_const<TChar>::type>
 } //!test
 
 #endif //!TEST_CSTR_FORMAT_H_
-

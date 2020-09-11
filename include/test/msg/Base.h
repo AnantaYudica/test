@@ -240,7 +240,7 @@ template<typename TCaseId, typename TTag,
     typename _THasCase, typename std::enable_if<
     (!test::trait::type::index::IsBaseOf<TCaseId>::Value &&
     !test::trait::type::index::IsBaseOf<TTag>::Value) &&
-    _THasCase::value, int>::type = 0>
+    _THasCase::value, int>::type>
 typename Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
     TCaseArgs...>::FormatType 
 Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
@@ -253,7 +253,7 @@ template<typename TChar, typename TId, typename... TTagArgs,
     typename... TCaseArgs>
 template<typename TCaseId, typename TTag, std::size_t ITAgAt, 
     typename _THasCase, typename std::enable_if<!test::trait::type::index::
-        IsBaseOf<TCaseId>::Value && _THasCase::value, int>::type = 0>
+        IsBaseOf<TCaseId>::Value && _THasCase::value, int>::type>
 typename Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
     TCaseArgs...>::FormatType 
 Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
@@ -267,7 +267,7 @@ template<typename TChar, typename TId, typename... TTagArgs,
     typename... TCaseArgs>
 template<typename TCaseId, typename TTag, std::size_t ICaseId, 
     typename _THasCase, typename std::enable_if<!test::trait::type::index::
-        IsBaseOf<TTag>::Value && _THasCase::value, int>::type = 0>
+        IsBaseOf<TTag>::Value && _THasCase::value, int>::type>
 typename Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,
     TCaseArgs...>::FormatType 
 Base<TChar, test::msg::Case<TId, TChar, TTagArgs...>,

@@ -16,3 +16,4 @@ int main()
     test::Variable<test::type::val::Sequence<int, 1, 2, 3>, int,
         test::type::val::Sequence<int, 14, 4, 22, 11>, char> var4;
 }
+

@@ -2,6 +2,7 @@
 #define TEST_OUT_FILE_H_
 
 #include "../CString.h"
+#include "../cstr/Length.h"
 #include "file/Status.h"
 #include "file/Base.h"
 #include "Interface.h"
@@ -11,6 +12,14 @@
 #include <cstdarg>
 #include <utility>
 #include <cstdint>
+
+#ifndef TEST_ATTRIBUTE
+#ifdef __GNUC__
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
+#else
+#define TEST_ATTRIBUTE(...)
+#endif
+#endif //!TEST_ATTRIBUTE
 
 namespace test
 {
@@ -93,8 +102,10 @@ public:
 public:
     test::CString<char> Filename() const;
 protected:
-    SizeType VPrint(const char * format, va_list var_args) override;
-    SizeType Print(const char * format, ...) override;
+    SizeType VPrint(const char * format, va_list var_args) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
+    SizeType Print(const char * format, ...) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
 protected:
     SizeType Puts(const TChar * cstr, const SizeType& size) override;
     SizeType Puts(const TChar * cstr) override;
@@ -341,7 +352,8 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::
     _SetFilename(const char * filename)
 {
     auto& status = GetStatus();
-    const SizeType len = strnlen(filename, filename_maximum_size);
+    const SizeType len = test::cstr::Length<TChar>::Value(filename, 
+        filename_maximum_size);
     if (len >= filename_maximum_size)
     {
         status.Bad(StatusType::filename_size_overflow);
@@ -556,7 +568,7 @@ template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
 typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
 File<TChar, MinimumBuffer, MaximumBuffer>::Puts(const TChar * cstr)
 {
-    const auto size = strnlen(cstr, MaximumBuffer);
+    const auto size = test::cstr::Length<TChar>::Value(cstr, MaximumBuffer);
     return Puts(cstr, size);
 }
 

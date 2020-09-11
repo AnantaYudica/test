@@ -1623,79 +1623,79 @@ public:
     inline Integer& operator=(const Integer& cpy);
     inline Integer& operator=(Integer&& mov);
 private:
-    inline constexpr ValueType _Value(ValueType val);
+    inline constexpr ValueType _Value(ValueType val) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<signed char>&&, TArgs&&... args);
+        DefineType<signed char>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<char>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned char>&&, TArgs&&... args);
+        DefineType<unsigned char>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<short>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned short>&&, TArgs&&... args);
+        DefineType<unsigned short>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<int>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned int>&&, TArgs&&... args);
+        DefineType<unsigned int>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<long>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned long>&&, TArgs&&... args);
+        DefineType<unsigned long>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<long long>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned long long>&&, TArgs&&... args);
+        DefineType<unsigned long long>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, SignedType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, UnsignedType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DecimalType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, OctalType&&, 
-        TArgs&&... args);  
+        TArgs&&... args) const;  
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, HexadecimalType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, LowerType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, UpperType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrefixType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrefixPlusType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrefixSpaceType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrefixZeroType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, WidthType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, LengthType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
 public:
     inline constexpr ValueType GetValue() const;
 };
@@ -1733,7 +1733,7 @@ inline Integer& Integer::operator=(Integer&& mov)
 }
 
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val)
+Integer::_Value(ValueType val) const
 {
     return ((val & flag_integer_mask) != good ? val : 
         ((val & decimal) ? (val | signed_integer) : (val | unsigned_integer)));
@@ -1741,7 +1741,8 @@ Integer::_Value(ValueType val)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<signed char>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<signed char>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_char | define_signed),
         std::forward<TArgs>(args)...);
@@ -1749,7 +1750,7 @@ Integer::_Value(ValueType val, DefineType<signed char>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<char>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<char>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_char | define_signed),
         std::forward<TArgs>(args)...);
@@ -1757,7 +1758,8 @@ Integer::_Value(ValueType val, DefineType<char>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<unsigned char>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<unsigned char>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_char | define_unsigned),
         std::forward<TArgs>(args)...);
@@ -1765,7 +1767,7 @@ Integer::_Value(ValueType val, DefineType<unsigned char>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<short>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<short>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_short | define_signed),
         std::forward<TArgs>(args)...);
@@ -1773,7 +1775,8 @@ Integer::_Value(ValueType val, DefineType<short>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<unsigned short>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<unsigned short>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_short | define_unsigned),
         std::forward<TArgs>(args)...);
@@ -1781,7 +1784,7 @@ Integer::_Value(ValueType val, DefineType<unsigned short>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<int>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<int>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_int | define_signed),
         std::forward<TArgs>(args)...);
@@ -1789,7 +1792,8 @@ Integer::_Value(ValueType val, DefineType<int>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<unsigned int>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<unsigned int>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_int | define_unsigned),
         std::forward<TArgs>(args)...);
@@ -1797,7 +1801,7 @@ Integer::_Value(ValueType val, DefineType<unsigned int>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<long>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<long>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_long | define_signed),
         std::forward<TArgs>(args)...);
@@ -1805,7 +1809,8 @@ Integer::_Value(ValueType val, DefineType<long>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<unsigned long>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<unsigned long>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_long | define_unsigned),
         std::forward<TArgs>(args)...);
@@ -1813,7 +1818,7 @@ Integer::_Value(ValueType val, DefineType<unsigned long>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DefineType<long long>&&, TArgs&&... args)
+Integer::_Value(ValueType val, DefineType<long long>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_long_long | define_signed),
         std::forward<TArgs>(args)...);
@@ -1822,7 +1827,7 @@ Integer::_Value(ValueType val, DefineType<long long>&&, TArgs&&... args)
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
 Integer::_Value(ValueType val, DefineType<unsigned long long>&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | (define_long_long | define_unsigned),
         std::forward<TArgs>(args)...);
@@ -1830,7 +1835,7 @@ Integer::_Value(ValueType val, DefineType<unsigned long long>&&,
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, SignedType&&, TArgs&&... args)
+Integer::_Value(ValueType val, SignedType&&, TArgs&&... args) const
 {
     return _Value((val & ~flag_integer_mask) | signed_integer, 
         std::forward<TArgs>(args)...);
@@ -1838,7 +1843,7 @@ Integer::_Value(ValueType val, SignedType&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, UnsignedType&&, TArgs&&... args)
+Integer::_Value(ValueType val, UnsignedType&&, TArgs&&... args) const
 {
     return _Value((val & ~flag_integer_mask) | unsigned_integer, 
         std::forward<TArgs>(args)...);
@@ -1846,21 +1851,21 @@ Integer::_Value(ValueType val, UnsignedType&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, DecimalType&&, TArgs&&... args)
+Integer::_Value(ValueType val, DecimalType&&, TArgs&&... args) const
 {
     return _Value((val & ~base_mask) | decimal, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, OctalType&&, TArgs&&... args)
+Integer::_Value(ValueType val, OctalType&&, TArgs&&... args) const
 {
     return _Value((val & ~base_mask) | octal, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, HexadecimalType&&, TArgs&&... args)
+Integer::_Value(ValueType val, HexadecimalType&&, TArgs&&... args) const
 {
     return _Value((val & ~base_mask) | hexadecimal, 
         std::forward<TArgs>(args)...);
@@ -1868,28 +1873,28 @@ Integer::_Value(ValueType val, HexadecimalType&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, LowerType&&, TArgs&&... args)
+Integer::_Value(ValueType val, LowerType&&, TArgs&&... args) const
 {
     return _Value((val & ~letter_mask) | lower, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, UpperType&&, TArgs&&... args)
+Integer::_Value(ValueType val, UpperType&&, TArgs&&... args) const
 {
     return _Value((val & ~letter_mask) | upper, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, PrefixType&&, TArgs&&... args)
+Integer::_Value(ValueType val, PrefixType&&, TArgs&&... args) const
 {
     return _Value(val | prefix, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, PrefixPlusType&&, TArgs&&... args)
+Integer::_Value(ValueType val, PrefixPlusType&&, TArgs&&... args) const
 {
     return _Value((val & ~prefix_mask) | (plus | prefix), 
         std::forward<TArgs>(args)...);
@@ -1897,7 +1902,7 @@ Integer::_Value(ValueType val, PrefixPlusType&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, PrefixSpaceType&&, TArgs&&... args)
+Integer::_Value(ValueType val, PrefixSpaceType&&, TArgs&&... args) const
 {
     return _Value((val & ~prefix_mask) | (space | prefix), 
         std::forward<TArgs>(args)...);
@@ -1905,7 +1910,7 @@ Integer::_Value(ValueType val, PrefixSpaceType&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, PrefixZeroType&&, TArgs&&... args)
+Integer::_Value(ValueType val, PrefixZeroType&&, TArgs&&... args) const
 {
     return _Value((val & ~prefix_mask) | (zero | prefix), 
         std::forward<TArgs>(args)...);
@@ -1913,14 +1918,14 @@ Integer::_Value(ValueType val, PrefixZeroType&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, WidthType&&, TArgs&&... args)
+Integer::_Value(ValueType val, WidthType&&, TArgs&&... args) const
 {
     return _Value((val | width), std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename Integer::ValueType 
-Integer::_Value(ValueType val, LengthType&&, TArgs&&... args)
+Integer::_Value(ValueType val, LengthType&&, TArgs&&... args) const
 {
     return _Value((val | length), std::forward<TArgs>(args)...);
 }

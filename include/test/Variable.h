@@ -42,12 +42,11 @@ public:
 
 template<typename... TArgs>
 template<typename... TValArgs>
-Variable<TArgs...>::Variable(TValArgs&&... val_args)
+Variable<TArgs...>::Variable(TValArgs&&...)
 {}
 
 template<typename... TArgs>
-Variable<TArgs...>& Variable<TArgs...>::
-    operator=(const Variable<TArgs...>& cpy)
+Variable<TArgs...>& Variable<TArgs...>::operator=(const Variable<TArgs...>&)
 {
     return *this;
 }

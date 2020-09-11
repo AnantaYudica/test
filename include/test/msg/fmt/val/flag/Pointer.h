@@ -49,10 +49,10 @@ public:
     inline Pointer& operator=(const Pointer& cpy);
     inline Pointer& operator=(Pointer&& mov);
 private:
-    inline constexpr ValueType _Value(ValueType val);
+    inline constexpr ValueType _Value(ValueType val) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, WidthType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
 public:
     inline constexpr ValueType GetValue() const;
 };
@@ -90,14 +90,14 @@ inline Pointer& Pointer::operator=(Pointer&& mov)
 }
 
 inline constexpr typename Pointer::ValueType 
-Pointer::_Value(ValueType val)
+Pointer::_Value(ValueType val) const
 {
     return val;
 }
 
 template<typename... TArgs>
 inline constexpr typename Pointer::ValueType 
-Pointer::_Value(ValueType val, WidthType&&, TArgs&&... args)
+Pointer::_Value(ValueType val, WidthType&&, TArgs&&... args) const
 {
     return _Value(val | width, std::forward<TArgs>(args)...);
 }

@@ -56,4 +56,3 @@ inline constexpr int Precision::GetValue() const
 } //!test
 
 #endif //!TEST_MSG_FMT_VAR_ARG_PRECISION_H_
-

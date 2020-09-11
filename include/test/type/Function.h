@@ -1,6 +1,8 @@
 #ifndef TEST_TYPE_FUNCTION_H_
 #define TEST_TYPE_FUNCTION_H_
 
+#include "Parameter.h"
+
 #include <utility>
 
 namespace test
@@ -18,6 +20,7 @@ class Function<TRet(TArgs...), Func>
 public:
     typedef TRet ReturnType;
     typedef TRet(*PointerType)(TArgs...);
+    typedef test::type::Parameter<TArgs...> ParameterType;
 public:
     typedef PointerType ConstGetType;
 public:
@@ -46,4 +49,3 @@ constexpr typename Function<TRet(TArgs...), Func>::ConstGetType
 } //!test
 
 #endif //!TEST_TYPE_FUNCTION_H_
-

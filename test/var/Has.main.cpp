@@ -67,3 +67,4 @@ int main()
     std::cout << " RValue : ";
     std::cout << test::var::Has<5, Var1>::RValue << "}" << std::endl;
 }
+

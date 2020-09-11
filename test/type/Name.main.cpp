@@ -26,9 +26,9 @@ template<typename T1, typename T2>
 TEST_TYPE_NAME_TEMPLATE("B", B<T1, T2>);
 
 template<typename T1, T1(*F)()>
-TEST_TYPE_NAME_PARAMETER(C<T1, F>) ->
+TEST_TYPE_NAME_TMPL_DEFINE((C<T1, F>),
     test::type::name::Parameter<T1, 
-    test::type::name::Value<T1(*)(), F>>;
+    test::type::name::Value<T1(*)(), F>>);
   
 template<typename T1, T1(*F)()>
 TEST_TYPE_NAME_TEMPLATE("C", C<T1, F>);
@@ -53,9 +53,9 @@ template<typename T,T...I>
 struct D{};
 
 template<typename T, T...I>
-TEST_TYPE_NAME_PARAMETER(D<T, I...>) ->
+TEST_TYPE_NAME_TMPL_DEFINE((D<T, I...>),
     test::type::name::Parameter<T, 
-    test::type::name::Value<T, I>...>;
+    test::type::name::Value<T, I>...>);
   
 template<typename T, T...I>
 TEST_TYPE_NAME_TEMPLATE("D", D<T, I...>);
@@ -114,3 +114,4 @@ int main()
 
     return TEST::GetInstance().Status().Get();
 }
+

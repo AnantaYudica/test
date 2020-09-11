@@ -12,3 +12,4 @@ int main()
     test::Variable<test::type::Value<int, 1>, int,
         test::type::Value<int, 4>, char> var3;
 }
+

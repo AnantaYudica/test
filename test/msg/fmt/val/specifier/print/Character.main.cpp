@@ -47,4 +47,4 @@ int main()
     size = Character<char, w_wchar_format>::Print(out_cstr5, wd2, val2);
     assert(size == 4);
     assert(strncmp(*(out_cstr5.Get()), "K   ", 5) == 0);
-};
+}

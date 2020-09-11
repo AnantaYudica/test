@@ -41,3 +41,4 @@ int main()
     std::cout << "TVar4 At 3 : " << typeid(typename test::var::
         Definition<3, TVar4>::Type).name() << std::endl;
 }
+

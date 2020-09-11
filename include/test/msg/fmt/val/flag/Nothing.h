@@ -67,61 +67,61 @@ public:
     inline Nothing& operator=(const Nothing& cpy);
     inline Nothing& operator=(Nothing&& mov);
 private:
-    inline constexpr ValueType _Value(ValueType val);
+    inline constexpr ValueType _Value(ValueType val) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, WidthType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, PrecisionType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<char>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<signed char>&&,
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned char>&&, TArgs&&... args);
+        DefineType<unsigned char>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<short>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned short>&&, TArgs&&... args);
+        DefineType<unsigned short>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<int>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned int>&&, TArgs&&... args);
+        DefineType<unsigned int>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<long>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned long>&&, TArgs&&... args);
+        DefineType<unsigned long>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<long long>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, 
-        DefineType<unsigned long long>&&, TArgs&&... args);
+        DefineType<unsigned long long>&&, TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<float>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<double>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<long double>&&,
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<const char *>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<const void *>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
 public:
     inline constexpr ValueType GetValue() const;
 };
@@ -159,28 +159,28 @@ inline Nothing& Nothing::operator=(Nothing&& mov)
 }
 
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val)
+Nothing::_Value(ValueType val) const
 {
     return val;
 }
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, WidthType&&, TArgs&&... args)
+Nothing::_Value(ValueType val, WidthType&&, TArgs&&... args) const
 {
     return _Value(val | width, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, PrecisionType&&, TArgs&&... args)
+Nothing::_Value(ValueType val, PrecisionType&&, TArgs&&... args) const
 {
     return _Value(val | precision, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<char>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<char>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_char, 
         std::forward<TArgs>(args)...);
@@ -188,7 +188,8 @@ Nothing::_Value(ValueType val, DefineType<char>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<signed char>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<signed char>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_char, 
         std::forward<TArgs>(args)...);
@@ -196,7 +197,8 @@ Nothing::_Value(ValueType val, DefineType<signed char>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<unsigned char>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<unsigned char>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_char, 
         std::forward<TArgs>(args)...);
@@ -204,7 +206,7 @@ Nothing::_Value(ValueType val, DefineType<unsigned char>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<short>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<short>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_short, 
         std::forward<TArgs>(args)...);
@@ -212,7 +214,8 @@ Nothing::_Value(ValueType val, DefineType<short>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<unsigned short>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<unsigned short>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_short, 
         std::forward<TArgs>(args)...);
@@ -220,7 +223,7 @@ Nothing::_Value(ValueType val, DefineType<unsigned short>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<int>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<int>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_int, 
         std::forward<TArgs>(args)...);
@@ -228,7 +231,8 @@ Nothing::_Value(ValueType val, DefineType<int>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<unsigned int>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<unsigned int>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_int, 
         std::forward<TArgs>(args)...);
@@ -236,7 +240,7 @@ Nothing::_Value(ValueType val, DefineType<unsigned int>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<long>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<long>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_long, 
         std::forward<TArgs>(args)...);
@@ -244,7 +248,8 @@ Nothing::_Value(ValueType val, DefineType<long>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<unsigned long>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<unsigned long>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_long, 
         std::forward<TArgs>(args)...);
@@ -252,7 +257,7 @@ Nothing::_Value(ValueType val, DefineType<unsigned long>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<long long>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<long long>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_long_long, 
         std::forward<TArgs>(args)...);
@@ -261,7 +266,7 @@ Nothing::_Value(ValueType val, DefineType<long long>&&, TArgs&&... args)
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
 Nothing::_Value(ValueType val, DefineType<unsigned long long>&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_long_long, 
         std::forward<TArgs>(args)...);
@@ -269,7 +274,7 @@ Nothing::_Value(ValueType val, DefineType<unsigned long long>&&,
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<float>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<float>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_double, 
         std::forward<TArgs>(args)...);
@@ -277,7 +282,7 @@ Nothing::_Value(ValueType val, DefineType<float>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<double>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<double>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_double, 
         std::forward<TArgs>(args)...);
@@ -285,7 +290,8 @@ Nothing::_Value(ValueType val, DefineType<double>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<long double>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<long double>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_long_double, 
         std::forward<TArgs>(args)...);
@@ -293,7 +299,8 @@ Nothing::_Value(ValueType val, DefineType<long double>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<const char *>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<const char *>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_pointer, 
         std::forward<TArgs>(args)...);
@@ -301,7 +308,8 @@ Nothing::_Value(ValueType val, DefineType<const char *>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename Nothing::ValueType 
-Nothing::_Value(ValueType val, DefineType<const void *>&&, TArgs&&... args)
+Nothing::_Value(ValueType val, DefineType<const void *>&&, 
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_pointer, 
         std::forward<TArgs>(args)...);

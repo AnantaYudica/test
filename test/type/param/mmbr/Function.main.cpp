@@ -33,3 +33,4 @@ int main()
     PF1::Call<void>(PF1::PointerType<void, A>(&A::Print2), &a, 1,'a', 3.14f);
 
 }
+

@@ -2,6 +2,7 @@
 #define TEST_OUT_CSTRING_H_
 
 #include "../CString.h"
+#include "../cstr/Length.h"
 #include "cstr/Status.h"
 #include "Interface.h"
 
@@ -12,13 +13,13 @@
 #include <cstdarg>
 #include <cstdio>
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 namespace test
 {
@@ -32,16 +33,9 @@ public:
     typedef typename std::remove_cv<TChar>::type CharType;
     typedef std::size_t SizeType; 
     typedef test::out::cstr::Status StatusType;
-public:
-    static constexpr SizeType default_maximum_capacity = 
-        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
-        << ((sizeof(SizeType) / 2) * 8)));
-    static constexpr SizeType default_minimum_capacity =
-        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
-        << (sizeof(SizeType))));
 private:
     static constexpr SizeType _Capacity(const SizeType & capacity,
-        SizeType offset = static_cast<SizeType>(-1) << 1);
+        SizeType offset = (static_cast<SizeType>(-1) << 1));
     static SizeType _Predict(const SizeType & capacity, StatusType& status);
     static SizeType _Predict(const SizeType & capacity, 
         const SizeType & need_capacity, const SizeType & minimum_capacity, 
@@ -58,6 +52,13 @@ private:
         const SizeType& new_capacity = static_cast<SizeType>(0));
     static void _Reset(CharType * &cstr, SizeType& size, 
         SizeType & capacity);
+public:
+    static constexpr SizeType default_maximum_capacity = 
+        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
+        << ((sizeof(SizeType) / 2) * 8)), (static_cast<SizeType>(-1) << 1));
+    static constexpr SizeType default_minimum_capacity =
+        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
+        << (sizeof(SizeType))), (static_cast<SizeType>(-1) << 1));
 private:
     StatusType m_status;
     CharType * m_cstr;
@@ -85,10 +86,12 @@ private:
     SizeType _Set(const SizeType& index, const TChar * cstr, 
         const SizeType& size);
     SizeType _Set(const SizeType& index, const char * format, va_list var_args)
-        __ATTRIBUTE__ ((__format__ (__printf__, 4, 0)));
+        TEST_ATTRIBUTE ((__format__ (__printf__, 3, 0)));
 public:
-    SizeType VPrint(const char * format, va_list var_args) override;
-    SizeType Print(const char * format, ...) override;
+    SizeType VPrint(const char * format, va_list var_args) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
+    SizeType Print(const char * format, ...) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
 public:
     SizeType Puts(const TChar * cstr, const SizeType& size) override;
     SizeType Puts(const TChar * cstr) override;
@@ -100,8 +103,8 @@ public:
 public:
     test::CString<TChar> Get() const; 
 public:
-    bool IsGood() const;
-    bool IsBad() const;
+    bool IsGood() const override;
+    bool IsBad() const override;
     StatusType::ValueType GetBadCode() const;
 public:
     bool Output(test::out::Interface<TChar>& out) const;
@@ -378,6 +381,7 @@ CString<TChar>::~CString()
 
 template<typename TChar>
 CString<TChar>::CString(const CString<TChar>& cpy) :
+    test::out::Interface<TChar>(),
     m_status(),
     m_cstr(nullptr),
     m_size(0),
@@ -398,7 +402,8 @@ CString<TChar>::CString(const CString<TChar>& cpy) :
 }
 
 template<typename TChar>
-CString<TChar>::CString(CString<TChar>&& mov):
+CString<TChar>::CString(CString<TChar>&& mov) :
+    test::out::Interface<TChar>(),
     m_status(std::move(mov.m_status)),
     m_cstr(mov.m_cstr),
     m_size(mov.m_size),
@@ -586,7 +591,8 @@ CString<TChar>::Puts(const TChar * cstr)
 {
     if (m_status.IsBad()) return 0;
     if (cstr == nullptr) return 0;
-    const SizeType size = strnlen(cstr, m_maximum_capacity - 1);
+    const SizeType size = test::cstr::Length<TChar>::Value(cstr, 
+        m_maximum_capacity - 1);
     if (size == 0) return 0;
     return _Set(m_size, cstr, size);
 }

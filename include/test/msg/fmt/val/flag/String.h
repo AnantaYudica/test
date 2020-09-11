@@ -66,19 +66,19 @@ public:
     inline String& operator=(const String& cpy);
     inline String& operator=(String&& mov);
 private:
-    inline constexpr ValueType _Value(ValueType val);
+    inline constexpr ValueType _Value(ValueType val) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, WidthType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, LengthType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<char>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<wchar_t>&&,
-        TArgs&&... args);
+        TArgs&&... args) const;
 public:
     inline constexpr ValueType GetValue() const;
 };
@@ -115,28 +115,29 @@ inline String& String::operator=(String&& mov)
     return *this;
 }
 
-inline constexpr typename String::ValueType String::_Value(ValueType val)
+inline constexpr typename String::ValueType 
+String::_Value(ValueType val) const
 {
     return val;
 }
 
 template<typename... TArgs>
 inline constexpr typename String::ValueType 
-String::_Value(ValueType val, WidthType&&, TArgs&&... args)
+String::_Value(ValueType val, WidthType&&, TArgs&&... args) const
 {
     return _Value(val | width, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename String::ValueType 
-String::_Value(ValueType val, LengthType&&, TArgs&&... args)
+String::_Value(ValueType val, LengthType&&, TArgs&&... args) const
 {
     return _Value(val | length, std::forward<TArgs>(args)...);
 }
 
 template<typename... TArgs>
 inline constexpr typename String::ValueType 
-String::_Value(ValueType val, DefineType<char>&&, TArgs&&... args)
+String::_Value(ValueType val, DefineType<char>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_char, 
         std::forward<TArgs>(args)...);
@@ -144,7 +145,7 @@ String::_Value(ValueType val, DefineType<char>&&, TArgs&&... args)
 
 template<typename... TArgs>
 inline constexpr typename String::ValueType 
-String::_Value(ValueType val, DefineType<wchar_t>&&, TArgs&&... args)
+String::_Value(ValueType val, DefineType<wchar_t>&&, TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_wchar, 
         std::forward<TArgs>(args)...);

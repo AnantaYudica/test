@@ -59,16 +59,16 @@ public:
     inline Character& operator=(const Character& cpy);
     inline Character& operator=(Character&& mov);
 private:
-    inline constexpr ValueType _Value(ValueType val);
+    inline constexpr ValueType _Value(ValueType val) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, WidthType&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<char>&&, 
-        TArgs&&... args);
+        TArgs&&... args) const;
     template<typename... TArgs>
     inline constexpr ValueType _Value(ValueType val, DefineType<wchar_t>&&,
-        TArgs&&... args);
+        TArgs&&... args) const;
 public:
     inline constexpr ValueType GetValue() const;
 };
@@ -106,14 +106,14 @@ inline Character& Character::operator=(Character&& mov)
 }
 
 inline constexpr typename Character::ValueType 
-Character::_Value(ValueType val)
+Character::_Value(ValueType val) const
 {
     return val;
 }
 
 template<typename... TArgs>
 inline constexpr typename Character::ValueType 
-Character::_Value(ValueType val, WidthType&&, TArgs&&... args)
+Character::_Value(ValueType val, WidthType&&, TArgs&&... args) const
 {
     return _Value(val | width, std::forward<TArgs>(args)...);
 }
@@ -121,7 +121,7 @@ Character::_Value(ValueType val, WidthType&&, TArgs&&... args)
 template<typename... TArgs>
 inline constexpr typename Character::ValueType 
 Character::_Value(ValueType val, DefineType<char>&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_char, 
         std::forward<TArgs>(args)...);
@@ -130,7 +130,7 @@ Character::_Value(ValueType val, DefineType<char>&&,
 template<typename... TArgs>
 inline constexpr typename Character::ValueType 
 Character::_Value(ValueType val, DefineType<wchar_t>&&, 
-    TArgs&&... args)
+    TArgs&&... args) const
 {
     return _Value((val & ~define_mask) | define_wchar, 
         std::forward<TArgs>(args)...);

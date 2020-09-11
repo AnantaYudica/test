@@ -10,6 +10,8 @@
 #include "test/reg/Base.h"
 #include "test/type/Name.h"
 #include "test/type/name/Parameter.h"
+#include "test/type/name/tmpl/Define.h"
+#include "test/type/name/tmpl/Parameter.h"
 #include "test/type/name/Template.h"
 #include "test/cstr/Format.h"
 
@@ -24,13 +26,13 @@
 #define TEST_OUTPUT_FILENAME_EMPTY
 #endif //!TEST_OUTPUT_FILENAME
 
-#ifndef __ATTRIBUTE__
+#ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
-#define __ATTRIBUTE__(...) __attribute__(__VA_ARGS__)
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
 #else
-#define __ATTRIBUTE__(...)
+#define TEST_ATTRIBUTE(...)
 #endif
-#endif //!__ATTRIBUTE__
+#endif //!TEST_ATTRIBUTE
 
 namespace _helper
 {
@@ -73,11 +75,11 @@ public:
     Test<Ts, To, Tmem>& operator=(Test<Ts, To, Tmem>&& mov) = delete;
 public:
     static void Info(const char* info_msg_cstr, ...)
-        __ATTRIBUTE__((__format__ (__printf__, 1, 2)));
+        TEST_ATTRIBUTE((__format__ (__printf__, 1, 2)));
     static void Debug(const char* debug_msg_cstr, ...)
-        __ATTRIBUTE__((__format__ (__printf__, 1, 2)));
+        TEST_ATTRIBUTE((__format__ (__printf__, 1, 2)));
     static void Error(const char* err_msg_cstr, ...)
-        __ATTRIBUTE__((__format__ (__printf__, 1, 2)));
+        TEST_ATTRIBUTE((__format__ (__printf__, 1, 2)));
     static bool Assert(bool test, const char* err_msg_cstr, 
         const char* file, const int& line);
 public:
@@ -180,7 +182,7 @@ void Test<Ts, To, Tmem>::Error(const char* err_msg_cstr, ...)
     auto trace = GetInstance().GetTrace();
     while (!trace.empty())
     {
-        GetInstance().Output().Error(" from file %s line %i\n",
+        GetInstance().Output().Error(" from file %s line %zi\n",
             trace.top().File, trace.top().Line);
         trace.pop();
     }
@@ -222,7 +224,7 @@ const int& Test<Ts, To, Tmem>::Run()
     std::size_t i = 0, s = GetInstance().List().size();
     for (auto t : GetInstance().List())
     {
-        Debug("Test %u of %u : \n", i + 1, s);
+        Debug("Test %zu of %zu : \n", i + 1, s);
         GetInstance().Push(test::Trace(t->File(), t->Line()));
         t->Run();
         GetInstance().Pop();
@@ -262,7 +264,7 @@ template<typename Ts, template<typename> class To,
 std::stack<test::Trace> Test<Ts, To, Tmem>::GetTrace()
 {
     if (m_traces == NULL)
-        return std::move(std::stack<test::Trace>());
+        return {};
     return *m_traces;
 }
 
@@ -404,8 +406,8 @@ void operator delete[](void* p) noexcept
 
 #ifndef REGISTER_TEST
 #define REGISTER_TEST(Name, Test, ...) auto Name =\
-    std::move(test::reg::Make<TEST>(Test,##__VA_ARGS__, \
-        __FILE__, __LINE__));
+    test::reg::Make<TEST>(Test,##__VA_ARGS__, \
+        __FILE__, __LINE__);
 #endif //!REGISTER_TEST
 
 #ifndef RUN_TEST
@@ -446,8 +448,11 @@ struct test::type::Name<__TYPE__,##__VA_ARGS__>\
     }\
 }
 
-#define TEST_TYPE_NAME_PARAMETER(__TYPE__, ...)\
-inline auto test::type::name::tmpl::Parameter(__TYPE__,##__VA_ARGS__*)\
+#define TEST_TYPE_NAME_TMPL_DEFINE(__TYPE__, __PARAM_TYPE__,...)\
+struct test::type::name::tmpl::Define<void(__TYPE__)>\
+{\
+    typedef __PARAM_TYPE__,##__VA_ARGS__ ParameterType;\
+}
 
 #define TEST_TYPE_NAME_VAL_ENUMERATION(__NAME__, __TYPE__, __VALUE__, ...)\
 template<>\

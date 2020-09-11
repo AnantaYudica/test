@@ -9,3 +9,4 @@ int main()
     test::Variable<int, char> var3;
     test::Variable<int, char, float> var4;
 }
+

@@ -11,8 +11,9 @@ struct Param1{};
 
 int main()
 {
-    printf("P1 Size : %d\n", test::type::param::Size<P1>::Value);
-    printf("Param1<int, int, char> : %d\n", test::type::param::
+    printf("P1 Size : %zd\n", test::type::param::Size<P1>::Value);
+    printf("Param1<int, int, char> : %zd\n", test::type::param::
         Size<Param1<int, int, char>>::Value);
 
 }
+

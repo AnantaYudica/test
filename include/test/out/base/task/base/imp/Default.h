@@ -64,14 +64,14 @@ protected:
     test::Guard<BaseType> ReleaseGuard() override final;
     test::Guard<BaseType> BufferGuard() override final;
 public:
-    virtual bool Execute(test::out::Interface<TChar>& out);
+    virtual bool Execute(test::out::Interface<TChar>& out) override;
 public:
     virtual bool Assign(const std::intptr_t& deleg_id,
-        std::intptr_t& task_id);
+        std::intptr_t& task_id) override;
 public:
-    virtual bool Release(const std::intptr_t& deleg_id);
+    virtual bool Release(const std::intptr_t& deleg_id) override;
 public:
-    virtual BufferType Buffer(const std::intptr_t& deleg_id);
+    virtual BufferType Buffer(const std::intptr_t& deleg_id) override;
 };
 
 template<typename TChar>

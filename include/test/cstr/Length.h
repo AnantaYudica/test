@@ -13,7 +13,7 @@ namespace test
 namespace cstr
 {
 
-template<typename TChar, typename T>
+template<typename TChar, typename T = TChar*>
 struct Length
 {
 };
@@ -43,6 +43,16 @@ struct Length<wchar_t, wchar_t*>
     {
         return wcslen(str);
     }
+    static std::size_t Value(const wchar_t * str, std::size_t max)
+    {
+        if (str == nullptr) return 0;
+        std::size_t size = 0;
+        for (; size <= max; ++size)
+        {
+            if (str[size] == wchar_t(0)) break;
+        }
+        return size;
+    }
 };
 
 template<>
@@ -51,6 +61,15 @@ struct Length<char, char*>
     static std::size_t Value(const char * str)
     {
         return strlen(str);
+    }
+    static std::size_t Value(const char * str, std::size_t max)
+    {
+        std::size_t size = 0;
+        for (; size <= max; ++size)
+        {
+            if (str[size] == '\0') break;
+        }
+        return size;
     }
 };
 

@@ -32,7 +32,7 @@ struct Out : test::out::base::imp::Default<char>
 
 template<typename TDeleg>
 std::size_t Print(TDeleg& deleg, const char * format, ...) 
-    __ATTRIBUTE__((__format__ (__printf__, 2, 3)));
+    TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
 
 template<typename TDeleg>
 std::size_t Print(TDeleg& deleg, const char * format, ...) 

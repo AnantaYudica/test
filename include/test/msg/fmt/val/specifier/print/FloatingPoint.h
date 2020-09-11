@@ -6126,7 +6126,7 @@ public:
 
 template<typename TChar, int FlagValue>
 typename FloatingPoint<TChar, FlagValue>::SizeType 
-FloatingPoint<TChar, FlagValue>::Print(OutputInterfaceType& out, 
+FloatingPoint<TChar, FlagValue>::Print(OutputInterfaceType&, 
     const WidthType&, const PrecisionType&, const ValueType&)
 {
     return 0;

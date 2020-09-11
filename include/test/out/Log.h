@@ -2,8 +2,8 @@
 #define TEST_OUT_LOG_H_
 
 #include "Interface.h"
-#include "Cstring.h"
-#include "../Cstring.h"
+#include "CString.h"
+#include "../CString.h"
 #include "log/Status.h"
 #include "log/Tag.h"
 
@@ -12,6 +12,14 @@
 #include <ctime>
 #include <utility>
 #include <cstdarg>
+
+#ifndef TEST_ATTRIBUTE
+#ifdef __GNUC__
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
+#else
+#define TEST_ATTRIBUTE(...)
+#endif
+#endif //!TEST_ATTRIBUTE
 
 namespace test
 {
@@ -105,8 +113,8 @@ public:
     OnEndFunctionType * GetOnEnd() const;
 public:
     bool IsEnd() const;
-    bool IsGood() const;
-    bool IsBad() const;
+    bool IsGood() const override;
+    bool IsBad() const override;
     typename StatusType::IntegerValueType GetBadCode() const;
 public:
     bool Output(test::out::Interface<TChar>& out);
@@ -116,8 +124,10 @@ protected:
     virtual bool OnBegin(test::out::Interface<TChar>& out);
     virtual bool OnEnd(test::out::Interface<TChar>& out);
 public:
-    virtual SizeType VPrint(const char * format, va_list var_args) override;
-    virtual SizeType Print(const char * format, ...) override;
+    virtual SizeType VPrint(const char * format, va_list var_args) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
+    virtual SizeType Print(const char * format, ...) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
 public:
     virtual SizeType Puts(const TChar * cstr, const SizeType& size) override;
     virtual SizeType Puts(const TChar * cstr) override;
@@ -151,7 +161,8 @@ bool Log<TChar>::DefaultOnBegin(test::out::Interface<TChar>& out,
     auto d_sec = duration_cast<seconds>(tp_sec.time_since_epoch());
     std::chrono::milliseconds::rep msec = d_msec.count() - 
         std::chrono::milliseconds::rep(d_sec.count() * 1000);
-    out_size = out.Print(".%03llu [%s] : ", msec, *tag);
+    out_size = out.Print(".%03u [%s] : ", 
+        static_cast<unsigned int>(msec), *tag);
     return out_size != 0;
 }
 

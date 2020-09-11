@@ -54,9 +54,9 @@ public:
 public:
     ValueType GetValue() const;
 public:
-    void Unset();
+    void Unset() override;
 public:
-    bool IsSet() const;
+    bool IsSet() const override;
 };
 
 template<typename TChar>

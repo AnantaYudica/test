@@ -18,3 +18,4 @@ int main()
     PF1::Call<void>(&Print, 1, 'a', 3.14f);
 
 }
+
