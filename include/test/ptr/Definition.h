@@ -128,11 +128,6 @@ void Definition<T, Func, typename std::enable_if<Func == nullptr>::type>::
     cast->~T();
 }
 
-template<typename T, T(*Func)()>
-std::true_type IsBaseOfDefault(Definition<T, Func>);
-
-std::false_type IsBaseOfDefault(...);
-
 } //!ptr
 
 } //!test
