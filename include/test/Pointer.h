@@ -1,10 +1,13 @@
 #ifndef TEST_POINTER_H_
 #define TEST_POINTER_H_
 
+#include "trait/ptr/defn/IsBaseOf.h"
 #include "ptr/Base.h"
-#include "ptr/Default.h"
+#include "ptr/Definition.h"
 #include "ptr/Flag.h"
 #include "ptr/arg/Array.h"
+#include "ptr/arg/Foreach.h"
+#include "ptr/Iterator.h"
 
 #include <type_traits>
 #include <utility>
@@ -14,13 +17,14 @@
 namespace test
 {
 
-template<typename T, typename TDefault = test::ptr::Default<T>>
+template<typename T, typename TDefinition = test::ptr::Definition<T>>
 class Pointer : public test::ptr::Base
 {
 public:
-    static_assert(decltype(IsBaseOfDefault(std::declval<TDefault>()))::value,
-        "T is base of test::ptr::Default<...>");
+    static_assert(test::trait::ptr::defn::IsBaseOf<TDefinition>::Value,
+        "T is base of test::ptr::Definition<...>");
 public:
+    typedef TDefinition DefinitionType;
     typedef test::ptr::Base BaseType;
     typedef T ValueType;
     typedef std::size_t IntegerCountType;
@@ -36,54 +40,65 @@ public:
         typename std::remove_cv<typename std::remove_pointer<
             typename std::remove_reference<TArg>::type>::type>::type, 
         typename std::enable_if<
-            !std::is_base_of<Pointer<T, TDefault>, _TArg>::value &&
+            !std::is_base_of<Pointer<T, TDefinition>, _TArg>::value &&
             !std::is_base_of<test::ptr::Base, _TArg>::value &&
             !std::is_base_of<test::ptr::arg::Array, _TArg>::value, int>::type = 0>
     Pointer(TArg&& arg, TArgs&&... args);
+    template<typename TArg, typename... TArgs, typename _TArg = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_base_of<test::ptr::arg::Foreach, 
+            _TArg>::value, int>::type = 0>
+    Pointer(test::ptr::arg::Array&& array, TArg&& arg, TArgs&&... args);
     template<typename... TArgs>
-    Pointer(test::ptr::arg::Array&& array, TArgs&&... args);
+    Pointer(test::ptr::arg::Array&& array, test::ptr::arg::Foreach&& foreach, 
+        TArgs&&... args);
 public:
     explicit Pointer(const BaseType& base, const std::size_t& step);
 public:
     ~Pointer();
 public:
-    Pointer(const Pointer<T, TDefault>& cpy);
-    Pointer(Pointer<T, TDefault>&& mov);
+    Pointer(const Pointer<T, TDefinition>& cpy);
+    Pointer(Pointer<T, TDefinition>&& mov);
 public:
-    Pointer<T, TDefault>& operator=(const Pointer<T, TDefault>& cpy);
-    Pointer<T, TDefault>& operator=(Pointer<T, TDefault>&& mov);
+    Pointer<T, TDefinition>& operator=(const Pointer<T, TDefinition>& cpy);
+    Pointer<T, TDefinition>& operator=(Pointer<T, TDefinition>&& mov);
 public:
-    template<typename TTo, typename TToDefault = TDefault,
+    template<typename T_To, typename T_ToDefinition = TDefinition,
         typename std::enable_if<std::is_same<
-            decltype(const_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+            decltype(const_cast<T_To*>(std::declval<T*>())), T_To*>::value,
             int>::type = 0>
-    Pointer<TTo, TToDefault> ConstCast();
-    template<typename TTo, typename TToDefault = TDefault,
+    Pointer<T_To, T_ToDefinition> ConstCast();
+    template<typename T_To, typename T_ToDefinition = TDefinition,
         typename std::enable_if<std::is_same<
-            decltype(dynamic_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+            decltype(dynamic_cast<T_To*>(std::declval<T*>())), T_To*>::value,
             int>::type = 0>
-    Pointer<TTo, TToDefault> DynamicCast();
-    template<typename TTo, typename TToDefault = TDefault,
+    Pointer<T_To, T_ToDefinition> DynamicCast();
+    template<typename T_To, typename T_ToDefinition = TDefinition,
         typename std::enable_if<std::is_same<
-            decltype(reinterpret_cast<TTo*>(std::declval<T*>())), TTo*>::value,
-            int>::type = 0>
-    Pointer<TTo, TToDefault> ReinterpretCast();
-    template<typename TTo, typename TToDefault = TDefault,
+            decltype(reinterpret_cast<T_To*>(std::declval<T*>())), 
+            T_To*>::value, int>::type = 0>
+    Pointer<T_To, T_ToDefinition> ReinterpretCast();
+    template<typename T_To, typename T_ToDefinition = TDefinition,
         typename std::enable_if<std::is_same<
-            decltype(static_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+            decltype(static_cast<T_To*>(std::declval<T*>())), T_To*>::value,
             int>::type = 0>
-    Pointer<TTo, TToDefault> StaticCast();
+    Pointer<T_To, T_ToDefinition> StaticCast();
 public:
     std::size_t StepSize() const;
     std::size_t AllocationSize() const;
     std::size_t Size() const;
 public:
     std::size_t Offset() const;
+public:
     std::size_t Index() const;
     void SetIndex(const std::size_t& set);
 public:
-    Pointer<T, TDefault>& operator+=(const std::size_t& index);
-    Pointer<T, TDefault>& operator-=(const std::size_t& index);
+    test::ptr::Iterator<Pointer, T, TDefinition> Begin() const;
+    test::ptr::Iterator<Pointer, T, TDefinition> End() const;
+public:
+    Pointer<T, TDefinition>& operator+=(const std::size_t& index);
+    Pointer<T, TDefinition>& operator-=(const std::size_t& index);
 public:
     T& operator*();
     const T& operator*() const;
@@ -93,322 +108,407 @@ public:
     T& operator[](const std::size_t& index);
     const T& operator[](const std::size_t& index) const;
 public:
-    Pointer<T, TDefault>& operator++();
-    Pointer<T, TDefault> operator++(int);
+    Pointer<T, TDefinition>& operator++();
+    Pointer<T, TDefinition> operator++(int);
 public:
-    Pointer<T, TDefault>& operator--();
-    Pointer<T, TDefault> operator--(int);
+    Pointer<T, TDefinition>& operator--();
+    Pointer<T, TDefinition> operator--(int);
 public:
-    Pointer<T, TDefault> operator+(const std::size_t& index);
-    Pointer<T, TDefault> operator-(const std::size_t& index);
-    Pointer<T, TDefault> operator+(const int& index);
-    Pointer<T, TDefault> operator-(const int& index);
+    Pointer<T, TDefinition> operator+(const std::size_t& index);
+    Pointer<T, TDefinition> operator-(const std::size_t& index);
+    Pointer<T, TDefinition> operator+(const int& index);
+    Pointer<T, TDefinition> operator-(const int& index);
 public:
-    template<typename TOther, typename TOtherDefault>
-    bool operator==(const Pointer<TOther, TOtherDefault>& other) const;
-    template<typename TOther, typename TOtherDefault>
-    bool operator!=(const Pointer<TOther, TOtherDefault>& other) const;
+    void* GetData();
+    void* GetData() const;
+public:
+    template<typename TOther, typename TOtherDefinition>
+    bool operator==(const Pointer<TOther, TOtherDefinition>& other) const;
+    template<typename TOther, typename TOtherDefinition>
+    bool operator!=(const Pointer<TOther, TOtherDefinition>& other) const;
+    bool operator==(std::nullptr_t other) const;
+    bool operator!=(std::nullptr_t other) const;
+    bool operator==(void * other) const;
+    bool operator!=(void * other) const;
 };
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>::Pointer() :
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>::Pointer() :
     BaseType(),
-    m_step(sizeof(typename TDefault::ValueType))
+    m_step(sizeof(typename TDefinition::ValueType))
 {
+    auto defn = new TDefinition();
     void* data = BaseType::Allocation(FlagType::default_initialization, 
-        m_step, 1, TDefault::Destructor);
-    TDefault::Constructor(data);
+        m_step, 1, defn);
+    defn->Constructor(data);
 }
 
-template<typename T, typename TDefault>
+template<typename T, typename TDefinition>
 template<typename TArg, typename... TArgs, typename _TArg, 
     typename std::enable_if<
-        !std::is_base_of<Pointer<T, TDefault>, _TArg>::value &&
+        !std::is_base_of<Pointer<T, TDefinition>, _TArg>::value &&
         !std::is_base_of<test::ptr::Base, _TArg>::value &&
         !std::is_base_of<test::ptr::arg::Array, _TArg>::value, int>::type>
-Pointer<T, TDefault>::Pointer(TArg&& arg, TArgs&&... args) :
+Pointer<T, TDefinition>::Pointer(TArg&& arg, TArgs&&... args) :
     BaseType(),
-    m_step(sizeof(typename TDefault::ValueType))
+    m_step(sizeof(typename TDefinition::ValueType))
 {
-    void* data = BaseType::Allocation(FlagType::empty, m_step, 1, 
-        TDefault::Destructor);
-    TDefault::Constructor(data, std::forward<TArg>(arg), 
+    auto defn = new TDefinition();
+    void* data = BaseType::Allocation(FlagType::empty, m_step, 1, defn);
+    defn->Constructor(data, std::forward<TArg>(arg), 
         std::forward<TArgs>(args)...);
 }
 
-template<typename T, typename TDefault>
-template<typename... TArgs>
-Pointer<T, TDefault>::Pointer(test::ptr::arg::Array&& array, TArgs&&... args) :
-    BaseType(),
-    m_step(sizeof(typename TDefault::ValueType))
+template<typename T, typename TDefinition>
+template<typename TArg, typename... TArgs, typename _TArg,
+    typename std::enable_if<!std::is_base_of<test::ptr::arg::Foreach, 
+        _TArg>::value, int>::type>
+Pointer<T, TDefinition>::Pointer(test::ptr::arg::Array&& array, 
+    TArg&& arg, TArgs&&... args) :
+        BaseType(),
+        m_step(sizeof(typename TDefinition::ValueType))
 {
+    auto defn = new TDefinition();
+    const auto size = array.GetSize();
     void* data = BaseType::Allocation(FlagType::array_allocation, m_step, 
-        array.GetSize(), TDefault::Destructor);
-    TDefault::Constructor(array.GetSize(), data, std::forward<TArgs>(args)...);
+        size == 0 ? 1 : size, defn);
+    defn->Constructor(array, data, std::forward<TArg>(arg),
+        std::forward<TArgs>(args)...);
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>::Pointer(const BaseType& base, const std::size_t& step) :
-    BaseType(base),
-    m_step(step)
+template<typename T, typename TDefinition>
+template<typename... TArgs>
+Pointer<T, TDefinition>::Pointer(test::ptr::arg::Array&& array, 
+    test::ptr::arg::Foreach&& foreach, TArgs&&... args) :
+        BaseType(),
+        m_step(sizeof(typename TDefinition::ValueType))
+{
+    auto defn = new TDefinition();
+    const auto size = array.GetSize();
+    void* data = BaseType::Allocation(FlagType::array_allocation, m_step, 
+        size == 0 ? 1 : size, defn);
+    defn->Constructor(array, std::forward<test::ptr::arg::Foreach>(foreach), 
+        data, std::forward<TArgs>(args)...);
+}
+
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>::Pointer(const BaseType& base, 
+    const std::size_t& step) :
+        BaseType(base),
+        m_step(step)
 {}
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>::~Pointer()
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>::~Pointer()
 {
     BaseType::Deallocation();
     m_step = 0;
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>::Pointer(const Pointer<T, TDefault>& cpy) :
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>::Pointer(const Pointer<T, TDefinition>& cpy) :
     BaseType(cpy),
     m_step(cpy.m_step)
 {}
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>::Pointer(Pointer<T, TDefault>&& mov) :
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>::Pointer(Pointer<T, TDefinition>&& mov) :
     BaseType(std::move(mov)),
     m_step(mov.m_step)
 {
-    mov.m_step = sizeof(typename TDefault::ValueType);
+    auto defn = new TDefinition();
+    mov.m_step = sizeof(typename TDefinition::ValueType);
     void * data = mov.BaseType::Allocation(FlagType::default_initialization, 
-        mov.m_step, 1, TDefault::Destructor);
-    TDefault::Constructor(data);
+        mov.m_step, 1, defn);
+    defn->Constructor(data);
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>& 
-Pointer<T, TDefault>::operator=(const Pointer<T, TDefault>& cpy)
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>& 
+Pointer<T, TDefinition>::operator=(const Pointer<T, TDefinition>& cpy)
 {
     BaseType::operator=(cpy);
     m_step = cpy.m_step;
     return *this;
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>& 
-Pointer<T, TDefault>::operator=(Pointer<T, TDefault>&& mov)
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>& 
+Pointer<T, TDefinition>::operator=(Pointer<T, TDefinition>&& mov)
 {
     BaseType::operator=(std::move(mov));
     m_step = mov.m_step;
-    mov.m_step = sizeof(typename TDefault::ValueType);
+    auto defn = new TDefinition();
+    mov.m_step = sizeof(typename TDefinition::ValueType);
     void * data = mov.BaseType::Allocation(FlagType::default_initialization, 
-        mov.m_step, 1, TDefault::Destructor);
-    TDefault::Constructor(data);
+        mov.m_step, 1, defn);
+    defn->Constructor(data);
     return *this;
 }
 
-template<typename T, typename TDefault>
-template<typename TTo, typename TToDefault,
+template<typename T, typename TDefinition>
+template<typename T_To, typename T_ToDefinition,
     typename std::enable_if<std::is_same<
-        decltype(const_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+        decltype(const_cast<T_To*>(std::declval<T*>())), T_To*>::value,
         int>::type>
-Pointer<TTo, TToDefault> Pointer<T, TDefault>::ConstCast()
+Pointer<T_To, T_ToDefinition> Pointer<T, TDefinition>::ConstCast()
 {
-    Pointer<TTo, TToDefault> ret{(BaseType&)*this, m_step};
+    Pointer<T_To, T_ToDefinition> ret{(BaseType&)*this, m_step};
     return ret;
 }
 
-template<typename T, typename TDefault>
-template<typename TTo, typename TToDefault,
+template<typename T, typename TDefinition>
+template<typename T_To, typename T_ToDefinition,
     typename std::enable_if<std::is_same<
-        decltype(dynamic_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+        decltype(dynamic_cast<T_To*>(std::declval<T*>())), T_To*>::value,
         int>::type>
-Pointer<TTo, TToDefault> Pointer<T, TDefault>::DynamicCast()
+Pointer<T_To, T_ToDefinition> Pointer<T, TDefinition>::DynamicCast()
 {
-    TTo* ptr = dynamic_cast<TTo*>(BaseType::Get<T>());
+    T_To* ptr = dynamic_cast<T_To*>(BaseType::Get<T>());
     if (ptr == nullptr)
     {
-        Pointer<TTo, TToDefault> ret;
+        Pointer<T_To, T_ToDefinition> ret;
         return ret;
     }
-    Pointer<TTo, TToDefault> ret{(BaseType&)*this, m_step};
+    Pointer<T_To, T_ToDefinition> ret{(BaseType&)*this, m_step};
     return ret;
 }
 
-template<typename T, typename TDefault>
-template<typename TTo, typename TToDefault,
+template<typename T, typename TDefinition>
+template<typename T_To, typename T_ToDefinition,
     typename std::enable_if<std::is_same<
-        decltype(reinterpret_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+        decltype(reinterpret_cast<T_To*>(std::declval<T*>())), T_To*>::value,
         int>::type>
-Pointer<TTo, TToDefault> Pointer<T, TDefault>::ReinterpretCast()
+Pointer<T_To, T_ToDefinition> Pointer<T, TDefinition>::ReinterpretCast()
 {
-    Pointer<TTo, TToDefault> ret{(BaseType&)*this, sizeof(TTo)};
+    Pointer<T_To, T_ToDefinition> ret{(BaseType&)*this, sizeof(T_To)};
     return ret;
 }
 
-template<typename T, typename TDefault>
-template<typename TTo, typename TToDefault,
+template<typename T, typename TDefinition>
+template<typename T_To, typename T_ToDefinition,
     typename std::enable_if<std::is_same<
-        decltype(static_cast<TTo*>(std::declval<T*>())), TTo*>::value,
+        decltype(static_cast<T_To*>(std::declval<T*>())), T_To*>::value,
         int>::type>
-Pointer<TTo, TToDefault> Pointer<T, TDefault>::StaticCast()
+Pointer<T_To, T_ToDefinition> Pointer<T, TDefinition>::StaticCast()
 {
-    Pointer<TTo, TToDefault> ret{(BaseType&)*this, m_step};
+    Pointer<T_To, T_ToDefinition> ret{(BaseType&)*this, m_step};
     return ret;
 }
 
-template<typename T, typename TDefault>
-std::size_t Pointer<T, TDefault>::StepSize() const
+template<typename T, typename TDefinition>
+std::size_t Pointer<T, TDefinition>::StepSize() const
 {
     return m_step;
 }
 
-template<typename T, typename TDefault>
-std::size_t Pointer<T, TDefault>::AllocationSize() const
+template<typename T, typename TDefinition>
+std::size_t Pointer<T, TDefinition>::AllocationSize() const
 {
     return BaseType::GetDataSize();
 }
 
-template<typename T, typename TDefault>
-std::size_t Pointer<T, TDefault>::Size() const
+template<typename T, typename TDefinition>
+std::size_t Pointer<T, TDefinition>::Size() const
 {
     return BaseType::GetDataSize() / m_step;
 }
 
-template<typename T, typename TDefault>
-std::size_t Pointer<T, TDefault>::Offset() const
+template<typename T, typename TDefinition>
+std::size_t Pointer<T, TDefinition>::Offset() const
 {
     return BaseType::GetOffset();
 }
 
-template<typename T, typename TDefault>
-std::size_t Pointer<T, TDefault>::Index() const
+template<typename T, typename TDefinition>
+std::size_t Pointer<T, TDefinition>::Index() const
 {
     return BaseType::GetOffset() / m_step;
 }
 
-template<typename T, typename TDefault>
-void Pointer<T, TDefault>::SetIndex(const std::size_t& set)
+template<typename T, typename TDefinition>
+void Pointer<T, TDefinition>::SetIndex(const std::size_t& set)
 {
     BaseType::SetOffset(set * m_step);
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>& 
-Pointer<T, TDefault>::operator+=(const std::size_t& index)
+template<typename T, typename TDefinition>
+test::ptr::Iterator<Pointer, T, TDefinition> 
+    Pointer<T, TDefinition>::Begin() const
+{
+    return {*this};
+}
+
+template<typename T, typename TDefinition>
+test::ptr::Iterator<Pointer, T, TDefinition> 
+    Pointer<T, TDefinition>::End() const
+{
+    return {*this, Size()};
+}
+
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>& 
+Pointer<T, TDefinition>::operator+=(const std::size_t& index)
 {
     BaseType::operator+=(index * m_step);
     return *this;
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>& 
-Pointer<T, TDefault>::operator-=(const std::size_t& index)
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>& 
+Pointer<T, TDefinition>::operator-=(const std::size_t& index)
 {
     BaseType::operator-=(index * m_step);
     return *this;
 }
 
-template<typename T, typename TDefault>
-T& Pointer<T, TDefault>::operator*()
+template<typename T, typename TDefinition>
+T& Pointer<T, TDefinition>::operator*()
 {
     return *(BaseType::Get<T>());
 }
 
-template<typename T, typename TDefault>
-const T& Pointer<T, TDefault>::operator*() const
+template<typename T, typename TDefinition>
+const T& Pointer<T, TDefinition>::operator*() const
 {
-    return *(const_cast<Pointer<T, TDefault>*>(this)->BaseType::Get<T>());
+    return *(const_cast<Pointer<T, TDefinition>*>(this)->BaseType::Get<T>());
 }
 
-template<typename T, typename TDefault>
-T* Pointer<T, TDefault>::operator->()
+template<typename T, typename TDefinition>
+T* Pointer<T, TDefinition>::operator->()
 {
     return BaseType::Get<T>();
 }
 
-template<typename T, typename TDefault>
-T& Pointer<T, TDefault>::operator[](const std::size_t& index)
+template<typename T, typename TDefinition>
+T& Pointer<T, TDefinition>::operator[](const std::size_t& index)
 {
-    Pointer<T, TDefault> ret{*this};
+    Pointer<T, TDefinition> ret{*this};
     ret.SetIndex(index);
     return *(ret.Get<T>());
 }
 
-template<typename T, typename TDefault>
-const T& Pointer<T, TDefault>::operator[](const std::size_t& index) const
+template<typename T, typename TDefinition>
+const T& Pointer<T, TDefinition>::operator[](const std::size_t& index) const
 {
-    Pointer<T, TDefault> ret{*this};
+    Pointer<T, TDefinition> ret{*this};
     ret.SetIndex(index);
     return *(ret.Get<T>());
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>& Pointer<T, TDefault>::operator++()
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>& Pointer<T, TDefinition>::operator++()
 {
     BaseType::operator+=(m_step);
     return *this;
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault> Pointer<T, TDefault>::operator++(int)
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition> Pointer<T, TDefinition>::operator++(int)
 {
-    Pointer<T, TDefault> ret{*this};
+    Pointer<T, TDefinition> ret{*this};
     BaseType::operator+=(m_step);
     return ret;
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault>& Pointer<T, TDefault>::operator--()
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>& Pointer<T, TDefinition>::operator--()
 {
     BaseType::operator-=(m_step);
     return *this;
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault> Pointer<T, TDefault>::operator--(int)
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition> Pointer<T, TDefinition>::operator--(int)
 {
-    Pointer<T, TDefault> ret{*this};
+    Pointer<T, TDefinition> ret{*this};
     BaseType::operator-=(m_step);
     return ret;
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault> Pointer<T, TDefault>::operator+(const std::size_t& index)
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition> Pointer<T, TDefinition>::
+    operator+(const std::size_t& index)
 {
-    Pointer<T, TDefault> ret{*this};
+    Pointer<T, TDefinition> ret{*this};
     ret += index;
     return ret;
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault> Pointer<T, TDefault>::operator-(const std::size_t& index)
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition> Pointer<T, TDefinition>::
+    operator-(const std::size_t& index)
 {
-    Pointer<T, TDefault> ret{*this};
+    Pointer<T, TDefinition> ret{*this};
     ret -= index;
     return ret;
 }
 
-template<typename T, typename TDefault>
-Pointer<T, TDefault> Pointer<T, TDefault>::operator+(const int& index)
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition> Pointer<T, TDefinition>::operator+(const int& index)
 {
     if (index >= 0)
         return (*this + std::size_t(index));
     return (*this - std::size_t(-index));
 }
     
-template<typename T, typename TDefault>
-Pointer<T, TDefault> Pointer<T, TDefault>::operator-(const int& index)
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition> Pointer<T, TDefinition>::operator-(const int& index)
 {
     if (index >= 0)
         return (*this - std::size_t(index));
     return (*this + std::size_t(-index));
 }
 
-template<typename T, typename TDefault>
-template<typename TOther, typename TOtherDefault>
-bool Pointer<T, TDefault>::
-    operator==(const Pointer<TOther, TOtherDefault>& other) const
+template<typename T, typename TDefinition>
+void* Pointer<T, TDefinition>::GetData()
+{
+    return BaseType::GetData();
+}
+
+template<typename T, typename TDefinition>
+void* Pointer<T, TDefinition>::GetData() const
+{
+    auto* _this = const_cast<Pointer<T, TDefinition>*>(this);
+    return _this->BaseType::GetData();
+}
+
+template<typename T, typename TDefinition>
+template<typename TOther, typename TOtherDefinition>
+bool Pointer<T, TDefinition>::
+    operator==(const Pointer<TOther, TOtherDefinition>& other) const
 {
     return this->BaseType::operator==(other);
 }
 
-template<typename T, typename TDefault>
-template<typename TOther, typename TOtherDefault>
-bool Pointer<T, TDefault>::
-    operator!=(const Pointer<TOther, TOtherDefault>& other) const
+template<typename T, typename TDefinition>
+template<typename TOther, typename TOtherDefinition>
+bool Pointer<T, TDefinition>::
+    operator!=(const Pointer<TOther, TOtherDefinition>& other) const
+{
+    return this->BaseType::operator!=(other);
+}
+
+template<typename T, typename TDefinition>
+bool Pointer<T, TDefinition>::operator==(std::nullptr_t other) const
+{
+    return false;
+}
+
+template<typename T, typename TDefinition>
+bool Pointer<T, TDefinition>::operator!=(std::nullptr_t other) const
+{
+    return true;
+}
+
+template<typename T, typename TDefinition>
+bool Pointer<T, TDefinition>::operator==(void * other) const
+{
+    return this->BaseType::operator==(other);
+}
+
+template<typename T, typename TDefinition>
+bool Pointer<T, TDefinition>::operator!=(void * other) const
 {
     return this->BaseType::operator!=(other);
 }

@@ -19,9 +19,9 @@ template<typename T>
 class IsBaseOf
 {
 private:
-    template<typename T, T(*Func)()>
+    template<typename _T, _T(*Func)()>
     static constexpr std::true_type _IsBaseOf(
-        const test::ptr::Definition<T, Func>&);
+        const test::ptr::Definition<_T, Func>&);
     static constexpr std::false_type _IsBaseOf(...);
 public:
     IsBaseOf() = delete;
