@@ -2,6 +2,7 @@
 #define TEST_PTR_BLOCK_HEADER_H_
 
 #include "../Flag.h"
+#include "../defn/Finalization.h"
 
 #include <cstdint>
 
@@ -15,11 +16,10 @@ namespace block
 struct Header
 {
     typedef test::ptr::FlagIntegerType FlagIntegerType;
-
-    typedef void(DestructorFuncType)(void *);
+    typedef test::ptr::defn::Finalization FinalizationType;
 
     test::ptr::FlagIntegerType flag;
-    DestructorFuncType* destructor;
+    FinalizationType* finalization;
     std::size_t type_size;
     std::size_t data_size;
 };

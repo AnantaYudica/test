@@ -2,6 +2,7 @@
 #define TEST_PTR_BASE_H_
 
 #include "Flag.h"
+#include "Definition.h"
 #include "Block.h"
 
 #include <cstdint>
@@ -22,7 +23,8 @@ private:
     typedef test::ptr::Flag FlagType;
     typedef test::ptr::FlagIntegerType FlagIntegerType;
     typedef test::ptr::Block BlockType;
-    typedef typename BlockType::DestructorFuncType DestructorFuncType;
+    template<typename T, T(*Func)()>
+    using DefinitionType = test::ptr::Definition<T, Func>;
 private:
     static inline void _Reset(CountType*& count, BlockType& block);
 private:
@@ -40,9 +42,10 @@ protected:
     inline Base& operator=(const Base& cpy);
     inline Base& operator=(Base&& mov);
 protected:
+    template<typename T, T(*Func)()>
     inline void* Allocation(const FlagIntegerType& flag,
         const std::size_t& type_size, const std::size_t& type_count,
-        DestructorFuncType& destructor);
+        DefinitionType<T, Func> * defn);
     inline void Deallocation();
 protected:
     template<typename T>
@@ -73,6 +76,9 @@ protected:
 protected:
     inline bool operator==(const Base& other) const;
     inline bool operator!=(const Base& other) const;
+protected:
+    inline bool operator==(void* other) const;
+    inline bool operator!=(void* other) const;
 protected:
     inline operator bool() const;
 };
@@ -147,14 +153,15 @@ inline Base& Base::operator=(Base&& mov)
     return *this;
 }
 
+template<typename T, T(*Func)()>
 inline void* Base::Allocation(const FlagIntegerType& flag,
     const std::size_t& type_size, const std::size_t& type_count,
-    DestructorFuncType& destructor)
+    DefinitionType<T, Func> * defn)
 {
     _Reset(m_count, m_block);
     *m_offset = 0;
     m_count = new CountType(1);
-    return m_block.Allocation(flag, type_size, type_count, destructor);
+    return m_block.Allocation(flag, type_size, type_count, defn);
 }
 
 inline void Base::Deallocation()
@@ -276,14 +283,24 @@ inline Base Base::operator-(const std::size_t& size)
 
 inline bool Base::operator==(const Base& other) const
 {
-    return const_cast<BlockType&>(m_block).GetData() == 
-        const_cast<BlockType&>(other.m_block).GetData();
+    return (const_cast<BlockType&>(m_block).GetData() == 
+        const_cast<BlockType&>(other.m_block).GetData()) &&
+        *m_offset == *(other.m_offset);
 }
 
 inline bool Base::operator!=(const Base& other) const
 {
-    return const_cast<BlockType&>(m_block).GetData() != 
-        const_cast<BlockType&>(other.m_block).GetData();
+    return !(*this == other);
+}
+
+inline bool Base::operator==(void* other) const
+{
+    return const_cast<BlockType&>(m_block).GetData() == other;
+}
+
+inline bool Base::operator!=(void* other) const
+{
+    return const_cast<BlockType&>(m_block).GetData() != other;
 }
 
 inline Base::operator bool() const

@@ -2,6 +2,7 @@
 #define TEST_PTR_BLOCK_H_
 
 #include "Flag.h"
+#include "defn/Finalization.h"
 #include "block/Header.h"
 
 #include <cstddef>
@@ -16,7 +17,7 @@ class Block
 {
 public:
     typedef test::ptr::block::Header HeaderType;
-    typedef typename HeaderType::DestructorFuncType DestructorFuncType;
+    typedef test::ptr::defn::Finalization FinalizationType;
     typedef test::ptr::FlagIntegerType FlagIntegerType;
 private:
     char * m_value;
@@ -35,7 +36,7 @@ public:
 public:
     inline void * Allocation(const FlagIntegerType& flag, 
         const std::size_t& type_size, const std::size_t& type_count,
-        DestructorFuncType& destructor);
+        FinalizationType* finalization);
     inline void Deallocation();
 public:
     inline FlagIntegerType GetFlag() const;
@@ -84,13 +85,13 @@ inline Block& Block::operator=(Block&& mov)
 
 inline void * Block::Allocation(const FlagIntegerType& flag, 
     const std::size_t& type_size, const std::size_t& type_count,
-    DestructorFuncType& destructor)
+    FinalizationType * finalization)
 {
     const std::size_t data_size = type_size * type_count;
     m_value = new char[sizeof(HeaderType) + data_size];
     HeaderType * header = (HeaderType*)m_value;
     header->flag = flag;
-    header->destructor = &destructor;
+    header->finalization = finalization;
     header->type_size = type_size;
     header->data_size = data_size;
     return GetData();
@@ -105,10 +106,12 @@ inline void Block::Deallocation()
     char * data = (char *)GetData();
     for (size_t i = 0; i < data_size;)
     {
-        (*header->destructor)(data);
+        header->finalization->Destructor(data);
         data += type_size;
         i += type_size;
     }
+    delete header->finalization;
+    header->finalization = nullptr;
     delete[] m_value;
     m_value = _Default();
 }
