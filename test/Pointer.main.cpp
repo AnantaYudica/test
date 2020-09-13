@@ -65,6 +65,18 @@ int main()
         assert(p1.StepSize() == sizeof(int));
         assert(p1.Offset() == 0);
         assert(p1.Index() == 0);
+        assert(p1 == p1.GetData());
+        assert(p1 != nullptr);
+
+        {
+            std::size_t i = 0;
+            for (auto it = p1.Begin(); it != p1.End(); ++it, ++i)
+            {
+                assert(*it == p1[i]);
+                assert(p1 == it);
+                assert(p1 == it.GetData());
+            }
+        }
 
         *p1 = 4;
         assert(*p1 == 4);
@@ -107,6 +119,18 @@ int main()
         assert(p2.StepSize() == sizeof(int));
 
         assert(p2 == p1);
+        assert(p2 == p1.GetData());
+        assert(p1 == p2.GetData());
+
+        {
+            std::size_t i = 0;
+            for (auto it = p2.Begin(); it != p2.End(); ++it, ++i)
+            {
+                assert(*it == p2[i]);
+                assert(p2 == it);
+                assert(p2 == it.GetData());
+            }
+        }
 
         test::Pointer<int> p3{std::move(p2)};
         assert(*p3 == 4);
@@ -118,6 +142,21 @@ int main()
 
         assert(p3 == p1);
         assert(p3 != p2);
+        assert(p3 == p1.GetData());
+        assert(p3 != p2.GetData());
+        
+        assert(p2 != p1);
+        assert(p2 != p1.GetData());
+
+        {
+            std::size_t i = 0;
+            for (auto it = p3.Begin(); it != p3.End(); ++it, ++i)
+            {
+                assert(*it == p3[i]);
+                assert(p3 == it);
+                assert(p3 == it.GetData());
+            }
+        }
 
         test::Pointer<int> p4;
 
@@ -133,6 +172,27 @@ int main()
         assert(p4 == p1);
         assert(p4 != p2);
         assert(p4 == p3);
+        assert(p4 == p1.GetData());
+        assert(p4 != p2.GetData());
+        assert(p4 == p3.GetData());
+
+        assert(p3 == p1);
+        assert(p3 != p2);
+        assert(p3 == p1.GetData());
+        assert(p3 != p2.GetData());
+
+        assert(p2 != p1);
+        assert(p2 != p1.GetData());
+
+        {
+            std::size_t i = 0;
+            for (auto it = p3.Begin(); it != p3.End(); ++it, ++i)
+            {
+                assert(*it == p3[i]);
+                assert(p3 == it);
+                assert(p3 == it.GetData());
+            }
+        }
         
         test::Pointer<int> p5;
 
@@ -150,6 +210,35 @@ int main()
         assert(p5 != p2);
         assert(p5 == p3);
         assert(p5 != p4);
+        assert(p5 == p1.GetData());
+        assert(p5 != p2.GetData());
+        assert(p5 == p3.GetData());
+        assert(p5 != p4.GetData());
+
+        assert(p4 != p1);
+        assert(p4 != p2);
+        assert(p4 != p3);
+        assert(p4 != p1.GetData());
+        assert(p4 != p2.GetData());
+        assert(p4 != p3.GetData());
+
+        assert(p3 == p1);
+        assert(p3 != p2);
+        assert(p3 == p1.GetData());
+        assert(p3 != p2.GetData());
+
+        assert(p2 != p1);
+        assert(p2 != p1.GetData());
+
+        {
+            std::size_t i = 0;
+            for (auto it = p3.Begin(); it != p3.End(); ++it, ++i)
+            {
+                assert(*it == p3[i]);
+                assert(p3 == it);
+                assert(p3 == it.GetData());
+            }
+        }
 
         auto p6 = p5.StaticCast<const int>();
         assert(*p6 == 4);
@@ -157,6 +246,7 @@ int main()
         assert(p6.AllocationSize() == sizeof(int));
         assert(p6.StepSize() == sizeof(int));
         assert(p6 == p5);
+        assert(p6 == p5.GetData());
 
         auto p7 = p6.ConstCast<int>();
         
@@ -165,7 +255,7 @@ int main()
         assert(p7.AllocationSize() == sizeof(int));
         assert(p7.StepSize() == sizeof(int));
         assert(p7 == p5);
-        assert(p7 == p5);
+        assert(p7 == p5.GetData());
 
         *p7 += 6;
         assert(*p6 == 10);
@@ -177,6 +267,7 @@ int main()
         assert(p8.AllocationSize() == sizeof(int));
         assert(p8.StepSize() == sizeof(char));
         assert(p8 == p7);
+        assert(p8 == p7.GetData());
 
     }
     {
@@ -188,11 +279,25 @@ int main()
         assert(p1[3] == 4);
         assert(p1[4] == 5);
         
+        assert(*p1 == 1);
         assert(p1.Size() == 10);
         assert(p1.AllocationSize() == (sizeof(int)* 10));
         assert(p1.StepSize() == sizeof(int));
         assert(p1.Offset() == 0);
         assert(p1.Index() == 0);
+        
+        assert(p1 != nullptr);
+        assert(p1 == p1.GetData());
+        
+        {
+            std::size_t i = 0;
+            for (auto it = p1.Begin(); it != p1.End(); ++it, ++i)
+            {
+                assert(*it == p1[i]);
+                assert(p1 == it);
+                assert(p1 == it.GetData());
+            }
+        }
 
         p1 += 5;
         assert(p1.Offset() == 5 * sizeof(int));
@@ -212,6 +317,16 @@ int main()
         assert(p1[7] == 8);
         assert(p1[8] == 9);
         assert(p1[9] == 10);
+        
+        {
+            std::size_t i = 0;
+            for (auto it = p1.Begin(); it != p1.End(); ++it, ++i)
+            {
+                assert(*it == p1[i]);
+                assert(p1 == it);
+                assert(p1 == it.GetData());
+            }
+        }
 
         p1 += 1;
         
@@ -235,7 +350,8 @@ int main()
 
         auto p2 = p1++;
 
-        assert(p2 == p1);
+        assert(p2 == p1.GetData());
+        assert(p1 == p2.GetData());
         
         assert(p2.Offset() == (sizeof(int) * 1));
         assert(p2.Index() == 1);
@@ -255,7 +371,8 @@ int main()
 
         auto p4 = p1--;
         
-        assert(p4 == p1);
+        assert(p4 == p1.GetData());
+        assert(p1 == p4.GetData());
 
         assert(p4.Offset() == (sizeof(int) * 3));
         assert(p4.Index() == 3);
@@ -265,7 +382,8 @@ int main()
 
         auto p5 = --p1;
         
-        assert(p5 == p1);
+        assert(p5 == p1.GetData());
+        assert(p1 == p5.GetData());
 
         assert(p5.Offset() == (sizeof(int) * 1));
         assert(p5.Index() == 1);
@@ -275,14 +393,16 @@ int main()
 
         auto p6 = (p1 + 4);
 
-        assert(p6 == p1);
+        assert(p6 == p1.GetData());
+        assert(p1 == p6.GetData());
         
         assert(p6.Offset() == (sizeof(int) * 5));
         assert(p6.Index() == 5);
 
         auto p7 = (p1 - 3);
         
-        assert(p7 == p1);
+        assert(p7 == p1.GetData());
+        assert(p1 == p7.GetData());
 
         assert(p7.Offset() == (sizeof(int) * 8));
         assert(p7.Index() == 8);
@@ -392,7 +512,7 @@ int main()
 
     }
     {
-        test::Pointer<Obj2, test::ptr::Default<Obj2, &DefaultObj2>> p1{};
+        test::Pointer<Obj2, test::ptr::Definition<Obj2, &DefaultObj2>> p1{};
         assert(p1->value == DefaultValueObj2);
         assert((*p1).value == DefaultValueObj2);
         assert(p1.AllocationSize() == sizeof(Obj2));
@@ -406,20 +526,20 @@ int main()
         p1->value = 108;
         assert((*p1).value == 108);
         
-        test::Pointer<Obj2, test::ptr::Default<Obj2, &DefaultObj2>> p2{p1};
+        test::Pointer<Obj2, test::ptr::Definition<Obj2, &DefaultObj2>> p2{p1};
         assert(p2->value == 108);
         assert(p1->value == 108);
         assert(p2 == p1);
 
         test::Pointer<Obj2, 
-            test::ptr::Default<Obj2, &DefaultObj2>> p3{std::move(p2)};
+            test::ptr::Definition<Obj2, &DefaultObj2>> p3{std::move(p2)};
         assert(p3->value == 108);
         assert(p2->value == DefaultValueObj2);
         assert(p1->value == 108);
         assert(p3 == p1);
         assert(p3 != p2);
 
-        test::Pointer<Obj2, test::ptr::Default<Obj2, &DefaultObj2>> p4;
+        test::Pointer<Obj2, test::ptr::Definition<Obj2, &DefaultObj2>> p4;
         p4 = p3;
         assert(p4->value == 108);
         assert(p3->value == 108);
@@ -429,7 +549,7 @@ int main()
         assert(p4 != p2);
         assert(p4 == p3);
         
-        test::Pointer<Obj2, test::ptr::Default<Obj2, &DefaultObj2>> p5;
+        test::Pointer<Obj2, test::ptr::Definition<Obj2, &DefaultObj2>> p5;
         p5 = std::move(p4);
         assert(p5->value == 108);
         assert(p4->value == DefaultValueObj2);
@@ -445,12 +565,15 @@ int main()
         
         assert(p6->value == 108);
         assert(p6 == p5);
+        assert(p6 == p5.GetData());
 
         auto p7 = p6.ConstCast<Obj2>();
         
         assert(p7->value == 108);
         assert(p7 == p6);
         assert(p7 == p5);
+        assert(p7 == p6.GetData());
+        assert(p7 == p5.GetData());
 
         p7->value += 6;
         
@@ -463,6 +586,7 @@ int main()
         assert(p8.AllocationSize() == sizeof(Obj1));
         assert(p8.StepSize() == sizeof(char));
         assert(p8 == p7);
+        assert(p8 == p7.GetData());
     }
     {
         test::Pointer<Obj3> p1{};
@@ -470,6 +594,7 @@ int main()
         assert(p1->Value() == 0);
         assert(p1_base->Value() == 0);
         assert(p1 == p1_base);
+        assert(p1 == p1_base.GetData());
         assert(p1.AllocationSize() == sizeof(Obj3));
         assert(p1.StepSize() == sizeof(Obj3));
         assert(p1.Offset() == 0);
@@ -478,12 +603,14 @@ int main()
         assert(p1_base.StepSize() == sizeof(Obj3));
         assert(p1_base.Offset() == 0);
         assert(p1_base.Index() == 0);
+        assert(p1_base == p1);
+        assert(p1_base == p1.GetData());
 
         bool t_f_base_1 = 
-            TestDynamicCast<Obj1, test::ptr::Default<Obj1>>(p1_base);
+            TestDynamicCast<Obj1, test::ptr::Definition<Obj1>>(p1_base);
         assert(t_f_base_1 == false);
         bool t_f_base_2 = 
-            TestDynamicCast<Obj3, test::ptr::Default<Obj3>>(p1_base);
+            TestDynamicCast<Obj3, test::ptr::Definition<Obj3>>(p1_base);
         assert(t_f_base_2 == true);
 
         p1->Value() = 600;
@@ -537,6 +664,17 @@ int main()
         assert(p8_base.AllocationSize() == sizeof(Obj3));
         assert(p8_base.StepSize() == sizeof(char));
         assert(p8_base == p7_base);
+    }
+    {
+        test::Pointer<char> p1{
+            test::ptr::arg::Array{1024}, test::ptr::arg::Foreach{}, 'A'
+        };
+        for (int i = 0; i < 1024; ++i)
+        {
+            assert(p1.Index() == (std::size_t)i);
+            assert((int)*p1 == (int)'A');
+            p1++;
+        }
     }
     return TEST::GetInstance().Status().Get();;
 }
