@@ -82,7 +82,7 @@ template<typename TArg, typename... TArgs, typename _TArgs,
     typename std::enable_if<
         !std::is_base_of<Structure, _TArgs>::value, int>::type>
 inline Structure::Structure(TArg&& size_arg, TArgs&&... size_args) :
-    m_size_list(test::ptr::arg::Array(sizeof...(TArgs) + 1)),
+    m_size_list(test::ptr::arg::Array(sizeof...(TArgs) + 2)),
     m_values(_Set(0, m_size_list, std::forward<TArg>(size_arg),
         std::forward<TArgs>(size_args)...))
 {}
@@ -128,7 +128,7 @@ inline T* Structure::Get(const std::size_t& index)
 
 inline std::size_t Structure::Size() const
 {
-    return m_size_list.Size();
+    return m_size_list.Size() - 1;
 }
 
 inline std::size_t Structure::AllocationSize() const

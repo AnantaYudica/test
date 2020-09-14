@@ -44,7 +44,7 @@ inline Value::Value() :
 {}
 
 inline Value::Value(const std::size_t& alloc_size) :
-    m_values(test::ptr::arg::Array(alloc_size), 
+    m_values(test::ptr::arg::Array(alloc_size + 1), 
         test::ptr::arg::Foreach{}, 0)
 {}
 
@@ -89,7 +89,7 @@ inline T* Value::Get(const std::size_t& off)
 
 inline std::size_t Value::AllocationSize() const
 {
-    return m_values.AllocationSize();
+    return m_values.AllocationSize() - 1;
 }
 
 inline bool Value::operator==(const Value& other) const
