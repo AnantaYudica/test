@@ -44,6 +44,7 @@ public:
             !std::is_base_of<test::ptr::Base, _TArg>::value &&
             !std::is_base_of<test::ptr::arg::Array, _TArg>::value, int>::type = 0>
     Pointer(TArg&& arg, TArgs&&... args);
+    Pointer(test::ptr::arg::Array&& array);
     template<typename TArg, typename... TArgs, typename _TArg = 
         typename std::remove_cv<typename std::remove_pointer<
             typename std::remove_reference<TArg>::type>::type>::type,
@@ -154,9 +155,22 @@ Pointer<T, TDefinition>::Pointer(TArg&& arg, TArgs&&... args) :
     m_step(sizeof(typename TDefinition::ValueType))
 {
     auto defn = new TDefinition();
-    void* data = BaseType::Allocation(FlagType::empty, m_step, 1, defn);
+    void* data = BaseType::Allocation(FlagType::value_initialization, m_step,
+        1, defn);
     defn->Constructor(data, std::forward<TArg>(arg), 
         std::forward<TArgs>(args)...);
+}
+
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>::Pointer(test::ptr::arg::Array&& array) :
+    BaseType(),
+    m_step(sizeof(typename TDefinition::ValueType))
+{
+    auto defn = new TDefinition();
+    const auto size = array.GetSize();
+    void* data = BaseType::Allocation(FlagType::array_allocation, m_step, 
+        size == 0 ? 1 : size, defn);
+    defn->Constructor(array, data);
 }
 
 template<typename T, typename TDefinition>

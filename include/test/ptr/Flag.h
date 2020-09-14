@@ -14,7 +14,8 @@ enum Flag : std::uint8_t
 {
     empty = 0,
     default_initialization = 1,
-    array_allocation = 2
+    value_initialization = 2,
+    array_allocation = 3
 };
 
 } //!ptr
