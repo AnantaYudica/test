@@ -49,7 +49,9 @@ public:
     inline T* Get(const std::size_t& index);
 public:
     inline std::size_t Size() const;
+public:
     inline std::size_t AllocationSize() const;
+    inline std::size_t AllocationSize(const std::size_t& index) const;
 public:
     inline bool operator==(const Structure& other) const;
     inline bool operator!=(const Structure& other) const;
@@ -132,6 +134,17 @@ inline std::size_t Structure::Size() const
 inline std::size_t Structure::AllocationSize() const
 {
     return m_values.AllocationSize();
+}
+
+inline std::size_t Structure::
+    AllocationSize(const std::size_t& index) const
+{
+    const auto size = Size();
+    if (size == 0 || index >= size) return 0;
+    if (index == (size - 1)) return AllocationSize() -
+        m_size_list[index];
+    else if (index == 0) return m_size_list[1];
+    return m_size_list[index + 1] - m_size_list[index];
 }
 
 inline bool Structure::operator==(const Structure& other) const
