@@ -16,6 +16,9 @@ int main()
         assert(s1.Size() == 1);
         assert(s1.AllocationSize() == sizeof(int));
 
+        assert(s1.AllocationSize(0) == sizeof(int));
+        assert(s1.AllocationSize(1) == 0);
+
         s1.template Set<int>(0, 234);
         auto v0 = s1.template Get<int>(0);
 
@@ -28,6 +31,17 @@ int main()
 
         assert(s1.Size() == 10);
         assert(s1.AllocationSize() == sizeof(int) * 10);
+        assert(s1.AllocationSize(0) == sizeof(int));
+        assert(s1.AllocationSize(1) == sizeof(int));
+        assert(s1.AllocationSize(2) == sizeof(int));
+        assert(s1.AllocationSize(3) == sizeof(int));
+        assert(s1.AllocationSize(4) == sizeof(int));
+        assert(s1.AllocationSize(5) == sizeof(int));
+        assert(s1.AllocationSize(6) == sizeof(int));
+        assert(s1.AllocationSize(7) == sizeof(int));
+        assert(s1.AllocationSize(8) == sizeof(int));
+        assert(s1.AllocationSize(9) == sizeof(int));
+        assert(s1.AllocationSize(10) == 0);
 
         s1.template Set<int>(0, 234);
         s1.template Set<int>(1, 567);
@@ -71,6 +85,14 @@ int main()
         
         assert(s1.Size() == 7);
         assert(s1.AllocationSize() == size_alloc);
+        assert(s1.AllocationSize(0) == sizeof(int));
+        assert(s1.AllocationSize(1) == sizeof(char));
+        assert(s1.AllocationSize(2) == sizeof(long long));
+        assert(s1.AllocationSize(3) == sizeof(char));
+        assert(s1.AllocationSize(4) == sizeof(long double));
+        assert(s1.AllocationSize(5) == sizeof(short));
+        assert(s1.AllocationSize(6) == sizeof(int*));
+        assert(s1.AllocationSize(7) == 0);
 
         s1.template Set<int>(0, INT_MAX);
         s1.template Set<char>(1, 'L');
@@ -99,6 +121,14 @@ int main()
         {
             assert(s2.Size() == 7);
             assert(s2.AllocationSize() == size_alloc);
+            assert(s2.AllocationSize(0) == sizeof(int));
+            assert(s2.AllocationSize(1) == sizeof(char));
+            assert(s2.AllocationSize(2) == sizeof(long long));
+            assert(s2.AllocationSize(3) == sizeof(char));
+            assert(s2.AllocationSize(4) == sizeof(long double));
+            assert(s2.AllocationSize(5) == sizeof(short));
+            assert(s2.AllocationSize(6) == sizeof(int*));
+            assert(s2.AllocationSize(7) == 0);
             
             auto v2_0 = s2.template Get<int>(0);
             auto v2_1 = s2.template Get<char>(1);
@@ -119,6 +149,14 @@ int main()
         {
             assert(s3.Size() == 7);
             assert(s3.AllocationSize() == size_alloc);
+            assert(s3.AllocationSize(0) == sizeof(int));
+            assert(s3.AllocationSize(1) == sizeof(char));
+            assert(s3.AllocationSize(2) == sizeof(long long));
+            assert(s3.AllocationSize(3) == sizeof(char));
+            assert(s3.AllocationSize(4) == sizeof(long double));
+            assert(s3.AllocationSize(5) == sizeof(short));
+            assert(s3.AllocationSize(6) == sizeof(int*));
+            assert(s3.AllocationSize(7) == 0);
             
             auto v2_0 = s3.template Get<int>(0);
             auto v2_1 = s3.template Get<char>(1);
@@ -138,6 +176,14 @@ int main()
         {
             assert(s2.Size() == 7);
             assert(s2.AllocationSize() == size_alloc);
+            assert(s2.AllocationSize(0) == sizeof(int));
+            assert(s2.AllocationSize(1) == sizeof(char));
+            assert(s2.AllocationSize(2) == sizeof(long long));
+            assert(s2.AllocationSize(3) == sizeof(char));
+            assert(s2.AllocationSize(4) == sizeof(long double));
+            assert(s2.AllocationSize(5) == sizeof(short));
+            assert(s2.AllocationSize(6) == sizeof(int*));
+            assert(s2.AllocationSize(7) == 0);
             
             auto v2_0 = s2.template Get<int>(0);
             auto v2_1 = s2.template Get<char>(1);
@@ -159,6 +205,14 @@ int main()
         {
             assert(s4.Size() == 7);
             assert(s4.AllocationSize() == size_alloc);
+            assert(s4.AllocationSize(0) == sizeof(int));
+            assert(s4.AllocationSize(1) == sizeof(char));
+            assert(s4.AllocationSize(2) == sizeof(long long));
+            assert(s4.AllocationSize(3) == sizeof(char));
+            assert(s4.AllocationSize(4) == sizeof(long double));
+            assert(s4.AllocationSize(5) == sizeof(short));
+            assert(s4.AllocationSize(6) == sizeof(int*));
+            assert(s4.AllocationSize(7) == 0);
             
             auto v2_0 = s4.template Get<int>(0);
             auto v2_1 = s4.template Get<char>(1);
@@ -180,6 +234,14 @@ int main()
         {
             assert(s5.Size() == 7);
             assert(s5.AllocationSize() == size_alloc);
+            assert(s5.AllocationSize(0) == sizeof(int));
+            assert(s5.AllocationSize(1) == sizeof(char));
+            assert(s5.AllocationSize(2) == sizeof(long long));
+            assert(s5.AllocationSize(3) == sizeof(char));
+            assert(s5.AllocationSize(4) == sizeof(long double));
+            assert(s5.AllocationSize(5) == sizeof(short));
+            assert(s5.AllocationSize(6) == sizeof(int*));
+            assert(s5.AllocationSize(7) == 0);
             
             auto v2_0 = s5.template Get<int>(0);
             auto v2_1 = s5.template Get<char>(1);
