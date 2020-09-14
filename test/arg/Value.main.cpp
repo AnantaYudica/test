@@ -261,5 +261,5 @@ int main()
             assert(*val2_6 == &p0);
         }
     }
-    return 0;
+    return TEST::GetInstance().Status().Get();
 }
