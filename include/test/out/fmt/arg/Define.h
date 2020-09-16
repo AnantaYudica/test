@@ -1,13 +1,11 @@
-#ifndef TEST_MSG_FMT_VAR_ARG_DEFINE_H_
-#define TEST_MSG_FMT_VAR_ARG_DEFINE_H_
+#ifndef TEST_OUT_FMT_ARG_DEFINE_H_
+#define TEST_OUT_FMT_ARG_DEFINE_H_
 
 namespace test
 {
-namespace msg
+namespace out
 {
 namespace fmt
-{
-namespace var
 {
 namespace arg
 {
@@ -21,12 +19,10 @@ public:
 
 } //!arg
 
-} //!var
-
 } //!fmt
 
-} //!msg
+} //!out
 
 } //!test
 
-#endif //!TEST_MSG_FMT_VAR_ARG_DEFINE_H_
+#endif //!TEST_OUT_FMT_ARG_DEFINE_H_
