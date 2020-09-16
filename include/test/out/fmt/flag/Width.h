@@ -1,5 +1,5 @@
-#ifndef TEST_OUT_FMT_ARG_WIDTH_H_
-#define TEST_OUT_FMT_ARG_WIDTH_H_
+#ifndef TEST_OUT_FMT_FLAG_WIDTH_H_
+#define TEST_OUT_FMT_FLAG_WIDTH_H_
 
 namespace test
 {
@@ -7,7 +7,7 @@ namespace out
 {
 namespace fmt
 {
-namespace arg
+namespace flag
 {
 
 class Width
@@ -43,7 +43,7 @@ inline constexpr int Width::GetValue() const
     return m_value;
 }
 
-} //!arg
+} //!flag
 
 } //!fmt
 
@@ -51,4 +51,4 @@ inline constexpr int Width::GetValue() const
 
 } //!test
 
-#endif //!TEST_OUT_FMT_ARG_WIDTH_H_
+#endif //!TEST_OUT_FMT_FLAG_WIDTH_H_

@@ -1,5 +1,5 @@
-#ifndef TEST_OUT_FMT_ARG_LENGTH_H_
-#define TEST_OUT_FMT_ARG_LENGTH_H_
+#ifndef TEST_OUT_FMT_FLAG_LENGTH_H_
+#define TEST_OUT_FMT_FLAG_LENGTH_H_
 
 #include "Precision.h"
 
@@ -9,12 +9,12 @@ namespace out
 {
 namespace fmt
 {
-namespace arg
+namespace flag
 {
 
-typedef test::out::fmt::arg::Precision Length;
+typedef test::out::fmt::flag::Precision Length;
 
-} //!arg
+} //!flag
 
 } //!fmt
 
@@ -22,4 +22,4 @@ typedef test::out::fmt::arg::Precision Length;
 
 } //!test
 
-#endif //!TEST_OUT_FMT_ARG_LENGTH_H_
+#endif //!TEST_OUT_FMT_FLAG_LENGTH_H_

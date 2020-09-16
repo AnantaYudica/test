@@ -1,5 +1,5 @@
-#ifndef TEST_OUT_FMT_ARG_DEFINE_H_
-#define TEST_OUT_FMT_ARG_DEFINE_H_
+#ifndef TEST_OUT_FMT_FLAG_DEFINE_H_
+#define TEST_OUT_FMT_FLAG_DEFINE_H_
 
 namespace test
 {
@@ -7,7 +7,7 @@ namespace out
 {
 namespace fmt
 {
-namespace arg
+namespace flag
 {
 
 template<typename T>
@@ -17,7 +17,7 @@ public:
     constexpr Define() = default;
 };
 
-} //!arg
+} //!flag
 
 } //!fmt
 
@@ -25,4 +25,4 @@ public:
 
 } //!test
 
-#endif //!TEST_OUT_FMT_ARG_DEFINE_H_
+#endif //!TEST_OUT_FMT_FLAG_DEFINE_H_

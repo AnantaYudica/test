@@ -1,5 +1,5 @@
-#ifndef TEST_OUT_FMT_ARG_PRECISION_H_
-#define TEST_OUT_FMT_ARG_PRECISION_H_
+#ifndef TEST_OUT_FMT_FLAG_PRECISION_H_
+#define TEST_OUT_FMT_FLAG_PRECISION_H_
 
 namespace test
 {
@@ -7,7 +7,7 @@ namespace out
 {
 namespace fmt
 {
-namespace arg
+namespace flag
 {
 
 class Precision
@@ -43,7 +43,7 @@ inline constexpr int Precision::GetValue() const
     return m_value;
 }
 
-} //!arg
+} //!flag
 
 } //!fmt
 
@@ -51,4 +51,4 @@ inline constexpr int Precision::GetValue() const
 
 } //!test
 
-#endif //!TEST_OUT_FMT_ARG_PRECISION_H_
+#endif //!TEST_OUT_FMT_FLAG_PRECISION_H_

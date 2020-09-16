@@ -1,5 +1,5 @@
-#ifndef TEST_OUT_FMT_ARG_SIGNED_H_
-#define TEST_OUT_FMT_ARG_SIGNED_H_
+#ifndef TEST_OUT_FMT_FLAG_SIGNED_H_
+#define TEST_OUT_FMT_FLAG_SIGNED_H_
 
 namespace test
 {
@@ -7,7 +7,7 @@ namespace out
 {
 namespace fmt
 {
-namespace arg
+namespace flag
 {
 
 class Signed
@@ -16,7 +16,7 @@ public:
     constexpr Signed() = default;
 };
 
-} //!arg
+} //!flag
 
 } //!fmt
 
@@ -24,4 +24,4 @@ public:
 
 } //!test
 
-#endif //!TEST_OUT_FMT_ARG_SIGNED_H_
+#endif //!TEST_OUT_FMT_FLAG_SIGNED_H_
