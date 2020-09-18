@@ -32,6 +32,11 @@ namespace fmt
 
 template<typename TValue = std::uint32_t, 
     typename TIntegerValue = std::uint32_t>
+class Flag;
+
+typedef Flag<std::uint32_t, std::uint32_t> FlagType;
+
+template<typename TValue, typename TIntegerValue>
 class Flag
 {
 public:
@@ -249,6 +254,8 @@ public:
     Flag<TValue, TIntegerValue>& 
         operator=(const Flag<TValue, TIntegerValue>& cpy);
     Flag<TValue, TIntegerValue>& operator=(Flag<TValue, TIntegerValue>&& mov);
+public:
+    constexpr IntegerValueType GetValue() const;
 public:
     constexpr bool IsDefine() const;
     constexpr bool IsDefineSigned() const;
@@ -662,6 +669,13 @@ Flag<TValue, TIntegerValue>::operator=(Flag<TValue, TIntegerValue>&& mov)
 {
     m_value = mov.m_value;
     return *this;
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::GetValue() const
+{
+    return m_value & ~bad_mask;
 }
 
 template<typename TValue, typename TIntegerValue>
