@@ -136,6 +136,14 @@ inline int VSPrint(wchar_t * buff, std::size_t buff_size,
     const wchar_t * fmt, va_list args);
 
 template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, char>::value, int>::type = 1>
+inline int FPuts(const char * str, std::FILE* stream);
+
+template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, wchar_t>::value, int>::type = 1>
+inline int FPuts(const wchar_t * str, std::FILE* stream);
+
+template<typename TChar, typename std::enable_if<
     std::is_same<TChar, char>::value, int>::type>
 inline int Print(const char * fmt, ...)
 {
@@ -244,6 +252,20 @@ inline int VSPrint(wchar_t * buff, std::size_t buff_size,
     const wchar_t * fmt, va_list args)
 {
     return std::vswprintf(buff, buff_size, fmt, args);
+}
+
+template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, char>::value, int>::type>
+inline int FPuts(const char * str, std::FILE* stream)
+{
+    return std::fputs(str, stream);
+}
+
+template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, wchar_t>::value, int>::type>
+inline int FPuts(const wchar_t * str, std::FILE* stream)
+{
+    return std::fputws(str, stream);
 }
 
 } //!out
