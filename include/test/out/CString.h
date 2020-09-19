@@ -5,13 +5,14 @@
 #include "../cstr/Length.h"
 #include "cstr/Status.h"
 #include "Interface.h"
+#include "Standard.h"
+#include "cstr/Base.h"
 
 #include <cstddef>
 #include <type_traits>
 #include <cstring>
 #include <utility>
 #include <cstdarg>
-#include <cstdio>
 
 #ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
@@ -27,43 +28,16 @@ namespace out
 {
 
 template<typename TChar = char>
-class CString : public test::out::Interface<TChar>
+class CString : 
+    private test::out::cstr::Base<TChar>,
+    public test::out::Interface<TChar>
 {
-public:
-    typedef typename std::remove_cv<TChar>::type CharType;
-    typedef std::size_t SizeType; 
-    typedef test::out::cstr::Status StatusType;
 private:
-    static constexpr SizeType _Capacity(const SizeType & capacity,
-        SizeType offset = (static_cast<SizeType>(-1) << 1));
-    static SizeType _Predict(const SizeType & capacity, StatusType& status);
-    static SizeType _Predict(const SizeType & capacity, 
-        const SizeType & need_capacity, const SizeType & minimum_capacity, 
-        const SizeType & maximum_capacity, StatusType& status);
-    static bool _Allocation(CharType * & cstr, SizeType& capacity, 
-        const SizeType& new_capacity, StatusType& status);
-    static bool _Reallocation(CharType * & cstr, SizeType& size, 
-        SizeType & capacity, const SizeType& need_capacity, 
-        const SizeType & minimum_capacity, 
-        const SizeType & maximum_capacity, StatusType& status);
-    static bool _Initialize(CharType * &cstr, SizeType& size, 
-        SizeType & capacity, SizeType & minimum_capacity, 
-        SizeType & maximum_capacity, StatusType& status,
-        const SizeType& new_capacity = static_cast<SizeType>(0));
-    static void _Reset(CharType * &cstr, SizeType& size, 
-        SizeType & capacity);
+    typedef test::out::cstr::Base<TChar> BaseType;
 public:
-    static constexpr SizeType default_maximum_capacity = 
-        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
-        << ((sizeof(SizeType) / 2) * 8)), (static_cast<SizeType>(-1) << 1));
-    static constexpr SizeType default_minimum_capacity =
-        CString<TChar>::_Capacity(~(static_cast<SizeType>(-1) 
-        << (sizeof(SizeType))), (static_cast<SizeType>(-1) << 1));
-private:
-    StatusType m_status;
-    CharType * m_cstr;
-    SizeType m_size, m_capacity, m_minimum_capacity, 
-        m_maximum_capacity;
+    typedef typename BaseType::CharType CharType;
+    typedef typename BaseType::SizeType SizeType; 
+    typedef typename BaseType::StatusType StatusType;
 public:
     CString();
     CString(const SizeType & minimum_capacity);
@@ -78,20 +52,12 @@ public:
     CString<TChar>& operator=(const CString<TChar>& cpy);
     CString<TChar>& operator=(CString<TChar>&& mov);
 public:
-    SizeType Size() const;
-    SizeType Capacity() const;
-    SizeType MaximumCapacity() const;
-    SizeType MinimumCapacity() const;
+    using BaseType::Size;
+    using BaseType::Capacity;
+    using BaseType::MaximumCapacity;
+    using BaseType::MinimumCapacity;
 private:
-    SizeType _Set(const SizeType& index, const TChar * cstr, 
-        const SizeType& size);
-    SizeType _Set(const SizeType& index, const char * format, va_list var_args)
-        TEST_ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-public:
-    SizeType VPrint(const char * format, va_list var_args) override
-        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-    SizeType Print(const char * format, ...) override
-        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
+    using BaseType::_Set;
 public:
     SizeType Puts(const TChar * cstr, const SizeType& size) override;
     SizeType Puts(const TChar * cstr) override;
@@ -101,451 +67,308 @@ public:
     SizeType Puts(const test::CString<const TChar>& cstr) override;
     SizeType Puts(const CString<TChar>& cpy);
 public:
-    test::CString<TChar> Get() const; 
+    using BaseType::Get;
 public:
-    bool IsGood() const override;
     bool IsBad() const override;
-    StatusType::ValueType GetBadCode() const;
+    bool IsGood() const override;
 public:
-    bool Output(test::out::Interface<TChar>& out) const;
+    using BaseType::GetBadCode;
+private:
+    using BaseType::Bad;
+public:
+    using BaseType::Output;
+};
+
+template<>
+class CString<char> : 
+    private test::out::cstr::Base<char>,
+    public test::out::Interface<char>
+{
+private:
+    typedef test::out::cstr::Base<char> BaseType;
+public:
+    typedef typename BaseType::CharType CharType;
+    typedef typename BaseType::SizeType SizeType; 
+    typedef typename BaseType::StatusType StatusType;
+public:
+    CString();
+    CString(const SizeType & minimum_capacity);
+    CString(const SizeType & minimum_capacity, 
+        const SizeType & maximum_capacity);
+public:
+    ~CString();
+public:
+    CString(const CString<char>& cpy);
+    CString(CString<char>&& mov);
+public:
+    CString<char>& operator=(const CString<char>& cpy);
+    CString<char>& operator=(CString<char>&& mov);
+public:
+    using BaseType::Size;
+    using BaseType::Capacity;
+    using BaseType::MaximumCapacity;
+    using BaseType::MinimumCapacity;
+private:
+    using BaseType::_Set;
+    SizeType _Set(const SizeType& index, const char * format, 
+        va_list var_args) TEST_ATTRIBUTE ((__format__ (__printf__, 3, 0)));
+public:
+    SizeType VPrint(const char * format, va_list var_args) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
+    SizeType Print(const char * format, ...) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
+public:
+    SizeType Puts(const char * cstr, const SizeType& size) override;
+    SizeType Puts(const char * cstr) override;
+    template<std::size_t S>
+    SizeType Puts(const char(&cstr)[S]);
+    SizeType Puts(const test::CString<char>& cstr) override;
+    SizeType Puts(const test::CString<const char>& cstr) override;
+    SizeType Puts(const CString<char>& cpy);
+public:
+    using BaseType::Get;
+public:
+    bool IsBad() const override;
+    bool IsGood() const override;
+public:
+    using BaseType::GetBadCode;
+private:
+    using BaseType::Bad;
+public:
+    using BaseType::Output;
+};
+
+template<>
+class CString<wchar_t> : 
+    private test::out::cstr::Base<wchar_t>,
+    public test::out::Interface<wchar_t>
+{
+private:
+    typedef test::out::cstr::Base<wchar_t> BaseType;
+public:
+    typedef typename BaseType::CharType CharType;
+    typedef typename BaseType::SizeType SizeType; 
+    typedef typename BaseType::StatusType StatusType;
+public:
+    CString();
+    CString(const SizeType & minimum_capacity);
+    CString(const SizeType & minimum_capacity, 
+        const SizeType & maximum_capacity);
+public:
+    ~CString();
+public:
+    CString(const CString<wchar_t>& cpy);
+    CString(CString<wchar_t>&& mov);
+public:
+    CString<wchar_t>& operator=(const CString<wchar_t>& cpy);
+    CString<wchar_t>& operator=(CString<wchar_t>&& mov);
+public:
+    using BaseType::Size;
+    using BaseType::Capacity;
+    using BaseType::MaximumCapacity;
+    using BaseType::MinimumCapacity;
+private:
+    using Base::_Set;
+    SizeType _Set(const SizeType& index, const wchar_t * format, 
+        va_list var_args);
+public:
+    SizeType VPrint(const wchar_t * format, va_list var_args) override;
+    SizeType Print(const wchar_t * format, ...) override;
+public:
+    SizeType Puts(const wchar_t * cstr, const SizeType& size) override;
+    SizeType Puts(const wchar_t * cstr) override;
+    template<std::size_t S>
+    SizeType Puts(const wchar_t(&cstr)[S]);
+    SizeType Puts(const test::CString<wchar_t>& cstr) override;
+    SizeType Puts(const test::CString<const wchar_t>& cstr) override;
+    SizeType Puts(const CString<wchar_t>& cpy);
+public:
+    using BaseType::Get;
+public:
+    bool IsBad() const override;
+    bool IsGood() const override;
+public:
+    using BaseType::GetBadCode;
+private:
+    using BaseType::Bad;
+public:
+    using BaseType::Output;
 };
 
 template<typename TChar>
-constexpr typename CString<TChar>::SizeType 
-CString<TChar>::_Capacity(const SizeType & capacity, SizeType offset)
-{
-    return offset != 0 ? ((~offset) >= capacity ? ~offset : 
-        _Capacity(capacity, offset << 1)) : 0;
-}
-
-template<typename TChar>
-typename CString<TChar>::SizeType
-CString<TChar>::_Predict(const SizeType & capacity, StatusType& status)
-{
-    const SizeType res = _Capacity(capacity);
-    if (res == static_cast<SizeType>(0)) 
-        status.Bad(StatusType::overflow_capacity);
-    return res;
-}
-
-template<typename TChar>
-typename CString<TChar>::SizeType 
-CString<TChar>::_Predict(const SizeType & capacity, 
-    const SizeType & need_capacity, const SizeType & minimum_capacity, 
-    const SizeType & maximum_capacity, StatusType& status)
-{
-    SizeType curr_capacity = (capacity == static_cast<SizeType>(0)) ?
-        ~minimum_capacity : capacity;
-    
-    if (curr_capacity == need_capacity)
-    {
-        return curr_capacity;
-    }
-    else if (need_capacity < curr_capacity)
-    {
-        if (need_capacity < minimum_capacity) return minimum_capacity;
-        SizeType curr = curr_capacity;
-        while (true)
-        {
-            if (curr < need_capacity)
-                return ~static_cast<SizeType>(~curr << 1);
-            curr >>= 1;
-        }
-    }
-    else
-    {
-        if (need_capacity > maximum_capacity) 
-        {
-            status.Bad(StatusType::overflow_capacity);
-            return 0;
-        }
-        else if(need_capacity == maximum_capacity) return maximum_capacity;
-        SizeType curr = ~curr_capacity;
-        while(true)
-        {
-            const SizeType size = ~curr;
-            if (size >= need_capacity)
-                return size;
-            curr <<= 1;
-        }
-    }
-    status.Bad(StatusType::predict_failed);
-    return 0;
-}
-
-template<typename TChar>
-bool CString<TChar>::_Allocation(CharType * & cstr, SizeType& capacity, 
-    const SizeType& new_capacity, StatusType& status)
-{
-    if (cstr != nullptr)
-    {
-        delete[] cstr;
-        cstr = nullptr;
-        capacity = static_cast<SizeType>(0);
-    }
-    if (new_capacity == static_cast<SizeType>(0)) 
-    {
-        status.Bad(StatusType::zero_allocation_failed);
-        return false;
-    }
-    cstr = new CharType[new_capacity];
-    capacity = new_capacity;
-    
-    if (cstr == nullptr)
-    {
-        status.Bad(StatusType::allocation_failed);
-        return false;
-    }
-
-    return true;
-}
-
-template<typename TChar>
-bool CString<TChar>::_Reallocation(CharType * & cstr, SizeType& size, 
-    SizeType & capacity, const SizeType& need_capacity, 
-    const SizeType & minimum_capacity, 
-    const SizeType & maximum_capacity, StatusType& status)
-{
-    
-    StatusType new_status;
-    SizeType target_capacity = _Predict(capacity, need_capacity, 
-        minimum_capacity, maximum_capacity, new_status);
-
-    if (new_status.IsBad()) 
-    {
-        if (new_status.BadCode() == StatusType::overflow_capacity)
-            status.Bad(StatusType::reallocation_overflow_capacity);
-        else 
-            status.Bad(StatusType::predict_reallocation_failed);
-        return false;
-    }
-
-    if (capacity == target_capacity) return true;
-
-    CharType * new_alloc = nullptr;
-    SizeType new_alloc_capacity = 0;
-
-    if (!_Allocation(new_alloc, new_alloc_capacity, 
-        target_capacity, new_status)) 
-    {
-        status.Bad(StatusType::reallocation_failed);
-        return false;
-    }
-
-    if (cstr != nullptr)
-    {
-        if (size == 0)
-        {
-            std::memset(new_alloc, 0, new_alloc_capacity * sizeof(CharType));
-        }
-        else if (new_alloc_capacity > size)
-        {
-            const SizeType num = size * sizeof(CharType);
-            const SizeType num_diff = (new_alloc_capacity - size) *
-                sizeof(CharType);
-            std::memcpy(new_alloc, cstr, num);
-            std::memset(new_alloc + num, 0, num_diff);
-        }
-        else if (new_alloc_capacity == size)
-        {
-            std::memcpy(new_alloc, cstr, size * sizeof(CharType));
-            std::memset(new_alloc + (new_alloc_capacity - 1), 
-                static_cast<CharType>(0), sizeof(CharType));
-        }
-        else
-        {
-            delete[] new_alloc;
-            status.Bad(StatusType::copy_reallocation_failed);
-            return false;
-        }
-        delete[] cstr;
-    }
-    else
-    {
-        std::memset(cstr, 0, new_alloc_capacity * sizeof(CharType));
-    }
-
-    cstr = new_alloc;
-    new_alloc = nullptr;
-    capacity = new_alloc_capacity;
-    new_alloc_capacity = 0;
-
-    return true;
-}
-
-template<typename TChar>
-bool CString<TChar>::_Initialize(CharType * &cstr, SizeType& size, 
-    SizeType & capacity, SizeType & minimum_capacity, 
-    SizeType & maximum_capacity, StatusType& status,
-    const SizeType& target_capacity)
-{
-    if (!status.IsRequire()) return true;
-    if (status.IsRequireInitialize())
-    {
-        minimum_capacity = _Predict(minimum_capacity, status);
-        if (status.IsBad()) return false;
-        maximum_capacity = _Predict(maximum_capacity, status);
-        if (status.IsBad()) return false;
-        
-        status.Unrequire(StatusType::require_initialize);
-        status.Require(StatusType::require_allocation);
-    }
-    if (status.IsRequireAllocation())
-    {
-        SizeType _target_capacity = target_capacity;
-        if (_target_capacity == static_cast<SizeType>(0))
-            _target_capacity = minimum_capacity;
-        if (!_Allocation(cstr, capacity, _target_capacity, status)) 
-        {
-            _Reset(cstr, size, capacity);
-            return false;
-        }
-        std::memset(cstr, 0, capacity * sizeof(CharType));
-        status.Unrequire(StatusType::require_allocation);
-    }
-    else if (status.IsRequireReallocation())
-    {
-        if (!_Reallocation(cstr, size, capacity, target_capacity, 
-            minimum_capacity, maximum_capacity, status))
-        {
-            return false;
-        }
-        status.Unrequire(StatusType::require_reallocation);
-    }
-    return true;
-}
-
-template<typename TChar>
-void CString<TChar>::_Reset(CharType * &cstr, SizeType& size, 
-    SizeType & capacity)
-{
-    if (cstr) delete[] cstr;
-    cstr = nullptr;
-    capacity = 0;
-    size = 0;
-}
-
-template<typename TChar>
 CString<TChar>::CString() :
-    m_status(),
-    m_cstr(nullptr),
-    m_size(0),
-    m_capacity(0),
-    m_minimum_capacity(default_minimum_capacity), 
-    m_maximum_capacity(default_maximum_capacity)
-{
-    m_status.Require(StatusType::require_allocation);
-    _Initialize(m_cstr, m_size, m_capacity, 
-        m_minimum_capacity, m_maximum_capacity, m_status);
-}
+    BaseType()
+{}
 
 template<typename TChar>
 CString<TChar>::CString(const SizeType & minimum_capacity)  :
-    m_status(),
-    m_cstr(nullptr),
-    m_size(0),
-    m_capacity(0),
-    m_minimum_capacity(minimum_capacity), 
-    m_maximum_capacity(default_maximum_capacity)
-{
-    m_status.Require(StatusType::require_initialize |
-        StatusType::require_allocation);
-    _Initialize(m_cstr, m_size, m_capacity, 
-        m_minimum_capacity, m_maximum_capacity, m_status);
-}
+    BaseType(minimum_capacity)
+{}
 
 template<typename TChar>
 CString<TChar>::CString(const SizeType & minimum_capacity, 
     const SizeType & maximum_capacity) :
-        m_status(),
-        m_cstr(nullptr),
-        m_size(0),
-        m_capacity(0),
-        m_minimum_capacity(minimum_capacity), 
-        m_maximum_capacity(maximum_capacity)
-{
-    m_status.Require(StatusType::require_initialize |
-        StatusType::require_allocation);
-    _Initialize(m_cstr, m_size, m_capacity, 
-        m_minimum_capacity, m_maximum_capacity, m_status);
-}
+        BaseType(minimum_capacity, maximum_capacity)
+{}
 
 template<typename TChar>
 CString<TChar>::~CString()
-{
-    _Reset(m_cstr, m_size, m_capacity);
-    m_status.Reset();
-    m_minimum_capacity = 0;
-    m_maximum_capacity = 0;
-}
+{}
 
 template<typename TChar>
 CString<TChar>::CString(const CString<TChar>& cpy) :
-    test::out::Interface<TChar>(),
-    m_status(),
-    m_cstr(nullptr),
-    m_size(0),
-    m_capacity(0),
-    m_minimum_capacity(cpy.m_minimum_capacity), 
-    m_maximum_capacity(cpy.m_maximum_capacity)
-{  
-    m_status.Require(StatusType::require_allocation);
-    if (_Initialize(m_cstr, m_size, m_capacity, 
-        m_minimum_capacity, m_maximum_capacity,
-        m_status, cpy.m_capacity))
-    {
-        std::memcpy(m_cstr, cpy.m_cstr, cpy.m_size * sizeof(CharType));
-        std::memset(m_cstr + (cpy.m_size), static_cast<CharType>(0), 
-            sizeof(CharType));
-        m_size = cpy.m_size;
-    }
-}
+    BaseType(cpy),
+    test::out::Interface<TChar>()
+{}
 
 template<typename TChar>
 CString<TChar>::CString(CString<TChar>&& mov) :
-    test::out::Interface<TChar>(),
-    m_status(std::move(mov.m_status)),
-    m_cstr(mov.m_cstr),
-    m_size(mov.m_size),
-    m_capacity(mov.m_capacity),
-    m_minimum_capacity(mov.m_minimum_capacity), 
-    m_maximum_capacity(mov.m_maximum_capacity)
-{
-    mov.m_cstr = nullptr;
-    mov.m_status.Require(StatusType::require_allocation);
-    mov.m_size = 0;
-    mov.m_capacity = 0;
-    mov.m_minimum_capacity = default_minimum_capacity;
-    mov.m_maximum_capacity = default_maximum_capacity; 
-}
+    BaseType(std::move(mov)),
+    test::out::Interface<TChar>()
+{}
 
 template<typename TChar>
 CString<TChar>& CString<TChar>::operator=(const CString<TChar>& cpy)
 {
-    m_status.Reset();
-    m_status.Require(StatusType::require_reallocation);
-    m_minimum_capacity = cpy.m_minimum_capacity; 
-    m_maximum_capacity = cpy.m_maximum_capacity;
-    if (_Initialize(m_cstr, m_size, m_capacity, 
-        m_minimum_capacity, m_maximum_capacity, m_status, cpy.m_capacity))
-    {
-        std::memcpy(m_cstr, cpy.m_cstr, cpy.m_size * sizeof(CharType));
-        std::memset(m_cstr + (cpy.m_size), static_cast<CharType>(0), 
-            sizeof(CharType));
-        m_size = cpy.m_size;
-    }
+    BaseType::operator=(cpy);
     return *this;
 }
 
 template<typename TChar>
 CString<TChar>& CString<TChar>::operator=(CString<TChar>&& mov)
 {   
-    m_cstr = mov.m_cstr;
-    m_status = std::move(mov.m_status);
-    m_size = mov.m_size;
-    m_capacity = mov.m_capacity;
-    m_minimum_capacity = mov.m_minimum_capacity;
-    m_maximum_capacity = mov.m_maximum_capacity;
-
-    mov.m_cstr = nullptr;
-    mov.m_status.Require(StatusType::require_allocation);
-    mov.m_size = 0;
-    mov.m_capacity = 0;
-    mov.m_minimum_capacity = default_minimum_capacity;
-    mov.m_maximum_capacity = default_maximum_capacity; 
+    BaseType::operator=(std::move(mov));
     return *this;
 }
 
 template<typename TChar>
-typename CString<TChar>::SizeType 
-CString<TChar>::Size() const
+typename CString<TChar>::SizeType  
+CString<TChar>::Puts(const TChar * cstr, const SizeType& size)
 {
-    return m_size;
+    if (IsBad()) return 0;
+    if (cstr == nullptr || size == static_cast<SizeType>(0)) return 0;
+    return _Set(Size(), cstr, size);
 }
 
 template<typename TChar>
-typename CString<TChar>::SizeType 
-CString<TChar>::Capacity() const
+typename CString<TChar>::SizeType  
+CString<TChar>::Puts(const TChar * cstr)
 {
-    return m_capacity;
+    if (IsBad()) return 0;
+    if (cstr == nullptr) return 0;
+    const SizeType size = test::cstr::Length<TChar>::Value(cstr, 
+        MaximumCapacity() - 1);
+    if (size == 0) return 0;
+    return _Set(Size(), cstr, size);
 }
 
 template<typename TChar>
-typename CString<TChar>::SizeType 
-CString<TChar>::MinimumCapacity() const
+template<std::size_t S>
+typename CString<TChar>::SizeType  
+CString<TChar>::Puts(const TChar(&cstr)[S])
 {
-    return m_minimum_capacity;
+    if (IsBad()) return 0;
+    return _Set(Size(), cstr, S);
 }
 
 template<typename TChar>
-typename CString<TChar>::SizeType 
-CString<TChar>::MaximumCapacity() const
+typename CString<TChar>::SizeType  
+CString<TChar>::Puts(const test::CString<TChar>& cstr)
 {
-    return m_maximum_capacity;
+    if (IsBad()) return 0;
+    return _Set(Size(), *cstr, cstr.Size());
 }
 
 template<typename TChar>
-typename CString<TChar>::SizeType 
-CString<TChar>::_Set(const SizeType& index, const TChar * cstr, 
-    const SizeType& size)
+typename CString<TChar>::SizeType  
+CString<TChar>::Puts(const test::CString<const TChar>& cstr)
 {
-    const SizeType req_size = index + size;
-    SizeType target_capacity = req_size + 1;
-    if ((req_size - index) != size || req_size > m_maximum_capacity)
-    {
-        m_status.Bad(StatusType::overflow_capacity);
-        return 0;
-    }
-    if (req_size >= m_capacity)
-    {
-        if (!(m_status.IsRequireInitialize() ||
-            m_status.IsRequireAllocation()))
-        {
-            m_status.Require(StatusType::require_reallocation);
-        }
-        else
-        {
-            target_capacity = _Predict(target_capacity, m_status);
-            if (m_status.IsBad())
-                return 0;
-        }
-    }
-    if (_Initialize(m_cstr, m_size, m_capacity, 
-        m_minimum_capacity, m_maximum_capacity, m_status, target_capacity))
-    {
-        std::memcpy(m_cstr + index, cstr, size * sizeof(CharType));
-        std::memset(m_cstr + (m_capacity - 1), 
-            static_cast<CharType>(0), sizeof(CharType));
-        m_size = req_size;
-        return size;
-    }
-    return 0;
+    if (IsBad()) return 0;
+    return _Set(Size(), *cstr, cstr.Size());
 }
 
 template<typename TChar>
-typename CString<TChar>::SizeType 
-CString<TChar>::_Set(const SizeType& index, const char * format, 
+typename CString<TChar>::SizeType  
+CString<TChar>::Puts(const CString<TChar>& cstr)
+{
+    if (IsBad()) return 0;
+    return _Set(Size(), cstr.GetCStr(), cstr.Size());
+}
+
+template<typename TChar>
+bool CString<TChar>::IsGood() const
+{
+    return BaseType::IsGood();
+}
+
+template<typename TChar>
+bool CString<TChar>::IsBad() const
+{
+    return BaseType::IsBad();
+}
+
+CString<char>::CString()  :
+    BaseType()
+{}
+
+CString<char>::CString(const SizeType & minimum_capacity)  :
+    BaseType(minimum_capacity)
+{}
+
+CString<char>::CString(const SizeType & minimum_capacity, 
+    const SizeType & maximum_capacity) :
+        BaseType(minimum_capacity, maximum_capacity)
+{}
+
+CString<char>::~CString()
+{}
+
+CString<char>::CString(const CString<char>& cpy) :
+    BaseType(cpy),
+    test::out::Interface<char>()
+{}
+
+CString<char>::CString(CString<char>&& mov) :
+    BaseType(std::move(mov)),
+    test::out::Interface<char>()
+{}
+
+CString<char>& CString<char>::operator=(const CString<char>& cpy)
+{
+    BaseType::operator=(cpy);
+    return *this;
+}
+
+CString<char>& CString<char>::operator=(CString<char>&& mov)
+{   
+    BaseType::operator=(std::move(mov));
+    return *this;
+}
+
+typename CString<char>::SizeType 
+CString<char>::_Set(const SizeType& index, const char * format, 
     va_list var_args)
 {
-    TChar * buffer = new TChar[m_minimum_capacity];
+    char * buffer = new char[MinimumCapacity()];
     
-    int print_size = vsnprintf(buffer, m_minimum_capacity, format, var_args);
+    int print_size = test::out::VSPrint<char>(buffer, MinimumCapacity(),
+        format, var_args);
     
     if (print_size < 0) 
     {
-        m_status.Bad(StatusType::print_buffer_failed);
+        Bad(StatusType::print_buffer_failed);
         return 0;
     }
 
-    if ((SizeType)print_size >= m_minimum_capacity)
+    if ((SizeType)print_size >= MinimumCapacity())
     {
         delete[] buffer;
-        buffer = new TChar[print_size + 1];
-        auto print_res = vsnprintf(buffer, print_size + 1, 
+        buffer = new char[print_size + 1];
+        auto print_res = test::out::VSPrint<char>(buffer, print_size + 1, 
             format, var_args);
         if (print_res < 0) 
         {
-            m_status.Bad(StatusType::print_buffer_failed);
+            Bad(StatusType::print_buffer_failed);
             return 0;
         }
     }
@@ -556,113 +379,228 @@ CString<TChar>::_Set(const SizeType& index, const char * format,
     return res;
 }
 
-template<typename TChar>
-typename CString<TChar>::SizeType 
-CString<TChar>::VPrint(const char * format, va_list var_args)
+typename CString<char>::SizeType 
+CString<char>::VPrint(const char * format, va_list var_args)
 {
-    if (m_status.IsBad()) return 0;
-    return _Set(m_size, format, var_args);
+    if (IsBad()) return 0;
+    return _Set(Size(), format, var_args);
 }
 
-template<typename TChar>
-typename CString<TChar>::SizeType 
-CString<TChar>::Print(const char * format, ...)
+typename CString<char>::SizeType 
+CString<char>::Print(const char * format, ...)
 {
-    if (m_status.IsBad()) return 0;
+    if (IsBad()) return 0;
     va_list args;
     va_start(args, format);
-    const auto res = _Set(m_size, format, args);
+    const auto res = _Set(Size(), format, args);
     va_end(args);
     return res;
 }
 
-template<typename TChar>
-typename CString<TChar>::SizeType  
-CString<TChar>::Puts(const TChar * cstr, const SizeType& size)
+typename CString<char>::SizeType  
+CString<char>::Puts(const char * cstr, const SizeType& size)
 {
-    if (m_status.IsBad()) return 0;
+    if (IsBad()) return 0;
     if (cstr == nullptr || size == static_cast<SizeType>(0)) return 0;
-    return _Set(m_size, cstr, size);
+    return _Set(Size(), cstr, size);
 }
 
-template<typename TChar>
-typename CString<TChar>::SizeType  
-CString<TChar>::Puts(const TChar * cstr)
+typename CString<char>::SizeType  
+CString<char>::Puts(const char * cstr)
 {
-    if (m_status.IsBad()) return 0;
+    if (IsBad()) return 0;
     if (cstr == nullptr) return 0;
-    const SizeType size = test::cstr::Length<TChar>::Value(cstr, 
-        m_maximum_capacity - 1);
+    const SizeType size = test::cstr::Length<char>::Value(cstr, 
+        MaximumCapacity() - 1);
     if (size == 0) return 0;
-    return _Set(m_size, cstr, size);
+    return _Set(Size(), cstr, size);
 }
 
-template<typename TChar>
 template<std::size_t S>
-typename CString<TChar>::SizeType  
-CString<TChar>::Puts(const TChar(&cstr)[S])
+typename CString<char>::SizeType  
+CString<char>::Puts(const char(&cstr)[S])
 {
-    if (m_status.IsBad()) return 0;
-    return _Set(m_size, cstr, S);
+    if (IsBad()) return 0;
+    return _Set(Size(), cstr, S);
 }
 
-template<typename TChar>
-typename CString<TChar>::SizeType  
-CString<TChar>::Puts(const test::CString<TChar>& cstr)
+typename CString<char>::SizeType  
+CString<char>::Puts(const test::CString<char>& cstr)
 {
-    if (m_status.IsBad()) return 0;
-    return _Set(m_size, *cstr, cstr.Size());
+    if (IsBad()) return 0;
+    return _Set(Size(), *cstr, cstr.Size());
 }
 
-template<typename TChar>
-typename CString<TChar>::SizeType  
-CString<TChar>::Puts(const test::CString<const TChar>& cstr)
+typename CString<char>::SizeType  
+CString<char>::Puts(const test::CString<const char>& cstr)
 {
-    if (m_status.IsBad()) return 0;
-    return _Set(m_size, *cstr, cstr.Size());
+    if (IsBad()) return 0;
+    return _Set(Size(), *cstr, cstr.Size());
 }
 
-template<typename TChar>
-typename CString<TChar>::SizeType  
-CString<TChar>::Puts(const CString<TChar>& cstr)
+typename CString<char>::SizeType  
+CString<char>::Puts(const CString<char>& cstr)
 {
-    if (m_status.IsBad()) return 0;
-    return _Set(m_size, cstr.m_cstr, cstr.m_size);
+    if (IsBad()) return 0;
+    return _Set(Size(), cstr.GetCStr(), cstr.Size());
 }
 
-template<typename TChar>
-test::CString<TChar> CString<TChar>::Get() const
+bool CString<char>::IsGood() const
 {
-    if (m_status.IsRequire() || m_status.IsBad()) return {""};
-    return {m_cstr, m_size};
-} 
-
-template<typename TChar>
-bool CString<TChar>::IsGood() const
-{
-    return m_status.IsGood() || 
-        (!m_status.IsBad() && m_status.IsRequire());
+    return BaseType::IsGood();
 }
 
-template<typename TChar>
-bool CString<TChar>::IsBad() const
+bool CString<char>::IsBad() const
 {
-    return m_status.IsBad();
+    return BaseType::IsBad();
 }
 
-template<typename TChar>
-typename CString<TChar>::StatusType::ValueType 
-CString<TChar>::GetBadCode() const
+CString<wchar_t>::CString() :
+    BaseType()
+{}
+
+CString<wchar_t>::CString(const SizeType & minimum_capacity)  :
+    BaseType(minimum_capacity)
+{}
+
+CString<wchar_t>::CString(const SizeType & minimum_capacity, 
+    const SizeType & maximum_capacity) :
+        BaseType(minimum_capacity, maximum_capacity)
+{}
+
+CString<wchar_t>::~CString()
+{}
+
+CString<wchar_t>::CString(const CString<wchar_t>& cpy) :
+    BaseType(cpy),
+    test::out::Interface<wchar_t>()
+{}
+
+CString<wchar_t>::CString(CString<wchar_t>&& mov) :
+    BaseType(std::move(mov)),
+    test::out::Interface<wchar_t>()
+{}
+
+CString<wchar_t>& CString<wchar_t>::operator=(const CString<wchar_t>& cpy)
 {
-    return m_status.BadCode();
+    BaseType::operator=(cpy);
+    return *this;
 }
 
-template<typename TChar>
-bool CString<TChar>::Output(test::out::Interface<TChar>& out) const
+CString<wchar_t>& CString<wchar_t>::operator=(CString<wchar_t>&& mov)
+{   
+    BaseType::operator=(std::move(mov));
+    return *this;
+}
+
+typename CString<wchar_t>::SizeType 
+CString<wchar_t>::_Set(const SizeType& index, const wchar_t * format, 
+    va_list var_args)
 {
-    if (m_status.IsBad()) return false;
-    const auto size = out.Puts(m_cstr, m_size);
-    return size == m_size;
+    wchar_t * buffer = new wchar_t[MinimumCapacity()];
+    
+    int print_size = test::out::VSPrint<wchar_t>(buffer, MinimumCapacity(),
+        format, var_args);
+    
+    if (print_size < 0) 
+    {
+        Bad(StatusType::print_buffer_failed);
+        return 0;
+    }
+
+    if ((SizeType)print_size >= MinimumCapacity())
+    {
+        delete[] buffer;
+        buffer = new wchar_t[print_size + 1];
+        auto print_res = test::out::VSPrint<wchar_t>(buffer, print_size + 1, 
+            format, var_args);
+        if (print_res < 0) 
+        {
+            Bad(StatusType::print_buffer_failed);
+            return 0;
+        }
+    }
+
+    const auto res = _Set(index, buffer, print_size);
+
+    delete[] buffer;
+    return res;
+}
+
+typename CString<wchar_t>::SizeType 
+CString<wchar_t>::VPrint(const wchar_t * format, va_list var_args)
+{
+    if (IsBad()) return 0;
+    return _Set(Size(), format, var_args);
+}
+
+typename CString<wchar_t>::SizeType 
+CString<wchar_t>::Print(const wchar_t * format, ...)
+{
+    if (IsBad()) return 0;
+    va_list args;
+    va_start(args, format);
+    const auto res = _Set(Size(), format, args);
+    va_end(args);
+    return res;
+}
+
+typename CString<wchar_t>::SizeType  
+CString<wchar_t>::Puts(const wchar_t * cstr, const SizeType& size)
+{
+    if (IsBad()) return 0;
+    if (cstr == nullptr || size == static_cast<SizeType>(0)) return 0;
+    return _Set(Size(), cstr, size);
+}
+
+typename CString<wchar_t>::SizeType  
+CString<wchar_t>::Puts(const wchar_t * cstr)
+{
+    if (IsBad()) return 0;
+    if (cstr == nullptr) return 0;
+    const SizeType size = test::cstr::Length<wchar_t>::Value(cstr, 
+        MaximumCapacity() - 1);
+    if (size == 0) return 0;
+    return _Set(Size(), cstr, size);
+}
+
+template<std::size_t S>
+typename CString<wchar_t>::SizeType  
+CString<wchar_t>::Puts(const wchar_t(&cstr)[S])
+{
+    if (IsBad()) return 0;
+    return _Set(Size(), cstr, S);
+}
+
+typename CString<wchar_t>::SizeType  
+CString<wchar_t>::Puts(const test::CString<wchar_t>& cstr)
+{
+    if (IsBad()) return 0;
+    return _Set(Size(), *cstr, cstr.Size());
+}
+
+typename CString<wchar_t>::SizeType  
+CString<wchar_t>::Puts(const test::CString<const wchar_t>& cstr)
+{
+    if (IsBad()) return 0;
+    return _Set(Size(), *cstr, cstr.Size());
+}
+
+typename CString<wchar_t>::SizeType  
+CString<wchar_t>::Puts(const CString<wchar_t>& cstr)
+{
+    if (IsBad()) return 0;
+    return _Set(Size(), cstr.GetCStr(), cstr.Size());
+}
+
+bool CString<wchar_t>::IsGood() const
+{
+    return BaseType::IsGood();
+}
+
+bool CString<wchar_t>::IsBad() const
+{
+    return BaseType::IsBad();
 }
 
 } //!out
