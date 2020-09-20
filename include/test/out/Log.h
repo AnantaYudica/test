@@ -4,8 +4,10 @@
 #include "Interface.h"
 #include "CString.h"
 #include "../CString.h"
+#include "log/Base.h"
 #include "log/Status.h"
 #include "log/Tag.h"
+#include "log/Time.h"
 
 #include <cstdint>
 #include <chrono>
@@ -27,72 +29,37 @@ namespace out
 {
 
 template<typename TChar>
-class Log : public test::out::Interface<TChar>
+class Log : 
+    private test::out::log::Base<TChar>,
+    public test::out::Interface<TChar>
 {
-public:
-    typedef bool (OnBeginFunctionType)(test::out::Interface<TChar>&,
-        std::chrono::time_point<std::chrono::system_clock>, test::CString<TChar>);
-    typedef bool (OnEndFunctionType)(test::out::Interface<TChar>&,
-        std::chrono::time_point<std::chrono::system_clock>, test::CString<TChar>);
-    typedef void (DeleterFunctionType)(test::out::Interface<TChar> *);
-    typedef typename test::out::Interface<TChar>::SizeType SizeType;
-    typedef test::out::log::Status<std::uint8_t> StatusType;
-    typedef test::out::log::Tag TagType;
-public:
-    static bool DefaultOnBegin(test::out::Interface<TChar>& out, 
-        std::chrono::time_point<std::chrono::system_clock> timestamp, 
-        test::CString<TChar> tag);
-    static bool DefaultOnEnd(test::out::Interface<TChar>& out,
-        std::chrono::time_point<std::chrono::system_clock> timestamp,
-        test::CString<TChar> tag);
-    static void DefaultDeleter(test::out::Interface<TChar> * out);
-    static void Deleter(test::out::Interface<TChar> * out);
 private:
-    StatusType m_status;
-    test::out::Interface<TChar> * m_out;
-    OnBeginFunctionType * m_on_begin;
-    OnEndFunctionType * m_on_end;
-    DeleterFunctionType * m_deleter;
-    std::chrono::time_point<std::chrono::system_clock> m_timestamp;
-    test::CString<TChar> m_tag;
-    test::out::CString<TChar> m_message;
+    typedef test::out::log::Base<TChar> BaseType;
+public:
+    typedef typename BaseType::OnBeginFunctionType OnBeginFunctionType;
+    typedef typename BaseType::OnEndFunctionType OnEndFunctionType;
+    typedef typename BaseType::DeleterFunctionType DeleterFunctionType;
+    typedef typename BaseType::SizeType SizeType;
+    typedef typename BaseType::StatusType StatusType;
+    typedef typename BaseType::TagType TagType;
+public:
+    using BaseType::DefaultDeleter;
+    using BaseType::Deleter;
 public:
     Log();
-    template<std::size_t S>
-    Log(const TChar(&tag)[S],
-        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
-        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
-    Log(const test::CString<TChar>& tag, 
-        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin,
-        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
-    Log(const TagType& tag, 
-        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin,
-        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
+    template<typename TTag>
+    Log(TTag&& tag, OnBeginFunctionType * on_begin = nullptr,
+        OnEndFunctionType * on_end = nullptr);
 
-    template<std::size_t S>
-    Log(test::out::Interface<TChar> * out, const TChar(&tag)[S], 
-        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
-        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
-    Log(test::out::Interface<TChar> * out, const test::CString<TChar>& tag, 
-        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
-        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
-    Log(test::out::Interface<TChar> * out, const TagType& tag, 
-        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
-        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
+    template<typename TTag>
+    Log(test::out::Interface<TChar> * out, TTag&& tag, 
+        OnBeginFunctionType * on_begin = nullptr, 
+        OnEndFunctionType * on_end = nullptr);
 
-    template<std::size_t S>
+    template<typename TTag>
     Log(test::out::Interface<TChar> * out, DeleterFunctionType * deleter,
-        const TChar(&tag)[S], 
-        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
-        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
-    Log(test::out::Interface<TChar> * out, DeleterFunctionType * deleter,
-        const test::CString<TChar>& tag, 
-        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
-        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
-    Log(test::out::Interface<TChar> * out, DeleterFunctionType * deleter,
-        const TagType& tag, 
-        OnBeginFunctionType * on_begin = &Log<TChar>::DefaultOnBegin, 
-        OnEndFunctionType * on_end = &Log<TChar>::DefaultOnEnd);
+        TTag&& tag, OnBeginFunctionType * on_begin = nullptr,
+        OnEndFunctionType * on_end = nullptr);
 
 public:
     virtual ~Log();
@@ -102,27 +69,29 @@ public:
 public:
     Log<TChar>& operator=(const Log<TChar>&) = delete;
     Log<TChar>& operator=(Log<TChar>&&) = delete;
+public:
+    using BaseType::GetTag;
+    using BaseType::GetTimestamp;
+    using BaseType::GetMessage;
 private:
-    bool _Output(test::out::Interface<TChar>& out, StatusType& status);
+    using BaseType::_GetMessage;
 public:
-    test::CString<TChar> GetTag() const;
-    std::chrono::time_point<std::chrono::system_clock> GetTimestamp() const;
-    test::CString<TChar> GetMessage() const;
+    using BaseType::GetOnBegin;
+    using BaseType::GetOnEnd;
 public:
-    OnBeginFunctionType * GetOnBegin() const;
-    OnEndFunctionType * GetOnEnd() const;
+    using BaseType::IsEnd;
 public:
-    bool IsEnd() const;
     bool IsGood() const override;
     bool IsBad() const override;
-    typename StatusType::IntegerValueType GetBadCode() const;
 public:
-    bool Output(test::out::Interface<TChar>& out);
+    using BaseType::GetBadCode;
 public:
-    bool End();
+    using BaseType::Output;
+public:
+    using BaseType::End;
 protected:
-    virtual bool OnBegin(test::out::Interface<TChar>& out);
-    virtual bool OnEnd(test::out::Interface<TChar>& out);
+    virtual bool OnBegin(test::out::Interface<TChar>& out) override;
+    virtual bool OnEnd(test::out::Interface<TChar>& out) override;
 public:
     virtual SizeType VPrint(const char * format, va_list var_args) override
         TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
@@ -135,381 +104,251 @@ public:
     virtual SizeType Puts(const test::CString<const TChar>& cstr) override;
 };
 
-template<typename TChar>
-bool Log<TChar>::DefaultOnBegin(test::out::Interface<TChar>& out, 
-    std::chrono::time_point<std::chrono::system_clock> timestamp, 
-    test::CString<TChar> tag)
+template<>
+class Log<char> : 
+    private test::out::log::Base<char>,
+    public test::out::Interface<char>
 {
-    using namespace std::chrono;
-    auto time = system_clock::to_time_t(timestamp);
-    struct tm * timeinfo;
-    timeinfo = std::localtime (&time);
-    TChar * tmp = new TChar[64];
-    const auto size = strftime(tmp, 64, "%F %X", timeinfo);
-    if (size >= 64)
-    {
-        delete[] tmp;
-        tmp = new TChar[size + 1];
-        strftime(tmp, size + 1, "%F %X", timeinfo);
-    }
-    auto out_size = out.Puts(tmp, size);
-    delete[] tmp;
-    if (out_size == 0) return false;
-    auto tp_msec = time_point_cast<milliseconds>(timestamp);
-    auto d_msec = duration_cast<milliseconds>(tp_msec.time_since_epoch());
-    auto tp_sec = time_point_cast<seconds>(timestamp);
-    auto d_sec = duration_cast<seconds>(tp_sec.time_since_epoch());
-    std::chrono::milliseconds::rep msec = d_msec.count() - 
-        std::chrono::milliseconds::rep(d_sec.count() * 1000);
-    out_size = out.Print(".%03u [%s] : ", 
-        static_cast<unsigned int>(msec), *tag);
-    return out_size != 0;
-}
+private:
+    typedef test::out::log::Base<char> BaseType;
+public:
+    typedef typename BaseType::OnBeginFunctionType OnBeginFunctionType;
+    typedef typename BaseType::OnEndFunctionType OnEndFunctionType;
+    typedef typename BaseType::DeleterFunctionType DeleterFunctionType;
+    typedef typename BaseType::SizeType SizeType;
+    typedef typename BaseType::StatusType StatusType;
+    typedef typename BaseType::TagType TagType;
+public:
+    static bool DefaultOnBegin(test::out::Interface<char>& out, 
+        std::chrono::time_point<std::chrono::system_clock> timestamp, 
+        test::CString<char> tag);
+    static bool DefaultOnEnd(test::out::Interface<char>& out,
+        std::chrono::time_point<std::chrono::system_clock> timestamp,
+        test::CString<char> tag);
+public:
+    using BaseType::DefaultDeleter;
+    using BaseType::Deleter;
+public:
+    Log();
+    template<typename TTag>
+    Log(TTag&& tag, 
+        OnBeginFunctionType * on_begin = &Log<char>::DefaultOnBegin, 
+        OnEndFunctionType * on_end = &Log<char>::DefaultOnEnd);
 
-template<typename TChar>
-bool Log<TChar>::DefaultOnEnd(test::out::Interface<TChar>& out, 
-    std::chrono::time_point<std::chrono::system_clock>,
-    test::CString<TChar>)
+    template<typename TTag>
+    Log(test::out::Interface<char> * out, TTag&& tag, 
+        OnBeginFunctionType * on_begin = &Log<char>::DefaultOnBegin, 
+        OnEndFunctionType * on_end = &Log<char>::DefaultOnEnd);
+
+    template<typename TTag>
+    Log(test::out::Interface<char> * out, DeleterFunctionType * deleter,
+        TTag&& tag, 
+        OnBeginFunctionType * on_begin = &Log<char>::DefaultOnBegin,
+        OnEndFunctionType * on_end = &Log<char>::DefaultOnEnd);
+
+public:
+    virtual ~Log();
+public:
+    Log(const Log<char>&) = delete;
+    Log(Log<char>&& mov);
+public:
+    Log<char>& operator=(const Log<char>&) = delete;
+    Log<char>& operator=(Log<char>&&) = delete;
+public:
+    using BaseType::GetTag;
+    using BaseType::GetTimestamp;
+    using BaseType::GetMessage;
+private:
+    using BaseType::_GetMessage;
+public:
+    using BaseType::GetOnBegin;
+    using BaseType::GetOnEnd;
+public:
+    using BaseType::IsEnd;
+public:
+    bool IsGood() const override;
+    bool IsBad() const override;
+public:
+    using BaseType::GetBadCode;
+public:
+    using BaseType::Output;
+public:
+    using BaseType::End;
+protected:
+    virtual bool OnBegin(test::out::Interface<char>& out) override;
+    virtual bool OnEnd(test::out::Interface<char>& out) override;
+public:
+    virtual SizeType VPrint(const char * format, va_list var_args) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
+    virtual SizeType Print(const char * format, ...) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
+public:
+    virtual SizeType Puts(const char * cstr, const SizeType& size) override;
+    virtual SizeType Puts(const char * cstr) override;
+    virtual SizeType Puts(const test::CString<char>& cstr) override;
+    virtual SizeType Puts(const test::CString<const char>& cstr) override;
+};
+
+template<>
+class Log<wchar_t> : 
+    private test::out::log::Base<wchar_t>,
+    public test::out::Interface<wchar_t>
 {
-    return out.Puts("\n") != 0;
-}
+private:
+    typedef test::out::log::Base<wchar_t> BaseType;
+public:
+    typedef typename BaseType::OnBeginFunctionType OnBeginFunctionType;
+    typedef typename BaseType::OnEndFunctionType OnEndFunctionType;
+    typedef typename BaseType::DeleterFunctionType DeleterFunctionType;
+    typedef typename BaseType::SizeType SizeType;
+    typedef typename BaseType::StatusType StatusType;
+    typedef typename BaseType::TagType TagType;
+public:
+    static bool DefaultOnBegin(test::out::Interface<wchar_t>& out, 
+        std::chrono::time_point<std::chrono::system_clock> timestamp, 
+        test::CString<wchar_t> tag);
+    static bool DefaultOnEnd(test::out::Interface<wchar_t>& out,
+        std::chrono::time_point<std::chrono::system_clock> timestamp,
+        test::CString<wchar_t> tag);
+public:
+    using BaseType::DefaultDeleter;
+    using BaseType::Deleter;
+public:
+    Log();
+    template<typename TTag>
+    Log(TTag&& tag, 
+        OnBeginFunctionType * on_begin = &Log<wchar_t>::DefaultOnBegin,
+        OnEndFunctionType * on_end = &Log<wchar_t>::DefaultOnEnd);
 
-template<typename TChar>
-void Log<TChar>::DefaultDeleter(test::out::Interface<TChar> *)
-{}
+    template<typename TTag>
+    Log(test::out::Interface<wchar_t> * out, TTag&& tag, 
+        OnBeginFunctionType * on_begin = &Log<wchar_t>::DefaultOnBegin, 
+        OnEndFunctionType * on_end = &Log<wchar_t>::DefaultOnEnd);
 
-template<typename TChar>
-void Log<TChar>::Deleter(test::out::Interface<TChar> * out)
-{
-    delete out;
-}
+    template<typename TTag>
+    Log(test::out::Interface<wchar_t> * out, DeleterFunctionType * deleter,
+        TTag&& tag, 
+        OnBeginFunctionType * on_begin = &Log<wchar_t>::DefaultOnBegin,
+        OnEndFunctionType * on_end = &Log<wchar_t>::DefaultOnEnd);
+
+public:
+    virtual ~Log();
+public:
+    Log(const Log<wchar_t>&) = delete;
+    Log(Log<wchar_t>&& mov);
+public:
+    Log<wchar_t>& operator=(const Log<wchar_t>&) = delete;
+    Log<wchar_t>& operator=(Log<wchar_t>&&) = delete;
+public:
+    using BaseType::GetTag;
+    using BaseType::GetTimestamp;
+    using BaseType::GetMessage;
+private:
+    using BaseType::_GetMessage;
+public:
+    using BaseType::GetOnBegin;
+    using BaseType::GetOnEnd;
+public:
+    using BaseType::IsEnd;
+public:
+    bool IsGood() const override;
+    bool IsBad() const override;
+public:
+    using BaseType::GetBadCode;
+public:
+    using BaseType::Output;
+public:
+    using BaseType::End;
+protected:
+    virtual bool OnBegin(test::out::Interface<wchar_t>& out) override;
+    virtual bool OnEnd(test::out::Interface<wchar_t>& out) override;
+public:
+    virtual SizeType VPrint(const wchar_t * format, va_list var_args) override;
+    virtual SizeType Print(const wchar_t * format, ...) override;
+public:
+    virtual SizeType Puts(const wchar_t * cstr, const SizeType& size) override;
+    virtual SizeType Puts(const wchar_t * cstr) override;
+    virtual SizeType Puts(const test::CString<wchar_t>& cstr) override;
+    virtual SizeType Puts(const test::CString<const wchar_t>& cstr) override;
+};
 
 template<typename TChar>
 Log<TChar>::Log() :
-    m_status(),
-    m_out(nullptr),
-    m_on_begin(&Log<TChar>::DefaultOnBegin),
-    m_on_end(&Log<TChar>::DefaultOnEnd),
-    m_deleter(&Log<TChar>::DefaultDeleter),
-    m_timestamp(std::chrono::system_clock::now()),
-    m_tag("Undefined"),
-    m_message()
+    BaseType()
 {}
 
 template<typename TChar>
-template<std::size_t S>
-Log<TChar>::Log(const TChar(&tag)[S], OnBeginFunctionType * on_begin, 
+template<typename TTag>
+Log<TChar>::Log(TTag&& tag, OnBeginFunctionType * on_begin, 
     OnEndFunctionType * on_end) :
-        m_status(),
-        m_out(nullptr),
-        m_on_begin(on_begin == nullptr ? 
-            &Log<TChar>::DefaultOnBegin : on_begin),
-        m_on_end(on_end == nullptr ?
-            &Log<TChar>::DefaultOnEnd : on_end),
-        m_deleter(&Log<TChar>::DefaultDeleter),
-        m_timestamp(std::chrono::system_clock::now()),
-        m_tag(tag),
-        m_message()
-{}
-    
-template<typename TChar>
-Log<TChar>::Log(const test::CString<TChar>& tag, 
-    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
-        m_status(),
-        m_out(nullptr),
-        m_on_begin(on_begin == nullptr ? 
-            &Log<TChar>::DefaultOnBegin : on_begin),
-        m_on_end(on_end == nullptr ?
-            &Log<TChar>::DefaultOnEnd : on_end),
-        m_deleter(&Log<TChar>::DefaultDeleter),
-        m_timestamp(std::chrono::system_clock::now()),
-        m_tag(tag),
-        m_message()
+        BaseType(std::forward<TTag>(tag), on_begin, on_end)
 {}
 
 template<typename TChar>
-Log<TChar>::Log(const TagType& tag, OnBeginFunctionType * on_begin, 
-    OnEndFunctionType * on_end) :
-        m_status(),
-        m_out(nullptr),
-        m_on_begin(on_begin == nullptr ? 
-            &Log<TChar>::DefaultOnBegin : on_begin),
-        m_on_end(on_end == nullptr ?
-            &Log<TChar>::DefaultOnEnd : on_end),
-        m_deleter(&Log<TChar>::DefaultDeleter),
-        m_timestamp(std::chrono::system_clock::now()),
-        m_tag(tag.GetName(), tag.GetNameSize()),
-        m_message()
-{}
-    
-template<typename TChar>
-template<std::size_t S>
-Log<TChar>::Log(test::out::Interface<TChar> * out, const TChar(&tag)[S],
+template<typename TTag>
+Log<TChar>::Log(test::out::Interface<TChar> * out, TTag&& tag,
     OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
-        m_status(),
-        m_out(out),
-        m_on_begin(on_begin == nullptr ? 
-            &Log<TChar>::DefaultOnBegin : on_begin),
-        m_on_end(on_end == nullptr ?
-            &Log<TChar>::DefaultOnEnd : on_end),
-        m_deleter(&Log<TChar>::DefaultDeleter),
-        m_timestamp(std::chrono::system_clock::now()),
-        m_tag(tag),
-        m_message()
-{}
-    
-template<typename TChar>
-Log<TChar>::Log(test::out::Interface<TChar> * out, 
-    const test::CString<TChar>& tag, OnBeginFunctionType * on_begin, 
-    OnEndFunctionType * on_end) :
-        m_status(),
-        m_out(out),
-        m_on_begin(on_begin == nullptr ? 
-            &Log<TChar>::DefaultOnBegin : on_begin),
-        m_on_end(on_end == nullptr ?
-            &Log<TChar>::DefaultOnEnd : on_end),
-        m_deleter(&Log<TChar>::DefaultDeleter),
-        m_timestamp(std::chrono::system_clock::now()),
-        m_tag(tag),
-        m_message()
+        BaseType(out, std::forward<TTag>(tag), on_begin, on_end)
 {}
 
 template<typename TChar>
-Log<TChar>::Log(test::out::Interface<TChar> * out, const TagType& tag, 
-    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
-        m_status(),
-        m_out(out),
-        m_on_begin(on_begin == nullptr ? 
-            &Log<TChar>::DefaultOnBegin : on_begin),
-        m_on_end(on_end == nullptr ?
-            &Log<TChar>::DefaultOnEnd : on_end),
-        m_deleter(&Log<TChar>::DefaultDeleter),
-        m_timestamp(std::chrono::system_clock::now()),
-        m_tag(tag.GetName(), tag.GetNameSize()),
-        m_message()
-{}
-    
-template<typename TChar>
-template<std::size_t S>
+template<typename TTag>
 Log<TChar>::Log(test::out::Interface<TChar> * out, 
-    DeleterFunctionType * deleter, const TChar(&tag)[S],
+    DeleterFunctionType * deleter, TTag&& tag,
     OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
-        m_status(),
-        m_out(out),
-        m_on_begin(on_begin == nullptr ? 
-            &Log<TChar>::DefaultOnBegin : on_begin),
-        m_on_end(on_end == nullptr ?
-            &Log<TChar>::DefaultOnEnd : on_end),
-        m_deleter(deleter == nullptr ?
-            &Log<TChar>::DefaultDeleter : deleter),
-        m_timestamp(std::chrono::system_clock::now()),
-        m_tag(tag),
-        m_message()
-{}
-    
-template<typename TChar>
-Log<TChar>::Log(test::out::Interface<TChar> * out, 
-    DeleterFunctionType * deleter, const test::CString<TChar>& tag, 
-    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
-        m_status(),
-        m_out(out),
-        m_on_begin(on_begin == nullptr ? 
-            &Log<TChar>::DefaultOnBegin : on_begin),
-        m_on_end(on_end == nullptr ?
-            &Log<TChar>::DefaultOnEnd : on_end),
-        m_deleter(deleter == nullptr ?
-            &Log<TChar>::DefaultDeleter : deleter),
-        m_timestamp(std::chrono::system_clock::now()),
-        m_tag(tag),
-        m_message()
-{}
-
-template<typename TChar>
-Log<TChar>::Log(test::out::Interface<TChar> * out, 
-    DeleterFunctionType * deleter, const TagType& tag, 
-    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
-        m_status(),
-        m_out(out),
-        m_on_begin(on_begin == nullptr ? 
-            &Log<TChar>::DefaultOnBegin : on_begin),
-        m_on_end(on_end == nullptr ?
-            &Log<TChar>::DefaultOnEnd : on_end),
-        m_deleter(deleter == nullptr ?
-            &Log<TChar>::DefaultDeleter : deleter),
-        m_timestamp(std::chrono::system_clock::now()),
-        m_tag(tag.GetName(), tag.GetNameSize()),
-        m_message()
+        BaseType(out, deleter, std::forward<TTag>(tag), on_begin, on_end)
 {}
 
 template<typename TChar>
 Log<TChar>::~Log()
-{
-    End();
-    if (m_out != nullptr)
-    {
-        m_deleter(m_out);
-        m_out = nullptr;
-    }
-}
+{}
 
 template<typename TChar>
 Log<TChar>::Log(Log<TChar>&& mov) :
-    m_status(std::move(mov.m_status)),
-    m_out(mov.m_out),
-    m_on_begin(mov.m_on_begin),
-    m_on_end(mov.m_on_end),
-    m_deleter(mov.m_deleter),
-    m_timestamp(mov.m_timestamp),
-    m_tag(std::move(mov.m_tag)),
-    m_message(std::move(mov.m_message))
-{
-    mov.m_out = nullptr;
-    mov.m_on_begin = &Log<TChar>::DefaultOnBegin;
-    mov.m_on_end = &Log<TChar>::DefaultOnEnd;
-    mov.m_deleter = &Log<TChar>::DefaultDeleter;
-    mov.m_timestamp = std::chrono::system_clock::now();
-    mov.m_tag = "Undefined";
-}
-
-template<typename TChar>
-bool Log<TChar>::_Output(test::out::Interface<TChar>& out, StatusType& status)
-{
-    if (!OnBegin(out))
-    {
-        status.Bad(StatusType::on_begin_failed);
-        return false;
-    }
-    if (!status.Begin())
-    {
-        status.Bad(StatusType::set_begin_failed);
-        return false;
-    }
-    if (!m_message.Output(out))
-    {
-        status.Bad(StatusType::message_failed);
-        return false;
-    }
-    if (!OnEnd(out))
-    {
-        status.Bad(StatusType::on_end_failed);
-        return false;
-    }
-    if (!status.End())
-    {
-        status.Bad(StatusType::set_end_failed);
-        return false;
-    }
-    return true;
-}
-
-template<typename TChar>
-test::CString<TChar> Log<TChar>::GetTag() const
-{
-    return {m_tag};
-}
-
-template<typename TChar>
-std::chrono::time_point<std::chrono::system_clock> 
-Log<TChar>::GetTimestamp() const
-{
-    return m_timestamp;
-}
-
-template<typename TChar>
-test::CString<TChar> Log<TChar>::GetMessage() const
-{
-    return {m_message.Get()};
-}
-
-template<typename TChar>
-typename Log<TChar>::OnBeginFunctionType * 
-Log<TChar>::GetOnBegin() const
-{
-    return m_on_begin;
-}
-
-template<typename TChar>
-typename Log<TChar>::OnEndFunctionType * 
-Log<TChar>::GetOnEnd() const
-{
-    return m_on_end;
-}
-
-template<typename TChar>
-bool Log<TChar>::IsEnd() const
-{
-    return m_status.IsEnd();
-}
+    BaseType(std::move(mov)),
+    test::out::Interface<TChar>()
+{}
 
 template<typename TChar>
 bool Log<TChar>::IsGood() const
 {
-    return m_status.IsGood();
+    return BaseType::IsGood();
 }
 
 template<typename TChar>
 bool Log<TChar>::IsBad() const
 {
-    return m_status.IsBad();
-}
-
-template<typename TChar>
-typename Log<TChar>::StatusType::IntegerValueType 
-Log<TChar>::GetBadCode() const
-{
-    return m_status.GetBadCode();
-}
-
-template<typename TChar>
-bool Log<TChar>::End()
-{
-    if (m_out == nullptr)
-    {
-        m_status.Bad(StatusType::output_undefined);
-        return false;
-    }
-    if (!m_status.IsBad() && !m_status.IsBegin())
-    {
-        return _Output(*m_out, m_status);
-    }
-    return false;
-}
-
-template<typename TChar>
-bool Log<TChar>::Output(test::out::Interface<TChar>& out)
-{
-    StatusType status;
-    return _Output(out, status);
+    return BaseType::IsBad();
 }
 
 template<typename TChar>
 bool Log<TChar>::OnBegin(test::out::Interface<TChar>& out)
 {
-    return m_on_begin(out, m_timestamp, m_tag);
+    return BaseType::OnBegin(out);
 }
 
 template<typename TChar>
 bool Log<TChar>::OnEnd(test::out::Interface<TChar>& out)
 {
-    return m_on_end(out, m_timestamp, m_tag);
+    return BaseType::OnEnd(out);
 }
 
 template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::VPrint(const char * format, va_list var_args)
 {
-    if (m_status.IsBad() || m_status.IsEnd()) return 0;
-    return m_message.VPrint(format, var_args);
+    if (IsBad() || IsEnd()) return 0;
+    return _GetMessage().VPrint(format, var_args);
 }
 
 template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Print(const char * format, ...)
 {
-    if (m_status.IsBad() || m_status.IsEnd()) return 0;
+    if (IsBad() || IsEnd()) return 0;
     va_list args;
     va_start(args, format);
-    const auto ret = m_message.VPrint(format, args);
+    const auto ret = _GetMessage().VPrint(format, args);
     va_end(args);
     return ret;
 }
@@ -518,32 +357,262 @@ template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Puts(const TChar * cstr, const SizeType& size)
 {
-    if (m_status.IsBad() || m_status.IsEnd()) return 0;
-    return m_message.Puts(cstr, size);
+    return BaseType::Puts(cstr, size);
 }
 
 template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Puts(const TChar * cstr)
 {
-    if (m_status.IsBad() || m_status.IsEnd()) return 0;
-    return m_message.Puts(cstr);
+    return BaseType::Puts(cstr);
 }
 
 template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Puts(const test::CString<TChar>& cstr)
 {
-    if (m_status.IsBad() || m_status.IsEnd()) return 0;
-    return m_message.Puts(cstr);
+    return BaseType::Puts(cstr);
 }
 
 template<typename TChar>
 typename Log<TChar>::SizeType 
 Log<TChar>::Puts(const test::CString<const TChar>& cstr)
 {
-    if (m_status.IsBad() || m_status.IsEnd()) return 0;
-    return m_message.Puts(cstr);
+    return BaseType::Puts(cstr);
+}
+
+bool Log<char>::DefaultOnBegin(test::out::Interface<char>& out, 
+    std::chrono::time_point<std::chrono::system_clock> timestamp, 
+    test::CString<char> tag)
+{
+    auto time_cstr = test::out::log::Time::CStr<char>(timestamp);
+    if (time_cstr.Size() == 0) return false;
+    auto out_size = out.Print("%s [%s]", *time_cstr, *tag);
+    return out_size != 0;
+}
+
+bool Log<char>::DefaultOnEnd(test::out::Interface<char>& out,
+    std::chrono::time_point<std::chrono::system_clock>,
+    test::CString<char>)
+{
+    return out.Puts("\n") != 0;
+}
+
+Log<char>::Log() :
+    BaseType(&Log<char>::DefaultOnBegin, &Log<char>::DefaultOnEnd)
+{}
+
+template<typename TTag>
+Log<char>::Log(TTag&& tag, OnBeginFunctionType * on_begin, 
+    OnEndFunctionType * on_end) :
+        BaseType(std::forward<TTag>(tag), 
+            (on_begin == nullptr ? &Log<char>::DefaultOnBegin : on_begin), 
+            (on_end == nullptr ? &Log<char>::DefaultOnEnd : on_end))
+{}
+
+template<typename TTag>
+Log<char>::Log(test::out::Interface<char> * out, TTag&& tag,
+    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
+        BaseType(out, std::forward<TTag>(tag),
+            (on_begin == nullptr ? &Log<char>::DefaultOnBegin : on_begin), 
+            (on_end == nullptr ? &Log<char>::DefaultOnEnd : on_end))
+{}
+
+template<typename TTag>
+Log<char>::Log(test::out::Interface<char> * out, 
+    DeleterFunctionType * deleter, TTag&& tag,
+    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
+        BaseType(out, deleter, std::forward<TTag>(tag), 
+            (on_begin == nullptr ? &Log<char>::DefaultOnBegin : on_begin), 
+            (on_end == nullptr ? &Log<char>::DefaultOnEnd : on_end))
+{}
+
+Log<char>::~Log()
+{}
+
+Log<char>::Log(Log<char>&& mov) :
+    BaseType(std::move(mov), &Log<char>::DefaultOnBegin, 
+        &Log<char>::DefaultOnEnd),
+    test::out::Interface<char>()
+{}
+
+bool Log<char>::IsGood() const
+{
+    return BaseType::IsGood();
+}
+
+bool Log<char>::IsBad() const
+{
+    return BaseType::IsBad();
+}
+
+bool Log<char>::OnBegin(test::out::Interface<char>& out)
+{
+    return BaseType::OnBegin(out);
+}
+
+bool Log<char>::OnEnd(test::out::Interface<char>& out)
+{
+    return BaseType::OnEnd(out);
+}
+
+typename Log<char>::SizeType 
+Log<char>::VPrint(const char * format, va_list var_args)
+{
+    if (IsBad() || IsEnd()) return 0;
+    return _GetMessage().VPrint(format, var_args);
+}
+
+typename Log<char>::SizeType 
+Log<char>::Print(const char * format, ...)
+{
+    if (IsBad() || IsEnd()) return 0;
+    va_list args;
+    va_start(args, format);
+    const auto ret = _GetMessage().VPrint(format, args);
+    va_end(args);
+    return ret;
+}
+
+typename Log<char>::SizeType 
+Log<char>::Puts(const char * cstr, const SizeType& size)
+{
+    return BaseType::Puts(cstr, size);
+}
+
+typename Log<char>::SizeType 
+Log<char>::Puts(const char * cstr)
+{
+    return BaseType::Puts(cstr);
+}
+
+typename Log<char>::SizeType 
+Log<char>::Puts(const test::CString<char>& cstr)
+{
+    return BaseType::Puts(cstr);
+}
+
+typename Log<char>::SizeType 
+Log<char>::Puts(const test::CString<const char>& cstr)
+{
+    return BaseType::Puts(cstr);
+}
+
+bool Log<wchar_t>::DefaultOnBegin(test::out::Interface<wchar_t>& out, 
+    std::chrono::time_point<std::chrono::system_clock> timestamp, 
+    test::CString<wchar_t> tag)
+{
+    auto time_cstr = test::out::log::Time::CStr<char>(timestamp);
+    if (time_cstr.Size() == 0) return false;
+    auto out_size = out.Print(L"%s [%s]", *time_cstr, *tag);
+    return out_size != 0;
+}
+
+bool Log<wchar_t>::DefaultOnEnd(test::out::Interface<wchar_t>& out,
+    std::chrono::time_point<std::chrono::system_clock>,
+    test::CString<wchar_t>)
+{
+    return out.Puts(L"\n") != 0;
+}
+
+Log<wchar_t>::Log() :
+    BaseType(&Log<wchar_t>::DefaultOnBegin, &Log<wchar_t>::DefaultOnEnd)
+{}
+
+template<typename TTag>
+Log<wchar_t>::Log(TTag&& tag, OnBeginFunctionType * on_begin, 
+    OnEndFunctionType * on_end) :
+        BaseType(std::forward<TTag>(tag),
+            (on_begin == nullptr ? &Log<wchar_t>::DefaultOnBegin : on_begin), 
+            (on_end == nullptr ? &Log<wchar_t>::DefaultOnEnd : on_end))
+{}
+
+template<typename TTag>
+Log<wchar_t>::Log(test::out::Interface<wchar_t> * out, TTag&& tag,
+    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
+        BaseType(out, std::forward<TTag>(tag),  
+            (on_begin == nullptr ? &Log<wchar_t>::DefaultOnBegin : on_begin), 
+            (on_end == nullptr ? &Log<wchar_t>::DefaultOnEnd : on_end))
+{}
+
+template<typename TTag>
+Log<wchar_t>::Log(test::out::Interface<wchar_t> * out, 
+    DeleterFunctionType * deleter, TTag&& tag,
+    OnBeginFunctionType * on_begin, OnEndFunctionType * on_end) :
+        BaseType(out, deleter, std::forward<TTag>(tag),  
+            (on_begin == nullptr ? &Log<wchar_t>::DefaultOnBegin : on_begin), 
+            (on_end == nullptr ? &Log<wchar_t>::DefaultOnEnd : on_end))
+{}
+
+Log<wchar_t>::~Log()
+{}
+
+Log<wchar_t>::Log(Log<wchar_t>&& mov) :
+    BaseType(std::move(mov), &Log<wchar_t>::DefaultOnBegin, 
+        &Log<wchar_t>::DefaultOnEnd),
+    test::out::Interface<wchar_t>()
+{}
+
+bool Log<wchar_t>::IsGood() const
+{
+    return BaseType::IsGood();
+}
+
+bool Log<wchar_t>::IsBad() const
+{
+    return BaseType::IsBad();
+}
+
+bool Log<wchar_t>::OnBegin(test::out::Interface<wchar_t>& out)
+{
+    return BaseType::OnBegin(out);
+}
+
+bool Log<wchar_t>::OnEnd(test::out::Interface<wchar_t>& out)
+{
+    return BaseType::OnEnd(out);
+}
+
+typename Log<wchar_t>::SizeType 
+Log<wchar_t>::VPrint(const wchar_t * format, va_list var_args)
+{
+    if (IsBad() || IsEnd()) return 0;
+    return _GetMessage().VPrint(format, var_args);
+}
+
+typename Log<wchar_t>::SizeType 
+Log<wchar_t>::Print(const wchar_t * format, ...)
+{
+    if (IsBad() || IsEnd()) return 0;
+    va_list args;
+    va_start(args, format);
+    const auto ret = _GetMessage().VPrint(format, args);
+    va_end(args);
+    return ret;
+}
+
+typename Log<wchar_t>::SizeType 
+Log<wchar_t>::Puts(const wchar_t * cstr, const SizeType& size)
+{
+    return BaseType::Puts(cstr, size);
+}
+
+typename Log<wchar_t>::SizeType 
+Log<wchar_t>::Puts(const wchar_t * cstr)
+{
+    return BaseType::Puts(cstr);
+}
+
+typename Log<wchar_t>::SizeType 
+Log<wchar_t>::Puts(const test::CString<wchar_t>& cstr)
+{
+    return BaseType::Puts(cstr);
+}
+
+typename Log<wchar_t>::SizeType 
+Log<wchar_t>::Puts(const test::CString<const wchar_t>& cstr)
+{
+    return BaseType::Puts(cstr);
 }
 
 } //!out
