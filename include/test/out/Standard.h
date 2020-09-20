@@ -6,6 +6,7 @@
 #include <cstddef>
 #include <cwchar>
 #include <type_traits>
+#include <ctime>
 
 #ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
@@ -54,7 +55,7 @@ public:
     Standard<char>& operator=(Standard<char>&&) = delete;
 public:
     virtual inline SizeType VPrint(const char * format, va_list var_args)
-        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0))) = 0;
+        TEST_ATTRIBUTE ((__format__ (printf, 2, 0))) = 0;
     virtual inline SizeType Print(const char * format, ...) 
         TEST_ATTRIBUTE((format(printf, 2, 3))) = 0;
 };
@@ -142,6 +143,16 @@ inline int FPuts(const char * str, std::FILE* stream);
 template<typename TChar, typename std::enable_if<
     std::is_same<TChar, wchar_t>::value, int>::type = 1>
 inline int FPuts(const wchar_t * str, std::FILE* stream);
+
+template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, char>::value, int>::type = 1>
+inline int SFTime(char* buff, std::size_t buff_size, const char* fmt, 
+    const struct tm* timeptr) TEST_ATTRIBUTE((format(strftime , 3, 0)));
+
+template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, wchar_t>::value, int>::type = 1>
+inline int SFTime(wchar_t* buff, std::size_t buff_size, const wchar_t* fmt, 
+    const struct tm* timeptr);
 
 template<typename TChar, typename std::enable_if<
     std::is_same<TChar, char>::value, int>::type>
@@ -266,6 +277,22 @@ template<typename TChar, typename std::enable_if<
 inline int FPuts(const wchar_t * str, std::FILE* stream)
 {
     return std::fputws(str, stream);
+}
+
+template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, char>::value, int>::type>
+inline int SFTime(char* buff, std::size_t buff_size, const char* fmt, 
+    const struct tm* timeptr)
+{
+    return (int)strftime(buff, buff_size, fmt, timeptr);
+}
+
+template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, wchar_t>::value, int>::type>
+inline int SFTime(wchar_t* buff, std::size_t buff_size, const wchar_t* fmt, 
+    const struct tm* timeptr)
+{
+    return (int)wcsftime(buff, buff_size, fmt, timeptr);
 }
 
 } //!out
