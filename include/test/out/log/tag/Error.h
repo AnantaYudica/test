@@ -5,6 +5,8 @@
 #include "../Tag.h"
 #include "../make/Tag.h"
 
+#include <cwchar>
+
 namespace test
 {
 namespace out
@@ -14,34 +16,85 @@ namespace log
 namespace tag
 {
 
-class Error : public test::out::log::Tag
+template<typename TChar = char>
+class Error : public test::out::log::Tag<TChar>
 {
 public:
-    typedef typename test::out::log::Tag::SizeType SizeType;
+    typedef typename test::out::log::Tag<TChar>::SizeType SizeType;
     typedef test::out::tag::Error OutTagType;
 private:
-    static inline const char (&_Name())[6];
+    static const char (&_Name())[6];
 public:
     Error() = default;
 public:
     ~Error() = default;
 public:
-    inline const char * GetName() const override;
-    inline SizeType GetNameSize() const override;
+    const char * GetName() const override;
+    SizeType GetNameSize() const override;
 };
 
-inline const char (&Error::_Name())[6]
+template<>
+class Error<char> : public test::out::log::Tag<char>
+{
+public:
+    typedef typename test::out::log::Tag<char>::SizeType SizeType;
+    typedef test::out::tag::Error OutTagType;
+private:
+    static const char (&_Name())[6];
+public:
+    Error() = default;
+public:
+    ~Error() = default;
+public:
+    const char * GetName() const override;
+    SizeType GetNameSize() const override;
+};
+
+template<>
+class Error<wchar_t> : public test::out::log::Tag<wchar_t>
+{
+public:
+    typedef typename test::out::log::Tag<wchar_t>::SizeType SizeType;
+    typedef test::out::tag::Error OutTagType;
+private:
+    static const wchar_t (&_Name())[6];
+public:
+    Error() = default;
+public:
+    ~Error() = default;
+public:
+    const wchar_t * GetName() const override;
+    SizeType GetNameSize() const override;
+};
+
+const char (&Error<char>::_Name())[6]
 {
     static const char name[] = "Error";
     return name;
 }
 
-inline const char * Error::GetName() const
+const char * Error<char>::GetName() const
 {
     return _Name();
 }
 
-inline typename Error::SizeType Error::GetNameSize() const
+typename Error<char>::SizeType Error<char>::GetNameSize() const
+{
+    return sizeof(_Name()) - 1;
+}
+
+const wchar_t (&Error<wchar_t>::_Name())[6]
+{
+    static const wchar_t name[] = L"Error";
+    return name;
+}
+
+const wchar_t * Error<wchar_t>::GetName() const
+{
+    return _Name();
+}
+
+typename Error<wchar_t>::SizeType Error<wchar_t>::GetNameSize() const
 {
     return sizeof(_Name()) - 1;
 }
@@ -51,7 +104,8 @@ inline typename Error::SizeType Error::GetNameSize() const
 namespace make
 {
 
-inline test::out::log::tag::Error Tag(const test::out::tag::Error&)
+template<typename TChar>
+inline test::out::log::tag::Error<TChar> Tag(const test::out::tag::Error&)
 {
     return {};
 }

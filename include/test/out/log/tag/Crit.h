@@ -5,6 +5,8 @@
 #include "../Tag.h"
 #include "../make/Tag.h"
 
+#include <cwchar>
+
 namespace test
 {
 namespace out
@@ -14,34 +16,76 @@ namespace log
 namespace tag
 {
 
-class Crit : public test::out::log::Tag
+template<typename TChar = char>
+class Crit
 {
 public:
-    typedef typename test::out::log::Tag::SizeType SizeType;
+    typedef typename test::out::log::Tag<TChar>::SizeType SizeType;
+    typedef test::out::tag::Crit OutTagType;
+};
+
+template<>
+class Crit<char> : public test::out::log::Tag<char>
+{
+public:
+    typedef typename test::out::log::Tag<char>::SizeType SizeType;
     typedef test::out::tag::Crit OutTagType;
 private:
-    static inline const char (&_Name())[9];
+    static const char (&_Name())[9];
 public:
     Crit() = default;
 public:
     ~Crit() = default;
 public:
-    inline const char * GetName() const override;
-    inline SizeType GetNameSize() const override;
+    const char * GetName() const override;
+    SizeType GetNameSize() const override;
 };
 
-inline const char (&Crit::_Name())[9]
+template<>
+class Crit<wchar_t> : public test::out::log::Tag<wchar_t>
+{
+public:
+    typedef typename test::out::log::Tag<wchar_t>::SizeType SizeType;
+    typedef test::out::tag::Crit OutTagType;
+private:
+    static const wchar_t (&_Name())[9];
+public:
+    Crit() = default;
+public:
+    ~Crit() = default;
+public:
+    const wchar_t * GetName() const override;
+    SizeType GetNameSize() const override;
+};
+
+inline const char (&Crit<char>::_Name())[9]
 {
     static const char name[] = "Critical";
     return name;
 }
 
-inline const char * Crit::GetName() const
+inline const char * Crit<char>::GetName() const
 {
     return _Name();
 }
 
-inline typename Crit::SizeType Crit::GetNameSize() const
+inline typename Crit<char>::SizeType Crit<char>::GetNameSize() const
+{
+    return sizeof( _Name()) - 1;
+}
+
+inline const wchar_t (&Crit<wchar_t>::_Name())[9]
+{
+    static const wchar_t name[] = L"Critical";
+    return name;
+}
+
+inline const wchar_t * Crit<wchar_t>::GetName() const
+{
+    return _Name();
+}
+
+inline typename Crit<wchar_t>::SizeType Crit<wchar_t>::GetNameSize() const
 {
     return sizeof( _Name()) - 1;
 }
@@ -51,7 +95,8 @@ inline typename Crit::SizeType Crit::GetNameSize() const
 namespace make
 {
 
-inline test::out::log::tag::Crit Tag(const test::out::tag::Crit&)
+template<typename TChar>
+inline test::out::log::tag::Crit<TChar> Tag(const test::out::tag::Crit&)
 {
     return {};
 }

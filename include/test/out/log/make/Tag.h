@@ -12,7 +12,8 @@ namespace log
 namespace make
 {
 
-inline test::out::log::Tag Tag(...)
+template<typename TChar>
+inline test::out::log::Tag<TChar> Tag(...)
 {
     return {};
 }

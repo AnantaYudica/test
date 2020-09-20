@@ -14,34 +14,76 @@ namespace log
 namespace tag
 {
 
-class Warn : public test::out::log::Tag
+template<typename TChar = char>
+class Warn
 {
 public:
-    typedef typename test::out::log::Tag::SizeType SizeType;
+    typedef typename test::out::log::Tag<TChar>::SizeType SizeType;
+    typedef test::out::tag::Warn OutTagType;
+};
+
+template<>
+class Warn<char> : public test::out::log::Tag<char>
+{
+public:
+    typedef typename test::out::log::Tag<char>::SizeType SizeType;
     typedef test::out::tag::Warn OutTagType;
 private:
-    static inline const char (&_Name())[8];
+    static const char (&_Name())[8];
 public:
     Warn() = default;
 public:
     ~Warn() = default;
 public:
-    inline const char * GetName() const override;
-    inline SizeType GetNameSize() const override;
+    const char * GetName() const override;
+    SizeType GetNameSize() const override;
 };
 
-inline const char (&Warn::_Name())[8]
+template<>
+class Warn<wchar_t> : public test::out::log::Tag<wchar_t>
+{
+public:
+    typedef typename test::out::log::Tag<wchar_t>::SizeType SizeType;
+    typedef test::out::tag::Warn OutTagType;
+private:
+    static const wchar_t (&_Name())[8];
+public:
+    Warn() = default;
+public:
+    ~Warn() = default;
+public:
+    const wchar_t * GetName() const override;
+    SizeType GetNameSize() const override;
+};
+
+const char (&Warn<char>::_Name())[8]
 {
     static const char name[] = "Warning";
     return name;
 }
 
-inline const char * Warn::GetName() const
+const char * Warn<char>::GetName() const
 {
     return _Name();
 }
 
-inline typename Warn::SizeType Warn::GetNameSize() const
+typename Warn<char>::SizeType Warn<char>::GetNameSize() const
+{
+    return sizeof(_Name()) - 1;
+}
+
+const wchar_t (&Warn<wchar_t>::_Name())[8]
+{
+    static const wchar_t name[] = L"Warning";
+    return name;
+}
+
+const wchar_t * Warn<wchar_t>::GetName() const
+{
+    return _Name();
+}
+
+typename Warn<wchar_t>::SizeType Warn<wchar_t>::GetNameSize() const
 {
     return sizeof(_Name()) - 1;
 }
@@ -51,7 +93,8 @@ inline typename Warn::SizeType Warn::GetNameSize() const
 namespace make
 {
 
-inline test::out::log::tag::Warn Tag(const test::out::tag::Warn&)
+template<typename TChar>
+inline test::out::log::tag::Warn<TChar> Tag(const test::out::tag::Warn&)
 {
     return {};
 }
