@@ -5,11 +5,13 @@
 #include "../Interface.h"
 #include "Interface.h"
 #include "deleg/Status.h"
+#include "deleg/Base.h"
 #include "task/Interface.h"
 #include "task/Buffer.h"
 
 #include <cstdint>
 #include <cstdarg>
+#include <cwchar>
 
 #ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
@@ -28,20 +30,17 @@ namespace base
 
 template<typename TChar, typename TStatus, typename TTaskStatus>
 class Delegate :
+    private test::out::base::deleg::Base<TChar, TStatus, TTaskStatus>,
     public test::out::Interface<TChar>
 {
-public:
-    typedef test::out::base::task::Interface<TChar, TTaskStatus> TaskInterfaceType;
-    typedef typename TaskInterfaceType::BufferType BufferType;
-    typedef test::out::base::Interface<TStatus> BaseInterfaceType;
-    typedef typename BaseInterfaceType::SizeType SizeType;
-    typedef test::out::base::deleg::Status<std::uint8_t> StatusType;
 private:
-    StatusType m_status;
-    const std::intptr_t m_id;
-    std::intptr_t m_task_id;
-    TaskInterfaceType * m_task;
-    BaseInterfaceType * m_base_intf;
+    typedef test::out::base::deleg::Base<TChar, TStatus, TTaskStatus> BaseType;
+public:
+    typedef typename BaseType::TaskInterfaceType TaskInterfaceType;
+    typedef typename BaseType::BufferType BufferType;
+    typedef typename BaseType::BaseInterfaceType BaseInterfaceType;
+    typedef typename BaseType::SizeType SizeType;
+    typedef typename BaseType::StatusType StatusType;
 public:
     Delegate();
     Delegate(BaseInterfaceType * base_intf, TaskInterfaceType * task);
@@ -56,7 +55,7 @@ public:
     Delegate<TChar, TStatus, TTaskStatus>& 
         operator=(Delegate<TChar, TStatus, TTaskStatus>&&) = delete;
 protected:
-    BufferType GetBuffer();
+    using BaseType::GetBuffer;
 public:
     virtual SizeType VPrint(const char * format, va_list var_args) override
         TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));;
@@ -71,103 +70,118 @@ public:
     virtual bool IsGood() const override;
     virtual bool IsBad() const override;
 public:
-    typename StatusType::IntegerValueType GetBadCode() const;
+    using BaseType::GetBadCode;
+};
+
+template<typename TStatus, typename TTaskStatus>
+class Delegate<char, TStatus, TTaskStatus> :
+    private test::out::base::deleg::Base<char, TStatus, TTaskStatus>,
+    public test::out::Interface<char>
+{
+private:
+    typedef test::out::base::deleg::Base<char, TStatus, TTaskStatus> BaseType;
+public:
+    typedef typename BaseType::TaskInterfaceType TaskInterfaceType;
+    typedef typename BaseType::BufferType BufferType;
+    typedef typename BaseType::BaseInterfaceType BaseInterfaceType;
+    typedef typename BaseType::SizeType SizeType;
+    typedef typename BaseType::StatusType StatusType;
+public:
+    Delegate();
+    Delegate(BaseInterfaceType * base_intf, TaskInterfaceType * task);
+public:
+    virtual ~Delegate();
+public:
+    Delegate(const Delegate<char, TStatus, TTaskStatus>&) = delete;
+    Delegate(Delegate<char, TStatus, TTaskStatus>&& mov);
+public:
+    Delegate<char, TStatus, TTaskStatus>& 
+        operator=(const Delegate<char, TStatus, TTaskStatus>&) = delete;
+    Delegate<char, TStatus, TTaskStatus>& 
+        operator=(Delegate<char, TStatus, TTaskStatus>&&) = delete;
+protected:
+    using BaseType::GetBuffer;
+public:
+    virtual SizeType VPrint(const char * format, va_list var_args) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
+    virtual SizeType Print(const char * format, ...) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
+public:
+    virtual SizeType Puts(const char * cstr, const SizeType& size) override;
+    virtual SizeType Puts(const char * cstr) override;
+    virtual SizeType Puts(const test::CString<char>& cstr) override;
+    virtual SizeType Puts(const test::CString<const char>& cstr) override;
+public:
+    virtual bool IsGood() const override;
+    virtual bool IsBad() const override;
+public:
+    using BaseType::GetBadCode;
+};
+
+template<typename TStatus, typename TTaskStatus>
+class Delegate<wchar_t, TStatus, TTaskStatus> :
+    private test::out::base::deleg::Base<wchar_t, TStatus, TTaskStatus>,
+    public test::out::Interface<wchar_t>
+{
+private:
+    typedef test::out::base::deleg::Base<wchar_t, TStatus, 
+        TTaskStatus> BaseType;
+public:
+    typedef typename BaseType::TaskInterfaceType TaskInterfaceType;
+    typedef typename BaseType::BufferType BufferType;
+    typedef typename BaseType::BaseInterfaceType BaseInterfaceType;
+    typedef typename BaseType::SizeType SizeType;
+    typedef typename BaseType::StatusType StatusType;
+public:
+    Delegate();
+    Delegate(BaseInterfaceType * base_intf, TaskInterfaceType * task);
+public:
+    virtual ~Delegate();
+public:
+    Delegate(const Delegate<wchar_t, TStatus, TTaskStatus>&) = delete;
+    Delegate(Delegate<wchar_t, TStatus, TTaskStatus>&& mov);
+public:
+    Delegate<wchar_t, TStatus, TTaskStatus>& 
+        operator=(const Delegate<wchar_t, TStatus, TTaskStatus>&) = delete;
+    Delegate<wchar_t, TStatus, TTaskStatus>& 
+        operator=(Delegate<wchar_t, TStatus, TTaskStatus>&&) = delete;
+protected:
+    using BaseType::GetBuffer;
+public:
+    virtual SizeType VPrint(const wchar_t * format, va_list var_args) override;
+    virtual SizeType Print(const wchar_t * format, ...) override;
+public:
+    virtual SizeType Puts(const wchar_t * cstr, const SizeType& size) override;
+    virtual SizeType Puts(const wchar_t * cstr) override;
+    virtual SizeType Puts(const test::CString<wchar_t>& cstr) override;
+    virtual SizeType Puts(const test::CString<const wchar_t>& cstr) override;
+public:
+    virtual bool IsGood() const override;
+    virtual bool IsBad() const override;
+public:
+    using BaseType::GetBadCode;
 };
 
 template<typename TChar, typename TStatus, typename TTaskStatus>
 Delegate<TChar, TStatus, TTaskStatus>::Delegate() :
-    m_status(),
-    m_id(0),
-    m_task_id(0),
-    m_task(nullptr),
-    m_base_intf(nullptr)
-{
-    m_status.Bad(StatusType::task_and_base_intf_nullptr);
-}
+    BaseType()
+{}
 
 template<typename TChar, typename TStatus, typename TTaskStatus>
 Delegate<TChar, TStatus, TTaskStatus>::Delegate(BaseInterfaceType * base_intf, 
     TaskInterfaceType * task) :
-        m_status(),
-        m_id(reinterpret_cast<std::intptr_t>(this)),
-        m_task_id(0),
-        m_task(task),
-        m_base_intf(base_intf)
-{
-    if (m_task == nullptr && m_base_intf == nullptr)
-    {
-        m_status.Bad(StatusType::task_and_base_intf_nullptr);
-    }
-    else if (m_task == nullptr)
-    {
-        m_status.Bad(StatusType::task_nullptr);
-    }
-    else if(m_base_intf == nullptr)
-    {
-        m_status.Bad(StatusType::base_intf_nullptr);
-    }
-    else
-    {
-        if (!m_task->Assign(m_id, m_task_id))
-        {
-            m_status.Bad(StatusType::task_assign_failed);
-        }
-    }
-}
+        BaseType(base_intf, task)
+{}
 
 template<typename TChar, typename TStatus, typename TTaskStatus>
 Delegate<TChar, TStatus, TTaskStatus>::~Delegate()
-{
-    if (m_base_intf != nullptr && m_task != nullptr) 
-    {
-        m_task->Release(m_id);
-        m_base_intf->Finalize(m_task_id);
-    }
-    m_task_id = 0;
-    m_task = nullptr;
-}
+{}
 
 template<typename TChar, typename TStatus, typename TTaskStatus>
 Delegate<TChar, TStatus, TTaskStatus>::
     Delegate(Delegate<TChar, TStatus, TTaskStatus>&& mov) :
-        m_status(std::move(mov.m_status)),
-        m_id(mov.m_id),
-        m_task_id(mov.m_task_id),
-        m_task(mov.m_task),
-        m_base_intf(mov.m_base_intf)
-{
-    mov.m_task_id = 0;
-    mov.m_task = nullptr;
-    mov.m_base_intf = nullptr;
-    mov.m_status.Bad(StatusType::task_and_base_intf_nullptr);
-}
-
-template<typename TChar, typename TStatus, typename TTaskStatus>
-typename Delegate<TChar, TStatus, TTaskStatus>::BufferType 
-Delegate<TChar, TStatus, TTaskStatus>::GetBuffer()
-{
-    if (m_task == nullptr) return {};
-    return m_task->Buffer(m_id);
-}
-
-template<typename TChar, typename TStatus, typename TTaskStatus>
-typename Delegate<TChar, TStatus, TTaskStatus>::SizeType 
-Delegate<TChar, TStatus, TTaskStatus>::VPrint(const char * format, 
-    va_list var_args)
-{
-    return GetBuffer().VPrint(format, var_args);
-}
-
-template<typename TChar, typename TStatus, typename TTaskStatus>
-typename Delegate<TChar, TStatus, TTaskStatus>::SizeType 
-Delegate<TChar, TStatus, TTaskStatus>::Print(const char * format, ...)
-{
-    va_list args;
-    va_start(args, format);
-    const auto ret = GetBuffer().VPrint(format, args);
-    va_end(args);
-    return ret;
-}
+        BaseType(std::move(mov))
+{}
 
 template<typename TChar, typename TStatus, typename TTaskStatus>
 typename Delegate<TChar, TStatus, TTaskStatus>::SizeType 
@@ -202,20 +216,178 @@ Delegate<TChar, TStatus, TTaskStatus>::
 template<typename TChar, typename TStatus, typename TTaskStatus>
 bool Delegate<TChar, TStatus, TTaskStatus>::IsGood() const
 {
-    return m_status.IsGood();
+    return BaseType::IsGood();
 }
 
 template<typename TChar, typename TStatus, typename TTaskStatus>
 bool Delegate<TChar, TStatus, TTaskStatus>::IsBad() const
 {
-    return m_status.IsBad();
+    return BaseType::IsBad();
 }
 
-template<typename TChar, typename TStatus, typename TTaskStatus>
-typename Delegate<TChar, TStatus, TTaskStatus>::StatusType::IntegerValueType 
-Delegate<TChar, TStatus, TTaskStatus>::GetBadCode() const
+template<typename TStatus, typename TTaskStatus>
+Delegate<char, TStatus, TTaskStatus>::Delegate() :
+    BaseType()
+{}
+
+template<typename TStatus, typename TTaskStatus>
+Delegate<char, TStatus, TTaskStatus>::Delegate(BaseInterfaceType * base_intf, 
+    TaskInterfaceType * task) :
+        BaseType(base_intf, task)
+{}
+
+template<typename TStatus, typename TTaskStatus>
+Delegate<char, TStatus, TTaskStatus>::~Delegate()
+{}
+
+template<typename TStatus, typename TTaskStatus>
+Delegate<char, TStatus, TTaskStatus>::
+    Delegate(Delegate<char, TStatus, TTaskStatus>&& mov) :
+        BaseType(std::move(mov))
+{}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<char, TStatus, TTaskStatus>::SizeType 
+Delegate<char, TStatus, TTaskStatus>::VPrint(const char * format, 
+    va_list var_args)
 {
-    return m_status.GetBadCode();
+    return GetBuffer().VPrint(format, var_args);
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<char, TStatus, TTaskStatus>::SizeType 
+Delegate<char, TStatus, TTaskStatus>::Print(const char * format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    const auto ret = GetBuffer().VPrint(format, args);
+    va_end(args);
+    return ret;
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<char, TStatus, TTaskStatus>::SizeType 
+Delegate<char, TStatus, TTaskStatus>::Puts(const char * cstr, 
+    const SizeType& size)
+{
+    return GetBuffer().Puts(cstr, size);
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<char, TStatus, TTaskStatus>::SizeType 
+Delegate<char, TStatus, TTaskStatus>::Puts(const char * cstr)
+{
+    return GetBuffer().Puts(cstr);
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<char, TStatus, TTaskStatus>::SizeType 
+Delegate<char, TStatus, TTaskStatus>::Puts(const test::CString<char>& cstr)
+{
+    return GetBuffer().Puts(cstr);
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<char, TStatus, TTaskStatus>::SizeType 
+Delegate<char, TStatus, TTaskStatus>::
+    Puts(const test::CString<const char>& cstr)
+{
+    return GetBuffer().Puts(cstr);
+}
+
+template<typename TStatus, typename TTaskStatus>
+bool Delegate<char, TStatus, TTaskStatus>::IsGood() const
+{
+    return BaseType::IsGood();
+}
+
+template<typename TStatus, typename TTaskStatus>
+bool Delegate<char, TStatus, TTaskStatus>::IsBad() const
+{
+    return BaseType::IsBad();
+}
+
+template<typename TStatus, typename TTaskStatus>
+Delegate<wchar_t, TStatus, TTaskStatus>::Delegate() :
+    BaseType()
+{}
+
+template<typename TStatus, typename TTaskStatus>
+Delegate<wchar_t, TStatus, TTaskStatus>::
+    Delegate(BaseInterfaceType * base_intf, TaskInterfaceType * task) :
+        BaseType(base_intf, task)
+{}
+
+template<typename TStatus, typename TTaskStatus>
+Delegate<wchar_t, TStatus, TTaskStatus>::~Delegate()
+{}
+
+template<typename TStatus, typename TTaskStatus>
+Delegate<wchar_t, TStatus, TTaskStatus>::
+    Delegate(Delegate<wchar_t, TStatus, TTaskStatus>&& mov) :
+        BaseType(std::move(mov))
+{}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<wchar_t, TStatus, TTaskStatus>::SizeType 
+Delegate<wchar_t, TStatus, TTaskStatus>::VPrint(const wchar_t * format, 
+    va_list var_args)
+{
+    return GetBuffer().VPrint(format, var_args);
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<wchar_t, TStatus, TTaskStatus>::SizeType 
+Delegate<wchar_t, TStatus, TTaskStatus>::Print(const wchar_t * format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    const auto ret = GetBuffer().VPrint(format, args);
+    va_end(args);
+    return ret;
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<wchar_t, TStatus, TTaskStatus>::SizeType 
+Delegate<wchar_t, TStatus, TTaskStatus>::Puts(const wchar_t * cstr, 
+    const SizeType& size)
+{
+    return GetBuffer().Puts(cstr, size);
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<wchar_t, TStatus, TTaskStatus>::SizeType 
+Delegate<wchar_t, TStatus, TTaskStatus>::Puts(const wchar_t * cstr)
+{
+    return GetBuffer().Puts(cstr);
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<wchar_t, TStatus, TTaskStatus>::SizeType 
+Delegate<wchar_t, TStatus, TTaskStatus>::
+    Puts(const test::CString<wchar_t>& cstr)
+{
+    return GetBuffer().Puts(cstr);
+}
+
+template<typename TStatus, typename TTaskStatus>
+typename Delegate<wchar_t, TStatus, TTaskStatus>::SizeType 
+Delegate<wchar_t, TStatus, TTaskStatus>::
+    Puts(const test::CString<const wchar_t>& cstr)
+{
+    return GetBuffer().Puts(cstr);
+}
+
+template<typename TStatus, typename TTaskStatus>
+bool Delegate<wchar_t, TStatus, TTaskStatus>::IsGood() const
+{
+    return BaseType::IsGood();
+}
+
+template<typename TStatus, typename TTaskStatus>
+bool Delegate<wchar_t, TStatus, TTaskStatus>::IsBad() const
+{
+    return BaseType::IsBad();
 }
 
 } //!base
