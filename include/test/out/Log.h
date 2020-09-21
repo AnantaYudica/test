@@ -387,7 +387,7 @@ bool Log<char>::DefaultOnBegin(test::out::Interface<char>& out,
 {
     auto time_cstr = test::out::log::Time::CStr<char>(timestamp);
     if (time_cstr.Size() == 0) return false;
-    auto out_size = out.Print("%s [%s]", *time_cstr, *tag);
+    auto out_size = out.Print("%s [%s] ", *time_cstr, *tag);
     return out_size != 0;
 }
 
@@ -504,7 +504,7 @@ bool Log<wchar_t>::DefaultOnBegin(test::out::Interface<wchar_t>& out,
 {
     auto time_cstr = test::out::log::Time::CStr<char>(timestamp);
     if (time_cstr.Size() == 0) return false;
-    auto out_size = out.Print(L"%s [%s]", *time_cstr, *tag);
+    auto out_size = out.Print(L"%s [%s] ", *time_cstr, *tag);
     return out_size != 0;
 }
 
