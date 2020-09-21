@@ -22,6 +22,7 @@
 
 #include <cstdint>
 #include <utility>
+#include <cwchar>
 
 namespace test
 {
@@ -96,60 +97,91 @@ public:
         ~(define_mask | specifier_mask);
     static constexpr IntegerValueType bad_offset = 20;
 public:
-    enum : IntegerValueType
-    {
-        good = 0,
-        bad = IntegerValueType(~((IntegerValueType)-1 >> 1)),
+    static constexpr IntegerValueType good = 0;
+    static constexpr IntegerValueType bad = 
+        IntegerValueType(~((IntegerValueType)-1 >> 1));
 
-        undefined = 0 << define_type_offset,
-        define_char = 1 << define_type_offset,
-        define_short = 2 << define_type_offset,
-        define_int = 3 << define_type_offset,
-        define_long = 4 << define_type_offset,
-        define_long_long = 5 << define_type_offset,
-        define_float = 6 << define_type_offset,
-        define_double = 7 << define_type_offset,
-        define_long_double = 8 << define_type_offset,
-        define_unsigned = 0 << define_signed_offset,
-        define_signed = 1 << define_signed_offset,
+    static constexpr IntegerValueType undefined = 0 << define_type_offset;
+    static constexpr IntegerValueType define_wchar = 1 << define_type_offset;
+    static constexpr IntegerValueType define_char = 2 << define_type_offset;
+    static constexpr IntegerValueType define_short = 3 << define_type_offset;
+    static constexpr IntegerValueType define_int = 4 << define_type_offset;
+    static constexpr IntegerValueType define_long = 5 << define_type_offset;
+    static constexpr IntegerValueType define_long_long = 
+        6 << define_type_offset;
+    static constexpr IntegerValueType define_float = 7 << define_type_offset;
+    static constexpr IntegerValueType define_double = 8 << define_type_offset;
+    static constexpr IntegerValueType define_long_double = 
+        9 << define_type_offset;
+    static constexpr IntegerValueType define_unsigned = 
+        0 << define_signed_offset;
+    static constexpr IntegerValueType define_signed = 
+        1 << define_signed_offset;
 
-        specifier_undefined = 0 << specifier_type_offset,
-        specifier_ch = 1 << specifier_type_offset,
-        specifier_str = 2 << specifier_type_offset,
-        specifier_ptr = 3 << specifier_type_offset,
-        specifier_int = 4 << specifier_type_offset,
-        specifier_fp = 5 << specifier_type_offset,
-        specifier_num_ch = 6 << specifier_type_offset,
-        specifier_blank = 7 << specifier_type_offset,
+    static constexpr IntegerValueType specifier_undefined = 
+        0 << specifier_type_offset;
+    static constexpr IntegerValueType specifier_ch = 
+        1 << specifier_type_offset;
+    static constexpr IntegerValueType specifier_str = 
+        2 << specifier_type_offset;
+    static constexpr IntegerValueType specifier_ptr = 
+        3 << specifier_type_offset;
+    static constexpr IntegerValueType specifier_int = 
+        4 << specifier_type_offset;
+    static constexpr IntegerValueType specifier_fp = 
+        5 << specifier_type_offset;
+    static constexpr IntegerValueType specifier_num_ch = 
+        6 << specifier_type_offset;
+    static constexpr IntegerValueType specifier_blank = 
+        7 << specifier_type_offset;
 
-        specifier_sub_width = 1 << specifier_sub_offset,
-        specifier_sub_precision = 2 << specifier_sub_offset,
-        specifier_sub_length = 2 << specifier_sub_offset,
+    static constexpr IntegerValueType specifier_sub_width = 
+        1 << specifier_sub_offset;
+    static constexpr IntegerValueType specifier_sub_precision = 
+        2 << specifier_sub_offset;
+    static constexpr IntegerValueType specifier_sub_length = 
+        2 << specifier_sub_offset;
 
-        specifier_int_signed = 1 << specifier_int_offset,
-        specifier_int_unsigned = 2 << specifier_int_offset,
+    static constexpr IntegerValueType specifier_int_signed = 
+        1 << specifier_int_offset;
+    static constexpr IntegerValueType specifier_int_unsigned = 
+        2 << specifier_int_offset;
 
-        specifier_fp_fixed = 1 << specifier_fp_offset,
-        specifier_fp_exponent = 2 << specifier_fp_offset,
-        specifier_fp_short = 3 << specifier_fp_offset,
+    static constexpr IntegerValueType specifier_fp_fixed = 
+        1 << specifier_fp_offset;
+    static constexpr IntegerValueType specifier_fp_exponent = 
+        2 << specifier_fp_offset;
+    static constexpr IntegerValueType specifier_fp_short = 
+        3 << specifier_fp_offset;
 
-        specifier_base_dec = 0 << specifier_base_offset,
-        specifier_base_oct = 1 << specifier_base_offset,
-        specifier_base_hex = 2 << specifier_base_offset,
+    static constexpr IntegerValueType specifier_base_dec = 
+        0 << specifier_base_offset;
+    static constexpr IntegerValueType specifier_base_oct = 
+        1 << specifier_base_offset;
+    static constexpr IntegerValueType specifier_base_hex = 
+        2 << specifier_base_offset;
 
-        specifier_lower_case = 0 << specifier_case_offset,
-        specifier_upper_case = 1 << specifier_case_offset,
+    static constexpr IntegerValueType specifier_lower_case = 
+        0 << specifier_case_offset;
+    static constexpr IntegerValueType specifier_upper_case = 
+        1 << specifier_case_offset;
 
-        specifier_flag_undefined = 0 << specifier_flag_offset,
-        specifier_flag_prefix = 1 << specifier_flag_offset,
-        specifier_flag_prefix_plus = 2 << specifier_flag_offset,
-        specifier_flag_prefix_space = 3 << specifier_flag_offset,
-        specifier_flag_prefix_zero = 4 << specifier_flag_offset
+    static constexpr IntegerValueType specifier_flag_undefined = 
+        0 << specifier_flag_offset;
+    static constexpr IntegerValueType specifier_flag_prefix = 
+        1 << specifier_flag_offset;
+    static constexpr IntegerValueType specifier_flag_prefix_plus = 
+        2 << specifier_flag_offset;
+    static constexpr IntegerValueType specifier_flag_prefix_space = 
+        3 << specifier_flag_offset;
+    static constexpr IntegerValueType specifier_flag_prefix_zero = 
+        4 << specifier_flag_offset;
 
-
-    };
 private:
     static constexpr IntegerValueType _Value(IntegerValueType val);
+    template<typename... TArgs>
+    static constexpr IntegerValueType _Value(IntegerValueType val, 
+        DefineType<wchar_t>&&, TArgs&&... args);
     template<typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
         DefineType<signed char>&&, TArgs&&... args);
@@ -329,6 +361,16 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val)
 {
     return val;
+}
+
+template<typename TValue, typename TIntegerValue>
+template<typename... TArgs>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
+    DefineType<wchar_t>&&, TArgs&&... args)
+{
+    return _Value((val & ~define_mask) | (define_char | define_signed),
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TValue, typename TIntegerValue>
@@ -639,7 +681,7 @@ template<typename TValue, typename TIntegerValue>
 template<typename... TArgs>
 constexpr Flag<TValue, TIntegerValue>::Flag(const IntegerValueType& specifier,
     TArgs&& ... args) :
-        m_value(_Value(specifier & specifier_mask, 
+        m_value(Flag<TValue, TIntegerValue>::_Value(specifier & specifier_mask, 
             std::forward<TArgs>(args)...))
 {}
 
