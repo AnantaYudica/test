@@ -19,8 +19,11 @@ public:
     Node();
     Node(const T & set);
     Node(T && set);
-    template<typename... TArgs, typename std::enable_if<
-        std::is_constructible<T, TArgs...>::value, int>::type = 0>
+    template<typename... TArgs, typename _TValue = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<T>::type>::type>::type,
+        typename std::enable_if<std::is_constructible<_TValue, 
+            TArgs...>::value, int>::type = 0>
     Node(TArgs && ... args);
 public:
     ~Node();
@@ -47,8 +50,11 @@ public:
     Node();
     Node(const T & set);
     Node(T && set);
-    template<typename... TArgs, typename std::enable_if<
-        std::is_constructible<T, TArgs...>::value, int>::type = 0>
+    template<typename... TArgs, typename _TValue = 
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<T>::type>::type>::type,
+        typename std::enable_if<std::is_constructible<_TValue, 
+            TArgs...>::value, int>::type = 0>
     Node(TArgs && ... args);
 public:
     ~Node();
@@ -85,8 +91,9 @@ Node<T, N, I>::Node(T && set) :
 {}
 
 template<typename T, std::size_t N, std::size_t I>
-template<typename... TArgs, typename std::enable_if<
-    std::is_constructible<T, TArgs...>::value, int>::type>
+template<typename... TArgs, typename _TValue,
+    typename std::enable_if<std::is_constructible<_TValue, 
+        TArgs...>::value, int>::type>
 Node<T, N, I>::Node(TArgs &&... args) :
     Node<T, N, I - 1>(std::forward<TArgs>(args)...),
     m_link(nullptr)
@@ -178,8 +185,9 @@ Node<T, N, 0>::Node(T && set) :
 {}
 
 template<typename T, std::size_t N>
-template<typename... TArgs, typename std::enable_if<
-    std::is_constructible<T, TArgs...>::value, int>::type>
+template<typename... TArgs, typename _TValue,
+    typename std::enable_if<std::is_constructible<_TValue, 
+        TArgs...>::value, int>::type>
 Node<T, N, 0>::Node(TArgs && ... args) :
     test::node::Data<T>(std::forward<TArgs>(args)...),
     m_link(nullptr)

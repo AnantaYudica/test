@@ -16,8 +16,8 @@ class Queue
 {
 public:
     typedef std::size_t SizeType;
-    typedef typename std::remove_pointer<
-        typename std::remove_reference<T>::type>::type ValueType;
+    typedef typename std::remove_cv<typename std::remove_pointer<
+        typename std::remove_reference<T>::type>::type>::type ValueType;
 private:
     static bool _Push(test::Node<T, 1> *& head,
         test::Node<T, 1> *& tail, test::Node<T, 1> * curr_head, 
@@ -52,8 +52,9 @@ public:
         Push(const typename std::remove_const<ValueType>::type & val);
     test::node::Data<T>& 
         Push(typename std::remove_const<ValueType>::type && val);
-    template<typename... TArgs, typename std::enable_if<
-        std::is_constructible<T, TArgs...>::value, int>::type = 0>
+    template<typename... TArgs, typename _TValue = ValueType,
+        typename std::enable_if<
+            std::is_constructible<_TValue, TArgs...>::value, int>::type = 0>
     test::node::Data<T>& Push(TArgs && ... args);
     SizeType Push(const Queue<T>& cpy);
     SizeType Push(Queue<T>&& mov);
@@ -241,8 +242,9 @@ Queue<T>::Push(typename std::remove_const<ValueType>::type && val)
 }
 
 template<typename T>
-template<typename... TArgs, typename std::enable_if<
-    std::is_constructible<T, TArgs...>::value, int>::type >
+template<typename... TArgs, typename _TValue,
+    typename std::enable_if<
+        std::is_constructible<_TValue, TArgs...>::value, int>::type>
 test::node::Data<T>& Queue<T>::Push(TArgs && ... args)
 {
     auto new_node = new test::Node<T, 1>(std::forward<TArgs>(args)...);
