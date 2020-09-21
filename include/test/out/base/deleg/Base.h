@@ -1,6 +1,7 @@
 #ifndef TEST_OUT_BASE_DELEG_BASE_H_
 #define TEST_OUT_BASE_DELEG_BASE_H_
 
+#include "../../Type.h"
 #include "../Interface.h"
 #include "../task/Interface.h"
 #include "../task/Buffer.h"
@@ -21,8 +22,8 @@ template<typename TChar, typename TStatus, typename TTaskStatus>
 class Base
 {
 public:
-    typedef test::out::base::task::Interface<TChar, TTaskStatus> TaskInterfaceType;
-    typedef typename TaskInterfaceType::BufferType BufferType;
+    typedef test::out::base::task::Interface<TTaskStatus> TaskInterfaceType;
+    typedef typename TaskInterfaceType::template BufferType<TChar> BufferType;
     typedef test::out::base::Interface<TStatus> BaseInterfaceType;
     typedef typename BaseInterfaceType::SizeType SizeType;
     typedef test::out::base::deleg::Status<std::uint8_t> StatusType;
@@ -127,7 +128,7 @@ typename Base<TChar, TStatus, TTaskStatus>::BufferType
 Base<TChar, TStatus, TTaskStatus>::GetBuffer()
 {
     if (m_task == nullptr) return {};
-    return m_task->Buffer(m_id);
+    return m_task->Buffer(test::out::Type<TChar>{}, m_id);
 }
 
 template<typename TChar, typename TStatus, typename TTaskStatus>

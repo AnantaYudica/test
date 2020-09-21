@@ -31,8 +31,7 @@ template<std::size_t MinimumBuffer = 512,
     std::size_t MaximumBuffer = 65535>
 class File : 
     private test::out::file::Base,
-    public test::out::Interface<char>,
-    public test::out::Interface<wchar_t>
+    public test::out::Interface<char, wchar_t>
 {
 public:
     static_assert(MinimumBuffer != 0, "Minimum Buffer cannot zero");
@@ -131,11 +130,11 @@ protected:
     template<typename TChar, typename std::enable_if<
         std::is_same<TChar, wchar_t>::value, int>::type = 1>
     test::CString<TChar> Buffer() const;
-protected:
+public:
     bool IsGood() const override;
     bool IsBad() const override;
     StatusValueType GetBadCode() const;
-protected:
+public:
     bool IsStandard() const;
 };
 

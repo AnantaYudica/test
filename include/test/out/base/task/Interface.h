@@ -38,6 +38,7 @@ public:
 public:
     virtual bool Execute(test::out::Interface<char>& out) = 0;
     virtual bool Execute(test::out::Interface<wchar_t>& out) = 0;
+    virtual bool Execute(test::out::Interface<char, wchar_t>& out) = 0;
 public:
     virtual bool Assign(const std::intptr_t& deleg_id,
         std::intptr_t& task_id) = 0;

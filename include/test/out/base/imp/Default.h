@@ -18,85 +18,70 @@ namespace base
 namespace imp
 {
 
-template<typename TChar>
 class Default :
     protected test::out::base::Interface<
         test::out::base::Status<std::uint8_t>>
 {
-private:
-    typedef test::out::base::task::Base<TChar> TaskBaseType;
 protected:
     typedef test::out::base::Status<std::uint8_t> StatusType;
     typedef test::out::base::Interface<StatusType> BaseType;
-    typedef test::out::base::Delegate<TChar, StatusType,
-        typename TaskBaseType::StatusType> DelegateType;
 protected:
-    Default() = default;
+    inline Default() = default;
 public:
-    virtual ~Default() = default;
+    virtual inline ~Default() = default;
 public:
-    Default(const Default<TChar>&) = delete;
-    Default(Default<TChar>&&) = delete;
+    inline Default(const Default&) = delete;
+    inline Default(Default&&) = delete;
 public:
-    Default<TChar>& operator=(const Default<TChar>&) = delete;
-    Default<TChar>& operator=(Default<TChar>&&) = delete;
+    inline Default& operator=(const Default&) = delete;
+    inline Default& operator=(Default&&) = delete;
 private:
-    bool Finalize(const std::intptr_t& id) override final;
+    inline bool Finalize(const std::intptr_t& id) override final;
 private:
-    bool _BeginRequestTask() override final;
-    void _EndRequestTask() override final;
+    inline bool _BeginRequestTask() override final;
+    inline void _EndRequestTask() override final;
 private:
-    bool _BeginExecuteTask() override final;
-    void _EndExecuteTask() override final;
+    inline bool _BeginExecuteTask() override final;
+    inline void _EndExecuteTask() override final;
 protected:
-    test::Guard<BaseType> RequestTaskGuard() override final;
-    test::Guard<BaseType> ExecuteTaskGuard() override final;
+    inline test::Guard<BaseType> RequestTaskGuard() override final;
+    inline test::Guard<BaseType> ExecuteTaskGuard() override final;
 protected:
-    virtual bool ExecuteTask(const std::intptr_t& id) override;
+    virtual inline bool ExecuteTask(const std::intptr_t& id) override;
 };
 
-template<typename TChar>
-bool Default<TChar>::Finalize(const std::intptr_t& m_id)
+inline bool Default::Finalize(const std::intptr_t& m_id)
 {
     return ExecuteTask(m_id);
 }
 
-template<typename TChar>
-bool Default<TChar>::_BeginRequestTask()
+inline bool Default::_BeginRequestTask()
 {
     return true;
 }
 
-template<typename TChar>
-void Default<TChar>::_EndRequestTask()
+inline void Default::_EndRequestTask()
 {}
 
-template<typename TChar>
-bool Default<TChar>::_BeginExecuteTask()
+inline bool Default::_BeginExecuteTask()
 {
     return true;
 }
 
-template<typename TChar>
-void Default<TChar>::_EndExecuteTask()
+inline void Default::_EndExecuteTask()
 {}
 
-template<typename TChar>
-test::Guard<typename Default<TChar>::BaseType> 
-Default<TChar>::RequestTaskGuard()
+inline test::Guard<typename Default::BaseType> Default::RequestTaskGuard()
 {
     return {this, &BaseType::_BeginRequestTask, &BaseType::_EndRequestTask};
 }
 
-template<typename TChar>
-test::Guard<typename Default<TChar>::BaseType> 
-Default<TChar>::ExecuteTaskGuard()
+inline test::Guard<typename Default::BaseType> Default::ExecuteTaskGuard()
 {
     return {this, &BaseType::_BeginExecuteTask, &BaseType::_EndExecuteTask};
 }
 
-template<typename TChar>
-bool Default<TChar>::ExecuteTask(const std::intptr_t&)
+inline bool Default::ExecuteTask(const std::intptr_t&)
 {
     return false;
 }

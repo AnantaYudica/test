@@ -69,6 +69,8 @@ protected:
 public:
     virtual inline bool Execute(test::out::Interface<char>& out) override;
     virtual inline bool Execute(test::out::Interface<wchar_t>& out) override;
+    virtual inline bool Execute(test::out::Interface<char, 
+        wchar_t>& out) override;
 public:
     virtual inline bool Assign(const std::intptr_t& deleg_id,
         std::intptr_t& task_id) override;
@@ -154,6 +156,11 @@ inline bool Default::Execute(test::out::Interface<char>&)
 }
 
 inline bool Default::Execute(test::out::Interface<wchar_t>&)
+{
+    return false;
+}
+
+inline bool Default::Execute(test::out::Interface<char, wchar_t>&)
 {
     return false;
 }

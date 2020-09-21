@@ -62,6 +62,8 @@ public:
 public:
     inline bool Execute(test::out::Interface<char>& out) override final;
     inline bool Execute(test::out::Interface<wchar_t>& out) override final;
+    inline bool Execute(test::out::Interface<char, 
+        wchar_t>& out) override final;
 public:
     inline bool Assign(const std::intptr_t& deleg_id,
         std::intptr_t& task_id) override final;
@@ -180,6 +182,28 @@ inline bool Task::Execute(test::out::Interface<wchar_t>& out)
     }
 
     return m_buffer.wchar_out_ptr->Output(out);
+}
+
+inline bool Task::Execute(test::out::Interface<char, wchar_t>& out)
+{
+    auto guard = BaseType::ExecuteGuard();
+    if (!guard) return false;
+    
+    auto& status = BaseType::GetStatus();
+    if (!status.Execute()) return false;
+
+    if (m_type_id == char_type_id &&
+        m_buffer.char_out_ptr != nullptr)
+    {
+        return m_buffer.char_out_ptr->Output(out);
+    }
+    else if (m_type_id == wchar_type_id &&
+        m_buffer.wchar_out_ptr != nullptr)
+    {
+        return m_buffer.wchar_out_ptr->Output(out);
+    }
+    status.Bad(status.execute_output_failed);
+    return false;
 }
 
 inline bool Task::Assign(const std::intptr_t& deleg_id,

@@ -23,7 +23,7 @@ namespace test
 namespace out
 {
 
-template<typename TChar>
+template<typename TChar, typename... TChars>
 class Interface : public test::out::Standard<TChar>
 {
 public:
@@ -105,6 +105,81 @@ public:
     virtual bool IsBad() const = 0;
     virtual bool IsGood() const = 0;
 };
+
+template<>
+class Interface<char, wchar_t> :
+    public Interface<char>,
+    public Interface<wchar_t>
+{
+public:
+    typedef std::size_t SizeType; 
+public:
+    Interface() = default;
+public:
+    virtual ~Interface() = default;
+public:
+    Interface(const Interface<char>&) = delete;
+    Interface(Interface<char>&&) = delete;
+public:
+    Interface<char>& operator=(const Interface<char>&) = delete;
+    Interface<char>& operator=(Interface<char>&&) = delete;
+public:
+    virtual SizeType VPrint(const char * format, va_list var_args) 
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0))) = 0;
+    virtual SizeType Print(const char * format, ...) 
+        TEST_ATTRIBUTE((format(printf, 2, 3))) = 0;
+    virtual SizeType VPrint(const wchar_t * format, va_list var_args) = 0;
+    virtual SizeType Print(const wchar_t * format, ...) = 0;
+public:
+    virtual SizeType Puts(const char * cstr, const SizeType& size) = 0;
+    virtual SizeType Puts(const char * cstr) = 0;
+    virtual SizeType Puts(const test::CString<char>& cstr) = 0;
+    virtual SizeType Puts(const test::CString<const char>& cstr) = 0;
+    virtual SizeType Puts(const wchar_t * cstr, const SizeType& size) = 0;
+    virtual SizeType Puts(const wchar_t * cstr) = 0;
+    virtual SizeType Puts(const test::CString<wchar_t>& cstr) = 0;
+    virtual SizeType Puts(const test::CString<const wchar_t>& cstr) = 0;
+public:
+    virtual bool IsBad() const = 0;
+    virtual bool IsGood() const = 0;
+}; 
+
+template<>
+class Interface<wchar_t, char> :
+    public Interface<char, wchar_t>
+{
+public:
+    typedef std::size_t SizeType; 
+public:
+    Interface() = default;
+public:
+    virtual ~Interface() = default;
+public:
+    Interface(const Interface<char>&) = delete;
+    Interface(Interface<char>&&) = delete;
+public:
+    Interface<char>& operator=(const Interface<char>&) = delete;
+    Interface<char>& operator=(Interface<char>&&) = delete;
+public:
+    virtual SizeType VPrint(const char * format, va_list var_args) 
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0))) = 0;
+    virtual SizeType Print(const char * format, ...) 
+        TEST_ATTRIBUTE((format(printf, 2, 3))) = 0;
+    virtual SizeType VPrint(const wchar_t * format, va_list var_args) = 0;
+    virtual SizeType Print(const wchar_t * format, ...) = 0;
+public:
+    virtual SizeType Puts(const char * cstr, const SizeType& size) = 0;
+    virtual SizeType Puts(const char * cstr) = 0;
+    virtual SizeType Puts(const test::CString<char>& cstr) = 0;
+    virtual SizeType Puts(const test::CString<const char>& cstr) = 0;
+    virtual SizeType Puts(const wchar_t * cstr, const SizeType& size) = 0;
+    virtual SizeType Puts(const wchar_t * cstr) = 0;
+    virtual SizeType Puts(const test::CString<wchar_t>& cstr) = 0;
+    virtual SizeType Puts(const test::CString<const wchar_t>& cstr) = 0;
+public:
+    virtual bool IsBad() const = 0;
+    virtual bool IsGood() const = 0;
+}; 
 
 } //!out
 
