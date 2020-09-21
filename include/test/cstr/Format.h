@@ -2,6 +2,7 @@
 #define TEST_CSTR_FORMAT_H_
 
 #include "../CString.h"
+#include "../def/cstr/val/Empty.h"
 
 #include <cstdio>
 #include <cstring>
@@ -49,7 +50,7 @@ inline test::CString<typename std::remove_const<TChar>::type>
             cstr[size - 1] = '\0';
         return {std::move(cstr), size - 1};
     }
-    return {""};
+    return test::def::cstr::val::Empty::CStr<char>();
 }
 
 template<typename TChar, typename std::enable_if<
@@ -68,7 +69,7 @@ inline test::CString<typename std::remove_const<TChar>::type>
             cstr[size - 1] = '\0';
         return {std::move(cstr), size - 1};
     }
-    return {L""};
+    return test::def::cstr::val::Empty::CStr<wchar_t>();
 }
 
 } //!cstr

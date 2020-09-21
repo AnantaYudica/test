@@ -3,6 +3,7 @@
 
 #include "../CString.h"
 #include "../cstr/Length.h"
+#include "../def/cstr/val/Empty.h"
 #include "file/Status.h"
 #include "file/Base.h"
 #include "Interface.h"
@@ -482,7 +483,7 @@ File<MinimumBuffer, MaximumBuffer>::VPrint(const char * format,
     auto guard = BaseType::PrintGuard();
     if(!guard) return 0;
     
-    m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+    m_wchar_tmp = std::move(test::def::cstr::val::Empty::CStr<wchar_t>());
     
     auto& status = GetStatus();
     char * buffer = new char[MinimumBuffer];
@@ -492,7 +493,7 @@ File<MinimumBuffer, MaximumBuffer>::VPrint(const char * format,
     {
         delete[] buffer;
         status.Bad(StatusType::print_buffer_failed);
-        m_char_tmp = std::move(test::CString<char>("", 0));
+        m_char_tmp = std::move(test::def::cstr::val::Empty::CStr<char>());
         return 0;
     } 
     else if ((SizeType)buffer_size >= MinimumBuffer && 
@@ -507,14 +508,14 @@ File<MinimumBuffer, MaximumBuffer>::VPrint(const char * format,
         delete[] buffer;
         buffer = nullptr;
         status.Bad(StatusType::print_buffer_overflow);
-        m_char_tmp = std::move(test::CString<char>("", 0));
+        m_char_tmp = std::move(test::def::cstr::val::Empty::CStr<char>());
         return 0;
     }
 
     if (buffer_size > 0)
         m_char_tmp = std::move(test::CString<char>(buffer, buffer_size));
     else
-        m_char_tmp = std::move(test::CString<char>("", 0));
+        m_char_tmp = std::move(test::def::cstr::val::Empty::CStr<char>());
 
     if (buffer != nullptr) delete[] buffer;
 
@@ -557,7 +558,7 @@ File<MinimumBuffer, MaximumBuffer>::VPrint(const wchar_t * format,
     auto guard = BaseType::PrintGuard();
     if(!guard) return 0;
     
-    m_char_tmp = std::move(test::CString<char>("", 0));
+    m_char_tmp = std::move(test::def::cstr::val::Empty::CStr<char>());
     
     auto& status = GetStatus();
     wchar_t * buffer = new wchar_t[MinimumBuffer];
@@ -567,7 +568,7 @@ File<MinimumBuffer, MaximumBuffer>::VPrint(const wchar_t * format,
     {
         delete[] buffer;
         status.Bad(StatusType::print_buffer_failed);
-        m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+        m_wchar_tmp = std::move(test::def::cstr::val::Empty::CStr<wchar_t>());
         return 0;
     } 
     else if ((SizeType)buffer_size >= MinimumBuffer && 
@@ -582,14 +583,14 @@ File<MinimumBuffer, MaximumBuffer>::VPrint(const wchar_t * format,
         delete[] buffer;
         buffer = nullptr;
         status.Bad(StatusType::print_buffer_overflow);
-        m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+        m_wchar_tmp = std::move(test::def::cstr::val::Empty::CStr<wchar_t>());
         return 0;
     }
 
     if (buffer_size > 0)
         m_wchar_tmp = std::move(test::CString<wchar_t>(buffer, buffer_size));
     else
-        m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+        m_wchar_tmp = std::move(test::def::cstr::val::Empty::CStr<wchar_t>());
 
     if (buffer != nullptr) delete[] buffer;
 
@@ -632,7 +633,7 @@ File<MinimumBuffer, MaximumBuffer>::
     auto guard = BaseType::PutsGuard();
     if (!guard) return 0;
     
-    m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+    m_wchar_tmp = std::move(test::def::cstr::val::Empty::CStr<wchar_t>());
 
     auto& status = GetStatus();
 
@@ -642,7 +643,7 @@ File<MinimumBuffer, MaximumBuffer>::
         m_char_tmp = std::move(test::CString<char>(cstr, size));
     else
     {
-        m_char_tmp = std::move(test::CString<char>("", 0));
+        m_char_tmp = std::move(test::def::cstr::val::Empty::CStr<char>());
         status.Bad(StatusType::puts_buffer_overflow);
         return 0;
     }
@@ -700,7 +701,7 @@ File<MinimumBuffer, MaximumBuffer>::Puts(const wchar_t * cstr,
     auto guard = BaseType::PutsGuard();
     if (!guard) return 0;
     
-    m_char_tmp = std::move(test::CString<char>("", 0));
+    m_char_tmp = std::move(test::def::cstr::val::Empty::CStr<char>());
 
     auto& status = GetStatus();
 
@@ -710,7 +711,7 @@ File<MinimumBuffer, MaximumBuffer>::Puts(const wchar_t * cstr,
         m_wchar_tmp = std::move(test::CString<wchar_t>(cstr, size));
     else
     {
-        m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+        m_wchar_tmp = std::move(test::def::cstr::val::Empty::CStr<wchar_t>());
         status.Bad(StatusType::puts_buffer_overflow);
         return 0;
     }
@@ -767,7 +768,7 @@ test::CString<TChar> File<MinimumBuffer, MaximumBuffer>::Buffer() const
     auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
 
     auto guard = pthis->BaseType::BufferGuard();
-    if (!guard) return test::CString<char>("", 0);
+    if (!guard) return test::def::cstr::val::Empty::CStr<char>();
 
     return {m_char_tmp};
 }
@@ -780,7 +781,7 @@ test::CString<TChar>  File<MinimumBuffer, MaximumBuffer>::Buffer() const
     auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
 
     auto guard = pthis->BaseType::BufferGuard();
-    if (!guard) return test::CString<wchar_t>(L"", 0);
+    if (!guard) return test::def::cstr::val::Empty::CStr<wchar_t>();
 
     return {m_wchar_tmp};
 }

@@ -4,6 +4,7 @@
 #include "Status.h"
 #include "../Interface.h"
 #include "../../CString.h"
+#include "../../def/cstr/val/Empty.h"
 
 #include <cwchar>
 
@@ -503,7 +504,8 @@ Base<TChar>::_Set(const SizeType& index, const TChar * cstr,
 template<typename TChar>
 test::CString<TChar> Base<TChar>::Get() const
 {
-    if (m_status.IsRequire() || m_status.IsBad()) return {""};
+    if (m_status.IsRequire() || m_status.IsBad()) 
+        return test::def::cstr::val::Empty::CStr<TChar>();
     return {m_cstr, m_size};
 } 
 
