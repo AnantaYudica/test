@@ -7,6 +7,7 @@
 #include <cstring>
 #include <cstdlib>
 #include <functional>
+#include <cwchar>
 
 constexpr std::size_t Out1MinimumBuffer = 512;
 constexpr std::size_t Out1MaximumBuffer = 12288;
@@ -17,10 +18,10 @@ constexpr std::size_t Out3MaximumBuffer = 16;
 constexpr std::size_t Out4MinimumBuffer = 32;
 constexpr std::size_t Out4MaximumBuffer = 64;
 
-struct Out1 : public test::out::File<char, Out1MinimumBuffer, 
+struct Out1 : public test::out::File<Out1MinimumBuffer, 
     Out1MaximumBuffer>
 {
-    typedef test::out::File<char, Out1MinimumBuffer, 
+    typedef test::out::File<Out1MinimumBuffer, 
         Out1MaximumBuffer> BaseType;
     Out1() :
         BaseType()
@@ -53,10 +54,10 @@ struct Out1 : public test::out::File<char, Out1MinimumBuffer,
     using BaseType::IsStandard;
 };
 
-struct Out2 : public test::out::File<char, Out2MinimumBuffer, 
+struct Out2 : public test::out::File<Out2MinimumBuffer, 
     Out2MaximumBuffer>
 {
-    typedef test::out::File<char, Out2MinimumBuffer, 
+    typedef test::out::File<Out2MinimumBuffer, 
         Out2MaximumBuffer> BaseType;
     Out2() :
         BaseType()
@@ -83,10 +84,10 @@ struct Out2 : public test::out::File<char, Out2MinimumBuffer,
     using BaseType::IsStandard;
 };
 
-struct Out3 : public test::out::File<char, Out3MinimumBuffer, 
+struct Out3 : public test::out::File<Out3MinimumBuffer, 
     Out3MaximumBuffer>
 {
-    typedef test::out::File<char, Out3MinimumBuffer, 
+    typedef test::out::File<Out3MinimumBuffer, 
         Out3MaximumBuffer> BaseType;
     Out3() :
         BaseType()
@@ -113,12 +114,12 @@ struct Out3 : public test::out::File<char, Out3MinimumBuffer,
     using BaseType::IsStandard;
 };
 
-struct Out4 : public test::out::File<char, Out4MinimumBuffer, 
+struct Out4 : public test::out::File<Out4MinimumBuffer, 
     Out4MaximumBuffer>
 {
     typedef std::function<bool(test::CString<char>, test::CString<char>&, ModeType&)> 
         OnMaximumSizeFunctionType;
-    typedef test::out::File<char, Out4MinimumBuffer, 
+    typedef test::out::File<Out4MinimumBuffer, 
         Out4MaximumBuffer> BaseType;
     OnMaximumSizeFunctionType onMaxSizeCb;
     Out4() :
@@ -182,10 +183,10 @@ int main()
         assert(out1_1.Size() == 0);
         assert(out1_1.MaximumSize() == 0);
         assert(strncmp(*(out1_1.Filename()), "", 0) == 0);
-        assert(out1_1.Buffer().Size() == 5);
-        assert(cout1_1.Buffer().Size() == 5);
-        assert(strncmp(*(out1_1.Buffer()), "test\n", 5) == 0);
-        assert(strncmp(*(cout1_1.Buffer()), "test\n", 5) == 0);
+        assert(cout1_1.Buffer<char>().Size() == 5);
+        assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout1_1.Buffer<char>()), "test\n", 5) == 0);
+        assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out1_1.IsGood() == true);
         assert(out1_1.IsBad() == false);
         assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -197,10 +198,10 @@ int main()
         assert(out1_1.Size() == 0);
         assert(out1_1.MaximumSize() == 0);
         assert(strncmp(*(out1_1.Filename()), "", 0) == 0);
-        assert(out1_1.Buffer().Size() == 17);
-        assert(cout1_1.Buffer().Size() == 17);
-        assert(strncmp(*(out1_1.Buffer()), "123,4,567,89.248\n", 17) == 0);
-        assert(strncmp(*(cout1_1.Buffer()), "123,4,567,89.248\n", 17) == 0);
+        assert(cout1_1.Buffer<char>().Size() == 17);
+        assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout1_1.Buffer<char>()), "123,4,567,89.248\n", 17) == 0);
+        assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out1_1.IsGood() == true);
         assert(out1_1.IsBad() == false);
         assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -212,10 +213,10 @@ int main()
         assert(out1_1.Size() == 0);
         assert(out1_1.MaximumSize() == 0);
         assert(strncmp(*(out1_1.Filename()), "", 0) == 0);
-        assert(out1_1.Buffer().Size() == 9);
-        assert(cout1_1.Buffer().Size() == 9);
-        assert(strncmp(*(out1_1.Buffer()), "12345678\n", 9) == 0);
-        assert(strncmp(*(cout1_1.Buffer()), "12345678\n", 9) == 0);
+        assert(cout1_1.Buffer<char>().Size() == 9);
+        assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout1_1.Buffer<char>()), "12345678\n", 9) == 0);
+        assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out1_1.IsGood() == true);
         assert(out1_1.IsBad() == false);
         assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -242,10 +243,10 @@ int main()
             assert(out1_1.Size() == 0);
             assert(out1_1.MaximumSize() == Out1MaximumBuffer);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 0);
-            assert(cout1_1.Buffer().Size() == 0);
-            assert(strncmp(*(out1_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "", 0) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 0);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == false);
             assert(out1_1.IsBad() == true);
             assert(out1_1.GetBadCode() == Out1::StatusType::open_file_mode_undefined);
@@ -263,10 +264,10 @@ int main()
             assert(out1_1.Size() == 5);
             assert(out1_1.MaximumSize() == Out1MaximumBuffer);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 5);
-            assert(cout1_1.Buffer().Size() == 5);
-            assert(strncmp(*(out1_1.Buffer()), "test\n", 5) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "test\n", 5) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 5);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "test\n", 5) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == true);
             assert(out1_1.IsBad() == false);
             assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -278,10 +279,10 @@ int main()
             assert(out1_1.Size() == 22);
             assert(out1_1.MaximumSize() == Out1MaximumBuffer);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 17);
-            assert(cout1_1.Buffer().Size() == 17);
-            assert(strncmp(*(out1_1.Buffer()), "123,4,567,89.248\n", 17) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "123,4,567,89.248\n", 17) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 17);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "123,4,567,89.248\n", 17) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == true);
             assert(out1_1.IsBad() == false);
             assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -293,10 +294,10 @@ int main()
             assert(out1_1.Size() == 31);
             assert(out1_1.MaximumSize() == Out1MaximumBuffer);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 9);
-            assert(cout1_1.Buffer().Size() == 9);
-            assert(strncmp(*(out1_1.Buffer()), "12345678\n", 9) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "12345678\n", 9) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 9);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "12345678\n", 9) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == true);
             assert(out1_1.IsBad() == false);
             assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -314,10 +315,10 @@ int main()
             assert(out1_1.Size() == 31);
             assert(out1_1.MaximumSize() == Out1MaximumBuffer);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 0);
-            assert(cout1_1.Buffer().Size() == 0);
-            assert(strncmp(*(out1_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "", 0) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 0);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == true);
             assert(out1_1.IsBad() == false);
             assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -329,10 +330,10 @@ int main()
             assert(out1_1.Size() == 42);
             assert(out1_1.MaximumSize() == Out1MaximumBuffer);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 11);
-            assert(cout1_1.Buffer().Size() == 11);
-            assert(strncmp(*(out1_1.Buffer()), "abcdefghij\n", 11) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "abcdefghij\n", 11) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 11);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "abcdefghij\n", 11) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == true);
             assert(out1_1.IsBad() == false);
             assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -344,10 +345,10 @@ int main()
             assert(out1_1.Size() == 59);
             assert(out1_1.MaximumSize() == Out1MaximumBuffer);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 17);
-            assert(cout1_1.Buffer().Size() == 17);
-            assert(strncmp(*(out1_1.Buffer()), "404,1,424,34.445\n", 17) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "404,1,424,34.445\n", 17) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 17);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "404,1,424,34.445\n", 17) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == true);
             assert(out1_1.IsBad() == false);
             assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -359,10 +360,10 @@ int main()
             assert(out1_1.Size() == 75);
             assert(out1_1.MaximumSize() == Out1MaximumBuffer);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 16);
-            assert(cout1_1.Buffer().Size() == 16);
-            assert(strncmp(*(out1_1.Buffer()), "klmnopqrstuvwxy\n", 16) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "klmnopqrstuvwxy\n", 16) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 16);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "klmnopqrstuvwxy\n", 16) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == true);
             assert(out1_1.IsBad() == false);
             assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -380,10 +381,10 @@ int main()
             assert(out1_1.Size() == 0);
             assert(out1_1.MaximumSize() == 16);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 0);
-            assert(cout1_1.Buffer().Size() == 0);
-            assert(strncmp(*(out1_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "", 0) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 0);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == false);
             assert(out1_1.IsBad() == true);
             assert(out1_1.GetBadCode() == Out1::StatusType::size_overflow);
@@ -398,10 +399,10 @@ int main()
             assert(out1_1.Size() == 0);
             assert(out1_1.MaximumSize() == 16);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 0);
-            assert(cout1_1.Buffer().Size() == 0);
-            assert(strncmp(*(out1_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "", 0) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 0);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == true);
             assert(out1_1.IsBad() == false);
             assert(out1_1.GetBadCode() == Out1::StatusType::good);
@@ -436,10 +437,10 @@ int main()
             assert(out1_1.Size() == 0);
             assert(out1_1.MaximumSize() == 16);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 27);
-            assert(cout1_1.Buffer().Size() == 27);
-            assert(strncmp(*(out1_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 27);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == false);
             assert(out1_1.IsBad() == true);
             assert(out1_1.GetBadCode() == Out1::StatusType::size_overflow);
@@ -456,10 +457,10 @@ int main()
             assert(out1_1.Size() == 0);
             assert(out1_1.MaximumSize() == 16);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 27);
-            assert(cout1_1.Buffer().Size() == 27);
-            assert(strncmp(*(out1_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 27);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == false);
             assert(out1_1.IsBad() == true);
             assert(out1_1.GetBadCode() == Out1::StatusType::size_overflow);
@@ -476,10 +477,10 @@ int main()
             assert(out1_1.Size() == 0);
             assert(out1_1.MaximumSize() == 16);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 27);
-            assert(cout1_1.Buffer().Size() == 27);
-            assert(strncmp(*(out1_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 27);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == false);
             assert(out1_1.IsBad() == true);
             assert(out1_1.GetBadCode() == Out1::StatusType::size_overflow);
@@ -496,10 +497,10 @@ int main()
             assert(out1_1.Size() == 0);
             assert(out1_1.MaximumSize() == 16);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 27);
-            assert(cout1_1.Buffer().Size() == 27);
-            assert(strncmp(*(out1_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 27);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out1_1.IsGood() == false);
             assert(out1_1.IsBad() == true);
             assert(out1_1.GetBadCode() == Out1::StatusType::size_overflow);
@@ -525,10 +526,10 @@ int main()
         assert(out2_1.Size() == 0);
         assert(out2_1.MaximumSize() == 0);
         assert(strncmp(*(out2_1.Filename()), "", 0) == 0);
-        assert(out2_1.Buffer().Size() == 5);
-        assert(cout2_1.Buffer().Size() == 5);
-        assert(strncmp(*(out2_1.Buffer()), "test\n", 5) == 0);
-        assert(strncmp(*(cout2_1.Buffer()), "test\n", 5) == 0);
+        assert(cout2_1.Buffer<char>().Size() == 5);
+        assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout2_1.Buffer<char>()), "test\n", 5) == 0);
+        assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out2_1.IsGood() == true);
         assert(out2_1.IsBad() == false);
         assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -540,10 +541,10 @@ int main()
         assert(out2_1.Size() == 0);
         assert(out2_1.MaximumSize() == 0);
         assert(strncmp(*(out2_1.Filename()), "", 0) == 0);
-        assert(out2_1.Buffer().Size() == 17);
-        assert(cout2_1.Buffer().Size() == 17);
-        assert(strncmp(*(out2_1.Buffer()), "123,4,567,89.248\n", 17) == 0);
-        assert(strncmp(*(cout2_1.Buffer()), "123,4,567,89.248\n", 17) == 0);
+        assert(cout2_1.Buffer<char>().Size() == 17);
+        assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout2_1.Buffer<char>()), "123,4,567,89.248\n", 17) == 0);
+        assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out2_1.IsGood() == true);
         assert(out2_1.IsBad() == false);
         assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -555,10 +556,10 @@ int main()
         assert(out2_1.Size() == 0);
         assert(out2_1.MaximumSize() == 0);
         assert(strncmp(*(out2_1.Filename()), "", 0) == 0);
-        assert(out2_1.Buffer().Size() == 9);
-        assert(cout2_1.Buffer().Size() == 9);
-        assert(strncmp(*(out2_1.Buffer()), "12345678\n", 9) == 0);
-        assert(strncmp(*(cout2_1.Buffer()), "12345678\n", 9) == 0);
+        assert(cout2_1.Buffer<char>().Size() == 9);
+        assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout2_1.Buffer<char>()), "12345678\n", 9) == 0);
+        assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out2_1.IsGood() == true);
         assert(out2_1.IsBad() == false);
         assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -585,10 +586,10 @@ int main()
             assert(out1_1.Size() == 0);
             assert(out1_1.MaximumSize() == Out1MaximumBuffer);
             assert(strncmp(*(out1_1.Filename()), fname, fname_size) == 0);
-            assert(out1_1.Buffer().Size() == 0);
-            assert(cout1_1.Buffer().Size() == 0);
-            assert(strncmp(*(out1_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout1_1.Buffer()), "", 0) == 0);
+            assert(cout1_1.Buffer<char>().Size() == 0);
+            assert(cout1_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout1_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout1_1.Buffer<wchar_t>()), L"", 0) == 0);
             assert(out1_1.IsGood() == false);
             assert(out1_1.IsBad() == true);
             assert(out1_1.GetBadCode() == Out1::StatusType::open_file_mode_undefined);
@@ -607,10 +608,10 @@ int main()
             assert(out2_1.Size() == 5);
             assert(out2_1.MaximumSize() == Out2MaximumBuffer);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 5);
-            assert(cout2_1.Buffer().Size() == 5);
-            assert(strncmp(*(out2_1.Buffer()), "test\n", 5) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "test\n", 5) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 5);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "test\n", 5) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == true);
             assert(out2_1.IsBad() == false);
             assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -622,10 +623,10 @@ int main()
             assert(out2_1.Size() == 22);
             assert(out2_1.MaximumSize() == Out2MaximumBuffer);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 17);
-            assert(cout2_1.Buffer().Size() == 17);
-            assert(strncmp(*(out2_1.Buffer()), "123,4,567,89.248\n", 17) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "123,4,567,89.248\n", 17) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 17);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "123,4,567,89.248\n", 17) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == true);
             assert(out2_1.IsBad() == false);
             assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -637,10 +638,10 @@ int main()
             assert(out2_1.Size() == 31);
             assert(out2_1.MaximumSize() == Out2MaximumBuffer);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 9);
-            assert(cout2_1.Buffer().Size() == 9);
-            assert(strncmp(*(out2_1.Buffer()), "12345678\n", 9) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "12345678\n", 9) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 9);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "12345678\n", 9) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == true);
             assert(out2_1.IsBad() == false);
             assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -658,10 +659,10 @@ int main()
             assert(out2_1.Size() == 31);
             assert(out2_1.MaximumSize() == Out2MaximumBuffer);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 0);
-            assert(cout2_1.Buffer().Size() == 0);
-            assert(strncmp(*(out2_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "", 0) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 0);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == true);
             assert(out2_1.IsBad() == false);
             assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -673,10 +674,10 @@ int main()
             assert(out2_1.Size() == 42);
             assert(out2_1.MaximumSize() == Out2MaximumBuffer);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 11);
-            assert(cout2_1.Buffer().Size() == 11);
-            assert(strncmp(*(out2_1.Buffer()), "abcdefghij\n", 11) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "abcdefghij\n", 11) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 11);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "abcdefghij\n", 11) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == true);
             assert(out2_1.IsBad() == false);
             assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -688,10 +689,10 @@ int main()
             assert(out2_1.Size() == 59);
             assert(out2_1.MaximumSize() == Out2MaximumBuffer);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 17);
-            assert(cout2_1.Buffer().Size() == 17);
-            assert(strncmp(*(out2_1.Buffer()), "404,1,424,34.445\n", 17) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "404,1,424,34.445\n", 17) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 17);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "404,1,424,34.445\n", 17) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == true);
             assert(out2_1.IsBad() == false);
             assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -703,10 +704,10 @@ int main()
             assert(out2_1.Size() == 75);
             assert(out2_1.MaximumSize() == Out2MaximumBuffer);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 16);
-            assert(cout2_1.Buffer().Size() == 16);
-            assert(strncmp(*(out2_1.Buffer()), "klmnopqrstuvwxy\n", 16) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "klmnopqrstuvwxy\n", 16) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 16);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "klmnopqrstuvwxy\n", 16) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == true);
             assert(out2_1.IsBad() == false);
             assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -724,10 +725,10 @@ int main()
             assert(out2_1.Size() == 0);
             assert(out2_1.MaximumSize() == 16);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 0);
-            assert(cout2_1.Buffer().Size() == 0);
-            assert(strncmp(*(out2_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "", 0) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 0);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 0) == 0);
             assert(out2_1.IsGood() == false);
             assert(out2_1.IsBad() == true);
             assert(out2_1.GetBadCode() == Out2::StatusType::size_overflow);
@@ -742,10 +743,10 @@ int main()
             assert(out2_1.Size() == 0);
             assert(out2_1.MaximumSize() == 16);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 0);
-            assert(cout2_1.Buffer().Size() == 0);
-            assert(strncmp(*(out2_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "", 0) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 0);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == true);
             assert(out2_1.IsBad() == false);
             assert(out2_1.GetBadCode() == Out2::StatusType::good);
@@ -781,10 +782,10 @@ int main()
             assert(out2_1.Size() == 0);
             assert(out2_1.MaximumSize() == 16);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 27);
-            assert(cout2_1.Buffer().Size() == 27);
-            assert(strncmp(*(out2_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 27);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == false);
             assert(out2_1.IsBad() == true);
             assert(out2_1.GetBadCode() == Out2::StatusType::size_overflow);
@@ -801,10 +802,10 @@ int main()
             assert(out2_1.Size() == 0);
             assert(out2_1.MaximumSize() == 16);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 27);
-            assert(cout2_1.Buffer().Size() == 27);
-            assert(strncmp(*(out2_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 27);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == false);
             assert(out2_1.IsBad() == true);
             assert(out2_1.GetBadCode() == Out2::StatusType::size_overflow);
@@ -821,10 +822,10 @@ int main()
             assert(out2_1.Size() == 0);
             assert(out2_1.MaximumSize() == 16);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 27);
-            assert(cout2_1.Buffer().Size() == 27);
-            assert(strncmp(*(out2_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 27);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == false);
             assert(out2_1.IsBad() == true);
             assert(out2_1.GetBadCode() == Out2::StatusType::size_overflow);
@@ -841,10 +842,10 @@ int main()
             assert(out2_1.Size() == 0);
             assert(out2_1.MaximumSize() == 16);
             assert(strncmp(*(out2_1.Filename()), fname, fname_size) == 0);
-            assert(out2_1.Buffer().Size() == 27);
-            assert(cout2_1.Buffer().Size() == 27);
-            assert(strncmp(*(out2_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout2_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout2_1.Buffer<char>().Size() == 27);
+            assert(cout2_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout2_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout2_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out2_1.IsGood() == false);
             assert(out2_1.IsBad() == true);
             assert(out2_1.GetBadCode() == Out2::StatusType::size_overflow);
@@ -870,10 +871,10 @@ int main()
         assert(out3_1.Size() == 0);
         assert(out3_1.MaximumSize() == 0);
         assert(strncmp(*(out3_1.Filename()), "", 0) == 0);
-        assert(out3_1.Buffer().Size() == 11);
-        assert(cout3_1.Buffer().Size() == 11);
-        assert(strncmp(*(out3_1.Buffer()), "abcdefghij\n", 11) == 0);
-        assert(strncmp(*(cout3_1.Buffer()), "abcdefghij\n", 11) == 0);
+        assert(cout3_1.Buffer<char>().Size() == 11);
+        assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout3_1.Buffer<char>()), "abcdefghij\n", 11) == 0);
+        assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out3_1.IsGood() == true);
         assert(out3_1.IsBad() == false);
         assert(out3_1.GetBadCode() == Out3::StatusType::good);
@@ -885,10 +886,10 @@ int main()
         assert(out3_1.Size() == 0);
         assert(out3_1.MaximumSize() == 0);
         assert(strncmp(*(out3_1.Filename()), "", 0) == 0);
-        assert(out3_1.Buffer().Size() == 0);
-        assert(cout3_1.Buffer().Size() == 0);
-        assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-        assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+        assert(cout3_1.Buffer<char>().Size() == 0);
+        assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+        assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out3_1.IsGood() == false);
         assert(out3_1.IsBad() == true);
         assert(out3_1.GetBadCode() == Out3::StatusType::print_buffer_overflow);
@@ -904,10 +905,10 @@ int main()
         assert(out3_1.Size() == 0);
         assert(out3_1.MaximumSize() == 0);
         assert(strncmp(*(out3_1.Filename()), "", 0) == 0);
-        assert(out3_1.Buffer().Size() == 11);
-        assert(cout3_1.Buffer().Size() == 11);
-        assert(strncmp(*(out3_1.Buffer()), "abcdefghij\n", 11) == 0);
-        assert(strncmp(*(cout3_1.Buffer()), "abcdefghij\n", 11) == 0);
+        assert(cout3_1.Buffer<char>().Size() == 11);
+        assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout3_1.Buffer<char>()), "abcdefghij\n", 11) == 0);
+        assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out3_1.IsGood() == true);
         assert(out3_1.IsBad() == false);
         assert(out3_1.GetBadCode() == Out3::StatusType::good);
@@ -919,10 +920,10 @@ int main()
         assert(out3_1.Size() == 0);
         assert(out3_1.MaximumSize() == 0);
         assert(strncmp(*(out3_1.Filename()), "", 0) == 0);
-        assert(out3_1.Buffer().Size() == 0);
-        assert(cout3_1.Buffer().Size() == 0);
-        assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-        assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+        assert(cout3_1.Buffer<char>().Size() == 0);
+        assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+        assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+        assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
         assert(out3_1.IsGood() == false);
         assert(out3_1.IsBad() == true);
         assert(out3_1.GetBadCode() == Out3::StatusType::puts_buffer_overflow);
@@ -949,10 +950,10 @@ int main()
             assert(out3_1.Size() == 0);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::open_file_mode_undefined);
@@ -970,10 +971,10 @@ int main()
             assert(out3_1.Size() == 8);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 8);
-            assert(cout3_1.Buffer().Size() == 8);
-            assert(strncmp(*(out3_1.Buffer()), "1234567\n", 8) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "1234567\n", 8) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 8);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "1234567\n", 8) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == true);
             assert(out3_1.IsBad() == false);
             assert(out3_1.GetBadCode() == Out3::StatusType::good);
@@ -985,10 +986,10 @@ int main()
             assert(out3_1.Size() == 8);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::print_buffer_overflow);
@@ -1004,10 +1005,10 @@ int main()
             assert(out3_1.Size() == 8);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == true);
             assert(out3_1.IsBad() == false);
             assert(out3_1.GetBadCode() == Out3::StatusType::good);
@@ -1019,10 +1020,10 @@ int main()
             assert(out3_1.Size() == 15);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 7);
-            assert(cout3_1.Buffer().Size() == 7);
-            assert(strncmp(*(out3_1.Buffer()), "123456\n", 7) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "123456\n", 7) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 7);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "123456\n", 7) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == true);
             assert(out3_1.IsBad() == false);
             assert(out3_1.GetBadCode() == Out3::StatusType::good);
@@ -1034,10 +1035,10 @@ int main()
             assert(out3_1.Size() == 15);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::print_buffer_overflow);
@@ -1055,10 +1056,10 @@ int main()
             assert(out3_1.Size() == 8);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 8);
-            assert(cout3_1.Buffer().Size() == 8);
-            assert(strncmp(*(out3_1.Buffer()), "1234567\n", 8) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "1234567\n", 8) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 8);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "1234567\n", 8) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == true);
             assert(out3_1.IsBad() == false);
             assert(out3_1.GetBadCode() == Out3::StatusType::good);
@@ -1070,10 +1071,10 @@ int main()
             assert(out3_1.Size() == 8);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::puts_buffer_overflow);
@@ -1089,10 +1090,10 @@ int main()
             assert(out3_1.Size() == 8);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == true);
             assert(out3_1.IsBad() == false);
             assert(out3_1.GetBadCode() == Out3::StatusType::good);
@@ -1104,10 +1105,10 @@ int main()
             assert(out3_1.Size() == 15);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 7);
-            assert(cout3_1.Buffer().Size() == 7);
-            assert(strncmp(*(out3_1.Buffer()), "123456\n", 7) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "123456\n", 7) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 7);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "123456\n", 7) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == true);
             assert(out3_1.IsBad() == false);
             assert(out3_1.GetBadCode() == Out3::StatusType::good);
@@ -1119,10 +1120,10 @@ int main()
             assert(out3_1.Size() == 15);
             assert(out3_1.MaximumSize() == Out3MaximumBuffer);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::puts_buffer_overflow);
@@ -1139,10 +1140,10 @@ int main()
             assert(out3_1.Size() == 0);
             assert(out3_1.MaximumSize() == 15);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::size_overflow);
@@ -1157,10 +1158,10 @@ int main()
             assert(out3_1.Size() == 0);
             assert(out3_1.MaximumSize() == 15);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == true);
             assert(out3_1.IsBad() == false);
             assert(out3_1.GetBadCode() == Out3::StatusType::good);
@@ -1195,10 +1196,10 @@ int main()
             assert(out3_1.Size() == 0);
             assert(out3_1.MaximumSize() == 16);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::print_buffer_overflow);
@@ -1215,10 +1216,10 @@ int main()
             assert(out3_1.Size() == 0);
             assert(out3_1.MaximumSize() == 16);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::puts_buffer_overflow);
@@ -1235,10 +1236,10 @@ int main()
             assert(out3_1.Size() == 0);
             assert(out3_1.MaximumSize() == 16);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::print_buffer_overflow);
@@ -1255,10 +1256,10 @@ int main()
             assert(out3_1.Size() == 0);
             assert(out3_1.MaximumSize() == 16);
             assert(strncmp(*(out3_1.Filename()), fname, fname_size) == 0);
-            assert(out3_1.Buffer().Size() == 0);
-            assert(cout3_1.Buffer().Size() == 0);
-            assert(strncmp(*(out3_1.Buffer()), "", 0) == 0);
-            assert(strncmp(*(cout3_1.Buffer()), "", 0) == 0);
+            assert(cout3_1.Buffer<char>().Size() == 0);
+            assert(cout3_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout3_1.Buffer<char>()), "", 0) == 0);
+            assert(wcsncmp(*(cout3_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out3_1.IsGood() == false);
             assert(out3_1.IsBad() == true);
             assert(out3_1.GetBadCode() == Out3::StatusType::puts_buffer_overflow);
@@ -1309,10 +1310,10 @@ int main()
             assert(out4_1.Size() == 27);
             assert(out4_1.MaximumSize() == 32);
             assert(strncmp(*(out4_1.Filename()), fname, fname_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1324,10 +1325,10 @@ int main()
             assert(out4_1.Size() == 27);
             assert(out4_1.MaximumSize() == 32);
             assert(strncmp(*(out4_1.Filename()), fname_next, fname_next_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1354,10 +1355,10 @@ int main()
             assert(out4_1.Size() == 54);
             assert(out4_1.MaximumSize() == 64);
             assert(strncmp(*(out4_1.Filename()), fname, fname_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1369,10 +1370,10 @@ int main()
             assert(out4_1.Size() == 54);
             assert(out4_1.MaximumSize() == 64);
             assert(strncmp(*(out4_1.Filename()), fname_next, fname_next_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1401,10 +1402,10 @@ int main()
             assert(out4_1.Size() == 27);
             assert(out4_1.MaximumSize() == 32);
             assert(strncmp(*(out4_1.Filename()), fname, fname_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1416,10 +1417,10 @@ int main()
             assert(out4_1.Size() == 27);
             assert(out4_1.MaximumSize() == 32);
             assert(strncmp(*(out4_1.Filename()), fname_next, fname_next_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1446,10 +1447,10 @@ int main()
             assert(out4_1.Size() == 54);
             assert(out4_1.MaximumSize() == 64);
             assert(strncmp(*(out4_1.Filename()), fname, fname_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1461,10 +1462,10 @@ int main()
             assert(out4_1.Size() == 54);
             assert(out4_1.MaximumSize() == 64);
             assert(strncmp(*(out4_1.Filename()), fname_next, fname_next_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1493,10 +1494,10 @@ int main()
             assert(out4_1.Size() == 81);
             assert(out4_1.MaximumSize() == 96);
             assert(strncmp(*(out4_1.Filename()), fname, fname_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1508,10 +1509,10 @@ int main()
             assert(out4_1.Size() == 27);
             assert(out4_1.MaximumSize() == 96);
             assert(strncmp(*(out4_1.Filename()), fname, fname_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1537,10 +1538,10 @@ int main()
             assert(out4_1.Size() == 81);
             assert(out4_1.MaximumSize() == 96);
             assert(strncmp(*(out4_1.Filename()), fname_next, fname_next_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
@@ -1552,10 +1553,10 @@ int main()
             assert(out4_1.Size() == 27);
             assert(out4_1.MaximumSize() == 96);
             assert(strncmp(*(out4_1.Filename()), fname_next, fname_next_size) == 0);
-            assert(out4_1.Buffer().Size() == 27);
-            assert(cout4_1.Buffer().Size() == 27);
-            assert(strncmp(*(out4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
-            assert(strncmp(*(cout4_1.Buffer()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(cout4_1.Buffer<char>().Size() == 27);
+            assert(cout4_1.Buffer<wchar_t>().Size() == 0);
+            assert(strncmp(*(cout4_1.Buffer<char>()), "abcdefghijklmnopqrstuvwxyz\n", 27) == 0);
+            assert(wcsncmp(*(cout4_1.Buffer<wchar_t>()), L"", 1) == 0);
             assert(out4_1.IsGood() == true);
             assert(out4_1.IsBad() == false);
             assert(out4_1.GetBadCode() == Out4::StatusType::good);
