@@ -6,6 +6,7 @@
 #include "file/Status.h"
 #include "file/Base.h"
 #include "Interface.h"
+#include "Standard.h"
 
 #include <cstdio>
 #include <cstddef>
@@ -26,11 +27,12 @@ namespace test
 namespace out
 {
 
-template<typename TChar, std::size_t MinimumBuffer = 512,
+template<std::size_t MinimumBuffer = 512,
     std::size_t MaximumBuffer = 65535>
 class File : 
     private test::out::file::Base,
-    public test::out::Interface<char>
+    public test::out::Interface<char>,
+    public test::out::Interface<wchar_t>
 {
 public:
     static_assert(MinimumBuffer != 0, "Minimum Buffer cannot zero");
@@ -61,7 +63,8 @@ private:
     ModeType m_mode;
     FILE * m_file;
     test::CString<char> m_filename;
-    test::CString<TChar> m_tmp;
+    test::CString<char> m_char_tmp;
+    test::CString<wchar_t> m_wchar_tmp;
     SizeType m_size;
     const SizeType m_maximum_size;
 public:
@@ -72,13 +75,13 @@ public:
 public:
     virtual ~File();
 public:
-    File(const File<TChar, MinimumBuffer, MaximumBuffer> &) = delete;
-    File(File<TChar, MinimumBuffer, MaximumBuffer> &&) = delete;
+    File(const File<MinimumBuffer, MaximumBuffer> &) = delete;
+    File(File<MinimumBuffer, MaximumBuffer> &&) = delete;
 public:
-    File<TChar, MinimumBuffer, MaximumBuffer>& 
-        operator=(const File<TChar, MinimumBuffer, MaximumBuffer>&) = delete;
-    File<TChar, MinimumBuffer, MaximumBuffer>& 
-        operator=(File<TChar, MinimumBuffer, MaximumBuffer>&&) = delete;
+    File<MinimumBuffer, MaximumBuffer>& 
+        operator=(const File<MinimumBuffer, MaximumBuffer>&) = delete;
+    File<MinimumBuffer, MaximumBuffer>& 
+        operator=(File<MinimumBuffer, MaximumBuffer>&&) = delete;
 protected:
     virtual bool OnMaximumSize(test::CString<char> old_filename,
         test::CString<char>& new_filename, ModeType& mode);
@@ -106,15 +109,27 @@ protected:
         TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
     SizeType Print(const char * format, ...) override
         TEST_ATTRIBUTE ((__format__ (__printf__, 2, 3)));
+    SizeType VPrint(const wchar_t * format, va_list var_args) override;
+    SizeType Print(const wchar_t * format, ...) override;
 protected:
-    SizeType Puts(const TChar * cstr, const SizeType& size) override;
-    SizeType Puts(const TChar * cstr) override;
+    SizeType Puts(const char * cstr, const SizeType& size) override;
+    SizeType Puts(const char * cstr) override;
     template<std::size_t S>
-    SizeType Puts(const TChar(&cstr)[S]);
-    SizeType Puts(const test::CString<TChar>& cstr) override;
-    SizeType Puts(const test::CString<const TChar>& cstr) override;
+    SizeType Puts(const char(&cstr)[S]);
+    SizeType Puts(const test::CString<char>& cstr) override;
+    SizeType Puts(const test::CString<const char>& cstr) override;
+    SizeType Puts(const wchar_t * cstr, const SizeType& size) override;
+    SizeType Puts(const wchar_t * cstr) override;
+    template<std::size_t S>
+    SizeType Puts(const wchar_t(&cstr)[S]);
+    SizeType Puts(const test::CString<wchar_t>& cstr) override;
+    SizeType Puts(const test::CString<const wchar_t>& cstr) override;
 protected:
-    test::CString<TChar> Buffer();
+    template<typename TChar, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    test::CString<TChar> Buffer() const;
+    template<typename TChar, typename std::enable_if<
+        std::is_same<TChar, wchar_t>::value, int>::type = 1>
     test::CString<TChar> Buffer() const;
 protected:
     bool IsGood() const override;
@@ -124,8 +139,8 @@ protected:
     bool IsStandard() const;
 };
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::
     _Open(FILE *& file, test::CString<char>& filename, const char * mode)
 {
 #if (defined(_MSC_BUILD) && !defined(_CRT_SECURE_NO_WARNINGS))
@@ -136,8 +151,8 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::
     return file != nullptr;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::
     _Size(test::CString<char>& filename, SizeType& size, StatusType& status)
 {
     FILE * read_file = nullptr;
@@ -172,47 +187,50 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::
     return true;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-File<TChar, MinimumBuffer, MaximumBuffer>::File() :
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+File<MinimumBuffer, MaximumBuffer>::File() :
     BaseType(StatusType::standard_output),
     m_mode(mode_undefined),
     m_file(stdout),
     m_filename(),
-    m_tmp(),
+    m_char_tmp(),
+    m_wchar_tmp(),
     m_size(0), 
     m_maximum_size(0)
 {}
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-File<TChar, MinimumBuffer, MaximumBuffer>::File(const char * filename, 
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+File<MinimumBuffer, MaximumBuffer>::File(const char * filename, 
     const ModeType& mode) :
         BaseType(StatusType::file_output | StatusType::require_initialize),
         m_mode(mode),
         m_file(nullptr),
         m_filename(),
-        m_tmp(),
+        m_char_tmp(),
+        m_wchar_tmp(),
         m_size(0),
         m_maximum_size(MaximumBuffer)
 {
     _SetFilename(filename);
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-File<TChar, MinimumBuffer, MaximumBuffer>::File(const char * filename, 
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+File<MinimumBuffer, MaximumBuffer>::File(const char * filename, 
     const ModeType& mode, const SizeType& maximum_size) :
         BaseType(StatusType::file_output | StatusType::require_initialize),
         m_mode(mode),
         m_file(nullptr),
         m_filename(),
-        m_tmp(),
+        m_char_tmp(),
+        m_wchar_tmp(),
         m_size(0),
         m_maximum_size(maximum_size)
 {
     _SetFilename(filename);
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-File<TChar, MinimumBuffer, MaximumBuffer>::~File()
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+File<MinimumBuffer, MaximumBuffer>::~File()
 {
     if (m_file != nullptr && m_file != stdout)
     {
@@ -221,16 +239,16 @@ File<TChar, MinimumBuffer, MaximumBuffer>::~File()
     }
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::
     OnMaximumSize(test::CString<char>,
         test::CString<char>&, ModeType&)
 {
     return false;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::_Open()
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::_Open()
 {
     auto& status = GetStatus();
     
@@ -259,8 +277,8 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::_Open()
     return true;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::_Close()
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::_Close()
 {
     auto& status = GetStatus();
     
@@ -274,8 +292,8 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::_Close()
     return true;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::_Size()
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::_Size()
 {
     auto& status = GetStatus();
     if (m_mode & mode_append)
@@ -291,8 +309,8 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::_Size()
     return true;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::
     _CheckSize(const SizeType& buffer_size)
 {
     auto& status = GetStatus();
@@ -313,8 +331,8 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::
     return true;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::_TriggerMaximumSize()
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::_TriggerMaximumSize()
 {
     auto& status = GetStatus();
 
@@ -347,12 +365,12 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::_TriggerMaximumSize()
     return true;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::
     _SetFilename(const char * filename)
 {
     auto& status = GetStatus();
-    const SizeType len = test::cstr::Length<TChar>::Value(filename, 
+    const SizeType len = test::cstr::Length<char>::Value(filename, 
         filename_maximum_size);
     if (len >= filename_maximum_size)
     {
@@ -363,8 +381,8 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::
     return true;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::
     _SetFilename(test::CString<char>& filename)
 {
     auto& status = GetStatus();
@@ -377,8 +395,8 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::
     return true;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::_Initialize()
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::_Initialize()
 {
     auto& status = GetStatus();
     if (status.IsRequire(StatusType::require_initialize))
@@ -399,19 +417,19 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::_Initialize()
     return true;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::Initialize()
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::Initialize()
 {
     auto& status = GetStatus();
     if (status.IsBad()) return false;
     return _Initialize();
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::ModeType 
-    File<TChar, MinimumBuffer, MaximumBuffer>::Mode() const
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::ModeType 
+    File<MinimumBuffer, MaximumBuffer>::Mode() const
 {
-    auto* pthis = const_cast<File<TChar, MinimumBuffer, MaximumBuffer>*>(this);
+    auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
     if (!pthis) return mode_undefined;
     
     pthis->_Initialize();
@@ -421,11 +439,11 @@ typename File<TChar, MinimumBuffer, MaximumBuffer>::ModeType
     return m_mode;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType 
-    File<TChar, MinimumBuffer, MaximumBuffer>::Size() const
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+    File<MinimumBuffer, MaximumBuffer>::Size() const
 {
-    auto* pthis = const_cast<File<TChar, MinimumBuffer, MaximumBuffer>*>(this);
+    auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
     if (!pthis) return 0;
     
     pthis->_Initialize();
@@ -435,17 +453,17 @@ typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
     return m_size;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType 
-    File<TChar, MinimumBuffer, MaximumBuffer>::MaximumSize() const
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+    File<MinimumBuffer, MaximumBuffer>::MaximumSize() const
 {
     return m_maximum_size;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-test::CString<char> File<TChar, MinimumBuffer, MaximumBuffer>::Filename() const
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+test::CString<char> File<MinimumBuffer, MaximumBuffer>::Filename() const
 {
-    auto* pthis = const_cast<File<TChar, MinimumBuffer, MaximumBuffer>*>(this);
+    auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
     if (!pthis) return {};
     
     pthis->_Initialize();
@@ -455,9 +473,9 @@ test::CString<char> File<TChar, MinimumBuffer, MaximumBuffer>::Filename() const
     return {m_filename};
 } 
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
-File<TChar, MinimumBuffer, MaximumBuffer>::VPrint(const char * format, 
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType
+File<MinimumBuffer, MaximumBuffer>::VPrint(const char * format, 
     va_list var_args)
 {
     if (!Initialize()) return 0;
@@ -465,43 +483,46 @@ File<TChar, MinimumBuffer, MaximumBuffer>::VPrint(const char * format,
     auto guard = BaseType::PrintGuard();
     if(!guard) return 0;
     
+    m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+    
     auto& status = GetStatus();
-    TChar * buffer = new TChar[MinimumBuffer];
-    int buffer_size = vsnprintf(buffer, MinimumBuffer, format, var_args);
+    char * buffer = new char[MinimumBuffer];
+    int buffer_size = test::out::VSPrint<char>(buffer, MinimumBuffer, 
+        format, var_args);
     if (buffer_size < 0)
     {
         delete[] buffer;
         status.Bad(StatusType::print_buffer_failed);
-        m_tmp = std::move(test::CString<TChar>("", 0));
+        m_char_tmp = std::move(test::CString<char>("", 0));
         return 0;
     } 
     else if ((SizeType)buffer_size >= MinimumBuffer && 
         (SizeType)buffer_size < MaximumBuffer)
     {
         delete[] buffer;
-        buffer = new TChar[buffer_size + 1];
-        vsnprintf(buffer, buffer_size + 1, format, var_args);
+        buffer = new char[buffer_size + 1];
+        test::out::VSPrint<char>(buffer, buffer_size + 1, format, var_args);
     }
     else if ((SizeType)buffer_size >= MaximumBuffer)
     {
         delete[] buffer;
         buffer = nullptr;
         status.Bad(StatusType::print_buffer_overflow);
-        m_tmp = std::move(test::CString<TChar>("", 0));
+        m_char_tmp = std::move(test::CString<char>("", 0));
         return 0;
     }
 
     if (buffer_size > 0)
-        m_tmp = std::move(test::CString<TChar>(buffer, buffer_size));
+        m_char_tmp = std::move(test::CString<char>(buffer, buffer_size));
     else
-        m_tmp = std::move(test::CString<TChar>("", 0));
+        m_char_tmp = std::move(test::CString<char>("", 0));
 
     if (buffer != nullptr) delete[] buffer;
 
     if (!_CheckSize(buffer_size)) return 0;
     if (!status.IsStandardOutput()) m_size += buffer_size;
 
-    int ret_puts = fputs(*m_tmp, m_file);
+    int ret_puts = test::out::FPuts<char>(*m_char_tmp, m_file);
     fflush(m_file);
 
     if (ret_puts < 0)
@@ -513,11 +534,10 @@ File<TChar, MinimumBuffer, MaximumBuffer>::VPrint(const char * format,
     return buffer_size;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
-File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType
+File<MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
 {
-    
     va_list var_args;
     va_start(var_args, format);
     
@@ -528,25 +548,102 @@ File<TChar, MinimumBuffer, MaximumBuffer>::Print(const char * format, ...)
     return size;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
-File<TChar, MinimumBuffer, MaximumBuffer>::
-    Puts(const TChar * cstr, const SizeType& size)
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+File<MinimumBuffer, MaximumBuffer>::VPrint(const wchar_t * format, 
+    va_list var_args)
+{
+    if (!Initialize()) return 0;
+
+    auto guard = BaseType::PrintGuard();
+    if(!guard) return 0;
+    
+    m_char_tmp = std::move(test::CString<char>("", 0));
+    
+    auto& status = GetStatus();
+    wchar_t * buffer = new wchar_t[MinimumBuffer];
+    int buffer_size = test::out::VSPrint<wchar_t>(buffer, MinimumBuffer, 
+        format, var_args);
+    if (buffer_size < 0)
+    {
+        delete[] buffer;
+        status.Bad(StatusType::print_buffer_failed);
+        m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+        return 0;
+    } 
+    else if ((SizeType)buffer_size >= MinimumBuffer && 
+        (SizeType)buffer_size < MaximumBuffer)
+    {
+        delete[] buffer;
+        buffer = new wchar_t[buffer_size + 1];
+        test::out::VSPrint<wchar_t>(buffer, buffer_size + 1, format, var_args);
+    }
+    else if ((SizeType)buffer_size >= MaximumBuffer)
+    {
+        delete[] buffer;
+        buffer = nullptr;
+        status.Bad(StatusType::print_buffer_overflow);
+        m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+        return 0;
+    }
+
+    if (buffer_size > 0)
+        m_wchar_tmp = std::move(test::CString<wchar_t>(buffer, buffer_size));
+    else
+        m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+
+    if (buffer != nullptr) delete[] buffer;
+
+    if (!_CheckSize(buffer_size)) return 0;
+    if (!status.IsStandardOutput()) m_size += buffer_size;
+
+    int ret_puts = test::out::FPuts<wchar_t>(*m_wchar_tmp, m_file);
+    fflush(m_file);
+
+    if (ret_puts < 0)
+    {
+        status.Bad(StatusType::print_output_failed);
+        return 0;
+    }
+
+    return buffer_size;
+}
+
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+File<MinimumBuffer, MaximumBuffer>::Print(const wchar_t * format, ...)
+{
+    va_list var_args;
+    va_start(var_args, format);
+    
+    SizeType size = VPrint(format, var_args);
+
+    va_end(var_args);
+
+    return size;
+}
+
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType
+File<MinimumBuffer, MaximumBuffer>::
+    Puts(const char * cstr, const SizeType& size)
 {
     if (!Initialize()) return 0;
 
     auto guard = BaseType::PutsGuard();
     if (!guard) return 0;
+    
+    m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
 
     auto& status = GetStatus();
 
     if (status.IsBad()) return 0;
 
     if (size < MaximumBuffer)
-        m_tmp = std::move(test::CString<TChar>(cstr, size));
+        m_char_tmp = std::move(test::CString<char>(cstr, size));
     else
     {
-        m_tmp = std::move(test::CString<TChar>("", 0));
+        m_char_tmp = std::move(test::CString<char>("", 0));
         status.Bad(StatusType::puts_buffer_overflow);
         return 0;
     }
@@ -554,7 +651,7 @@ File<TChar, MinimumBuffer, MaximumBuffer>::
     if (!_CheckSize(size)) return 0;
     if (!status.IsStandardOutput()) m_size += size;
 
-    int ret_puts = fputs(*m_tmp, m_file);
+    int ret_puts = test::out::FPuts<char>(*m_char_tmp, m_file);
 
     if (ret_puts < 0)
     {
@@ -564,62 +661,137 @@ File<TChar, MinimumBuffer, MaximumBuffer>::
     return size;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
-File<TChar, MinimumBuffer, MaximumBuffer>::Puts(const TChar * cstr)
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType
+File<MinimumBuffer, MaximumBuffer>::Puts(const char * cstr)
 {
-    const auto size = test::cstr::Length<TChar>::Value(cstr, MaximumBuffer);
+    const auto size = test::cstr::Length<char>::Value(cstr, MaximumBuffer);
     return Puts(cstr, size);
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
 template<std::size_t S>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
-File<TChar, MinimumBuffer, MaximumBuffer>::Puts(const TChar(&cstr)[S])
+typename File<MinimumBuffer, MaximumBuffer>::SizeType
+File<MinimumBuffer, MaximumBuffer>::Puts(const char(&cstr)[S])
 {
     return Puts(cstr, S - 1);
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType
-File<TChar, MinimumBuffer, MaximumBuffer>::
-    Puts(const test::CString<TChar>& cstr)
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType
+File<MinimumBuffer, MaximumBuffer>::Puts(const test::CString<char>& cstr)
 {
     return Puts(*cstr, cstr.Size());
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::SizeType 
-File<TChar, MinimumBuffer, MaximumBuffer>::
-    Puts(const test::CString<const TChar>& cstr)
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+File<MinimumBuffer, MaximumBuffer>::Puts(const test::CString<const char>& cstr)
 {
     return Puts(*cstr, cstr.Size());
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-test::CString<TChar> File<TChar, MinimumBuffer, MaximumBuffer>::Buffer()
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+File<MinimumBuffer, MaximumBuffer>::Puts(const wchar_t * cstr, 
+    const SizeType& size)
 {
-    auto guard = BaseType::BufferGuard();
-    if (!guard) return test::CString<TChar>("", 0);
+    if (!Initialize()) return 0;
 
-    return {m_tmp};
+    auto guard = BaseType::PutsGuard();
+    if (!guard) return 0;
+    
+    m_char_tmp = std::move(test::CString<char>("", 0));
+
+    auto& status = GetStatus();
+
+    if (status.IsBad()) return 0;
+
+    if (size < MaximumBuffer)
+        m_wchar_tmp = std::move(test::CString<wchar_t>(cstr, size));
+    else
+    {
+        m_wchar_tmp = std::move(test::CString<wchar_t>(L"", 0));
+        status.Bad(StatusType::puts_buffer_overflow);
+        return 0;
+    }
+    
+    if (!_CheckSize(size)) return 0;
+    if (!status.IsStandardOutput()) m_size += size;
+
+    int ret_puts = test::out::FPuts<wchar_t>(*m_wchar_tmp, m_file);
+
+    if (ret_puts < 0)
+    {
+        status.Bad(StatusType::puts_output_failed);
+        return 0;
+    }
+    return size;
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-test::CString<TChar> 
-File<TChar, MinimumBuffer, MaximumBuffer>::Buffer() const
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+File<MinimumBuffer, MaximumBuffer>::Puts(const wchar_t * cstr)
 {
-    auto* pthis = const_cast<File<TChar, MinimumBuffer, MaximumBuffer>*>(this);
-    if (pthis) return pthis->Buffer();
-    return {};
+    const auto size = test::cstr::Length<wchar_t>::Value(cstr, MaximumBuffer);
+    return Puts(cstr, size);
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::IsGood() const
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+template<std::size_t S>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+File<MinimumBuffer, MaximumBuffer>::Puts(const wchar_t(&cstr)[S])
+{
+    return Puts(cstr, S - 1);
+}
+
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+File<MinimumBuffer, MaximumBuffer>::Puts(const test::CString<wchar_t>& cstr)
+{
+    return Puts(*cstr, cstr.Size());
+}
+
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::SizeType 
+File<MinimumBuffer, MaximumBuffer>::
+    Puts(const test::CString<const wchar_t>& cstr)
+{
+    return Puts(*cstr, cstr.Size());
+}
+
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, char>::value, int>::type>
+test::CString<TChar> File<MinimumBuffer, MaximumBuffer>::Buffer() const
+{
+    auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
+
+    auto guard = pthis->BaseType::BufferGuard();
+    if (!guard) return test::CString<char>("", 0);
+
+    return {m_char_tmp};
+}
+
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+template<typename TChar, typename std::enable_if<
+    std::is_same<TChar, wchar_t>::value, int>::type>
+test::CString<TChar>  File<MinimumBuffer, MaximumBuffer>::Buffer() const
+{
+    auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
+
+    auto guard = pthis->BaseType::BufferGuard();
+    if (!guard) return test::CString<wchar_t>(L"", 0);
+
+    return {m_wchar_tmp};
+}
+
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File< MinimumBuffer, MaximumBuffer>::IsGood() const
 {
     const auto& status = GetStatus();
 
-    auto* pthis = const_cast<File<TChar, MinimumBuffer, MaximumBuffer>*>(this);
+    auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
     if (!pthis) return false;
     
     if (status.IsBad()) return false;
@@ -629,12 +801,12 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::IsGood() const
     return status.IsGood();
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::IsBad() const
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::IsBad() const
 {
     const auto& status = GetStatus();
 
-    auto* pthis = const_cast<File<TChar, MinimumBuffer, MaximumBuffer>*>(this);
+    auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
     if (!pthis) return true;
 
     if (status.IsBad()) return true;
@@ -643,13 +815,13 @@ bool File<TChar, MinimumBuffer, MaximumBuffer>::IsBad() const
     return status.IsBad();
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-typename File<TChar, MinimumBuffer, MaximumBuffer>::StatusValueType 
-File<TChar, MinimumBuffer, MaximumBuffer>::GetBadCode() const
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+typename File<MinimumBuffer, MaximumBuffer>::StatusValueType 
+File<MinimumBuffer, MaximumBuffer>::GetBadCode() const
 {
     const auto& status = GetStatus();
 
-    auto* pthis = const_cast<File<TChar, MinimumBuffer, MaximumBuffer>*>(this);
+    auto* pthis = const_cast<File<MinimumBuffer, MaximumBuffer>*>(this);
     if (!pthis) return status.GetBadCode();
 
     if (status.IsBad()) return status.GetBadCode();
@@ -658,8 +830,8 @@ File<TChar, MinimumBuffer, MaximumBuffer>::GetBadCode() const
     return status.GetBadCode();
 }
 
-template<typename TChar, std::size_t MinimumBuffer, std::size_t MaximumBuffer>
-bool File<TChar, MinimumBuffer, MaximumBuffer>::IsStandard() const
+template<std::size_t MinimumBuffer, std::size_t MaximumBuffer>
+bool File<MinimumBuffer, MaximumBuffer>::IsStandard() const
 {
     return GetStatus().IsStandardOutput();
 }
