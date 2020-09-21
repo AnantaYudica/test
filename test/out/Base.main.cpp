@@ -2,26 +2,26 @@
 
 #include <cassert>
 
-struct Out1 : test::out::Base<char>
+struct Out1 : test::out::Base<>
 {
     Out1() {}
     Out1(const char * f, const ModeType& m) :
-        test::out::Base<char>(f, m) {}
+        test::out::Base<>(f, m) {}
     Out1(const char * f, const ModeType& m, const SizeType& s) :
-        test::out::Base<char>(f, m, s) {}
+        test::out::Base<>(f, m, s) {}
     ~Out1() {}
-    using test::out::Base<char>::VPrint;
-    using test::out::Base<char>::Print;
-    using test::out::Base<char>::Puts;
+    using test::out::Base<>::VPrint;
+    using test::out::Base<>::Print;
+    using test::out::Base<>::Puts;
 };
 template<std::size_t N>
-struct Out2 : test::out::Base<char, N>
+struct Out2 : test::out::Base<N>
 {
     Out2() {}
     ~Out2() {}
-    using test::out::Base<char, N>::VPrint;
-    using test::out::Base<char, N>::Print;
-    using test::out::Base<char, N>::Puts;
+    using test::out::Base<N>::VPrint;
+    using test::out::Base<N>::Print;
+    using test::out::Base<N>::Puts;
 };
 
 template<typename T>
