@@ -12,8 +12,7 @@ namespace base
 namespace task
 {
 
-template<typename TChar>
-using Base = test::out::base::task::base::imp::Default<TChar>;
+using Base = test::out::base::task::base::imp::Default;
 
 } //!task
 

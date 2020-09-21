@@ -3,6 +3,7 @@
 
 #include "../CString.h"
 #include "../Interface.h"
+#include "../Type.h"
 #include "task/Base.h"
 
 #include <cstdint>
@@ -15,93 +16,137 @@ namespace out
 namespace base
 {
 
-template<typename TChar>
 class Task : 
-    public test::out::base::task::Base<TChar>
+    public test::out::base::task::Base
 {
 private:
-    typedef test::out::base::task::Base<TChar> BaseType;
+    typedef test::out::base::task::Base BaseType;
 public:
     typedef typename BaseType::TaskInterfaceType TaskInterfaceType;
     typedef typename BaseType::StatusType StatusType;
     typedef typename StatusType::IntegerValueType IntegerValueType;
-    typedef typename test::out::CString<TChar>::StatusType::IntegerValueType
+    typedef typename test::out::CString<>::StatusType::IntegerValueType
         BufferIntegerValueType;
-    typedef typename TaskInterfaceType::BufferType BufferType;
+    template<typename TChar>
+    using BufferType = typename TaskInterfaceType::template BufferType<TChar>;
 private:
+    union BufferPtrType
+    {
+        test::out::CString<char> * char_out_ptr;
+        test::out::CString<wchar_t> * wchar_out_ptr;
+    };
+public:
+    static constexpr std::uint8_t undefined_type_id = 0;
+    static constexpr std::uint8_t char_type_id = 1;
+    static constexpr std::uint8_t wchar_type_id = 2;
+private:
+    std::uint8_t m_type_id;
     const std::intptr_t m_id; 
     std::intptr_t m_delegate_id;
-    test::out::CString<TChar> m_buffer;
+    BufferPtrType m_buffer;
 public:
-    Task();
+    inline Task();
+    inline Task(test::out::Type<char>);
+    inline Task(test::out::Type<wchar_t>);
 public:
-    ~Task();
+    inline ~Task();
 public:
-    Task(const Task<TChar>&) = delete;
-    Task(Task<TChar>&& mov);
+    inline Task(const Task&) = delete;
+    inline Task(Task&& mov);
 public:
-    Task<TChar>& operator=(const Task<TChar>&) = delete;
-    Task<TChar>& operator=(Task<TChar>&&) = delete;
+    inline Task& operator=(const Task&) = delete;
+    inline Task& operator=(Task&&) = delete;
 public:
-    bool operator==(const std::intptr_t& id) const;
-    bool operator!=(const std::intptr_t& id) const;
+    inline bool operator==(const std::intptr_t& id) const;
+    inline bool operator!=(const std::intptr_t& id) const;
 public:
-    bool Execute(test::out::Interface<TChar>& out) override final;
+    inline bool Execute(test::out::Interface<char>& out) override final;
+    inline bool Execute(test::out::Interface<wchar_t>& out) override final;
 public:
-    bool Assign(const std::intptr_t& deleg_id,
+    inline bool Assign(const std::intptr_t& deleg_id,
         std::intptr_t& task_id) override final;
 public:
-    bool Release(const std::intptr_t& deleg_id) override final;
+    inline bool Release(const std::intptr_t& deleg_id) override final;
 public:
-    BufferType Buffer(const std::intptr_t& deleg_id) override final;
+    inline BufferType<char> Buffer(test::out::Type<char>, 
+        const std::intptr_t& deleg_id) override final;
+    inline BufferType<wchar_t> Buffer(test::out::Type<wchar_t>, 
+        const std::intptr_t& deleg_id) override final;
 public:
-    bool IsDone() const;
-    bool IsRelease() const;
-    bool IsAssign() const;
-    bool IsGood() const;
-    bool IsBad() const;
+    inline bool IsDone() const;
+    inline bool IsRelease() const;
+    inline bool IsAssign() const;
+    inline bool IsGood() const;
+    inline bool IsBad() const;
 public:
-    IntegerValueType GetBadCode() const;
-    BufferIntegerValueType GetBufferBadCode() const;
+    inline IntegerValueType GetBadCode() const;
+    inline BufferIntegerValueType GetBufferBadCode() const;
 };
 
-template<typename TChar>
-Task<TChar>::Task() :
+inline Task::Task() :
     BaseType(),
+    m_type_id(undefined_type_id),
     m_id(reinterpret_cast<std::intptr_t>(this)),
     m_delegate_id(0),
-    m_buffer()
+    m_buffer{.char_out_ptr = nullptr}
 {}
 
-template<typename TChar>
-Task<TChar>::~Task()
+inline Task::Task(test::out::Type<char>) :
+    BaseType(),
+    m_type_id(char_type_id),
+    m_id(reinterpret_cast<std::intptr_t>(this)),
+    m_delegate_id(0),
+    m_buffer{.char_out_ptr = new test::out::CString<char>()}
 {}
 
-template<typename TChar>
-Task<TChar>::Task(Task<TChar>&& mov) :
+inline Task::Task(test::out::Type<wchar_t>) :
+    BaseType(),
+    m_type_id(wchar_type_id),
+    m_id(reinterpret_cast<std::intptr_t>(this)),
+    m_delegate_id(0),
+    m_buffer{.wchar_out_ptr = new test::out::CString<wchar_t>()}
+{}
+
+inline Task::~Task()
+{
+    if (m_type_id == char_type_id &&
+        m_buffer.char_out_ptr != nullptr)
+    {
+        delete m_buffer.char_out_ptr;
+        m_buffer.char_out_ptr = nullptr;
+    }
+    else if(m_type_id == wchar_type_id &&
+        m_buffer.wchar_out_ptr != nullptr)
+    {
+        delete m_buffer.wchar_out_ptr;
+        m_buffer.wchar_out_ptr = nullptr;
+    }
+}
+
+inline Task::Task(Task&& mov) :
     BaseType(std::move(static_cast<BaseType&&>(mov))),
+    m_type_id(mov.m_type_id),
     m_id(mov.m_id),
     m_delegate_id(mov.m_delegate_id),
-    m_buffer(std::move(mov.m_buffer))
+    m_buffer(mov.m_buffer)
 {
+    mov.m_type_id = undefined_type_id;
     mov.m_delegate_id = 0;
+    mov.m_buffer.char_out_ptr = nullptr;
     mov.GetStatus().Remove();
 }
 
-template<typename TChar>
-bool Task<TChar>::operator==(const std::intptr_t& id) const
+inline bool Task::operator==(const std::intptr_t& id) const
 {
     return m_id == id;
 }
 
-template<typename TChar>
-bool Task<TChar>::operator!=(const std::intptr_t& id) const
+inline bool Task::operator!=(const std::intptr_t& id) const
 {
     return m_id != id;
 }
 
-template<typename TChar>
-bool Task<TChar>::Execute(test::out::Interface<TChar>& out)
+inline bool Task::Execute(test::out::Interface<char>& out)
 {
     auto guard = BaseType::ExecuteGuard();
     if (!guard) return false;
@@ -109,11 +154,35 @@ bool Task<TChar>::Execute(test::out::Interface<TChar>& out)
     auto& status = BaseType::GetStatus();
     if (!status.Execute()) return false;
 
-    return m_buffer.Output(out);
+    if (m_type_id != char_type_id || 
+        m_buffer.char_out_ptr == nullptr)
+    {
+        status.Bad(status.execute_output_failed);
+        return false;
+    }
+
+    return m_buffer.char_out_ptr->Output(out);
 }
 
-template<typename TChar>
-bool Task<TChar>::Assign(const std::intptr_t& deleg_id,
+inline bool Task::Execute(test::out::Interface<wchar_t>& out)
+{
+    auto guard = BaseType::ExecuteGuard();
+    if (!guard) return false;
+    
+    auto& status = BaseType::GetStatus();
+    if (!status.Execute()) return false;
+
+    if (m_type_id != wchar_type_id ||
+        m_buffer.wchar_out_ptr == nullptr)
+    {
+        status.Bad(status.execute_output_failed);
+        return false;
+    }
+
+    return m_buffer.wchar_out_ptr->Output(out);
+}
+
+inline bool Task::Assign(const std::intptr_t& deleg_id,
     std::intptr_t& task_id)
 {
     auto guard = BaseType::AssignGuard();
@@ -128,8 +197,7 @@ bool Task<TChar>::Assign(const std::intptr_t& deleg_id,
     return true;
 }
 
-template<typename TChar>
-bool Task<TChar>::Release(const std::intptr_t& deleg_id)
+inline bool Task::Release(const std::intptr_t& deleg_id)
 {
     auto guard = BaseType::ReleaseGuard();
     if (!guard) return false;
@@ -139,9 +207,8 @@ bool Task<TChar>::Release(const std::intptr_t& deleg_id)
     return status.Release();
 }
 
-template<typename TChar>
-typename Task<TChar>::BufferType 
-Task<TChar>::Buffer(const std::intptr_t& deleg_id)
+inline typename Task::BufferType<char>
+Task::Buffer(test::out::Type<char>, const std::intptr_t& deleg_id)
 {
     auto guard = BaseType::BufferGuard();
     if (!guard) return {};
@@ -149,57 +216,92 @@ Task<TChar>::Buffer(const std::intptr_t& deleg_id)
     if (m_delegate_id != 0 && m_delegate_id != deleg_id) return {};
 
     auto& status = BaseType::GetStatus();
-    if (m_buffer.IsBad())
+
+    if (m_type_id != char_type_id || 
+        m_buffer.char_out_ptr == nullptr)
+    {
+        status.Bad(status.bad_buffer);
+        return {};
+    }
+
+    if (m_buffer.char_out_ptr->IsBad())
     {
         status.Bad(StatusType::buffer_failed);
         return {};
     }
 
-    return {&m_buffer, std::move(guard)};
+    return {m_buffer.char_out_ptr, std::move(guard)};
 }
 
-template<typename TChar>
-bool Task<TChar>::IsDone() const
+inline typename Task::BufferType<wchar_t>
+Task::Buffer(test::out::Type<wchar_t>, const std::intptr_t& deleg_id)
+{
+    auto guard = BaseType::BufferGuard();
+    if (!guard) return {};
+
+    if (m_delegate_id != 0 && m_delegate_id != deleg_id) return {};
+
+    auto& status = BaseType::GetStatus();
+
+    if (m_type_id != wchar_type_id || 
+        m_buffer.wchar_out_ptr == nullptr)
+    {
+        status.Bad(status.bad_buffer);
+        return {};
+    }
+
+    if (m_buffer.char_out_ptr->IsBad())
+    {
+        status.Bad(StatusType::buffer_failed);
+        return {};
+    }
+
+    return {m_buffer.wchar_out_ptr, std::move(guard)};
+}
+
+inline bool Task::IsDone() const
 {
     return BaseType::GetStatus().IsDone();
 }
 
-template<typename TChar>
-bool Task<TChar>::IsRelease() const
+inline bool Task::IsRelease() const
 {
     return BaseType::GetStatus().IsRelease();
 }
 
-template<typename TChar>
-bool Task<TChar>::IsAssign() const
+inline bool Task::IsAssign() const
 {
     return BaseType::GetStatus().IsAssign();
 }
 
-template<typename TChar>
-bool Task<TChar>::IsGood() const
+inline bool Task::IsGood() const
 {
     return BaseType::GetStatus().IsGood();
 }
 
-template<typename TChar>
-bool Task<TChar>::IsBad() const
+inline bool Task::IsBad() const
 {
     return BaseType::GetStatus().IsBad(); 
 }
 
-template<typename TChar>
-typename Task<TChar>::IntegerValueType 
-Task<TChar>::GetBadCode() const
+inline typename Task::IntegerValueType Task::GetBadCode() const
 {
     return BaseType::GetStatus().GetBadCode(); 
 }
 
-template<typename TChar>
-typename Task<TChar>::BufferIntegerValueType 
-Task<TChar>::GetBufferBadCode() const
+inline typename Task::BufferIntegerValueType Task::GetBufferBadCode() const
 {
-    return m_buffer.GetBadCode();
+    if (m_type_id == char_type_id &&
+        m_buffer.char_out_ptr != nullptr)
+    {
+        return m_buffer.char_out_ptr->GetBadCode();
+    }
+    else if (m_type_id == wchar_type_id &&
+        m_buffer.wchar_out_ptr != nullptr)
+    {
+        return m_buffer.wchar_out_ptr->GetBadCode();
+    }
+    return test::out::CString<>::StatusType::bad;
 }
 
 } //!base

@@ -41,7 +41,9 @@ public:
         release = 2,
         assign = 4,
         remove = 8,
-        buffer_failed = (bad | 1 << bad_offset)
+        buffer_failed = (bad | 1 << bad_offset),
+        bad_buffer = bad | (2 << bad_offset),
+        execute_output_failed = bad | (3 << bad_offset),
     };
 private:
     TValue m_val;

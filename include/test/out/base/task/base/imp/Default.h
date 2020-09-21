@@ -4,9 +4,12 @@
 #include "../Interface.h"
 #include "../../Interface.h"
 #include "../../Status.h"
+#include "../../../../Interface.h"
+#include "../../../../Type.h"
 
 #include <cstdint>
 #include <utility>
+#include <cwchar>
 
 namespace test
 {
@@ -21,172 +24,163 @@ namespace base
 namespace imp
 {
 
-template<typename TChar>
 class Default :
     protected test::out::base::task::base::Interface<
         test::out::base::task::Status<std::uint8_t>>,
-    public test::out::base::task::Interface<TChar, 
+    public test::out::base::task::Interface< 
         test::out::base::task::Status<std::uint8_t>>
 {
 protected:
     typedef test::out::base::task::base::Interface<StatusType> BaseType;
 public:
     typedef test::out::base::task::Status<std::uint8_t> StatusType;
-    typedef test::out::base::task::Interface<TChar, 
+    typedef test::out::base::task::Interface< 
         StatusType> TaskInterfaceType;
-    typedef typename TaskInterfaceType::BufferType BufferType;
+    template<typename TChar>
+    using BufferType = typename TaskInterfaceType::template BufferType<TChar>;
 protected:
-    Default();
-    Default(const std::uint8_t& val);
+    inline Default();
+    inline Default(const std::uint8_t& val);
 public:
-    virtual ~Default();
+    virtual inline ~Default();
 public:
-    Default(const Default&) = delete;
-    Default(Default&& mov);
+    inline Default(const Default&) = delete;
+    inline Default(Default&& mov);
 public:
-    Default& operator=(const Default&) = delete;
-    Default& operator=(Default&&) = delete;
+    inline Default& operator=(const Default&) = delete;
+    inline Default& operator=(Default&&) = delete;
 private:
-    bool _BeginExecute() override final;
-    void _EndExecute() override final;
+    inline bool _BeginExecute() override final;
+    inline void _EndExecute() override final;
 private:
-    bool _BeginAssign() override final;
-    void _EndAssign() override final;
+    inline bool _BeginAssign() override final;
+    inline void _EndAssign() override final;
 private:
-    bool _BeginRelease() override final;
-    void _EndRelease() override final;
+    inline bool _BeginRelease() override final;
+    inline void _EndRelease() override final;
 private:
-    bool _BeginBuffer() override final;
-    void _EndBuffer() override final;
+    inline bool _BeginBuffer() override final;
+    inline void _EndBuffer() override final;
 protected:
-    test::Guard<BaseType> ExecuteGuard() override final;
-    test::Guard<BaseType> AssignGuard() override final;
-    test::Guard<BaseType> ReleaseGuard() override final;
-    test::Guard<BaseType> BufferGuard() override final;
+    inline test::Guard<BaseType> ExecuteGuard() override final;
+    inline test::Guard<BaseType> AssignGuard() override final;
+    inline test::Guard<BaseType> ReleaseGuard() override final;
+    inline test::Guard<BaseType> BufferGuard() override final;
 public:
-    virtual bool Execute(test::out::Interface<TChar>& out) override;
+    virtual inline bool Execute(test::out::Interface<char>& out) override;
+    virtual inline bool Execute(test::out::Interface<wchar_t>& out) override;
 public:
-    virtual bool Assign(const std::intptr_t& deleg_id,
+    virtual inline bool Assign(const std::intptr_t& deleg_id,
         std::intptr_t& task_id) override;
 public:
-    virtual bool Release(const std::intptr_t& deleg_id) override;
+    virtual inline bool Release(const std::intptr_t& deleg_id) override;
 public:
-    virtual BufferType Buffer(const std::intptr_t& deleg_id) override;
+    virtual inline BufferType<char> Buffer(test::out::Type<char>,
+        const std::intptr_t& deleg_id) override;
+    virtual inline BufferType<wchar_t> Buffer(test::out::Type<wchar_t>,
+        const std::intptr_t& deleg_id) override;
 };
 
-template<typename TChar>
-Default<TChar>::Default() :
+inline Default::Default() :
     BaseType()
 {}
 
-template<typename TChar>
-Default<TChar>::Default(const std::uint8_t& val) :
+inline Default::Default(const std::uint8_t& val) :
     BaseType(val)
 {}
 
-template<typename TChar>
-Default<TChar>::~Default()
+inline Default::~Default()
 {}
 
-template<typename TChar>
-Default<TChar>::Default(Default&& mov) :
+inline Default::Default(Default&& mov) :
     BaseType(std::move(static_cast<BaseType&&>(mov)))
 {}
 
-template<typename TChar>
-bool Default<TChar>::_BeginExecute()
+inline bool Default::_BeginExecute()
 {
     return true;
 }
 
-template<typename TChar>
-void Default<TChar>::_EndExecute()
+inline void Default::_EndExecute()
 {}
 
-template<typename TChar>
-bool Default<TChar>::_BeginAssign()
+inline bool Default::_BeginAssign()
 {
     return true;
 }
 
-template<typename TChar>
-void Default<TChar>::_EndAssign()
+inline void Default::_EndAssign()
 {}
 
-template<typename TChar>
-bool Default<TChar>::_BeginRelease()
+inline bool Default::_BeginRelease()
 {
     return true;
 }
 
-template<typename TChar>
-void Default<TChar>::_EndRelease()
+inline void Default::_EndRelease()
 {}
 
-template<typename TChar>
-bool Default<TChar>::_BeginBuffer()
+inline bool Default::_BeginBuffer()
 {
     return true;
 }
 
-template<typename TChar>
-void Default<TChar>::_EndBuffer()
+inline void Default::_EndBuffer()
 {}
 
-template<typename TChar>
-test::Guard<typename Default<TChar>::BaseType> 
-Default<TChar>::ExecuteGuard()
+inline test::Guard<typename Default::BaseType> Default::ExecuteGuard()
 {
     return {this, &BaseType::_BeginExecute, &BaseType::_EndExecute};
 }
 
-template<typename TChar>
-test::Guard<typename Default<TChar>::BaseType> 
-Default<TChar>::AssignGuard()
+test::Guard<typename Default::BaseType> Default::AssignGuard()
 {
     return {this, &BaseType::_BeginAssign, &BaseType::_EndAssign};
 }
 
-template<typename TChar>
-test::Guard<typename Default<TChar>::BaseType> 
-Default<TChar>::ReleaseGuard()
+inline test::Guard<typename Default::BaseType> Default::ReleaseGuard()
 {
     return {this, &BaseType::_BeginRelease, &BaseType::_EndRelease};
 }
 
-template<typename TChar>
-test::Guard<typename Default<TChar>::BaseType> 
-Default<TChar>::BufferGuard()
+inline test::Guard<typename Default::BaseType> Default::BufferGuard()
 {
     return {this, &BaseType::_BeginBuffer, &BaseType::_EndBuffer};
 }
 
-template<typename TChar>
-bool Default<TChar>::Execute(test::out::Interface<TChar>&)
+inline bool Default::Execute(test::out::Interface<char>&)
 {
     return false;
 }
 
-template<typename TChar>
-bool Default<TChar>::Assign(const std::intptr_t&, 
+inline bool Default::Execute(test::out::Interface<wchar_t>&)
+{
+    return false;
+}
+
+inline bool Default::Assign(const std::intptr_t&, 
     std::intptr_t&)
 {
     return false;
 }
 
-template<typename TChar>
-bool Default<TChar>::Release(const std::intptr_t&)
+inline bool Default::Release(const std::intptr_t&)
 {
     return false;
 }
 
-template<typename TChar>
-typename Default<TChar>::BufferType 
-Default<TChar>::Buffer(const std::intptr_t&)
+inline typename Default::template BufferType<char> 
+Default::Buffer(test::out::Type<char>, const std::intptr_t&)
 {
     return {};
 }
-    
+
+inline typename Default::template BufferType<wchar_t> 
+Default::Buffer(test::out::Type<wchar_t>, const std::intptr_t&)
+{
+    return {};
+}
+
 } //!imp
 
 } //!base
