@@ -63,7 +63,7 @@ struct Out : test::out::Interface<char>
 int main()
 {
     Out out1;
-    test::out::base::Task<char> t1;
+    test::out::base::Task t1{test::out::Type<char>{}};
     std::intptr_t tid1 = 0;
     assert(t1.IsGood() == true);
     assert(t1.IsBad() == false);
@@ -84,7 +84,7 @@ int main()
     assert(res == true);
 
     {
-        auto buff1 = t1.Buffer(1);
+        auto buff1 = t1.Buffer(test::out::Type<char>{}, 1);
         buff1.Print("test");
     }
     res = t1.Release(1);
@@ -103,7 +103,7 @@ int main()
     assert(t1.IsRelease() == true);
     assert(t1.IsDone() == true);
 
-    test::out::base::Task<char> t2(std::move(t1));
+    test::out::base::Task t2(std::move(t1));
     assert(res == true);
     assert(t2.IsGood() == true);
     assert(t2.IsBad() == false);
