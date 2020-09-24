@@ -7,6 +7,9 @@
 #include "../Qualifier.h"
 #include "Parameter.h"
 
+#include <type_traits>
+#include <cwchar>
+
 namespace test
 {
 namespace type
@@ -19,74 +22,119 @@ namespace decltor
 template<typename TQ, typename TN, typename TParam>
 struct Format
 {
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static TChar _fmt[] = "format undefined";
+        static char _fmt[] = "format undefined";
         return {_fmt};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
 template<typename TN>
 struct Format<TN, TN, test::type::name::decltor::Parameter<>>
 {
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _fmt = test::cstr::Format(
-            (test::type::Name<TN>::template CStr<TChar>().Size() + 1),
-            "%s", *(test::type::Name<TN>::template CStr<TChar>()));
+        static test::CString<char> _fmt = test::cstr::Format<char>(
+            (test::type::Name<TN>::template CStr<char>().Size() + 1),
+            "%s", *(test::type::Name<TN>::template CStr<char>()));
         return {_fmt};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
 template<typename TN, typename TArg, typename... TArgs>
 struct Format<TN, TN, test::type::name::decltor::Parameter<TArg, TArgs...>>
 {
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
         typedef test::type::name::decltor::Parameter<TArg, TArgs...> ParamType;
-        static test::CString<TChar> _fmt = test::cstr::Format(
-            (test::type::Name<TN>::template CStr<TChar>().Size() +
-                ParamType::template CStr<TChar>().Size() + 2),
-            "%s %s", *(test::type::Name<TN>::template CStr<TChar>()),
-            *(ParamType::template CStr<TChar>()));
+        static test::CString<char> _fmt = test::cstr::Format<char>(
+            (test::type::Name<TN>::template CStr<char>().Size() +
+                ParamType::template CStr<char>().Size() + 2),
+            "%s %s", *(test::type::Name<TN>::template CStr<char>()),
+            *(ParamType::template CStr<char>()));
         return {_fmt};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
 template<typename TQ, typename TN>
 struct Format<TQ, TN, test::type::name::decltor::Parameter<>>
 {
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _fmt = test::cstr::Format(
-            (test::type::name::Qualifier<TQ>::template CStr<TChar>().Size() +
-                test::type::Name<TN>::template CStr<TChar>().Size() + 2),
+        static test::CString<char> _fmt = test::cstr::Format<char>(
+            (test::type::name::Qualifier<TQ>::template CStr<char>().Size() +
+                test::type::Name<TN>::template CStr<char>().Size() + 2),
             "%s %s", *(test::type::name::Qualifier<TQ>::
-                template CStr<TChar>()),
-            *(test::type::Name<TN>::template CStr<TChar>()));
+                template CStr<char>()),
+            *(test::type::Name<TN>::template CStr<char>()));
         return {_fmt};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
 template<typename TQ, typename TN, typename TArg, typename... TArgs>
 struct Format<TQ, TN, test::type::name::decltor::Parameter<TArg, TArgs...>>
 {
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
         typedef test::type::name::decltor::Parameter<TArg, TArgs...> ParamType;
-        static test::CString<TChar> _fmt = test::cstr::Format(
-            (test::type::name::Qualifier<TQ>::template CStr<TChar>().Size() +
-                test::type::Name<TN>::template CStr<TChar>().Size() +
-                ParamType::template CStr<TChar>().Size() + 3), "%s %s %s", 
-            *(test::type::name::Qualifier<TQ>::template CStr<TChar>()),
-            *(test::type::Name<TN>::template CStr<TChar>()),
-            *(ParamType::template CStr<TChar>()));
+        static test::CString<char> _fmt = test::cstr::Format<char>(
+            (test::type::name::Qualifier<TQ>::template CStr<char>().Size() +
+                test::type::Name<TN>::template CStr<char>().Size() +
+                ParamType::template CStr<char>().Size() + 3), "%s %s %s", 
+            *(test::type::name::Qualifier<TQ>::template CStr<char>()),
+            *(test::type::Name<TN>::template CStr<char>()),
+            *(ParamType::template CStr<char>()));
         return {_fmt};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 

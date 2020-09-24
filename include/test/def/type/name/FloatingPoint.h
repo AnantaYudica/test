@@ -2,6 +2,10 @@
 #define TEST_DEF_TYPE_NAME_FLOATINGPOINT_H_
 
 #include "../../../type/Name.h"
+#include "../../../cstr/Format.h"
+
+#include <cwchar>
+#include <type_traits>
 
 namespace test
 {
@@ -11,33 +15,60 @@ namespace type
 template<>
 struct Name<float>
 {
-    template<typename TChar = char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar = char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 0>
+    static test::CString<const char> CStr()
     {
-        static TChar _name[] = "float";
+        static char _name[] = "float";
         return {_name};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
 template<>
 struct Name<double>
 {
-    template<typename TChar = char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar = char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 0>
+    static test::CString<const char> CStr()
     {
-        static TChar _name[] = "double";
+        static char _name[] = "double";
         return {_name};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
 template<>
 struct Name<long double>
 {
-    template<typename TChar = char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar = char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 0>
+    static test::CString<const char> CStr()
     {
-        static TChar _name[] = "long double";
+        static char _name[] = "long double";
         return {_name};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 

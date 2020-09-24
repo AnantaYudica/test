@@ -19,7 +19,7 @@ struct Empty
 {
     template<typename TChar = char,typename std::enable_if<
         std::is_same<TChar, char>::value, int>::type = 0>
-    static test::CString<const TChar> CStr()
+    static test::CString<const char> CStr()
     {
         static char _val[] = "";
         return {_val};
@@ -28,7 +28,7 @@ struct Empty
     template<typename TChar = char, typename std::enable_if<
         !std::is_same<TChar, char>::value &&
         std::is_same<TChar, wchar_t>::value, int>::type = 0>
-    static test::CString<const TChar> CStr()
+    static test::CString<const wchar_t> CStr()
     {
         static wchar_t _val[] = L"";
         return {_val};

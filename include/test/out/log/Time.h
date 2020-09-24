@@ -41,11 +41,12 @@ public:
     static inline int Millisecond(const TimestampType& timestamp);
 public:
     template<typename TChar, typename std::enable_if<
-    std::is_same<TChar, char>::value, int>::type = 1>
-    static inline test::CString<TChar> CStr(const TimestampType& timestamp);
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static inline test::CString<char> CStr(const TimestampType& timestamp);
     template<typename TChar, typename std::enable_if<
-    std::is_same<TChar, wchar_t>::value, int>::type = 1>
-    static inline test::CString<TChar> CStr(const TimestampType& timestamp);
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 1>
+    static inline test::CString<wchar_t> CStr(const TimestampType& timestamp);
 public:
     Time() = delete;
 };
@@ -130,7 +131,7 @@ inline int Time::Millisecond(const TimestampType& timestamp)
 
 template<typename TChar, typename std::enable_if<
 std::is_same<TChar, char>::value, int>::type>
-inline test::CString<TChar> Time::CStr(const TimestampType& timestamp)
+inline test::CString<char> Time::CStr(const TimestampType& timestamp)
 {
     auto info = GetInfo(timestamp);
     auto tm_cstr = test::cstr::fmt::Time<char>(20, "%F %X", &info);
@@ -139,13 +140,12 @@ inline test::CString<TChar> Time::CStr(const TimestampType& timestamp)
 }
 
 template<typename TChar, typename std::enable_if<
-std::is_same<TChar, wchar_t>::value, int>::type>
-inline test::CString<TChar> Time::CStr(const TimestampType& timestamp)
+    !std::is_same<TChar, char>::value &&
+    std::is_same<TChar, wchar_t>::value, int>::type>
+inline test::CString<wchar_t> Time::CStr(const TimestampType& timestamp)
 {
-    auto info = GetInfo(timestamp);
-    auto tm_cstr = test::cstr::fmt::Time<wchar_t>(20, L"%F %X", &info);
-    return test::cstr::Format<wchar_t>(25, L"%s.%03u", 
-        *tm_cstr, (unsigned int)Millisecond(timestamp));
+    const auto cstr = CStr<char>(timestamp);
+    return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
 }
 
 } //!log

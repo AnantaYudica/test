@@ -15,6 +15,7 @@
 
 #include <cstddef>
 #include <type_traits>
+#include <cwchar>
 
 namespace test
 {
@@ -27,13 +28,22 @@ template<typename T, typename TB, typename... TArgs>
 struct Declarator
 {
     typedef T DefaultType;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
         return {test::type::name::decltor::Format<T,
             typename test::type::name::Qualifier<TB>::SimpleType,
             test::type::name::decltor::Parameter<TArgs...>>::
-                template CStr<TChar>()};
+                template CStr<char>()};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -41,12 +51,21 @@ template<typename T, typename... TArgs>
 struct Declarator<T, typename test::type::name::Array<T>::Type, TArgs...>
 {
     typedef T Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
         typedef typename test::type::name::Array<T>::SimpleType SimpleType;
         return {Declarator<SimpleType, SimpleType, 
-            test::type::name::Array<T>, TArgs...>::template CStr<TChar>()};
+            test::type::name::Array<T>, TArgs...>::template CStr<char>()};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -54,12 +73,21 @@ template<typename T, typename... TArgs>
 struct Declarator<T, typename test::type::name::Function<T>::Type, TArgs...>
 {
     typedef T Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
         typedef typename test::type::name::Function<T>::SimpleType SimpleType;
         return {Declarator<SimpleType, SimpleType, 
-            test::type::name::Function<T>, TArgs...>::template CStr<TChar>()};
+            test::type::name::Function<T>, TArgs...>::template CStr<char>()};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -67,12 +95,21 @@ template<typename T, typename... TArgs>
 struct Declarator<T, typename test::type::name::Pointer<T>::Type, TArgs...>
 {
     typedef T Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
         typedef typename test::type::name::Pointer<T>::SimpleType SimpleType;
         return {Declarator<SimpleType, SimpleType, 
-            test::type::name::Pointer<T>, TArgs...>::template CStr<TChar>()};
+            test::type::name::Pointer<T>, TArgs...>::template CStr<char>()};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -80,12 +117,21 @@ template<typename T, typename... TArgs>
 struct Declarator<T, typename test::type::name::Reference<T>::Type, TArgs...>
 {
     typedef T Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
         typedef typename test::type::name::Reference<T>::SimpleType SimpleType;
         return {Declarator<SimpleType, SimpleType, 
-            test::type::name::Reference<T>, TArgs...>::template CStr<TChar>()};
+            test::type::name::Reference<T>, TArgs...>::template CStr<char>()};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 

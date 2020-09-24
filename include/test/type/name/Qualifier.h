@@ -4,6 +4,9 @@
 #include "../../CString.h"
 #include "../../cstr/Format.h"
 
+#include <type_traits>
+#include <cwchar>
+
 namespace test
 {
 namespace type
@@ -16,11 +19,20 @@ struct Qualifier
 {
     typedef T SimpleType;
     typedef T DefaultType;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static TChar no_qualifier[] = "";
+        static char no_qualifier[] = "";
         return {no_qualifier};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -29,11 +41,20 @@ struct Qualifier<const T>
 {
     typedef T SimpleType;
     typedef const T Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static TChar _qualifier[] = "const";
+        static char _qualifier[] = "const";
         return {_qualifier};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -42,11 +63,20 @@ struct Qualifier<volatile T>
 {
     typedef T SimpleType;
     typedef volatile T Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static TChar _qualifier[] = "volatile";
+        static char _qualifier[] = "volatile";
         return {_qualifier};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -55,11 +85,20 @@ struct Qualifier<const volatile T>
 {
     typedef T SimpleType;
     typedef const volatile T Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static TChar _qualifier[] = "const volatile";
+        static char _qualifier[] = "const volatile";
         return {_qualifier};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 

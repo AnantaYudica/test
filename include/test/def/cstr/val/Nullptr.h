@@ -2,6 +2,7 @@
 #define TEST_DEF_CSTR_VAL_NULLPTR_H_
 
 #include "../../../CString.h"
+#include "../../../cstr/Format.h"
 
 #include <cwchar>
 #include <type_traits>
@@ -17,9 +18,9 @@ namespace val
 
 struct Nullptr
 {
-    template<typename TChar = char,typename std::enable_if<
+    template<typename TChar = char, typename std::enable_if<
         std::is_same<TChar, char>::value, int>::type = 0>
-    static test::CString<const TChar> CStr()
+    static test::CString<const char> CStr()
     {
         static char _val[] = "(null)";
         return {_val};
@@ -28,10 +29,10 @@ struct Nullptr
     template<typename TChar = char, typename std::enable_if<
         !std::is_same<TChar, char>::value &&
         std::is_same<TChar, wchar_t>::value, int>::type = 0>
-    static test::CString<const TChar> CStr()
+    static test::CString<wchar_t> CStr()
     {
-        static wchar_t _val[] = L"(null)";
-        return {_val};
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     };
 };
 

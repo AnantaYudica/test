@@ -162,7 +162,7 @@ CString<TChar>& CString<TChar>::
     }
     if (*cpy != nullptr)
     {
-        m_cstr = new char[cpy.Size() + 1];
+        m_cstr = new TChar[cpy.Size() + 1];
         m_size = cpy.Size();
         memcpy(m_cstr, *cpy, cpy.Size() * sizeof(TChar));
         memset(m_cstr + m_size, 0, sizeof(TChar));
@@ -213,7 +213,7 @@ CString<TChar>& CString<TChar>::operator=(CString<const TChar>&& mov)
     }
     if (*mov != nullptr)
     {
-        m_cstr = new char[mov.Size() + 1];
+        m_cstr = new TChar[mov.Size() + 1];
         m_size = mov.Size();
         memcpy(m_cstr, *mov, mov.Size() * sizeof(TChar));
         memset(m_cstr + m_size, 0, sizeof(TChar));

@@ -6,6 +6,8 @@
 #include "../Name.h"
 
 #include <cstddef>
+#include <type_traits>
+#include <cwchar>
 
 namespace test
 {
@@ -18,11 +20,20 @@ template<typename T>
 struct Pointer
 {
     typedef T SimpleType;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static TChar no_ptr[] = "";
+        static char no_ptr[] = "";
         return {no_ptr};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -31,13 +42,22 @@ struct Pointer<T*>
 {
     typedef typename Pointer<T>::SimpleType SimpleType;
     typedef T* Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _ptr = test::cstr::Format(2 +
-            (test::type::name::Pointer<T>::template CStr<TChar>().Size()),
-            "%s*", *(test::type::name::Pointer<T>::template CStr<TChar>()));
+        static test::CString<char> _ptr = test::cstr::Format<char>(2 +
+            (test::type::name::Pointer<T>::template CStr<char>().Size()),
+            "%s*", *(test::type::name::Pointer<T>::template CStr<char>()));
         return {_ptr};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -46,14 +66,23 @@ struct Pointer<T*const>
 {
     typedef typename Pointer<T>::SimpleType SimpleType;
     typedef T*const Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _ptr = test::cstr::Format(
-            (test::type::name::Pointer<T>::template CStr<TChar>().Size() + 7),
+        static test::CString<char> _ptr = test::cstr::Format<char>(
+            (test::type::name::Pointer<T>::template CStr<char>().Size() + 7),
             "%s*const", *(test::type::name::Pointer<T>::
-                template CStr<TChar>()));
+                template CStr<char>()));
         return {_ptr};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -62,14 +91,23 @@ struct Pointer<T*volatile>
 {
     typedef typename Pointer<T>::SimpleType SimpleType;
     typedef T*volatile Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _ptr = test::cstr::Format(
-            (test::type::name::Pointer<T>::template CStr<TChar>().Size() + 10),
+        static test::CString<char> _ptr = test::cstr::Format<char>(
+            (test::type::name::Pointer<T>::template CStr<char>().Size() + 10),
             "%s*volatile", *(test::type::name::Pointer<T>::
-                template CStr<TChar>()));
+                template CStr<char>()));
         return {_ptr};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -78,14 +116,23 @@ struct Pointer<T*const volatile>
 {
     typedef typename Pointer<T>::SimpleType SimpleType;
     typedef T*const volatile Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _ptr = test::cstr::Format(
-            (test::type::name::Pointer<T>::template CStr<TChar>().Size() + 16),
+        static test::CString<char> _ptr = test::cstr::Format<char>(
+            (test::type::name::Pointer<T>::template CStr<char>().Size() + 16),
             "%s*const volatile", *(test::type::name::Pointer<T>::
-                template CStr<TChar>()));
+                template CStr<char>()));
         return {_ptr};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -94,13 +141,22 @@ struct Pointer<T TM::*>
 {
     typedef T SimpleType;
     typedef T TM::* Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _ptr = test::cstr::Format(
-            (test::type::Name<TM>::template CStr<TChar>().Size() + 4),
-            "%s::*", *(test::type::Name<TM>::template CStr<TChar>()));
+        static test::CString<char> _ptr = test::cstr::Format<char>(
+            (test::type::Name<TM>::template CStr<char>().Size() + 4),
+            "%s::*", *(test::type::Name<TM>::template CStr<char>()));
         return {_ptr};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -109,13 +165,22 @@ struct Pointer<T TM::*const>
 {
     typedef T SimpleType;
     typedef T TM::*const Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _ptr = test::cstr::Format(
-            (test::type::Name<TM>::template CStr<TChar>().Size() + 9),
-            "%s::*const", *(test::type::Name<TM>::template CStr<TChar>()));
+        static test::CString<char> _ptr = test::cstr::Format<char>(
+            (test::type::Name<TM>::template CStr<char>().Size() + 9),
+            "%s::*const", *(test::type::Name<TM>::template CStr<char>()));
         return {_ptr};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -124,13 +189,22 @@ struct Pointer<T TM::*volatile>
 {
     typedef T SimpleType;
     typedef T TM::*volatile Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _ptr = test::cstr::Format(
-            (test::type::Name<TM>::template CStr<TChar>().Size() + 12),
-            "%s::*volatile", *(test::type::Name<TM>::template CStr<TChar>()));
+        static test::CString<char> _ptr = test::cstr::Format<char>(
+            (test::type::Name<TM>::template CStr<char>().Size() + 12),
+            "%s::*volatile", *(test::type::Name<TM>::template CStr<char>()));
         return {_ptr};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
@@ -139,14 +213,23 @@ struct Pointer<T TM::*const volatile>
 {
     typedef T SimpleType;
     typedef T TM::*const volatile Type;
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static test::CString<TChar> _ptr = test::cstr::Format(
-            (test::type::Name<TM>::template CStr<TChar>().Size() + 18),
+        static test::CString<char> _ptr = test::cstr::Format<char>(
+            (test::type::Name<TM>::template CStr<char>().Size() + 18),
             "%s::*const volatile", *(test::type::Name<TM>::
-                template CStr<TChar>()));
+                template CStr<char>()));
         return {_ptr};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 

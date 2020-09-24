@@ -7,6 +7,8 @@
 
 #include <cstdint>
 #include <cmath>
+#include <type_traits>
+#include <cwchar>
 
 namespace test
 {
@@ -20,37 +22,64 @@ namespace val
 template<>
 struct Get<signed char>
 {
-    template<signed char V, typename TChar= char>
-    static test::CString<TChar> CStr()
+    template<signed char V, typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 0>
+    static test::CString<char> CStr()
     {
         const auto val = static_cast<unsigned char>(std::abs(V));
-        test::CString<TChar> _val = test::cstr::Format(
+        test::CString<char> _val = test::cstr::Format<char>(
             (V > 0 ? (std::log10(V) + 2) : (V < 0 ? 
                 (std::log10(val) + 3) : 2)), "%hhd", V);
         return {_val};
+    }
+    template<signed char V, typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<V, char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
 template<>
 struct Get<char>
 {
-    template<char V, typename TChar= char>
-    static test::CString<TChar> CStr()
+    template<char V, typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 0>
+    static test::CString<char> CStr()
     {
-        test::CString<TChar> _val = test::cstr::Format(2, "%c", V);
+        test::CString<char> _val = test::cstr::Format<char>(2, "%c", V);
         return {_val};
+    }
+    template<char V, typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<V, char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
 template<>
 struct Get<unsigned char>
 {
-    template<unsigned char V, typename TChar= char>
-    static test::CString<TChar> CStr()
+    template<unsigned char V, typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 0>
+    static test::CString<char> CStr()
     {
-        test::CString<TChar> _val = test::cstr::Format(
+        test::CString<char> _val = test::cstr::Format<char>(
             (V > 0 ? (std::log10(V) + 2) : 2), "%hhu", V);
         return {_val};
+    }
+    template<unsigned char V, typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<V, char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 

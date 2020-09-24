@@ -16,6 +16,7 @@
 #include "test/cstr/Format.h"
 
 #include <cstdio>
+#include <cwchar>
 #include <cstdlib>
 #include <utility>
 #include <vector>
@@ -423,28 +424,48 @@ void operator delete[](void* p) noexcept
 template<>\
 struct test::type::Name<__TYPE__,##__VA_ARGS__>\
 {\
-    template<typename TChar = char>\
-    static test::CString<const TChar> CStr()\
+    template<typename TChar = char, typename std::enable_if<\
+        std::is_same<TChar, char>::value, int>::type = 1>\
+    static test::CString<const char> CStr()\
     {\
-        static TChar _cstr[] = __NAME__;\
+        static char _cstr[] = __NAME__;\
         return {_cstr};\
+    }\
+    template<typename TChar = char, typename std::enable_if<\
+        !std::is_same<TChar, char>::value && \
+        std::is_same<TChar, wchar_t>::value, int>::type = 1>\
+    static test::CString<wchar_t> CStr()\
+    {\
+        const auto cstr = test::type::Name<__TYPE__,##__VA_ARGS__>::\
+            template CStr<char>();\
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);\
     }\
 }
 
 #define TEST_TYPE_NAME_TEMPLATE(__NAME__, __TYPE__, ...)\
 struct test::type::Name<__TYPE__,##__VA_ARGS__>\
 {\
-    template<typename TChar = char>\
-    static test::CString<const TChar> CStr()\
+    template<typename TChar = char, typename std::enable_if<\
+        std::is_same<TChar, char>::value, int>::type = 1>\
+    static test::CString<const char> CStr()\
     {\
         typedef decltype(test::type::name::tmpl::Parameter(\
             std::declval<__TYPE__,##__VA_ARGS__*>())) ParamType;\
         typedef test::type::name::Template<__TYPE__,##__VA_ARGS__,\
             ParamType> TemplateType;\
-        static test::CString<TChar> _name = test::cstr::Format(\
-            (sizeof(__NAME__) + TemplateType::template CStr<TChar>().Size()),\
-            "%s%s", __NAME__, *(TemplateType::template CStr<TChar>()));\
+        static test::CString<char> _name = test::cstr::Format<char>(\
+            (sizeof(__NAME__) + TemplateType::template CStr<char>().Size()),\
+            "%s%s", __NAME__, *(TemplateType::template CStr<char>()));\
         return {_name};\
+    }\
+    template<typename TChar = char, typename std::enable_if<\
+        !std::is_same<TChar, char>::value && \
+        std::is_same<TChar, wchar_t>::value, int>::type = 1>\
+    static test::CString<wchar_t> CStr()\
+    {\
+        const auto cstr = test::type::Name<__TYPE__,##__VA_ARGS__>::\
+            template CStr<char>();\
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);\
     }\
 }
 
@@ -458,11 +479,21 @@ struct test::type::name::tmpl::Define<void(__TYPE__)>\
 template<>\
 struct test::type::name::val::Enumeration<__TYPE__, __VALUE__,##__VA_ARGS__>\
 {\
-    template<typename TChar= char>\
-    static test::CString<TChar> CStr()\
+    template<typename TChar= char, typename std::enable_if<\
+        std::is_same<TChar, char>::value, int>::type = 1>\
+    static test::CString<char> CStr()\
     {\
         static TChar _val[] = __NAME__;\
         return {_val};\
+    }\
+    template<typename TChar = char, typename std::enable_if<\
+        !std::is_same<TChar, char>::value && \
+        std::is_same<TChar, wchar_t>::value, int>::type = 1>\
+    static test::CString<wchar_t> CStr()\
+    {\
+        const auto cstr = test::type::name::val::Enumeration<\
+            __TYPE__, __VALUE__,##__VA_ARGS__>::template CStr<char>();\
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);\
     }\
 }
 

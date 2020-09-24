@@ -15,21 +15,39 @@ namespace type
 template<typename T, typename TDeclarator = test::type::name::Declarator<T>>
 struct Name
 {
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        static TChar undefined[] = "undefined";
+        static char undefined[] = "undefined";
         return {undefined};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
 template<typename T>
 struct Name<T, typename test::trait::type::name::decltor::Enable<T>::Type>
 {
-    template<typename TChar= char>
-    static test::CString<const TChar> CStr()
+    template<typename TChar= char, typename std::enable_if<
+        std::is_same<TChar, char>::value, int>::type = 1>
+    static test::CString<const char> CStr()
     {
-        return {test::type::name::Declarator<T>::template CStr<TChar>()};
+        return {test::type::name::Declarator<T>::template CStr<char>()};
+    }
+    template<typename TChar = char, typename std::enable_if<
+        !std::is_same<TChar, char>::value &&
+        std::is_same<TChar, wchar_t>::value, int>::type = 0>
+    static test::CString<wchar_t> CStr()
+    {
+        const auto cstr = CStr<char>();
+        return test::cstr::Format<wchar_t>(cstr.Size() + 1, L"%s", *cstr);
     }
 };
 
