@@ -294,9 +294,9 @@ int main()
             for (auto it = p1.Begin(); it != p1.End(); ++it, ++i)
             {
                 assert(*it == p1[i]);
-                assert(p1 == it);
                 assert(p1 == it.GetData());
             }
+            assert(i == 10);
         }
 
         p1 += 5;
@@ -323,9 +323,9 @@ int main()
             for (auto it = p1.Begin(); it != p1.End(); ++it, ++i)
             {
                 assert(*it == p1[i]);
-                assert(p1 == it);
                 assert(p1 == it.GetData());
             }
+            assert(i == 10);
         }
 
         p1 += 1;
