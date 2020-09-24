@@ -14,7 +14,7 @@ template<template<typename, typename> class TTPointer,
 class Iterator : public TTPointer<T, TDefault>
 {
 private:
-    std::size_t m_begin, m_end;
+    std::size_t m_begin, m_end, m_pos;
 public:
     Iterator(const TTPointer<T, TDefault>& ptr, const std::size_t& bg,
         const std::size_t& ed, const std::size_t& index);
@@ -80,7 +80,8 @@ Iterator<TTPointer, T, TDefault>::Iterator(const TTPointer<T, TDefault>& ptr,
     const std::size_t& bg, const std::size_t& ed, const std::size_t& index) :
         TTPointer<T, TDefault>(ptr),
         m_begin(bg),
-        m_end(ed)
+        m_end(ed),
+        m_pos(index)
 {
     this->SetIndex(index);
 }
@@ -91,6 +92,7 @@ Iterator<TTPointer, T, TDefault>::~Iterator()
 {
     m_begin = 0;
     m_end = 0;
+    m_pos = 0;
 }
 
 template<template<typename, typename> class TTPointer, 
@@ -99,7 +101,8 @@ Iterator<TTPointer, T, TDefault>::
     Iterator(const Iterator<TTPointer, T, TDefault>& cpy) :
         TTPointer<T, TDefault>(cpy),
         m_begin(cpy.m_begin),
-        m_end(cpy.m_end)
+        m_end(cpy.m_end),
+        m_pos(cpy.m_pos)
 {}
 
 template<template<typename, typename> class TTPointer, 
@@ -108,9 +111,11 @@ Iterator<TTPointer, T, TDefault>::
     Iterator(Iterator<TTPointer, T, TDefault>&& mov) :
         TTPointer<T, TDefault>(std::move(mov)),
         m_begin(mov.m_begin),
-        m_end(mov.m_end)
+        m_end(mov.m_end),
+        m_pos(mov.m_pos)
 {
-    mov.SetIndex(mov.m_end);
+    mov.SetIndex(0);
+    mov.m_pos = mov.m_end;
 }
 
 template<template<typename, typename> class TTPointer, 
@@ -122,6 +127,7 @@ Iterator<TTPointer, T, TDefault>::
     Iterator<TTPointer, T, TDefault>::operator=(cpy);
     m_begin = cpy.m_begin;
     m_end = cpy.m_end;
+    m_pos = cpy.m_pos;
     return *this;
 }
 
@@ -134,7 +140,9 @@ Iterator<TTPointer, T, TDefault>::
     Iterator<TTPointer, T, TDefault>::operator=(mov);
     m_begin = mov.m_begin;
     m_end = mov.m_end;
-    mov.SetIndex(mov.m_end);
+    m_pos = mov.m_pos;
+    mov.SetIndex(0);
+    mov.m_pos = mov.m_end;
     return *this;
 }
 
@@ -144,6 +152,7 @@ Iterator<TTPointer, T, TDefault>&
 Iterator<TTPointer, T, TDefault>::operator+=(const std::size_t& index)
 {
     TTPointer<T, TDefault>::operator+=(index);
+    m_pos += index;
     return *this;
 }
 
@@ -153,6 +162,7 @@ Iterator<TTPointer, T, TDefault>&
 Iterator<TTPointer, T, TDefault>::operator-=(const std::size_t& index)
 {
     TTPointer<T, TDefault>::operator-=(index);
+    m_pos -= index;
     return *this;
 }
 
@@ -161,7 +171,7 @@ template<template<typename, typename> class TTPointer,
 Iterator<TTPointer, T, TDefault>& 
 Iterator<TTPointer, T, TDefault>::operator++()
 {
-    TTPointer<T, TDefault>::operator++();
+    *this += 1;
     return *this;
 }
 
@@ -180,7 +190,7 @@ template<template<typename, typename> class TTPointer,
 Iterator<TTPointer, T, TDefault>& 
 Iterator<TTPointer, T, TDefault>::operator--()
 {
-    TTPointer<T, TDefault>::operator--();
+    *this -= 1;
     return *this;
 }
 
@@ -239,8 +249,8 @@ template<template<typename, typename> class TTPointer,
 bool Iterator<TTPointer, T, TDefault>::
     operator==(const Iterator<TTPointer, T, TDefault>& other) const
 {
-    const std::size_t index = this->Index();
-    const std::size_t other_index = other.Index();
+    const std::size_t index = m_pos;
+    const std::size_t other_index = other.m_pos;
     return this->TTPointer<T, TDefault>::operator==(other.GetData()) &&
         (index == other_index || ((index < m_begin || index >= m_end) &&
         (other_index < other.m_begin || other_index >= other.m_end)));
