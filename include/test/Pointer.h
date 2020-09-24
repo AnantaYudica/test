@@ -350,14 +350,16 @@ template<typename T, typename TDefinition>
 test::ptr::Iterator<Pointer, T, TDefinition> 
     Pointer<T, TDefinition>::Begin() const
 {
-    return {*this};
+    const std::size_t index = Index();
+    return {*this, index, Size(), index};
 }
 
 template<typename T, typename TDefinition>
 test::ptr::Iterator<Pointer, T, TDefinition> 
     Pointer<T, TDefinition>::End() const
 {
-    return {*this, Size()};
+    const std::size_t size = Size();
+    return {*this, Index(), size, size};
 }
 
 template<typename T, typename TDefinition>
