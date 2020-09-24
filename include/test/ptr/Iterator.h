@@ -243,7 +243,7 @@ bool Iterator<TTPointer, T, TDefault>::
     const std::size_t other_index = other.Index();
     return this->TTPointer<T, TDefault>::operator==(other.GetData()) &&
         (index == other_index || ((index < m_begin || index >= m_end) &&
-        (other_index < other.m_begin || other_index >= other.m_begin)));
+        (other_index < other.m_begin || other_index >= other.m_end)));
 }
 
 template<template<typename, typename> class TTPointer, 
