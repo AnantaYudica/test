@@ -653,6 +653,30 @@ int main()
 
     }
     {
+        test::Byte<2> b1;
+        test::Byte<1> b2;
+
+        assert(b1 == b2);
+
+        b1 = 0xff00;
+
+        assert(b1 == b2);
+
+        assert(b1 != test::byte::off::Make(1, b2));
+
+        
+        test::Byte<5> b3{0xF012AA2211};
+        test::Byte<4> b4{0x12AA2211};
+        test::Byte<5> b5{0xE012AA2211};
+
+        assert(b3 == b4);
+        assert(b3 != test::byte::off::Make(1, b4));
+        assert(b3 != b5);
+        assert(b3 == test::byte::order::
+            LittleEndian(0x11, 0x22, 0xAA, 0x012, 0xF0));
+        assert(b3 == 0xF012AA2211);
+    }
+    {
         Obj1<int> obj1{.val=0x10c01104};
         {
             std::uint8_t res[]{0x04, 0x11, 0xc0, 0x10};
