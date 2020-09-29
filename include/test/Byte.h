@@ -92,6 +92,17 @@ private:
 private:
     static void _LShift(std::uint8_t* ptr, std::size_t size, 
         std::size_t shift);
+private:
+    template<typename TBValue>
+    static bool _Equal(ConstIteratorType a_bg, ConstIteratorType a_ed, 
+        test::byte::Iterator<TBValue> b_bg, 
+        test::byte::Iterator<TBValue> b_ed);
+    static bool _Equal(ConstIteratorType a_bg, ConstIteratorType a_ed, 
+        const std::uint8_t* ptr, std::size_t size);
+    template<typename TBValue>
+    static bool _Equal(const std::uint8_t* ptr, std::size_t size, 
+        test::byte::Iterator<TBValue> b_bg,
+        test::byte::Iterator<TBValue> b_ed);
 public:
     static test::byte::it::Operator GetOperator();
     static test::byte::it::Operator GetReverseOperator();
@@ -229,12 +240,12 @@ public:
             !std::is_base_of<test::byte::Order, _TValue>::value &&
             !std::is_pointer<_TValue>::value &&
             !std::is_array<_TValue>::value, int>::type = 1>
-    Byte<N, Sign> operator&(const TValue& val);
-    Byte<N, Sign> operator&(const test::byte::Order& byte_order);
+    Byte<N, Sign> operator&(const TValue& val) const;
+    Byte<N, Sign> operator&(const test::byte::Order& byte_order) const;
     template<typename TValue>
-    Byte<N, Sign> operator&(test::byte::Offset<TValue>&& offset_val);
+    Byte<N, Sign> operator&(test::byte::Offset<TValue>&& offset_val) const;
     template<std::size_t _N, bool _Sign>
-    Byte<N, Sign> operator&(const Byte<_N, _Sign>& other);
+    Byte<N, Sign> operator&(const Byte<_N, _Sign>& other) const;
 public:
     template<typename TValue, typename _TValue = 
         typename std::remove_cv<typename std::remove_reference<
@@ -245,14 +256,13 @@ public:
             !std::is_base_of<test::byte::Order, _TValue>::value &&
             !std::is_pointer<_TValue>::value &&
             !std::is_array<_TValue>::value, int>::type = 1>
-    Byte<N, Sign> operator|(const TValue& val);
-    Byte<N, Sign> operator|(const test::byte::Order& byte_order);
+    Byte<N, Sign> operator|(const TValue& val) const;
+    Byte<N, Sign> operator|(const test::byte::Order& byte_order) const;
     template<typename TValue>
-    Byte<N, Sign> operator|(test::byte::Offset<TValue>&& offset_val);
+    Byte<N, Sign> operator|(test::byte::Offset<TValue>&& offset_val) const;
     template<std::size_t _N, bool _Sign>
-    Byte<N, Sign> operator|(const Byte<_N, _Sign>& other);
+    Byte<N, Sign> operator|(const Byte<_N, _Sign>& other) const;
 public:
-    
     template<typename TValue, typename _TValue = 
         typename std::remove_cv<typename std::remove_reference<
             TValue>::type>::type,
@@ -262,16 +272,53 @@ public:
             !std::is_base_of<test::byte::Order, _TValue>::value &&
             !std::is_pointer<_TValue>::value &&
             !std::is_array<_TValue>::value, int>::type = 1>
-    Byte<N, Sign> operator^(const TValue& val);
-    Byte<N, Sign> operator^(const test::byte::Order& byte_order);
+    Byte<N, Sign> operator^(const TValue& val) const;
+    Byte<N, Sign> operator^(const test::byte::Order& byte_order) const;
     template<typename TValue>
-    Byte<N, Sign> operator^(test::byte::Offset<TValue>&& offset_val);
+    Byte<N, Sign> operator^(test::byte::Offset<TValue>&& offset_val) const;
     template<std::size_t _N, bool _Sign>
-    Byte<N, Sign> operator^(const Byte<_N, _Sign>& other);
+    Byte<N, Sign> operator^(const Byte<_N, _Sign>& other) const;
+public:
+    Byte<N, Sign> operator<<(const std::size_t& size) const;
+    Byte<N, Sign> operator<<(const int& size) const;
+public:
+    Byte<N, Sign> operator>>(const std::size_t& size) const;
+    Byte<N, Sign> operator>>(const int& size) const;
 public:
     std::uint8_t& operator[](const std::size_t& index);
     std::uint8_t operator[](const std::size_t& index) const;
-
+public:
+    template<typename TValue, typename _TValue = 
+        typename std::remove_cv<typename std::remove_reference<
+            TValue>::type>::type,
+        typename std::enable_if<!test::trait::byte::IsBaseOf<_TValue>::Value &&
+            !test::trait::byte::off::IsBaseOf<_TValue>::Value &&
+            !test::trait::byte::it::IsBaseOf<_TValue>::Value &&
+            !std::is_base_of<test::byte::Order, _TValue>::value &&
+            !std::is_pointer<_TValue>::value &&
+            !std::is_array<_TValue>::value, int>::type = 1>
+    bool operator==(const TValue& val) const;
+    bool operator==(const test::byte::Order& byte_order) const;
+    template<typename TValue>
+    bool operator==(test::byte::Offset<TValue>&& offset_val) const;
+    template<std::size_t _N, bool _Sign>
+    bool operator==(const Byte<_N, _Sign>& other) const;
+public:
+    template<typename TValue, typename _TValue = 
+        typename std::remove_cv<typename std::remove_reference<
+            TValue>::type>::type,
+        typename std::enable_if<!test::trait::byte::IsBaseOf<_TValue>::Value &&
+            !test::trait::byte::off::IsBaseOf<_TValue>::Value &&
+            !test::trait::byte::it::IsBaseOf<_TValue>::Value &&
+            !std::is_base_of<test::byte::Order, _TValue>::value &&
+            !std::is_pointer<_TValue>::value &&
+            !std::is_array<_TValue>::value, int>::type = 1>
+    bool operator!=(const TValue& val) const;
+    bool operator!=(const test::byte::Order& byte_order) const;
+    template<typename TValue>
+    bool operator!=(test::byte::Offset<TValue>&& offset_val) const;
+    template<std::size_t _N, bool _Sign>
+    bool operator!=(const Byte<_N, _Sign>& other) const;
 };
 
 template<std::size_t N, bool Sign>
@@ -524,6 +571,44 @@ void Byte<N, Sign>::_LShift(std::uint8_t* ptr, std::size_t size,
         else
             *it = 0;
     }
+}
+
+template<std::size_t N, bool Sign>
+template<typename TBValue>
+bool Byte<N, Sign>::_Equal(ConstIteratorType a_bg, ConstIteratorType a_ed, 
+    test::byte::Iterator<TBValue> b_bg, test::byte::Iterator<TBValue> b_ed)
+{
+    while(a_bg != a_ed && b_bg != b_ed)
+    {
+        if (*a_bg != *b_bg) return false;
+        ++a_bg; ++b_bg;
+    }
+    return true;
+}
+    
+template<std::size_t N, bool Sign>
+bool Byte<N, Sign>::_Equal(ConstIteratorType a_bg, ConstIteratorType a_ed, 
+    const std::uint8_t* ptr, std::size_t size)
+{
+    const auto op = GetOperator();
+    ConstIteratorType begin{const_cast<std::uint8_t*>(ptr), 0,
+        size, op.Begin(0, size), op};
+    ConstIteratorType end{const_cast<std::uint8_t*>(ptr), 0, 
+        size, op.End(0, size), op};
+    return _Equal(a_bg, a_ed, begin, end);
+}
+    
+template<std::size_t N, bool Sign>
+template<typename TBValue>
+bool Byte<N, Sign>::_Equal(const std::uint8_t* ptr, std::size_t size, 
+    test::byte::Iterator<TBValue> b_bg, test::byte::Iterator<TBValue> b_ed)
+{
+    const auto op = GetOperator();
+    ConstIteratorType begin{const_cast<std::uint8_t*>(ptr), 0, size, 
+        op.Begin(0, size), op};
+    ConstIteratorType end{const_cast<std::uint8_t*>(ptr), 0, size, 
+        op.End(0, size), op};
+    return _Equal(begin, end, b_bg, b_ed);
 }
 
 template<std::size_t N, bool Sign>
@@ -911,7 +996,7 @@ template<typename TValue, typename _TValue,
         !std::is_base_of<test::byte::Order, _TValue>::value &&
         !std::is_pointer<_TValue>::value &&
         !std::is_array<_TValue>::value, int>::type>
-Byte<N, Sign> Byte<N, Sign>::operator&(const TValue& val)
+Byte<N, Sign> Byte<N, Sign>::operator&(const TValue& val) const
 {
     Byte<N, Sign> ret{*this};
     ret &= val;
@@ -919,7 +1004,8 @@ Byte<N, Sign> Byte<N, Sign>::operator&(const TValue& val)
 }
 
 template<std::size_t N, bool Sign>
-Byte<N, Sign> Byte<N, Sign>::operator&(const test::byte::Order& byte_order)
+Byte<N, Sign> 
+Byte<N, Sign>::operator&(const test::byte::Order& byte_order) const
 {
     Byte<N, Sign> ret{*this};
     ret &= byte_order;
@@ -928,16 +1014,17 @@ Byte<N, Sign> Byte<N, Sign>::operator&(const test::byte::Order& byte_order)
 
 template<std::size_t N, bool Sign>
 template<typename TValue>
-Byte<N, Sign> Byte<N, Sign>::operator&(test::byte::Offset<TValue>&& offset_val)
+Byte<N, Sign> 
+Byte<N, Sign>::operator&(test::byte::Offset<TValue>&& offset_val) const
 {
     Byte<N, Sign> ret{*this};
-    ret &= offset_val;
+    ret &= std::forward<test::byte::Offset<TValue>>(offset_val);
     return ret;
 }
 
 template<std::size_t N, bool Sign>
 template<std::size_t _N, bool _Sign>
-Byte<N, Sign> Byte<N, Sign>::operator&(const Byte<_N, _Sign>& other)
+Byte<N, Sign> Byte<N, Sign>::operator&(const Byte<_N, _Sign>& other) const
 {
     Byte<N, Sign> ret{*this};
     ret &= other;
@@ -952,7 +1039,7 @@ template<typename TValue, typename _TValue,
         !std::is_base_of<test::byte::Order, _TValue>::value &&
         !std::is_pointer<_TValue>::value &&
         !std::is_array<_TValue>::value, int>::type>
-Byte<N, Sign> Byte<N, Sign>::operator|(const TValue& val)
+Byte<N, Sign> Byte<N, Sign>::operator|(const TValue& val) const
 {
     Byte<N, Sign> ret{*this};
     ret |= val;
@@ -960,7 +1047,8 @@ Byte<N, Sign> Byte<N, Sign>::operator|(const TValue& val)
 }
 
 template<std::size_t N, bool Sign>
-Byte<N, Sign> Byte<N, Sign>::operator|(const test::byte::Order& byte_order)
+Byte<N, Sign> 
+Byte<N, Sign>::operator|(const test::byte::Order& byte_order) const
 {
     Byte<N, Sign> ret{*this};
     ret |= byte_order;
@@ -969,16 +1057,17 @@ Byte<N, Sign> Byte<N, Sign>::operator|(const test::byte::Order& byte_order)
 
 template<std::size_t N, bool Sign>
 template<typename TValue>
-Byte<N, Sign> Byte<N, Sign>::operator|(test::byte::Offset<TValue>&& offset_val)
+Byte<N, Sign> 
+Byte<N, Sign>::operator|(test::byte::Offset<TValue>&& offset_val) const
 {
     Byte<N, Sign> ret{*this};
-    ret |= offset_val;
+    ret |= std::forward<test::byte::Offset<TValue>>(offset_val);
     return ret;
 }
 
 template<std::size_t N, bool Sign>
 template<std::size_t _N, bool _Sign>
-Byte<N, Sign> Byte<N, Sign>::operator|(const Byte<_N, _Sign>& other)
+Byte<N, Sign> Byte<N, Sign>::operator|(const Byte<_N, _Sign>& other) const
 {
     Byte<N, Sign> ret{*this};
     ret |= other;
@@ -993,7 +1082,7 @@ template<typename TValue, typename _TValue,
         !std::is_base_of<test::byte::Order, _TValue>::value &&
         !std::is_pointer<_TValue>::value &&
         !std::is_array<_TValue>::value, int>::type>
-Byte<N, Sign> Byte<N, Sign>::operator^(const TValue& val)
+Byte<N, Sign> Byte<N, Sign>::operator^(const TValue& val) const
 {
     Byte<N, Sign> ret{*this};
     ret ^= val;
@@ -1001,7 +1090,8 @@ Byte<N, Sign> Byte<N, Sign>::operator^(const TValue& val)
 }
 
 template<std::size_t N, bool Sign>
-Byte<N, Sign> Byte<N, Sign>::operator^(const test::byte::Order& byte_order)
+Byte<N, Sign> 
+Byte<N, Sign>::operator^(const test::byte::Order& byte_order) const
 {
     Byte<N, Sign> ret{*this};
     ret ^= byte_order;
@@ -1010,19 +1100,52 @@ Byte<N, Sign> Byte<N, Sign>::operator^(const test::byte::Order& byte_order)
 
 template<std::size_t N, bool Sign>
 template<typename TValue>
-Byte<N, Sign> Byte<N, Sign>::operator^(test::byte::Offset<TValue>&& offset_val)
+Byte<N, Sign> 
+Byte<N, Sign>::operator^(test::byte::Offset<TValue>&& offset_val) const
 {
     Byte<N, Sign> ret{*this};
-    ret ^= offset_val;
+    ret ^= std::forward<test::byte::Offset<TValue>>(offset_val);
     return ret;
 }
 
 template<std::size_t N, bool Sign>
 template<std::size_t _N, bool _Sign>
-Byte<N, Sign> Byte<N, Sign>::operator^(const Byte<_N, _Sign>& other)
+Byte<N, Sign> Byte<N, Sign>::operator^(const Byte<_N, _Sign>& other) const
 {
     Byte<N, Sign> ret{*this};
     ret ^= other;
+    return ret;
+}
+
+template<std::size_t N, bool Sign>
+Byte<N, Sign> Byte<N, Sign>::operator<<(const std::size_t& size) const
+{
+    Byte<N, Sign> ret{*this};
+    ret <<= size;
+    return ret;
+}
+
+template<std::size_t N, bool Sign>
+Byte<N, Sign> Byte<N, Sign>::operator<<(const int& size) const
+{
+    Byte<N, Sign> ret{*this};
+    ret <<= size;
+    return ret;
+}
+
+template<std::size_t N, bool Sign>
+Byte<N, Sign> Byte<N, Sign>::operator>>(const std::size_t& size) const
+{
+    Byte<N, Sign> ret{*this};
+    ret >>= size;
+    return ret;
+}
+
+template<std::size_t N, bool Sign>
+Byte<N, Sign> Byte<N, Sign>::operator>>(const int& size) const
+{
+    Byte<N, Sign> ret{*this};
+    ret >>= size;
     return ret;
 }
 
@@ -1039,6 +1162,73 @@ template<std::size_t N, bool Sign>
 std::uint8_t Byte<N, Sign>::operator[](const std::size_t& index) const
 {
     return const_cast<Byte<N, Sign>*>(this)->operator[](index);
+}
+
+template<std::size_t N, bool Sign>
+template<typename TValue, typename _TValue,
+    typename std::enable_if<!test::trait::byte::IsBaseOf<_TValue>::Value &&
+        !test::trait::byte::off::IsBaseOf<_TValue>::Value &&
+        !test::trait::byte::it::IsBaseOf<_TValue>::Value &&
+        !std::is_base_of<test::byte::Order, _TValue>::value &&
+        !std::is_pointer<_TValue>::value &&
+        !std::is_array<_TValue>::value, int>::type>
+bool Byte<N, Sign>::operator==(const TValue& val) const
+{
+    return _Equal(Begin(), End(), (const std::uint8_t*)&val, sizeof(TValue));
+}
+
+template<std::size_t N, bool Sign>
+bool Byte<N, Sign>::operator==(const test::byte::Order& byte_order) const
+{
+    return _Equal(Begin(), End(), byte_order.Begin(), byte_order.End());
+}
+
+template<std::size_t N, bool Sign>
+template<typename TValue>
+bool Byte<N, Sign>::operator==(test::byte::Offset<TValue>&& offset_val) const
+{
+    return _Equal(Begin() + std::move(offset_val).Size(), End(), 
+        std::move(offset_val).Begin(), std::move(offset_val).End());
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t _N, bool _Sign>
+bool Byte<N, Sign>::operator==(const Byte<_N, _Sign>& other) const
+{
+    return _Equal(Begin(), End(), other.Begin(), other.End());
+}
+
+template<std::size_t N, bool Sign>
+template<typename TValue, typename _TValue,
+    typename std::enable_if<!test::trait::byte::IsBaseOf<_TValue>::Value &&
+        !test::trait::byte::off::IsBaseOf<_TValue>::Value &&
+        !test::trait::byte::it::IsBaseOf<_TValue>::Value &&
+        !std::is_base_of<test::byte::Order, _TValue>::value &&
+        !std::is_pointer<_TValue>::value &&
+        !std::is_array<_TValue>::value, int>::type>
+bool Byte<N, Sign>::operator!=(const TValue& val) const
+{
+    return !(*this == val);
+}
+
+template<std::size_t N, bool Sign>
+bool Byte<N, Sign>::operator!=(const test::byte::Order& byte_order) const
+{
+    return !(*this == byte_order);
+}
+
+template<std::size_t N, bool Sign>
+template<typename TValue>
+bool Byte<N, Sign>::operator!=(test::byte::Offset<TValue>&& offset_val) const
+{
+    return !(*this == std::forward<test::byte::Offset<TValue>>(offset_val));
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t _N, bool _Sign>
+bool Byte<N, Sign>::operator!=(const Byte<_N, _Sign>& other) const
+{
+    return !(*this == other);
 }
 
 } //!test
