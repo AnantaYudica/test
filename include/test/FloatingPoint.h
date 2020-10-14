@@ -2,11 +2,15 @@
 #define TEST_FLOATINGPOINT_H_
 
 #include "Byte.h"
+#include "fp/Base.h"
+#include "fp/Format.h"
 #include "fp/fmt/Definition.h"
+#include "bit/index/Big.h"
 
 #include <cstddef>
 #include <cmath>
 #include <cfloat>
+#include <type_traits>
 
 namespace test
 {
@@ -44,18 +48,18 @@ private:
     static ByteType _GetValue(const SignedIntegerType& val);
     static ByteType _GetValue(const UnsignedIntegerType& val);
 public:
-    static ExponentType GetBiasExponent();
-    static ExponentType GetMinimumExponent();
-    static ExponentType GetMaximumExponent();
+    static constexpr ExponentType BiasExponent();
+    static constexpr ExponentType MinimumExponent();
+    static constexpr ExponentType MaximumExponent();
 public:
-    static MantissaType GetMinimumNormalMantissa();
-    static MantissaType GetMaximumNormalMantissa();
-    static MantissaType GetMinimumSubNormalMantissa();
-    static MantissaType GetMaximumSubNormalMantissa();
+    static constexpr MantissaType MinimumNormalMantissa();
+    static constexpr MantissaType MaximumNormalMantissa();
+    static constexpr MantissaType MinimumSubNormalMantissa();
+    static constexpr MantissaType MaximumSubNormalMantissa();
 public:
-    static constexpr int GetBitFieldSign();
-    static constexpr int GetBitFieldExponent();
-    static constexpr int GetBitFieldMantissa();
+    static constexpr int BitFieldSign();
+    static constexpr int BitFieldExponent();
+    static constexpr int BitFieldMantissa();
 private:
     TFloat m_value;
 public:
@@ -82,9 +86,15 @@ public:
     void SetMantissa(const MantissaType& mant);
 public:
     bool IsSign() const;
+public:
     ExponentType GetExponent() const;
     MantissaType GetNormalMantissa() const;
     MantissaType GetSubNormalMantissa() const;
+public:
+    template<std::size_t NBase = 10, bool BNormalize = false>
+    test::fp::Base<NBase, test::FloatingPoint<TFloat, TFormat>, BNormalize> 
+        GetBase() const;
+public:
     TFloat GetFloat() const;
 };
 
@@ -110,7 +120,7 @@ FloatingPoint<TFloat, TFormat>::_SetExponent(const ByteType& byte,
     const auto _exponent_index = FormatType::exponent_index;
     const auto _exponent_bitoff = FormatType::exponent_bitoff;
     ByteType res{byte};
-    auto exp = FormatType::ExponentBias().template CastTo<ExponentType>();
+    auto exp = FormatType::ExponentBias();
     exp += exp_val;
     exp &= FormatType::ExponentMask().template CastTo<ExponentType>();
     ByteType exp_byte{exp};
@@ -129,7 +139,8 @@ FloatingPoint<TFloat, TFormat>::_SetMantissa(const ByteType& byte,
     typedef typename FormatType::MantissaByteType MantissaByteType;
     const auto _mantissa_index = FormatType::mantissa_index;
     ByteType res{byte};
-    MantissaByteType mant_byte = mant_val & FormatType::MantissaMaskByte();
+    MantissaByteType mant_byte = mant_val;
+    mant_byte &= FormatType::MantissaMaskByte();
     res &= test::byte::off::Make(_mantissa_index,
         ~FormatType::MantissaMaskByte());
     res |= mant_byte;
@@ -152,20 +163,17 @@ typename FloatingPoint<TFloat, TFormat>::ExponentType
 FloatingPoint<TFloat, TFormat>::_GetExponent(const ByteType& byte)
 {
     typedef typename FormatType::ExponentByteType ExponentByteType;
-    typedef typename FormatType::ExponentExpandValueType 
-        ExponentExpandValueType;
+    typedef typename FormatType::ExponentValueType ExponentValueType;
     const auto _exponent_index = FormatType::exponent_index;
     const auto _exponent_bitoff = FormatType::exponent_bitoff;
     ExponentByteType exp_byte{byte.template 
         GetBlock<FormatType::exponent_size>(_exponent_index)};
     exp_byte >>= _exponent_bitoff;
     exp_byte &= FormatType::ExponentMask();
-    auto exp_val = exp_byte.template CastTo<ExponentExpandValueType>();
+    auto exp_val = exp_byte.template CastTo<ExponentValueType>();
     if (exp_val == 0) 
-        return FormatType::ExponentMinimumValue().template 
-            CastTo<ExponentExpandValueType>();
-    exp_val -= FormatType::ExponentBias().template 
-        CastTo<ExponentExpandValueType>();
+        return FormatType::ExponentMinimumValue() - 1;
+    exp_val -= FormatType::ExponentBias();
     return (ExponentType)exp_val;
 }
 
@@ -187,7 +195,7 @@ FloatingPoint<TFloat, TFormat>::_GetSubNormalMantissa(const ByteType& byte)
     MantissaByteType mant_byte = byte.template
         GetBlock<FormatType::mantissa_size>(_mantissa_index);
     mant_byte &= FormatType::MantissaSubNormalMaximumValue();
-    return mant_byte;
+    return mant_byte.template CastTo<MantissaType>();
 }
 
 template<typename TFloat, typename TFormat>
@@ -208,7 +216,7 @@ FloatingPoint<TFloat, TFormat>::_GetValue(const UnsignedIntegerType& val)
     const auto _mantissa_bitfield = FormatType::mantissa_bitfield;
     ByteType byte;
     ExponentType exp = 1;
-    auto id_val = std::log2(val);
+    TFloat id_val = test::bit::index::Big(val);
     int len = std::floor(id_val);
     int inv_len = _mantissa_bitfield - len;
 
@@ -226,68 +234,68 @@ FloatingPoint<TFloat, TFormat>::_GetValue(const UnsignedIntegerType& val)
 }
 
 template<typename TFloat, typename TFormat>
-typename FloatingPoint<TFloat, TFormat>::ExponentType 
-FloatingPoint<TFloat, TFormat>::GetBiasExponent()
+constexpr typename FloatingPoint<TFloat, TFormat>::ExponentType 
+FloatingPoint<TFloat, TFormat>::BiasExponent()
 {
-    return FormatType::ExponentBias().template CastTo<ExponentType>();
+    return FormatType::ExponentBias();
 }
 
 template<typename TFloat, typename TFormat>
-typename FloatingPoint<TFloat, TFormat>::ExponentType 
-FloatingPoint<TFloat, TFormat>::GetMinimumExponent()
+constexpr typename FloatingPoint<TFloat, TFormat>::ExponentType 
+FloatingPoint<TFloat, TFormat>::MinimumExponent()
 {
-    return FormatType::ExponentMinimumValue().template CastTo<ExponentType>();
+    return FormatType::ExponentMinimumValue();
 }
 
 template<typename TFloat, typename TFormat>
-typename FloatingPoint<TFloat, TFormat>::ExponentType 
-FloatingPoint<TFloat, TFormat>::GetMaximumExponent()
+constexpr typename FloatingPoint<TFloat, TFormat>::ExponentType 
+FloatingPoint<TFloat, TFormat>::MaximumExponent()
 {
-    return FormatType::ExponentMaximumValue().template CastTo<ExponentType>();
+    return FormatType::ExponentMaximumValue();
 }
 
 template<typename TFloat, typename TFormat>
-typename FloatingPoint<TFloat, TFormat>::MantissaType 
-FloatingPoint<TFloat, TFormat>::GetMinimumNormalMantissa()
+constexpr typename FloatingPoint<TFloat, TFormat>::MantissaType 
+FloatingPoint<TFloat, TFormat>::MinimumNormalMantissa()
 {
     return FormatType::MantissaNormalMinimumValue();
 }
 
 template<typename TFloat, typename TFormat>
-typename FloatingPoint<TFloat, TFormat>::MantissaType 
-FloatingPoint<TFloat, TFormat>::GetMaximumNormalMantissa()
+constexpr typename FloatingPoint<TFloat, TFormat>::MantissaType 
+FloatingPoint<TFloat, TFormat>::MaximumNormalMantissa()
 {
     return FormatType::MantissaNormalMaximumValue();
 }
 
 template<typename TFloat, typename TFormat>
-typename FloatingPoint<TFloat, TFormat>::MantissaType 
-FloatingPoint<TFloat, TFormat>::GetMinimumSubNormalMantissa()
+constexpr typename FloatingPoint<TFloat, TFormat>::MantissaType 
+FloatingPoint<TFloat, TFormat>::MinimumSubNormalMantissa()
 {
     return FormatType::MantissaSubNormalMinimumValue();
 }
 
 template<typename TFloat, typename TFormat>
-typename FloatingPoint<TFloat, TFormat>::MantissaType 
-FloatingPoint<TFloat, TFormat>::GetMaximumSubNormalMantissa()
+constexpr typename FloatingPoint<TFloat, TFormat>::MantissaType 
+FloatingPoint<TFloat, TFormat>::MaximumSubNormalMantissa()
 {
     return FormatType::MantissaSubNormalMaximumValue();
 }
 
 template<typename TFloat, typename TFormat>
-constexpr int FloatingPoint<TFloat, TFormat>::GetBitFieldSign()
+constexpr int FloatingPoint<TFloat, TFormat>::BitFieldSign()
 {
     return FormatType::sign_bitfield;
 }
 
 template<typename TFloat, typename TFormat>
-constexpr int FloatingPoint<TFloat, TFormat>::GetBitFieldExponent()
+constexpr int FloatingPoint<TFloat, TFormat>::BitFieldExponent()
 {
     return FormatType::exponent_bitfield;
 }
 
 template<typename TFloat, typename TFormat>
-constexpr int FloatingPoint<TFloat, TFormat>::GetBitFieldMantissa()
+constexpr int FloatingPoint<TFloat, TFormat>::BitFieldMantissa()
 {
     return FormatType::mantissa_bitfield;
 }
@@ -423,6 +431,14 @@ FloatingPoint<TFloat, TFormat>::GetSubNormalMantissa() const
 {
     const ByteType byte = m_value;
     return _GetSubNormalMantissa(byte);
+}
+
+template<typename TFloat, typename TFormat>
+template<std::size_t NBase, bool BNormalize>
+test::fp::Base<NBase, test::FloatingPoint<TFloat, TFormat>, BNormalize> 
+FloatingPoint<TFloat, TFormat>::GetBase() const
+{
+    return {*this};
 }
 
 template<typename TFloat, typename TFormat>

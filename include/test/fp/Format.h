@@ -40,78 +40,84 @@ struct Format<32>
     typedef test::Byte<mantissa_size> MantissaByteType;
 
     typedef bool SignValueType;
-    typedef std::int8_t ExponentValueType;
-    typedef std::int16_t ExponentExpandValueType;
-    typedef test::Byte<mantissa_size> MantissaValueType;
+    typedef std::int16_t ExponentValueType;
+    typedef std::uint32_t MantissaValueType;
     typedef std::int32_t SignedIntegerType;
     typedef std::uint32_t UnsignedIntegerType;
 
     static FloatByteType Zero()
     {
-        return {};
+        static const FloatByteType instance;
+        return instance;
     }
 
     static SignByteType SignMask()
     {
-        return {0x01};
+        static const SignByteType instance{0x01};
+        return instance;
     }
     static SignByteType SignMaskByte()
     {
-        return {0x80};
+        static const SignByteType instance{0x80};
+        return instance;
     }
 
     static ExponentByteType ExponentMask()
     {
-        return {0x00FF};
+        static const ExponentByteType instance{0x00FF};
+        return instance;
     }
     static ExponentByteType ExponentMaskByte()
     {
-        return {0x7F80};
+        static const ExponentByteType instance{0x7F80};
+        return instance;
     }
 
     static MantissaByteType MantissaMask()
     {
-        return {0x007FFFFF};
+        static const MantissaByteType instance{0x007FFFFF};
+        return instance;
     }
     
     static MantissaByteType MantissaMaskByte()
     {
-        return {0x007FFFFF};
+        static const MantissaByteType instance{0x007FFFFF};
+        return instance;
     }
 
-    static ExponentByteType ExponentBias()
+    static constexpr ExponentValueType ExponentBias()
     {
-        return {0x007F};
+        return 0x007F;
     }
 
-    static ExponentByteType ExponentMinimumValue()
+    static constexpr ExponentValueType ExponentMinimumValue()
     {
-        return {0x0FF82};
+        return 0xFF82;
     }
 
-    static ExponentByteType ExponentMaximumValue()
+    static constexpr ExponentValueType ExponentMaximumValue()
     {
-        return {0x007F};
+        return 0x007F;
     }
 
-    static MantissaByteType MantissaNormalMinimumValue()
+    static constexpr MantissaValueType MantissaNormalMinimumValue()
     {
-        return {0x00800000};
+        return 0x00800000;
     }
     
-    static MantissaByteType MantissaNormalMaximumValue()
+    static constexpr MantissaValueType MantissaNormalMaximumValue()
     {
-        return {0x00FFFFFF};
+        return 0x00FFFFFF;
     }
 
-    static MantissaByteType MantissaSubNormalMinimumValue()
+    static constexpr MantissaValueType MantissaSubNormalMinimumValue()
     {
-        return {0x00000000};
+        return 0x00000000;
     }
 
-    static MantissaByteType MantissaSubNormalMaximumValue()
+    static constexpr MantissaValueType MantissaSubNormalMaximumValue()
     {
-        return {0x007FFFFF};
+        return 0x007FFFFF;
     }
 };
 
@@ -139,77 +145,83 @@ struct Format<64>
 
     typedef bool SignValueType;
     typedef std::int16_t ExponentValueType;
-    typedef std::int16_t ExponentExpandValueType;
-    typedef test::Byte<mantissa_size> MantissaValueType;
+    typedef std::uint64_t MantissaValueType;
     typedef std::int64_t SignedIntegerType;
     typedef std::uint64_t UnsignedIntegerType;
     
     static FloatByteType Zero()
     {
-        return {};
+        static const FloatByteType instance;
+        return instance;
     }
 
     static SignByteType SignMask()
     {
-        return {0x01};
+        static const SignByteType instance{0x01};
+        return instance;
     }
     static SignByteType SignMaskByte()
     {
-        return {0x80};
+        static const SignByteType instance{0x80};
+        return instance;
     }
 
     static ExponentByteType ExponentMask()
     {
-        return {0x07FF};
+        static const ExponentByteType instance{0x07FF};
+        return instance;
     }
     static ExponentByteType ExponentMaskByte()
     {
-        return {0x7FF0};
+        static const ExponentByteType instance{0x7FF0};
+        return instance;
     }
 
     static MantissaByteType MantissaMask()
     {
-        return {0x0FFFFFFFFFFFFF};
+        static const MantissaByteType instance{0x0FFFFFFFFFFFFF};
+        return instance;
     }
     
     static MantissaByteType MantissaMaskByte()
     {
-        return {0x0FFFFFFFFFFFFF};
+        static const MantissaByteType instance{0x0FFFFFFFFFFFFF};
+        return instance;
     }
 
-    static ExponentByteType ExponentBias()
+    static constexpr ExponentValueType ExponentBias()
     {
-        return {0x03FF};
+        return 0x03FF;
     }
 
-    static ExponentByteType ExponentMinimumValue()
+    static constexpr ExponentValueType ExponentMinimumValue()
     {
-        return {0xFC02};
+        return 0xFC02;
     }
 
-    static ExponentByteType ExponentMaximumValue()
+    static constexpr ExponentValueType ExponentMaximumValue()
     {
-        return {0x03FF};
+        return 0x03FF;
     }
 
-    static MantissaByteType MantissaNormalMinimumValue()
+    static constexpr MantissaValueType MantissaNormalMinimumValue()
     {
-        return {0x10000000000000};
+        return 0x10000000000000;
     }
     
-    static MantissaByteType MantissaNormalMaximumValue()
+    static constexpr MantissaValueType MantissaNormalMaximumValue()
     {
-        return {0x1FFFFFFFFFFFFF};
+        return 0x1FFFFFFFFFFFFF;
     }
 
-    static MantissaByteType MantissaSubNormalMinimumValue()
+    static constexpr MantissaValueType MantissaSubNormalMinimumValue()
     {
-        return {0x00000000000000};
+        return 0x00000000000000;
     }
 
-    static MantissaByteType MantissaSubNormalMaximumValue()
+    static constexpr MantissaValueType MantissaSubNormalMaximumValue()
     {
-        return {0x0FFFFFFFFFFFFF};
+        return 0x0FFFFFFFFFFFFF;
     }
 };
 
@@ -237,77 +249,83 @@ struct Format<80>
 
     typedef bool SignValueType;
     typedef std::int16_t ExponentValueType;
-    typedef std::int16_t ExponentExpandValueType;
-    typedef test::Byte<mantissa_size> MantissaValueType;
+    typedef std::uint64_t MantissaValueType;
     typedef std::int64_t SignedIntegerType;
     typedef std::uint64_t UnsignedIntegerType;
     
     static FloatByteType Zero()
     {
-        return {};
+        static const FloatByteType instance{};
+        return instance;
     }
 
     static SignByteType SignMask()
     {
-        return {0x01};
+        static const SignByteType instance{0x01};
+        return instance;
     }
     static SignByteType SignMaskByte()
     {
-        return {0x80};
+        static const SignByteType instance{0x80};
+        return instance;
     }
 
     static ExponentByteType ExponentMask()
     {
-        return {0x7FFF};
+        static const ExponentByteType instance{0x7FFF};
+        return instance;
     }
     static ExponentByteType ExponentMaskByte()
     {
-        return {0x7FFF};
+        static const ExponentByteType instance{0x7FFF};
+        return instance;
     }
 
     static MantissaByteType MantissaMask()
     {
-        return {0x7FFFFFFFFFFFFFFF};
+        static const MantissaByteType instance{0x7FFFFFFFFFFFFFFF};
+        return instance;
     }
     
     static MantissaByteType MantissaMaskByte()
     {
-        return {0xFFFFFFFFFFFFFFFF};
+        static const MantissaByteType instance{0xFFFFFFFFFFFFFFFF};
+        return instance;
     }
 
-    static ExponentByteType ExponentBias()
+    static constexpr ExponentValueType ExponentBias()
     {
-        return {0x3FFF};
+        return 0x3FFF;
     }
 
-    static ExponentByteType ExponentMinimumValue()
+    static constexpr ExponentValueType ExponentMinimumValue()
     {
-        return {0xC002};
+        return 0xC002;
     }
 
-    static ExponentByteType ExponentMaximumValue()
+    static constexpr ExponentValueType ExponentMaximumValue()
     {
-        return {0x03FF};
+        return 0x03FF;
     }
 
-    static MantissaByteType MantissaNormalMinimumValue()
+    static constexpr MantissaValueType MantissaNormalMinimumValue()
     {
-        return {0x8000000000000000};
+        return 0x8000000000000000;
     }
     
-    static MantissaByteType MantissaNormalMaximumValue()
+    static constexpr MantissaValueType MantissaNormalMaximumValue()
     {
-        return {0xFFFFFFFFFFFFFFFF};
+        return 0xFFFFFFFFFFFFFFFF;
     }
 
-    static MantissaByteType MantissaSubNormalMinimumValue()
+    static constexpr MantissaValueType MantissaSubNormalMinimumValue()
     {
-        return {0x0000000000000000};
+        return 0x0000000000000000;
     }
 
-    static MantissaByteType MantissaSubNormalMaximumValue()
+    static constexpr MantissaValueType MantissaSubNormalMaximumValue()
     {
-        return {0x7FFFFFFFFFFFFFFF};
+        return 0x7FFFFFFFFFFFFFFF;
     }
 };
 
