@@ -4067,7 +4067,2376 @@ int main()
             assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
         }
     }
-    ////
+    {
+        typedef typename test::FloatingPoint<double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<double>::ExponentType 
+            ExponentType;
+        test::FloatingPoint<double> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<double>::
+            MaximumSubNormalMantissa();
+        mant_bin_int <<= 1;
+        const double mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<double>::
+            MinimumExponent() - (test::FloatingPoint<double>::
+            BitFieldMantissa() + 1);
+        fl1.SetExponent(test::FloatingPoint<double>::MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<double>::
+            MaximumSubNormalMantissa());
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+
+            auto fp_num = fp_base.GetNumber();
+            double rem_ndigit = test::bit::index::Big(fp_num.GetRemainder());
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_base);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == mant_base);
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+        {
+            auto fp_base = fl1.GetBase<10>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+            double exp_b10_f = exp_bin;
+            exp_b10_f *=(std::log((double)2)/std::log((double)10));
+            ExponentType exp_b10 = std::floor(std::abs(exp_b10_f));
+            exp_b10_f = exp_b10_f + (double)exp_b10;
+            exp_b10 *= -1;
+            double mant_b10_f = mant_bin_f;
+            mant_b10_f *= std::pow((double)10, exp_b10_f);
+            
+            auto fp_num = fp_base.GetNumber();
+            double rem_ndigit = std::log((double)fp_num.GetRemainder());
+            rem_ndigit /= std::log((double)10);
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_b10);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == std::floor(mant_b10_f));
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+        {
+            auto fp_base = fl1.GetBase<16>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+            
+            double exp_b16_f = 
+                (std::log((double)2)/std::log((double)16)) * exp_bin;
+            ExponentType exp_b16 = std::floor(std::abs(exp_b16_f));
+            exp_b16_f = exp_b16_f + (double)exp_b16;
+            exp_b16 *= -1;
+            double mant_b16_f = mant_bin_f;
+            mant_b16_f *= std::pow((double)16, exp_b16_f);
+
+            auto fp_num = fp_base.GetNumber();
+            double rem_ndigit = std::log((double)fp_num.GetRemainder());
+            rem_ndigit /= std::log((double)16);
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_b16);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == std::floor(mant_b16_f));
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+    }
+    {
+        typedef typename test::FloatingPoint<double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<double>::ExponentType 
+            ExponentType;
+        test::FloatingPoint<double> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<double>::
+            MinimumSubNormalMantissa() + 1;
+        mant_bin_int <<= test::FloatingPoint<double>::
+            BitFieldMantissa();
+        const double mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<double>::
+            MinimumExponent() - (test::FloatingPoint<double>::
+            BitFieldMantissa() + test::FloatingPoint<double>::
+            BitFieldMantissa());
+        fl1.SetExponent(test::FloatingPoint<double>::MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<double>::
+            MinimumSubNormalMantissa() + 1);
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+
+            auto fp_num = fp_base.GetNumber();
+            double rem_ndigit = test::bit::index::Big(fp_num.GetRemainder());
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_base);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == mant_base);
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+        {
+            auto fp_base = fl1.GetBase<10>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+            double exp_b10_f = (std::log((double)2)/std::log((double)10)) * 
+                (double)exp_bin;
+            ExponentType exp_b10 = std::floor(std::abs(exp_b10_f));
+            exp_b10_f = exp_b10_f + (double)exp_b10;
+            exp_b10 *= -1;
+            double mant_b10_f = mant_bin_f;
+            mant_b10_f *= std::pow((double)10, exp_b10_f);
+
+            auto fp_num = fp_base.GetNumber();
+            double rem_ndigit = std::log((double)fp_num.GetRemainder());
+            rem_ndigit /= std::log((double)10);
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_b10);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == std::floor(mant_b10_f));
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+        {
+            auto fp_base = fl1.GetBase<16>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+            
+            double exp_b16_f = 
+                (std::log((double)2)/std::log((double)16)) * exp_bin;
+            ExponentType exp_b16 = std::floor(std::abs(exp_b16_f));
+            exp_b16_f = exp_b16_f + (double)exp_b16;
+            exp_b16 *= -1;
+            double mant_b16_f = mant_bin_f;
+            mant_b16_f *= std::pow((double)16, exp_b16_f);
+
+            auto fp_num = fp_base.GetNumber();
+            double rem_ndigit = std::log((double)fp_num.GetRemainder());
+            rem_ndigit /= std::log((double)16);
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_b16);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == std::floor(mant_b16_f));
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+    }
     
+    {
+        typedef typename test::FloatingPoint<long double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<long double>::ExponentType 
+            ExponentType;
+        test::FloatingPoint<long double> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<long double>::
+            MaximumSubNormalMantissa();
+        mant_bin_int <<= 1;
+        const long double mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<long double>::
+            MinimumExponent() - (test::FloatingPoint<long double>::
+            BitFieldMantissa() + 1);
+        fl1.SetExponent(test::FloatingPoint<long double>::
+            MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<long double>::
+            MaximumSubNormalMantissa());
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+
+            auto fp_num = fp_base.GetNumber();
+            long double rem_ndigit = 
+                test::bit::index::Big(fp_num.GetRemainder());
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_base);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == mant_base);
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+        {
+            auto fp_base = fl1.GetBase<10>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+            long double exp_b10_f = exp_bin;
+            exp_b10_f *=(std::log((long double)2)/std::log((long double)10));
+            ExponentType exp_b10 = std::floor(std::abs(exp_b10_f));
+            exp_b10_f = exp_b10_f + (long double)exp_b10;
+            exp_b10 *= -1;
+            long double mant_b10_f = mant_bin_f;
+            mant_b10_f *= std::pow((long double)10, exp_b10_f);
+            
+            auto fp_num = fp_base.GetNumber();
+            long double rem_ndigit = 
+                std::log((long double)fp_num.GetRemainder());
+            rem_ndigit /= std::log((long double)10);
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_b10);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == std::floor(mant_b10_f));
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+        {
+            auto fp_base = fl1.GetBase<16>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+            
+            long double exp_b16_f = 
+                (std::log((long double)2)/std::log((long double)16)) * exp_bin;
+            ExponentType exp_b16 = std::floor(std::abs(exp_b16_f));
+            exp_b16_f = exp_b16_f + (long double)exp_b16;
+            exp_b16 *= -1;
+            long double mant_b16_f = mant_bin_f;
+            mant_b16_f *= std::pow((long double)16, exp_b16_f);
+
+            auto fp_num = fp_base.GetNumber();
+            long double rem_ndigit = 
+                std::log((long double)fp_num.GetRemainder());
+            rem_ndigit /= std::log((long double)16);
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_b16);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == std::floor(mant_b16_f));
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+    }
+    {
+        typedef typename test::FloatingPoint<long double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<long double>::ExponentType 
+            ExponentType;
+        test::FloatingPoint<long double> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<long double>::
+            MinimumSubNormalMantissa() + 1;
+        mant_bin_int <<= test::FloatingPoint<long double>::
+            BitFieldMantissa();
+        const long double mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<long double>::
+            MinimumExponent() - (test::FloatingPoint<long double>::
+            BitFieldMantissa() + test::FloatingPoint<long double>::
+            BitFieldMantissa());
+        fl1.SetExponent(test::FloatingPoint<long double>::
+            MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<long double>::
+            MinimumSubNormalMantissa() + 1);
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+
+            auto fp_num = fp_base.GetNumber();
+            long double rem_ndigit = 
+                test::bit::index::Big(fp_num.GetRemainder());
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_base);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == mant_base);
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+        {
+            auto fp_base = fl1.GetBase<10>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+            long double exp_b10_f = 
+                (std::log((long double)2)/std::log((long double)10)) * 
+                (long double)exp_bin;
+            ExponentType exp_b10 = std::floor(std::abs(exp_b10_f));
+            exp_b10_f = exp_b10_f + (long double)exp_b10;
+            exp_b10 *= -1;
+            long double mant_b10_f = mant_bin_f;
+            mant_b10_f *= std::pow((long double)10, exp_b10_f);
+
+            auto fp_num = fp_base.GetNumber();
+            long double rem_ndigit = 
+                std::log((long double)fp_num.GetRemainder());
+            rem_ndigit /= std::log((long double)10);
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_b10);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == std::floor(mant_b10_f));
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+        {
+            auto fp_base = fl1.GetBase<16>();
+            auto exp_base = fp_base.GetExponent();
+            auto mant_base = fp_base.GetMantissa();
+            
+            long double exp_b16_f = 
+                (std::log((long double)2)/std::log((long double)16)) * exp_bin;
+            ExponentType exp_b16 = std::floor(std::abs(exp_b16_f));
+            exp_b16_f = exp_b16_f + (long double)exp_b16;
+            exp_b16 *= -1;
+            long double mant_b16_f = mant_bin_f;
+            mant_b16_f *= std::pow((long double)16, exp_b16_f);
+
+            auto fp_num = fp_base.GetNumber();
+            long double rem_ndigit = 
+                std::log((long double)fp_num.GetRemainder());
+            rem_ndigit /= std::log((long double)16);
+            rem_ndigit = std::floor(rem_ndigit) + 1;
+
+            assert(fp_num.GetExponent() == exp_b16);
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == std::floor(mant_b16_f));
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == rem_ndigit);
+        }
+    }
+    ////
+    {
+        typedef test::FloatingPoint<float>::MantissaType MantissaType;
+        float f1 = 0.314f;
+        test::FloatingPoint<float> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fl1.GetNormalMantissa();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            float rem = 1;
+            rem *= std::pow((float)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((float)2, 1);
+            rem = std::floor(rem);
+
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == -2);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float rem = fp_num.GetInteger();
+            rem *= std::pow((float)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == -1);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float rem = fp_num.GetInteger();
+            rem *= std::pow((float)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 5);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == -1);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+            
+        }
+    }
+    {
+        float f1 = 314.0f;
+        test::FloatingPoint<float> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fl1.GetNormalMantissa();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            float rem = 1;
+            rem *= std::pow((float)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((float)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 8);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float rem = fp_num.GetInteger();
+            rem *= std::pow((float)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 2);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float rem = fp_num.GetInteger();
+            rem *= std::pow((float)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 2);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+            
+        }
+    }
+    {
+        float f1 = 3.14f;
+        test::FloatingPoint<float> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fl1.GetNormalMantissa();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            float rem = 1;
+            rem *= std::pow((float)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((float)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 1);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float rem = fp_num.GetInteger();
+            rem *= std::pow((float)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float rem = fp_num.GetInteger();
+            rem *= std::pow((float)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+            
+        }
+    }
+    {
+        const float f1_int = 0.0f;
+        int pn = 0;
+        float f1 = f1_int * std::pow(10, pn);
+        test::FloatingPoint<float> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == 0);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == 0);
+            
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == 0);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == 0);
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == 0);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == 0);
+
+        }
+    }
+    
+    for(int pn = ((int)std::floor(std::log10(2) * 
+        test::FloatingPoint<float>::MinimumExponent()) + MaxDigit<float>()); 
+        pn <= ((int)std::floor(std::log10(2) * 
+        test::FloatingPoint<float>::MaximumExponent()) - 
+            MaxDigit<float>()); ++pn)
+    for(int i = 0; i < 100; ++i)
+    {
+        typedef typename test::FloatingPoint<float>::MantissaType MantissaType;
+        typedef typename test::FloatingPoint<float>::ExponentType ExponentType;
+        float f1_int = 0.0f;
+        while(f1_int == 0.0f) f1_int = Random<float>();
+        float f1 = f1_int * std::pow((float)10, pn);
+        test::FloatingPoint<float> fl1{f1};
+        auto mant = fl1.GetNormalMantissa();
+        auto exp = fl1.GetExponent();
+
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            float rem = 1;
+            rem *= std::pow((float)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((float)2, 1);
+            rem = std::floor(rem);
+
+            if (fp_num.GetInteger() != 1)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int %" PRFMant "\n", fp_num.GetInteger());
+            }
+            assert(fp_num.GetInteger() == 1);
+
+            if (fp_num.GetRemainder() != rem)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int %" PRFMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRFMant "\n", fp_num.GetRemainder());
+                printf("rem %f\n", rem);
+            }
+            assert(fp_num.GetRemainder() == rem);
+
+            if (fp_num.GetExponent() != exp)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num exp %" PRFExp "\n", fp_num.GetExponent());
+                printf("exp %" PRFExp "\n", exp);
+            }
+            assert(fp_num.GetExponent() == exp);
+
+            if (fp_num.GetIntegerDigitSize() != 1)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int digit size %" PRFExp "\n", 
+                    fp_num.GetIntegerDigitSize());
+            }
+            assert(fp_num.GetIntegerDigitSize() == 1);
+
+            if (fp_num.GetRemainderDigitSize() != mant_size)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num rem digit size %" PRFExp "\n", 
+                    fp_num.GetRemainderDigitSize());
+                printf("mant_size %zd\n", mant_size);
+            }
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float _int = mant;
+            _int *= std::pow((float)10, -(mant_size - 1));
+            _int = std::floor(_int);
+            float rem = _int;
+            rem *= std::pow((float)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            if (fp_num.GetInteger() != _int)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int %" PRFMant "\n", fp_num.GetInteger());
+                printf("int %f\n", _int);
+            }
+            assert(fp_num.GetInteger() == _int);
+
+            if (fp_num.GetRemainder() != rem)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int %" PRFMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRFMant "\n", fp_num.GetRemainder());
+                printf("rem %f\n", rem);
+            }
+            assert(fp_num.GetRemainder() == rem);
+
+            if (fp_num.GetExponent() != exp)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int %" PRFMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRFMant "\n", fp_num.GetRemainder());
+                printf("num exp %" PRFExp "\n", fp_num.GetExponent());
+                printf("mant_size %f\n", mant_size);
+                printf("exp %" PRFExp "\n", exp);
+            }
+            assert(fp_num.GetExponent() == exp);
+
+            if (fp_num.GetIntegerDigitSize() != 1)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int digit size %" PRFExp "\n", 
+                    fp_num.GetIntegerDigitSize());
+            }
+            assert(fp_num.GetIntegerDigitSize() == 1);
+
+            if (fp_num.GetRemainderDigitSize() != (mant_size - 1))
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num rem digit size %" PRFExp "\n", 
+                    fp_num.GetRemainderDigitSize());
+                printf("mant_size %f\n", mant_size);
+            }
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.template GetBase<16, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float _int = mant;
+            _int *= std::pow((float)16, -(mant_size - 1));
+            _int = std::floor(_int);
+            float rem = _int;
+            rem *= std::pow((float)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            if (fp_num.GetInteger() != _int)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int %" PRFMant "\n", fp_num.GetInteger());
+                printf("int %f\n", _int);
+            }
+            assert(fp_num.GetInteger() == _int);
+
+            if (fp_num.GetRemainder() != rem)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int %" PRFMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRFMant "\n", fp_num.GetRemainder());
+                printf("rem %f\n", rem);
+            }
+            assert(fp_num.GetRemainder() == rem);
+
+            if (fp_num.GetExponent() != exp)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int %" PRFMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRFMant "\n", fp_num.GetRemainder());
+                printf("num exp %" PRFExp "\n", fp_num.GetExponent());
+                printf("mant_size %f\n", mant_size);
+                printf("exp %" PRFExp "\n", exp);
+            }
+            assert(fp_num.GetExponent() == exp);
+
+            if (fp_num.GetIntegerDigitSize() != 1)
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num int digit size %" PRFExp "\n", 
+                    fp_num.GetIntegerDigitSize());
+            }
+            assert(fp_num.GetIntegerDigitSize() == 1);
+
+            if (fp_num.GetRemainderDigitSize() != (mant_size - 1))
+            {
+                printf("mant %" PRFMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRFExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRFExp "\n", fp_base.GetExponent());
+                printf("num rem digit size %" PRFExp "\n", 
+                    fp_num.GetRemainderDigitSize());
+                printf("mant_size %f\n", mant_size);
+            }
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+    }
+    ///
+    {
+        typedef test::FloatingPoint<double>::MantissaType MantissaType;
+        double f1 = 0.314;
+        test::FloatingPoint<double> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fl1.GetNormalMantissa();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            double rem = 1;
+            rem *= std::pow((double)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((double)2, 1);
+            rem = std::floor(rem);
+
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == -2);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double rem = fp_num.GetInteger();
+            rem *= std::pow((double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == -1);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double rem = fp_num.GetInteger();
+            rem *= std::pow((double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 5);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == -1);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+            
+        }
+    }
+    {
+        double f1 = 314.0;
+        test::FloatingPoint<double> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fl1.GetNormalMantissa();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            double rem = 1;
+            rem *= std::pow((double)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((double)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 8);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double rem = fp_num.GetInteger();
+            rem *= std::pow((double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 2);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double rem = fp_num.GetInteger();
+            rem *= std::pow((double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 2);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+            
+        }
+    }
+    {
+        double f1 = 3.14;
+        test::FloatingPoint<double> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fl1.GetNormalMantissa();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            double rem = 1;
+            rem *= std::pow((double)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((double)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 1);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double rem = fp_num.GetInteger();
+            rem *= std::pow((double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double rem = fp_num.GetInteger();
+            rem *= std::pow((double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+            
+        }
+    }
+    {
+        const double f1_int = 0.0;
+        int pn = 0;
+        double f1 = f1_int * std::pow(10, pn);
+        test::FloatingPoint<double> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == 0);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == 0);
+            
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == 0);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == 0);
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == 0);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == 0);
+
+        }
+    }
+    
+    for(int pn = ((int)std::floor(std::log10(2) * 
+        test::FloatingPoint<double>::MinimumExponent()) + MaxDigit<double>()); 
+        pn <= ((int)std::floor(std::log10(2) * 
+        test::FloatingPoint<double>::MaximumExponent()) - 
+            MaxDigit<double>()); ++pn)
+    for(int i = 0; i < 100; ++i)
+    {
+        typedef typename test::FloatingPoint<double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<double>::ExponentType 
+            ExponentType;
+        double f1_int = 0.0;
+        while(f1_int == 0.0) f1_int = Random<double>();
+        double f1 = f1_int * std::pow((double)10, pn);
+        test::FloatingPoint<double> fl1{f1};
+        auto mant = fl1.GetNormalMantissa();
+        auto exp = fl1.GetExponent();
+
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            double rem = 1;
+            rem *= std::pow((double)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((double)2, 1);
+            rem = std::floor(rem);
+
+            if (fp_num.GetInteger() != 1)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRDMant "\n", fp_num.GetInteger());
+            }
+            assert(fp_num.GetInteger() == 1);
+
+            if (fp_num.GetRemainder() != rem)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRDMant "\n", fp_num.GetRemainder());
+                printf("rem %f\n", rem);
+            }
+            assert(fp_num.GetRemainder() == rem);
+
+            if (fp_num.GetExponent() != exp)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num exp %" PRDExp "\n", fp_num.GetExponent());
+                printf("exp %" PRDExp "\n", exp);
+            }
+            assert(fp_num.GetExponent() == exp);
+
+            if (fp_num.GetIntegerDigitSize() != 1)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int digit size %" PRDExp "\n", 
+                    fp_num.GetIntegerDigitSize());
+            }
+            assert(fp_num.GetIntegerDigitSize() == 1);
+
+            if (fp_num.GetRemainderDigitSize() != mant_size)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num rem digit size %" PRDExp "\n", 
+                    fp_num.GetRemainderDigitSize());
+                printf("mant_size %zd\n", mant_size);
+            }
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double _int = mant;
+            _int *= std::pow((double)10, -(mant_size - 1));
+            _int = std::floor(_int);
+            double rem = _int;
+            rem *= std::pow((double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            if (fp_num.GetInteger() != _int)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRDMant "\n", fp_num.GetInteger());
+                printf("int %f\n", _int);
+            }
+            assert(fp_num.GetInteger() == _int);
+
+            if (fp_num.GetRemainder() != rem)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRDMant "\n", fp_num.GetRemainder());
+                printf("rem %f\n", rem);
+            }
+            assert(fp_num.GetRemainder() == rem);
+
+            if (fp_num.GetExponent() != exp)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRDMant "\n", fp_num.GetRemainder());
+                printf("num exp %" PRDExp "\n", fp_num.GetExponent());
+                printf("mant_size %f\n", mant_size);
+                printf("exp %" PRDExp "\n", exp);
+            }
+            assert(fp_num.GetExponent() == exp);
+
+            if (fp_num.GetIntegerDigitSize() != 1)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int digit size %" PRDExp "\n", 
+                    fp_num.GetIntegerDigitSize());
+            }
+            assert(fp_num.GetIntegerDigitSize() == 1);
+
+            if (fp_num.GetRemainderDigitSize() != (mant_size - 1))
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num rem digit size %" PRDExp "\n", 
+                    fp_num.GetRemainderDigitSize());
+                printf("mant_size %f\n", mant_size);
+            }
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.template GetBase<16, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double _int = mant;
+            _int *= std::pow((double)16, -(mant_size - 1));
+            _int = std::floor(_int);
+            double rem = _int;
+            rem *= std::pow((double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            if (fp_num.GetInteger() != _int)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRDMant "\n", fp_num.GetInteger());
+                printf("int %f\n", _int);
+            }
+            assert(fp_num.GetInteger() == _int);
+
+            if (fp_num.GetRemainder() != rem)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRDMant "\n", fp_num.GetRemainder());
+                printf("rem %f\n", rem);
+            }
+            assert(fp_num.GetRemainder() == rem);
+
+            if (fp_num.GetExponent() != exp)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRDMant "\n", fp_num.GetRemainder());
+                printf("num exp %" PRDExp "\n", fp_num.GetExponent());
+                printf("mant_size %f\n", mant_size);
+                printf("exp %" PRDExp "\n", exp);
+            }
+            assert(fp_num.GetExponent() == exp);
+
+            if (fp_num.GetIntegerDigitSize() != 1)
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num int digit size %" PRDExp "\n", 
+                    fp_num.GetIntegerDigitSize());
+            }
+            assert(fp_num.GetIntegerDigitSize() == 1);
+
+            if (fp_num.GetRemainderDigitSize() != (mant_size - 1))
+            {
+                printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRDExp "\n", fl1.GetExponent());
+                printf("base mant %f\n", fp_base.GetMantissa());
+                printf("base exp %" PRDExp "\n", fp_base.GetExponent());
+                printf("num rem digit size %" PRDExp "\n", 
+                    fp_num.GetRemainderDigitSize());
+                printf("mant_size %f\n", mant_size);
+            }
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+    }
+    ///
+    {
+        typedef test::FloatingPoint<long double>::MantissaType 
+            MantissaType;
+        long double f1 = 0.314L;
+        test::FloatingPoint<long double> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fl1.GetNormalMantissa();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            long double rem = 1;
+            rem *= std::pow((long double)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((long double)2, 1);
+            rem = std::floor(rem);
+
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == -2);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double rem = fp_num.GetInteger();
+            rem *= std::pow((long double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == -1);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double rem = fp_num.GetInteger();
+            rem *= std::pow((long double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 5);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == -1);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+            
+        }
+    }
+    {
+        long double f1 = 314.0L;
+        test::FloatingPoint<long double> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fl1.GetNormalMantissa();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            long double rem = 1;
+            rem *= std::pow((long double)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((long double)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 8);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double rem = fp_num.GetInteger();
+            rem *= std::pow((long double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 2);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double rem = fp_num.GetInteger();
+            rem *= std::pow((long double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 2);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+            
+        }
+    }
+    {
+        long double f1 = 3.14L;
+        test::FloatingPoint<long double> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fl1.GetNormalMantissa();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            long double rem = 1;
+            rem *= std::pow((long double)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((long double)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 1);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double rem = fp_num.GetInteger();
+            rem *= std::pow((long double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double rem = fp_num.GetInteger();
+            rem *= std::pow((long double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 3);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+            
+        }
+    }
+    {
+        const long double f1_int = 0.0L;
+        int pn = 0;
+        long double f1 = f1_int * std::pow(10, pn);
+        test::FloatingPoint<long double> fl1{f1};
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == 0);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == 0);
+            
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == 0);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == 0);
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            
+            assert(fp_num.GetInteger() == 0);
+            assert(fp_num.GetRemainder() == 0);
+            assert(fp_num.GetExponent() == 0);
+
+            assert(fp_num.GetIntegerDigitSize() == 0);
+            assert(fp_num.GetRemainderDigitSize() == 0);
+
+        }
+    }
+    
+    for(int pn = ((int)std::floor(std::log10(2) * 
+        test::FloatingPoint<long double>::MinimumExponent()) + 
+        MaxDigit<long double>()); 
+        pn <= ((int)std::floor(std::log10(2) * 
+        test::FloatingPoint<long double>::MaximumExponent()) - 
+            MaxDigit<long double>()); ++pn)
+    for(int i = 0; i < 100; ++i)
+    {
+        typedef typename test::FloatingPoint<long double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<long double>::ExponentType 
+            ExponentType;
+        long double f1_int = 0.0L;
+        while(f1_int == 0.0L) f1_int = Random<long double>();
+        long double f1 = f1_int * std::pow((long double)10, pn);
+        test::FloatingPoint<long double> fl1{f1};
+        auto mant = fl1.GetNormalMantissa();
+        auto exp = fl1.GetExponent();
+
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant_size = test::bit::index::Big(mant);
+            mant_size += 1;
+            long double rem = 1;
+            rem *= std::pow((long double)2, mant_size - 1);
+            rem = mant - rem;
+            rem *= std::pow((long double)2, 1);
+            rem = std::floor(rem);
+
+            if (fp_num.GetInteger() != 1)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRLDMant "\n", fp_num.GetInteger());
+            }
+            assert(fp_num.GetInteger() == 1);
+
+            if (fp_num.GetRemainder() != rem)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRLDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRLDMant "\n", fp_num.GetRemainder());
+                printf("rem %Lf\n", rem);
+            }
+            assert(fp_num.GetRemainder() == rem);
+
+            if (fp_num.GetExponent() != exp)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num exp %" PRLDExp "\n", fp_num.GetExponent());
+                printf("exp %" PRLDExp "\n", exp);
+            }
+            assert(fp_num.GetExponent() == exp);
+
+            if (fp_num.GetIntegerDigitSize() != 1)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int digit size %" PRLDExp "\n", 
+                    fp_num.GetIntegerDigitSize());
+            }
+            assert(fp_num.GetIntegerDigitSize() == 1);
+
+            if (fp_num.GetRemainderDigitSize() != mant_size)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num rem digit size %" PRLDExp "\n", 
+                    fp_num.GetRemainderDigitSize());
+                printf("mant_size %zd\n", mant_size);
+            }
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double _int = mant;
+            _int *= std::pow((long double)10, -(mant_size - 1));
+            _int = std::floor(_int);
+            long double rem = _int;
+            rem *= std::pow((long double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            if (fp_num.GetInteger() != _int)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRLDMant "\n", fp_num.GetInteger());
+                printf("int %Lf\n", _int);
+            }
+            assert(fp_num.GetInteger() == _int);
+
+            if (fp_num.GetRemainder() != rem)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRLDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRLDMant "\n", fp_num.GetRemainder());
+                printf("rem %Lf\n", rem);
+            }
+            assert(fp_num.GetRemainder() == rem);
+
+            if (fp_num.GetExponent() != exp)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRLDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRLDMant "\n", fp_num.GetRemainder());
+                printf("num exp %" PRLDExp "\n", fp_num.GetExponent());
+                printf("mant_size %Lf\n", mant_size);
+                printf("exp %" PRLDExp "\n", exp);
+            }
+            assert(fp_num.GetExponent() == exp);
+
+            if (fp_num.GetIntegerDigitSize() != 1)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int digit size %" PRLDExp "\n", 
+                    fp_num.GetIntegerDigitSize());
+            }
+            assert(fp_num.GetIntegerDigitSize() == 1);
+
+            if (fp_num.GetRemainderDigitSize() != (mant_size - 1))
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num rem digit size %" PRLDExp "\n", 
+                    fp_num.GetRemainderDigitSize());
+                printf("mant_size %Lf\n", mant_size);
+            }
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.template GetBase<16, true>();
+            
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double _int = mant;
+            _int *= std::pow((long double)16, -(mant_size - 1));
+            _int = std::floor(_int);
+            long double rem = _int;
+            rem *= std::pow((long double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            if (fp_num.GetInteger() != _int)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRLDMant "\n", fp_num.GetInteger());
+                printf("int %Lf\n", _int);
+            }
+            assert(fp_num.GetInteger() == _int);
+
+            if (fp_num.GetRemainder() != rem)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRLDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRLDMant "\n", fp_num.GetRemainder());
+                printf("rem %Lf\n", rem);
+            }
+            assert(fp_num.GetRemainder() == rem);
+
+            if (fp_num.GetExponent() != exp)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int %" PRLDMant "\n", fp_num.GetInteger());
+                printf("num rem %" PRLDMant "\n", fp_num.GetRemainder());
+                printf("num exp %" PRLDExp "\n", fp_num.GetExponent());
+                printf("mant_size %Lf\n", mant_size);
+                printf("exp %" PRLDExp "\n", exp);
+            }
+            assert(fp_num.GetExponent() == exp);
+
+            if (fp_num.GetIntegerDigitSize() != 1)
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num int digit size %" PRLDExp "\n", 
+                    fp_num.GetIntegerDigitSize());
+            }
+            assert(fp_num.GetIntegerDigitSize() == 1);
+
+            if (fp_num.GetRemainderDigitSize() != (mant_size - 1))
+            {
+                printf("mant %" PRLDMant "\n", fl1.GetNormalMantissa());
+                printf("exp %" PRLDExp "\n", fl1.GetExponent());
+                printf("base mant %Lf\n", fp_base.GetMantissa());
+                printf("base exp %" PRLDExp "\n", fp_base.GetExponent());
+                printf("num rem digit size %" PRLDExp "\n", 
+                    fp_num.GetRemainderDigitSize());
+                printf("mant_size %Lf\n", mant_size);
+            }
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+    }
+    /// SUBNORMAL
+    {
+        typedef typename test::FloatingPoint<float>::MantissaType MantissaType;
+        typedef typename test::FloatingPoint<float>::ExponentType ExponentType;
+        test::FloatingPoint<float> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<float>::
+            MaximumSubNormalMantissa();
+        mant_bin_int <<= 1;
+        const float mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<float>::
+            MinimumExponent() - (test::FloatingPoint<float>::
+            BitFieldMantissa() + 1);
+        fl1.SetExponent(test::FloatingPoint<float>::MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<float>::MaximumSubNormalMantissa());
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant_size = test::bit::index::Big(mant_bin_int);
+            mant_size += 1;
+            float rem = 1;
+            rem *= std::pow((float)2, mant_size - 1);
+            rem = mant_bin_int - rem;
+            rem *= std::pow((float)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == fl1.GetExponent());
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float _int = mant;
+            _int *= std::pow((float)10, -(mant_size - 1));
+            _int = std::floor(_int);
+            float rem = _int;
+            rem *= std::pow((float)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float _int = mant;
+            _int *= std::pow((float)16, -(mant_size - 1));
+            _int = std::floor(_int);
+            float rem = _int;
+            rem *= std::pow((float)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+    }
+    {
+        typedef typename test::FloatingPoint<float>::MantissaType MantissaType;
+        typedef typename test::FloatingPoint<float>::ExponentType ExponentType;
+        test::FloatingPoint<float> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<float>::
+            MinimumSubNormalMantissa() + 1;
+        mant_bin_int <<= test::FloatingPoint<float>::
+            BitFieldMantissa();
+        const float mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<float>::
+            MinimumExponent() - (test::FloatingPoint<float>::
+            BitFieldMantissa() + test::FloatingPoint<float>::
+            BitFieldMantissa());
+        fl1.SetExponent(test::FloatingPoint<float>::MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<float>::
+            MinimumSubNormalMantissa() + 1);
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant_size = test::bit::index::Big(mant_bin_int);
+            mant_size += 1;
+            float rem = 1;
+            rem *= std::pow((float)2, mant_size - 1);
+            rem = mant_bin_int - rem;
+            rem *= std::pow((float)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == (exp_bin + 
+                test::FloatingPoint<float>::BitFieldMantissa()));
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float _int = mant;
+            _int *= std::pow((float)10, -(mant_size - 1));
+            _int = std::floor(_int);
+            float rem = _int;
+            rem *= std::pow((float)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+            
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((float)mant);
+            mant_size /= std::log((float)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            float _int = mant;
+            _int *= std::pow((float)16, -(mant_size - 1));
+            _int = std::floor(_int);
+            float rem = _int;
+            rem *= std::pow((float)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+    }
+    ///
+    {
+        typedef typename test::FloatingPoint<double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<double>::ExponentType 
+            ExponentType;
+        test::FloatingPoint<double> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<double>::
+            MaximumSubNormalMantissa();
+        mant_bin_int <<= 1;
+        const double mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<double>::
+            MinimumExponent() - (test::FloatingPoint<double>::
+            BitFieldMantissa() + 1);
+        fl1.SetExponent(test::FloatingPoint<double>::MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<double>::MaximumSubNormalMantissa());
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant_size = test::bit::index::Big(mant_bin_int);
+            mant_size += 1;
+            double rem = 1;
+            rem *= std::pow((double)2, mant_size - 1);
+            rem = mant_bin_int - rem;
+            rem *= std::pow((double)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == fl1.GetExponent());
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double _int = mant;
+            _int *= std::pow((double)10, -(mant_size - 1));
+            _int = std::floor(_int);
+            double rem = _int;
+            rem *= std::pow((double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double _int = mant;
+            _int *= std::pow((double)16, -(mant_size - 1));
+            _int = std::floor(_int);
+            double rem = _int;
+            rem *= std::pow((double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+    }
+    {
+        typedef typename test::FloatingPoint<double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<double>::ExponentType 
+            ExponentType;
+        test::FloatingPoint<double> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<double>::
+            MinimumSubNormalMantissa() + 1;
+        mant_bin_int <<= test::FloatingPoint<double>::
+            BitFieldMantissa();
+        const double mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<double>::
+            MinimumExponent() - (test::FloatingPoint<double>::
+            BitFieldMantissa() + test::FloatingPoint<double>::
+            BitFieldMantissa());
+        fl1.SetExponent(test::FloatingPoint<double>::MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<double>::
+            MinimumSubNormalMantissa() + 1);
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant_size = test::bit::index::Big(mant_bin_int);
+            mant_size += 1;
+            double rem = 1;
+            rem *= std::pow((double)2, mant_size - 1);
+            rem = mant_bin_int - rem;
+            rem *= std::pow((double)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == (exp_bin + 
+                test::FloatingPoint<double>::BitFieldMantissa()));
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double _int = mant;
+            _int *= std::pow((double)10, -(mant_size - 1));
+            _int = std::floor(_int);
+            double rem = _int;
+            rem *= std::pow((double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+            
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((double)mant);
+            mant_size /= std::log((double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            double _int = mant;
+            _int *= std::pow((double)16, -(mant_size - 1));
+            _int = std::floor(_int);
+            double rem = _int;
+            rem *= std::pow((double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+    }
+    ///
+    {
+        typedef typename test::FloatingPoint<long double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<long double>::ExponentType 
+            ExponentType;
+        test::FloatingPoint<long double> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<long double>::
+            MaximumSubNormalMantissa();
+        mant_bin_int <<= 1;
+        const long double mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<long double>::
+            MinimumExponent() - (test::FloatingPoint<long double>::
+            BitFieldMantissa() + 1);
+        fl1.SetExponent(test::FloatingPoint<long double>::
+            MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<long double>::
+            MaximumSubNormalMantissa());
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant_size = test::bit::index::Big(mant_bin_int);
+            mant_size += 1;
+            long double rem = 1;
+            rem *= std::pow((long double)2, mant_size - 1);
+            rem = mant_bin_int - rem;
+            rem *= std::pow((long double)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == fl1.GetExponent());
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double _int = mant;
+            _int *= std::pow((long double)10, -(mant_size - 1));
+            _int = std::floor(_int);
+            long double rem = _int;
+            rem *= std::pow((long double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double _int = mant;
+            _int *= std::pow((long double)16, -(mant_size - 1));
+            _int = std::floor(_int);
+            long double rem = _int;
+            rem *= std::pow((long double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+    }
+    {
+        typedef typename test::FloatingPoint<long double>::MantissaType 
+            MantissaType;
+        typedef typename test::FloatingPoint<long double>::ExponentType 
+            ExponentType;
+        test::FloatingPoint<long double> fl1;
+        MantissaType mant_bin_int = test::FloatingPoint<long double>::
+            MinimumSubNormalMantissa() + 1;
+        mant_bin_int <<= test::FloatingPoint<long double>::
+            BitFieldMantissa();
+        const long double mant_bin_f = mant_bin_int;
+        const ExponentType exp_bin = test::FloatingPoint<long double>::
+            MinimumExponent() - (test::FloatingPoint<long double>::
+            BitFieldMantissa() + test::FloatingPoint<long double>::
+            BitFieldMantissa());
+        fl1.SetExponent(test::FloatingPoint<long double>::
+            MinimumExponent() - 1);
+        fl1.SetMantissa(test::FloatingPoint<long double>::
+            MinimumSubNormalMantissa() + 1);
+        assert(std::fpclassify(fl1.GetFloat()) == FP_SUBNORMAL);
+
+        {
+            auto fp_base = fl1.GetBase<2, true>();
+            auto fp_num = fp_base.GetNumber();
+            auto mant_size = test::bit::index::Big(mant_bin_int);
+            mant_size += 1;
+            long double rem = 1;
+            rem *= std::pow((long double)2, mant_size - 1);
+            rem = mant_bin_int - rem;
+            rem *= std::pow((long double)2, 1);
+            rem = std::floor(rem);
+            
+            assert(fp_num.GetInteger() == 1);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == (exp_bin + 
+                test::FloatingPoint<long double>::BitFieldMantissa()));
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == mant_size);
+        }
+        {
+            auto fp_base = fl1.GetBase<10, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)10);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double _int = mant;
+            _int *= std::pow((long double)10, -(mant_size - 1));
+            _int = std::floor(_int);
+            long double rem = _int;
+            rem *= std::pow((long double)10, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+            
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+        {
+            auto fp_base = fl1.GetBase<16, true>();
+
+            auto fp_num = fp_base.GetNumber();
+            auto mant = fp_base.GetMantissa();
+            auto exp = fp_base.GetExponent();
+            auto mant_size = std::log((long double)mant);
+            mant_size /= std::log((long double)16);
+            mant_size = std::floor(mant_size);
+            mant_size += 1;
+            long double _int = mant;
+            _int *= std::pow((long double)16, -(mant_size - 1));
+            _int = std::floor(_int);
+            long double rem = _int;
+            rem *= std::pow((long double)16, mant_size - 1);
+            rem = mant - rem;
+            rem = std::floor(rem);
+            exp += mant_size;
+            exp -= 1;
+
+            assert(fp_num.GetInteger() == _int);
+            assert(fp_num.GetRemainder() == rem);
+            assert(fp_num.GetExponent() == exp);
+
+            assert(fp_num.GetIntegerDigitSize() == 1);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
+        }
+    }
     return 0;
 }
