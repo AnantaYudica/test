@@ -7,6 +7,7 @@
 #include <cstddef>
 #include <cmath>
 #include <cfloat>
+#include <utility>
 
 namespace test
 {
@@ -32,6 +33,9 @@ public:
         UnsignedIntegerType;
     typedef test::fp::Number<ExponentType, MantissaType> NumberType;
 protected:
+    typedef void (InitializeFuncType(int&, TFloat&, ExponentType&, 
+        NumberType&));
+protected:
     static int _InitExponent(TFloat& mant_exp, 
         const MantissaType& subnorm_mant, const int& subnorm_ndigit_mant);
     static void _InitNormalMantisssa(TFloat& mant, TFloat& mant_exp);
@@ -39,6 +43,7 @@ protected:
         MantissaType subnorm_mant, const int& subnorm_ndigit_mant);
     static void _InitNumber(NumberType& num, const TFloat& mant, 
         const ExponentType& mant_exp);
+private:
     static void _Initialize(int& classify, TFloat& mant, 
         ExponentType& mant_exp, NumberType& num);
 public:
@@ -59,6 +64,9 @@ public:
 public:
     Base();
     Base(const TTFloatingPoint<TFloat, TFormat>& fp);
+protected:
+    Base(InitializeFuncType* init_func, 
+        const TTFloatingPoint<TFloat, TFormat>& fp);
 public:
     ~Base();
 public:
@@ -78,6 +86,61 @@ public:
     TFloat GetMantissa() const;
 public:
     NumberType GetNumber() const;
+};
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+class Base<N, TTFloatingPoint<TFloat, TFormat>, true> :
+    private  Base<N, TTFloatingPoint<TFloat, TFormat>, false>
+{
+private:
+    typedef Base<N, TTFloatingPoint<TFloat, TFormat>, false> BaseType;
+public:
+    typedef typename BaseType::FloatingPointType FloatingPointType;
+    typedef typename BaseType::SignType SignType;
+    typedef typename BaseType::ExponentType ExponentType;
+    typedef typename BaseType::MantissaType MantissaType;
+    typedef typename BaseType::SignedIntegerType SignedIntegerType;
+    typedef typename BaseType::UnsignedIntegerType UnsignedIntegerType;
+    typedef typename BaseType::NumberType NumberType;
+protected:
+    static void _InitNumber(NumberType& num, const TFloat& mant, 
+        const ExponentType& mant_exp);
+private:
+    static void _Initialize(int& classify, TFloat& mant, 
+        ExponentType& mant_exp, NumberType& num);
+public:
+    using BaseType::Log;
+public:
+    using BaseType::MinimumBinExponent;
+    using BaseType::MaximumBinExponent;
+public:
+    using BaseType::MinimumMantissa;
+    using BaseType::MaximumMantissa;
+    using BaseType::DigitSizeMantissa;
+    using BaseType::BitSizeMantissa;
+public:
+    Base();
+    Base(const TTFloatingPoint<TFloat, TFormat>& fp);
+public:
+    ~Base();
+public:
+    Base(const Base<N, TTFloatingPoint<TFloat, TFormat>, true>& cpy);
+    Base(Base<N, TTFloatingPoint<TFloat, TFormat>, true>&& mov);
+public:
+    Base<N, TTFloatingPoint<TFloat, TFormat>, true>&
+        operator=(const Base<N, TTFloatingPoint<TFloat, TFormat>, 
+            true>& cpy);
+    Base<N, TTFloatingPoint<TFloat, TFormat>, true>& 
+        operator=(Base<N, TTFloatingPoint<TFloat, TFormat>,true>&& mov);
+public:
+    using BaseType::Classify;
+public:
+    using BaseType::IsSign;
+    using BaseType::GetExponent;
+    using BaseType::GetMantissa;
+public:
+    using BaseType::GetNumber;
 };
 
 template<std::size_t N, typename TFloat, typename TFormat,
@@ -306,6 +369,19 @@ Base<N, TTFloatingPoint<TFloat, TFormat>, false>::
 
 template<std::size_t N, typename TFloat, typename TFormat,
     template <typename, typename> class TTFloatingPoint>
+Base<N, TTFloatingPoint<TFloat, TFormat>, false>::
+    Base(InitializeFuncType* init_func, 
+        const TTFloatingPoint<TFloat, TFormat>& fp) :
+            m_classify(FP_ZERO),
+            m_exp(fp.GetExponent()),
+            m_mant(fp.GetNormalMantissa()),
+            m_num()
+{
+    init_func(m_classify, m_mant, m_exp, m_num);
+}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
 Base<N, TTFloatingPoint<TFloat, TFormat>, false>::~Base()
 {}
 
@@ -390,6 +466,133 @@ typename Base<N, TTFloatingPoint<TFloat, TFormat>, false>::NumberType
 Base<N, TTFloatingPoint<TFloat, TFormat>, false>::GetNumber() const
 {
     return m_num;
+}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+void Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
+    _InitNumber(NumberType& num, const TFloat& mant, 
+        const ExponentType& mant_exp)
+{
+    const int ndigit_mant = DigitSizeMantissa(mant) + 1;
+    ExponentType rem_ndigit = ndigit_mant - 1;
+
+    TFloat int_f = std::floor(mant);
+    int_f *= std::pow((TFloat)N, -rem_ndigit);
+
+    if (int_f == 0)
+    {
+        num.SetInteger(0, 0);
+        num.SetRemainder(0, 0);
+        num.SetExponent(0);
+        return;
+    }
+    
+    num.SetInteger(std::floor(int_f), 1);
+
+    TFloat rem_f = num.GetInteger();
+    rem_f *= std::pow((TFloat)N, rem_ndigit);
+    rem_f = mant - rem_f;
+    
+    num.SetExponent(mant_exp + rem_ndigit);
+
+    if (N == 2)
+    {
+        rem_f *= std::pow((TFloat)N, 1);
+        rem_ndigit += 1;
+    }
+    rem_f = std::floor(rem_f);
+
+    if (rem_f == 0)
+        num.SetRemainder(0, rem_ndigit);
+    else
+        num.SetRemainder(rem_f, rem_ndigit);
+    
+}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+void Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
+    _Initialize(int& classify, TFloat& mant, ExponentType& mant_exp, 
+        NumberType& num)
+{
+    MantissaType subnorm_mant = std::abs(mant);
+    subnorm_mant &= ~MinimumMantissa();
+    const ExponentType sub_mant_ndigit = test::bit::index::Big(subnorm_mant, 
+        TTFloatingPoint<TFloat, TFormat>::BitFieldMantissa() + 1) + 1;
+    TFloat fexp = mant_exp;
+    classify = BaseType::_InitExponent(fexp, subnorm_mant, sub_mant_ndigit);
+    switch (classify)
+    {
+    case FP_NORMAL:
+        BaseType::_InitNormalMantisssa(mant, fexp);
+        _InitNumber(num, mant, fexp);
+        break;
+    case FP_SUBNORMAL:
+        BaseType::_InitSubNormalMantisssa(mant, fexp, subnorm_mant, 
+            sub_mant_ndigit);
+        _InitNumber(num, mant, fexp);
+        break;
+    case FP_ZERO:
+    case FP_INFINITE:
+    case FP_NAN:
+    default:
+        break;
+    }
+    mant_exp = fexp < 0 ? (ExponentType)-std::floor(std::abs(fexp)) : 
+        (ExponentType)std::floor(fexp);
+}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+Base<N, TTFloatingPoint<TFloat, TFormat>, true>::Base() :
+    BaseType()
+{}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
+    Base(const TTFloatingPoint<TFloat, TFormat>& fp) :
+        BaseType(&_Initialize, fp)
+{}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+Base<N, TTFloatingPoint<TFloat, TFormat>, true>::~Base()
+{}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
+    Base(const Base<N, TTFloatingPoint<TFloat, TFormat>, true>& cpy) :
+        BaseType(cpy)
+{}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
+    Base(Base<N, TTFloatingPoint<TFloat, TFormat>, true>&& mov) :
+        BaseType(std::move(mov))
+{}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+Base<N, TTFloatingPoint<TFloat, TFormat>, true>&
+Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
+    operator=(const Base<N, TTFloatingPoint<TFloat, TFormat>, true>& cpy)
+{
+    BaseType::operator=(cpy);
+    return *this;
+}
+
+template<std::size_t N, typename TFloat, typename TFormat,
+    template <typename, typename> class TTFloatingPoint>
+Base<N, TTFloatingPoint<TFloat, TFormat>, true>& 
+Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
+    operator=(Base<N, TTFloatingPoint<TFloat, TFormat>,true>&& mov)
+{
+    BaseType::operator=(std::move(mov));
+    return *this;
 }
 
 } //!fp
