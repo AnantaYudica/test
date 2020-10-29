@@ -498,8 +498,13 @@ void Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
 
     if (N == 2)
     {
-        rem_f *= std::pow((TFloat)N, 1);
-        rem_ndigit += 1;
+        int index = rem_ndigit;
+        index %= 4;
+        if (index != 0)
+        {
+            rem_f *= std::pow((TFloat)N, 4 - index);
+            rem_ndigit += (4 - index);
+        }
     }
     rem_f = std::floor(rem_f);
 
