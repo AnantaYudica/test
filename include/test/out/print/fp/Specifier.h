@@ -1,0 +1,151 @@
+#ifndef TEST_OUT_PRINT_FP_SPECIFIER_H_
+#define TEST_OUT_PRINT_FP_SPECIFIER_H_
+
+#include <cfloat>
+#include <cinttypes>
+
+#ifndef TEST_OUT_PRINT_FP_FLOAT_EXP_D
+#if FLT_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_FLOAT_EXP_D PRId16
+#elif FLT_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_FLOAT_EXP_D PRId16
+#elif FLT_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_FLOAT_EXP_D PRId16
+#else
+    #error "FLT_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_FLOAT_MANT_U
+#if FLT_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_FLOAT_MANT_U PRIu32
+#elif FLT_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_FLOAT_MANT_U PRIu64
+#elif FLT_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_FLOAT_MANT_U PRIu64
+#else
+    #error "FLT_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_FLOAT_MANT_X
+#if FLT_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_FLOAT_MANT_X PRIx32
+#elif FLT_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_FLOAT_MANT_X PRIx64
+#elif FLT_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_FLOAT_MANT_X PRIx64
+#else
+    #error "FLT_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_FLOAT_MANT__X
+#if FLT_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_FLOAT_MANT__X PRIX32
+#elif FLT_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_FLOAT_MANT__X PRIX64
+#elif FLT_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_FLOAT_MANT__X PRIX64
+#else
+    #error "FLT_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_DOUBLE_EXP_D
+#if DBL_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_DOUBLE_EXP_D PRId16
+#elif DBL_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_DOUBLE_EXP_D PRId16
+#elif DBL_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_DOUBLE_EXP_D PRId16
+#else
+    #error "DBL_MANT_DIG no condition"
+#endif
+#endif 
+
+#ifndef TEST_OUT_PRINT_FP_DOUBLE_MANT_U
+#if DBL_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_DOUBLE_MANT_U PRIu32
+#elif DBL_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_DOUBLE_MANT_U PRIu64
+#elif DBL_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_DOUBLE_MANT_U PRIu64
+#else
+    #error "DBL_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_DOUBLE_MANT_X
+#if DBL_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_DOUBLE_MANT_X PRIx32
+#elif DBL_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_DOUBLE_MANT_X PRIx64
+#elif DBL_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_DOUBLE_MANT_X PRIx64
+#else
+    #error "DBL_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_DOUBLE_MANT__X
+#if DBL_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_DOUBLE_MANT__X PRIX32
+#elif DBL_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_DOUBLE_MANT__X PRIX64
+#elif DBL_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_DOUBLE_MANT__X PRIX64
+#else
+    #error "DBL_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_LDOUBLE_EXP_D
+#if LDBL_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_LDOUBLE_EXP_D PRId16
+#elif LDBL_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_LDOUBLE_EXP_D PRId16
+#elif LDBL_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_LDOUBLE_EXP_D PRId16
+#else
+    #error "LDBL_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_LDOUBLE_MANT_U
+#if LDBL_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_LDOUBLE_MANT_U PRIu32
+#elif LDBL_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_LDOUBLE_MANT_U PRIu64
+#elif LDBL_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_LDOUBLE_MANT_U PRIu64
+#else
+    #error "LDBL_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_LDOUBLE_MANT_X
+#if LDBL_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_LDOUBLE_MANT_X PRIx32
+#elif LDBL_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_LDOUBLE_MANT_X PRIx64
+#elif LDBL_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_LDOUBLE_MANT_X PRIx64
+#else
+    #error "LDBL_MANT_DIG no condition"
+#endif
+#endif
+
+#ifndef TEST_OUT_PRINT_FP_LDOUBLE_MANT__X
+#if LDBL_MANT_DIG == 24
+#define TEST_OUT_PRINT_FP_LDOUBLE_MANT__X PRIX32
+#elif LDBL_MANT_DIG == 53
+#define TEST_OUT_PRINT_FP_LDOUBLE_MANT__X PRIX64
+#elif LDBL_MANT_DIG == 64
+#define TEST_OUT_PRINT_FP_LDOUBLE_MANT__X PRIX64
+#else
+    #error "LDBL_MANT_DIG no condition"
+#endif
+#endif
+
+#endif //!TEST_OUT_PRINT_FP_SPECIFIER_H_
