@@ -71,20 +71,20 @@ public:
     static constexpr IntegerValueType define_signed_mask = 0x10;
     static constexpr IntegerValueType specifier_type_offset = 5;
     static constexpr IntegerValueType specifier_type_mask = 
-        0x10 | 0x20 | 0x40;
+        0x20 | 0x40 | 0x80;
     static constexpr IntegerValueType specifier_sub_offset = 8;
-    static constexpr IntegerValueType specifier_sub_mask = 0x80 | 0x100;
+    static constexpr IntegerValueType specifier_sub_mask = 0x100 | 0x200;
     static constexpr IntegerValueType specifier_int_offset = 10;
-    static constexpr IntegerValueType specifier_int_mask = 0x200 | 0x400;
+    static constexpr IntegerValueType specifier_int_mask = 0x400 | 0x800;
     static constexpr IntegerValueType specifier_fp_offset = 12;
-    static constexpr IntegerValueType specifier_fp_mask = 0x400 | 0x800;
+    static constexpr IntegerValueType specifier_fp_mask = 0x1000 | 0x2000;
     static constexpr IntegerValueType specifier_base_offset = 14;
-    static constexpr IntegerValueType specifier_base_mask = 0x1000 | 0x2000;
+    static constexpr IntegerValueType specifier_base_mask = 0x4000 | 0x8000;
     static constexpr IntegerValueType specifier_case_offset = 16;
-    static constexpr IntegerValueType specifier_case_mask = 0x4000;
+    static constexpr IntegerValueType specifier_case_mask = 0x10000;
     static constexpr IntegerValueType specifier_flag_offset = 17;
-    static constexpr IntegerValueType specifier_flag_mask = 0x8000 | 0x10000 |
-        0x20000;
+    static constexpr IntegerValueType specifier_flag_mask = 0x20000 | 0x40000 |
+        0x80000 | 0x100000;
 public:
     static constexpr IntegerValueType define_mask = define_type_mask | 
         define_signed_mask;
@@ -173,9 +173,9 @@ public:
     static constexpr IntegerValueType specifier_flag_prefix_plus = 
         2 << specifier_flag_offset;
     static constexpr IntegerValueType specifier_flag_prefix_space = 
-        3 << specifier_flag_offset;
-    static constexpr IntegerValueType specifier_flag_prefix_zero = 
         4 << specifier_flag_offset;
+    static constexpr IntegerValueType specifier_flag_prefix_zero = 
+        8 << specifier_flag_offset;
 
 private:
     static constexpr IntegerValueType _Value(IntegerValueType val);
@@ -638,7 +638,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrefixType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_flag_mask) | specifier_flag_prefix, 
+    return _Value(val | specifier_flag_prefix, 
         std::forward<TArgs>(args)...);
 }
 
@@ -648,7 +648,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrefixPlusType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_flag_mask) | specifier_flag_prefix_plus, 
+    return _Value(val | specifier_flag_prefix_plus, 
         std::forward<TArgs>(args)...);
 }
 
@@ -658,7 +658,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrefixSpaceType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_flag_mask) | specifier_flag_prefix_space, 
+    return _Value(val | specifier_flag_prefix_space, 
         std::forward<TArgs>(args)...);
 }
 
@@ -668,7 +668,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrefixZeroType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_flag_mask) | specifier_flag_prefix_zero, 
+    return _Value(val | specifier_flag_prefix_zero, 
         std::forward<TArgs>(args)...);
 }
 
@@ -870,28 +870,28 @@ constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierFlagUndefined() const
 template<typename TValue, typename TIntegerValue>
 constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierFlagPrefix() const
 {
-    return ((m_value & specifier_flag_mask) == specifier_flag_prefix) &&
+    return (m_value & specifier_flag_prefix) &&
         !IsSpecifierUndefined(); 
 }
 
 template<typename TValue, typename TIntegerValue>
 constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierFlagPrefixPlus() const
 {
-    return ((m_value & specifier_flag_mask) == specifier_flag_prefix_plus) &&
+    return (m_value & specifier_flag_prefix_plus) &&
         !IsSpecifierUndefined(); 
 }
 
 template<typename TValue, typename TIntegerValue>
 constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierFlagPrefixSpace() const
 {
-    return ((m_value & specifier_flag_mask) == specifier_flag_prefix_space) &&
+    return (m_value & specifier_flag_prefix_space) &&
         !IsSpecifierUndefined(); 
 }
 
 template<typename TValue, typename TIntegerValue>
 constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierFlagPrefixZero() const
 {
-    return ((m_value & specifier_flag_mask) == specifier_flag_prefix_zero) &&
+    return (m_value & specifier_flag_prefix_zero) &&
         !IsSpecifierUndefined(); 
 }
 
