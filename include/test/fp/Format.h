@@ -119,6 +119,10 @@ struct Format<32>
     {
         return 0x007FFFFF;
     }
+    static MantissaValueType MantissaFloatToInteger(const float& mant)
+    {
+        return std::floor(mant);
+    }
 };
 
 template<>
@@ -223,6 +227,11 @@ struct Format<64>
     {
         return 0x0FFFFFFFFFFFFF;
     }
+
+    static MantissaValueType MantissaFloatToInteger(const double& mant)
+    {
+        return std::floor(mant);
+    }
 };
 
 template<>
@@ -326,6 +335,11 @@ struct Format<80>
     static constexpr MantissaValueType MantissaSubNormalMaximumValue()
     {
         return 0x7FFFFFFFFFFFFFFF;
+    }
+
+    static MantissaValueType MantissaFloatToInteger(const long double& mant)
+    {
+        return std::round(mant);
     }
 };
 
