@@ -189,9 +189,9 @@ void Base<N, TTFloatingPoint<TFloat, TFormat>, false>::
     const TFloat index = abs_exp - std::floor(abs_exp);
 
     if (mant_exp < 0) mant *= std::pow((TFloat)N, -index);
-    else if (index != 0)
+    else if (index > 0)
     {
-        mant *= std::pow((TFloat)N, index - 1);
+        mant *= std::pow((TFloat)N, index - (TFloat)1);
         mant_exp += 1;
     }
 }
@@ -218,9 +218,15 @@ void Base<N, TTFloatingPoint<TFloat, TFormat>, false>::
     const int ndigit_mant = DigitSizeMantissa(mant) + 1;
     const ExponentType diff_exp = std::abs(mant_exp) - ndigit_mant;
     const auto abs_mant_exp = std::abs(mant_exp);
-    if (mant_exp >= 0)
+    if (mant_exp == 0)
     {
-        num.SetInteger(mant, ndigit_mant);
+        num.SetInteger(TFormat::MantissaFloatToInteger(mant), ndigit_mant);
+        num.SetRemainder(0, 0);
+        num.SetExponent(mant_exp);
+    }
+    else if (mant_exp > 0)
+    {
+        num.SetInteger(std::floor(mant), ndigit_mant);
         num.SetRemainder(0, 0);
         num.SetExponent(mant_exp);
     }
@@ -233,13 +239,12 @@ void Base<N, TTFloatingPoint<TFloat, TFormat>, false>::
     else
     {
         
-        TFloat int_f = std::floor(mant);
+        TFloat int_f = mant;
         int_f *= std::pow((TFloat)N, mant_exp);
         num.SetInteger(std::floor(int_f), std::abs(diff_exp));
         TFloat rem_f = num.GetInteger();
         rem_f *= std::pow((TFloat)N, -mant_exp);
         rem_f = mant - rem_f;
-        rem_f = std::floor(rem_f);
         if (rem_f == 0)
         {
             num.SetRemainder(0, 0);
@@ -477,7 +482,7 @@ void Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
     const int ndigit_mant = DigitSizeMantissa(mant) + 1;
     ExponentType rem_ndigit = ndigit_mant - 1;
 
-    TFloat int_f = std::floor(mant);
+    TFloat int_f = mant;
     int_f *= std::pow((TFloat)N, -rem_ndigit);
 
     if (int_f == 0)
@@ -506,7 +511,6 @@ void Base<N, TTFloatingPoint<TFloat, TFormat>, true>::
             rem_ndigit += (4 - index);
         }
     }
-    rem_f = std::floor(rem_f);
 
     if (rem_f == 0)
         num.SetRemainder(0, rem_ndigit);
