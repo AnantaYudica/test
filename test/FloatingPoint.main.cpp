@@ -1355,9 +1355,13 @@ int main()
             assert(rem_base10 > 0.3135f);
             assert(fl1_num.GetInteger() == 0);
             
-            float rem_ndigit = std::log(fl1_num.GetRemainder());
-            rem_ndigit /= std::log((float) 10);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            float rem_ndigit = 1;
+            if (fl1_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log(fl1_num.GetRemainder());
+                rem_ndigit /= std::log((float) 10);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
             assert(fl1_num.GetIntegerDigitSize() >= 0);
             assert(fl1_num.GetRemainderDigitSize() >= 0);
             assert(fl1_num.GetRemainderDigitSize() == rem_ndigit);
@@ -1374,9 +1378,14 @@ int main()
             assert(rem_base16 > 0.3135f);
             assert(fl1_num.GetInteger() == 0);
             
-            float rem_ndigit = std::log(fl1_num.GetRemainder());
-            rem_ndigit /= std::log((float) 16);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            float rem_ndigit = 1;
+            if (fl1_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log(fl1_num.GetRemainder());
+                rem_ndigit /= std::log((float) 16);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
+
             assert(fl1_num.GetIntegerDigitSize() >= 0);
             assert(fl1_num.GetRemainderDigitSize() >= 0);
             assert(fl1_num.GetRemainderDigitSize() == rem_ndigit);
@@ -1416,9 +1425,14 @@ int main()
             assert(rem_base10 > 0.135f);
             assert(fl1_num.GetInteger() == 3);
             
-            float rem_ndigit = std::log(fl1_num.GetRemainder());
-            rem_ndigit /= std::log((float) 10);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            float rem_ndigit = 1;
+            if (fl1_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log(fl1_num.GetRemainder());
+                rem_ndigit /= std::log((float) 10);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
+
             assert(fl1_num.GetIntegerDigitSize() >= 0);
             assert(fl1_num.GetRemainderDigitSize() >= 0);
             assert(fl1_num.GetIntegerDigitSize() == 1);
@@ -1436,9 +1450,14 @@ int main()
             assert(rem_base16 > 0.135f);
             assert(fl1_num.GetInteger() == 3);
             
-            float rem_ndigit = std::log(fl1_num.GetRemainder());
-            rem_ndigit /= std::log((float) 16);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            float rem_ndigit = 1;
+            if (fl1_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log(fl1_num.GetRemainder());
+                rem_ndigit /= std::log((float) 16);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
+
             assert(fl1_num.GetIntegerDigitSize() >= 0);
             assert(fl1_num.GetRemainderDigitSize() >= 0);
             assert(fl1_num.GetIntegerDigitSize() == 1);
@@ -1788,9 +1807,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() <= 0);
 
-                float int_ndigit = std::log((float)fl1_num.GetInteger());
-                int_ndigit /= std::log((float)10);
-                int_ndigit = std::floor(int_ndigit) + 1;
+                float int_ndigit = 1;
+                if (fl1_num.GetInteger() != 0)
+                {
+                    int_ndigit = std::log((float)fl1_num.GetInteger());
+                    int_ndigit /= std::log((float)10);
+                    int_ndigit = std::floor(int_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                 {
@@ -1854,9 +1877,13 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == 0);
                     
-                    float int_ndigit = std::log((float)fl1_num.GetInteger());
-                    int_ndigit /= std::log((float)10);
-                    int_ndigit = std::floor(int_ndigit) + 1;
+                    float int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((float)fl1_num.GetInteger());
+                        int_ndigit /= std::log((float)10);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -1912,12 +1939,20 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == rem_val);
                     
-                    float int_ndigit = std::log((float)fl1_num.GetInteger());
-                    int_ndigit /= std::log((float)10);
-                    int_ndigit = std::floor(int_ndigit) + 1;
-                    float rem_ndigit = std::log((float)fl1_num.GetRemainder());
-                    rem_ndigit /= std::log((float)10);
-                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                    float int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((float)fl1_num.GetInteger());
+                        int_ndigit /= std::log((float)10);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
+                    float rem_ndigit = 1;
+                    if (fl1_num.GetRemainder() != 0)
+                    {
+                        rem_ndigit = std::log((float)fl1_num.GetRemainder());
+                        rem_ndigit /= std::log((float)10);
+                        rem_ndigit = std::floor(rem_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -1979,9 +2014,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() == mant_base10);
                 
-                float rem_ndigit = std::log((float)fl1_num.GetRemainder());
-                rem_ndigit /= std::log((float)10);
-                rem_ndigit = std::floor(rem_ndigit) + 1;
+                float rem_ndigit = 1;
+                if (fl1_num.GetRemainder() != 0)
+                {
+                    rem_ndigit = std::log((float)fl1_num.GetRemainder());
+                    rem_ndigit /= std::log((float)10);
+                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != 0)
                 {
@@ -2068,9 +2107,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() <= 0);
 
-                float int_ndigit = std::log((float)fl1_num.GetInteger());
-                int_ndigit /= std::log((float)16);
-                int_ndigit = std::floor(int_ndigit) + 1;
+                float int_ndigit = 1;
+                if (fl1_num.GetInteger() != 0)
+                {
+                    int_ndigit = std::log((float)fl1_num.GetInteger());
+                    int_ndigit /= std::log((float)16);
+                    int_ndigit = std::floor(int_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                 {
@@ -2134,9 +2177,13 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == 0);
                     
-                    float int_ndigit = std::log((float)fl1_num.GetInteger());
-                    int_ndigit /= std::log((float)16);
-                    int_ndigit = std::floor(int_ndigit) + 1;
+                    float int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((float)fl1_num.GetInteger());
+                        int_ndigit /= std::log((float)16);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -2192,12 +2239,20 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == rem_val);
                     
-                    float int_ndigit = std::log((float)fl1_num.GetInteger());
-                    int_ndigit /= std::log((float)16);
-                    int_ndigit = std::floor(int_ndigit) + 1;
-                    float rem_ndigit = std::log((float)fl1_num.GetRemainder());
-                    rem_ndigit /= std::log((float)16);
-                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                    float int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((float)fl1_num.GetInteger());
+                        int_ndigit /= std::log((float)16);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
+                    float rem_ndigit = 1;
+                    if (fl1_num.GetRemainder() != 0)
+                    {
+                        rem_ndigit = std::log((float)fl1_num.GetRemainder());
+                        rem_ndigit /= std::log((float)16);
+                        rem_ndigit = std::floor(rem_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -2259,9 +2314,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() == mant_base16);
                 
-                float rem_ndigit = std::log((float)fl1_num.GetRemainder());
-                rem_ndigit /= std::log((float)16);
-                rem_ndigit = std::floor(rem_ndigit) + 1;
+                float rem_ndigit = 1;
+                if (fl1_num.GetRemainder() != 0)
+                {
+                    rem_ndigit = std::log((float)fl1_num.GetRemainder());
+                    rem_ndigit /= std::log((float)16);
+                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != 0)
                 {
@@ -2590,9 +2649,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() <= 0);
 
-                double int_ndigit = std::log((double)fl1_num.GetInteger());
-                int_ndigit /= std::log((double)10);
-                int_ndigit = std::floor(int_ndigit) + 1;
+                double int_ndigit = 1;
+                if (fl1_num.GetInteger() != 0)
+                {
+                    int_ndigit = std::log((double)fl1_num.GetInteger());
+                    int_ndigit /= std::log((double)10);
+                    int_ndigit = std::floor(int_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                 {
@@ -2656,9 +2719,13 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == 0);
                     
-                    double int_ndigit = std::log((double)fl1_num.GetInteger());
-                    int_ndigit /= std::log((double)10);
-                    int_ndigit = std::floor(int_ndigit) + 1;
+                    double int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((double)fl1_num.GetInteger());
+                        int_ndigit /= std::log((double)10);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -2714,13 +2781,20 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == rem_val);
                     
-                    double int_ndigit = std::log((double)fl1_num.GetInteger());
-                    int_ndigit /= std::log((double)10);
-                    int_ndigit = std::floor(int_ndigit) + 1;
-                    double rem_ndigit = 
-                        std::log((double)fl1_num.GetRemainder());
-                    rem_ndigit /= std::log((double)10);
-                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                    double int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((double)fl1_num.GetInteger());
+                        int_ndigit /= std::log((double)10);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
+                    double rem_ndigit = 1;
+                    if (fl1_num.GetRemainder() != 0)
+                    {
+                        rem_ndigit = std::log((double)fl1_num.GetRemainder());
+                        rem_ndigit /= std::log((double)10);
+                        rem_ndigit = std::floor(rem_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -2782,9 +2856,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() == mant_base10);
                 
-                double rem_ndigit = std::log((double)fl1_num.GetRemainder());
-                rem_ndigit /= std::log((double)10);
-                rem_ndigit = std::floor(rem_ndigit) + 1;
+                double rem_ndigit = 1;
+                if (fl1_num.GetRemainder() != 0)
+                {
+                    rem_ndigit = std::log((double)fl1_num.GetRemainder());
+                    rem_ndigit /= std::log((double)10);
+                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != 0)
                 {
@@ -2871,9 +2949,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() <= 0);
 
-                double int_ndigit = std::log((double)fl1_num.GetInteger());
-                int_ndigit /= std::log((double)16);
-                int_ndigit = std::floor(int_ndigit) + 1;
+                double int_ndigit = 1;
+                if (fl1_num.GetInteger() != 0)
+                {
+                    int_ndigit = std::log((double)fl1_num.GetInteger());
+                    int_ndigit /= std::log((double)16);
+                    int_ndigit = std::floor(int_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                 {
@@ -2937,9 +3019,13 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == 0);
                     
-                    double int_ndigit = std::log((double)fl1_num.GetInteger());
-                    int_ndigit /= std::log((double)16);
-                    int_ndigit = std::floor(int_ndigit) + 1;
+                    double int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((double)fl1_num.GetInteger());
+                        int_ndigit /= std::log((double)16);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -2995,13 +3081,20 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == rem_val);
                     
-                    double int_ndigit = std::log((double)fl1_num.GetInteger());
-                    int_ndigit /= std::log((double)16);
-                    int_ndigit = std::floor(int_ndigit) + 1;
-                    double rem_ndigit = 
-                        std::log((double)fl1_num.GetRemainder());
-                    rem_ndigit /= std::log((double)16);
-                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                    double int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((double)fl1_num.GetInteger());
+                        int_ndigit /= std::log((double)16);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
+                    double rem_ndigit = 1;
+                    if (fl1_num.GetRemainder() != 0)
+                    {
+                        rem_ndigit = std::log((double)fl1_num.GetRemainder());
+                        rem_ndigit /= std::log((double)16);
+                        rem_ndigit = std::floor(rem_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -3063,9 +3156,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() == mant_base16);
                 
-                double rem_ndigit = std::log((double)fl1_num.GetRemainder());
-                rem_ndigit /= std::log((double)16);
-                rem_ndigit = std::floor(rem_ndigit) + 1;
+                double rem_ndigit = 1;
+                if (fl1_num.GetRemainder() != 0)
+                {
+                    rem_ndigit = std::log((double)fl1_num.GetRemainder());
+                    rem_ndigit /= std::log((double)16);
+                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != 0)
                 {
@@ -3107,7 +3204,7 @@ int main()
             MantissaType;
         typedef typename test::FloatingPoint<long double>::ExponentType 
             ExponentType;
-        long double f1_int = 0.0;
+        long double f1_int = 0.0L;
         while(f1_int == 0.0L) f1_int = Random<long double>();
         long double f1 = f1_int * std::pow((long double)10, pn);
         test::FloatingPoint<long double> fl1{f1};
@@ -3396,10 +3493,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() <= 0);
 
-                long double int_ndigit = 
-                    std::log((long double)fl1_num.GetInteger());
-                int_ndigit /= std::log((long double)10);
-                int_ndigit = std::floor(int_ndigit) + 1;
+                long double int_ndigit = 1;
+                if (fl1_num.GetInteger() != 0)
+                {
+                    int_ndigit = std::log((long double)fl1_num.GetInteger());
+                    int_ndigit /= std::log((long double)10);
+                    int_ndigit = std::floor(int_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                 {
@@ -3438,7 +3538,7 @@ int main()
                 assert(fl1_num.GetExponent() <= 0);
                 if (fl1_num.GetExponent() == 0)
                 {
-                    long double int_val_f = mant_base10;
+                    long double int_val_f = mant_base10_f;
                     int_val_f *= std::pow((long double)10, exp_base10);
                     MantissaType int_val = std::round(int_val_f);
 
@@ -3463,10 +3563,13 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == 0);
                     
-                    long double int_ndigit = 
-                        std::log((long double)fl1_num.GetInteger());
-                    int_ndigit /= std::log((long double)10);
-                    int_ndigit = std::floor(int_ndigit) + 1;
+                    long double int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((long double)fl1_num.GetInteger());
+                        int_ndigit /= std::log((long double)10);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -3494,10 +3597,10 @@ int main()
                 }
                 else if (fl1_num.GetExponent() < 0)
                 {
-                    long double int_val_f = mant_base10;
+                    long double int_val_f = mant_base10_f;
                     int_val_f *= std::pow((long double)10, exp_base10);
                     MantissaType int_val = std::floor(int_val_f);
-                    MantissaType rem_val = (MantissaType)(mant_base10 - 
+                    MantissaType rem_val = (MantissaType)(mant_base10_f - 
                         (int_val * (MantissaType)(std::pow((long double)10, 
                         -fl1_num.GetExponent()))));
 
@@ -3523,14 +3626,20 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == rem_val);
                     
-                    long double int_ndigit = 
-                        std::log((long double)fl1_num.GetInteger());
-                    int_ndigit /= std::log((long double)10);
-                    int_ndigit = std::floor(int_ndigit) + 1;
-                    long double rem_ndigit = 
-                        std::log((long double)fl1_num.GetRemainder());
-                    rem_ndigit /= std::log((long double)10);
-                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                    long double int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((long double)fl1_num.GetInteger());
+                        int_ndigit /= std::log((long double)10);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
+                    long double rem_ndigit = 1;
+                    if (fl1_num.GetRemainder() != 0)
+                    {
+                        rem_ndigit = std::log((long double)fl1_num.GetRemainder());
+                        rem_ndigit /= std::log((long double)10);
+                        rem_ndigit = std::floor(rem_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -3592,10 +3701,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() == mant_base10);
                 
-                long double rem_ndigit = 
-                    std::log((long double)fl1_num.GetRemainder());
-                rem_ndigit /= std::log((long double)10);
-                rem_ndigit = std::floor(rem_ndigit) + 1;
+                long double rem_ndigit = 1;
+                if (fl1_num.GetRemainder() != 0)
+                {
+                    rem_ndigit = std::log((long double)fl1_num.GetRemainder());
+                    rem_ndigit /= std::log((long double)10);
+                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != 0)
                 {
@@ -3683,10 +3795,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() <= 0);
 
-                long double int_ndigit = 
-                    std::log((long double)fl1_num.GetInteger());
-                int_ndigit /= std::log((long double)16);
-                int_ndigit = std::floor(int_ndigit) + 1;
+                long double int_ndigit = 1;
+                if (fl1_num.GetInteger() != 0)
+                {
+                    int_ndigit = std::log((long double)fl1_num.GetInteger());
+                    int_ndigit /= std::log((long double)16);
+                    int_ndigit = std::floor(int_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                 {
@@ -3750,10 +3865,13 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == 0);
                     
-                    long double int_ndigit = 
-                        std::log((long double)fl1_num.GetInteger());
-                    int_ndigit /= std::log((long double)16);
-                    int_ndigit = std::floor(int_ndigit) + 1;
+                    long double int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((long double)fl1_num.GetInteger());
+                        int_ndigit /= std::log((long double)16);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -3809,14 +3927,20 @@ int main()
                     }
                     assert(fl1_num.GetRemainder() == rem_val);
                     
-                    long double int_ndigit = 
-                        std::log((long double)fl1_num.GetInteger());
-                    int_ndigit /= std::log((long double)16);
-                    int_ndigit = std::floor(int_ndigit) + 1;
-                    long double rem_ndigit = 
-                        std::log((long double)fl1_num.GetRemainder());
-                    rem_ndigit /= std::log((long double)16);
-                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                    long double int_ndigit = 1;
+                    if (fl1_num.GetInteger() != 0)
+                    {
+                        int_ndigit = std::log((long double)fl1_num.GetInteger());
+                        int_ndigit /= std::log((long double)16);
+                        int_ndigit = std::floor(int_ndigit) + 1;
+                    }
+                    long double rem_ndigit = 1;
+                    if (fl1_num.GetRemainder() != 0)
+                    {
+                        rem_ndigit = std::log((long double)fl1_num.GetRemainder());
+                        rem_ndigit /= std::log((long double)16);
+                        rem_ndigit = std::floor(rem_ndigit) + 1;
+                    }
 
                     if (fl1_num.GetIntegerDigitSize() != int_ndigit)
                     {
@@ -3878,10 +4002,13 @@ int main()
                 }
                 assert(fl1_num.GetRemainder() == mant_base16);
                 
-                long double rem_ndigit = 
-                    std::log((long double)fl1_num.GetRemainder());
-                rem_ndigit /= std::log((long double)16);
-                rem_ndigit = std::floor(rem_ndigit) + 1;
+                long double rem_ndigit = 1;
+                if (fl1_num.GetRemainder() != 0)
+                {
+                    rem_ndigit = std::log((long double)fl1_num.GetRemainder());
+                    rem_ndigit /= std::log((long double)16);
+                    rem_ndigit = std::floor(rem_ndigit) + 1;
+                }
 
                 if (fl1_num.GetIntegerDigitSize() != 0)
                 {
@@ -3953,9 +4080,13 @@ int main()
             mant_b10_f *= std::pow((float)10, exp_b10_f);
             
             auto fp_num = fp_base.GetNumber();
-            float rem_ndigit = std::log((float)fp_num.GetRemainder());
-            rem_ndigit /= std::log((float)10);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            float rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((float)fp_num.GetRemainder());
+                rem_ndigit /= std::log((float)10);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b10);
             assert(fp_num.GetInteger() == 0);
@@ -3976,9 +4107,13 @@ int main()
             mant_b16_f *= std::pow((float)16, exp_b16_f);
 
             auto fp_num = fp_base.GetNumber();
-            float rem_ndigit = std::log((float)fp_num.GetRemainder());
-            rem_ndigit /= std::log((float)16);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            float rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((float)fp_num.GetRemainder());
+                rem_ndigit /= std::log((float)16);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b16);
             assert(fp_num.GetInteger() == 0);
@@ -4033,9 +4168,13 @@ int main()
             mant_b10_f *= std::pow((float)10, exp_b10_f);
 
             auto fp_num = fp_base.GetNumber();
-            float rem_ndigit = std::log((float)fp_num.GetRemainder());
-            rem_ndigit /= std::log((float)10);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            float rem_ndigit = 1;
+            if (fp_num.GetRemainder()) 
+            {
+                rem_ndigit = std::log((float)fp_num.GetRemainder());
+                rem_ndigit /= std::log((float)10);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b10);
             assert(fp_num.GetInteger() == 0);
@@ -4056,9 +4195,13 @@ int main()
             mant_b16_f *= std::pow((float)16, exp_b16_f);
 
             auto fp_num = fp_base.GetNumber();
-            float rem_ndigit = std::log((float)fp_num.GetRemainder());
-            rem_ndigit /= std::log((float)16);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            float rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((float)fp_num.GetRemainder());
+                rem_ndigit /= std::log((float)16);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b16);
             assert(fp_num.GetInteger() == 0);
@@ -4113,9 +4256,13 @@ int main()
             mant_b10_f *= std::pow((double)10, exp_b10_f);
             
             auto fp_num = fp_base.GetNumber();
-            double rem_ndigit = std::log((double)fp_num.GetRemainder());
-            rem_ndigit /= std::log((double)10);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            double rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((double)fp_num.GetRemainder());
+                rem_ndigit /= std::log((double)10);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b10);
             assert(fp_num.GetInteger() == 0);
@@ -4137,9 +4284,13 @@ int main()
             mant_b16_f *= std::pow((double)16, exp_b16_f);
 
             auto fp_num = fp_base.GetNumber();
-            double rem_ndigit = std::log((double)fp_num.GetRemainder());
-            rem_ndigit /= std::log((double)16);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            double rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((double)fp_num.GetRemainder());
+                rem_ndigit /= std::log((double)16);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b16);
             assert(fp_num.GetInteger() == 0);
@@ -4196,9 +4347,13 @@ int main()
             mant_b10_f *= std::pow((double)10, exp_b10_f);
 
             auto fp_num = fp_base.GetNumber();
-            double rem_ndigit = std::log((double)fp_num.GetRemainder());
-            rem_ndigit /= std::log((double)10);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            double rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((double)fp_num.GetRemainder());
+                rem_ndigit /= std::log((double)10);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b10);
             assert(fp_num.GetInteger() == 0);
@@ -4220,9 +4375,13 @@ int main()
             mant_b16_f *= std::pow((double)16, exp_b16_f);
 
             auto fp_num = fp_base.GetNumber();
-            double rem_ndigit = std::log((double)fp_num.GetRemainder());
-            rem_ndigit /= std::log((double)16);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            double rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((double)fp_num.GetRemainder());
+                rem_ndigit /= std::log((double)16);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b16);
             assert(fp_num.GetInteger() == 0);
@@ -4280,10 +4439,13 @@ int main()
             mant_b10_f *= std::pow((long double)10, exp_b10_f);
             
             auto fp_num = fp_base.GetNumber();
-            long double rem_ndigit = 
-                std::log((long double)fp_num.GetRemainder());
-            rem_ndigit /= std::log((long double)10);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            long double rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((long double)fp_num.GetRemainder());
+                rem_ndigit /= std::log((long double)10);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b10);
             assert(fp_num.GetInteger() == 0);
@@ -4305,10 +4467,13 @@ int main()
             mant_b16_f *= std::pow((long double)16, exp_b16_f);
 
             auto fp_num = fp_base.GetNumber();
-            long double rem_ndigit = 
-                std::log((long double)fp_num.GetRemainder());
-            rem_ndigit /= std::log((long double)16);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            long double rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((long double)fp_num.GetRemainder());
+                rem_ndigit /= std::log((long double)16);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b16);
             assert(fp_num.GetInteger() == 0);
@@ -4368,10 +4533,13 @@ int main()
             mant_b10_f *= std::pow((long double)10, exp_b10_f);
 
             auto fp_num = fp_base.GetNumber();
-            long double rem_ndigit = 
-                std::log((long double)fp_num.GetRemainder());
-            rem_ndigit /= std::log((long double)10);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            long double rem_ndigit = 1;
+            if(fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((long double)fp_num.GetRemainder());
+                rem_ndigit /= std::log((long double)10);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b10);
             assert(fp_num.GetInteger() == 0);
@@ -4393,10 +4561,13 @@ int main()
             mant_b16_f *= std::pow((long double)16, exp_b16_f);
 
             auto fp_num = fp_base.GetNumber();
-            long double rem_ndigit = 
-                std::log((long double)fp_num.GetRemainder());
-            rem_ndigit /= std::log((long double)16);
-            rem_ndigit = std::floor(rem_ndigit) + 1;
+            long double rem_ndigit = 1;
+            if (fp_num.GetRemainder() != 0)
+            {
+                rem_ndigit = std::log((long double)fp_num.GetRemainder());
+                rem_ndigit /= std::log((long double)16);
+                rem_ndigit = std::floor(rem_ndigit) + 1;
+            }
 
             assert(fp_num.GetExponent() == exp_b16);
             assert(fp_num.GetInteger() == 0);
@@ -4910,7 +5081,6 @@ int main()
             double rem = 1;
             rem *= std::pow((double)2, mant_size - 1);
             rem = mant - rem;
-            rem *= std::pow((double)2, 1);
             rem = std::floor(rem);
 
             assert(fp_num.GetInteger() == 1);
@@ -4918,7 +5088,7 @@ int main()
             assert(fp_num.GetExponent() == -2);
 
             assert(fp_num.GetIntegerDigitSize() == 1);
-            assert(fp_num.GetRemainderDigitSize() == mant_size);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
         }
         {
             auto fp_base = fl1.GetBase<10, true>();
@@ -4976,7 +5146,6 @@ int main()
             double rem = 1;
             rem *= std::pow((double)2, mant_size - 1);
             rem = mant - rem;
-            rem *= std::pow((double)2, 1);
             rem = std::floor(rem);
             
             assert(fp_num.GetInteger() == 1);
@@ -4984,7 +5153,7 @@ int main()
             assert(fp_num.GetExponent() == 8);
 
             assert(fp_num.GetIntegerDigitSize() == 1);
-            assert(fp_num.GetRemainderDigitSize() == mant_size);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
         }
         {
             auto fp_base = fl1.GetBase<10, true>();
@@ -5042,7 +5211,6 @@ int main()
             double rem = 1;
             rem *= std::pow((double)2, mant_size - 1);
             rem = mant - rem;
-            rem *= std::pow((double)2, 1);
             rem = std::floor(rem);
             
             assert(fp_num.GetInteger() == 1);
@@ -5050,7 +5218,7 @@ int main()
             assert(fp_num.GetExponent() == 1);
 
             assert(fp_num.GetIntegerDigitSize() == 1);
-            assert(fp_num.GetRemainderDigitSize() == mant_size);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
         }
         {
             auto fp_base = fl1.GetBase<10, true>();
@@ -5167,7 +5335,6 @@ int main()
             double rem = 1;
             rem *= std::pow((double)2, mant_size - 1);
             rem = mant - rem;
-            rem *= std::pow((double)2, 1);
             rem = std::floor(rem);
 
             if (fp_num.GetInteger() != 1)
@@ -5214,7 +5381,7 @@ int main()
             }
             assert(fp_num.GetIntegerDigitSize() == 1);
 
-            if (fp_num.GetRemainderDigitSize() != mant_size)
+            if (fp_num.GetRemainderDigitSize() != (mant_size - 1))
             {
                 printf("mant %" PRDMant "\n", fl1.GetNormalMantissa());
                 printf("exp %" PRDExp "\n", fl1.GetExponent());
@@ -5224,7 +5391,7 @@ int main()
                     fp_num.GetRemainderDigitSize());
                 printf("mant_size %zd\n", mant_size);
             }
-            assert(fp_num.GetRemainderDigitSize() == mant_size);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
         }
         {
             auto fp_base = fl1.GetBase<10, true>();
@@ -6089,7 +6256,6 @@ int main()
             double rem = 1;
             rem *= std::pow((double)2, mant_size - 1);
             rem = mant_bin_int - rem;
-            rem *= std::pow((double)2, 1);
             rem = std::floor(rem);
             
             assert(fp_num.GetInteger() == 1);
@@ -6097,7 +6263,7 @@ int main()
             assert(fp_num.GetExponent() == fl1.GetExponent());
 
             assert(fp_num.GetIntegerDigitSize() == 1);
-            assert(fp_num.GetRemainderDigitSize() == mant_size);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
         }
         {
             auto fp_base = fl1.GetBase<10, true>();
@@ -6183,7 +6349,6 @@ int main()
             double rem = 1;
             rem *= std::pow((double)2, mant_size - 1);
             rem = mant_bin_int - rem;
-            rem *= std::pow((double)2, 1);
             rem = std::floor(rem);
             
             assert(fp_num.GetInteger() == 1);
@@ -6192,7 +6357,7 @@ int main()
                 test::FloatingPoint<double>::BitFieldMantissa()));
 
             assert(fp_num.GetIntegerDigitSize() == 1);
-            assert(fp_num.GetRemainderDigitSize() == mant_size);
+            assert(fp_num.GetRemainderDigitSize() == (mant_size - 1));
         }
         {
             auto fp_base = fl1.GetBase<10, true>();
