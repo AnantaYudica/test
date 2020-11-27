@@ -7,6 +7,605 @@
 int main()
 {
     {
+        test::FloatingPoint<float> fp1{3.0f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<float> fp1{3.4f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<float> fp1{3.5f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<float> fp1{3.9f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<float> fp1{0.3f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<float> fp1{0.34f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<float> fp1{0.35f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<float> fp1{0.39f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<float> fp1{0.3f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    {
+        test::FloatingPoint<float> fp1{0.34f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    {
+        test::FloatingPoint<float> fp1{0.35f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    {
+        test::FloatingPoint<float> fp1{0.39f};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<float, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        if (is_round) assert(int1 == 2);
+        else assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+
+    // double Round
+    {
+        test::FloatingPoint<double> fp1{3.0};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<double> fp1{3.4};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<double> fp1{3.5};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<double> fp1{3.9};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<double> fp1{0.3};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<double> fp1{0.34};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<double> fp1{0.35};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<double> fp1{0.39};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<double> fp1{0.3};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    {
+        test::FloatingPoint<double> fp1{0.34};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    {
+        test::FloatingPoint<double> fp1{0.35};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    {
+        test::FloatingPoint<double> fp1{0.39};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<double, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        if (is_round) assert(int1 == 2);
+        else assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    
+    // long double Round
+    
+    {
+        test::FloatingPoint<long double> fp1{3.0L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<long double> fp1{3.4L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<long double> fp1{3.5L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<long double> fp1{3.9L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, false>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<long double> fp1{0.3L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<long double> fp1{0.34L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<long double> fp1{0.35L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<long double> fp1{0.39L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 10>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 0);
+        if (is_round) assert(int1 == 4);
+        else assert(int1 == 3);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 1);
+        assert(int2 == 3);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<10, true>(), 10);
+        assert(int3 == 3);
+    }
+    {
+        test::FloatingPoint<long double> fp1{0.3L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    {
+        test::FloatingPoint<long double> fp1{0.34L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    {
+        test::FloatingPoint<long double> fp1{0.35L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+    {
+        test::FloatingPoint<long double> fp1{0.39L};
+        const auto is_round = 
+            test::def::out::cstr::fp::Precision::IsRound<long double, 2>();
+        auto int1 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 0);
+        if (is_round) assert(int1 == 2);
+        else assert(int1 == 1);
+        
+        auto int2 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 1);
+        assert(int2 == 1);
+            
+        auto int3 = test::out::print::fp::Integer::
+            Round(fp1.GetBase<2, true>(), 10);
+        assert(int3 == 1);
+    }
+
+    // float CStr
+
+    {
         test::FloatingPoint<float> fp1{3140.0f};
         auto cstr1 = test::out::print::fp::Integer::
             CStr(fp1.GetBase<10, false>());
