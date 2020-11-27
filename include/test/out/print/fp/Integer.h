@@ -4,6 +4,7 @@
 #include "../../../CString.h"
 #include "../../../FloatingPoint.h"
 #include "../../../cstr/Format.h"
+#include "../../../def/out/cstr/fp/Precision.h"
 #include "Specifier.h"
 
 #include <cmath>
@@ -22,6 +23,56 @@ namespace fp
 
 struct Integer
 {
+    template<std::size_t NBase, typename TFloatingPoint, 
+        bool BNormalize = false>
+    using ValueType = typename test::fp::Base<NBase, TFloatingPoint, 
+        BNormalize>::MantissaType;
+
+    template<typename TFloat, std::size_t NBase, bool BNormalize,
+        typename std::enable_if<!test::def::out::cstr::fp::Precision::
+            IsRound<TFloat, NBase>(), int>::type = 0>
+    static ValueType<NBase, test::FloatingPoint<TFloat>, BNormalize> 
+        Round(const test::fp::Base<NBase, test::FloatingPoint<TFloat>, 
+            BNormalize>& fp_base, const std::size_t& precision)
+    {
+        return fp_base.GetNumber().GetInteger();
+    }
+
+    template<typename TFloat, std::size_t NBase,
+        typename std::enable_if<test::def::out::cstr::fp::Precision::
+            IsRound<TFloat, NBase>(), int>::type = 0>
+    static ValueType<NBase, test::FloatingPoint<TFloat>, false> 
+        Round(const test::fp::Base<NBase, test::FloatingPoint<TFloat>, 
+            false>& fp_base, const std::size_t& precision)
+    {
+        const auto num = fp_base.GetNumber();
+        const auto exp = num.GetExponent();
+        const auto rem_digit = num.GetRemainderDigitSize();
+        TFloat rem = num.GetRemainder();
+        if (precision != 0 || exp > rem_digit || rem == 0)
+            return num.GetInteger();
+        rem *= std::pow(NBase, -rem_digit);
+        rem = std::round(rem);
+        return num.GetInteger() + rem;
+    }
+
+    template<typename TFloat, std::size_t NBase,
+        typename std::enable_if<test::def::out::cstr::fp::Precision::
+            IsRound<TFloat, NBase>(), int>::type = 0>
+    static ValueType<NBase, test::FloatingPoint<TFloat>, true> 
+        Round(const test::fp::Base<NBase, test::FloatingPoint<TFloat>, 
+            true>& fp_base, const std::size_t& precision)
+    {
+        const auto num = fp_base.GetNumber();
+        const auto rem_digit = num.GetRemainderDigitSize();
+        TFloat rem = num.GetRemainder();
+        if (precision != 0 || rem == 0)
+            return num.GetInteger();
+        rem *= std::pow(NBase, -rem_digit);
+        rem = std::round(rem);
+        return num.GetInteger() + rem;
+    }
+
     template<typename TChar = char, bool BLower = true,
         typename std::enable_if<std::is_same<TChar, char>::value, 
         int>::type = 0>
