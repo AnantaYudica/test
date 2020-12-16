@@ -17,16 +17,17 @@ template<typename TElementValue, typename TValue,
     TExpandValue(FGetValue)(const TValue&, const TSize&),
     TExpandValue(FSplitValue)(const TExpandValue&),
     TElementValue(FElementValue)(const TExpandValue&),
-    TElementValue(FCarryValue)(const TExpandValue&)>
+    TElementValue(FCarryValue)(const TExpandValue&),
+    TExpandValue(FGetBValue)(const TValue&, const TSize&) = FGetValue>
 static TElementValue Addition(TValue& a, const TValue& b,
-    const TSize& begin = 0)
+    const TSize& bg = 0, const TElementValue& c = 0)
 {
-    TElementValue carry = 0;
+    TElementValue carry = c;
     TExpandValue sum = 0;
-    for (TSize i = begin; i < N; ++i)
+    for (TSize i = bg; i < N; ++i)
     {
         sum = FGetValue(a, i);
-        sum += FGetValue(b, i);
+        sum += FGetBValue(b, i);
         sum += carry;
         const auto split = FSplitValue(sum);
         FSetValue(a, i, FElementValue(split));
@@ -42,12 +43,13 @@ template<typename TElementValue, typename TValue,
     TExpandValue(FGetValue)(const TValue&, const TSize&),
     TExpandValue(FSplitValue)(const TExpandValue&),
     TElementValue(FElementValue)(const TExpandValue&),
-    TElementValue(FCarryValue)(const TExpandValue&)>
+    TElementValue(FCarryValue)(const TExpandValue&),
+    TElementValue VElementBDefault = 0>
 static TElementValue Addition(TValue& a, const TExpandValue& b,
-    const TSize& begin = 0)
+    const TSize& bg = 0, const TElementValue& c = 0)
 {
-    TElementValue carry = 0;
-    TSize i = begin;
+    TElementValue carry = c;
+    TSize i = bg;
     if (i < N)
     {
         TExpandValue sum = 0;
@@ -65,9 +67,10 @@ static TElementValue Addition(TValue& a, const TExpandValue& b,
             carry = FCarryValue(split);
         }
         
-        for (; (i < N && carry != 0); ++i)
+        for (; (i < N && (carry != 0 || VElementBDefault != 0)); ++i)
         {
             sum = FGetValue(a, i);
+            sum += VElementBDefault;
             sum += carry;
             const auto split = FSplitValue(sum);
             FSetValue(a, i, FElementValue(split));
