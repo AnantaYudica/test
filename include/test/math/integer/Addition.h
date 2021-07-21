@@ -10,27 +10,33 @@ namespace math
 namespace integer
 {
 
-template<typename TElementValue, typename TValue,
-    typename TExpandValue, typename TSize, TSize N, 
-    TElementValue(FSetValue)(TValue&, const TSize&,
+template<typename TElementValue, typename TAValue, typename TBValue,
+    typename TExpandValue, typename TSize, TSize NA, TSize NB, 
+    TElementValue(FSetValue)(TAValue&, const TSize&,
         const TElementValue&),
-    TExpandValue(FGetValue)(const TValue&, const TSize&),
+    TExpandValue(FGetAValue)(const TAValue&, const TSize&),
+    TExpandValue(FGetBValue)(const TBValue&, const TSize&),
     TExpandValue(FSplitValue)(const TExpandValue&),
     TElementValue(FElementValue)(const TExpandValue&),
     TElementValue(FCarryValue)(const TExpandValue&),
-    TExpandValue(FGetBValue)(const TValue&, const TSize&) = FGetValue>
-static TElementValue Addition(TValue& a, const TValue& b,
-    const TSize& bg = 0, const TElementValue& c = 0)
+    TElementValue VElementDefault = 0>
+static TElementValue Addition(TAValue& a, const TBValue& b,
+    const TElementValue& c = 0, const TSize& bg_a = 0,
+    const TSize& bg_b = 0, const TSize& ed_b = NB)
 {
     TElementValue carry = c;
     TExpandValue sum = 0;
-    for (TSize i = bg; i < N; ++i)
+    const TSize end_b = bg_b < ed_b ? (ed_b < NB ? ed_b : NB) : bg_b;
+    for (TSize i_a = bg_a, i_b = bg_b; i_a < NA; ++i_a, ++i_b)
     {
-        sum = FGetValue(a, i);
-        sum += FGetBValue(b, i);
+        sum = FGetAValue(a, i_a);
+        if (i_b < end_b)
+            sum += FGetBValue(b, i_b);
+        else
+            sum += VElementDefault;
         sum += carry;
         const auto split = FSplitValue(sum);
-        FSetValue(a, i, FElementValue(split));
+        FSetValue(a, i_a, FElementValue(split));
         carry = FCarryValue(split);
     }
     return carry;
@@ -46,7 +52,7 @@ template<typename TElementValue, typename TValue,
     TElementValue(FCarryValue)(const TExpandValue&),
     TElementValue VElementBDefault = 0>
 static TElementValue Addition(TValue& a, const TExpandValue& b,
-    const TSize& bg = 0, const TElementValue& c = 0)
+    const TElementValue& c = 0, const TSize& bg = 0)
 {
     TElementValue carry = c;
     TSize i = bg;
