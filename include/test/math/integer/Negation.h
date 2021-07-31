@@ -35,6 +35,26 @@ TElementValue Negation(TValue& v, const TElementValue& c = 0,
     return carry;
 }
 
+template<typename TElementValue, typename TExpandValue, typename TSize,
+    TExpandValue(FNegationValue)(const TExpandValue&, const TSize&),
+    TExpandValue(FSplitValue)(const TExpandValue&),
+    TElementValue(FElementValue)(const TExpandValue&),
+    TElementValue(FCarryValue)(const TExpandValue&)>
+TElementValue Negation(TExpandValue& v, const TElementValue& c = 0, 
+    const TSize& i = 0)
+{
+    TElementValue carry = c;
+    TExpandValue sum = 0;
+
+    sum = FNegationValue(v, i);
+    sum += carry;
+    const auto split = FSplitValue(sum);
+    v = FElementValue(split);
+    carry = FCarryValue(split);
+    
+    return carry;
+}
+
 } //!integer
 
 } //!math
