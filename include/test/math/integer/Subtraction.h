@@ -98,7 +98,9 @@ static TElementValue Subtraction(TValue& a, const TExpandValue& b,
         TExpandValue diff = 0;
         TExpandValue b_val;
         const TExpandValue split_b = FSplitValue(b);
-        TElementValue elem_b[2]{FElementValue(split_b), FCarryValue(split_b)};
+        const TExpandValue elem_b0 = FElementValue(split_b);
+        const TExpandValue elem_b1 = FCarryValue(split_b);
+        const TExpandValue (&elem_b)[2]{elem_b0, elem_b1};
 
         for (; j < 2; ++j, ++i)
         {
