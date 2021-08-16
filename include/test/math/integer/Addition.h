@@ -12,7 +12,7 @@ namespace integer
 
 template<typename TElementValue, typename TAValue, typename TBValue,
     typename TExpandValue, typename TSize, TSize NA, TSize NB, 
-    TElementValue(FSetValue)(TAValue&, const TSize&,
+    TElementValue(FSetAValue)(TAValue&, const TSize&,
         const TElementValue&),
     TExpandValue(FGetAValue)(const TAValue&, const TSize&),
     TExpandValue(FGetBValue)(const TBValue&, const TSize&),
@@ -21,8 +21,39 @@ template<typename TElementValue, typename TAValue, typename TBValue,
     TElementValue(FCarryValue)(const TExpandValue&),
     TElementValue VElementDefault = 0>
 static TElementValue Addition(TAValue& a, const TBValue& b,
-    const TElementValue& c = 0, const TSize& bg_a = 0,
-    const TSize& bg_b = 0, const TSize& ed_b = NB)
+    const TElementValue& c = 0, const TSize& bg_a = 0, 
+    const TSize& bg_b = 0)
+{
+    TElementValue carry = c;
+    TExpandValue sum = 0;
+    for (TSize i_a = bg_a, i_b = bg_b; i_a < NA; ++i_a, ++i_b)
+    {
+        sum = FGetAValue(a, i_a);
+        if (i_b < NB)
+            sum += FGetBValue(b, i_b);
+        else
+            sum += VElementDefault;
+        sum += carry;
+        const auto split = FSplitValue(sum);
+        FSetAValue(a, i_a, FElementValue(split));
+        carry = FCarryValue(split);
+    }
+    return carry;
+}
+
+template<typename TElementValue, typename TAValue, typename TBValue,
+    typename TExpandValue, typename TSize, TSize NA, TSize NB, 
+    TElementValue(FSetAValue)(TAValue&, const TSize&,
+        const TElementValue&),
+    TExpandValue(FGetAValue)(const TAValue&, const TSize&),
+    TExpandValue(FGetBValue)(const TBValue&, const TSize&),
+    TExpandValue(FSplitValue)(const TExpandValue&),
+    TElementValue(FElementValue)(const TExpandValue&),
+    TElementValue(FCarryValue)(const TExpandValue&),
+    TElementValue VElementDefault = 0>
+static TElementValue Addition(TAValue& a, const TBValue& b,
+    const TElementValue& c, const TSize& bg_a, const TSize& bg_b, 
+    const TSize& ed_b)
 {
     TElementValue carry = c;
     TExpandValue sum = 0;
@@ -36,7 +67,7 @@ static TElementValue Addition(TAValue& a, const TBValue& b,
             sum += VElementDefault;
         sum += carry;
         const auto split = FSplitValue(sum);
-        FSetValue(a, i_a, FElementValue(split));
+        FSetAValue(a, i_a, FElementValue(split));
         carry = FCarryValue(split);
     }
     return carry;
@@ -60,7 +91,9 @@ static TElementValue Addition(TValue& a, const TExpandValue& b,
     {
         TExpandValue sum = 0;
         const auto split_b = FSplitValue(b);
-        TElementValue elem_b[2]{FElementValue(split_b), FCarryValue(split_b)};
+        const TExpandValue elem_b0 = FElementValue(split_b);
+        const TExpandValue elem_b1 = FCarryValue(split_b);
+        const TExpandValue (&elem_b)[2]{elem_b0, elem_b1};
 
         for (int j = 0; j < 2; ++j, ++i)
         {
