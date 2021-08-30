@@ -85,36 +85,39 @@ template<typename TElementValue, typename TValue,
 static TElementValue Addition(TValue& a, const TExpandValue& b,
     const TElementValue& c = 0, const TSize& bg = 0)
 {
-    TElementValue carry = c;
     TSize i = bg;
-    if (i < N)
-    {
-        TExpandValue sum = 0;
-        const auto split_b = FSplitValue(b);
-        const TExpandValue elem_b0 = FElementValue(split_b);
-        const TExpandValue elem_b1 = FCarryValue(split_b);
-        const TExpandValue (&elem_b)[2]{elem_b0, elem_b1};
+    if (i > N) return 0;
 
-        for (int j = 0; j < 2; ++j, ++i)
-        {
-            sum = FGetValue(a, i);
-            sum += elem_b[j];
-            sum += carry;
-            
-            auto split = FSplitValue(sum);
-            FSetValue(a, i, FElementValue(split));
-            carry = FCarryValue(split);
-        }
-        
-        for (; (i < N && (carry != 0 || VElementBDefault != 0)); ++i)
-        {
-            sum = FGetValue(a, i);
-            sum += VElementBDefault;
-            sum += carry;
-            const auto split = FSplitValue(sum);
-            FSetValue(a, i, FElementValue(split));
-            carry = FCarryValue(split);
-        }
+    TElementValue carry = c;
+    TExpandValue sum = 0;
+    const auto split_b = FSplitValue(b);
+    const TExpandValue elem_b0 = FElementValue(split_b);
+    const TExpandValue elem_b1 = FCarryValue(split_b);
+    const TExpandValue (&elem_b)[2]{elem_b0, elem_b1};
+
+    for (int j = 0; j < 2; ++j, ++i)
+    {
+        if (i < N) sum = FGetValue(a, i);
+        else sum = 0;
+        sum += elem_b[j];
+        sum += carry;
+
+        auto split = FSplitValue(sum);
+        carry = FCarryValue(split);
+        if (i < N) FSetValue(a, i, FElementValue(split));
+        else if (j == 0)
+            return (carry += FElementValue(split));
+        else
+            return FElementValue(split);
+    }
+    for (; (i < N && (carry != 0 || VElementBDefault != 0)); ++i)
+    {
+        sum = FGetValue(a, i);
+        sum += VElementBDefault;
+        sum += carry;
+        const auto split = FSplitValue(sum);
+        FSetValue(a, i, FElementValue(split));
+        carry = FCarryValue(split);
     }
     return carry;
 }
