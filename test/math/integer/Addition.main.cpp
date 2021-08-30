@@ -1689,5 +1689,543 @@ int main()
         assert(f1.Value[5] == 0);
         assert(c1 == 1);
     }
+    ////
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{0};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{255};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{255};
+        std::uint16_t f2{0x00FF};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2);
+        assert(f1.Value[0] == 254);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{0};
+        std::uint16_t f2{0x0100};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x0100};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x01FF};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 2);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{255};
+        std::uint16_t f2{0x0100};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2);
+        assert(f1.Value[0] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{255};
+        std::uint16_t f2{0x01FF};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2);
+        assert(f1.Value[0] == 254);
+        assert(c1 == 2);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{255};
+        std::uint16_t f2{0xFFFF};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2);
+        assert(f1.Value[0] == 254);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{0};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0 , 1);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0 , 1);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x00FF};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0 , 1);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 255);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{255};
+        std::uint16_t f2{0x00FF};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0 , 1);
+        assert(f1.Value[0] == 255);
+        assert(c1 == 255);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{0};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0 , 2);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0 , 2);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{255};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0 , 2);
+        assert(f1.Value[0] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{255};
+        std::uint16_t f2{0x00FF};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0 , 2);
+        assert(f1.Value[0] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{255};
+        std::uint16_t f2{0x00FF};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 1 , 2);
+        assert(f1.Value[0] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format1<N> f1{0, 0};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0, 1);
+        assert(f1.Value[0] == 0);
+        assert(f1.Value[1] == 1);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format1<N> f1{0, 255};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0, 1);
+        assert(f1.Value[0] == 0);
+        assert(f1.Value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format1<N> f1{0, 255};
+        std::uint16_t f2{0x0101};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0, 1);
+        assert(f1.Value[0] == 0);
+        assert(f1.Value[1] == 0);
+        assert(c1 == 2);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format1<N> f1{0, 255};
+        std::uint16_t f2{0xFFFF};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base2, 
+            ElementValueF1Base2, CarryValueF1Base2>(f1, f2, 0, 1);
+        assert(f1.Value[0] == 0);
+        assert(f1.Value[1] == 254);
+        assert(c1 == 0);
+    }
+    ////
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{0};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{9};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{9};
+        std::uint16_t f2{0x0009};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2);
+        assert(f1.Value[0] == 8);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{0};
+        std::uint16_t f2{0x000A};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x000A};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x0013};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 2);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{9};
+        std::uint16_t f2{0x000A};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2);
+        assert(f1.Value[0] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{9};
+        std::uint16_t f2{0x0013};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2);
+        assert(f1.Value[0] == 8);
+        assert(c1 == 2);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{9};
+        std::uint16_t f2{0x0063};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2);
+        assert(f1.Value[0] == 8);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{0};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0 , 1);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0 , 1);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x0009};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0 , 1);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 9);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{9};
+        std::uint16_t f2{0x0009};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0 , 1);
+        assert(f1.Value[0] == 9);
+        assert(c1 == 9);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{0};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0 , 2);
+        assert(f1.Value[0] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{1};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0 , 2);
+        assert(f1.Value[0] == 1);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{9};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0 , 2);
+        assert(f1.Value[0] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{9};
+        std::uint16_t f2{0x0009};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0 , 2);
+        assert(f1.Value[0] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format1<N> f1{9};
+        std::uint16_t f2{0x0009};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 1 , 2);
+        assert(f1.Value[0] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format1<N> f1{0, 0};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0, 1);
+        assert(f1.Value[0] == 0);
+        assert(f1.Value[1] == 1);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format1<N> f1{0, 9};
+        std::uint16_t f2{0x0001};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0, 1);
+        assert(f1.Value[0] == 0);
+        assert(f1.Value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format1<N> f1{0, 9};
+        std::uint16_t f2{0x000B};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0, 1);
+        assert(f1.Value[0] == 0);
+        assert(f1.Value[1] == 0);
+        assert(c1 == 2);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format1<N> f1{0, 9};
+        std::uint16_t f2{0x0063};
+        std::uint8_t c1 = test::math::integer::Addition<std::uint8_t,
+            Format1<N>, std::uint16_t, std::size_t, N,
+            SetValueF1<N>, GetValueF1<N>, SplitValueF1Base10, 
+            ElementValueF1Base10, CarryValueF1Base10>(f1, f2, 0, 1);
+        assert(f1.Value[0] == 0);
+        assert(f1.Value[1] == 8);
+        assert(c1 == 0);
+    }
     return 0;
 }
