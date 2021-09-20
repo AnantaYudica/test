@@ -1,8 +1,8 @@
 #ifndef TEST_MATH_INTEGER_SUBTRACTION_H_
 #define TEST_MATH_INTEGER_SUBTRACTION_H_
 
-#include "Addition.h"
 #include "Negation.h"
+#include "fmt/Trait.h"
 
 #include <cstddef>
 
@@ -13,124 +13,141 @@ namespace math
 namespace integer
 {
 
-template<typename TElementValue, typename TAValue, typename TBValue,
-    typename TExpandValue, typename TSize, TSize NA, TSize NB, 
-    TElementValue(FSetAValue)(TAValue&, const TSize&,
-        const TElementValue&),
-    TElementValue(FSetBValue)(TAValue&, const TSize&,
-        const TElementValue&),
-    TExpandValue(FGetAValue)(const TAValue&, const TSize&),
-    TExpandValue(FGetBValue)(const TBValue&, const TSize&),
-    TExpandValue(FNegationValue)(const TExpandValue&, const TSize&),
-    TExpandValue(FSplitValue)(const TExpandValue&),
-    TElementValue(FElementValue)(const TExpandValue&),
-    TElementValue(FCarryValue)(const TExpandValue&),
-    TElementValue VElementBDefault = 0>
-static TElementValue Subtraction(TAValue& a, const TBValue& b,
-    const TElementValue& c = 0, const TSize& bg_a = 0, 
-    const TSize& bg_b = 0, const TSize& ed_b = NB, 
-    TElementValue c_b_in = 0, TElementValue * c_b_out = nullptr)
+template<typename TAValue, typename TBValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType,
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TBValue>::Has, void>::type,
+    TSize NA = test::math::integer::fmt::
+        Trait<TAValue, TBValue>::Size,
+    TSize NB = test::math::integer::fmt::
+        Trait<TBValue, TAValue>::Size>
+static TElement Subtraction(TAValue& a, const TBValue& b,
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType& c = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& bg_a = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& bg_b = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& ed_b = NB, 
+    typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType c_b_in = 0, 
+    typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType * c_b_out = nullptr)
 {
+    typedef test::math::integer::fmt::Trait<TAValue, TBValue> TraitType;
+    typedef test::math::integer::fmt::Trait<TAValue> TraitAType;
+    typedef test::math::integer::fmt::Trait<TBValue> TraitBType;
+
     TBValue b_cpy = b;
-    TElementValue carry = c;
-    TElementValue c_b_default;
-    TElementValue & c_b = (c_b_out == nullptr ? c_b_default : *c_b_out);
+    TElement carry = c;
+    TElement c_b_default;
+    TElement & c_b = (c_b_out == nullptr ? c_b_default : *c_b_out);
     c_b = c_b_in;
-    TExpandValue b_val;
-    TExpandValue diff = 0;
+    TExpand b_val;
+    TExpand diff = 0;
     for(TSize i = 0, j = bg_b; i < NA; ++i, ++j)
     {
         if (j < ed_b)
         {
             if (j < NB)
             {   
-                b_val = FGetBValue(b_cpy, j);
-                c_b = test::math::integer::Negation<TElementValue,
-                    TExpandValue, TSize, FNegationValue, FSplitValue,
-                    FElementValue, FCarryValue>(b_val, c_b, j);
+                b_val = TraitBType::GetElement(b_cpy, j);
+                c_b = test::math::integer::Negation<TAValue>(b_val, c_b, j);
             }
             else
             {
-                b_val = VElementBDefault;
-                c_b = test::math::integer::Negation<TElementValue,
-                    TExpandValue, TSize, FNegationValue, FSplitValue,
-                    FElementValue, FCarryValue>(b_val, c_b, j);
+                b_val = 0;
+                c_b = test::math::integer::Negation<TAValue>(b_val, c_b, j);
             }
         }
         else
         {
-            b_val = VElementBDefault;
+            b_val = 0;
         }
 
-        diff = FGetAValue(a, i);
+        diff = TraitAType::GetElement(a, i);
         diff += b_val;
         diff += carry;
 
-        const auto split = FSplitValue(diff);
-        FSetAValue(a, i, FElementValue(split));
-        carry = FCarryValue(split);
+        const auto split = TraitType::ExpandSplit(diff);
+        TraitAType::SetElement(a, i, TraitType::ExpandElementValue(split));
+        carry = TraitType::ExpandCarryValue(split);
     }
 
     return carry;
 }
 
-template<typename TElementValue, typename TValue,
-    typename TExpandValue, typename TSize, TSize N, 
-    TElementValue(FSetValue)(TValue&, const TSize&,
-        const TElementValue&),
-    TExpandValue(FGetValue)(const TValue&, const TSize&),
-    TExpandValue(FNegationValue)(const TExpandValue&, const TSize&),
-    TExpandValue(FSplitValue)(const TExpandValue&),
-    TElementValue(FElementValue)(const TExpandValue&),
-    TElementValue(FCarryValue)(const TExpandValue&),
-    TElementValue VElementBDefault = 0>
-static TElementValue Subtraction(TValue& a, const TExpandValue& b,
-    const TElementValue& c = 0, const TSize& bg = 0, 
-    TElementValue c_b_in = 0, TElementValue * c_b_out = nullptr)
+template<typename TValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TValue>::SizeType,
+    typename = typename std::enable_if<std::is_same<TExpand, 
+        typename test::math::integer::fmt::
+        Trait<TValue>::ExpandType>::value, void>::type,
+    TSize N = test::math::integer::fmt::
+        Trait<TValue>::Size>
+static TElement Subtraction(TValue& a, 
+    const typename test::math::integer::fmt::
+        Trait<TValue>::ExpandType& b,
+    const typename test::math::integer::fmt::
+        Trait<TValue>::ElementType& c = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TValue>::SizeType& bg = 0, 
+    typename test::math::integer::fmt::
+        Trait<TValue>::ElementType c_b_in = 0, 
+    typename test::math::integer::fmt::
+        Trait<TValue>::ElementType * c_b_out = nullptr)
 {
-    TElementValue carry = c;
-    TElementValue c_b_default;
-    TElementValue & c_b = (c_b_out == nullptr ? c_b_default : *c_b_out);
+    typedef test::math::integer::fmt::Trait<TValue> TraitType;
+
+    TElement carry = c;
+    TElement c_b_default;
+    TElement & c_b = (c_b_out == nullptr ? c_b_default : *c_b_out);
     c_b = c_b_in;
     TSize i = bg, j = 0;
     if (i < N)
     {
-        TExpandValue diff = 0;
-        TExpandValue b_val;
-        const TExpandValue split_b = FSplitValue(b);
-        const TExpandValue elem_b0 = FElementValue(split_b);
-        const TExpandValue elem_b1 = FCarryValue(split_b);
-        const TExpandValue (&elem_b)[2]{elem_b0, elem_b1};
+        TExpand diff = 0;
+        TExpand b_val;
+        const TExpand split_b = TraitType::ExpandSplit(b);
+        const TExpand elem_b0 = TraitType::ExpandElementValue(split_b);
+        const TExpand elem_b1 = TraitType::ExpandCarryValue(split_b);
+        const TExpand (&elem_b)[2]{elem_b0, elem_b1};
 
         for (; j < 2; ++j, ++i)
         {
             b_val = elem_b[j];
-            c_b = test::math::integer::Negation<TElementValue,
-                TExpandValue, TSize, FNegationValue, FSplitValue,
-                FElementValue, FCarryValue>(b_val, c_b, j);
+            c_b = test::math::integer::Negation<TraitType>(b_val, c_b, j);
 
-            diff = FGetValue(a, i);
+            diff = TraitType::GetElement(a, i);
             diff += b_val;
             diff += carry;
             
-            auto split = FSplitValue(diff);
-            FSetValue(a, i, FElementValue(split));
-            carry = FCarryValue(split);
+            auto split = TraitType::ExpandSplit(diff);
+            TraitType::SetElement(a, i, TraitType::ExpandElementValue(split));
+            carry = TraitType::ExpandCarryValue(split);
         }
         for (; i < N; ++i)
         {
-            b_val = VElementBDefault;
-            c_b = test::math::integer::Negation<TElementValue,
-                TExpandValue, TSize, FNegationValue, FSplitValue,
-                FElementValue, FCarryValue>(b_val, c_b, j);
+            b_val = 0;
+            c_b = test::math::integer::Negation<TraitType>(b_val, c_b, j);
 
-            diff = FGetValue(a, i);
+            diff = TraitType::GetElement(a, i);
             diff += b_val;
             diff += carry;
 
-            const auto split = FSplitValue(diff);
-            FSetValue(a, i, FElementValue(split));
-            carry = FCarryValue(split);
+            const auto split = TraitType::ExpandSplit(diff);
+            TraitType::SetElement(a, i, TraitType::ExpandElementValue(split));
+            carry = TraitType::ExpandCarryValue(split);
         }
     }
     return carry;

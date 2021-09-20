@@ -1,7 +1,10 @@
 #ifndef TEST_MATH_INTEGER_ADDITION_H_
 #define TEST_MATH_INTEGER_ADDITION_H_
 
+#include "fmt/Trait.h"
+
 #include <cstddef>
+#include <type_traits>
 
 namespace test
 {
@@ -10,114 +13,147 @@ namespace math
 namespace integer
 {
 
-template<typename TElementValue, typename TAValue, typename TBValue,
-    typename TExpandValue, typename TSize, TSize NA, TSize NB, 
-    TElementValue(FSetAValue)(TAValue&, const TSize&,
-        const TElementValue&),
-    TExpandValue(FGetAValue)(const TAValue&, const TSize&),
-    TExpandValue(FGetBValue)(const TBValue&, const TSize&),
-    TExpandValue(FSplitValue)(const TExpandValue&),
-    TElementValue(FElementValue)(const TExpandValue&),
-    TElementValue(FCarryValue)(const TExpandValue&),
-    TElementValue VElementDefault = 0>
-static TElementValue Addition(TAValue& a, const TBValue& b,
-    const TElementValue& c = 0, const TSize& bg_a = 0, 
-    const TSize& bg_b = 0)
+template<typename TAValue, typename TBValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType,
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TBValue>::Has, void>::type>
+static TElement Addition(TAValue& a, const TBValue& b,
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType& c = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& bg_a = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& bg_b = 0)
 {
-    TElementValue carry = c;
-    TExpandValue sum = 0;
+    typedef test::math::integer::fmt::Trait<TAValue, TBValue> TraitType;
+    typedef test::math::integer::fmt::Trait<TAValue> TraitAType;
+    typedef test::math::integer::fmt::Trait<TBValue> TraitBType;
+
+    constexpr TSize NA = TraitAType::Size;
+    constexpr TSize NB = TraitBType::Size;
+    
+    TElement carry = c;
+    TExpand sum = 0;
     for (TSize i_a = bg_a, i_b = bg_b; i_a < NA; ++i_a, ++i_b)
     {
-        sum = FGetAValue(a, i_a);
+        sum = TraitAType::GetElement(a, i_a);
         if (i_b < NB)
-            sum += FGetBValue(b, i_b);
+            sum += TraitBType::GetElement(b, i_b);
         else
-            sum += VElementDefault;
+            sum += 0;
         sum += carry;
-        const auto split = FSplitValue(sum);
-        FSetAValue(a, i_a, FElementValue(split));
-        carry = FCarryValue(split);
+        const auto split = TraitType::ExpandSplit(sum);
+        TraitAType::SetElement(a, i_a, TraitType::ExpandElementValue(split));
+        carry = TraitType::ExpandCarryValue(split);
     }
     return carry;
 }
 
-template<typename TElementValue, typename TAValue, typename TBValue,
-    typename TExpandValue, typename TSize, TSize NA, TSize NB, 
-    TElementValue(FSetAValue)(TAValue&, const TSize&,
-        const TElementValue&),
-    TExpandValue(FGetAValue)(const TAValue&, const TSize&),
-    TExpandValue(FGetBValue)(const TBValue&, const TSize&),
-    TExpandValue(FSplitValue)(const TExpandValue&),
-    TElementValue(FElementValue)(const TExpandValue&),
-    TElementValue(FCarryValue)(const TExpandValue&),
-    TElementValue VElementDefault = 0>
-static TElementValue Addition(TAValue& a, const TBValue& b,
-    const TElementValue& c, const TSize& bg_a, const TSize& bg_b, 
-    const TSize& ed_b)
+template<typename TAValue, typename TBValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType,
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TBValue>::Has, void>::type>
+static TElement Addition(TAValue& a, const TBValue& b,
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType& c, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& bg_a, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& bg_b, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& ed_b)
 {
-    TElementValue carry = c;
-    TExpandValue sum = 0;
+    typedef test::math::integer::fmt::Trait<TAValue, TBValue> TraitType;
+    typedef test::math::integer::fmt::Trait<TAValue> TraitAType;
+    typedef test::math::integer::fmt::Trait<TBValue> TraitBType;
+    
+    constexpr TSize NA = TraitAType::Size;
+    constexpr TSize NB = TraitBType::Size;
+
+    TElement carry = c;
+    TExpand sum = 0;
     const TSize end_b = bg_b < ed_b ? (ed_b < NB ? ed_b : NB) : bg_b;
     for (TSize i_a = bg_a, i_b = bg_b; i_a < NA; ++i_a, ++i_b)
     {
-        sum = FGetAValue(a, i_a);
+        sum = TraitAType::GetElement(a, i_a);
         if (i_b < end_b)
-            sum += FGetBValue(b, i_b);
+            sum += TraitBType::GetElement(b, i_b);
         else
-            sum += VElementDefault;
+            sum += 0;
         sum += carry;
-        const auto split = FSplitValue(sum);
-        FSetAValue(a, i_a, FElementValue(split));
-        carry = FCarryValue(split);
+        const auto split = TraitType::ExpandSplit(sum);
+        TraitAType::SetElement(a, i_a, TraitType::ExpandElementValue(split));
+        carry = TraitType::ExpandCarryValue(split);
     }
     return carry;
 }
 
-template<typename TElementValue, typename TValue,
-    typename TExpandValue, typename TSize, TSize N, 
-    TElementValue(FSetValue)(TValue&, const TSize&,
-        const TElementValue&),
-    TExpandValue(FGetValue)(const TValue&, const TSize&),
-    TExpandValue(FSplitValue)(const TExpandValue&),
-    TElementValue(FElementValue)(const TExpandValue&),
-    TElementValue(FCarryValue)(const TExpandValue&),
-    TElementValue VElementBDefault = 0>
-static TElementValue Addition(TValue& a, const TExpandValue& b,
-    const TElementValue& c = 0, const TSize& bg = 0)
+template<typename TValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TValue>::SizeType,
+    typename = typename std::enable_if<std::is_same<TExpand, 
+        typename test::math::integer::fmt::
+        Trait<TValue>::ExpandType>::value, void>::type>
+static TElement Addition(TValue& a, 
+    const typename test::math::integer::fmt::
+        Trait<TValue>::ExpandType& b,
+    const typename test::math::integer::fmt::
+        Trait<TValue>::ElementType& c = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TValue>::SizeType& bg = 0)
 {
+    typedef test::math::integer::fmt::Trait<TValue> TraitType;
+
+    constexpr TSize N = TraitType::Size;
+
     TSize i = bg;
     if (i > N) return 0;
 
-    TElementValue carry = c;
-    TExpandValue sum = 0;
-    const auto split_b = FSplitValue(b);
-    const TExpandValue elem_b0 = FElementValue(split_b);
-    const TExpandValue elem_b1 = FCarryValue(split_b);
-    const TExpandValue (&elem_b)[2]{elem_b0, elem_b1};
+    TElement carry = c;
+    TExpand sum = 0;
+    const auto split_b = TraitType::ExpandSplit(b);
+    const TExpand elem_b0 = TraitType::ExpandElementValue(split_b);
+    const TExpand elem_b1 = TraitType::ExpandCarryValue(split_b);
+    const TExpand (&elem_b)[2]{elem_b0, elem_b1};
 
     for (int j = 0; j < 2; ++j, ++i)
     {
-        if (i < N) sum = FGetValue(a, i);
+        if (i < N) sum = TraitType::GetElement(a, i);
         else sum = 0;
         sum += elem_b[j];
         sum += carry;
 
-        auto split = FSplitValue(sum);
-        carry = FCarryValue(split);
-        if (i < N) FSetValue(a, i, FElementValue(split));
+        auto split = TraitType::ExpandSplit(sum);
+        carry = TraitType::ExpandCarryValue(split);
+        if (i < N) 
+            TraitType::SetElement(a, i, TraitType::ExpandElementValue(split));
         else if (j == 0)
-            return (carry += FElementValue(split));
+            return (carry += TraitType::ExpandElementValue(split));
         else
-            return FElementValue(split);
+            return TraitType::ExpandElementValue(split);
     }
-    for (; (i < N && (carry != 0 || VElementBDefault != 0)); ++i)
+    for (; (i < N && carry != 0); ++i)
     {
-        sum = FGetValue(a, i);
-        sum += VElementBDefault;
+        sum = TraitType::GetElement(a, i);
+        sum += 0;
         sum += carry;
-        const auto split = FSplitValue(sum);
-        FSetValue(a, i, FElementValue(split));
-        carry = FCarryValue(split);
+        const auto split = TraitType::ExpandSplit(sum);
+        TraitType::SetElement(a, i, TraitType::ExpandElementValue(split));
+        carry = TraitType::ExpandCarryValue(split);
     }
     return carry;
 }
