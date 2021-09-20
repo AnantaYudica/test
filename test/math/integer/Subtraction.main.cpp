@@ -5,596 +5,546 @@
 #include <cassert>
 #include <type_traits>
 
-template<std::size_t N>
-struct Format1
+template<typename TElement, typename TExpand, typename TSize>
+struct Bin
 {
-    std::uint8_t Value[N];
-    constexpr Format1() :
-        Value{0}
+    typedef TElement ElementType;
+    typedef TExpand ExpandType;
+    typedef TSize SizeType;
+
+    static TExpand ExpandSplit(const TExpand& expand);
+
+    static TExpand ExpandNegationValue(const TExpand& expand,
+        const TSize& i);
+
+    static TElement ExpandElementValue(const TExpand& expand_split);
+
+    static TElement ExpandCarryValue(const TExpand& expand_split);
+
+    static TElement LogElementValue(const TElement& v);
+};
+
+template<>
+struct Bin<std::uint8_t, std::uint16_t, std::size_t>
+{
+    typedef std::uint8_t ElementType;
+    typedef std::uint16_t ExpandType;
+    typedef std::size_t SizeType;
+
+    static constexpr std::uint8_t ElementMaxExponent = 8;
+
+    static std::uint16_t ExpandSplit(const std::uint16_t& expand)
+    {
+        return expand;
+    }
+
+    static std::uint16_t ExpandNegationValue(const std::uint16_t& expand,
+        const std::size_t& at)
+    {
+        return at == 0 ? (0x00ff & (~expand)) + 1 : 0x00ff & ~expand;
+    }
+
+    static std::uint8_t ExpandElementValue(const std::uint16_t& expand_split)
+    {
+        return (expand_split & 0x00FF);
+    }
+
+    static std::uint8_t ExpandCarryValue(const std::uint16_t& expand_split)
+    {
+        return (expand_split >> 8);
+    }
+    
+    static std::uint8_t LogElementValue(const std::uint8_t& v)
+    {
+        if (v & 0x80) return 7;
+        else if (v & 0x40) return 6;
+        else if (v & 0x20) return 5;
+        else if (v & 0x10) return 4;
+        else if (v & 0x8) return 3;
+        else if (v & 0x4) return 2;
+        else if (v & 0x2) return 1;
+        return 0;
+    }
+    
+
+};
+
+template<typename TElement, typename TExpand, typename TSize>
+struct Dec
+{
+    typedef TElement ElementType;
+    typedef TExpand ExpandType;
+    typedef TSize SizeType;
+
+    static TExpand ExpandSplit(const TExpand& expand);
+    
+    static TExpand ExpandNegationValue(const TExpand& expand,
+        const TSize& i);
+
+    static TElement ExpandElementValue(const TExpand& expand_split);
+
+    static TElement ExpandCarryValue(const TExpand& expand_split);
+
+    static TElement LogElementValue(const TElement& v);
+};
+
+template<>
+struct Dec<std::uint8_t, std::uint16_t, std::size_t>
+{
+    typedef std::uint8_t ElementType;
+    typedef std::uint16_t ExpandType;
+    typedef std::size_t SizeType;
+
+    static constexpr std::uint8_t ElementMaxExponent = 1;
+
+    static std::uint16_t ExpandSplit(const std::uint16_t& expand)
+    {
+        std::uint16_t carry = expand / 10;
+        return expand < 10 ? expand : (carry << 8) | (expand - (carry * 10));
+    }
+    
+    static std::uint16_t ExpandNegationValue(const std::uint16_t& expand,
+        const std::size_t& at)
+    {
+        return at == 0 ? (9 - expand) + 1 : (9 - expand);
+    }
+
+    static std::uint8_t ExpandElementValue(const std::uint16_t& expand_split)
+    {
+        return (expand_split & 0x00FF);
+    }
+
+    static std::uint8_t ExpandCarryValue(const std::uint16_t& expand_split)
+    {
+        return (expand_split >> 8);
+    }
+    
+    static std::uint8_t LogElementValue(const std::uint8_t& v)
+    {
+        return 0;
+    }
+
+};
+
+template<std::size_t N, template<typename, typename, typename>class TTag>
+struct Format : public TTag<std::uint8_t, std::uint16_t, std::size_t>
+{
+    static constexpr std::size_t Size = N;
+    std::uint8_t m_value[N];
+    static std::uint8_t GetElement(const Format<N, TTag>& val,
+        const std::size_t& at)
+    {
+        return val.m_value[at];
+    }
+
+    static std::uint8_t SetElement(Format<N, TTag>& val,
+        const std::size_t& at, const std::uint8_t& set_val)
+    {
+        return (val.m_value[at] = set_val);
+    }
+
+    Format() :
+        m_value{0}
     {}
     template<typename TArg, typename ... TArgs,
         typename _TArg = typename std::remove_cv<typename std::remove_pointer<
             typename std::remove_reference<TArg>::type>::type>::type,
-        typename std::enable_if<!std::is_base_of<Format1<N>, _TArg>::value, 
+        typename std::enable_if<!std::is_base_of<Format<N, TTag>, _TArg>::value, 
             int>::type = 1>
-    constexpr Format1(const TArg& arg, const TArgs& ... args) :
-            Value{static_cast<std::uint8_t>(arg), 
+    constexpr Format(const TArg& arg, const TArgs& ... args) :
+            m_value{static_cast<std::uint8_t>(arg), 
                 static_cast<std::uint8_t>(args)...}
     {}
+
 };
-
-template<std::size_t N>
-static std::uint8_t SetValueF1(Format1<N>& val, const std::size_t& index,
-    const std::uint8_t& setval)
-{
-    return (val.Value[index] = setval);
-}
-
-template<std::size_t N>
-static std::uint16_t GetValueF1(const Format1<N>& val, 
-    const std::size_t& index)
-{
-    return static_cast<std::uint16_t>(val.Value[index]);
-}
-
-static std::uint16_t NegationValueF1Base2(const std::uint16_t& sum,
-    const std::size_t& i)
-{
-    return i == 0 ? (0x00ff & (~sum)) + 1 : 0x00ff & ~sum;
-}
-
-static std::uint16_t SplitValueF1Base2(const std::uint16_t& diff)
-{
-    return diff;
-}
-
-static std::uint8_t ElementValueF1Base2(const std::uint16_t& diff)
-{
-    return (diff & 0x00FF);
-}
-
-static std::uint8_t CarryValueF1Base2(const std::uint16_t& diff)
-{
-    return (diff >> 8);
-}
-
-static std::uint16_t NegationValueF1Base10(const std::uint16_t& sum,
-    const std::size_t& i)
-{
-    return i == 0 ? (9 - sum) + 1 : (9 - sum);
-}
-
-static std::uint16_t SplitValueF1Base10(const std::uint16_t& diff)
-{
-    std::uint16_t carry = diff / 10;
-    return diff < 10 ? diff : (carry << 8) | (diff - (carry * 10));
-}
-
-static std::uint8_t ElementValueF1Base10(const std::uint16_t& diff)
-{
-    return diff & 0x00FF;
-}
-
-static std::uint8_t CarryValueF1Base10(const std::uint16_t& diff)
-{
-    return diff >> 8;
-}
 
 int main()
 {
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{0, 0};
-        Format1<N> f2{0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
+        Format<N, Bin> f1{0, 0};
+        Format<N, Bin> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{1, 0};
-        Format1<N> f2{0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2);
-        assert(f1.Value[0] == 1);
-        assert(f1.Value[1] == 0);
+        Format<N, Bin> f1{1, 0};
+        Format<N, Bin> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 1);
+        assert(f1.m_value[1] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{0, 0};
-        Format1<N> f2{1, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>,
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2);
-        assert(f1.Value[0] == 255);
-        assert(f1.Value[1] == 255);
+        Format<N, Bin> f1{0, 0};
+        Format<N, Bin> f2{1, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 255);
+        assert(f1.m_value[1] == 255);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{0, 1};
-        Format1<N> f2{1, 1};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2);
-        assert(f1.Value[0] == 255);
-        assert(f1.Value[1] == 255);
+        Format<N, Bin> f1{0, 1};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 255);
+        assert(f1.m_value[1] == 255);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{0, 0};
-        Format1<N> f2{0, 1};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 255);
+        Format<N, Bin> f1{0, 0};
+        Format<N, Bin> f2{0, 1};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 255);
         assert(c1 == 0);
     }
     ////
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 0, 0};
-        Format1<N> f2{0, 0, 0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 0);
+        Format<N, Bin> f1{0, 0, 0, 0};
+        Format<N, Bin> f2{0, 0, 0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 1, 0};
-        Format1<N> f2{0, 0, 0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 1);
-        assert(f1.Value[3] == 0);
+        Format<N, Bin> f1{0, 0, 1, 0};
+        Format<N, Bin> f2{0, 0, 0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 1);
+        assert(f1.m_value[3] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 0, 0};
-        Format1<N> f2{0, 0, 1, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 255);
-        assert(f1.Value[3] == 255);
+        Format<N, Bin> f1{0, 0, 0, 0};
+        Format<N, Bin> f2{0, 0, 1, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 255);
+        assert(f1.m_value[3] == 255);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 0, 1};
-        Format1<N> f2{0, 0, 0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>,
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 1);
+        Format<N, Bin> f1{0, 0, 0, 1};
+        Format<N, Bin> f2{0, 0, 0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 1);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 0, 0};
-        Format1<N> f2{0, 0, 0, 1};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>,
-            NegationValueF1Base2, SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 255);
+        Format<N, Bin> f1{0, 0, 0, 0};
+        Format<N, Bin> f2{0, 0, 0, 1};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 255);
         assert(c1 == 0);
     }
     ////
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 0, 0, 0, 0};
+        Format<N, Bin> f1{0, 0, 0, 0, 0, 0};
         std::uint16_t f2 = 0x0000;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base2,
-            SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 0);
-        assert(f1.Value[4] == 0);
-        assert(f1.Value[5] == 0);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 0);
+        assert(f1.m_value[4] == 0);
+        assert(f1.m_value[5] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 1, 0, 0, 0};
+        Format<N, Bin> f1{0, 0, 1, 0, 0, 0};
         std::uint16_t f2 = 0x0000;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base2, 
-            SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 1);
-        assert(f1.Value[3] == 0);
-        assert(f1.Value[4] == 0);
-        assert(f1.Value[5] == 0);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 1);
+        assert(f1.m_value[3] == 0);
+        assert(f1.m_value[4] == 0);
+        assert(f1.m_value[5] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 0, 0, 0, 0};
+        Format<N, Bin> f1{0, 0, 0, 0, 0, 0};
         std::uint16_t f2 = 0x0001;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base2, 
-            SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 255);
-        assert(f1.Value[3] == 255);
-        assert(f1.Value[4] == 255);
-        assert(f1.Value[5] == 255);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 255);
+        assert(f1.m_value[3] == 255);
+        assert(f1.m_value[4] == 255);
+        assert(f1.m_value[5] == 255);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 0, 0, 0, 0};
+        Format<N, Bin> f1{0, 0, 0, 0, 0, 0};
         std::uint16_t f2 = 0xFF00;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base2, 
-            SplitValueF1Base2, ElementValueF1Base2, 
-            CarryValueF1Base2>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 1);
-        assert(f1.Value[4] == 255);
-        assert(f1.Value[5] == 255);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 1);
+        assert(f1.m_value[4] == 255);
+        assert(f1.m_value[5] == 255);
         assert(c1 == 0);
     }
     ////
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{0, 0};
-        Format1<N> f2{0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>,
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
+        Format<N, Dec> f1{0, 0};
+        Format<N, Dec> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{1, 0};
-        Format1<N> f2{0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>,
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2);
-        assert(f1.Value[0] == 1);
-        assert(f1.Value[1] == 0);
+        Format<N, Dec> f1{1, 0};
+        Format<N, Dec> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 1);
+        assert(f1.m_value[1] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{0, 0};
-        Format1<N> f2{1, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2);
-        assert(f1.Value[0] == 9);
-        assert(f1.Value[1] == 9);
+        Format<N, Dec> f1{0, 0};
+        Format<N, Dec> f2{1, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 9);
+        assert(f1.m_value[1] == 9);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{0, 1};
-        Format1<N> f2{0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 1);
+        Format<N, Dec> f1{0, 1};
+        Format<N, Dec> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 1);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-        Format1<N> f1{0, 0};
-        Format1<N> f2{0, 1};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 9);
+        Format<N, Dec> f1{0, 0};
+        Format<N, Dec> f2{0, 1};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 9);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 2;
-            Format1<N> f1{0, 1};
-            Format1<N> f2{1, 1};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2);
-        assert(f1.Value[0] == 9);
-        assert(f1.Value[1] == 9);
+        Format<N, Dec> f1{0, 1};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2);
+        assert(f1.m_value[0] == 9);
+        assert(f1.m_value[1] == 9);
         assert(c1 == 0);
     }
     ////
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 0, 0};
-        Format1<N> f2{0, 0, 0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 0);
+        Format<N, Dec> f1{0, 0, 0, 0};
+        Format<N, Dec> f2{0, 0, 0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 1, 0};
-        Format1<N> f2{0, 0, 0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 1);
-        assert(f1.Value[3] == 0);
+        Format<N, Dec> f1{0, 0, 1, 0};
+        Format<N, Dec> f2{0, 0, 0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 1);
+        assert(f1.m_value[3] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 0, 0};
-        Format1<N> f2{0, 0, 1, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 9);
-        assert(f1.Value[3] == 9);
+        Format<N, Dec> f1{0, 0, 0, 0};
+        Format<N, Dec> f2{0, 0, 1, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 9);
+        assert(f1.m_value[3] == 9);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 0, 1};
-        Format1<N> f2{0, 0, 0, 0};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 1);
+        Format<N, Dec> f1{0, 0, 0, 1};
+        Format<N, Dec> f2{0, 0, 0, 0};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 1);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 0, 0};
-        Format1<N> f2{0, 0, 0, 1};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 9);
+        Format<N, Dec> f1{0, 0, 0, 0};
+        Format<N, Dec> f2{0, 0, 0, 1};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 9);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 4;
-        Format1<N> f1{0, 0, 0, 1};
-        Format1<N> f2{0, 0, 1, 1};
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, Format1<N>, std::uint16_t, std::size_t, N, N,
-            SetValueF1<N>, SetValueF1<N>, GetValueF1<N>, GetValueF1<N>, 
-            NegationValueF1Base10, SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 9);
-        assert(f1.Value[3] == 9);
+        Format<N, Dec> f1{0, 0, 0, 1};
+        Format<N, Dec> f2{0, 0, 1, 1};
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 9);
+        assert(f1.m_value[3] == 9);
         assert(c1 == 0);
     }
     ////
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 0, 0, 0, 0};
+        Format<N, Dec> f1{0, 0, 0, 0, 0, 0};
         std::uint16_t f2 = 0x0000;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base10,
-            SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 0);
-        assert(f1.Value[4] == 0);
-        assert(f1.Value[5] == 0);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 0);
+        assert(f1.m_value[4] == 0);
+        assert(f1.m_value[5] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 1, 0, 0, 0};
+        Format<N, Dec> f1{0, 0, 1, 0, 0, 0};
         std::uint16_t f2 = 0x0000;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base10,
-            SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 1);
-        assert(f1.Value[3] == 0);
-        assert(f1.Value[4] == 0);
-        assert(f1.Value[5] == 0);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 1);
+        assert(f1.m_value[3] == 0);
+        assert(f1.m_value[4] == 0);
+        assert(f1.m_value[5] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 0, 0, 0, 0};
+        Format<N, Dec> f1{0, 0, 0, 0, 0, 0};
         std::uint16_t f2 = 0x0001;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base10,
-            SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 9);
-        assert(f1.Value[3] == 9);
-        assert(f1.Value[4] == 9);
-        assert(f1.Value[5] == 9);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 9);
+        assert(f1.m_value[3] == 9);
+        assert(f1.m_value[4] == 9);
+        assert(f1.m_value[5] == 9);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 0, 1, 0, 0};
+        Format<N, Dec> f1{0, 0, 0, 1, 0, 0};
         std::uint16_t f2 = 0x0000;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base10,
-            SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 1);
-        assert(f1.Value[4] == 0);
-        assert(f1.Value[5] == 0);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 1);
+        assert(f1.m_value[4] == 0);
+        assert(f1.m_value[5] == 0);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 0, 0, 0, 0};
+        Format<N, Dec> f1{0, 0, 0, 0, 0, 0};
         std::uint16_t f2 = 0x000A;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base10,
-            SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 9);
-        assert(f1.Value[4] == 9);
-        assert(f1.Value[5] == 9);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 9);
+        assert(f1.m_value[4] == 9);
+        assert(f1.m_value[5] == 9);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N = 6;
-        Format1<N> f1{0, 0, 1, 0, 0, 0};
+        Format<N, Dec> f1{0, 0, 1, 0, 0, 0};
         std::uint16_t f2 = 0x000B;
-        std::uint8_t c1 = test::math::integer::Subtraction<std::uint8_t,
-            Format1<N>, std::uint16_t, std::size_t, N,
-            SetValueF1<N>, GetValueF1<N>, NegationValueF1Base10,
-            SplitValueF1Base10, ElementValueF1Base10, 
-            CarryValueF1Base10>(f1, f2, 0, 2);
-        assert(f1.Value[0] == 0);
-        assert(f1.Value[1] == 0);
-        assert(f1.Value[2] == 0);
-        assert(f1.Value[3] == 9);
-        assert(f1.Value[4] == 9);
-        assert(f1.Value[5] == 9);
+        std::uint8_t c1 = test::math::integer::Subtraction(f1, f2, 0, 2);
+        assert(f1.m_value[0] == 0);
+        assert(f1.m_value[1] == 0);
+        assert(f1.m_value[2] == 0);
+        assert(f1.m_value[3] == 9);
+        assert(f1.m_value[4] == 9);
+        assert(f1.m_value[5] == 9);
         assert(c1 == 0);
     }
 

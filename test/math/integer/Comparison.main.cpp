@@ -4,44 +4,158 @@
 #include <cassert>
 #include <type_traits>
 
-template<std::size_t N>
-struct Format1
+template<typename TElement, typename TExpand, typename TSize>
+struct Bin
 {
-    std::uint8_t Value[N];
-    constexpr Format1() :
-        Value{0}
-    {}
-    template<typename TArg, typename ... TArgs,
-        typename _TArg = typename std::remove_cv<typename std::remove_pointer<
-            typename std::remove_reference<TArg>::type>::type>::type,
-        typename std::enable_if<!std::is_base_of<Format1<N>, _TArg>::value ||
-            !std::is_same<Format1<N>, _TArg>::value, int>::type = 1>
-    constexpr Format1(const TArg& arg, const TArgs& ... args) :
-            Value{static_cast<std::uint8_t>(arg), 
-                static_cast<std::uint8_t>(args)...}
-    {}
-    template<typename TArg, typename ... TArgs,
-        typename _TArg = typename std::remove_cv<typename std::remove_pointer<
-            typename std::remove_reference<TArg>::type>::type>::type,
-        typename std::enable_if<std::is_base_of<Format1<N>, _TArg>::value ||
-            std::is_same<Format1<N>, _TArg>::value, int>::type = 1>
-    Format1(const TArg& arg) :
-            Value{0}
-    {
-        const Format1<N>& cpy = static_cast<const Format1<N>&>(arg);
-        for (std::size_t i = 0; i < N; ++i)
-        {
-            Value[i] = cpy.Value[i];
-        }
-    }
+    typedef TElement ElementType;
+    typedef TExpand ExpandType;
+    typedef TSize SizeType;
+
+    static TExpand ExpandSplit(const TExpand& expand);
+
+    static TExpand ExpandNegationValue(const TExpand& expand,
+        const TSize& i);
+
+    static TElement ExpandElementValue(const TExpand& expand_split);
+
+    static TElement ExpandCarryValue(const TExpand& expand_split);
+
+    static TElement LogElementValue(const TElement& v);
 };
 
-template<std::size_t N>
-static std::uint16_t GetValueF1(const Format1<N>& val, 
-    const std::size_t& index)
+template<>
+struct Bin<std::uint8_t, std::uint16_t, std::size_t>
 {
-    return static_cast<std::uint16_t>(val.Value[index]);
-}
+    typedef std::uint8_t ElementType;
+    typedef std::uint16_t ExpandType;
+    typedef std::size_t SizeType;
+
+    static constexpr std::uint8_t ElementMaxExponent = 8;
+
+    static std::uint16_t ExpandSplit(const std::uint16_t& expand)
+    {
+        return expand;
+    }
+
+    static std::uint16_t ExpandNegationValue(const std::uint16_t& expand,
+        const std::size_t& at)
+    {
+        return at == 0 ? (0x00ff & (~expand)) + 1 : 0x00ff & ~expand;
+    }
+
+    static std::uint8_t ExpandElementValue(const std::uint16_t& expand_split)
+    {
+        return (expand_split & 0x00FF);
+    }
+
+    static std::uint8_t ExpandCarryValue(const std::uint16_t& expand_split)
+    {
+        return (expand_split >> 8);
+    }
+    
+    static std::uint8_t LogElementValue(const std::uint8_t& v)
+    {
+        if (v & 0x80) return 7;
+        else if (v & 0x40) return 6;
+        else if (v & 0x20) return 5;
+        else if (v & 0x10) return 4;
+        else if (v & 0x8) return 3;
+        else if (v & 0x4) return 2;
+        else if (v & 0x2) return 1;
+        return 0;
+    }
+    
+
+};
+
+template<typename TElement, typename TExpand, typename TSize>
+struct Dec
+{
+    typedef TElement ElementType;
+    typedef TExpand ExpandType;
+    typedef TSize SizeType;
+
+    static TExpand ExpandSplit(const TExpand& expand);
+    
+    static TExpand ExpandNegationValue(const TExpand& expand,
+        const TSize& i);
+
+    static TElement ExpandElementValue(const TExpand& expand_split);
+
+    static TElement ExpandCarryValue(const TExpand& expand_split);
+
+    static TElement LogElementValue(const TElement& v);
+};
+
+template<>
+struct Dec<std::uint8_t, std::uint16_t, std::size_t>
+{
+    typedef std::uint8_t ElementType;
+    typedef std::uint16_t ExpandType;
+    typedef std::size_t SizeType;
+
+    static constexpr std::uint8_t ElementMaxExponent = 1;
+
+    static std::uint16_t ExpandSplit(const std::uint16_t& expand)
+    {
+        std::uint16_t carry = expand / 10;
+        return expand < 10 ? expand : (carry << 8) | (expand - (carry * 10));
+    }
+    
+    static std::uint16_t ExpandNegationValue(const std::uint16_t& expand,
+        const std::size_t& at)
+    {
+        return at == 0 ? (9 - expand) + 1 : (9 - expand);
+    }
+
+    static std::uint8_t ExpandElementValue(const std::uint16_t& expand_split)
+    {
+        return (expand_split & 0x00FF);
+    }
+
+    static std::uint8_t ExpandCarryValue(const std::uint16_t& expand_split)
+    {
+        return (expand_split >> 8);
+    }
+    
+    static std::uint8_t LogElementValue(const std::uint8_t& v)
+    {
+        return 0;
+    }
+
+};
+
+template<std::size_t N, template<typename, typename, typename>class TTag>
+struct Format : public TTag<std::uint8_t, std::uint16_t, std::size_t>
+{
+    static constexpr std::size_t Size = N;
+    std::uint8_t m_value[N];
+    static std::uint8_t GetElement(const Format<N, TTag>& val,
+        const std::size_t& at)
+    {
+        return val.m_value[at];
+    }
+
+    static std::uint8_t SetElement(Format<N, TTag>& val,
+        const std::size_t& at, const std::uint8_t& set_val)
+    {
+        return (val.m_value[at] = set_val);
+    }
+
+    Format() :
+        m_value{0}
+    {}
+    template<typename TArg, typename ... TArgs,
+        typename _TArg = typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type,
+        typename std::enable_if<!std::is_base_of<Format<N, TTag>, _TArg>::value, 
+            int>::type = 1>
+    constexpr Format(const TArg& arg, const TArgs& ... args) :
+            m_value{static_cast<std::uint8_t>(arg), 
+                static_cast<std::uint8_t>(args)...}
+    {}
+
+};
 
 int main()
 {
@@ -49,539 +163,441 @@ int main()
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{0};
-        Format1<N2> f2{0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0};
+        Format<N2, Bin> f2{0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0, 0};
-        Format1<N2> f2{0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0};
+        Format<N2, Bin> f2{0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 0, 0};
-        Format1<N2> f2{0, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 0};
+        Format<N2, Bin> f2{0, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0};
-        Format1<N2> f2{0, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0};
+        Format<N2, Bin> f2{0, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{0, 0, 0};
-        Format1<N2> f2{0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 0};
+        Format<N2, Bin> f2{0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{1};
-        Format1<N2> f2{0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1};
+        Format<N2, Bin> f2{0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{1, 0};
-        Format1<N2> f2{0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 0};
+        Format<N2, Bin> f2{0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0, 1};
-        Format1<N2> f2{0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 1};
+        Format<N2, Bin> f2{0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{1, 1};
-        Format1<N2> f2{0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 1};
+        Format<N2, Bin> f2{0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{1, 0, 0};
-        Format1<N2> f2{0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 0, 0};
+        Format<N2, Bin> f2{0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{0, 1, 0};
-        Format1<N2> f2{0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 1, 0};
+        Format<N2, Bin> f2{0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{0, 0, 1};
-        Format1<N2> f2{0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 1};
+        Format<N2, Bin> f2{0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{1, 0, 0};
-        Format1<N2> f2{0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 0, 0};
+        Format<N2, Bin> f2{0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0, 1, 0};
-        Format1<N2> f2{0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 1, 0};
+        Format<N2, Bin> f2{0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0, 0, 1};
-        Format1<N2> f2{0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 1};
+        Format<N2, Bin> f2{0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{1, 0, 0};
-        Format1<N2> f2{0, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 0, 0};
+        Format<N2, Bin> f2{0, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 1, 0};
-        Format1<N2> f2{0, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 1, 0};
+        Format<N2, Bin> f2{0, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 0, 1};
-        Format1<N2> f2{0, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 1};
+        Format<N2, Bin> f2{0, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{1};
-        Format1<N2> f2{0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1};
+        Format<N2, Bin> f2{0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{1};
-        Format1<N2> f2{0, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1};
+        Format<N2, Bin> f2{0, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{1, 0};
-        Format1<N2> f2{0, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 0};
+        Format<N2, Bin> f2{0, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 1};
-        Format1<N2> f2{0, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 1};
+        Format<N2, Bin> f2{0, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{1, 1};
-        Format1<N2> f2{0, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 1};
+        Format<N2, Bin> f2{0, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{0};
-        Format1<N2> f2{1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0};
+        Format<N2, Bin> f2{1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{0, 0};
-        Format1<N2> f2{1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0};
+        Format<N2, Bin> f2{1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{0, 0, 0};
-        Format1<N2> f2{1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 0};
+        Format<N2, Bin> f2{1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0};
-        Format1<N2> f2{1, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0};
+        Format<N2, Bin> f2{1, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0};
-        Format1<N2> f2{0, 1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0};
+        Format<N2, Bin> f2{0, 1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0};
-        Format1<N2> f2{1, 1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0};
+        Format<N2, Bin> f2{1, 1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0, 0};
-        Format1<N2> f2{1, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0};
+        Format<N2, Bin> f2{1, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0, 0};
-        Format1<N2> f2{0, 1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0};
+        Format<N2, Bin> f2{0, 1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0, 0};
-        Format1<N2> f2{0, 1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0};
+        Format<N2, Bin> f2{0, 1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0, 0};
-        Format1<N2> f2{1, 1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0};
+        Format<N2, Bin> f2{1, 1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 0};
-        Format1<N2> f2{1, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0};
+        Format<N2, Bin> f2{1, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 0};
-        Format1<N2> f2{0, 1, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0};
+        Format<N2, Bin> f2{0, 1, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 0};
-        Format1<N2> f2{0, 0, 1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0};
+        Format<N2, Bin> f2{0, 0, 1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 0, 0};
-        Format1<N2> f2{1, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 0};
+        Format<N2, Bin> f2{1, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 0, 0};
-        Format1<N2> f2{0, 1, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 0};
+        Format<N2, Bin> f2{0, 1, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 0, 0};
-        Format1<N2> f2{0, 0, 1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 0};
+        Format<N2, Bin> f2{0, 0, 1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == -1);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{1};
-        Format1<N2> f2{1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1};
+        Format<N2, Bin> f2{1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 1;
-        Format1<N1> f1{1, 0};
-        Format1<N2> f2{1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 0};
+        Format<N2, Bin> f2{1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 1;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{1};
-        Format1<N2> f2{1, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1};
+        Format<N2, Bin> f2{1, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{1, 0};
-        Format1<N2> f2{1, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 0};
+        Format<N2, Bin> f2{1, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 2;
-        Format1<N1> f1{0, 1};
-        Format1<N2> f2{0, 1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 1};
+        Format<N2, Bin> f2{0, 1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{1, 0};
-        Format1<N2> f2{1, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 0};
+        Format<N2, Bin> f2{1, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 2;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 1};
-        Format1<N2> f2{0, 1, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 1};
+        Format<N2, Bin> f2{0, 1, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{1, 0, 0};
-        Format1<N2> f2{1, 0, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{1, 0, 0};
+        Format<N2, Bin> f2{1, 0, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 1, 0};
-        Format1<N2> f2{0, 1, 0};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 1, 0};
+        Format<N2, Bin> f2{0, 1, 0};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         constexpr SizeType N1 = 3;
         constexpr SizeType N2 = 3;
-        Format1<N1> f1{0, 0, 1};
-        Format1<N2> f2{0, 0, 1};
-        int c1 = test::math::integer::Comparison<std::uint8_t,
-            Format1<N1>, Format1<N2>, std::uint16_t, std::size_t, N1, N2,
-            GetValueF1<N1>, GetValueF1<N2>>(f1, f2);
+        Format<N1, Bin> f1{0, 0, 1};
+        Format<N2, Bin> f2{0, 0, 1};
+        int c1 = test::math::integer::Comparison(f1, f2);
         assert(c1 == 0);
     }
     return 0;
