@@ -116,7 +116,8 @@ template<typename TValue,
         Trait<TValue>::SizeType,
     typename = typename std::enable_if<std::is_same<TExpand, 
         typename test::math::integer::fmt::
-        Trait<TValue>::ExpandType>::value, void>::type>
+            Trait<TValue>::ExpandType>::value &&
+        test::math::integer::fmt::Trait<TValue>::Has, void>::type>
 static void Multiplication(TValue& a, 
     const  typename test::math::integer::fmt::
         Trait<TValue>::ExpandType& b)
@@ -161,7 +162,8 @@ template<typename TValue,
         Trait<TValue>::SizeType,
     typename = typename std::enable_if<std::is_same<TExpand, 
         typename test::math::integer::fmt::
-        Trait<TValue>::ExpandType>::value, void>::type>
+            Trait<TValue>::ExpandType>::value &&
+        test::math::integer::fmt::Trait<TValue>::Has, void>::type>
 static void Multiplication(TValue& a, 
     const  typename test::math::integer::fmt::
         Trait<TValue>::ExpandType& b,

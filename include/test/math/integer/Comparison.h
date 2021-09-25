@@ -23,7 +23,9 @@ template<typename TAValue, typename TBValue,
     TSize NA = test::math::integer::fmt::
         Trait<TAValue, TBValue>::Size,
     TSize NB = test::math::integer::fmt::
-        Trait<TBValue, TAValue>::Size>
+        Trait<TBValue, TAValue>::Size,
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TAValue, TBValue>::Has, void>::type>
 static int Comparison(const TAValue& a, const TBValue& b, 
     const typename test::math::integer::fmt::
         Trait<TAValue, TBValue>::SizeType& r_bg_a = NA, 

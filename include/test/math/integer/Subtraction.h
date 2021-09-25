@@ -92,7 +92,8 @@ template<typename TValue,
         Trait<TValue>::SizeType,
     typename = typename std::enable_if<std::is_same<TExpand, 
         typename test::math::integer::fmt::
-        Trait<TValue>::ExpandType>::value, void>::type,
+            Trait<TValue>::ExpandType>::value &&
+        test::math::integer::fmt::Trait<TValue>::Has, void>::type,
     TSize N = test::math::integer::fmt::
         Trait<TValue>::Size>
 static TElement Subtraction(TValue& a, 

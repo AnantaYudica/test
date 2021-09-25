@@ -29,7 +29,9 @@ template<std::size_t NElementMaxExponent = -1, typename TValue,
     typename TExpand = typename test::math::integer::fmt::
         Trait<TValue>::ExpandType,
     typename TSize = typename test::math::integer::fmt::
-        Trait<TValue>::SizeType>
+        Trait<TValue>::SizeType,
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TValue>::Has, void>::type>
 static test::math::integer::log::Flag Logarithm(const TValue& v, 
     typename test::math::integer::fmt::
         Trait<TValue>::SizeType& value_out, 
