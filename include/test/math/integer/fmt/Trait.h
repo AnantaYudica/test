@@ -111,6 +111,26 @@ static constexpr std::false_type
     _HasLogElementValueStaticMemberFunction(...);
   
 template<typename T1, typename T2 = T1>
+static constexpr auto _HasShiftRightElementValueStaticMemberFunction(int) ->
+    decltype(std::declval<decltype(&T1::ShiftRightElementValue)>(),
+        std::declval<decltype(&T2::ShiftRightElementValue)>(),
+        std::true_type());
+
+template<typename T1, typename T2 = T1>
+static constexpr std::false_type 
+    _HasShiftRightElementValueStaticMemberFunction(...);
+
+template<typename T1, typename T2 = T1>
+static constexpr auto _HasShiftLeftElementValueStaticMemberFunction(int) ->
+    decltype(std::declval<decltype(&T1::ShiftLeftElementValue)>(),
+        std::declval<decltype(&T2::ShiftLeftElementValue)>(),
+        std::true_type());
+
+template<typename T1, typename T2 = T1>
+static constexpr std::false_type 
+    _HasShiftLeftElementValueStaticMemberFunction(...);
+
+template<typename T1, typename T2 = T1>
 static constexpr auto _HasGetElementStaticMemberFunction(int) ->
     decltype(std::declval<decltype(&T1::GetElement)>(),
         std::declval<decltype(&T2::GetElement)>(),
@@ -152,6 +172,11 @@ static constexpr auto _Has(int) ->
             _HasExpandCarryValueStaticMemberFunction<T1, T2>(0))::value &&
         decltype(test::_helper::_math::_integer::_fmt::
             _HasLogElementValueStaticMemberFunction<T1, T2>(0))::value &&
+        decltype(test::_helper::_math::_integer::_fmt::
+            _HasShiftRightElementValueStaticMemberFunction<T1, T2>(0))::
+                value &&
+        decltype(test::_helper::_math::_integer::_fmt::
+            _HasShiftLeftElementValueStaticMemberFunction<T1, T2>(0))::value &&
         decltype(test::_helper::_math::_integer::_fmt::
             _HasGetElementStaticMemberFunction<T1, T2>(0))::value &&
         decltype(test::_helper::_math::_integer::_fmt::
@@ -251,6 +276,28 @@ static constexpr auto _IsSameLogElementValueStaticMemberFunction(int) ->
 template<typename T1, typename T2>
 static constexpr std::false_type 
     _IsSameLogElementValueStaticMemberFunction(...);
+    
+template<typename T1, typename T2>
+static constexpr auto _IsSameShiftRightElementValueStaticMemberFunction(int) ->
+    decltype(std::declval<typename std::enable_if<
+        T1::ShiftRightElementValue == T2::ShiftRightElementValue, 
+            int>::type>(), 
+        std::true_type());
+
+template<typename T1, typename T2>
+static constexpr std::false_type 
+    _IsSameShiftRightElementValueStaticMemberFunction(...);
+
+template<typename T1, typename T2>
+static constexpr auto _IsSameShiftLeftElementValueStaticMemberFunction(int) ->
+    decltype(std::declval<typename std::enable_if<
+        T1::ShiftLeftElementValue == T2::ShiftLeftElementValue, 
+            int>::type>(), 
+        std::true_type());
+
+template<typename T1, typename T2>
+static constexpr std::false_type 
+    _IsSameShiftLeftElementValueStaticMemberFunction(...);
 
     
 template<typename T1, typename T2>
@@ -274,8 +321,14 @@ static constexpr auto _IsSame(int) ->
         decltype(test::_helper::_math::_integer::_fmt::
             _IsSameExpandCarryValueStaticMemberFunction<T1, T2>(0))::value &&
         decltype(test::_helper::_math::_integer::_fmt::
-            _IsSameLogElementValueStaticMemberFunction<T1, T2>(0))::value, 
-                int>::type>(), 
+            _IsSameLogElementValueStaticMemberFunction<T1, T2>(0))::value &&
+        decltype(test::_helper::_math::_integer::_fmt::
+            _IsSameShiftRightElementValueStaticMemberFunction<T1, 
+                T2>(0))::value &&
+        decltype(test::_helper::_math::_integer::_fmt::
+            _IsSameShiftLeftElementValueStaticMemberFunction<T1, 
+                T2>(0))::value, 
+            int>::type>(), 
         std::true_type());
 
 template<typename T1, typename T2>
@@ -353,6 +406,16 @@ struct Trait
         test::_helper::_math::_integer::_fmt::
             _HasLogElementValueStaticMemberFunction<TFormat, 
                 TFormatO>(0))::value;
+        
+    static constexpr bool HasShiftRightElementValueFunction = decltype(
+        test::_helper::_math::_integer::_fmt::
+            _HasShiftRightElementValueStaticMemberFunction<TFormat, 
+                TFormatO>(0))::value;
+    
+    static constexpr bool HasShiftLeftElementValueFunction =  decltype(
+        test::_helper::_math::_integer::_fmt::
+            _HasShiftLeftElementValueStaticMemberFunction<TFormat, 
+                TFormatO>(0))::value;
 
     static constexpr bool HasGetElementFunction = decltype(
         test::_helper::_math::_integer::_fmt::
@@ -410,6 +473,16 @@ struct Trait
             _IsSameLogElementValueStaticMemberFunction<TFormat, 
                 TFormatO>(0))::value;
 
+    static constexpr bool IsSameShiftRightElementValueFunction = decltype(
+        test::_helper::_math::_integer::_fmt::
+            _IsSameShiftRightElementValueStaticMemberFunction<TFormat, 
+                TFormatO>(0))::value;
+
+    static constexpr bool IsSameShiftLeftElementValueFunction = decltype(
+        test::_helper::_math::_integer::_fmt::
+            _IsSameShiftLeftElementValueStaticMemberFunction<TFormat, 
+                TFormatO>(0))::value;
+
     static constexpr int Size = 0;
 
     static constexpr int ElementMaxExponent = 0;
@@ -419,6 +492,8 @@ struct Trait
     static int ExpandElementValue(...);
     static int ExpandCarryValue(...);
     static int LogElementValue(...);
+    static int ShiftRightElementValue(...);
+    static int ShiftLeftElementValue(...);
     static int GetElement(...);
     static int SetElement(...);
     
@@ -456,6 +531,10 @@ struct Trait<TFormat, TFormatO, typename std::enable_if<
     static constexpr bool HasExpandCarryValueFunction = true;
 
     static constexpr bool HasLogElementValueFunction = true;
+
+    static constexpr bool HasShiftRightElementValueFunction = true;
+
+    static constexpr bool HasShiftLeftElementValueFunction = true;
     
     static constexpr bool HasGetElementFunction = true;
 
@@ -481,6 +560,10 @@ struct Trait<TFormat, TFormatO, typename std::enable_if<
 
     static constexpr bool IsSameLogElementValueFunction = true;
 
+    static constexpr bool IsSameShiftRightElementValueFunction = true;
+
+    static constexpr bool IsSameShiftLeftElementValueFunction = true;
+
     static constexpr SizeType Size = TFormat::Size;
 
     static constexpr ElementType ElementMaxExponent = TFormat::ElementMaxExponent;
@@ -496,6 +579,10 @@ struct Trait<TFormat, TFormatO, typename std::enable_if<
         ExpandCarryValue(const ExpandType& expand_split);
     static typename TFormat::ElementType 
         LogElementValue(const ElementType& element);
+    static typename TFormat::ElementType
+        ShiftRightElementValue(const ElementType& element, const SizeType& n);
+    static typename TFormat::ElementType
+        ShiftLeftElementValue(const ElementType& element, const SizeType& n);
     static typename TFormat::ElementType GetElement(const TFormat& format,
         const SizeType& at);
     static typename TFormat::ElementType SetElement(TFormat& format,
@@ -528,6 +615,18 @@ int Trait<TFormat, TFormatO, TVoid>::ExpandCarryValue(...)
 
 template<typename TFormat, typename TFormatO, typename TVoid>
 int Trait<TFormat, TFormatO, TVoid>::LogElementValue(...)
+{
+    return 0;
+}
+
+template<typename TFormat, typename TFormatO, typename TVoid>
+int Trait<TFormat, TFormatO, TVoid>::ShiftRightElementValue(...)
+{
+    return 0;
+}
+
+template<typename TFormat, typename TFormatO, typename TVoid>
+int Trait<TFormat, TFormatO, TVoid>::ShiftLeftElementValue(...)
 {
     return 0;
 }
@@ -603,6 +702,33 @@ Trait<TFormat, TFormatO, typename std::enable_if<
             LogElementValue(const ElementType& element)
 {
     return TFormat::LogElementValue(element);
+}
+
+template<typename TFormat, typename TFormatO>
+typename TFormat::ElementType
+Trait<TFormat, TFormatO, typename std::enable_if<
+    decltype(test::_helper::_math::_integer::_fmt::
+        _Has<TFormat, TFormatO>(0))::value &&
+    decltype(test::_helper::_math::_integer::_fmt::
+        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
+            ShiftRightElementValue(const ElementType& element, 
+                const SizeType& n)
+{
+    return TFormat::ShiftRightElementValue(element, n);
+}
+
+
+template<typename TFormat, typename TFormatO>
+typename TFormat::ElementType
+Trait<TFormat, TFormatO, typename std::enable_if<
+    decltype(test::_helper::_math::_integer::_fmt::
+        _Has<TFormat, TFormatO>(0))::value &&
+    decltype(test::_helper::_math::_integer::_fmt::
+        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
+            ShiftLeftElementValue(const ElementType& element, 
+                const SizeType& n)
+{
+    return TFormat::ShiftLeftElementValue(element, n);
 }
 
 template<typename TFormat, typename TFormatO>
