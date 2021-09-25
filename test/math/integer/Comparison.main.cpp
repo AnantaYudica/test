@@ -21,6 +21,10 @@ struct Bin
     static TElement ExpandCarryValue(const TExpand& expand_split);
 
     static TElement LogElementValue(const TElement& v);
+
+    static TElement ShiftRightElementValue(const TElement& v, const TSize& n);
+    
+    static TElement ShiftLeftElementValue(const TElement& v, const TSize& n);
 };
 
 template<>
@@ -64,7 +68,18 @@ struct Bin<std::uint8_t, std::uint16_t, std::size_t>
         else if (v & 0x2) return 1;
         return 0;
     }
+
+    static std::uint8_t ShiftRightElementValue(const std::uint8_t& v, 
+        const std::size_t& n)
+    {
+        return v >> n;
+    }
     
+    static std::uint8_t ShiftLeftElementValue(const std::uint8_t& v, 
+        const std::size_t& n)
+    {
+        return v << n;
+    }
 
 };
 
@@ -85,6 +100,10 @@ struct Dec
     static TElement ExpandCarryValue(const TExpand& expand_split);
 
     static TElement LogElementValue(const TElement& v);
+    
+    static TElement ShiftRightElementValue(const TElement& v, const TSize& n);
+    
+    static TElement ShiftLeftElementValue(const TElement& v, const TSize& n);
 };
 
 template<>
@@ -122,7 +141,20 @@ struct Dec<std::uint8_t, std::uint16_t, std::size_t>
     {
         return 0;
     }
-
+    
+    static std::uint8_t ShiftRightElementValue(const std::uint8_t& v, 
+        const std::size_t& n)
+    {
+        if (n >= 1) return 0;
+        return v;
+    }
+    
+    static std::uint8_t ShiftLeftElementValue(const std::uint8_t& v, 
+        const std::size_t& n)
+    {
+        if (n >= 1) return 0;
+        return v;
+    }
 };
 
 template<std::size_t N, template<typename, typename, typename>class TTag>
