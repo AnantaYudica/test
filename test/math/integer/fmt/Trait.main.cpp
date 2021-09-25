@@ -21,6 +21,10 @@ struct Bin
     static TElement ExpandCarryValue(const TExpand& expand_split);
 
     static TElement LogElementValue(const TElement& v);
+
+    static TElement ShiftRightElementValue(const TElement& v, const TSize& n);
+    
+    static TElement ShiftLeftElementValue(const TElement& v, const TSize& n);
 };
 
 template<>
@@ -64,7 +68,18 @@ struct Bin<std::uint8_t, std::uint16_t, std::size_t>
         else if (v & 0x2) return 1;
         return 0;
     }
+
+    static std::uint8_t ShiftRightElementValue(const std::uint8_t& v, 
+        const std::size_t& n)
+    {
+        return v >> n;
+    }
     
+    static std::uint8_t ShiftLeftElementValue(const std::uint8_t& v, 
+        const std::size_t& n)
+    {
+        return v << n;
+    }
 
 };
 
@@ -85,6 +100,10 @@ struct Dec
     static TElement ExpandCarryValue(const TExpand& expand_split);
 
     static TElement LogElementValue(const TElement& v);
+    
+    static TElement ShiftRightElementValue(const TElement& v, const TSize& n);
+    
+    static TElement ShiftLeftElementValue(const TElement& v, const TSize& n);
 };
 
 template<>
@@ -122,7 +141,20 @@ struct Dec<std::uint8_t, std::uint16_t, std::size_t>
     {
         return 0;
     }
-
+    
+    static std::uint8_t ShiftRightElementValue(const std::uint8_t& v, 
+        const std::size_t& n)
+    {
+        if (n >= 1) return 0;
+        return v;
+    }
+    
+    static std::uint8_t ShiftLeftElementValue(const std::uint8_t& v, 
+        const std::size_t& n)
+    {
+        if (n >= 1) return 0;
+        return v;
+    }
 };
 
 template<std::size_t N, template<typename, typename, typename>class TTag>
@@ -185,6 +217,8 @@ int main()
         assert((Trait1::HasExpandElementValueFunction == true));
         assert((Trait1::HasExpandCarryValueFunction == true));
         assert((Trait1::HasLogElementValueFunction == true));
+        assert((Trait1::HasShiftRightElementValueFunction == true));
+        assert((Trait1::HasShiftLeftElementValueFunction == true));
         assert((Trait1::HasGetElementFunction == true));
         assert((Trait1::HasSetElementFunction == true));
 
@@ -201,6 +235,8 @@ int main()
         assert((Trait1::IsSameExpandElementValueFunction == true));
         assert((Trait1::IsSameExpandCarryValueFunction == true));
         assert((Trait1::IsSameLogElementValueFunction == true));
+        assert((Trait1::IsSameShiftRightElementValueFunction == true));
+        assert((Trait1::IsSameShiftLeftElementValueFunction == true));
 
         assert((Trait1::Size == Format1Type::Size));
         assert((Trait1::ElementMaxExponent == Format1Type::ElementMaxExponent));
@@ -223,6 +259,9 @@ int main()
         assert(Trait1::LogElementValue(1) == 0);
         assert(Trait1::LogElementValue(127) == 6);
         assert(Trait1::LogElementValue(255) == 7);
+
+        assert(Trait1::ShiftRightElementValue(128, 1) == 64);
+        assert(Trait1::ShiftLeftElementValue(1, 1) == 2);
 
         assert(Trait1::Size == 2);
 
@@ -261,6 +300,8 @@ int main()
         assert((Trait1::HasExpandElementValueFunction == true));
         assert((Trait1::HasExpandCarryValueFunction == true));
         assert((Trait1::HasLogElementValueFunction == true));
+        assert((Trait1::HasShiftRightElementValueFunction == true));
+        assert((Trait1::HasShiftLeftElementValueFunction == true));
         assert((Trait1::HasGetElementFunction == true));
         assert((Trait1::HasSetElementFunction == true));
 
@@ -277,6 +318,8 @@ int main()
         assert((Trait1::IsSameExpandElementValueFunction == true));
         assert((Trait1::IsSameExpandCarryValueFunction == true));
         assert((Trait1::IsSameLogElementValueFunction == true));
+        assert((Trait1::IsSameShiftRightElementValueFunction == true));
+        assert((Trait1::IsSameShiftLeftElementValueFunction == true));
 
         assert((Trait1::Size == Format1Type::Size));
         assert((Trait1::ElementMaxExponent == Format1Type::ElementMaxExponent));
@@ -299,6 +342,9 @@ int main()
         assert(Trait1::LogElementValue(1) == 0);
         assert(Trait1::LogElementValue(4) == 0);
         assert(Trait1::LogElementValue(9) == 0);
+        
+        assert(Trait1::ShiftRightElementValue(2, 1) == 0);
+        assert(Trait1::ShiftLeftElementValue(1, 1) == 0);
 
         assert(Trait1::Size == 2);
 
