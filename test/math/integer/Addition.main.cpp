@@ -1664,7 +1664,7 @@ int main()
         std::uint16_t f2{0x00FF};
         std::uint8_t c1 = test::math::integer::Addition(f1, f2, 1 , 2);
         assert(f1.m_value[0] == 255);
-        assert(c1 == 0);
+        assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
@@ -1867,7 +1867,7 @@ int main()
         std::uint16_t f2{0x0009};
         std::uint8_t c1 = test::math::integer::Addition(f1, f2, 1 , 2);
         assert(f1.m_value[0] == 9);
-        assert(c1 == 0);
+        assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
@@ -1908,6 +1908,1267 @@ int main()
         assert(f1.m_value[0] == 0);
         assert(f1.m_value[1] == 8);
         assert(c1 == 0);
+    }
+    ////
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{0, 0};
+        Format<N, Bin> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{1, 0};
+        Format<N, Bin> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{0, 1};
+        Format<N, Bin> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 1);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 0};
+        Format<N, Bin> f1_lo{0, 0};
+        Format<N, Bin> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 1};
+        Format<N, Bin> f1_lo{0, 0};
+        Format<N, Bin> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2, 1);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 0};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{254, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 254};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2);
+            
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3);
+            
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 4);
+            
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 8);
+            
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{254, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 1);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 254};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2);
+            
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3);
+            
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 4);
+            
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 8);
+            
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3, 1);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 1);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2, 1);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3, 1);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1, 1, 1);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2, 1, 1);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3, 1, 1);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1, 2, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2, 2, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3, 2, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 0);
+    }
+    
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1, 1, 1);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2, 1, 1);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3, 1, 1);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1, 2, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2, 2, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3, 2, 2);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+        assert(c1 == 1);
+    }////
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{0, 0};
+        Format<N, Dec> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{1, 0};
+        Format<N, Dec> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{0, 1};
+        Format<N, Dec> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 1);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 0};
+        Format<N, Dec> f1_lo{0, 0};
+        Format<N, Dec> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 1};
+        Format<N, Dec> f1_lo{0, 0};
+        Format<N, Dec> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{0, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2, 1);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 0};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 0};
+        std::uint8_t c1 = test::math::integer::Addition(f1_up, f1_lo, f2);
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{8, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 8};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2);
+            
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3);
+            
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 4);
+            
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 8);
+            
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{8, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 1);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 8};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2);
+            
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3);
+            
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 4);
+            
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 8);
+            
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 0);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3, 1);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 1);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2, 1);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3, 1);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1, 1, 1);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2, 1, 1);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3, 1, 1);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 1, 2, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 2, 2, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 0, 3, 2, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1, 1, 1);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2, 1, 1);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3, 1, 1);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 1, 2, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 2, 2, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2{1, 1};
+        std::uint8_t c1 = test::math::integer::
+            Addition(f1_up, f1_lo, f2, 1, 3, 2, 2);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+        assert(c1 == 1);
     }
     return 0;
 }
