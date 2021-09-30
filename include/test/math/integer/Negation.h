@@ -32,11 +32,11 @@ TElement Negation(TValue& v,
 {
     typedef test::math::integer::fmt::Trait<TValue> TraitType;
 
-    TElement carry = c;
+    TElement carry = bg == 0 && c == 0 ? 1 : c;
     TExpand sum = 0;
     for (TSize i = bg; i < ed; ++i)
     {
-        sum = TraitType::ExpandNegationValue(TraitType::GetElement(v, i), i);
+        sum = TraitType::ExpandNegationValue(TraitType::GetElement(v, i));
         sum += carry;
         const auto split = TraitType::ExpandSplit(sum);
         TraitType::SetElement(v, i, TraitType::ExpandElementValue(split));
@@ -65,10 +65,10 @@ TElement Negation(typename test::math::integer::fmt::
 {
     typedef test::math::integer::fmt::Trait<TValue> TraitType;
     
-    TElement carry = c;
+    TElement carry = i == 0 && c == 0 ? 1 : c;;
     TExpand sum = 0;
 
-    sum = TraitType::ExpandNegationValue(v, i);
+    sum = TraitType::ExpandNegationValue(v);
     sum += carry;
     const auto split = TraitType::ExpandSplit(sum);
     v = TraitType::ExpandElementValue(split);

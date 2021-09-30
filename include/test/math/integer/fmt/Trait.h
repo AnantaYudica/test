@@ -571,8 +571,7 @@ struct Trait<TFormat, TFormatO, typename std::enable_if<
     static typename TFormat::ExpandType 
         ExpandSplit(const ExpandType& expand);
     static typename TFormat::ExpandType 
-        ExpandNegationValue(const ExpandType& expand,
-        const SizeType& at);
+        ExpandNegationValue(const ExpandType& expand);
     static typename TFormat::ElementType 
         ExpandElementValue(const ExpandType& expand_split);
     static typename TFormat::ElementType 
@@ -662,10 +661,9 @@ Trait<TFormat, TFormatO, typename std::enable_if<
         _Has<TFormat, TFormatO>(0))::value &&
     decltype(test::_helper::_math::_integer::_fmt::
         _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            ExpandNegationValue(const ExpandType& expand,
-                const SizeType& at)
+            ExpandNegationValue(const ExpandType& expand)
 {
-    return TFormat::ExpandNegationValue(expand, at);
+    return TFormat::ExpandNegationValue(expand);
 }
 
 template<typename TFormat, typename TFormatO>

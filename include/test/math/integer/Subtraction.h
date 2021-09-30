@@ -36,7 +36,7 @@ static TElement Subtraction(TAValue& a, const TBValue& b,
     const typename test::math::integer::fmt::
         Trait<TAValue, TBValue>::SizeType& ed_b = NB, 
     typename test::math::integer::fmt::
-        Trait<TAValue, TBValue>::ElementType c_b_in = 0, 
+        Trait<TAValue, TBValue>::ElementType c_b_in = 1, 
     typename test::math::integer::fmt::
         Trait<TAValue, TBValue>::ElementType * c_b_out = nullptr)
 {
@@ -104,7 +104,7 @@ static TElement Subtraction(TValue& a,
     const typename test::math::integer::fmt::
         Trait<TValue>::SizeType& bg = 0, 
     typename test::math::integer::fmt::
-        Trait<TValue>::ElementType c_b_in = 0, 
+        Trait<TValue>::ElementType c_b_in = 1, 
     typename test::math::integer::fmt::
         Trait<TValue>::ElementType * c_b_out = nullptr)
 {
