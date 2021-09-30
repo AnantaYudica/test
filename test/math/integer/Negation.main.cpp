@@ -894,28 +894,28 @@ int main()
         std::uint16_t v1 = 0;
         std::uint8_t c1 = test::math::integer::Negation<Format<1, Bin>>(v1, 1);
         
-        assert(v1 == 1);
+        assert(v1 == 0);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         std::uint16_t v1 = 1;
         std::uint8_t c1 = test::math::integer::Negation<Format<1, Bin>>(v1, 1);
-        assert(v1 == 0);
-        assert(c1 == 1);
+        assert(v1 == 255);
+        assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         std::uint16_t v1 = 255;
         std::uint8_t c1 = test::math::integer::Negation<Format<1, Bin>>(v1, 1);
-        assert(v1 == 2);
+        assert(v1 == 1);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         std::uint16_t v1 = 60;
         std::uint8_t c1 = test::math::integer::Negation<Format<1, Bin>>(v1, 1);
-        assert(v1 == 197);
+        assert(v1 == 196);
         assert(c1 == 0);
     }
     {
@@ -972,28 +972,28 @@ int main()
         typedef std::size_t SizeType;
         std::uint16_t v1 = 0;
         std::uint8_t c1 = test::math::integer::Negation<Format<1, Dec>>(v1, 1);
-        assert(v1 == 1);
+        assert(v1 == 0);
         assert(c1 == 1);
     }
     {
         typedef std::size_t SizeType;
         std::uint16_t v1 = 1;
         std::uint8_t c1 = test::math::integer::Negation<Format<1, Dec>>(v1, 1);
-        assert(v1 == 0);
-        assert(c1 == 1);
+        assert(v1 == 9);
+        assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         std::uint16_t v1 = 9;
         std::uint8_t c1 = test::math::integer::Negation<Format<1, Dec>>(v1, 1);
-        assert(v1 == 2);
+        assert(v1 == 1);
         assert(c1 == 0);
     }
     {
         typedef std::size_t SizeType;
         std::uint16_t v1 = 5;
         std::uint8_t c1 = test::math::integer::Negation<Format<1, Dec>>(v1, 1);
-        assert(v1 == 6);
+        assert(v1 == 5);
         assert(c1 == 0);
     }
     {

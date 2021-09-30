@@ -13,8 +13,7 @@ struct Bin
 
     static TExpand ExpandSplit(const TExpand& expand);
 
-    static TExpand ExpandNegationValue(const TExpand& expand,
-        const TSize& i);
+    static TExpand ExpandNegationValue(const TExpand& expand);
 
     static TElement ExpandElementValue(const TExpand& expand_split);
 
@@ -41,10 +40,9 @@ struct Bin<std::uint8_t, std::uint16_t, std::size_t>
         return expand;
     }
 
-    static std::uint16_t ExpandNegationValue(const std::uint16_t& expand,
-        const std::size_t& at)
+    static std::uint16_t ExpandNegationValue(const std::uint16_t& expand)
     {
-        return at == 0 ? (0x00ff & (~expand)) + 1 : 0x00ff & ~expand;
+        return 0x00ff & ~expand;
     }
 
     static std::uint8_t ExpandElementValue(const std::uint16_t& expand_split)
@@ -92,8 +90,7 @@ struct Dec
 
     static TExpand ExpandSplit(const TExpand& expand);
     
-    static TExpand ExpandNegationValue(const TExpand& expand,
-        const TSize& i);
+    static TExpand ExpandNegationValue(const TExpand& expand);
 
     static TElement ExpandElementValue(const TExpand& expand_split);
 
@@ -121,10 +118,9 @@ struct Dec<std::uint8_t, std::uint16_t, std::size_t>
         return expand < 10 ? expand : (carry << 8) | (expand - (carry * 10));
     }
     
-    static std::uint16_t ExpandNegationValue(const std::uint16_t& expand,
-        const std::size_t& at)
+    static std::uint16_t ExpandNegationValue(const std::uint16_t& expand)
     {
-        return at == 0 ? (9 - expand) + 1 : (9 - expand);
+        return (9 - expand);
     }
 
     static std::uint8_t ExpandElementValue(const std::uint16_t& expand_split)
