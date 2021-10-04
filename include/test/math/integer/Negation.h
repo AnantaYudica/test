@@ -22,33 +22,6 @@ template<typename TValue,
     typename = typename std::enable_if<test::math::integer::fmt::
         Trait<TValue>::Has, void>::type,
     TSize N = test::math::integer::fmt::Trait<TValue>::Size>
-TElement Negation(TValue& v)
-{
-    typedef test::math::integer::fmt::Trait<TValue> TraitType;
-
-    TElement carry = 1;
-    TExpand sum = 0;
-    for (TSize i = 0; i < N; ++i)
-    {
-        sum = TraitType::ExpandNegationValue(TraitType::GetElement(v, i));
-        sum += carry;
-        const auto split = TraitType::ExpandSplit(sum);
-        TraitType::SetElement(v, i, TraitType::ExpandElementValue(split));
-        carry = TraitType::ExpandCarryValue(split);
-    }
-    return carry;
-}
-
-template<typename TValue,
-    typename TElement = typename test::math::integer::fmt::
-        Trait<TValue>::ElementType,
-    typename TExpand = typename test::math::integer::fmt::
-        Trait<TValue>::ExpandType,
-    typename TSize = typename test::math::integer::fmt::
-        Trait<TValue>::SizeType,
-    typename = typename std::enable_if<test::math::integer::fmt::
-        Trait<TValue>::Has, void>::type,
-    TSize N = test::math::integer::fmt::Trait<TValue>::Size>
 TElement Negation(TValue& v, 
     const typename test::math::integer::fmt::
         Trait<TValue>::ElementType& c,
@@ -79,25 +52,12 @@ template<typename TValue,
         Trait<TValue>::ExpandType,
     typename TSize = typename test::math::integer::fmt::
         Trait<TValue>::SizeType,
-    typename = typename std::enable_if<std::is_same<TExpand, 
-        typename test::math::integer::fmt::
-            Trait<TValue>::ExpandType>::value &&
-        test::math::integer::fmt::Trait<TValue>::Has, void>::type>
-TElement Negation(typename test::math::integer::fmt::
-        Trait<TValue>::ExpandType& v)
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TValue>::Has, void>::type,
+    TSize N = test::math::integer::fmt::Trait<TValue>::Size>
+TElement Negation(TValue& v)
 {
-    typedef test::math::integer::fmt::Trait<TValue> TraitType;
-    
-    TElement carry = 1;
-    TExpand sum = 0;
-
-    sum = TraitType::ExpandNegationValue(v);
-    sum += carry;
-    const auto split = TraitType::ExpandSplit(sum);
-    v = TraitType::ExpandElementValue(split);
-    carry = TraitType::ExpandCarryValue(split);
-    
-    return carry;
+    return test::math::integer::Negation(v, 1);
 }
 
 template<typename TValue,
@@ -130,6 +90,23 @@ TElement Negation(typename test::math::integer::fmt::
     carry = TraitType::ExpandCarryValue(split);
     
     return carry;
+}
+
+template<typename TValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TValue>::SizeType,
+    typename = typename std::enable_if<std::is_same<TExpand, 
+        typename test::math::integer::fmt::
+            Trait<TValue>::ExpandType>::value &&
+        test::math::integer::fmt::Trait<TValue>::Has, void>::type>
+TElement Negation(typename test::math::integer::fmt::
+        Trait<TValue>::ExpandType& v)
+{
+    return test::math::integer::Negation<TValue>(v, 1);
 }
 
 } //!integer
