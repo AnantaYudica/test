@@ -1017,5 +1017,42 @@ int main()
         assert(v1 == 4);
         assert(c1 == 0);
     }
+    ////
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 4;
+        Format<N, Bin> f1{0, 0, 0, 0};
+        std::uint8_t c1 = test::math::integer::Negation(f1, 0);
+        assert(f1.m_value[0] == 255);
+        assert(f1.m_value[1] == 255);
+        assert(f1.m_value[2] == 255);
+        assert(f1.m_value[3] == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        std::uint16_t v1 = 0;
+        std::uint8_t c1 = test::math::integer::Negation<Format<1, Bin>>(v1, 0);
+        assert(v1 == 255);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 4;
+        Format<N, Dec> f1{0, 0, 0, 0};
+        std::uint8_t c1 = test::math::integer::Negation(f1, 0);
+        assert(f1.m_value[0] == 9);
+        assert(f1.m_value[1] == 9);
+        assert(f1.m_value[2] == 9);
+        assert(f1.m_value[3] == 9);
+        assert(c1 == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        std::uint16_t v1 = 0;
+        std::uint8_t c1 = test::math::integer::Negation<Format<1, Dec>>(v1, 0);
+        assert(v1 == 9);
+        assert(c1 == 0);
+    }
     return 0;
 }
