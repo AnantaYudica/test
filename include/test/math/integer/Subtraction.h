@@ -51,24 +51,18 @@ static TElement Subtraction(TAValue& a, const TBValue& b,
     c_b = c_b_in;
     TExpand b_val;
     TExpand diff = 0;
-    for(TSize i = 0, j = bg_b; i < NA; ++i, ++j)
+    if (bg_b >= ed_b) return carry;
+    for(TSize i = bg_a, j = bg_b; i < NA; ++i, ++j)
     {
-        if (j < ed_b)
+        if (j < ed_b && j < NB)
         {
-            if (j < NB)
-            {   
-                b_val = TraitBType::GetElement(b_cpy, j);
-                c_b = test::math::integer::Negation<TAValue>(b_val, c_b, j);
-            }
-            else
-            {
-                b_val = 0;
-                c_b = test::math::integer::Negation<TAValue>(b_val, c_b, j);
-            }
+            b_val = TraitBType::GetElement(b_cpy, j);
+            c_b = test::math::integer::Negation<TAValue>(b_val, c_b, j);
         }
         else
         {
             b_val = 0;
+            c_b = test::math::integer::Negation<TAValue>(b_val, c_b, j);
         }
 
         diff = TraitAType::GetElement(a, i);
@@ -152,6 +146,64 @@ static TElement Subtraction(TValue& a,
         }
     }
     return carry;
+}
+
+template<typename TAValue, typename TBValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType,
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TBValue>::Has, void>::type,
+    TSize NA = test::math::integer::fmt::
+        Trait<TAValue, TBValue>::Size,
+    TSize NB = test::math::integer::fmt::
+        Trait<TBValue, TAValue>::Size>
+static TElement Subtraction(TAValue& a_upper, TAValue& a_lower, 
+    const TBValue& b,
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType& c = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& bg_a = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& bg_b = 0, 
+    const typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType& ed_b = NB, 
+    typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType c_b_in = 1, 
+    typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType * c_b_out = nullptr)
+{
+    typedef test::math::integer::fmt::Trait<TAValue, TBValue> TraitType;
+    typedef test::math::integer::fmt::Trait<TAValue> TraitAType;
+    typedef test::math::integer::fmt::Trait<TBValue> TraitBType;
+    
+    TElement carry = c;
+    if (bg_a >= NA)
+    {
+        return test::math::integer::Subtraction(a_upper, b, carry, 
+            bg_a - NA, bg_b, ed_b, c_b_in, c_b_out);
+    }
+    TElement c_b_default;
+    TElement & c_b = (c_b_out == nullptr ? c_b_default : *c_b_out);
+    carry = test::math::integer::Subtraction(a_lower, b, carry, bg_a, bg_b, 
+        ed_b, c_b_in, &c_b);
+    
+    const TSize size_a_lower = NA - bg_a;
+    const TSize size_b = bg_b >= ed_b ? 0 : ed_b - bg_b;
+    if (size_a_lower > size_b)
+    {
+        return carry;
+    }
+    else if (size_a_lower == size_b)
+    {
+        return test::math::integer::Subtraction(a_upper, 0, carry, 0, c_b, 
+            &c_b);
+    }
+    return test::math::integer::Subtraction(a_upper, b, carry, 0, 
+        bg_b + size_a_lower, ed_b, c_b, &c_b);
 }
 
 } //!integer
