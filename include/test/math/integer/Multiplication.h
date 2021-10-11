@@ -64,7 +64,7 @@ template<typename TAValue, typename TBValue,
     typename = typename std::enable_if<test::math::integer::fmt::
         Trait<TBValue>::Has, void>::type>
 static void Multiplication(TAValue& a, const TBValue& b,
-    TAValue& overflow_out)
+    TAValue* overflow_out)
 {
     typedef test::math::integer::fmt::Trait<TAValue, TBValue> TraitType;
     typedef test::math::integer::fmt::Trait<TAValue> TraitAType;
@@ -72,6 +72,11 @@ static void Multiplication(TAValue& a, const TBValue& b,
 
     constexpr TSize NA = TraitAType::Size;
     constexpr TSize NB = TraitBType::Size;
+
+    if (overflow_out == nullptr)
+    {
+        return test::math::integer::Multiplication(a, b);
+    }
 
     TAValue sum {0};
     for (TSize i = 0; i < NA; ++i)
@@ -94,11 +99,11 @@ static void Multiplication(TAValue& a, const TBValue& b,
             {
                 auto c = test::math::integer::Addition(sum, mul, 0, ij);
                 if (c != 0)
-                    test::math::integer::Addition(overflow_out, 0, c, 0);
+                    test::math::integer::Addition(*overflow_out, 0, c, 0);
             }
             else
             {
-                test::math::integer::Addition(overflow_out, mul, 0, ij - NA);
+                test::math::integer::Addition(*overflow_out, mul, 0, ij - NA);
             }
 
         }
@@ -167,11 +172,16 @@ template<typename TValue,
 static void Multiplication(TValue& a, 
     const  typename test::math::integer::fmt::
         Trait<TValue>::ExpandType& b,
-    TValue& overflow_out)
+    TValue* overflow_out)
 {
     typedef test::math::integer::fmt::Trait<TValue> TraitType;
 
     constexpr TSize N = TraitType::Size;
+    
+    if (overflow_out == nullptr)
+    {
+        return test::math::integer::Multiplication(a, b);
+    }
 
     const TExpand split_b = TraitType::ExpandSplit(b);
     const TExpand elem_b0 = TraitType::ExpandElementValue(split_b);
@@ -199,11 +209,11 @@ static void Multiplication(TValue& a,
             {
                 auto c = test::math::integer::Addition(sum, mul, 0, ij);
                 if (c != 0)
-                    test::math::integer::Addition(overflow_out, 0, c, 0);
+                    test::math::integer::Addition(*overflow_out, 0, c, 0);
             }
             else
             {
-                 test::math::integer::Addition(overflow_out, mul, 0, ij - N);
+                 test::math::integer::Addition(*overflow_out, mul, 0, ij - N);
             }
             
         }
@@ -211,6 +221,47 @@ static void Multiplication(TValue& a,
         TraitType::SetElement(a, i, TraitType::GetElement(sum, i));
     }
 } 
+
+template<typename TAValue, typename TBValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType,
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TBValue>::Has, void>::type>
+static void Multiplication(TAValue& a_upper, TAValue& a_lower, 
+    const TBValue& b)
+{
+    TAValue overflow{0};
+    test::math::integer::Multiplication(a_lower, b, &overflow);
+    test::math::integer::Multiplication(a_upper, b);
+    test::math::integer::Addition(a_upper, overflow);
+}
+
+template<typename TAValue, typename TBValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType,
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TBValue>::Has, void>::type>
+static void Multiplication(TAValue& a_upper, TAValue& a_lower, 
+    const TBValue& b, TAValue* overflow_out)
+{
+    if (overflow_out == nullptr)
+    {
+        return test::math::integer::Multiplication(a_upper, a_lower, b);
+    }
+    TAValue overflow{0};
+    test::math::integer::Multiplication(a_lower, b, &overflow);
+    test::math::integer::Multiplication(a_upper, b, overflow_out);
+    TElement carry = test::math::integer::Addition(a_upper, overflow);
+    test::math::integer::Addition(*overflow_out, carry);
+}
 
 } //!integer
 
