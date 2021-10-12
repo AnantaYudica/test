@@ -1691,6 +1691,795 @@ int main()
         assert(f1.m_value[4] == 9);
         assert(f1.m_value[5] == 9);
     }
+    ////
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Bin> f1_up{0};
+        Format<N, Bin> f1_lo{0};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 0);
 
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{0, 0};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 0);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 1);
+
+        assert(f1_up.m_value[0] == 128);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 128);
+        assert(f1_lo.m_value[1] == 128);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 8);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 9);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 128);
+        assert(f1_lo.m_value[1] == 128);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 16);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 17);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 128);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Bin> f1_up{0};
+        Format<N, Bin> f1_lo{0};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 0, 0xff);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{0, 0};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 0, 0xff);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 1, 0xff);
+
+        assert(f1_up.m_value[0] == 128);
+        assert(f1_up.m_value[1] == 128);
+        assert(f1_lo.m_value[0] == 128);
+        assert(f1_lo.m_value[1] == 128);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 8, 0xff);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 9, 0xff);
+
+        assert(f1_up.m_value[0] == 128);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 128);
+        assert(f1_lo.m_value[1] == 128);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 16, 0xff);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 17, 0xff);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 255);
+        assert(f1_lo.m_value[0] == 128);
+        assert(f1_lo.m_value[1] == 128);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Dec> f1_up{0};
+        Format<N, Dec> f1_lo{0};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 0);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{0, 0};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 0);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 1);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 2);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 3);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 4);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Dec> f1_up{0};
+        Format<N, Dec> f1_lo{0};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 0, 9);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{0, 0};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 0, 9);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 1, 9);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 2, 9);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 3, 9);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 9);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Right>(f1_up, f1_lo, 4, 9);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+    }
+    ////
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Bin> f1_up{0};
+        Format<N, Bin> f1_lo{0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 0);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Bin> f1_up{0};
+        Format<N, Bin> f1_lo{0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{0, 0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 0);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 1);
+
+        assert(f1_up.m_value[0] == 2);
+        assert(f1_up.m_value[1] == 2);
+        assert(f1_lo.m_value[0] == 2);
+        assert(f1_lo.m_value[1] == 2);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 8);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 9);
+
+        assert(f1_up.m_value[0] == 2);
+        assert(f1_up.m_value[1] == 2);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 2);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 16);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 17);
+
+        assert(f1_up.m_value[0] == 2);
+        assert(f1_up.m_value[1] == 2);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 25);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 2);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Bin> f1_up{0};
+        Format<N, Bin> f1_lo{0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 0, 0xff);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Bin> f1_up{0};
+        Format<N, Bin> f1_lo{0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 1, 0xff);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{0, 0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 0, 0xff);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 1, 0xff);
+
+        assert(f1_up.m_value[0] == 2);
+        assert(f1_up.m_value[1] == 2);
+        assert(f1_lo.m_value[0] == 3);
+        assert(f1_lo.m_value[1] == 2);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 8, 0xff);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 9, 0xff);
+
+        assert(f1_up.m_value[0] == 2);
+        assert(f1_up.m_value[1] == 2);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 3);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 16, 0xff);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 17, 0xff);
+
+        assert(f1_up.m_value[0] == 3);
+        assert(f1_up.m_value[1] == 2);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 25, 0xff);
+
+        assert(f1_up.m_value[0] == 255);
+        assert(f1_up.m_value[1] == 3);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 255);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Dec> f1_up{0};
+        Format<N, Dec> f1_lo{0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 0);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Dec> f1_up{0};
+        Format<N, Dec> f1_lo{0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 1);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{0, 0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 0);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 1);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 2);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 3);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 4);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Dec> f1_up{0};
+        Format<N, Dec> f1_lo{0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 0, 9);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 1;
+        Format<N, Dec> f1_up{0};
+        Format<N, Dec> f1_lo{0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 1, 9);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_lo.m_value[0] == 9);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{0, 0};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 0, 9);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 1, 9);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 1);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 2, 9);
+
+        assert(f1_up.m_value[0] == 1);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 3, 9);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 1);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+    }
+    {
+        using namespace test::math::integer::shift;
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        
+        test::math::integer::Shift<Left>(f1_up, f1_lo, 4, 9);
+
+        assert(f1_up.m_value[0] == 9);
+        assert(f1_up.m_value[1] == 9);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 9);
+    }
     return 0;
 }
