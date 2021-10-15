@@ -188,119 +188,119 @@ template<typename T1, typename T2 = T1>
 static constexpr std::false_type _Has(...);
 
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameElementType(int) -> 
     decltype(std::declval<typename std::enable_if<
         std::is_same<typename T1::ElementType, 
             typename T2::ElementType>::value, int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type _IsSameElementType(...);
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameExpandType(int) -> 
     decltype(std::declval<typename std::enable_if<
         std::is_same<typename T1::ExpandType, 
             typename T2::ExpandType>::value, int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type _IsSameExpandType(...);
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameSizeType(int) -> 
     decltype(std::declval<typename std::enable_if<
         std::is_same<typename T1::SizeType, 
             typename T2::SizeType>::value, int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type _IsSameSizeType(...);
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameElementMaxExponentStaticConstantMember(int) -> 
     decltype(std::declval<typename std::enable_if<
         T1::ElementMaxExponent == T2::ElementMaxExponent, int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type 
     _IsSameElementMaxExponentStaticConstantMember(...);
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameExpandSplitStaticMemberFunction(int) -> 
     decltype(std::declval<typename std::enable_if<
         T1::ExpandSplit == T2::ExpandSplit, int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type _IsSameExpandSplitStaticMemberFunction(...);
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameExpandNegationValueStaticMemberFunction(int) -> 
     decltype(std::declval<typename std::enable_if<
         T1::ExpandNegationValue == T2::ExpandNegationValue, int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type 
     _IsSameExpandNegationValueStaticMemberFunction(...);
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameExpandElementValueStaticMemberFunction(int) -> 
     decltype(std::declval<typename std::enable_if<
         T1::ExpandElementValue == T2::ExpandElementValue, int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type 
     _IsSameExpandElementValueStaticMemberFunction(...);
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameExpandCarryValueStaticMemberFunction(int) -> 
     decltype(std::declval<typename std::enable_if<
         T1::ExpandCarryValue == T2::ExpandCarryValue, int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type 
     _IsSameExpandCarryValueStaticMemberFunction(...);
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameLogElementValueStaticMemberFunction(int) -> 
     decltype(std::declval<typename std::enable_if<
         T1::LogElementValue == T2::LogElementValue, int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type 
     _IsSameLogElementValueStaticMemberFunction(...);
     
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameShiftRightElementValueStaticMemberFunction(int) ->
     decltype(std::declval<typename std::enable_if<
         T1::ShiftRightElementValue == T2::ShiftRightElementValue, 
             int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type 
     _IsSameShiftRightElementValueStaticMemberFunction(...);
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSameShiftLeftElementValueStaticMemberFunction(int) ->
     decltype(std::declval<typename std::enable_if<
         T1::ShiftLeftElementValue == T2::ShiftLeftElementValue, 
             int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type 
     _IsSameShiftLeftElementValueStaticMemberFunction(...);
 
     
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr auto _IsSame(int) -> 
     decltype(std::declval<typename std::enable_if<
         decltype(test::_helper::_math::_integer::_fmt::
@@ -331,7 +331,7 @@ static constexpr auto _IsSame(int) ->
             int>::type>(), 
         std::true_type());
 
-template<typename T1, typename T2>
+template<typename T1, typename T2 = T1>
 static constexpr std::false_type _IsSame(...);
 
 } //!_fmt
@@ -349,139 +349,375 @@ namespace integer
 namespace fmt
 {
 
-template<typename TFormat, typename TFormatO = TFormat,
-    typename = void>
+template<typename TFormat, typename... TArgs>
 struct Trait
+{
+    static constexpr bool IsDefault = true;
+
+    static constexpr bool IsInvalid = true;
+
+};
+
+template<typename TFormatA, typename TFormatB, typename... TArgs>
+struct Trait<TFormatA, TFormatB, TArgs...> :
+    std::conditional<
+        decltype(test::_helper::_math::_integer::_fmt::
+            _Has<TFormatA, TFormatB>(0))::value &&
+        decltype(test::_helper::_math::_integer::_fmt::
+            _IsSame<TFormatA, TFormatB>(0))::value,
+        Trait<TFormatA, TArgs...>,
+        Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>>::type
+{
+    typedef typename std::conditional<
+        decltype(test::_helper::_math::_integer::_fmt::
+            _Has<TFormatA, TFormatB>(0))::value &&
+        decltype(test::_helper::_math::_integer::_fmt::
+            _IsSame<TFormatA, TFormatB>(0))::value,
+        Trait<TFormatA, TArgs...>,
+        Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>>::type _BaseType;
+
+    typedef typename _BaseType::ElementType ElementType;
+    typedef typename _BaseType::ExpandType ExpandType;
+    typedef typename _BaseType::SizeType SizeType;
+    
+    static constexpr bool IsDefault = _BaseType::IsDefault;
+
+    static constexpr bool IsInvalid = _BaseType::IsInvalid;
+
+    static constexpr bool Has = _BaseType::Has;
+
+    static constexpr bool HasElementType = _BaseType::HasElementType;
+
+    static constexpr bool HasExpandType = _BaseType::HasExpandType;
+
+    static constexpr bool HasSizeType = _BaseType::HasSizeType;
+
+    static constexpr bool HasConstantSize = _BaseType::HasConstantSize;
+            
+    static constexpr bool HasConstantElementMaxExponent = 
+        _BaseType::HasConstantElementMaxExponent;
+
+    static constexpr bool HasExpandSplitFunction = 
+        _BaseType::HasExpandSplitFunction;
+    
+    static constexpr bool HasExpandNegationValueFunction = 
+        _BaseType::HasExpandNegationValueFunction;
+                
+    static constexpr bool HasExpandElementValueFunction = 
+        _BaseType::HasExpandElementValueFunction;
+
+    static constexpr bool HasExpandCarryValueFunction =
+        _BaseType::HasExpandCarryValueFunction;
+
+    static constexpr bool HasLogElementValueFunction = 
+        _BaseType::HasLogElementValueFunction;
+        
+    static constexpr bool HasShiftRightElementValueFunction = 
+        _BaseType::HasShiftRightElementValueFunction;
+    
+    static constexpr bool HasShiftLeftElementValueFunction = 
+        _BaseType::HasShiftLeftElementValueFunction;
+
+    static constexpr bool HasGetElementFunction = 
+        _BaseType::HasGetElementFunction;
+    
+    static constexpr bool HasSetElementFunction = 
+        _BaseType::HasSetElementFunction;
+
+    static constexpr bool IsSame = _BaseType::IsSame;
+
+    static constexpr bool IsSameElementType = _BaseType::IsSameElementType;
+
+    static constexpr bool IsSameExpandType = _BaseType::IsSameExpandType;
+
+    static constexpr bool IsSameSizeType = _BaseType::IsSameSizeType;
+
+    static constexpr bool IsSameConstantElementMaxExponent = 
+        _BaseType::IsSameConstantElementMaxExponent;
+
+    static constexpr bool IsSameExpandSplitFunction = 
+        _BaseType::IsSameExpandSplitFunction;
+
+    static constexpr bool IsSameExpandNegationValueFunction = 
+        _BaseType::IsSameExpandNegationValueFunction;
+
+    static constexpr bool IsSameExpandElementValueFunction = 
+        _BaseType::IsSameExpandElementValueFunction;
+
+    static constexpr bool IsSameExpandCarryValueFunction = 
+        _BaseType::IsSameExpandCarryValueFunction;
+
+    static constexpr bool IsSameLogElementValueFunction = 
+        _BaseType::IsSameLogElementValueFunction;
+
+    static constexpr bool IsSameShiftRightElementValueFunction = 
+        _BaseType::IsSameShiftRightElementValueFunction;
+
+    static constexpr bool IsSameShiftLeftElementValueFunction = 
+        _BaseType::IsSameShiftLeftElementValueFunction;
+
+    static constexpr int Size = _BaseType::Size;
+
+    static constexpr int ElementMaxExponent = _BaseType::ElementMaxExponent;
+    
+    using _BaseType::ExpandSplit;
+    using _BaseType::ExpandNegationValue;
+    using _BaseType::ExpandElementValue;
+    using _BaseType::ExpandCarryValue;
+    using _BaseType::LogElementValue;
+    using _BaseType::ShiftRightElementValue;
+    using _BaseType::ShiftLeftElementValue;
+    using _BaseType::GetElement;
+    using _BaseType::SetElement;
+};
+
+template<typename TFormat>
+struct Trait<TFormat> :
+    Trait<typename std::conditional<
+        decltype(test::_helper::_math::_integer::_fmt::
+            _Has<TFormat>(0))::value &&
+        decltype(test::_helper::_math::_integer::_fmt::
+            _IsSame<TFormat>(0))::value, std::nullptr_t, 
+                std::pair<TFormat*, TFormat*>>::type, TFormat>
+{
+    typedef Trait<typename std::conditional<
+        decltype(test::_helper::_math::_integer::_fmt::
+            _Has<TFormat, TFormat>(0))::value &&
+        decltype(test::_helper::_math::_integer::_fmt::
+            _IsSame<TFormat, TFormat>(0))::value, std::nullptr_t, 
+                std::pair<TFormat*, TFormat*>>::type, TFormat> _BaseType;
+
+    typedef typename _BaseType::ElementType ElementType;
+    typedef typename _BaseType::ExpandType ExpandType;
+    typedef typename _BaseType::SizeType SizeType;
+
+    static constexpr bool IsDefault = _BaseType::IsDefault;
+
+    static constexpr bool IsInvalid = _BaseType::IsInvalid;
+
+    static constexpr bool Has = _BaseType::Has;
+
+    static constexpr bool HasElementType = _BaseType::HasElementType;
+
+    static constexpr bool HasExpandType = _BaseType::HasExpandType;
+
+    static constexpr bool HasSizeType = _BaseType::HasSizeType;
+
+    static constexpr bool HasConstantSize = _BaseType::HasConstantSize;
+            
+    static constexpr bool HasConstantElementMaxExponent = 
+        _BaseType::HasConstantElementMaxExponent;
+
+    static constexpr bool HasExpandSplitFunction = 
+        _BaseType::HasExpandSplitFunction;
+    
+    static constexpr bool HasExpandNegationValueFunction = 
+        _BaseType::HasExpandNegationValueFunction;
+                
+    static constexpr bool HasExpandElementValueFunction = 
+        _BaseType::HasExpandElementValueFunction;
+
+    static constexpr bool HasExpandCarryValueFunction =
+        _BaseType::HasExpandCarryValueFunction;
+
+    static constexpr bool HasLogElementValueFunction = 
+        _BaseType::HasLogElementValueFunction;
+        
+    static constexpr bool HasShiftRightElementValueFunction = 
+        _BaseType::HasShiftRightElementValueFunction;
+    
+    static constexpr bool HasShiftLeftElementValueFunction = 
+        _BaseType::HasShiftLeftElementValueFunction;
+
+    static constexpr bool HasGetElementFunction = 
+        _BaseType::HasGetElementFunction;
+    
+    static constexpr bool HasSetElementFunction = 
+        _BaseType::HasSetElementFunction;
+
+    static constexpr bool IsSame = _BaseType::IsSame;
+
+    static constexpr bool IsSameElementType = _BaseType::IsSameElementType;
+
+    static constexpr bool IsSameExpandType = _BaseType::IsSameExpandType;
+
+    static constexpr bool IsSameSizeType = _BaseType::IsSameSizeType;
+
+    static constexpr bool IsSameConstantElementMaxExponent = 
+        _BaseType::IsSameConstantElementMaxExponent;
+
+    static constexpr bool IsSameExpandSplitFunction = 
+        _BaseType::IsSameExpandSplitFunction;
+
+    static constexpr bool IsSameExpandNegationValueFunction = 
+        _BaseType::IsSameExpandNegationValueFunction;
+
+    static constexpr bool IsSameExpandElementValueFunction = 
+        _BaseType::IsSameExpandElementValueFunction;
+
+    static constexpr bool IsSameExpandCarryValueFunction = 
+        _BaseType::IsSameExpandCarryValueFunction;
+
+    static constexpr bool IsSameLogElementValueFunction = 
+        _BaseType::IsSameLogElementValueFunction;
+
+    static constexpr bool IsSameShiftRightElementValueFunction = 
+        _BaseType::IsSameShiftRightElementValueFunction;
+
+    static constexpr bool IsSameShiftLeftElementValueFunction = 
+        _BaseType::IsSameShiftLeftElementValueFunction;
+
+    static constexpr int Size = _BaseType::Size;
+
+    static constexpr int ElementMaxExponent = _BaseType::ElementMaxExponent;
+    
+    using _BaseType::ExpandSplit;
+    using _BaseType::ExpandNegationValue;
+    using _BaseType::ExpandElementValue;
+    using _BaseType::ExpandCarryValue;
+    using _BaseType::LogElementValue;
+    using _BaseType::ShiftRightElementValue;
+    using _BaseType::ShiftLeftElementValue;
+    using _BaseType::GetElement;
+    using _BaseType::SetElement;
+};
+
+template<typename TFormatA, typename TFormatB>
+struct Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>
 {
     typedef int ElementType;
     typedef int ExpandType;
     typedef int SizeType;
+    
+    static constexpr bool IsDefault = false;
+
+    static constexpr bool IsInvalid = true;
 
     static constexpr bool Has = decltype(
         test::_helper::_math::_integer::_fmt::
-            _Has<TFormat, TFormatO>(0))::value;
+            _Has<TFormatA, TFormatB>(0))::value;
 
     static constexpr bool HasElementType = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasElementType<TFormat, TFormatO>(0))::value;
+            _HasElementType<TFormatA, TFormatB>(0))::value;
 
     static constexpr bool HasExpandType = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasExpandType<TFormat, TFormatO>(0))::value;
+            _HasExpandType<TFormatA, TFormatB>(0))::value;
 
     static constexpr bool HasSizeType = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasSizeType<TFormat, TFormatO>(0))::value;
+            _HasSizeType<TFormatA, TFormatB>(0))::value;
 
     static constexpr bool HasConstantSize = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasSizeStaticConstantMember<TFormat, TFormatO>(0))::value;
+            _HasSizeStaticConstantMember<TFormatA, TFormatB>(0))::value;
             
     static constexpr bool HasConstantElementMaxExponent = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasElementMaxExponentStaticConstantMember<TFormat, 
-                TFormatO>(0))::value;
+            _HasElementMaxExponentStaticConstantMember<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool HasExpandSplitFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasExpandSplitStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _HasExpandSplitStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
     
     static constexpr bool HasExpandNegationValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasExpandNegationValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _HasExpandNegationValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
                 
     static constexpr bool HasExpandElementValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasExpandElementValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _HasExpandElementValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool HasExpandCarryValueFunction =decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasExpandCarryValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _HasExpandCarryValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool HasLogElementValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasLogElementValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _HasLogElementValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
         
     static constexpr bool HasShiftRightElementValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasShiftRightElementValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _HasShiftRightElementValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
     
     static constexpr bool HasShiftLeftElementValueFunction =  decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasShiftLeftElementValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _HasShiftLeftElementValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool HasGetElementFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasGetElementStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _HasGetElementStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
     
     static constexpr bool HasSetElementFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _HasSetElementStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _HasSetElementStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool IsSame = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSame<TFormat, TFormatO>(0))::value;
+            _IsSame<TFormatA, TFormatB>(0))::value;
 
     static constexpr bool IsSameElementType = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameElementType<TFormat, TFormatO>(0))::value;
+            _IsSameElementType<TFormatA, TFormatB>(0))::value;
 
     static constexpr bool IsSameExpandType = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameExpandType<TFormat, TFormatO>(0))::value;
+            _IsSameExpandType<TFormatA, TFormatB>(0))::value;
 
     static constexpr bool IsSameSizeType = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameSizeType<TFormat, TFormatO>(0))::value;
+            _IsSameSizeType<TFormatA, TFormatB>(0))::value;
 
     static constexpr bool IsSameConstantElementMaxExponent = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameElementMaxExponentStaticConstantMember<TFormat, 
-                TFormatO>(0))::value;
+            _IsSameElementMaxExponentStaticConstantMember<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool IsSameExpandSplitFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameExpandSplitStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _IsSameExpandSplitStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool IsSameExpandNegationValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameExpandNegationValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _IsSameExpandNegationValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool IsSameExpandElementValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameExpandElementValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _IsSameExpandElementValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool IsSameExpandCarryValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameExpandCarryValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _IsSameExpandCarryValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool IsSameLogElementValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameLogElementValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _IsSameLogElementValueStaticMemberFunction<TFormatA,
+                TFormatB>(0))::value;
 
     static constexpr bool IsSameShiftRightElementValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameShiftRightElementValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _IsSameShiftRightElementValueStaticMemberFunction<
+                TFormatA, TFormatB>(0))::value;
 
     static constexpr bool IsSameShiftLeftElementValueFunction = decltype(
         test::_helper::_math::_integer::_fmt::
-            _IsSameShiftLeftElementValueStaticMemberFunction<TFormat, 
-                TFormatO>(0))::value;
+            _IsSameShiftLeftElementValueStaticMemberFunction<
+                TFormatA, TFormatB>(0))::value;
 
     static constexpr int Size = 0;
 
@@ -496,19 +732,18 @@ struct Trait
     static int ShiftLeftElementValue(...);
     static int GetElement(...);
     static int SetElement(...);
-    
 };
 
-template<typename TFormat, typename TFormatO>
-struct Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>
+template<typename TFormat>
+struct Trait<std::nullptr_t, TFormat>
 {
     typedef typename TFormat::ElementType ElementType;
     typedef typename TFormat::ExpandType ExpandType;
     typedef typename TFormat::SizeType SizeType;
+
+    static constexpr bool IsDefault = false;
+
+    static constexpr bool IsInvalid = false;
 
     static constexpr bool Has = true;
 
@@ -566,7 +801,8 @@ struct Trait<TFormat, TFormatO, typename std::enable_if<
 
     static constexpr SizeType Size = TFormat::Size;
 
-    static constexpr ElementType ElementMaxExponent = TFormat::ElementMaxExponent;
+    static constexpr ElementType ElementMaxExponent = 
+        TFormat::ElementMaxExponent;
 
     static typename TFormat::ExpandType 
         ExpandSplit(const ExpandType& expand);
@@ -588,172 +824,135 @@ struct Trait<TFormat, TFormatO, typename std::enable_if<
         const SizeType& at, const ElementType& val);
 };
 
-template<typename TFormat, typename TFormatO, typename TVoid>
-int Trait<TFormat, TFormatO, TVoid>::ExpandSplit(...)
+template<typename TFormatA, typename TFormatB>
+int Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>::ExpandSplit(...)
 {
     return 0;
 }
 
-template<typename TFormat, typename TFormatO, typename TVoid>
-int Trait<TFormat, TFormatO, TVoid>::ExpandNegationValue(...)
+template<typename TFormatA, typename TFormatB>
+int Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>::
+    ExpandNegationValue(...)
 {
     return 0;
 }
 
-template<typename TFormat, typename TFormatO, typename TVoid>
-int Trait<TFormat, TFormatO, TVoid>::ExpandElementValue(...)
+template<typename TFormatA, typename TFormatB>
+int Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>::
+    ExpandElementValue(...)
 {
     return 0;
 }
 
-template<typename TFormat, typename TFormatO, typename TVoid>
-int Trait<TFormat, TFormatO, TVoid>::ExpandCarryValue(...)
+template<typename TFormatA, typename TFormatB>
+int Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>::
+    ExpandCarryValue(...)
 {
     return 0;
 }
 
-template<typename TFormat, typename TFormatO, typename TVoid>
-int Trait<TFormat, TFormatO, TVoid>::LogElementValue(...)
+template<typename TFormatA, typename TFormatB>
+int Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>::
+    LogElementValue(...)
 {
     return 0;
 }
 
-template<typename TFormat, typename TFormatO, typename TVoid>
-int Trait<TFormat, TFormatO, TVoid>::ShiftRightElementValue(...)
+template<typename TFormatA, typename TFormatB>
+int Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>::
+    ShiftRightElementValue(...)
 {
     return 0;
 }
 
-template<typename TFormat, typename TFormatO, typename TVoid>
-int Trait<TFormat, TFormatO, TVoid>::ShiftLeftElementValue(...)
+template<typename TFormatA, typename TFormatB>
+int Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>::
+    ShiftLeftElementValue(...)
 {
     return 0;
 }
 
-template<typename TFormat, typename TFormatO, typename TVoid>
-int Trait<TFormat, TFormatO, TVoid>::GetElement(...)
+template<typename TFormatA, typename TFormatB>
+int Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>::GetElement(...)
 {
     return 0;
 }
 
-template<typename TFormat, typename TFormatO, typename TVoid>
-int Trait<TFormat, TFormatO, TVoid>::SetElement(...)
+template<typename TFormatA, typename TFormatB>
+int Trait<std::pair<TFormatA*, TFormatB*>, TFormatA>::SetElement(...)
 {
     return 0;
 }
 
-template<typename TFormat, typename TFormatO>
+template<typename TFormat>
 typename TFormat::ExpandType 
-Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            ExpandSplit(const ExpandType& expand)
+Trait<std::nullptr_t, TFormat>::ExpandSplit(const ExpandType& expand)
 {
     return TFormat::ExpandSplit(expand);
 }
 
-template<typename TFormat, typename TFormatO>
+template<typename TFormat>
 typename TFormat::ExpandType 
-Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            ExpandNegationValue(const ExpandType& expand)
+Trait<std::nullptr_t, TFormat>::ExpandNegationValue(const ExpandType& expand)
 {
     return TFormat::ExpandNegationValue(expand);
 }
 
-template<typename TFormat, typename TFormatO>
+template<typename TFormat>
 typename TFormat::ElementType 
-Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            ExpandElementValue(const ExpandType& expand_split)
+Trait<std::nullptr_t, TFormat>::
+    ExpandElementValue(const ExpandType& expand_split)
 {
     return TFormat::ExpandElementValue(expand_split);
 }
 
-template<typename TFormat, typename TFormatO>
+template<typename TFormat>
 typename TFormat::ElementType 
-Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            ExpandCarryValue(const ExpandType& expand_split)
+Trait<std::nullptr_t, TFormat>::
+    ExpandCarryValue(const ExpandType& expand_split)
 {
     return TFormat::ExpandCarryValue(expand_split);
 }
 
-template<typename TFormat, typename TFormatO>
+template<typename TFormat>
 typename TFormat::ElementType 
-Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            LogElementValue(const ElementType& element)
+Trait<std::nullptr_t, TFormat>::LogElementValue(const ElementType& element)
 {
     return TFormat::LogElementValue(element);
 }
 
-template<typename TFormat, typename TFormatO>
+template<typename TFormat>
 typename TFormat::ElementType
-Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            ShiftRightElementValue(const ElementType& element, 
-                const SizeType& n)
+Trait<std::nullptr_t, TFormat>::
+    ShiftRightElementValue(const ElementType& element, const SizeType& n)
 {
     return TFormat::ShiftRightElementValue(element, n);
 }
 
 
-template<typename TFormat, typename TFormatO>
+template<typename TFormat>
 typename TFormat::ElementType
-Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            ShiftLeftElementValue(const ElementType& element, 
-                const SizeType& n)
+Trait<std::nullptr_t, TFormat>::
+    ShiftLeftElementValue(const ElementType& element, const SizeType& n)
 {
     return TFormat::ShiftLeftElementValue(element, n);
 }
 
-template<typename TFormat, typename TFormatO>
+template<typename TFormat>
 typename TFormat::ElementType 
-Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            GetElement(const TFormat& format, const SizeType& at)
+Trait<std::nullptr_t, TFormat>::GetElement(const TFormat& format, 
+    const SizeType& at)
 {
     return TFormat::GetElement(format, at);
 }
 
-template<typename TFormat, typename TFormatO>
+template<typename TFormat>
 typename TFormat::ElementType 
-Trait<TFormat, TFormatO, typename std::enable_if<
-    decltype(test::_helper::_math::_integer::_fmt::
-        _Has<TFormat, TFormatO>(0))::value &&
-    decltype(test::_helper::_math::_integer::_fmt::
-        _IsSame<TFormat, TFormatO>(0))::value, void>::type>::
-            SetElement(TFormat& format, const SizeType& at,
-                const ElementType& val)
+Trait<std::nullptr_t, TFormat>::SetElement(TFormat& format, const SizeType& at,
+    const ElementType& val)
 {
     return TFormat::SetElement(format, at, val);
 }
-
 
 } //!fmt
 
