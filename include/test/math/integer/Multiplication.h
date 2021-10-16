@@ -263,6 +263,52 @@ static void Multiplication(TAValue& a_upper, TAValue& a_lower,
     test::math::integer::Addition(*overflow_out, carry);
 }
 
+template<typename TAValue, typename TBValue,
+    typename TElement = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ElementType,
+    typename TExpand = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::ExpandType,
+    typename TSize = typename test::math::integer::fmt::
+        Trait<TAValue, TBValue>::SizeType,
+    typename = typename std::enable_if<test::math::integer::fmt::
+        Trait<TBValue>::Has, void>::type>
+static void Multiplication(TAValue& a_upper, TAValue& a_lower, 
+    const TBValue& b_upper, const TBValue& b_lower, 
+    typename std::remove_pointer<TAValue>::type * overflow_upper_out = nullptr,
+    typename std::remove_pointer<TAValue>::type * overflow_lower_out = nullptr)
+{
+    TAValue overflow_1{0};
+    TAValue overflow_2{0};
+    TAValue overflow_3{0};
+    TAValue overflow_upper_def{0};
+    TAValue overflow_lower_def{0};
+    TAValue* overflow_upper_ptr = overflow_upper_out == nullptr ?
+        &overflow_upper_def : overflow_upper_out;
+    TAValue* overflow_lower_ptr = overflow_lower_out == nullptr ?
+        &overflow_lower_def : overflow_lower_out;
+    TAValue a_lower_cpy = a_lower;
+    *overflow_lower_ptr = a_upper;
+
+    test::math::integer::Multiplication(a_lower, b_lower, &overflow_1);
+    test::math::integer::Multiplication(a_upper, b_lower, &overflow_2);
+
+    TElement carry = test::math::integer::Addition(a_upper, overflow_1);
+
+    test::math::integer::Multiplication(a_lower_cpy, b_upper, &overflow_3);
+    
+    carry = test::math::integer::Addition(a_upper, a_lower_cpy, carry);
+
+    test::math::integer::Multiplication(*overflow_lower_ptr, b_upper, 
+        overflow_upper_ptr);
+
+    carry = test::math::integer::Addition(*overflow_lower_ptr, overflow_2, carry);
+    test::math::integer::Addition(*overflow_upper_ptr, 0, carry);
+
+    carry = test::math::integer::Addition(*overflow_lower_ptr, overflow_3);
+    test::math::integer::Addition(*overflow_upper_ptr, 0, carry);
+}
+
+
 } //!integer
 
 } //!math
