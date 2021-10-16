@@ -2874,5 +2874,271 @@ int main()
         assert(o1.m_value[0] == 8);
         assert(o1.m_value[1] == 9);
     }
+    ////
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{0, 0};
+        Format<N, Bin> f2_up{0, 0};
+        Format<N, Bin> f2_lo{0, 0};
+        Format<N, Bin> of_up{0, 0};
+        Format<N, Bin> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(of_up.m_value[0] == 0);
+        assert(of_up.m_value[1] == 0);
+        assert(of_lo.m_value[0] == 0);
+        assert(of_lo.m_value[1] == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{0, 0};
+        Format<N, Bin> f1_lo{0, 0};
+        Format<N, Bin> f2_up{1, 1};
+        Format<N, Bin> f2_lo{1, 1};
+        Format<N, Bin> of_up{0, 0};
+        Format<N, Bin> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(of_up.m_value[0] == 0);
+        assert(of_up.m_value[1] == 0);
+        assert(of_lo.m_value[0] == 0);
+        assert(of_lo.m_value[1] == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        Format<N, Bin> f2_up{0, 0};
+        Format<N, Bin> f2_lo{0, 0};
+        Format<N, Bin> of_up{0, 0};
+        Format<N, Bin> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(of_up.m_value[0] == 0);
+        assert(of_up.m_value[1] == 0);
+        assert(of_lo.m_value[0] == 0);
+        assert(of_lo.m_value[1] == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{1, 1};
+        Format<N, Bin> f1_lo{1, 1};
+        Format<N, Bin> f2_up{1, 1};
+        Format<N, Bin> f2_lo{1, 1};
+        Format<N, Bin> of_up{0, 0};
+        Format<N, Bin> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 3);
+        assert(f1_up.m_value[1] == 4);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 2);
+        assert(of_up.m_value[0] == 1);
+        assert(of_up.m_value[1] == 0);
+        assert(of_lo.m_value[0] == 3);
+        assert(of_lo.m_value[1] == 2);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2_up{1, 1};
+        Format<N, Bin> f2_lo{1, 1};
+        Format<N, Bin> of_up{0, 0};
+        Format<N, Bin> of_lo{0, 0};
+        
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+            
+        assert(f1_up.m_value[0] == 254);
+        assert(f1_up.m_value[1] == 254);
+        assert(f1_lo.m_value[0] == 255);
+        assert(f1_lo.m_value[1] == 254);
+        assert(of_up.m_value[0] == 1);
+        assert(of_up.m_value[1] == 1);
+        assert(of_lo.m_value[0] == 0);
+        assert(of_lo.m_value[1] == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Bin> f1_up{255, 255};
+        Format<N, Bin> f1_lo{255, 255};
+        Format<N, Bin> f2_up{255, 255};
+        Format<N, Bin> f2_lo{255, 255};
+        Format<N, Bin> of_up{0, 0};
+        Format<N, Bin> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 0);
+        assert(of_up.m_value[0] == 255);
+        assert(of_up.m_value[1] == 255);
+        assert(of_lo.m_value[0] == 254);
+        assert(of_lo.m_value[1] == 255);
+    }
+    
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{0, 0};
+        Format<N, Dec> f2_up{0, 0};
+        Format<N, Dec> f2_lo{0, 0};
+        Format<N, Dec> of_up{0, 0};
+        Format<N, Dec> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(of_up.m_value[0] == 0);
+        assert(of_up.m_value[1] == 0);
+        assert(of_lo.m_value[0] == 0);
+        assert(of_lo.m_value[1] == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{0, 0};
+        Format<N, Dec> f1_lo{0, 0};
+        Format<N, Dec> f2_up{1, 1};
+        Format<N, Dec> f2_lo{1, 1};
+        Format<N, Dec> of_up{0, 0};
+        Format<N, Dec> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(of_up.m_value[0] == 0);
+        assert(of_up.m_value[1] == 0);
+        assert(of_lo.m_value[0] == 0);
+        assert(of_lo.m_value[1] == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        Format<N, Dec> f2_up{0, 0};
+        Format<N, Dec> f2_lo{0, 0};
+        Format<N, Dec> of_up{0, 0};
+        Format<N, Dec> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 0);
+        assert(f1_lo.m_value[1] == 0);
+        assert(of_up.m_value[0] == 0);
+        assert(of_up.m_value[1] == 0);
+        assert(of_lo.m_value[0] == 0);
+        assert(of_lo.m_value[1] == 0);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{1, 1};
+        Format<N, Dec> f1_lo{1, 1};
+        Format<N, Dec> f2_up{1, 1};
+        Format<N, Dec> f2_lo{1, 1};
+        Format<N, Dec> of_up{0, 0};
+        Format<N, Dec> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 3);
+        assert(f1_up.m_value[1] == 4);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 2);
+        assert(of_up.m_value[0] == 1);
+        assert(of_up.m_value[1] == 0);
+        assert(of_lo.m_value[0] == 3);
+        assert(of_lo.m_value[1] == 2);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2_up{1, 1};
+        Format<N, Dec> f2_lo{1, 1};
+        Format<N, Dec> of_up{0, 0};
+        Format<N, Dec> of_lo{0, 0};
+        
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+            
+        assert(f1_up.m_value[0] == 8);
+        assert(f1_up.m_value[1] == 8);
+        assert(f1_lo.m_value[0] == 9);
+        assert(f1_lo.m_value[1] == 8);
+        assert(of_up.m_value[0] == 1);
+        assert(of_up.m_value[1] == 1);
+        assert(of_lo.m_value[0] == 0);
+        assert(of_lo.m_value[1] == 1);
+    }
+    {
+        typedef std::size_t SizeType;
+        constexpr SizeType N = 2;
+        Format<N, Dec> f1_up{9, 9};
+        Format<N, Dec> f1_lo{9, 9};
+        Format<N, Dec> f2_up{9, 9};
+        Format<N, Dec> f2_lo{9, 9};
+        Format<N, Dec> of_up{0, 0};
+        Format<N, Dec> of_lo{0, 0};
+
+        test::math::integer::Multiplication(f1_up, f1_lo, f2_up, f2_lo, 
+            &of_up, &of_lo);
+
+        assert(f1_up.m_value[0] == 0);
+        assert(f1_up.m_value[1] == 0);
+        assert(f1_lo.m_value[0] == 1);
+        assert(f1_lo.m_value[1] == 0);
+        assert(of_up.m_value[0] == 9);
+        assert(of_up.m_value[1] == 9);
+        assert(of_lo.m_value[0] == 8);
+        assert(of_lo.m_value[1] == 9);
+    }
     return 0;
 }
