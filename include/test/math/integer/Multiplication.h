@@ -300,7 +300,7 @@ static void Multiplication(TAValue& a_upper, TAValue& a_lower,
 
     carry = test::math::integer::Addition(*overflow_lower_ptr, overflow_2, 
         carry);
-    carry += test::math::integer::Addition(*overflow_lower_ptr, overflow_2);
+    carry += test::math::integer::Addition(*overflow_lower_ptr, overflow_3);
     
     test::math::integer::Addition(*overflow_upper_ptr, 0, carry);
 }
