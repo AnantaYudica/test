@@ -291,20 +291,17 @@ static void Multiplication(TAValue& a_upper, TAValue& a_lower,
 
     test::math::integer::Multiplication(a_lower, b_lower, &overflow_1);
     test::math::integer::Multiplication(a_upper, b_lower, &overflow_2);
-
-    TElement carry = test::math::integer::Addition(a_upper, overflow_1);
-
     test::math::integer::Multiplication(a_lower_cpy, b_upper, &overflow_3);
-    
-    carry = test::math::integer::Addition(a_upper, a_lower_cpy, carry);
-
     test::math::integer::Multiplication(*overflow_lower_ptr, b_upper, 
         overflow_upper_ptr);
 
-    carry = test::math::integer::Addition(*overflow_lower_ptr, overflow_2, carry);
-    test::math::integer::Addition(*overflow_upper_ptr, 0, carry);
+    TElement carry = test::math::integer::Addition(a_upper, overflow_1);
+    carry += test::math::integer::Addition(a_upper, a_lower_cpy);
 
-    carry = test::math::integer::Addition(*overflow_lower_ptr, overflow_3);
+    carry = test::math::integer::Addition(*overflow_lower_ptr, overflow_2, 
+        carry);
+    carry += test::math::integer::Addition(*overflow_lower_ptr, overflow_2);
+    
     test::math::integer::Addition(*overflow_upper_ptr, 0, carry);
 }
 
