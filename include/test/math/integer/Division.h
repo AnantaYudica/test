@@ -23,10 +23,10 @@ namespace div
 enum class Flag : int
 {
     Ok = 0,
-    DivByZero,
-    DivByOne,
-    ReachMaxLoopsPredError,
-    ReachMaxLoopsNPredError
+    DivByZero = -1,
+    DivByOne = 1,
+    ReachMaxLoopsPredError = -2,
+    ReachMaxLoopsNPredError = -3
 };
 
 }
@@ -71,7 +71,7 @@ static test::math::integer::div::Flag Division(TAValue& a, const TBValue& b,
         if (res_b == test::math::integer::log::Flag::ZeroValue) 
         {
             for (TSize i = 0; i < NA; ++i)
-                TAValue::SetElement(a, i, 0);
+                TraitAType::SetElement(a, i, 0);
             return test::math::integer::div::Flag::DivByZero;
         }
         else if(b_elem == 1)
@@ -82,14 +82,14 @@ static test::math::integer::div::Flag Division(TAValue& a, const TBValue& b,
     {
         rem = a;
         for (TSize i = 0; i < NA; ++i)
-            TAValue::SetElement(a, i, 0);
+            TraitAType::SetElement(a, i, 0);
         return test::math::integer::div::Flag::Ok;
     }
     else if(diff == 0)
     {
         for (TSize i = 0; i < NA; ++i)
-            TAValue::SetElement(a, i, 0);
-        TAValue::SetElement(a, 0, 1);
+            TraitAType::SetElement(a, i, 0);
+        TraitAType::SetElement(a, 0, 1);
         return test::math::integer::div::Flag::Ok;
     }
 
@@ -118,7 +118,7 @@ static test::math::integer::div::Flag Division(TAValue& a, const TBValue& b,
 
         for (TSize i = 0; i < NA && i < NB; ++i)
         {
-            TAValue::SetElement(b_lower, i, TBValue::GetElement(b, i));
+            TraitAType::SetElement(b_lower, i, TraitBType::GetElement(b, i));
         }
         
         // Division used goldschmidt's algorithm
@@ -136,8 +136,7 @@ static test::math::integer::div::Flag Division(TAValue& a, const TBValue& b,
             // F = 2 - D
             {
                 test::math::integer::Subtraction(f_upper, f_lower, b_lower);
-                
-                TAValue::SetElement(f_upper, 0, 1);
+                TraitAType::SetElement(f_upper, 0, 1);
             }
 
             // N^ = N * F
@@ -162,7 +161,8 @@ static test::math::integer::div::Flag Division(TAValue& a, const TBValue& b,
             
             // Normalize 
             {
-                const auto check = test::math::integer::Logarithm(of2, b_upper, exp_b);
+                const auto check = test::math::integer::Logarithm(of2, 
+                    b_upper, exp_b);
 
                 if (exp_b >= val_a_max_exp)
                 {
