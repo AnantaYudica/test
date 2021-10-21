@@ -183,6 +183,24 @@ struct Format : public TTag<std::uint8_t, std::uint16_t, std::size_t>
                 static_cast<std::uint8_t>(args)...}
     {}
 
+    Format(const Format<N, TTag>& cpy) :
+        m_value{0}
+    {
+        for (std::size_t i = 0; i < Size; ++i)
+        {
+            (this->m_value)[i] = cpy.m_value[i];
+        }
+    }
+
+    Format<N, TTag>& operator=(const Format<N, TTag>& cpy)
+    {
+        for (std::size_t i = 0; i < Size; ++i)
+        {
+            (this->m_value)[i] = cpy.m_value[i];
+        }
+        return *this;
+    }
+
 };
 
 #endif //!TEST_MATH_INTEGER_FORMAT__TEST_H_
