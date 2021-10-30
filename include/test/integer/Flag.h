@@ -43,13 +43,13 @@ private:
         kSigned;
     static constexpr ValueType ms_formatValueMask = 
         kBinaryFormat | kOctalFormat | kDecimalFormat;
-    static constexpr ValueType ms_initValueMask = kNegative | kSigned | 
+    static constexpr ValueType ms_initValueMask = kSigned | 
         ms_formatValueMask;
 private:
     ValueType m_val;
 public:
-    inline Flag();
-    inline Flag(const ValueType& val);
+    inline constexpr Flag();
+    inline constexpr Flag(const ValueType& val);
     ~Flag() = default;
 public:
     inline Flag(const Flag& cpy);
@@ -64,13 +64,13 @@ public:
     inline void SetNegative();
     inline void UnsetNegative();
 public:
-    inline bool IsSigned() const;
+    inline constexpr bool IsSigned() const;
 public:
-    inline bool IsUndefinedFormat() const;
-    inline bool IsBinaryFormat() const;
-    inline bool IsOctalFormat() const;
-    inline bool IsDecimalFormat() const;
-    inline ValueType Format() const;
+    inline constexpr bool IsUndefinedFormat() const;
+    inline constexpr bool IsBinaryFormat() const;
+    inline constexpr bool IsOctalFormat() const;
+    inline constexpr bool IsDecimalFormat() const;
+    inline constexpr ValueType Format() const;
 public:
     inline OperatorValueType operator+=(const Flag& flag);
     inline OperatorValueType operator-=(const Flag& flag);
@@ -91,20 +91,20 @@ public:
     inline operator ValueType() const;
 };
 
-inline Flag::Flag() :
+constexpr Flag::Flag() :
     m_val(0)
 {}
 
-inline Flag::Flag(const ValueType& val) :
+constexpr Flag::Flag(const ValueType& val) :
     m_val(val & ms_initValueMask)
 {}
 
 inline Flag::Flag(const Flag& cpy) :
-    m_val(cpy.m_val & ms_initValueMask)
+    m_val(cpy.m_val)
 {}
 
 inline Flag::Flag(Flag&& mov) :
-    m_val(mov.m_val & ms_initValueMask)
+    m_val(mov.m_val)
 {
     mov.m_val = 0;
 }
@@ -144,33 +144,32 @@ inline void Flag::UnsetNegative()
     if (IsSigned()) m_val &= ~kNegative;
 }
 
-inline bool Flag::IsSigned() const
+inline constexpr bool Flag::IsSigned() const
 {
     return m_val & kSigned;
 }
 
-inline bool Flag::IsUndefinedFormat() const
+inline constexpr bool Flag::IsUndefinedFormat() const
 {
-    const auto fmt = Format();
-    return fmt == 0;
+    return Format() == 0;
 }
 
-inline bool Flag::IsBinaryFormat() const
+inline constexpr bool Flag::IsBinaryFormat() const
 {
     return Format() == kBinaryFormat;
 }
 
-inline bool Flag::IsOctalFormat() const
+inline constexpr bool Flag::IsOctalFormat() const
 {
     return Format() == kOctalFormat;
 }
 
-inline bool Flag::IsDecimalFormat() const
+inline constexpr bool Flag::IsDecimalFormat() const
 {
     return Format() == kDecimalFormat;
 }
 
-inline typename Flag::ValueType Flag::Format() const
+inline constexpr typename Flag::ValueType Flag::Format() const
 {
     return m_val & ms_formatValueMask;
 }
