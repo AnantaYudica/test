@@ -105,9 +105,7 @@ inline Flag::Flag(const Flag& cpy) :
 
 inline Flag::Flag(Flag&& mov) :
     m_val(mov.m_val)
-{
-    mov.m_val = 0;
-}
+{}
 
 inline Flag& Flag::operator=(const Flag& cpy)
 {
