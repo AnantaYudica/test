@@ -32,49 +32,64 @@ template<std::size_t N, bool Sign>
 class Byte
 {
 public:
-    typedef test::byte::Iterator<std::uint8_t*> IteratorType;
-    typedef test::byte::Iterator<const std::uint8_t*> ConstIteratorType;
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    using IteratorType = test::byte::Iterator<std::uint8_t*, TCast, NStep>;
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    using ConstIteratorType = test::byte::Iterator<const std::uint8_t*, 
+        TCast, NStep>;
 private:
     static void _SetZero(std::uint8_t* ptr, std::size_t size);
 private:
-    template<typename TIDestValue>
-    static void _Set(IteratorType dest_bg, IteratorType dest_ed, 
+    template<typename TIDestValue, typename TCast, std::size_t NStep>
+    static void _Set(IteratorType<TCast, NStep> dest_bg, 
+        IteratorType<TCast, NStep> dest_ed, 
         test::byte::Iterator<TIDestValue> src_bg,
         test::byte::Iterator<TIDestValue> src_ed);
-    static void _Set(IteratorType dest_bg, IteratorType dest_ed, 
+    template<typename TCast, std::size_t NStep>
+    static void _Set(IteratorType<TCast, NStep> dest_bg, 
+        IteratorType<TCast, NStep> dest_ed, 
         const std::uint8_t* ptr, std::size_t size);
     template<typename TIDestValue>
     static void _Set(std::uint8_t* ptr, std::size_t size, 
         test::byte::Iterator<TIDestValue> src_bg,
         test::byte::Iterator<TIDestValue> src_ed);
 private:
-    template<typename TIDestValue>
-    static void _And(IteratorType dest_bg, IteratorType dest_ed, 
+    template<typename TIDestValue, typename TCast, std::size_t NStep>
+    static void _And(IteratorType<TCast, NStep> dest_bg, 
+        IteratorType<TCast, NStep> dest_ed, 
         test::byte::Iterator<TIDestValue> src_bg,
         test::byte::Iterator<TIDestValue> src_ed);
-    static void _And(IteratorType dest_bg, IteratorType dest_ed, 
+    template<typename TCast, std::size_t NStep>
+    static void _And(IteratorType<TCast, NStep> dest_bg, 
+        IteratorType<TCast, NStep> dest_ed, 
         const std::uint8_t* ptr, std::size_t size);
     template<typename TIDestValue>
     static void _And(std::uint8_t* ptr, std::size_t size, 
         test::byte::Iterator<TIDestValue> src_bg,
         test::byte::Iterator<TIDestValue> src_ed);
 private:
-    template<typename TIDestValue>
-    static void _Or(IteratorType dest_bg, IteratorType dest_ed, 
+    template<typename TIDestValue, typename TCast, std::size_t NStep>
+    static void _Or(IteratorType<TCast, NStep> dest_bg, 
+        IteratorType<TCast, NStep> dest_ed, 
         test::byte::Iterator<TIDestValue> src_bg,
         test::byte::Iterator<TIDestValue> src_ed);
-    static void _Or(IteratorType dest_bg, IteratorType dest_ed, 
+    template<typename TCast, std::size_t NStep>
+    static void _Or(IteratorType<TCast, NStep> dest_bg, 
+        IteratorType<TCast, NStep> dest_ed, 
         const std::uint8_t* ptr, std::size_t size);
     template<typename TIDestValue>
     static void _Or(std::uint8_t* ptr, std::size_t size, 
         test::byte::Iterator<TIDestValue> src_bg,
         test::byte::Iterator<TIDestValue> src_ed);
 private:
-    template<typename TIDestValue>
-    static void _Xor(IteratorType dest_bg, IteratorType dest_ed, 
+    template<typename TIDestValue, typename TCast, std::size_t NStep>
+    static void _Xor(IteratorType<TCast, NStep> dest_bg, 
+        IteratorType<TCast, NStep> dest_ed, 
         test::byte::Iterator<TIDestValue> src_bg,
         test::byte::Iterator<TIDestValue> src_ed);
-    static void _Xor(IteratorType dest_bg, IteratorType dest_ed, 
+    template<typename TCast, std::size_t NStep>
+    static void _Xor(IteratorType<TCast, NStep> dest_bg, 
+        IteratorType<TCast, NStep> dest_ed, 
         const std::uint8_t* ptr, std::size_t size);
     template<typename TIDestValue>
     static void _Xor(std::uint8_t* ptr, std::size_t size, 
@@ -93,11 +108,14 @@ private:
     static void _LShift(std::uint8_t* ptr, std::size_t size, 
         std::size_t shift);
 private:
-    template<typename TBValue>
-    static bool _Equal(ConstIteratorType a_bg, ConstIteratorType a_ed, 
+    template<typename TBValue, typename TCast, std::size_t NStep>
+    static bool _Equal(ConstIteratorType<TCast, NStep> a_bg, 
+        ConstIteratorType<TCast, NStep> a_ed, 
         test::byte::Iterator<TBValue> b_bg, 
         test::byte::Iterator<TBValue> b_ed);
-    static bool _Equal(ConstIteratorType a_bg, ConstIteratorType a_ed, 
+    template<typename TCast, std::size_t NStep>
+    static bool _Equal(ConstIteratorType<TCast, NStep> a_bg, 
+        ConstIteratorType<TCast, NStep> a_ed, 
         const std::uint8_t* ptr, std::size_t size);
     template<typename TBValue>
     static bool _Equal(const std::uint8_t* ptr, std::size_t size, 
@@ -154,17 +172,25 @@ public:
 public:
     std::size_t Size() const;
 public:
-    IteratorType Begin();
-    IteratorType End();
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    IteratorType<TCast, NStep> Begin();
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    IteratorType<TCast, NStep> End();
 public:
-    ConstIteratorType Begin() const;
-    ConstIteratorType End() const;
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    ConstIteratorType<TCast, NStep> Begin() const;
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    ConstIteratorType<TCast, NStep> End() const;
 public:
-    IteratorType ReverseBegin();
-    IteratorType ReverseEnd();
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    IteratorType<TCast, NStep> ReverseBegin();
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    IteratorType<TCast, NStep> ReverseEnd();
 public:
-    ConstIteratorType ReverseBegin() const;
-    ConstIteratorType ReverseEnd() const;
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    ConstIteratorType<TCast, NStep> ReverseBegin() const;
+    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
+    ConstIteratorType<TCast, NStep> ReverseEnd() const;
 public:
     template<typename T>
     T CastTo(const std::size_t& off = 0) const;
@@ -328,8 +354,9 @@ void Byte<N, Sign>::_SetZero(std::uint8_t* ptr, std::size_t size)
 }
 
 template<std::size_t N, bool Sign>
-template<typename TIDestValue>
-void Byte<N, Sign>::_Set(IteratorType dest_bg, IteratorType dest_ed, 
+template<typename TIDestValue, typename TCast, std::size_t NStep>
+void Byte<N, Sign>::_Set(IteratorType<TCast, NStep> dest_bg, 
+    IteratorType<TCast, NStep> dest_ed, 
     test::byte::Iterator<TIDestValue> src_bg,
     test::byte::Iterator<TIDestValue> src_ed)
 {
@@ -341,13 +368,15 @@ void Byte<N, Sign>::_Set(IteratorType dest_bg, IteratorType dest_ed,
 }
 
 template<std::size_t N, bool Sign>
-void Byte<N, Sign>::_Set(IteratorType dest_bg, IteratorType dest_ed, 
+template<typename TCast, std::size_t NStep>
+void Byte<N, Sign>::_Set(IteratorType<TCast, NStep> dest_bg, 
+    IteratorType<TCast, NStep> dest_ed, 
     const std::uint8_t* ptr, std::size_t size)
 {
     const auto op = GetOperator();
-    ConstIteratorType begin{const_cast<std::uint8_t*>(ptr), 0,
+    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
         size, op.Begin(0, size), op};
-    ConstIteratorType end{const_cast<std::uint8_t*>(ptr), 0, 
+    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
         size, op.End(0, size), op};
     _Set(dest_bg, dest_ed, begin, end);
 }
@@ -359,14 +388,15 @@ void Byte<N, Sign>::_Set(std::uint8_t* ptr, std::size_t size,
     test::byte::Iterator<TIDestValue> src_ed)
 {
     const auto op = GetOperator();
-    IteratorType begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType end{ptr, 0, size, op.End(0, size), op};
+    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
+    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
     _Set(begin, end, src_bg, src_ed);
 }
 
 template<std::size_t N, bool Sign>
-template<typename TIDestValue>
-void Byte<N, Sign>::_And(IteratorType dest_bg, IteratorType dest_ed,
+template<typename TIDestValue, typename TCast, std::size_t NStep>
+void Byte<N, Sign>::_And(IteratorType<TCast, NStep> dest_bg, 
+    IteratorType<TCast, NStep> dest_ed,
     test::byte::Iterator<TIDestValue> src_bg,
     test::byte::Iterator<TIDestValue> src_ed)
 {
@@ -378,13 +408,15 @@ void Byte<N, Sign>::_And(IteratorType dest_bg, IteratorType dest_ed,
 }
 
 template<std::size_t N, bool Sign>
-void Byte<N, Sign>::_And(IteratorType dest_bg, IteratorType dest_ed, 
+template<typename TCast, std::size_t NStep>
+void Byte<N, Sign>::_And(IteratorType<TCast, NStep> dest_bg, 
+    IteratorType<TCast, NStep> dest_ed, 
     const std::uint8_t* ptr, std::size_t size)
 {
     const auto op = GetOperator();
-    ConstIteratorType begin{const_cast<std::uint8_t*>(ptr), 0,
+    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
         size, op.Begin(0, size), op};
-    ConstIteratorType end{const_cast<std::uint8_t*>(ptr), 0, 
+    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
         size, op.End(0, size), op};
     _And(dest_bg, dest_ed, begin, end);
 }
@@ -396,14 +428,15 @@ void Byte<N, Sign>::_And(std::uint8_t* ptr, std::size_t size,
     test::byte::Iterator<TIDestValue> src_ed)
 {
     const auto op = GetOperator();
-    IteratorType begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType end{ptr, 0, size, op.End(0, size), op};
+    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
+    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
     _And(begin, end, src_bg, src_ed);
 }
 
 template<std::size_t N, bool Sign>
-template<typename TIDestValue>
-void Byte<N, Sign>::_Or(IteratorType dest_bg, IteratorType dest_ed, 
+template<typename TIDestValue, typename TCast, std::size_t NStep>
+void Byte<N, Sign>::_Or(IteratorType<TCast, NStep> dest_bg, 
+    IteratorType<TCast, NStep> dest_ed, 
     test::byte::Iterator<TIDestValue> src_bg,
     test::byte::Iterator<TIDestValue> src_ed)
 {
@@ -415,13 +448,15 @@ void Byte<N, Sign>::_Or(IteratorType dest_bg, IteratorType dest_ed,
 }
 
 template<std::size_t N, bool Sign>
-void Byte<N, Sign>::_Or(IteratorType dest_bg, IteratorType dest_ed, 
+template<typename TCast, std::size_t NStep>
+void Byte<N, Sign>::_Or(IteratorType<TCast, NStep> dest_bg, 
+    IteratorType<TCast, NStep> dest_ed, 
     const std::uint8_t* ptr, std::size_t size)
 {
     const auto op = GetOperator();
-    ConstIteratorType begin{const_cast<std::uint8_t*>(ptr), 0,
+    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
         size, op.Begin(0, size), op};
-    ConstIteratorType end{const_cast<std::uint8_t*>(ptr), 0, 
+    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
         size, op.End(0, size), op};
     _Or(dest_bg, dest_ed, begin, end);
 }
@@ -433,14 +468,15 @@ void Byte<N, Sign>::_Or(std::uint8_t* ptr, std::size_t size,
     test::byte::Iterator<TIDestValue> src_ed)
 {
     const auto op = GetOperator();
-    IteratorType begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType end{ptr, 0, size, op.End(0, size), op};
+    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
+    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
     _Or(begin, end, src_bg, src_ed);
 }
 
 template<std::size_t N, bool Sign>
-template<typename TIDestValue>
-void Byte<N, Sign>::_Xor(IteratorType dest_bg, IteratorType dest_ed, 
+template<typename TIDestValue, typename TCast, std::size_t NStep>
+void Byte<N, Sign>::_Xor(IteratorType<TCast, NStep> dest_bg, 
+    IteratorType<TCast, NStep> dest_ed, 
     test::byte::Iterator<TIDestValue> src_bg,
     test::byte::Iterator<TIDestValue> src_ed)
 {
@@ -452,13 +488,15 @@ void Byte<N, Sign>::_Xor(IteratorType dest_bg, IteratorType dest_ed,
 }
 
 template<std::size_t N, bool Sign>
-void Byte<N, Sign>::_Xor(IteratorType dest_bg, IteratorType dest_ed, 
+template<typename TCast, std::size_t NStep>
+void Byte<N, Sign>::_Xor(IteratorType<TCast, NStep> dest_bg, 
+    IteratorType<TCast, NStep> dest_ed, 
     const std::uint8_t* ptr, std::size_t size)
 {
     const auto op = GetOperator();
-    ConstIteratorType begin{const_cast<std::uint8_t*>(ptr), 0,
+    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
         size, op.Begin(0, size), op};
-    ConstIteratorType end{const_cast<std::uint8_t*>(ptr), 0, 
+    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
         size, op.End(0, size), op};
     _Xor(dest_bg, dest_ed, begin, end);
 }
@@ -470,8 +508,8 @@ void Byte<N, Sign>::_Xor(std::uint8_t* ptr, std::size_t size,
     test::byte::Iterator<TIDestValue> src_ed)
 {
     const auto op = GetOperator();
-    IteratorType begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType end{ptr, 0, size, op.End(0, size), op};
+    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
+    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
     _Xor(begin, end, src_bg, src_ed);
 }
 
@@ -494,8 +532,8 @@ void Byte<N, Sign>::_RShift(std::uint8_t* ptr, std::size_t size,
     const std::size_t start = shift / 8;
     const std::size_t rem = shift % 8;
     const std::size_t inv_rem = 8 - rem;
-    IteratorType begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType end{ptr, 0, size, op.End(0, size), op};
+    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
+    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
     auto it = begin;
     std::uint8_t prev = *it, sign = (((std::int8_t)*it) < 0 ? 0xff : 0);
     for(std::size_t i = 0; it != end; ++i, ++it)
@@ -524,8 +562,8 @@ void Byte<N, Sign>::_RShift(std::uint8_t* ptr, std::size_t size,
     const std::size_t start = shift / 8;
     const std::size_t rem = shift % 8;
     const std::size_t inv_rem = 8 - rem;
-    IteratorType begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType end{ptr, 0, size, op.End(0, size), op};
+    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
+    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
     auto it = begin;
     std::uint8_t prev = *it;
     for(std::size_t i = 0; it != end; ++i, ++it)
@@ -553,8 +591,8 @@ void Byte<N, Sign>::_LShift(std::uint8_t* ptr, std::size_t size,
     const std::size_t start = shift / 8;
     const std::size_t rem = shift % 8;
     const std::size_t inv_rem = 8 - rem;
-    IteratorType begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType end{ptr, 0, size, op.End(0, size), op};
+    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
+    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
     auto it = begin;
     std::uint8_t prev = *it;
     for(std::size_t i = 0; it != end; ++i, ++it)
@@ -574,8 +612,9 @@ void Byte<N, Sign>::_LShift(std::uint8_t* ptr, std::size_t size,
 }
 
 template<std::size_t N, bool Sign>
-template<typename TBValue>
-bool Byte<N, Sign>::_Equal(ConstIteratorType a_bg, ConstIteratorType a_ed, 
+template<typename TBValue, typename TCast, std::size_t NStep>
+bool Byte<N, Sign>::_Equal(ConstIteratorType<TCast, NStep> a_bg, 
+    ConstIteratorType<TCast, NStep> a_ed, 
     test::byte::Iterator<TBValue> b_bg, test::byte::Iterator<TBValue> b_ed)
 {
     while(a_bg != a_ed && b_bg != b_ed)
@@ -587,13 +626,15 @@ bool Byte<N, Sign>::_Equal(ConstIteratorType a_bg, ConstIteratorType a_ed,
 }
     
 template<std::size_t N, bool Sign>
-bool Byte<N, Sign>::_Equal(ConstIteratorType a_bg, ConstIteratorType a_ed, 
+template<typename TCast, std::size_t NStep>
+bool Byte<N, Sign>::_Equal(ConstIteratorType<TCast, NStep> a_bg, 
+    ConstIteratorType<TCast, NStep> a_ed, 
     const std::uint8_t* ptr, std::size_t size)
 {
     const auto op = GetOperator();
-    ConstIteratorType begin{const_cast<std::uint8_t*>(ptr), 0,
+    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
         size, op.Begin(0, size), op};
-    ConstIteratorType end{const_cast<std::uint8_t*>(ptr), 0, 
+    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
         size, op.End(0, size), op};
     return _Equal(a_bg, a_ed, begin, end);
 }
@@ -604,10 +645,10 @@ bool Byte<N, Sign>::_Equal(const std::uint8_t* ptr, std::size_t size,
     test::byte::Iterator<TBValue> b_bg, test::byte::Iterator<TBValue> b_ed)
 {
     const auto op = GetOperator();
-    ConstIteratorType begin{const_cast<std::uint8_t*>(ptr), 0, size, 
-        op.Begin(0, size), op};
-    ConstIteratorType end{const_cast<std::uint8_t*>(ptr), 0, size, 
-        op.End(0, size), op};
+    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0, 
+        size, op.Begin(0, size), op};
+    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
+        size, op.End(0, size), op};
     return _Equal(begin, end, b_bg, b_ed);
 }
 
@@ -750,55 +791,73 @@ std::size_t Byte<N, Sign>::Size() const
 }
 
 template<std::size_t N, bool Sign>
-typename Byte<N, Sign>::IteratorType Byte<N, Sign>::Begin()
+template<typename TCast, std::size_t NStep>
+typename Byte<N, Sign>::template IteratorType<TCast, NStep> 
+Byte<N, Sign>::Begin()
 {
     const auto op = GetOperator();
-    return {m_block, 0, N, op.Begin(0, N), op};
+    return {m_block, 0, N, op.Begin(0, N, NStep), op};
 }
 
 template<std::size_t N, bool Sign>
-typename Byte<N, Sign>::IteratorType Byte<N, Sign>::End()
+template<typename TCast, std::size_t NStep>
+typename Byte<N, Sign>::template IteratorType<TCast, NStep>  
+Byte<N, Sign>::End()
 {
     const auto op = GetOperator();
-    return {m_block, 0, N, op.End(0, N), op};
+    return {m_block, 0, N, op.End(0, N, NStep), op};
 }
 
 template<std::size_t N, bool Sign>
-typename Byte<N, Sign>::ConstIteratorType Byte<N, Sign>::Begin() const
+template<typename TCast, std::size_t NStep>
+typename Byte<N, Sign>::template ConstIteratorType<TCast, NStep> 
+Byte<N, Sign>::Begin() const
 {
-    return const_cast<Byte<N, Sign>*>(this)->Begin();
+    return const_cast<Byte<N, Sign>*>(this)->template Begin<TCast, NStep>();
 }
 
 template<std::size_t N, bool Sign>
-typename Byte<N, Sign>::ConstIteratorType Byte<N, Sign>::End() const
+template<typename TCast, std::size_t NStep>
+typename Byte<N, Sign>::template ConstIteratorType<TCast, NStep> 
+Byte<N, Sign>::End() const
 {
-    return const_cast<Byte<N, Sign>*>(this)->End();
+    return const_cast<Byte<N, Sign>*>(this)->template End<TCast, NStep>();
 }
 
 template<std::size_t N, bool Sign>
-typename Byte<N, Sign>::IteratorType Byte<N, Sign>::ReverseBegin()
+template<typename TCast, std::size_t NStep>
+typename Byte<N, Sign>::template IteratorType<TCast, NStep> 
+Byte<N, Sign>::ReverseBegin()
 {
     const auto op = GetReverseOperator();
-    return {m_block, 0, N, op.Begin(0, N), op};
+    return {m_block, 0, N, op.Begin(0, N, NStep), op};
 }
 
 template<std::size_t N, bool Sign>
-typename Byte<N, Sign>::IteratorType Byte<N, Sign>::ReverseEnd()
+template<typename TCast, std::size_t NStep>
+typename Byte<N, Sign>::template IteratorType<TCast, NStep> 
+Byte<N, Sign>::ReverseEnd()
 {
     const auto op = GetReverseOperator();
-    return {m_block, 0, N, op.End(0, N), op};
+    return {m_block, 0, N, op.End(0, N, NStep), op};
 }
 
 template<std::size_t N, bool Sign>
-typename Byte<N, Sign>::ConstIteratorType Byte<N, Sign>::ReverseBegin() const
+template<typename TCast, std::size_t NStep>
+typename Byte<N, Sign>::template ConstIteratorType<TCast, NStep> 
+Byte<N, Sign>::ReverseBegin() const
 {
-    return const_cast<Byte<N, Sign>*>(this)->ReverseBegin();
+    return const_cast<Byte<N, Sign>*>(this)->
+        template ReverseBegin<TCast, NStep>();
 }
 
 template<std::size_t N, bool Sign>
-typename Byte<N, Sign>::ConstIteratorType Byte<N, Sign>::ReverseEnd() const
+template<typename TCast, std::size_t NStep>
+typename Byte<N, Sign>::template ConstIteratorType<TCast, NStep> 
+Byte<N, Sign>::ReverseEnd() const
 {
-    return const_cast<Byte<N, Sign>*>(this)->ReverseEnd();
+    return const_cast<Byte<N, Sign>*>(this)->
+        template ReverseEnd<TCast, NStep>();
 }
 
 template<std::size_t N, bool Sign>
