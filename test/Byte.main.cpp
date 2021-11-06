@@ -677,7 +677,7 @@ int main()
         assert(b3 == 0xF012AA2211);
     }
     {
-        Obj1<int> obj1{.val=0x10c01104};
+        Obj1<std::uint32_t> obj1{.val=0x10c01104};
         {
             std::uint8_t res[]{0x04, 0x11, 0xc0, 0x10};
             std::size_t i = 0;
@@ -687,6 +687,35 @@ int main()
                 ++i;
             }
             assert(i == 4);
+        }
+        
+    }
+    ////
+    {
+        Obj1<std::uint32_t> obj1{.val=0x10c01104};
+        {
+            std::uint16_t res[]{0x1104, 0x10c0};
+            std::size_t i = 0;
+            auto it = obj1.byte.template Begin<std::uint16_t>();
+            const auto end = obj1.byte.template End<std::uint16_t>(); 
+            for(; it != end; ++it)
+            {
+                assert(*it == res[i]);
+                ++i;
+            }
+            assert(i == 2);
+        } 
+        {
+            std::uint16_t res[]{0x10c0, 0x1104};
+            std::size_t i = 0;
+            auto it = obj1.byte.template ReverseBegin<std::uint16_t>();
+            const auto end = obj1.byte.template ReverseEnd<std::uint16_t>(); 
+            for(; it != end; ++it)
+            {
+                assert(*it == res[i]);
+                ++i;
+            }
+            assert(i == 2);
         }
         
     }
