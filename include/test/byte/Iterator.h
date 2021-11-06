@@ -12,12 +12,13 @@ namespace test
 namespace byte
 {
 
-template<typename TPointer>
+template<typename TPointer, typename TCast = std::uint8_t, 
+    std::size_t NStep = sizeof(TCast)>
 class Iterator
 {};
 
-template<>
-class Iterator<const test::Pointer<std::uint8_t>>
+template<typename TCast, std::size_t NStep>
+class Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>
 {
 public:
     typedef test::Pointer<std::uint8_t> PointerType;
@@ -32,41 +33,45 @@ public:
 public:
     ~Iterator();
 public:
-    Iterator(const Iterator<ConstPointerType>& cpy);
-    Iterator(Iterator<ConstPointerType>&& mov);
+    Iterator(const Iterator<ConstPointerType, TCast, NStep>& cpy);
+    Iterator(Iterator<ConstPointerType, TCast, NStep>&& mov);
 public:
-    Iterator<const test::Pointer<std::uint8_t>>& 
-        operator=(const Iterator<ConstPointerType>& cpy);
-    Iterator<const test::Pointer<std::uint8_t>>& 
-        operator=(Iterator<ConstPointerType>&& mov);
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
+        operator=(const Iterator<ConstPointerType, TCast, NStep>& cpy);
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
+        operator=(Iterator<ConstPointerType, TCast, NStep>&& mov);
 public:
-    Iterator<const test::Pointer<std::uint8_t>>& 
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
         operator+=(const std::size_t& index);
-    Iterator<const test::Pointer<std::uint8_t>>& 
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
         operator-=(const std::size_t& index);
 public:
-    const std::uint8_t& operator*() const;
+    const TCast& operator*() const;
 public:
-    Iterator<const test::Pointer<std::uint8_t>>& operator++();
-    Iterator<const test::Pointer<std::uint8_t>> operator++(int);
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& operator++();
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> operator++(int);
 public:
-    Iterator<const test::Pointer<std::uint8_t>>& operator--();
-    Iterator<const test::Pointer<std::uint8_t>> operator--(int);
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& operator--();
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> operator--(int);
 public:
-    Iterator<const test::Pointer<std::uint8_t>> 
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
         operator+(const std::size_t& index);
-    Iterator<const test::Pointer<std::uint8_t>> 
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
         operator-(const std::size_t& index);
-    Iterator<const test::Pointer<std::uint8_t>> operator+(const int& index);
-    Iterator<const test::Pointer<std::uint8_t>> operator-(const int& index);
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
+        operator+(const int& index);
+    Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
+        operator-(const int& index);
 public:
-    bool operator==(const Iterator<ConstPointerType>& other) const;
-    bool operator!=(const Iterator<ConstPointerType>& other) const;
+    bool operator==(const Iterator<ConstPointerType, 
+        TCast, NStep>& other) const;
+    bool operator!=(const Iterator<ConstPointerType, 
+        TCast, NStep>& other) const;
 };
 
-template<>
-class Iterator<test::Pointer<std::uint8_t>> :
-    public Iterator<const test::Pointer<std::uint8_t>>
+template<typename TCast, std::size_t NStep>
+class Iterator<test::Pointer<std::uint8_t>, TCast, NStep> :
+    public Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>
 {
 public:
     typedef test::Pointer<std::uint8_t> PointerType;
@@ -77,39 +82,45 @@ public:
 public:
     ~Iterator();
 public:
-    Iterator(const Iterator<PointerType>& cpy);
-    Iterator(Iterator<PointerType>&& mov);
+    Iterator(const Iterator<PointerType, TCast, NStep>& cpy);
+    Iterator(Iterator<PointerType, TCast, NStep>&& mov);
 public:
-    Iterator<test::Pointer<std::uint8_t>>& 
-        operator=(const Iterator<PointerType> & cpy);
-    Iterator<test::Pointer<std::uint8_t>>& 
-        operator=(Iterator<PointerType> && mov);
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
+        operator=(const Iterator<PointerType, TCast, NStep> & cpy);
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
+        operator=(Iterator<PointerType, TCast, NStep> && mov);
 public:
-    Iterator<test::Pointer<std::uint8_t>>& 
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
         operator+=(const std::size_t& index);
-    Iterator<test::Pointer<std::uint8_t>>& 
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
         operator-=(const std::size_t& index);
 public:
-    std::uint8_t& operator*();
-    const std::uint8_t& operator*() const;
+    TCast& operator*();
+    const TCast& operator*() const;
 public:
-    Iterator<test::Pointer<std::uint8_t>>& operator++();
-    Iterator<test::Pointer<std::uint8_t>>  operator++(int);
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& operator++();
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep>  operator++(int);
 public:
-    Iterator<test::Pointer<std::uint8_t>>& operator--();
-    Iterator<test::Pointer<std::uint8_t>> operator--(int);
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& operator--();
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep> operator--(int);
 public:
-    Iterator<test::Pointer<std::uint8_t>> operator+(const std::size_t& index);
-    Iterator<test::Pointer<std::uint8_t>> operator-(const std::size_t& index);
-    Iterator<test::Pointer<std::uint8_t>> operator+(const int& index);
-    Iterator<test::Pointer<std::uint8_t>> operator-(const int& index);
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+        operator+(const std::size_t& index);
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+        operator-(const std::size_t& index);
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+        operator+(const int& index);
+    Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+        operator-(const int& index);
 public:
-    bool operator==(const Iterator<ConstPointerType>& other) const;
-    bool operator!=(const Iterator<ConstPointerType>& other) const;
+    bool operator==(const Iterator<ConstPointerType, 
+        TCast, NStep>& other) const;
+    bool operator!=(const Iterator<ConstPointerType, 
+        TCast, NStep>& other) const;
 };
 
-template<>
-class Iterator<const std::uint8_t*>
+template<typename TCast, std::size_t NStep>
+class Iterator<const std::uint8_t*, TCast, NStep>
 {
 public:
     typedef std::uint8_t* PointerType;
@@ -124,36 +135,43 @@ public:
 public:
     ~Iterator();
 public:
-    Iterator(const Iterator<ConstPointerType>& cpy);
-    Iterator(Iterator<ConstPointerType>&& mov);
+    Iterator(const Iterator<ConstPointerType, TCast, NStep>& cpy);
+    Iterator(Iterator<ConstPointerType, TCast, NStep>&& mov);
 public:
-    Iterator<const std::uint8_t*>& 
-        operator=(const Iterator<ConstPointerType>& cpy);
-    Iterator<const std::uint8_t*>& 
-        operator=(Iterator<ConstPointerType>&& mov);
+    Iterator<const std::uint8_t*, TCast, NStep>& 
+        operator=(const Iterator<ConstPointerType, TCast, NStep>& cpy);
+    Iterator<const std::uint8_t*, TCast, NStep>& 
+        operator=(Iterator<ConstPointerType, TCast, NStep>&& mov);
 public:
-    Iterator<const std::uint8_t*>& operator+=(const std::size_t& index);
-    Iterator<const std::uint8_t*>& operator-=(const std::size_t& index);
+    Iterator<const std::uint8_t*, TCast, NStep>& 
+        operator+=(const std::size_t& index);
+    Iterator<const std::uint8_t*, TCast, NStep>& 
+        operator-=(const std::size_t& index);
 public:
-    const std::uint8_t& operator*() const;
+    const TCast& operator*() const;
 public:
-    Iterator<const std::uint8_t*>& operator++();
-    Iterator<const std::uint8_t*> operator++(int);
+    Iterator<const std::uint8_t*, TCast, NStep>& operator++();
+    Iterator<const std::uint8_t*, TCast, NStep> operator++(int);
 public:
-    Iterator<const std::uint8_t*>& operator--();
-    Iterator<const std::uint8_t*> operator--(int);
+    Iterator<const std::uint8_t*, TCast, NStep>& operator--();
+    Iterator<const std::uint8_t*, TCast, NStep> operator--(int);
 public:
-    Iterator<const std::uint8_t*> operator+(const std::size_t& index);
-    Iterator<const std::uint8_t*> operator-(const std::size_t& index);
-    Iterator<const std::uint8_t*> operator+(const int& index);
-    Iterator<const std::uint8_t*> operator-(const int& index);
+    Iterator<const std::uint8_t*, TCast, NStep> 
+        operator+(const std::size_t& index);
+    Iterator<const std::uint8_t*, TCast, NStep> 
+        operator-(const std::size_t& index);
+    Iterator<const std::uint8_t*, TCast, NStep> operator+(const int& index);
+    Iterator<const std::uint8_t*, TCast, NStep> operator-(const int& index);
 public:
-    bool operator==(const Iterator<ConstPointerType>& other) const;
-    bool operator!=(const Iterator<ConstPointerType>& other) const;
+    bool operator==(const Iterator<ConstPointerType, 
+        TCast, NStep>& other) const;
+    bool operator!=(const Iterator<ConstPointerType, 
+        TCast, NStep>& other) const;
 };
 
-template<>
-class Iterator<std::uint8_t*> : public Iterator<const std::uint8_t*>
+template<typename TCast, std::size_t NStep>
+class Iterator<std::uint8_t*, TCast, NStep> : 
+    public Iterator<const std::uint8_t*, TCast, NStep>
 {
 public:
     typedef std::uint8_t* PointerType;
@@ -164,34 +182,41 @@ public:
 public:
     ~Iterator();
 public:
-    Iterator(const Iterator<PointerType>& cpy);
-    Iterator(Iterator<PointerType>&& mov);
+    Iterator(const Iterator<PointerType, TCast, NStep>& cpy);
+    Iterator(Iterator<PointerType, TCast, NStep>&& mov);
 public:
-    Iterator<std::uint8_t*>& operator=(const Iterator<PointerType>& cpy);
-    Iterator<std::uint8_t*>& operator=(Iterator<PointerType>&& mov);
+    Iterator<std::uint8_t*, TCast, NStep>& 
+        operator=(const Iterator<PointerType, TCast, NStep>& cpy);
+    Iterator<std::uint8_t*, TCast, NStep>& 
+        operator=(Iterator<PointerType, TCast, NStep>&& mov);
 public:
-    Iterator<std::uint8_t*>& operator+=(const std::size_t& index);
-    Iterator<std::uint8_t*>& operator-=(const std::size_t& index);
+    Iterator<std::uint8_t*, TCast, NStep>& 
+        operator+=(const std::size_t& index);
+    Iterator<std::uint8_t*, TCast, NStep>& 
+        operator-=(const std::size_t& index);
 public:
-    std::uint8_t& operator*();
-    const std::uint8_t& operator*() const;
+    TCast& operator*();
+    const TCast& operator*() const;
 public:
-    Iterator<std::uint8_t*>& operator++();
-    Iterator<std::uint8_t*> operator++(int);
+    Iterator<std::uint8_t*, TCast, NStep>& operator++();
+    Iterator<std::uint8_t*, TCast, NStep> operator++(int);
 public:
-    Iterator<std::uint8_t*>& operator--();
-    Iterator<std::uint8_t*> operator--(int);
+    Iterator<std::uint8_t*, TCast, NStep>& operator--();
+    Iterator<std::uint8_t*, TCast, NStep> operator--(int);
 public:
-    Iterator<std::uint8_t*> operator+(const std::size_t& index);
-    Iterator<std::uint8_t*> operator-(const std::size_t& index);
-    Iterator<std::uint8_t*> operator+(const int& index);
-    Iterator<std::uint8_t*> operator-(const int& index);
+    Iterator<std::uint8_t*, TCast, NStep> operator+(const std::size_t& index);
+    Iterator<std::uint8_t*, TCast, NStep> operator-(const std::size_t& index);
+    Iterator<std::uint8_t*, TCast, NStep> operator+(const int& index);
+    Iterator<std::uint8_t*, TCast, NStep> operator-(const int& index);
 public:
-    bool operator==(const Iterator<ConstPointerType>& other) const;
-    bool operator!=(const Iterator<ConstPointerType>& other) const;
+    bool operator==(const Iterator<ConstPointerType, 
+        TCast, NStep>& other) const;
+    bool operator!=(const Iterator<ConstPointerType, 
+        TCast, NStep>& other) const;
 };
 
-Iterator<const test::Pointer<std::uint8_t>>::
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
     Iterator(PointerType ptr, const std::size_t& begin, const std::size_t& end, 
         const std::size_t& index, const test::byte::it::Operator& op) :
             m_ptr(ptr),
@@ -203,11 +228,13 @@ Iterator<const test::Pointer<std::uint8_t>>::
     m_ptr.SetIndex(index);
 }
 
-Iterator<const test::Pointer<std::uint8_t>>::~Iterator()
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::~Iterator()
 {}
 
-Iterator<const test::Pointer<std::uint8_t>>::
-    Iterator(const Iterator<ConstPointerType>& cpy) :
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
+    Iterator(const Iterator<ConstPointerType, TCast, NStep>& cpy) :
         m_ptr(cpy.m_ptr),
         m_begin(cpy.m_begin),
         m_end(cpy.m_end),
@@ -215,8 +242,9 @@ Iterator<const test::Pointer<std::uint8_t>>::
         m_op(cpy.m_op)
 {}
 
-Iterator<const test::Pointer<std::uint8_t>>::
-    Iterator(Iterator<ConstPointerType>&& mov) :
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
+    Iterator(Iterator<ConstPointerType, TCast, NStep>&& mov) :
         m_ptr(mov.m_ptr),
         m_begin(mov.m_begin),
         m_end(mov.m_end),
@@ -224,9 +252,10 @@ Iterator<const test::Pointer<std::uint8_t>>::
         m_op(mov.m_op)
 {}
 
-Iterator<const test::Pointer<std::uint8_t>>& 
-Iterator<const test::Pointer<std::uint8_t>>::
-    operator=(const Iterator<ConstPointerType>& cpy)
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator=(const Iterator<ConstPointerType, TCast, NStep>& cpy)
 {
     m_ptr = cpy.m_ptr;
     m_begin = cpy.m_begin;
@@ -236,9 +265,10 @@ Iterator<const test::Pointer<std::uint8_t>>::
     return *this;
 }
 
-Iterator<const test::Pointer<std::uint8_t>>& 
-Iterator<const test::Pointer<std::uint8_t>>::
-    operator=(Iterator<ConstPointerType>&& mov)
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator=(Iterator<ConstPointerType, TCast, NStep>&& mov)
 {
     m_ptr = mov.m_ptr;
     m_begin = mov.m_begin;
@@ -248,62 +278,75 @@ Iterator<const test::Pointer<std::uint8_t>>::
     return *this;
 }
 
-Iterator<const test::Pointer<std::uint8_t>>& 
-Iterator<const test::Pointer<std::uint8_t>>::
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
     operator+=(const std::size_t& index)
 {
-    auto new_pos = m_op.Addition(m_pos, index);
+    auto new_pos = m_op.Addition(m_pos, NStep * index);
     m_ptr.SetIndex(new_pos);
     m_pos = new_pos;
     return *this;
 }
 
-Iterator<const test::Pointer<std::uint8_t>>& 
-Iterator<const test::Pointer<std::uint8_t>>::
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
     operator-=(const std::size_t& index)
 {
-    auto new_pos = m_op.Subtraction(m_pos, index);
+    auto new_pos = m_op.Subtraction(m_pos, NStep * index);
     m_ptr.SetIndex(new_pos);
     m_pos = new_pos;
     return *this;
 }
 
-const std::uint8_t& Iterator<const test::Pointer<std::uint8_t>>::
+template<typename TCast, std::size_t NStep>
+const TCast& Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
     operator*() const
 {
-    return *m_ptr;
+    static TCast _def;
+    _def = 0;
+    if (m_pos < m_begin || (m_pos + NStep) > m_end) return _def;
+    
+    return *(reinterpret_cast<const TCast*>(
+        (std::uint8_t*)(m_ptr.GetData()) + m_pos));
 }
 
-Iterator<const test::Pointer<std::uint8_t>>& 
-Iterator<const test::Pointer<std::uint8_t>>::operator++()
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::operator++()
 {
     return *this += 1;
 }
 
-Iterator<const test::Pointer<std::uint8_t>> 
-Iterator<const test::Pointer<std::uint8_t>>::operator++(int)
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::operator++(int)
 {
     Iterator<ConstPointerType> ret{*this};
     operator++();
     return ret;
 }
 
-Iterator<const test::Pointer<std::uint8_t>>& 
-Iterator<const test::Pointer<std::uint8_t>>::operator--()
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::operator--()
 {
     return *this -= 1;
 }
 
-Iterator<const test::Pointer<std::uint8_t>> 
-Iterator<const test::Pointer<std::uint8_t>>::operator--(int)
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::operator--(int)
 {
     Iterator<ConstPointerType> ret{*this};
     operator--();
     return ret;
 }
 
-Iterator<const test::Pointer<std::uint8_t>> 
-Iterator<const test::Pointer<std::uint8_t>>::
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
     operator+(const std::size_t& index)
 {
     Iterator<ConstPointerType> ret{*this};
@@ -311,8 +354,9 @@ Iterator<const test::Pointer<std::uint8_t>>::
     return ret;
 }
 
-Iterator<const test::Pointer<std::uint8_t>> 
-Iterator<const test::Pointer<std::uint8_t>>::
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
     operator-(const std::size_t& index)
 {
     Iterator<ConstPointerType> ret{*this};
@@ -320,24 +364,29 @@ Iterator<const test::Pointer<std::uint8_t>>::
     return ret;
 }
 
-Iterator<const test::Pointer<std::uint8_t>> 
-Iterator<const test::Pointer<std::uint8_t>>::operator+(const int& index)
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator+(const int& index)
 {
     if (index >= 0)
         return (*this + std::size_t(index)); 
     return (*this - std::size_t(-index)); 
 }
 
-Iterator<const test::Pointer<std::uint8_t>> 
-Iterator<const test::Pointer<std::uint8_t>>::operator-(const int& index)
+template<typename TCast, std::size_t NStep>
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator-(const int& index)
 {
     if (index >= 0)
         return (*this - std::size_t(index));
     return (*this + std::size_t(-index));
 }
 
-bool Iterator<const test::Pointer<std::uint8_t>>::
-    operator==(const Iterator<ConstPointerType>& other) const
+template<typename TCast, std::size_t NStep>
+bool Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator==(const Iterator<ConstPointerType, TCast, NStep>& other) const
 {
     const std::size_t index = m_pos;
     const std::size_t other_index = other.m_pos;
@@ -346,143 +395,175 @@ bool Iterator<const test::Pointer<std::uint8_t>>::
         (other_index < other.m_begin || other_index >= other.m_end)));
 }
 
-bool Iterator<const test::Pointer<std::uint8_t>>::
-    operator!=(const Iterator<ConstPointerType>& other) const
+template<typename TCast, std::size_t NStep>
+bool Iterator<const test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator!=(const Iterator<ConstPointerType, TCast, NStep>& other) const
 {
     return !(*this == other);
 }
 
-Iterator<test::Pointer<std::uint8_t>>::
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
     Iterator(PointerType ptr, const std::size_t& begin, const std::size_t& end,
         const std::size_t& index, const test::byte::it::Operator& op) :
-            Iterator<ConstPointerType>(ptr, begin, end, index, op)
+            Iterator<ConstPointerType, TCast, NStep>(ptr, begin, end, 
+                index, op)
 {}
 
-Iterator<test::Pointer<std::uint8_t>>::~Iterator()
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::~Iterator()
 {}
 
-Iterator<test::Pointer<std::uint8_t>>::
-    Iterator(const Iterator<PointerType>& cpy) :
-        Iterator<ConstPointerType>(cpy)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    Iterator(const Iterator<PointerType, TCast, NStep>& cpy) :
+        Iterator<ConstPointerType, TCast, NStep>(cpy)
 {}
 
-Iterator<test::Pointer<std::uint8_t>>::
-    Iterator(Iterator<PointerType>&& mov) :
-        Iterator<ConstPointerType>(std::move(mov))
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    Iterator(Iterator<PointerType, TCast, NStep>&& mov) :
+        Iterator<ConstPointerType, TCast, NStep>(std::move(mov))
 {}
 
-Iterator<test::Pointer<std::uint8_t>>& Iterator<test::Pointer<std::uint8_t>>::
-    operator=(const Iterator<PointerType>& cpy)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator=(const Iterator<PointerType, TCast, NStep>& cpy)
 {
-    Iterator<ConstPointerType>::operator=(cpy);
+    Iterator<ConstPointerType, TCast, NStep>::operator=(cpy);
     return *this;
 }
 
-Iterator<test::Pointer<std::uint8_t>>& Iterator<test::Pointer<std::uint8_t>>::
-    operator=(Iterator<PointerType>&& mov)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator=(Iterator<PointerType, TCast, NStep>&& mov)
 {
-    Iterator<ConstPointerType>::operator=(std::move(mov));
+    Iterator<ConstPointerType, TCast, NStep>::operator=(std::move(mov));
     return *this;
 }
 
-Iterator<test::Pointer<std::uint8_t>>& 
-Iterator<test::Pointer<std::uint8_t>>::operator+=(const std::size_t& index)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator+=(const std::size_t& index)
 {
-    Iterator<ConstPointerType>::operator+=(index);
+    Iterator<ConstPointerType, TCast, NStep>::operator+=(index);
     return *this;
 }
 
-Iterator<test::Pointer<std::uint8_t>>& 
-Iterator<test::Pointer<std::uint8_t>>::operator-=(const std::size_t& index)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator-=(const std::size_t& index)
 {
-    Iterator<ConstPointerType>::operator-=(index);
+    Iterator<ConstPointerType, TCast, NStep>::operator-=(index);
     return *this;
 }
 
-std::uint8_t& Iterator<test::Pointer<std::uint8_t>>::operator*()
+template<typename TCast, std::size_t NStep>
+TCast& Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::operator*()
 {
-    return const_cast<std::uint8_t&>(Iterator<ConstPointerType>::operator*());
+    return const_cast<TCast&>(Iterator<ConstPointerType, 
+        TCast, NStep>::operator*());
 }
 
-const std::uint8_t& Iterator<test::Pointer<std::uint8_t>>::
+template<typename TCast, std::size_t NStep>
+const TCast& Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
     operator*() const
 {
-    return Iterator<ConstPointerType>::operator*();
+    return Iterator<ConstPointerType, TCast, NStep>::operator*();
 }
 
-Iterator<test::Pointer<std::uint8_t>>& 
-Iterator<test::Pointer<std::uint8_t>>::operator++()
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::operator++()
 {
     return *this += 1;
 }
 
-Iterator<test::Pointer<std::uint8_t>> 
-Iterator<test::Pointer<std::uint8_t>>::operator++(int)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::operator++(int)
 {
     Iterator<PointerType> ret{*this};
     operator++();
     return ret;
 }
 
-Iterator<test::Pointer<std::uint8_t>>& 
-Iterator<test::Pointer<std::uint8_t>>::operator--()
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>& 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::operator--()
 {
     return *this -= 1;
 }
 
-Iterator<test::Pointer<std::uint8_t>> 
-Iterator<test::Pointer<std::uint8_t>>::operator--(int)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::operator--(int)
 {
     Iterator<PointerType> ret{*this};
     operator--();
     return ret;
 }
 
-Iterator<test::Pointer<std::uint8_t>> 
-Iterator<test::Pointer<std::uint8_t>>::operator+(const std::size_t& index)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator+(const std::size_t& index)
 {
     Iterator<PointerType> ret{*this};
     ret += index;
     return ret;
 }
 
-Iterator<test::Pointer<std::uint8_t>> 
-Iterator<test::Pointer<std::uint8_t>>::operator-(const std::size_t& index)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator-(const std::size_t& index)
 {
     Iterator<PointerType> ret{*this};
     ret -= index;
     return ret;
 }
 
-Iterator<test::Pointer<std::uint8_t>> 
-Iterator<test::Pointer<std::uint8_t>>::operator+(const int& index)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator+(const int& index)
 {
     if (index >= 0)
         return (*this + std::size_t(index)); 
     return (*this - std::size_t(-index)); 
 }
 
-Iterator<test::Pointer<std::uint8_t>> 
-Iterator<test::Pointer<std::uint8_t>>::operator-(const int& index)
+template<typename TCast, std::size_t NStep>
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep> 
+Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator-(const int& index)
 {
     if (index >= 0)
         return (*this - std::size_t(index));
     return (*this + std::size_t(-index));
 }
 
-bool Iterator<test::Pointer<std::uint8_t>>::
-    operator==(const Iterator<ConstPointerType>& other) const
+template<typename TCast, std::size_t NStep>
+bool Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator==(const Iterator<ConstPointerType, TCast, NStep>& other) const
 {
     return Iterator<ConstPointerType>::operator==(other);
 }
 
-bool Iterator<test::Pointer<std::uint8_t>>::
-    operator!=(const Iterator<ConstPointerType>& other) const
+template<typename TCast, std::size_t NStep>
+bool Iterator<test::Pointer<std::uint8_t>, TCast, NStep>::
+    operator!=(const Iterator<ConstPointerType, TCast, NStep>& other) const
 {
     return !(*this == other);
 }
 
-Iterator<const std::uint8_t*>::Iterator(PointerType ptr, 
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>::Iterator(PointerType ptr, 
     const std::size_t& begin, const std::size_t& end, 
     const std::size_t& index, const test::byte::it::Operator& op) :
         m_ptr(ptr),
@@ -492,11 +573,13 @@ Iterator<const std::uint8_t*>::Iterator(PointerType ptr,
         m_op(op)
 {}
 
-Iterator<const std::uint8_t*>::~Iterator()
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>::~Iterator()
 {}
 
-Iterator<const std::uint8_t*>::
-    Iterator(const Iterator<ConstPointerType>& cpy) :
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>::
+    Iterator(const Iterator<ConstPointerType, TCast, NStep>& cpy) :
         m_ptr(const_cast<std::uint8_t*>(cpy.m_ptr)),
         m_begin(cpy.m_begin),
         m_end(cpy.m_end),
@@ -504,16 +587,20 @@ Iterator<const std::uint8_t*>::
         m_op(cpy.m_op)
 {}
 
-Iterator<const std::uint8_t*>::Iterator(Iterator<ConstPointerType>&& mov) :
-    m_ptr(mov.m_ptr),
-    m_begin(mov.m_begin),
-    m_end(mov.m_end),
-    m_pos(mov.m_pos),
-    m_op(mov.m_op)
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>::
+    Iterator(Iterator<ConstPointerType, TCast, NStep>&& mov) :
+        m_ptr(mov.m_ptr),
+        m_begin(mov.m_begin),
+        m_end(mov.m_end),
+        m_pos(mov.m_pos),
+        m_op(mov.m_op)
 {}
 
-Iterator<const std::uint8_t*>& Iterator<const std::uint8_t*>::
-    operator=(const Iterator<ConstPointerType>& cpy)
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>& 
+Iterator<const std::uint8_t*, TCast, NStep>::
+    operator=(const Iterator<ConstPointerType, TCast, NStep>& cpy)
 {
     m_ptr = cpy.m_ptr;
     m_begin = cpy.m_begin;
@@ -523,8 +610,10 @@ Iterator<const std::uint8_t*>& Iterator<const std::uint8_t*>::
     return *this;
 }
 
-Iterator<const std::uint8_t*>& Iterator<const std::uint8_t*>::
-    operator=(Iterator<ConstPointerType>&& mov)
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>& 
+Iterator<const std::uint8_t*, TCast, NStep>::
+    operator=(Iterator<ConstPointerType, TCast, NStep>&& mov)
 {
     m_ptr = mov.m_ptr;
     m_begin = mov.m_begin;
@@ -534,69 +623,88 @@ Iterator<const std::uint8_t*>& Iterator<const std::uint8_t*>::
     return *this;
 }
 
-Iterator<const std::uint8_t*>& Iterator<const std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>& 
+Iterator<const std::uint8_t*, TCast, NStep>::
     operator+=(const std::size_t& index)
 {
-    m_pos = m_op.Addition(m_pos, index);
+    m_pos = m_op.Addition(m_pos, NStep * index);
     return *this;
 }
 
-Iterator<const std::uint8_t*>& Iterator<const std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>& 
+Iterator<const std::uint8_t*, TCast, NStep>::
     operator-=(const std::size_t& index)
 {
-    m_pos = m_op.Subtraction(m_pos, index);
+    m_pos = m_op.Subtraction(m_pos, NStep * index);
     return *this;
 }
 
-const std::uint8_t& Iterator<const std::uint8_t*>::operator*() const
+template<typename TCast, std::size_t NStep>
+const TCast& Iterator<const std::uint8_t*, TCast, NStep>::operator*() const
 {
-    static std::uint8_t _def;
+    static TCast _def;
     _def = 0;
-    if (m_pos < m_begin || m_pos >= m_end) return _def;
-    return *(m_ptr + m_pos);
+    if (m_pos < m_begin || (m_pos + NStep) > m_end) return _def;
+    return reinterpret_cast<const TCast&>(*(m_ptr + m_pos));
 }
 
-Iterator<const std::uint8_t*>& Iterator<const std::uint8_t*>::operator++()
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>& 
+Iterator<const std::uint8_t*, TCast, NStep>::operator++()
 {
     return *this += 1;
 }
 
-Iterator<const std::uint8_t*> Iterator<const std::uint8_t*>::operator++(int)
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep> 
+Iterator<const std::uint8_t*, TCast, NStep>::operator++(int)
 {
-    Iterator<ConstPointerType> ret{*this};
+    Iterator<ConstPointerType, TCast, NStep> ret{*this};
     operator++();
     return ret;
 }
 
-Iterator<const std::uint8_t*>& Iterator<const std::uint8_t*>::operator--()
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep>& 
+Iterator<const std::uint8_t*, TCast, NStep>::operator--()
 {
     return *this -= 1;
 }
 
-Iterator<const std::uint8_t*> Iterator<const std::uint8_t*>::operator--(int)
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep> 
+Iterator<const std::uint8_t*, TCast, NStep>::operator--(int)
 {
-    Iterator<ConstPointerType> ret{*this};
+    Iterator<ConstPointerType, TCast, NStep> ret{*this};
     operator--();
     return ret;
 }
 
-Iterator<const std::uint8_t*> Iterator<const std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep> 
+Iterator<const std::uint8_t*, TCast, NStep>::
     operator+(const std::size_t& index)
 {
-    Iterator<ConstPointerType> ret{*this};
+    Iterator<ConstPointerType, TCast, NStep> ret{*this};
     ret += index;
     return ret;
 }
 
-Iterator<const std::uint8_t*> Iterator<const std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep> 
+Iterator<const std::uint8_t*, TCast, NStep>::
     operator-(const std::size_t& index)
 {
-    Iterator<ConstPointerType> ret{*this};
+    Iterator<ConstPointerType, TCast, NStep> ret{*this};
     ret -= index;
     return ret;
 }
 
-Iterator<const std::uint8_t*> Iterator<const std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep> 
+Iterator<const std::uint8_t*, TCast, NStep>::
     operator+(const int& index)
 {
     if (index >= 0)
@@ -604,7 +712,9 @@ Iterator<const std::uint8_t*> Iterator<const std::uint8_t*>::
     return (*this - std::size_t(-index)); 
 }
 
-Iterator<const std::uint8_t*> Iterator<const std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<const std::uint8_t*, TCast, NStep> 
+Iterator<const std::uint8_t*, TCast, NStep>::
     operator-(const int& index)
 {
     if (index >= 0)
@@ -612,8 +722,9 @@ Iterator<const std::uint8_t*> Iterator<const std::uint8_t*>::
     return (*this + std::size_t(-index));
 }
 
-bool Iterator<const std::uint8_t*>::
-    operator==(const Iterator<ConstPointerType>& other) const
+template<typename TCast, std::size_t NStep>
+bool Iterator<const std::uint8_t*, TCast, NStep>::
+    operator==(const Iterator<ConstPointerType, TCast, NStep>& other) const
 {
     const std::size_t other_index = other.m_pos;
     return m_ptr == other.m_ptr &&
@@ -621,93 +732,121 @@ bool Iterator<const std::uint8_t*>::
         (other_index < other.m_begin || other_index >= other.m_end)));
 }
 
-bool Iterator<const std::uint8_t*>::
-    operator!=(const Iterator<ConstPointerType>& other) const
+template<typename TCast, std::size_t NStep>
+bool Iterator<const std::uint8_t*, TCast, NStep>::
+    operator!=(const Iterator<ConstPointerType, TCast, NStep>& other) const
 {
     return !(*this == other);
 }
 
-Iterator<std::uint8_t*>::Iterator(PointerType ptr, const std::size_t& begin, 
-    const std::size_t& end, const std::size_t& index, 
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>::Iterator(PointerType ptr, 
+    const std::size_t& begin, const std::size_t& end, const std::size_t& index,
     const test::byte::it::Operator& op) :
-        Iterator<ConstPointerType>(ptr, begin, end, index, op)
+        Iterator<ConstPointerType, TCast, NStep>(ptr, begin, end, index, op)
 {}
 
-Iterator<std::uint8_t*>::~Iterator()
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>::~Iterator()
 {}
 
-Iterator<std::uint8_t*>::Iterator(const Iterator<PointerType>& cpy) :
-    Iterator<ConstPointerType>(cpy)
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>::
+    Iterator(const Iterator<PointerType, TCast, NStep>& cpy) :
+        Iterator<ConstPointerType, TCast, NStep>(cpy)
 {}
 
-Iterator<std::uint8_t*>::Iterator(Iterator<PointerType>&& mov) :
-        Iterator<ConstPointerType>(std::move(mov))
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>::
+    Iterator(Iterator<PointerType, TCast, NStep>&& mov) :
+        Iterator<ConstPointerType, TCast, NStep>(std::move(mov))
 {}
 
-Iterator<std::uint8_t*>& Iterator<std::uint8_t*>::
-    operator=(const Iterator<PointerType>& cpy)
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>& 
+Iterator<std::uint8_t*, TCast, NStep>::
+    operator=(const Iterator<PointerType, TCast, NStep>& cpy)
 {
-    Iterator<ConstPointerType>::operator=(cpy);
+    Iterator<ConstPointerType, TCast, NStep>::operator=(cpy);
     return *this;
 }
 
-Iterator<std::uint8_t*>& Iterator<std::uint8_t*>::
-    operator=(Iterator<PointerType>&& mov)
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>& 
+Iterator<std::uint8_t*, TCast, NStep>::
+    operator=(Iterator<PointerType, TCast, NStep>&& mov)
 {
-    Iterator<ConstPointerType>::operator=(std::move(mov));
+    Iterator<ConstPointerType, TCast, NStep>::operator=(std::move(mov));
     return *this;
 }
 
-Iterator<std::uint8_t*>& Iterator<std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>& 
+Iterator<std::uint8_t*, TCast, NStep>::
     operator+=(const std::size_t& index)
 {
-    Iterator<ConstPointerType>::operator+=(index);
+    Iterator<ConstPointerType, TCast, NStep>::operator+=(index);
     return *this;
 }
 
-Iterator<std::uint8_t*>& Iterator<std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>& 
+Iterator<std::uint8_t*, TCast, NStep>::
     operator-=(const std::size_t& index)
 {
-    Iterator<ConstPointerType>::operator-=(index);
+    Iterator<ConstPointerType, TCast, NStep>::operator-=(index);
     return *this;
 }
 
-std::uint8_t& Iterator<std::uint8_t*>::operator*()
+template<typename TCast, std::size_t NStep>
+TCast& Iterator<std::uint8_t*, TCast, NStep>::operator*()
 {
-    return const_cast<std::uint8_t&>(Iterator<ConstPointerType>::operator*());
+    return const_cast<TCast&>(Iterator<ConstPointerType,
+        TCast, NStep>::operator*());
 }
 
-const std::uint8_t& Iterator<std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+const TCast& Iterator<std::uint8_t*, TCast, NStep>::
     operator*() const
 {
-    return Iterator<ConstPointerType>::operator*();
+    return Iterator<ConstPointerType, TCast, NStep>::operator*();
 }
 
-Iterator<std::uint8_t*>& Iterator<std::uint8_t*>::operator++()
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>& 
+Iterator<std::uint8_t*, TCast, NStep>::operator++()
 {
     return *this += 1;
 }
 
-Iterator<std::uint8_t*> Iterator<std::uint8_t*>::operator++(int)
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep> 
+Iterator<std::uint8_t*, TCast, NStep>::operator++(int)
 {
     Iterator<PointerType> ret{*this};
     operator++();
     return ret;
 }
 
-Iterator<std::uint8_t*>& Iterator<std::uint8_t*>::operator--()
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep>& 
+Iterator<std::uint8_t*, TCast, NStep>::operator--()
 {
     return *this -= 1;
 }
 
-Iterator<std::uint8_t*> Iterator<std::uint8_t*>::operator--(int)
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep> 
+Iterator<std::uint8_t*, TCast, NStep>::operator--(int)
 {
     Iterator<PointerType> ret{*this};
     operator--();
     return ret;
 }
 
-Iterator<std::uint8_t*> Iterator<std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep> 
+Iterator<std::uint8_t*, TCast, NStep>::
     operator+(const std::size_t& index)
 {
     Iterator<PointerType> ret{*this};
@@ -715,7 +854,9 @@ Iterator<std::uint8_t*> Iterator<std::uint8_t*>::
     return ret;
 }
 
-Iterator<std::uint8_t*> Iterator<std::uint8_t*>::
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep> 
+Iterator<std::uint8_t*, TCast, NStep>::
     operator-(const std::size_t& index)
 {
     Iterator<PointerType> ret{*this};
@@ -723,28 +864,34 @@ Iterator<std::uint8_t*> Iterator<std::uint8_t*>::
     return ret;
 }
 
-Iterator<std::uint8_t*> Iterator<std::uint8_t*>::operator+(const int& index)
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep> 
+Iterator<std::uint8_t*, TCast, NStep>::operator+(const int& index)
 {
     if (index >= 0)
         return (*this + std::size_t(index)); 
     return (*this - std::size_t(-index)); 
 }
 
-Iterator<std::uint8_t*> Iterator<std::uint8_t*>::operator-(const int& index)
+template<typename TCast, std::size_t NStep>
+Iterator<std::uint8_t*, TCast, NStep> 
+Iterator<std::uint8_t*, TCast, NStep>::operator-(const int& index)
 {
     if (index >= 0)
         return (*this - std::size_t(index));
     return (*this + std::size_t(-index));
 }
 
-bool Iterator<std::uint8_t*>::
-    operator==(const Iterator<ConstPointerType>& other) const
+template<typename TCast, std::size_t NStep>
+bool Iterator<std::uint8_t*, TCast, NStep>::
+    operator==(const Iterator<ConstPointerType, TCast, NStep>& other) const
 {
-    return Iterator<ConstPointerType>::operator==(other);
+    return Iterator<ConstPointerType, TCast, NStep>::operator==(other);
 }
 
-bool Iterator<std::uint8_t*>::
-    operator!=(const Iterator<ConstPointerType>& other) const
+template<typename TCast, std::size_t NStep>
+bool Iterator<std::uint8_t*, TCast, NStep>::
+    operator!=(const Iterator<ConstPointerType, TCast, NStep>& other) const
 {
     return !(*this == other);
 }
