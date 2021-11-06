@@ -692,7 +692,7 @@ Byte<N, Sign>::Byte(Byte<_N, _Sign>&& mov) :
 {
     _SetZero(m_block, N);
     _Set(Begin(), End(), mov.Begin(), mov.End());
-    _SetZero(mov.Get(), N);
+    _SetZero(mov.Get(), _N);
 }
 
 template<std::size_t N, bool Sign>
@@ -739,7 +739,7 @@ template<std::size_t _N, bool _Sign>
 Byte<N, Sign>& Byte<N, Sign>::operator=(Byte<_N, _Sign>&& mov)
 {
     _Set(Begin(), End(), mov.Begin(), mov.End());
-    _SetZero(mov.Get(), N);
+    _SetZero(mov.Get(), _N);
     return *this;
 }
 
