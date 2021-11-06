@@ -20,9 +20,9 @@ private:
     static inline std::size_t _Subtraction(const std::size_t& i, 
         const std::size_t& s);
     static inline std::size_t _Begin(const std::size_t& off, 
-        const std::size_t& size);
+        const std::size_t& size, const std::size_t& tsize);
     static inline std::size_t _End(const std::size_t& off, 
-        const std::size_t& size);
+        const std::size_t& size, const std::size_t& tsize);
 public:
     inline BigEndian();
 public:
@@ -48,15 +48,15 @@ inline std::size_t BigEndian::_Subtraction(const std::size_t& i,
 }
 
 inline std::size_t BigEndian::_Begin(const std::size_t& off, 
-    const std::size_t& size)
+    const std::size_t& size, const std::size_t& tsize)
 {
-    return (off + size) - 1;
+    return (off + size) - tsize;
 }
 
 inline std::size_t BigEndian::_End(const std::size_t& off, 
-    const std::size_t& size)
+    const std::size_t& size, const std::size_t& tsize)
 {
-    return (off == 0 ? size : off - 1); 
+    return (off == 0 ? size : off - tsize); 
 }
 
 inline BigEndian::BigEndian() :

@@ -19,8 +19,9 @@ public:
     typedef std::size_t (SubtractionFuncType(const std::size_t&, 
         const std::size_t&));
     typedef std::size_t (BeginFuncType(const std::size_t&, 
-        const std::size_t&));
-    typedef std::size_t (EndFuncType(const std::size_t&, const std::size_t&));
+        const std::size_t&, const std::size_t&));
+    typedef std::size_t (EndFuncType(const std::size_t&, 
+        const std::size_t&, const std::size_t&));
 private:
     AdditionFuncType * m_add;
     SubtractionFuncType * m_sub;
@@ -43,9 +44,9 @@ public:
     inline std::size_t Subtraction(const std::size_t& i, 
         const std::size_t& s) const;
     inline std::size_t Begin(const std::size_t& off, 
-        const std::size_t& size) const;
+        const std::size_t& size, const std::size_t& tsize = 1) const;
     inline std::size_t End(const std::size_t& off, 
-        const std::size_t& size) const;
+        const std::size_t& size, const std::size_t& tsize = 1) const;
 public:
     inline bool operator==(const Operator& other) const;
     inline bool operator!=(const Operator& other) const;
@@ -107,15 +108,15 @@ inline std::size_t Operator::Subtraction(const std::size_t& i,
 }
 
 inline std::size_t Operator::Begin(const std::size_t& off, 
-    const std::size_t& size) const
+    const std::size_t& size, const std::size_t& tsize) const
 {
-    return m_begin(off, size);
+    return m_begin(off, size, tsize);
 }
 
 inline std::size_t Operator::End(const std::size_t& off, 
-    const std::size_t& size) const
+    const std::size_t& size, const std::size_t& tsize) const
 {
-    return m_end(off, size);
+    return m_end(off, size, tsize);
 }
 
 inline bool Operator::operator==(const Operator& other) const

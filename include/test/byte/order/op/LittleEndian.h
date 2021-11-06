@@ -18,9 +18,9 @@ private:
     static inline std::size_t _Subtraction(const std::size_t& i, 
         const std::size_t& s);
     static inline std::size_t _Begin(const std::size_t& off, 
-        const std::size_t& size);
+        const std::size_t& size, const std::size_t& tsize);
     static inline std::size_t _End(const std::size_t& off, 
-        const std::size_t& size);
+        const std::size_t& size, const std::size_t& tsize);
 public:
     inline LittleEndian();
 public:
@@ -46,13 +46,13 @@ inline std::size_t LittleEndian::_Subtraction(const std::size_t& i,
 }
 
 inline std::size_t LittleEndian::_Begin(const std::size_t& off, 
-    const std::size_t&)
+    const std::size_t&, const std::size_t&)
 {
     return off;
 }
 
 inline std::size_t LittleEndian::_End(const std::size_t&, 
-    const std::size_t& size)
+    const std::size_t& size, const std::size_t&)
 {
     return size; 
 }
