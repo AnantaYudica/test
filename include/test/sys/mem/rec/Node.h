@@ -47,8 +47,12 @@ public:
     bool operator==(const Node<TBlock>& other) const;
     bool operator!=(const Node<TBlock>& other) const;
 public:
-    bool operator==(const bool& val) const;
-    bool operator!=(const bool& val) const;
+    template<typename TValue>
+    typename std::enable_if<std::is_same<TValue, bool>::value, bool>::type 
+        operator==(const TValue& val) const;
+    template<typename TValue>
+    typename std::enable_if<std::is_same<TValue, bool>::value, bool>::type 
+        operator!=(const TValue& val) const;
 public:
     bool operator==(const TBlock* other) const;
     bool operator!=(const TBlock* other) const;
@@ -62,11 +66,11 @@ public:
     template<typename TValue, typename TNull = decltype(NULL)>
     typename std::enable_if<!std::is_same<TNull, void*>::value
         && std::is_same<TValue, TNull>::value, bool>::type 
-            operator==(const TValue& val);
+            operator==(const TValue& val) const;
     template<typename TValue, typename TNull = decltype(NULL)>
     typename std::enable_if<!std::is_same<TNull, void*>::value
         && std::is_same<TValue, TNull>::value, bool>::type 
-            operator!=(const TValue& val);
+            operator!=(const TValue& val) const;
 };
 
 template<typename TBlock>
@@ -197,16 +201,21 @@ bool Node<TBlock>::operator!=(const Node<TBlock>& other) const
 }
 
 template<typename TBlock>
-bool Node<TBlock>::operator==(const bool& val) const
+template<typename TValue>
+typename std::enable_if<std::is_same<TValue, bool>::value, bool>::type 
+Node<TBlock>::operator==(const TValue& val) const
 {
     return (bool)*this == val;
 }
-
+    
 template<typename TBlock>
-bool Node<TBlock>::operator!=(const bool& val) const
+template<typename TValue>
+typename std::enable_if<std::is_same<TValue, bool>::value, bool>::type 
+Node<TBlock>::operator!=(const TValue& val) const
 {
     return (bool)*this != val;
 }
+
 
 template<typename TBlock>
 bool Node<TBlock>::operator==(const TBlock* other) const
@@ -248,7 +257,7 @@ template<typename TBlock>
 template<typename TValue, typename TNull>
 typename std::enable_if<!std::is_same<TNull, void*>::value
     && std::is_same<TValue, TNull>::value, bool>::type 
-Node<TBlock>::operator==(const TValue& val)
+Node<TBlock>::operator==(const TValue& val) const
 {
     return m_data == (const void*)val;
 }
@@ -257,7 +266,7 @@ template<typename TBlock>
 template<typename TValue, typename TNull>
 typename std::enable_if<!std::is_same<TNull, void*>::value
     && std::is_same<TValue, TNull>::value, bool>::type 
-Node<TBlock>::operator!=(const TValue& val)
+Node<TBlock>::operator!=(const TValue& val) const
 {
     return m_data != (const void*)val;
 }
