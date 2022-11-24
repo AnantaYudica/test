@@ -117,6 +117,7 @@ template<typename TBlock>
 Node<TBlock>& Node<TBlock>::operator=(TBlock* set)
 {
     m_data = set;
+    return *this;
 }
 
 template<typename TBlock>
