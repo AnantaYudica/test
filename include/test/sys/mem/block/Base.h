@@ -163,7 +163,7 @@ template<typename TSysStatus>
 Base<TSysStatus>::Base(Base&& mov) :
     m_status(mov.m_status.load()),
     m_refCount(mov.m_refCount.load()),
-    m_lock(mov.m_lock),
+    m_lock(),
     m_deallocator(mov.m_deallocator),
     m_log(mov.m_log),
     m_data{mov.m_data.id, mov.m_data.pointer, mov.m_data.size,
