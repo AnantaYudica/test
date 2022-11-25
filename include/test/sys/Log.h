@@ -30,6 +30,7 @@ class Log
 {
 public:
     typedef TStatus StatusType;
+    typedef typename StatusType::StatusIntegerType StatusIntegerType;
 public:
     typedef int(*FormatCallbackFunc)(char* buffer, 
         const std::size_t& buffer_size, const StatusType& status, 
@@ -42,7 +43,9 @@ private:
     FILE* m_file;
     StatusType& m_status;
     std::mutex m_mutex;
-    FormatCallbackFunc m_fmtCb;
+    FormatCallbackFunc m_outFmtCb;
+    FormatCallbackFunc m_infoFmtCb;
+    FormatCallbackFunc m_errFmtCb;
 public:
     Log(StatusType& status);
 public:
@@ -55,13 +58,28 @@ public:
     Log& operator=(Log&& mov) = delete;
 public:
     void SetFileOutput(FILE* fout);
-    void SetFormatCallback(FormatCallbackFunc cb);
+public:
+    void SetOutputFormatCallback(FormatCallbackFunc cb);
+    void SetInfoFormatCallback(FormatCallbackFunc cb);
+    void SetErrorFormatCallback(FormatCallbackFunc cb);
 public:
     int Output(const char* format, ...)
         TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
 public:
     int VOutput(const char* format, va_list args)
         TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
+public:
+    int Info(const char* format, ...)
+        TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
+public:
+    int VInfo(const char* format, va_list args)
+        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
+public:
+    int Error(StatusIntegerType code, const char* format, ...)
+        TEST_ATTRIBUTE((__format__ (__printf__, 3, 4)));
+public:
+    int VError(StatusIntegerType code, const char* format, va_list args)
+        TEST_ATTRIBUTE ((__format__ (__printf__, 3, 0)));
 public:
     int OutputCallback(FormatCallbackFunc cb, const char* format, ...)
         TEST_ATTRIBUTE((__format__ (__printf__, 3, 4)));
@@ -83,7 +101,9 @@ Log<TStatus>::Log(StatusType& status) :
     m_file(NULL),
     m_status(status),
     m_mutex(),
-    m_fmtCb(&DefaultFormat)
+    m_outFmtCb(&DefaultFormat),
+    m_infoFmtCb(nullptr),
+    m_errFmtCb(nullptr)
 {}
 
 template<typename TStatus>
@@ -105,18 +125,47 @@ void Log<TStatus>::SetFileOutput(FILE* fout)
 }
 
 template<typename TStatus>
-void Log<TStatus>::SetFormatCallback(FormatCallbackFunc cb)
+void Log<TStatus>::SetOutputFormatCallback(FormatCallbackFunc cb)
 {
     std::lock_guard<std::mutex> guard(m_mutex);
     if (cb == nullptr)
     {
-        m_fmtCb = &DefaultFormat;
+        m_outFmtCb = &DefaultFormat;
     }
     else
     {
-        m_fmtCb = cb;
+        m_outFmtCb = cb;
     }
 }
+
+template<typename TStatus>
+void Log<TStatus>::SetInfoFormatCallback(FormatCallbackFunc cb)
+{
+    std::lock_guard<std::mutex> guard(m_mutex);
+    if (cb == nullptr)
+    {
+        m_infoFmtCb = &DefaultFormat;
+    }
+    else
+    {
+        m_infoFmtCb = cb;
+    }
+}
+
+template<typename TStatus>
+void Log<TStatus>::SetErrorFormatCallback(FormatCallbackFunc cb)
+{
+    std::lock_guard<std::mutex> guard(m_mutex);
+    if (cb == nullptr)
+    {
+        m_errFmtCb = &DefaultFormat;
+    }
+    else
+    {
+        m_errFmtCb = cb;
+    }
+}
+  
 
 template<typename TStatus>
 int Log<TStatus>::Output(const char* format, ...)
@@ -132,7 +181,52 @@ int Log<TStatus>::Output(const char* format, ...)
 template<typename TStatus>
 int Log<TStatus>::VOutput(const char* format, va_list args)
 {
-    return VOutputCallback(m_fmtCb, format, args);
+    return VOutputCallback(m_outFmtCb, format, args);
+}
+
+
+template<typename TStatus>
+int Log<TStatus>::Info(const char* format, ...)
+{
+    va_list vlist;
+    int res = 0;
+    va_start(vlist, format);
+    res = VInfo(format, vlist);
+    va_end(vlist);
+    return res;
+}
+
+template<typename TStatus>
+int Log<TStatus>::VInfo(const char* format, va_list args)
+{
+    if (m_infoFmtCb == nullptr)
+    {
+        return VOutputCallback(m_outFmtCb, format, args);
+    }
+    return VOutputCallback(m_infoFmtCb, format, args);
+}
+
+template<typename TStatus>
+int Log<TStatus>::Error(StatusIntegerType code, const char* format, ...)
+{
+    va_list vlist;
+    int res = 0;
+    va_start(vlist, format);
+    res = VError(code, format, vlist);
+    va_end(vlist);
+    return res;
+}
+    
+template<typename TStatus>
+int Log<TStatus>::VError(StatusIntegerType code, const char* format, 
+    va_list args)
+{
+    m_status.Error(code);
+    if (m_errFmtCb == nullptr)
+    {
+        return VOutputCallback(m_outFmtCb, format, args);
+    }
+    return VOutputCallback(m_errFmtCb, format, args);
 }
 
 template<typename TStatus>
@@ -163,7 +257,7 @@ int Log<TStatus>::VOutputCallback(FormatCallbackFunc cb, const char* format,
         FormatCallbackFunc call_fn;
         if (cb == nullptr)
         {
-            call_fn = m_fmtCb;
+            call_fn = m_outFmtCb;
         }
         else
         {
