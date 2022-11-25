@@ -51,12 +51,12 @@ public:
         test::sys::mem::block::FileLine>& 
     operator=(Block<test::sys::mem::block::Base<TSysStatus>,
         test::sys::mem::block::FileLine>&& mov);
-protected:
+public:
     using test::sys::mem::block::Base<TSysStatus>::Allocate;
     using test::sys::mem::block::Base<TSysStatus>::Reallocate;
     using test::sys::mem::block::Base<TSysStatus>::Deallocate;
     using test::sys::mem::block::Base<TSysStatus>::Release;
-protected:
+public:
     using test::sys::mem::block::Base<TSysStatus>::SetDeallocator;
 public:
     using test::sys::mem::block::Base<TSysStatus>::Pointer;
@@ -98,12 +98,12 @@ public:
     operator=(const Block<test::sys::mem::block::Base<TSysStatus>>& cpy) = delete;
     Block<test::sys::mem::block::Base<TSysStatus>>& 
     operator=(Block<test::sys::mem::block::Base<TSysStatus>>&& mov);
-protected:
+public:
     using test::sys::mem::block::Base<TSysStatus>::Allocate;
     using test::sys::mem::block::Base<TSysStatus>::Reallocate;
     using test::sys::mem::block::Base<TSysStatus>::Deallocate;
     using test::sys::mem::block::Base<TSysStatus>::Release;
-protected:
+public:
     using test::sys::mem::block::Base<TSysStatus>::SetDeallocator;
 public:
     using test::sys::mem::block::Base<TSysStatus>::Pointer;
