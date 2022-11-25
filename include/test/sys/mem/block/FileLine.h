@@ -48,9 +48,12 @@ inline FileLine::FileLine(const char (&f)[N], const int& l) :
     m_file((char*)std::malloc((N + 1) * sizeof(char))),
     m_line(l)
 {
-    for (std::size_t i = 0; i < N; ++i)
-        m_file[i] = f[i];
-    m_file[N] = 0;
+    if (m_file != nullptr)
+    {
+        for (std::size_t i = 0; i < N; ++i)
+            m_file[i] = f[i];
+        m_file[N] = 0;
+    }
 }
 
 inline FileLine::FileLine(FileLine&& mov) :
