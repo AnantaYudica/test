@@ -27,6 +27,13 @@ public:
     TEST_SYS_STATUS_DEF_ERR_CODE(sSignalsAllocFailed,                  0x0200);
     TEST_SYS_STATUS_DEF_ERR_CODE(sSignalsReallocFailed,                0x0201);
     TEST_SYS_STATUS_DEF_ERR_CODE(sSignalsReallocOverflow,              0x0202);
+    TEST_SYS_STATUS_DEF_ERR_CODE(sMemoryReallocFailed,                 0x0300);
+    TEST_SYS_STATUS_DEF_ERR_CODE(sMemoryReferenceCountOverflow,        0x0301);
+    TEST_SYS_STATUS_DEF_ERR_CODE(sMemRecordAllocFailed,                0x0400);
+    TEST_SYS_STATUS_DEF_ERR_CODE(sMemRecordDuplicatePointer,           0x0401);
+    TEST_SYS_STATUS_DEF_ERR_CODE(sMemRecordPointerNotFound,            0x0402);
+    TEST_SYS_STATUS_DEF_ERR_CODE(sMemRecordSizeOverflow,               0x0403);
+
 private:
     static inline const char* _GetErrorName(StatusIntegerType code);
 private:
@@ -86,10 +93,18 @@ inline const char* Status::_GetErrorName(StatusIntegerType code)
         // 02
         "sSignalsAllocFailed",
         "sSignalsReallocFailed",
-        "sSignalsReallocOverflow"
+        "sSignalsReallocOverflow",
+        // 03
+        "sMemoryReallocFailed",
+        "sMemoryReferenceCountOverflow",
+        // 04
+        "sMemRecordAllocFailed",
+        "sMemRecordDuplicatePointer",
+        "sMemRecordPointerNotFound",
+        "sMemRecordSizeOverflow"
     };
     static const std::uint8_t error_max[] = {
-        2, 1, 3,   
+        2, 1, 3, 2, 4
     };
     const uint8_t obj_code = code >> 8;
     const uint8_t num_code = 0x00FF & code;
