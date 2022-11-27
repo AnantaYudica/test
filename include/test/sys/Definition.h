@@ -6,6 +6,14 @@
 
 #include <cstdio>
 
+#ifndef TEST_ATTRIBUTE
+#ifdef __GNUC__
+#define TEST_ATTRIBUTE(...) __attribute__(__VA_ARGS__)
+#else
+#define TEST_ATTRIBUTE(...)
+#endif
+#endif //!TEST_ATTRIBUTE
+
 namespace test
 {
 namespace sys
@@ -13,6 +21,7 @@ namespace sys
 
 struct Definition
 {
+    typedef std::uint16_t StatusIntegerType;
     typedef std::chrono::microseconds TimestampDurationType;
     typedef decltype(TimestampDurationType().count()) TimestampType;
     typedef TimestampType DurationType;
@@ -67,6 +76,32 @@ struct Definition
     
     template<typename TTimeDuration = TimestampDurationType>
     static inline DateTimeType GetDateTime(const TimestampType& timestamp);
+
+    enum class Status : StatusIntegerType 
+    {
+        sOk                                 = 0x0000,
+        sUndefined                          = 0x0001,
+
+        sSysAllocArgsFailed                 = 0x0100,
+
+        sSignalsAllocFailed                 = 0x0200,
+        sSignalsReallocFailed               = 0x0201,
+        sSignalsReallocOverflow             = 0x0202,
+
+        sMemoryReallocFailed                = 0x0300,
+        sMemoryReferenceCountOverflow       = 0x0301,
+
+
+        sMemRecordAllocFailed               = 0x0400,
+        sMemRecordDuplicatePointer          = 0x0401,
+        sMemRecordPointerNotFound           = 0x0402,
+        sMemRecordSizeOverflow              = 0x0403,
+
+        sUnknown                            = 0xFFFF
+    };
+
+    static inline const char* GetErrorName(Status code);
+    static inline const char* GetErrorName(StatusIntegerType code);
 
 };
 
@@ -192,6 +227,88 @@ Definition::GetDateTime(const TimestampType& timestamp)
         result.UTC_Minute = diff_time - (result.UTC_Hour * 3600);
     }
     return result;
+}
+
+inline const char* Definition::GetErrorName(Status code)
+{
+    return GetErrorName(static_cast<StatusIntegerType>(code));
+}
+
+inline const char* Definition::GetErrorName(StatusIntegerType code)
+{
+    static const char unkown[] = "sUnknown"; 
+    static const char* error_names[] = {
+        // 00
+        "sOk",
+        "sUndefined",
+        // 01
+        "sSysAllocArgsFailed",
+        // 02
+        "sSignalsAllocFailed",
+        "sSignalsReallocFailed",
+        "sSignalsReallocOverflow",
+        // 03
+        "sMemoryReallocFailed",
+        "sMemoryReferenceCountOverflow",
+        // 04
+        "sMemRecordAllocFailed",
+        "sMemRecordDuplicatePointer",
+        "sMemRecordPointerNotFound",
+        "sMemRecordSizeOverflow"
+    };
+    static const std::uint8_t error_max[] = {
+        2, 1, 3, 2, 4
+    };
+    const uint8_t obj_code = code >> 8;
+    const uint8_t num_code = 0x00FF & code;
+    const char * errorName = unkown;
+    if (obj_code < sizeof(error_max))
+    {
+        if (num_code < error_max[obj_code])
+        {
+            std::uint16_t index = 0; 
+            for (int i = 0; i < sizeof(error_max); ++i)
+            {
+                if (i == obj_code)
+                {
+                    break;
+                }
+                index += error_max[i];
+            }
+            errorName = error_names[index + code];
+        }
+    }
+    return errorName;
+}
+
+static inline bool operator==(typename Definition::Status status_enum,
+    typename Definition::StatusIntegerType status_int)
+{
+    return static_cast<Definition::StatusIntegerType>(status_enum)
+        == status_int;
+}
+
+static inline bool operator!=(typename Definition::Status status_enum,
+    typename Definition::StatusIntegerType status_int)
+{
+    return static_cast<Definition::StatusIntegerType>(status_enum)
+        != status_int;
+}
+
+static inline bool 
+operator==(typename Definition::StatusIntegerType status_int,
+    typename Definition::Status status_enum)
+{
+    return static_cast<Definition::StatusIntegerType>(status_enum)
+        == status_int;
+}
+
+static inline bool 
+operator!=(typename Definition::StatusIntegerType status_int,
+    typename Definition::Status status_enum)
+{
+    return static_cast<Definition::StatusIntegerType>(status_enum)
+        != status_int;
 }
 
 } //!sys
