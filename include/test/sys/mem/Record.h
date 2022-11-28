@@ -3,7 +3,8 @@
 
 #include "rec/Node.h"
 #include "rec/Iterator.h"
-#include "../Log.h"
+#include "../Definition.h"
+#include "../Interface.h"
 #include "../../Guard.h"
 #include "block/Pointer.h"
 
@@ -23,19 +24,20 @@ namespace sys
 namespace mem
 {
 
-template<typename TBlock, typename TStatus>
+template<typename TBlock>
 class Record
 {
+private:
+    typedef test::sys::Definition DefinitionType;
+    typedef test::sys::Interface InterfaceType;
 public:
     typedef typename TBlock::TimestampType TimestampType; 
-    typedef TStatus StatusType;
-    typedef test::sys::Log<StatusType> LogType;
     typedef test::sys::mem::block::Pointer<TBlock> BlockPointerType;
 public:
     typedef test::sys::mem::rec::Node<TBlock> NodeType;
     typedef test::sys::mem::rec::Iterator<TBlock> IteratorType;
     typedef std::function<int(NodeType*)> FindConditionFuncType;
-    typedef void (*RemoveFuncType)(NodeType* node, Record<TBlock, TStatus>& obj);
+    typedef void (*RemoveFuncType)(NodeType* node, Record<TBlock>& obj);
 public:
     static constexpr int sOk = 0;
 public:
@@ -57,24 +59,22 @@ private:
     static NodeType* _Find(NodeType *& head, NodeType *& tail, 
         FindConditionFuncType f);
 private:
-    static TBlock* MakeBlock(LogType& log, TBlock&& instance);
+    static TBlock* MakeBlock(InterfaceType& sys, TBlock&& instance);
 private:
     NodeType *m_head, *m_tail;
     std::size_t m_size;
     std::mutex m_lock;
-    LogType& m_log;
+    InterfaceType& m_sys;
 public:
-    Record(LogType& log);
+    Record(InterfaceType& intf);
 public:
-    Record(const Record<TBlock, TStatus>&) = delete;
-    Record(Record<TBlock, TStatus>&&) = delete;
+    Record(const Record<TBlock>&) = delete;
+    Record(Record<TBlock>&&) = delete;
 public:
     ~Record();
 public:
-    Record<TBlock, TStatus>& 
-        operator=(const Record<TBlock, TStatus>&) = delete;
-    Record<TBlock, TStatus>& 
-        operator=(Record<TBlock, TStatus>&&) = delete;
+    Record<TBlock>& operator=(const Record<TBlock>&) = delete;
+    Record<TBlock>& operator=(Record<TBlock>&&) = delete;
 public:
     void* operator new (std::size_t) = delete;
     void* operator new[] (std::size_t) = delete;
@@ -101,8 +101,8 @@ public:
     TBlock* operator[](void * pointer);
 };
 
-template<typename TBlock, typename TStatus>
-int Record<TBlock, TStatus>::FindCondition(void* pointer, NodeType* node)
+template<typename TBlock>
+int Record<TBlock>::FindCondition(void* pointer, NodeType* node)
 {
     void* curr_ptr = (*node)->Pointer();
     if (pointer == curr_ptr)
@@ -117,8 +117,8 @@ int Record<TBlock, TStatus>::FindCondition(void* pointer, NodeType* node)
     return -1;
 }
 
-template<typename TBlock, typename TStatus>
-TBlock* Record<TBlock, TStatus>::ReleaseNode(NodeType* node)
+template<typename TBlock>
+TBlock* Record<TBlock>::ReleaseNode(NodeType* node)
 {
     TBlock* block = (TBlock*)*node;
     if (block != nullptr)
@@ -133,9 +133,9 @@ TBlock* Record<TBlock, TStatus>::ReleaseNode(NodeType* node)
 }
 
 
-template<typename TBlock, typename TStatus>
-typename Record<TBlock, TStatus>::NodeType* 
-Record<TBlock, TStatus>::_Find(NodeType *& head, 
+template<typename TBlock>
+typename Record<TBlock>::NodeType* 
+Record<TBlock>::_Find(NodeType *& head, 
     NodeType *&, FindConditionFuncType f)
 {
     if (f && head != nullptr)
@@ -161,13 +161,15 @@ Record<TBlock, TStatus>::_Find(NodeType *& head,
     return nullptr;
 }
 
-template<typename TBlock, typename TStatus>
-TBlock* Record<TBlock, TStatus>::MakeBlock(LogType& log, TBlock&& instance)
+template<typename TBlock>
+TBlock* Record<TBlock>::MakeBlock(InterfaceType& sys, TBlock&& instance)
 {
-    TBlock default_block{log};
+    TBlock default_block{sys};
     TBlock* block = (TBlock*)malloc(sizeof(TBlock));
     if (block == nullptr) 
     {
+        sys.Error(DefinitionType::Status::sMemRecordAllocFailed, 
+            "Memory allocation is failed");
         return nullptr;
     }
     memcpy(block, (void*)&default_block, sizeof(TBlock));
@@ -175,17 +177,17 @@ TBlock* Record<TBlock, TStatus>::MakeBlock(LogType& log, TBlock&& instance)
     return block;
 }
 
-template<typename TBlock, typename TStatus>
-Record<TBlock, TStatus>::Record(LogType& log) :
+template<typename TBlock>
+Record<TBlock>::Record(InterfaceType& intf) :
     m_head(nullptr),
     m_tail(nullptr),
     m_size(0),
     m_lock(),
-    m_log(log)
+    m_sys(intf)
 {}
 
-template<typename TBlock, typename TStatus>
-Record<TBlock, TStatus>::~Record()
+template<typename TBlock>
+Record<TBlock>::~Record()
 {
     if (m_size > 0)
     {
@@ -193,15 +195,15 @@ Record<TBlock, TStatus>::~Record()
     }
 }
 
-template<typename TBlock, typename TStatus>
-typename Record<TBlock, TStatus>::NodeType* 
-Record<TBlock, TStatus>::Find(FindConditionFuncType f)
+template<typename TBlock>
+typename Record<TBlock>::NodeType* 
+Record<TBlock>::Find(FindConditionFuncType f)
 {
     return _Find(m_head, m_tail, f);
 }
 
-template<typename TBlock, typename TStatus>
-bool Record<TBlock, TStatus>::Insert(NodeType *node)
+template<typename TBlock>
+bool Record<TBlock>::Insert(NodeType *node)
 {
     if (m_head == nullptr)
     {
@@ -242,8 +244,8 @@ bool Record<TBlock, TStatus>::Insert(NodeType *node)
     return true;
 }
 
-template<typename TBlock, typename TStatus>
-TBlock* Record<TBlock, TStatus>::Remove(NodeType *node)
+template<typename TBlock>
+TBlock* Record<TBlock>::Remove(NodeType *node)
 {
     if (m_head == nullptr)
     {
@@ -284,8 +286,8 @@ TBlock* Record<TBlock, TStatus>::Remove(NodeType *node)
     return ReleaseNode(node);
 }
 
-template<typename TBlock, typename TStatus>
-void Record<TBlock, TStatus>::RemoveAll()
+template<typename TBlock>
+void Record<TBlock>::RemoveAll()
 {
     NodeType * curr = m_head;
     m_head = nullptr;
@@ -299,9 +301,9 @@ void Record<TBlock, TStatus>::RemoveAll()
     }
 }
 
-template<typename TBlock, typename TStatus>
+template<typename TBlock>
 template<typename... TArgs>
-int Record<TBlock, TStatus>::Register(void * pointer, 
+int Record<TBlock>::Register(void * pointer, 
     TArgs&&... args)
 {
     if (pointer == nullptr)
@@ -309,12 +311,12 @@ int Record<TBlock, TStatus>::Register(void * pointer,
         return sRegisterWithNullPointer;
     }
     
-    TBlock* block = MakeBlock(m_log, 
-        TBlock(m_log, pointer, std::forward<TArgs>(args)...));
+    TBlock* block = MakeBlock(m_sys, 
+        TBlock(m_sys, pointer, std::forward<TArgs>(args)...));
     
     if (block == nullptr)
     {
-        m_log.Error(StatusType::sMemRecordAllocFailed, 
+        m_sys.Error(DefinitionType::Status::sMemRecordAllocFailed, 
             "Block Allocation is failed");
         return sRegisterAllocationMemoryFailed;
     }
@@ -323,7 +325,7 @@ int Record<TBlock, TStatus>::Register(void * pointer,
 
     if (instance == nullptr)
     {
-        m_log.Error(StatusType::sMemRecordAllocFailed, 
+        m_sys.Error(DefinitionType::Status::sMemRecordAllocFailed, 
             "Node Allocation is failed");
         return sRegisterAllocationMemoryFailed;
     }
@@ -336,7 +338,7 @@ int Record<TBlock, TStatus>::Register(void * pointer,
 
         if (!Insert(instance))
         {
-            m_log.Error(StatusType::sMemRecordDuplicatePointer, 
+            m_sys.Error(DefinitionType::Status::sMemRecordDuplicatePointer, 
                 "Pointer(%p) registered", pointer);
             return sRegisterDuplicatePointer;
         }
@@ -345,7 +347,7 @@ int Record<TBlock, TStatus>::Register(void * pointer,
             const auto size = m_size++;
             if (size >= m_size)
             {
-                m_log.Error(StatusType::sMemRecordAllocFailed, 
+                m_sys.Error(DefinitionType::Status::sMemRecordAllocFailed, 
                     "Size Overflow");
                 return sRegisterSizeOverflow;
             }
@@ -355,8 +357,8 @@ int Record<TBlock, TStatus>::Register(void * pointer,
     return sRegisterOk;
 }
 
-template<typename TBlock, typename TStatus>
-int Record<TBlock, TStatus>::Unregister(void * pointer, 
+template<typename TBlock>
+int Record<TBlock>::Unregister(void * pointer, 
     BlockPointerType* block, bool force)
 {
     if (pointer == nullptr)
@@ -370,7 +372,7 @@ int Record<TBlock, TStatus>::Unregister(void * pointer,
             std::placeholders::_1));
         if (found == nullptr)
         {
-            m_log.Error(StatusType::sMemRecordPointerNotFound, 
+            m_sys.Error(DefinitionType::Status::sMemRecordPointerNotFound, 
                 "Pointer(%p) not registered", pointer);
             return sUnregisterPointerNotFound;
         }
@@ -380,7 +382,7 @@ int Record<TBlock, TStatus>::Unregister(void * pointer,
             auto* block_removed = Remove(found);
             if (block_removed == nullptr)
             {
-                m_log.Error(StatusType::sMemRecordPointerNotFound, 
+                m_sys.Error(DefinitionType::Status::sMemRecordPointerNotFound, 
                     "Pointer(%p) not registered", pointer);
                 return sUnregisterPointerNotFound;
             }
@@ -402,8 +404,8 @@ int Record<TBlock, TStatus>::Unregister(void * pointer,
     return sUnregisterOk;
 }
 
-template<typename TBlock, typename TStatus>
-bool Record<TBlock, TStatus>::HasRegister(void * pointer)
+template<typename TBlock>
+bool Record<TBlock>::HasRegister(void * pointer)
 {
     if (pointer == nullptr)
     {
@@ -417,22 +419,22 @@ bool Record<TBlock, TStatus>::HasRegister(void * pointer)
     return found != nullptr;
 }
 
-template<typename TBlock, typename TStatus>
-std::size_t Record<TBlock, TStatus>::AllocationSize()
+template<typename TBlock>
+std::size_t Record<TBlock>::AllocationSize()
 {
     std::lock_guard<std::mutex> guard(m_lock);
     return sizeof(NodeType) * m_size;
 }
 
-template<typename TBlock, typename TStatus>
-std::size_t Record<TBlock, TStatus>::Size()
+template<typename TBlock>
+std::size_t Record<TBlock>::Size()
 {
     std::lock_guard<std::mutex> guard(m_lock);
     return m_size;
 }
 
-template<typename TBlock, typename TStatus>
-TBlock* Record<TBlock, TStatus>::operator[](void * pointer)
+template<typename TBlock>
+TBlock* Record<TBlock>::operator[](void * pointer)
 {
     if (pointer == nullptr)
     {

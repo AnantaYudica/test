@@ -2,7 +2,7 @@
 #define TEST_SYS_MEM_BLOCK_BASE_H_
 
 #include "../../Definition.h"
-#include "../../Log.h"
+#include "../../Interface.h"
 
 #include <cstddef>
 #include <limits>
@@ -23,12 +23,11 @@ namespace mem
 namespace block
 {
 
-template<typename TSysStatus>
 class Base
 {
 private:
-    typedef TSysStatus SysStatusType;
-    typedef test::sys::Log<SysStatusType> LogType;
+    typedef test::sys::Definition DefinitionType;
+    typedef test::sys::Interface InterfaceType;
 public:
     typedef std::size_t IDType;
     typedef std::atomic_uint16_t StatusType;
@@ -67,105 +66,99 @@ private:
     std::atomic_uint64_t m_refCount;
     std::mutex m_lock;
     DeallocationFuncType m_deallocator;
-    LogType& m_log;
+    InterfaceType& m_sys;
     Data m_data;
 protected:
-    Base(LogType& log);
-    Base(LogType& log, const IDType& id);
-    Base(LogType& log, const IDType& id, DeallocationFuncType deallocator);
+    inline Base(InterfaceType& sys);
+    inline Base(InterfaceType& sys, const IDType& id);
+    inline Base(InterfaceType& sys, const IDType& id, DeallocationFuncType deallocator);
 protected:
-    Base(const Base<TSysStatus>& cpy) = delete;
-    Base(Base<TSysStatus>&& mov);
+    Base(const Base& cpy) = delete;
+    Base(Base&& mov);
 public:
-    ~Base();
+    inline ~Base();
 public:
-    Base<TSysStatus>& operator=(const Base<TSysStatus>& cpy) = delete;
-    Base<TSysStatus>& operator=(Base<TSysStatus>&& mov);
+    Base& operator=(const Base& cpy) = delete;
+    inline Base& operator=(Base&& mov);
 private:
-    bool _Deallocate();
+    inline bool _Deallocate();
 protected:
-    bool Allocate(void* pointer, const std::size_t& size);
-    bool Reallocate(ReallocateCallbackType callback);
-    bool Deallocate();
-    bool Release(const bool& force = false);
+    inline bool Allocate(void* pointer, const std::size_t& size);
+    inline bool Reallocate(ReallocateCallbackType callback);
+    inline bool Deallocate();
+    inline bool Release(const bool& force = false);
 protected:
-    bool SetDeallocator(DeallocationFuncType deallocator);
+    inline bool SetDeallocator(DeallocationFuncType deallocator);
 protected:
-    void* Pointer();
-    void* Pointer() const;
+    inline void* Pointer();
+    inline void* Pointer() const;
 public:
-    std::size_t Size() const;
-    TimestampType AllocationTimestamp() const;
-    TimestampType DeallocationTimestamp() const;
+    inline std::size_t Size() const;
+    inline TimestampType AllocationTimestamp() const;
+    inline TimestampType DeallocationTimestamp() const;
 public:
-    IDType ID() const;
+    inline IDType ID() const;
 public:
-    std::size_t ReferenceCount() const;
-    void AddReference() const;
-    void ReleaseReference() const;
+    inline std::size_t ReferenceCount() const;
+    inline void AddReference() const;
+    inline void ReleaseReference() const;
 public:
-    bool IsGood() const;
-    bool IsBad() const;
+    inline bool IsGood() const;
+    inline bool IsBad() const;
 public:
-    StatusIntegerType Status() const;
+    inline StatusIntegerType Status() const;
 public:
-    operator bool() const;
+    inline operator bool() const;
 public:
-    bool operator==(const Base& other) const;
-    bool operator!=(const Base& other) const;
+    inline bool operator==(const Base& other) const;
+    inline bool operator!=(const Base& other) const;
 };
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::DefaultDeallocation(StatusIntegerType status, Data data)
+inline bool Base::DefaultDeallocation(StatusIntegerType status, Data data)
 {
     return true;
 }
 
-template<typename TSysStatus>
-void * Base<TSysStatus>::Empty()
+inline void * Base::Empty()
 {
     static char _empty[EmptySize];
     return (void*)_empty;
 }
 
-template<typename TSysStatus>
-Base<TSysStatus>::Base(LogType& log) :
+inline Base::Base(InterfaceType& intf) :
     m_status(sDefaultConstructor),
     m_refCount(0),
     m_lock(),
     m_deallocator(DefaultDeallocation),
-    m_log(log),
+    m_sys(intf),
     m_data{0, Empty(), EmptySize, 0, 0}
 {}
 
-template<typename TSysStatus>
-Base<TSysStatus>::Base(LogType& log, const IDType& id) :
+inline Base::Base(InterfaceType& intf, const IDType& id) :
         m_status(sNeedAllocate),
         m_refCount(0),
         m_lock(),
         m_deallocator(DefaultDeallocation),
-        m_log(log),
+        m_sys(intf),
         m_data{id, Empty(), EmptySize, 0, 0}
 {}
 
-template<typename TSysStatus>
-Base<TSysStatus>::Base(LogType& log, const IDType& id, 
+inline Base::Base(InterfaceType& intf, const IDType& id, 
     DeallocationFuncType deallocator) :
         m_status(sNeedAllocate),
         m_refCount(0),
         m_lock(),
         m_deallocator(deallocator ? deallocator : DefaultDeallocation),
-        m_log(log),
+        m_sys(intf),
         m_data{id, Empty(), EmptySize, 0, 0}
 {}
 
-template<typename TSysStatus>
-Base<TSysStatus>::Base(Base&& mov) :
+inline Base::Base(Base&& mov) :
     m_status(mov.m_status.load()),
     m_refCount(mov.m_refCount.load()),
     m_lock(),
     m_deallocator(mov.m_deallocator),
-    m_log(mov.m_log),
+    m_sys(mov.m_sys),
     m_data{mov.m_data.id, mov.m_data.pointer, mov.m_data.size,
         mov.m_data.alloc_timestamp, mov.m_data.dealloc_timestamp}
 {
@@ -175,8 +168,7 @@ Base<TSysStatus>::Base(Base&& mov) :
     mov.m_data = Data{0, Empty(), EmptySize, 0, 0};
 }
 
-template<typename TSysStatus>
-Base<TSysStatus>::~Base()
+inline Base::~Base()
 {
     {
         std::lock_guard<std::mutex> guard(m_lock);
@@ -191,8 +183,7 @@ Base<TSysStatus>::~Base()
     this->m_data = Data{0, NULL, 0, 0, 0};
 }
 
-template<typename TSysStatus>
-Base<TSysStatus>& Base<TSysStatus>::operator=(Base<TSysStatus>&& mov)
+inline Base& Base::operator=(Base&& mov)
 {
     m_status.store(mov.m_status.load());
     mov.m_status = sDefaultConstructor;
@@ -210,8 +201,7 @@ Base<TSysStatus>& Base<TSysStatus>::operator=(Base<TSysStatus>&& mov)
     return *this;
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::_Deallocate()
+inline bool Base::_Deallocate()
 {
     bool res = false;
     m_data.dealloc_timestamp = test::sys::Definition::GetTimestampNow();
@@ -236,8 +226,7 @@ bool Base<TSysStatus>::_Deallocate()
     return res;
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::Allocate(void* pointer, const std::size_t& size)
+inline bool Base::Allocate(void* pointer, const std::size_t& size)
 {
     if (pointer == nullptr || size == 0)
     {
@@ -262,8 +251,7 @@ bool Base<TSysStatus>::Allocate(void* pointer, const std::size_t& size)
     }   
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::Reallocate(ReallocateCallbackType callback)
+inline bool Base::Reallocate(ReallocateCallbackType callback)
 {
     if(callback == nullptr)
     {
@@ -279,7 +267,7 @@ bool Base<TSysStatus>::Reallocate(ReallocateCallbackType callback)
         m_data.size = callback(m_data.pointer);
         if (m_data.pointer == nullptr)
         {
-            m_log.Error(TSysStatus::sMemoryReallocFailed, 
+            m_sys.Error(DefinitionType::Status::sMemoryReallocFailed, 
                 "Memory Reallocation is failed");
             m_status |= sRelocateNullpointer;
             m_data.pointer = Empty();
@@ -291,8 +279,7 @@ bool Base<TSysStatus>::Reallocate(ReallocateCallbackType callback)
     return true;
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::Deallocate()
+inline bool Base::Deallocate()
 {
     std::lock_guard<std::mutex> guard(m_lock);
     if (IsBad())
@@ -306,8 +293,7 @@ bool Base<TSysStatus>::Deallocate()
     return _Deallocate();
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::Release(const bool& force)
+inline bool Base::Release(const bool& force)
 {
     std::lock_guard<std::mutex> guard(m_lock);
     if (IsBad())
@@ -322,8 +308,7 @@ bool Base<TSysStatus>::Release(const bool& force)
     return _Deallocate();
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::SetDeallocator(DeallocationFuncType deallocator)
+inline bool Base::SetDeallocator(DeallocationFuncType deallocator)
 {
     if (m_deallocator != nullptr || 
         m_deallocator != &DefaultDeallocation || deallocator == nullptr)
@@ -337,8 +322,7 @@ bool Base<TSysStatus>::SetDeallocator(DeallocationFuncType deallocator)
     return true;
 }
 
-template<typename TSysStatus>
-void* Base<TSysStatus>::Pointer()
+inline void* Base::Pointer()
 {
     void * pointer = nullptr;
     {
@@ -348,65 +332,57 @@ void* Base<TSysStatus>::Pointer()
     return pointer;
 }
 
-template<typename TSysStatus>
-void* Base<TSysStatus>::Pointer() const
+inline void* Base::Pointer() const
 {
-    auto* cast_ptr = const_cast<Base<TSysStatus>*>(this);
+    auto* cast_ptr = const_cast<Base*>(this);
     return cast_ptr->Pointer();
 }
 
-template<typename TSysStatus>
-std::size_t Base<TSysStatus>::Size() const
+inline std::size_t Base::Size() const
 {
     return m_data.size;
 }
 
-template<typename TSysStatus>
-std::size_t Base<TSysStatus>::ReferenceCount() const
+inline std::size_t Base::ReferenceCount() const
 {
     return m_refCount.load();
 }
 
-template<typename TSysStatus>
-typename Base<TSysStatus>::TimestampType 
-Base<TSysStatus>::AllocationTimestamp() const
+inline typename Base::TimestampType 
+Base::AllocationTimestamp() const
 {
     return m_data.alloc_timestamp;
 }
 
-template<typename TSysStatus>
-typename Base<TSysStatus>::TimestampType 
-Base<TSysStatus>::DeallocationTimestamp() const
+inline typename Base::TimestampType 
+Base::DeallocationTimestamp() const
 {
     return m_data.dealloc_timestamp;
 }
 
-template<typename TSysStatus>
-typename Base<TSysStatus>::IDType Base<TSysStatus>::ID() const
+inline typename Base::IDType Base::ID() const
 {
     return m_data.id;
 }
 
-template<typename TSysStatus>
-void Base<TSysStatus>::AddReference() const
+inline void Base::AddReference() const
 {
     if (m_data.pointer == Empty()) return;
-    auto* cast_ptr = const_cast<Base<TSysStatus>*>(this);
+    auto* cast_ptr = const_cast<Base*>(this);
     if (cast_ptr->m_refCount < std::numeric_limits<std::size_t>::max())
     {
         cast_ptr->m_refCount += 1;
     }
     else
     {
-        m_log.Error(TSysStatus::sMemoryReferenceCountOverflow, 
+        m_sys.Error(DefinitionType::Status::sMemoryReferenceCountOverflow, 
             "Memory Reference count is overflow");
     }
 }
 
-template<typename TSysStatus>
-void Base<TSysStatus>::ReleaseReference() const
+inline void Base::ReleaseReference() const
 {
-    auto* cast_ptr = const_cast<Base<TSysStatus>*>(this);
+    auto* cast_ptr = const_cast<Base*>(this);
     std::lock_guard<std::mutex> guard(cast_ptr->m_lock);
     if (m_data.pointer == Empty()) return;
     if (m_refCount.load() != 1)
@@ -424,38 +400,32 @@ void Base<TSysStatus>::ReleaseReference() const
     }
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::IsGood() const
+inline bool Base::IsGood() const
 {
     return m_status.load() == sGood;
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::IsBad() const
+inline bool Base::IsBad() const
 {
     return m_status.load() != sGood;
 }
 
-template<typename TSysStatus>
-typename Base<TSysStatus>::StatusIntegerType Base<TSysStatus>::Status() const
+inline typename Base::StatusIntegerType Base::Status() const
 {
     return m_status.load();
 }
 
-template<typename TSysStatus>
-Base<TSysStatus>::operator bool() const
+inline Base::operator bool() const
 {
     return m_data.pointer != Empty();
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::operator==(const Base<TSysStatus>& other) const
+inline bool Base::operator==(const Base& other) const
 {
     return m_data.id == other.m_data.id;
 }
 
-template<typename TSysStatus>
-bool Base<TSysStatus>::operator!=(const Base<TSysStatus>& other) const
+inline bool Base::operator!=(const Base& other) const
 {
     return m_data.id != other.m_data.id;
 }

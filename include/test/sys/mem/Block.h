@@ -4,7 +4,7 @@
 #include "block/Base.h"
 #include "block/FileLine.h"
 #include "../Definition.h"
-#include "../Log.h"
+#include "../Interface.h"
 
 #include <cstdlib>
 
@@ -20,202 +20,193 @@ class Block
 {
 };
 
-template<typename TSysStatus>
-class Block<test::sys::mem::block::Base<TSysStatus>,
+template<>
+class Block<test::sys::mem::block::Base,
     test::sys::mem::block::FileLine> : 
-        public test::sys::mem::block::Base<TSysStatus>,
+        public test::sys::mem::block::Base,
         public test::sys::mem::block::FileLine
 {
 private:
-    typedef test::sys::Log<TSysStatus> LogType;
+    typedef test::sys::Definition DefinitionType;
+    typedef test::sys::Interface InterfaceType;
 public:
     typedef typename test::sys::Definition::TimestampType TimestampType;
 public:
-    Block(LogType& log);
+    Block(InterfaceType& intf);
     template<std::size_t N>
-    Block(LogType& log, void * pointer, const std::size_t& size,
+    Block(InterfaceType& intf, void * pointer, const std::size_t& size,
         const std::size_t& id, const char (&f)[N], const int& l);
 public:
-    Block(const Block<test::sys::mem::block::Base<TSysStatus>,
+    Block(const Block<test::sys::mem::block::Base,
         test::sys::mem::block::FileLine>& cpy) = delete;
-    Block(Block<test::sys::mem::block::Base<TSysStatus>,
+    Block(Block<test::sys::mem::block::Base,
         test::sys::mem::block::FileLine>&& mov);
 public:
     ~Block();
 public:
-    Block<test::sys::mem::block::Base<TSysStatus>,
+    Block<test::sys::mem::block::Base,
         test::sys::mem::block::FileLine>& 
-    operator=(const Block<test::sys::mem::block::Base<TSysStatus>,
+    operator=(const Block<test::sys::mem::block::Base,
         test::sys::mem::block::FileLine>& cpy) = delete;
-    Block<test::sys::mem::block::Base<TSysStatus>,
+    Block<test::sys::mem::block::Base,
         test::sys::mem::block::FileLine>& 
-    operator=(Block<test::sys::mem::block::Base<TSysStatus>,
+    operator=(Block<test::sys::mem::block::Base,
         test::sys::mem::block::FileLine>&& mov);
 public:
-    using test::sys::mem::block::Base<TSysStatus>::Allocate;
-    using test::sys::mem::block::Base<TSysStatus>::Reallocate;
-    using test::sys::mem::block::Base<TSysStatus>::Deallocate;
-    using test::sys::mem::block::Base<TSysStatus>::Release;
+    using test::sys::mem::block::Base::Allocate;
+    using test::sys::mem::block::Base::Reallocate;
+    using test::sys::mem::block::Base::Deallocate;
+    using test::sys::mem::block::Base::Release;
 public:
-    using test::sys::mem::block::Base<TSysStatus>::SetDeallocator;
+    using test::sys::mem::block::Base::SetDeallocator;
 public:
-    using test::sys::mem::block::Base<TSysStatus>::Pointer;
-    using test::sys::mem::block::Base<TSysStatus>::Size;
-    using test::sys::mem::block::Base<TSysStatus>::AllocationTimestamp;
-    using test::sys::mem::block::Base<TSysStatus>::DeallocationTimestamp;
-    using test::sys::mem::block::Base<TSysStatus>::ReferenceCount;
-    using test::sys::mem::block::Base<TSysStatus>::AddReference;
-    using test::sys::mem::block::Base<TSysStatus>::ReleaseReference;
-    using test::sys::mem::block::Base<TSysStatus>::operator bool;
-    using test::sys::mem::block::Base<TSysStatus>::operator==;
-    using test::sys::mem::block::Base<TSysStatus>::operator!=;
+    using test::sys::mem::block::Base::Pointer;
+    using test::sys::mem::block::Base::Size;
+    using test::sys::mem::block::Base::AllocationTimestamp;
+    using test::sys::mem::block::Base::DeallocationTimestamp;
+    using test::sys::mem::block::Base::ReferenceCount;
+    using test::sys::mem::block::Base::AddReference;
+    using test::sys::mem::block::Base::ReleaseReference;
+    using test::sys::mem::block::Base::operator bool;
+    using test::sys::mem::block::Base::operator==;
+    using test::sys::mem::block::Base::operator!=;
     using test::sys::mem::block::FileLine::File;
     using test::sys::mem::block::FileLine::Line;
 };
 
-template<typename TSysStatus>
-class Block<test::sys::mem::block::Base<TSysStatus>> : 
-    public test::sys::mem::block::Base<TSysStatus>
+template<>
+class Block<test::sys::mem::block::Base> : 
+    public test::sys::mem::block::Base
 {
 private:
-    typedef test::sys::Log<TSysStatus> LogType;
+    typedef test::sys::Definition DefinitionType;
+    typedef test::sys::Interface InterfaceType;
 public:
     typedef typename test::sys::Definition::TimestampType TimestampType;
 public:
-    Block(LogType& log);
-    Block(LogType& log, void * pointer, const std::size_t& size,
+    Block(InterfaceType& intf);
+    Block(InterfaceType& intf, void * pointer, const std::size_t& size,
         const std::size_t& id);
     template<std::size_t N>
-    Block(LogType& log, void * pointer, const std::size_t& size,
+    Block(InterfaceType& intf, void * pointer, const std::size_t& size,
         const std::size_t& id, const char (&)[N], const int& );
 public:
-    Block(const Block<test::sys::mem::block::Base<TSysStatus>>& cpy) = delete;
-    Block(Block<test::sys::mem::block::Base<TSysStatus>>&& mov);
+    Block(const Block<test::sys::mem::block::Base>& cpy) = delete;
+    Block(Block<test::sys::mem::block::Base>&& mov);
 public:
     ~Block();
 public:
-    Block<test::sys::mem::block::Base<TSysStatus>>& 
-    operator=(const Block<test::sys::mem::block::Base<TSysStatus>>& cpy) = delete;
-    Block<test::sys::mem::block::Base<TSysStatus>>& 
-    operator=(Block<test::sys::mem::block::Base<TSysStatus>>&& mov);
+    Block<test::sys::mem::block::Base>& 
+    operator=(const Block<test::sys::mem::block::Base>& cpy) = delete;
+    Block<test::sys::mem::block::Base>& 
+    operator=(Block<test::sys::mem::block::Base>&& mov);
 public:
-    using test::sys::mem::block::Base<TSysStatus>::Allocate;
-    using test::sys::mem::block::Base<TSysStatus>::Reallocate;
-    using test::sys::mem::block::Base<TSysStatus>::Deallocate;
-    using test::sys::mem::block::Base<TSysStatus>::Release;
+    using test::sys::mem::block::Base::Allocate;
+    using test::sys::mem::block::Base::Reallocate;
+    using test::sys::mem::block::Base::Deallocate;
+    using test::sys::mem::block::Base::Release;
 public:
-    using test::sys::mem::block::Base<TSysStatus>::SetDeallocator;
+    using test::sys::mem::block::Base::SetDeallocator;
 public:
-    using test::sys::mem::block::Base<TSysStatus>::Pointer;
-    using test::sys::mem::block::Base<TSysStatus>::Size;
-    using test::sys::mem::block::Base<TSysStatus>::AllocationTimestamp;
-    using test::sys::mem::block::Base<TSysStatus>::DeallocationTimestamp;
-    using test::sys::mem::block::Base<TSysStatus>::ReferenceCount;
-    using test::sys::mem::block::Base<TSysStatus>::AddReference;
-    using test::sys::mem::block::Base<TSysStatus>::ReleaseReference;
-    using test::sys::mem::block::Base<TSysStatus>::operator bool;
-    using test::sys::mem::block::Base<TSysStatus>::operator==;
-    using test::sys::mem::block::Base<TSysStatus>::operator!=;
+    using test::sys::mem::block::Base::Pointer;
+    using test::sys::mem::block::Base::Size;
+    using test::sys::mem::block::Base::AllocationTimestamp;
+    using test::sys::mem::block::Base::DeallocationTimestamp;
+    using test::sys::mem::block::Base::ReferenceCount;
+    using test::sys::mem::block::Base::AddReference;
+    using test::sys::mem::block::Base::ReleaseReference;
+    using test::sys::mem::block::Base::operator bool;
+    using test::sys::mem::block::Base::operator==;
+    using test::sys::mem::block::Base::operator!=;
 public:
     inline const char* File() const;
     inline int Line() const;
 };
 
-template<typename TSysStatus>
-Block<test::sys::mem::block::Base<TSysStatus>,
-    test::sys::mem::block::FileLine>::Block(LogType& log) :
-        test::sys::mem::block::Base<TSysStatus>(log),
-        test::sys::mem::block::FileLine()
+Block<test::sys::mem::block::Base,
+    test::sys::mem::block::FileLine>::Block(InterfaceType& intf) :
+        test::sys::mem::block::Base(intf),
+        test::sys::mem::block::FileLine(intf)
 {}
 
-template<typename TSysStatus>
 template<std::size_t N>
-Block<test::sys::mem::block::Base<TSysStatus>,
-    test::sys::mem::block::FileLine>::Block(LogType& log, void * pointer, 
+Block<test::sys::mem::block::Base,
+    test::sys::mem::block::FileLine>::Block(InterfaceType& intf, void * pointer, 
     const std::size_t& size, const std::size_t& id, const char (&f)[N], 
     const int& l) :
-        test::sys::mem::block::Base<TSysStatus>(log, id),
-        test::sys::mem::block::FileLine(f, l)
+        test::sys::mem::block::Base(intf, id),
+        test::sys::mem::block::FileLine(intf, f, l)
 {
-    test::sys::mem::block::Base<TSysStatus>::Allocate(pointer, size);
+    test::sys::mem::block::Base::Allocate(pointer, size);
 }
-    
-template<typename TSysStatus>
-Block<test::sys::mem::block::Base<TSysStatus>,
+
+Block<test::sys::mem::block::Base,
     test::sys::mem::block::FileLine>::Block(
-        Block<test::sys::mem::block::Base<TSysStatus>,
+        Block<test::sys::mem::block::Base,
         test::sys::mem::block::FileLine>&& mov) :
-            test::sys::mem::block::Base<TSysStatus>(std::move(mov)),
+            test::sys::mem::block::Base(std::move(mov)),
             test::sys::mem::block::FileLine(std::move(mov))
 {}
 
-template<typename TSysStatus>
-Block<test::sys::mem::block::Base<TSysStatus>,
+Block<test::sys::mem::block::Base,
     test::sys::mem::block::FileLine>::~Block()
 {}
 
-template<typename TSysStatus>
-Block<test::sys::mem::block::Base<TSysStatus>,
+Block<test::sys::mem::block::Base,
     test::sys::mem::block::FileLine>& 
-Block<test::sys::mem::block::Base<TSysStatus>,
+Block<test::sys::mem::block::Base,
     test::sys::mem::block::FileLine>::
-        operator=(Block<test::sys::mem::block::Base<TSysStatus>,
+        operator=(Block<test::sys::mem::block::Base,
             test::sys::mem::block::FileLine>&& mov)
 {
-    test::sys::mem::block::Base<TSysStatus>::operator=(std::move(mov));
+    test::sys::mem::block::Base::operator=(std::move(mov));
     test::sys::mem::block::FileLine::operator=(std::move(mov));
     return *this;
 }
 
-template<typename TSysStatus>
-Block<test::sys::mem::block::Base<TSysStatus>>::Block(LogType& log) :
-    test::sys::mem::block::Base<TSysStatus>(log)
+Block<test::sys::mem::block::Base>::Block(InterfaceType& intf) :
+    test::sys::mem::block::Base(intf)
 {}
 
-template<typename TSysStatus>
-Block<test::sys::mem::block::Base<TSysStatus>>::Block(LogType& log, 
+Block<test::sys::mem::block::Base>::Block(InterfaceType& intf, 
     void * pointer, const std::size_t& size, const std::size_t& id) :
-        test::sys::mem::block::Base<TSysStatus>(log, id)
+        test::sys::mem::block::Base(intf, id)
 {
-    test::sys::mem::block::Base<TSysStatus>::Allocate(pointer, size);
+    test::sys::mem::block::Base::Allocate(pointer, size);
 }
 
-template<typename TSysStatus>
 template<std::size_t N>
-Block<test::sys::mem::block::Base<TSysStatus>>::Block(LogType& log,
+Block<test::sys::mem::block::Base>::Block(InterfaceType& intf,
     void * pointer, const std::size_t& size, const std::size_t& id, 
     const char (&)[N], const int&) :
-        test::sys::mem::block::Base<TSysStatus>(log, pointer, size, id)
-{}
-
-template<typename TSysStatus>
-Block<test::sys::mem::block::Base<TSysStatus>>::
-    Block(Block<test::sys::mem::block::Base<TSysStatus>>&& mov) :
-        test::sys::mem::block::Base<TSysStatus>(std::move(mov))
-{}
-
-template<typename TSysStatus>
-Block<test::sys::mem::block::Base<TSysStatus>>::~Block()
-{}
-
-template<typename TSysStatus>
-Block<test::sys::mem::block::Base<TSysStatus>>& 
-Block<test::sys::mem::block::Base<TSysStatus>>::
-    operator=(Block<test::sys::mem::block::Base<TSysStatus>>&& mov)
+        test::sys::mem::block::Base(intf, id)
 {
-    test::sys::mem::block::Base<TSysStatus>::operator=(std::move(mov));
+    test::sys::mem::block::Base::Allocate(pointer, size);
+}
+
+Block<test::sys::mem::block::Base>::
+    Block(Block<test::sys::mem::block::Base>&& mov) :
+        test::sys::mem::block::Base(std::move(mov))
+{}
+
+Block<test::sys::mem::block::Base>::~Block()
+{}
+
+Block<test::sys::mem::block::Base>& 
+Block<test::sys::mem::block::Base>::
+    operator=(Block<test::sys::mem::block::Base>&& mov)
+{
+    test::sys::mem::block::Base::operator=(std::move(mov));
     return *this;
 }
 
-template<typename TSysStatus>
-const char* Block<test::sys::mem::block::Base<TSysStatus>>::File() const
+const char* Block<test::sys::mem::block::Base>::File() const
 {
     static const char * tmp = TEST_MEM_BLOCK_FILE_DEFAULT_STR;
     return tmp;
 }
 
-template<typename TSysStatus>
-int Block<test::sys::mem::block::Base<TSysStatus>>::Line() const
+int Block<test::sys::mem::block::Base>::Line() const
 {
     return -1;
 }
