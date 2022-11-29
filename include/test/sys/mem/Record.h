@@ -29,7 +29,7 @@ class Record
 {
 private:
     typedef test::sys::Definition DefinitionType;
-    typedef test::sys::Interface InterfaceType;
+    typedef test::sys::Interface SystemType;
 public:
     typedef typename TBlock::TimestampType TimestampType; 
     typedef test::sys::mem::block::Pointer<TBlock> BlockPointerType;
@@ -59,14 +59,13 @@ private:
     static NodeType* _Find(NodeType *& head, NodeType *& tail, 
         FindConditionFuncType f);
 private:
-    static TBlock* MakeBlock(InterfaceType& sys, TBlock&& instance);
+    static TBlock* MakeBlock(TBlock&& instance);
 private:
     NodeType *m_head, *m_tail;
     std::size_t m_size;
     std::mutex m_lock;
-    InterfaceType& m_sys;
 public:
-    Record(InterfaceType& intf);
+    Record();
 public:
     Record(const Record<TBlock>&) = delete;
     Record(Record<TBlock>&&) = delete;
@@ -162,13 +161,14 @@ Record<TBlock>::_Find(NodeType *& head,
 }
 
 template<typename TBlock>
-TBlock* Record<TBlock>::MakeBlock(InterfaceType& sys, TBlock&& instance)
+TBlock* Record<TBlock>::MakeBlock(TBlock&& instance)
 {
-    TBlock default_block{sys};
+    TBlock default_block;
     TBlock* block = (TBlock*)malloc(sizeof(TBlock));
     if (block == nullptr) 
     {
-        sys.Error(DefinitionType::Status::sMemRecordAllocFailed, 
+        SystemType::GetInstance().Error(
+            DefinitionType::Status::sMemRecordAllocFailed, 
             "Memory allocation is failed");
         return nullptr;
     }
@@ -178,12 +178,11 @@ TBlock* Record<TBlock>::MakeBlock(InterfaceType& sys, TBlock&& instance)
 }
 
 template<typename TBlock>
-Record<TBlock>::Record(InterfaceType& intf) :
+Record<TBlock>::Record() :
     m_head(nullptr),
     m_tail(nullptr),
     m_size(0),
-    m_lock(),
-    m_sys(intf)
+    m_lock()
 {}
 
 template<typename TBlock>
@@ -311,12 +310,13 @@ int Record<TBlock>::Register(void * pointer,
         return sRegisterWithNullPointer;
     }
     
-    TBlock* block = MakeBlock(m_sys, 
-        TBlock(m_sys, pointer, std::forward<TArgs>(args)...));
+    TBlock* block = MakeBlock(TBlock(pointer, 
+        std::forward<TArgs>(args)...));
     
     if (block == nullptr)
     {
-        m_sys.Error(DefinitionType::Status::sMemRecordAllocFailed, 
+        SystemType::GetInstance().Error(
+            DefinitionType::Status::sMemRecordAllocFailed, 
             "Block Allocation is failed");
         return sRegisterAllocationMemoryFailed;
     }
@@ -325,7 +325,8 @@ int Record<TBlock>::Register(void * pointer,
 
     if (instance == nullptr)
     {
-        m_sys.Error(DefinitionType::Status::sMemRecordAllocFailed, 
+        SystemType::GetInstance().Error(
+            DefinitionType::Status::sMemRecordAllocFailed, 
             "Node Allocation is failed");
         return sRegisterAllocationMemoryFailed;
     }
@@ -338,7 +339,8 @@ int Record<TBlock>::Register(void * pointer,
 
         if (!Insert(instance))
         {
-            m_sys.Error(DefinitionType::Status::sMemRecordDuplicatePointer, 
+            SystemType::GetInstance().Error(
+                DefinitionType::Status::sMemRecordDuplicatePointer, 
                 "Pointer(%p) registered", pointer);
             return sRegisterDuplicatePointer;
         }
@@ -347,7 +349,8 @@ int Record<TBlock>::Register(void * pointer,
             const auto size = m_size++;
             if (size >= m_size)
             {
-                m_sys.Error(DefinitionType::Status::sMemRecordAllocFailed, 
+                SystemType::GetInstance().Error(
+                    DefinitionType::Status::sMemRecordAllocFailed, 
                     "Size Overflow");
                 return sRegisterSizeOverflow;
             }
@@ -372,7 +375,8 @@ int Record<TBlock>::Unregister(void * pointer,
             std::placeholders::_1));
         if (found == nullptr)
         {
-            m_sys.Error(DefinitionType::Status::sMemRecordPointerNotFound, 
+            SystemType::GetInstance().Error(
+                DefinitionType::Status::sMemRecordPointerNotFound, 
                 "Pointer(%p) not registered", pointer);
             return sUnregisterPointerNotFound;
         }
@@ -382,7 +386,8 @@ int Record<TBlock>::Unregister(void * pointer,
             auto* block_removed = Remove(found);
             if (block_removed == nullptr)
             {
-                m_sys.Error(DefinitionType::Status::sMemRecordPointerNotFound, 
+                SystemType::GetInstance().Error(
+                    DefinitionType::Status::sMemRecordPointerNotFound, 
                     "Pointer(%p) not registered", pointer);
                 return sUnregisterPointerNotFound;
             }

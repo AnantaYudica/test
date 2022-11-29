@@ -28,13 +28,13 @@ class Block<test::sys::mem::block::Base,
 {
 private:
     typedef test::sys::Definition DefinitionType;
-    typedef test::sys::Interface InterfaceType;
+    typedef test::sys::Interface SystemType;
 public:
     typedef typename test::sys::Definition::TimestampType TimestampType;
 public:
-    Block(InterfaceType& intf);
+    Block();
     template<std::size_t N>
-    Block(InterfaceType& intf, void * pointer, const std::size_t& size,
+    Block(void * pointer, const std::size_t& size,
         const std::size_t& id, const char (&f)[N], const int& l);
 public:
     Block(const Block<test::sys::mem::block::Base,
@@ -80,15 +80,18 @@ class Block<test::sys::mem::block::Base> :
 {
 private:
     typedef test::sys::Definition DefinitionType;
-    typedef test::sys::Interface InterfaceType;
+    typedef test::sys::Interface SystemType;
 public:
     typedef typename test::sys::Definition::TimestampType TimestampType;
 public:
-    Block(InterfaceType& intf);
-    Block(InterfaceType& intf, void * pointer, const std::size_t& size,
+    typedef typename DefinitionType::Status SysStatusEnumType;
+    typedef typename DefinitionType::StatusIntegerType SysStatusIntegerType;
+public:
+    Block();
+    Block(void * pointer, const std::size_t& size,
         const std::size_t& id);
     template<std::size_t N>
-    Block(InterfaceType& intf, void * pointer, const std::size_t& size,
+    Block(void * pointer, const std::size_t& size,
         const std::size_t& id, const char (&)[N], const int& );
 public:
     Block(const Block<test::sys::mem::block::Base>& cpy) = delete;
@@ -124,18 +127,18 @@ public:
 };
 
 Block<test::sys::mem::block::Base,
-    test::sys::mem::block::FileLine>::Block(InterfaceType& intf) :
-        test::sys::mem::block::Base(intf),
-        test::sys::mem::block::FileLine(intf)
+    test::sys::mem::block::FileLine>::Block() :
+        test::sys::mem::block::Base(),
+        test::sys::mem::block::FileLine()
 {}
 
 template<std::size_t N>
 Block<test::sys::mem::block::Base,
-    test::sys::mem::block::FileLine>::Block(InterfaceType& intf, void * pointer, 
+    test::sys::mem::block::FileLine>::Block(void * pointer, 
     const std::size_t& size, const std::size_t& id, const char (&f)[N], 
     const int& l) :
-        test::sys::mem::block::Base(intf, id),
-        test::sys::mem::block::FileLine(intf, f, l)
+        test::sys::mem::block::Base(id),
+        test::sys::mem::block::FileLine(f, l)
 {
     test::sys::mem::block::Base::Allocate(pointer, size);
 }
@@ -164,22 +167,22 @@ Block<test::sys::mem::block::Base,
     return *this;
 }
 
-Block<test::sys::mem::block::Base>::Block(InterfaceType& intf) :
-    test::sys::mem::block::Base(intf)
+Block<test::sys::mem::block::Base>::Block() :
+    test::sys::mem::block::Base()
 {}
 
-Block<test::sys::mem::block::Base>::Block(InterfaceType& intf, 
-    void * pointer, const std::size_t& size, const std::size_t& id) :
-        test::sys::mem::block::Base(intf, id)
+Block<test::sys::mem::block::Base>::Block(void * pointer, 
+    const std::size_t& size, const std::size_t& id) :
+        test::sys::mem::block::Base(id)
 {
     test::sys::mem::block::Base::Allocate(pointer, size);
 }
 
 template<std::size_t N>
-Block<test::sys::mem::block::Base>::Block(InterfaceType& intf,
-    void * pointer, const std::size_t& size, const std::size_t& id, 
+Block<test::sys::mem::block::Base>::Block(void * pointer, 
+    const std::size_t& size, const std::size_t& id, 
     const char (&)[N], const int&) :
-        test::sys::mem::block::Base(intf, id)
+        test::sys::mem::block::Base(id)
 {
     test::sys::mem::block::Base::Allocate(pointer, size);
 }

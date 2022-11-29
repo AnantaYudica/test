@@ -27,7 +27,7 @@ class Base
 {
 private:
     typedef test::sys::Definition DefinitionType;
-    typedef test::sys::Interface InterfaceType;
+    typedef test::sys::Interface SystemType;
 public:
     typedef std::size_t IDType;
     typedef std::atomic_uint16_t StatusType;
@@ -66,12 +66,11 @@ private:
     std::atomic_uint64_t m_refCount;
     std::mutex m_lock;
     DeallocationFuncType m_deallocator;
-    InterfaceType& m_sys;
     Data m_data;
 protected:
-    inline Base(InterfaceType& sys);
-    inline Base(InterfaceType& sys, const IDType& id);
-    inline Base(InterfaceType& sys, const IDType& id, DeallocationFuncType deallocator);
+    inline Base();
+    inline Base(const IDType& id);
+    inline Base(const IDType& id, DeallocationFuncType deallocator);
 protected:
     Base(const Base& cpy) = delete;
     Base(Base&& mov);
@@ -125,31 +124,28 @@ inline void * Base::Empty()
     return (void*)_empty;
 }
 
-inline Base::Base(InterfaceType& intf) :
+inline Base::Base() :
     m_status(sDefaultConstructor),
     m_refCount(0),
     m_lock(),
     m_deallocator(DefaultDeallocation),
-    m_sys(intf),
     m_data{0, Empty(), EmptySize, 0, 0}
 {}
 
-inline Base::Base(InterfaceType& intf, const IDType& id) :
+inline Base::Base(const IDType& id) :
         m_status(sNeedAllocate),
         m_refCount(0),
         m_lock(),
         m_deallocator(DefaultDeallocation),
-        m_sys(intf),
         m_data{id, Empty(), EmptySize, 0, 0}
 {}
 
-inline Base::Base(InterfaceType& intf, const IDType& id, 
+inline Base::Base(const IDType& id, 
     DeallocationFuncType deallocator) :
         m_status(sNeedAllocate),
         m_refCount(0),
         m_lock(),
         m_deallocator(deallocator ? deallocator : DefaultDeallocation),
-        m_sys(intf),
         m_data{id, Empty(), EmptySize, 0, 0}
 {}
 
@@ -158,7 +154,6 @@ inline Base::Base(Base&& mov) :
     m_refCount(mov.m_refCount.load()),
     m_lock(),
     m_deallocator(mov.m_deallocator),
-    m_sys(mov.m_sys),
     m_data{mov.m_data.id, mov.m_data.pointer, mov.m_data.size,
         mov.m_data.alloc_timestamp, mov.m_data.dealloc_timestamp}
 {
@@ -267,7 +262,9 @@ inline bool Base::Reallocate(ReallocateCallbackType callback)
         m_data.size = callback(m_data.pointer);
         if (m_data.pointer == nullptr)
         {
-            m_sys.Error(DefinitionType::Status::sMemoryReallocFailed, 
+
+            SystemType::GetInstance().Error(
+                DefinitionType::Status::sMemoryReallocFailed, 
                 "Memory Reallocation is failed");
             m_status |= sRelocateNullpointer;
             m_data.pointer = Empty();
@@ -375,7 +372,8 @@ inline void Base::AddReference() const
     }
     else
     {
-        m_sys.Error(DefinitionType::Status::sMemoryReferenceCountOverflow, 
+        SystemType::GetInstance().Error(
+            DefinitionType::Status::sMemoryReferenceCountOverflow, 
             "Memory Reference count is overflow");
     }
 }

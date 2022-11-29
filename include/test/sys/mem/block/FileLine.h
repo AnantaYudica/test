@@ -23,15 +23,14 @@ class FileLine
 {
 private:
     typedef test::sys::Definition DefinitionType;
-    typedef test::sys::Interface InterfaceType;
+    typedef test::sys::Interface SystemType;
 private:
     char * m_file;
     int m_line;
-    InterfaceType& m_sys;
 protected:
-    inline FileLine(InterfaceType& intf);
+    inline FileLine();
     template<std::size_t N>
-    inline FileLine(InterfaceType& intf, const char (&f)[N], const int& l);
+    inline FileLine(const char (&f)[N], const int& l);
 protected:
     inline FileLine(const FileLine& cpy) = delete;
     inline FileLine(FileLine&& mov);
@@ -45,18 +44,16 @@ public:
     inline int Line() const;
 };
 
-inline FileLine::FileLine(InterfaceType& intf) :
+inline FileLine::FileLine() :
     m_file(nullptr),
-    m_line(-1),
-    m_sys(intf)
+    m_line(-1)
 {}
 
 template<std::size_t N>
-inline FileLine::FileLine(InterfaceType& intf, const char (&f)[N], 
+inline FileLine::FileLine(const char (&f)[N], 
     const int& l) :
         m_file((char*)std::malloc((N + 1) * sizeof(char))),
-        m_line(l),
-        m_sys(intf)
+        m_line(l)
 {
     if (m_file != nullptr)
     {
@@ -66,15 +63,15 @@ inline FileLine::FileLine(InterfaceType& intf, const char (&f)[N],
     }
     else
     {
-        m_sys.Error(DefinitionType::Status::sMemRecordAllocFailed, 
+        SystemType::GetInstance().Error(
+            DefinitionType::Status::sMemRecordAllocFailed, 
             "Memory allocation is failed");
     }
 }
 
 inline FileLine::FileLine(FileLine&& mov) :
     m_file(std::move(mov.m_file)),
-    m_line(std::move(mov.m_line)),
-    m_sys(mov.m_sys)
+    m_line(std::move(mov.m_line))
 {
     mov.m_file = nullptr;
     mov.m_line = -1;
