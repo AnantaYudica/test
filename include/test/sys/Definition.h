@@ -93,9 +93,12 @@ struct Definition
 
 
         sMemRecordAllocFailed               = 0x0400,
-        sMemRecordDuplicatePointer          = 0x0401,
-        sMemRecordPointerNotFound           = 0x0402,
-        sMemRecordSizeOverflow              = 0x0403,
+        sMemRecordReallocFailed             = 0x0401,
+        sMemRecordDuplicatePointer          = 0x0402,
+        sMemRecordPointerNotFound           = 0x0403,
+        sMemRecordSizeOverflow              = 0x0404,
+        sMemRecordCastFailed                = 0x0405,
+        sMemRecordIndexOutOfBounds          = 0x0406,
 
         sUnknown                            = 0xFFFF
     };
@@ -252,12 +255,15 @@ inline const char* Definition::GetErrorName(StatusIntegerType code)
         "sMemoryReferenceCountOverflow",
         // 04
         "sMemRecordAllocFailed",
+        "sMemRecordReallocFailed",
         "sMemRecordDuplicatePointer",
         "sMemRecordPointerNotFound",
-        "sMemRecordSizeOverflow"
+        "sMemRecordSizeOverflow",
+        "sMemRecordCastFailed",
+        "sMemRecordIndexOutOfBounds"
     };
     static const std::uint8_t error_max[] = {
-        2, 1, 3, 2, 4
+        2, 1, 3, 2, 7
     };
     const uint8_t obj_code = code >> 8;
     const uint8_t num_code = 0x00FF & code;
