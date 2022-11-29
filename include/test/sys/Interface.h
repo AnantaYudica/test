@@ -13,11 +13,31 @@ namespace sys
 
 class Interface
 {
+private:
+    class Instance
+    {
+    private:
+        Interface* m_value;
+    public:
+        Instance();
+        ~Instance();
+    public:
+        operator bool();
+    public:
+        void Set(Interface* instance);
+        Interface* Get();
+    };
 public:
     typedef typename test::sys::Definition::StatusIntegerType 
         StatusIntegerType;
-    typedef typename test::sys::Definition::Status Status; 
+    typedef typename test::sys::Definition::Status Status;
+private:
+    static inline typename Interface::Instance& _GetInstance();
+protected:
+    static inline bool CreateInstance(Interface* intf);
 public:
+    static Interface& GetInstance();
+protected:
     Interface() = default;
 public:
     virtual ~Interface() = default;
@@ -41,6 +61,58 @@ public:
     virtual inline int VError(StatusIntegerType code, const char* format, 
         va_list args) TEST_ATTRIBUTE ((__format__ (__printf__, 3, 0)));
 };
+
+Interface::Instance::Instance() :
+    m_value(nullptr)
+{}
+
+Interface::Instance::~Instance()
+{
+    m_value = nullptr;
+}
+
+Interface::Instance::operator bool()
+{
+    return m_value != nullptr;
+}
+
+void Interface::Instance::Set(Interface* instance)
+{
+    m_value = instance;
+}
+
+Interface* Interface::Instance::Get()
+{
+    return m_value;
+}
+
+inline typename Interface::Instance& Interface::_GetInstance()
+{
+    static Instance instance;
+    return instance;
+}
+
+inline bool Interface::CreateInstance(Interface * intf)
+{
+    Instance& instance = _GetInstance();
+    if ((bool)instance)
+    {
+        return false;
+    }
+    instance.Set(intf);
+    return true;
+}
+
+Interface& Interface::GetInstance()
+{
+    Instance& instance = _GetInstance();
+    static Interface default_value;
+    if (!(bool)instance)
+    {
+        return default_value;
+    }
+    return *(instance.Get());
+}
 
 inline int Interface::Output(const char* format, ...)
 {
