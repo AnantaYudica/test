@@ -98,6 +98,8 @@ public:
     std::size_t Size();
 public:
     TBlock* operator[](void * pointer);
+public:
+    std::size_t ForEach(std::function<void(TBlock*)> op);
 };
 
 template<typename TBlock>
@@ -452,6 +454,28 @@ TBlock* Record<TBlock>::operator[](void * pointer)
         std::placeholders::_1));
     if (found == nullptr) return nullptr;
     return &**found;
+}
+
+template<typename TBlock>
+std::size_t Record<TBlock>::ForEach(std::function<void(TBlock*)> op)
+{
+    if (op == nullptr)
+    {
+        return 0;
+    }
+
+    std::lock_guard<std::mutex> guard(m_lock);
+
+    std::size_t count = 0;
+
+    IteratorType it(m_head);
+    while(it != nullptr)
+    {
+        op((TBlock*)*it);
+        ++it;
+        ++count;
+    }
+    return count;
 }
 
 } //!mem
