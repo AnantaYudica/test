@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include <ctime>
+#include <type_traits>
 
 #include <cstdio>
 
@@ -80,33 +81,158 @@ struct Definition
     enum class Status : StatusIntegerType 
     {
         sOk                                 = 0x0000,
-        sUndefined                          = 0x0001,
+        sError                              = 0x0080,
+        sSystem                             = sOk,
+        sAllocationAgumentsFailed           = sError | 0x01,
+        sUndefined                          = sError | 0x02,
 
-        sSysAllocArgsFailed                 = 0x0100,
+        sSignals                            = 0x0100,
+        sSignalsAllocationFailed            = sSignals | sError | 0x01,
+        sSignalsReallocationFailed          = sSignals | sError | 0x02,
+        sSignalsReallocationOutOfMemory     = sSignals | sError | 0x03,
 
-        sSignalsAllocFailed                 = 0x0200,
-        sSignalsReallocFailed               = 0x0201,
-        sSignalsReallocOverflow             = 0x0202,
+        sMemory                             = 0x0200,
+        sMemoryNotClearOnFinalize           = sMemory | sError | 0x01,
 
-        sMemoryReallocFailed                = 0x0300,
-        sMemoryReferenceCountOverflow       = 0x0301,
+        sMemRecord                          = 0x0300,
+        sMemRecordDuplicatePointer          = sMemRecord | sError | 0x01,
+        sMemRecordPointerNotFound           = sMemRecord | sError | 0x02,
+        sMemRecordSizeOverflow              = sMemRecord | sError | 0x03,
 
+        sMemBlock                           = 0x0400,
+        sMemBlockAllocationFailed           = sMemBlock | sError | 0x01,
+        sMemBlockReallocationFailed         = sMemBlock | sError | 0x02,
+        sMemBlockReferenceCountOverflow     = sMemBlock | sError | 0x03,
 
-        sMemRecordAllocFailed               = 0x0400,
-        sMemRecordReallocFailed             = 0x0401,
-        sMemRecordDuplicatePointer          = 0x0402,
-        sMemRecordPointerNotFound           = 0x0403,
-        sMemRecordSizeOverflow              = 0x0404,
-        sMemRecordCastFailed                = 0x0405,
-        sMemRecordIndexOutOfBounds          = 0x0406,
+        sMemPointer                         = 0x0500,
+        sMemPointerCastFailed               = sMemPointer | sError | 0x01,
+        sMemPointerIndexOutOfBounds         = sMemPointer | sError | 0x02,
+
+        sMemDummy                           = 0x0600,
+        sMemDummyAllocationFailed           = sMemDummy | sError | 0x01,
+        sMemDummyReallocationFailed         = sMemDummy | sError | 0x02,
 
         sUnknown                            = 0xFFFF
     };
 
-    static inline const char* GetErrorName(Status code);
-    static inline const char* GetErrorName(StatusIntegerType code);
+    static constexpr const char* _StatusNames[] = {
+
+        "sOk",
+
+        "[Unknown]",
+        "sUnknown",
+
+        "[System]",
+        "sAllocationAgumentsFailed",
+        "sUndefined",
+
+        "[sys][Signals]",
+        "sSignalsAllocationFailed",
+        "sSignalsReallocationFailed",
+        "sSignalsReallocationOutOfMemory"
+
+        "[sys][Memory]",
+        "sMemoryNotClearOnFinalize",
+
+        "[sys][mem][Record]",
+        "sMemRecordDuplicatePointer",
+        "sMemRecordPointerNotFound",
+        "sMemRecordSizeOverflow",
+
+        "[sys][mem][Block]",
+        "sMemBlockAllocationFailed",
+        "sMemBlockReallocationFailed",
+        "sMemBlockReferenceCountOverflow",
+
+        "[sys][mem][Pointer]"
+        "sMemPointerCastFailed",
+        "sMemPointerIndexOutOfBounds",
+
+        "[sys]][mem][Dummy]"
+        "sMemDummyAllocationFailed",
+        "sMemDummyReallocationFailed",
+    };
+
+    static constexpr std::size_t _StatusNamesSize = 
+        sizeof(_StatusNames) / sizeof(const char*);
+    
+    static constexpr StatusIntegerType StatusTagMax = 6;
+
+    static constexpr std::uint8_t _StatusErrorNameMaxIndexs[] = 
+    {
+        1, 2, 3, 1, 3, 3, 2, 2
+    };
+    static constexpr std::size_t _StatusErrorNameMaxIndexsSize = 
+        sizeof(_StatusErrorNameMaxIndexs) / sizeof(std::uint8_t);
+
+    static inline std::size_t SumStatusNames(std::uint8_t tag = StatusTagMax, 
+        std::size_t sum = 0);
+
+    template<std::size_t N = _StatusNamesSize, typename... TArgs>
+    static inline typename std::enable_if<N == 0, const char**>::type 
+        StatusNames(TArgs... args);
+    template<std::size_t N = _StatusNamesSize, typename... TArgs>
+    static inline typename std::enable_if<N != 0, const char**>::type 
+        StatusNames(TArgs... args);
+
+    template<std::size_t N = _StatusErrorNameMaxIndexsSize, 
+        typename... TArgs>
+    static inline typename std::enable_if<N == 0, std::uint8_t*>::type 
+        StatusErrorNameMaxIndexs(TArgs... args);
+    template<std::size_t N = _StatusErrorNameMaxIndexsSize, 
+        typename... TArgs>
+    static inline typename std::enable_if<N != 0, std::uint8_t*>::type 
+        StatusErrorNameMaxIndexs(TArgs... args);
+
+
+    static inline const char* GetStatusTagName(Status code);
+    static inline const char* GetStatusTagName(StatusIntegerType code);
+
+    static inline const char* GetStatusName(Status code);
+    static inline const char* GetStatusName(StatusIntegerType code);
 
 };
+
+} //!sys
+
+} //!test
+
+static inline bool 
+operator==(typename test::sys::Definition::Status status_enum,
+    typename test::sys::Definition::StatusIntegerType status_int)
+{
+    return static_cast<test::sys::Definition::StatusIntegerType>(status_enum)
+        == status_int;
+}
+
+static inline bool 
+operator!=(typename test::sys::Definition::Status status_enum,
+    typename test::sys::Definition::StatusIntegerType status_int)
+{
+    return static_cast<test::sys::Definition::StatusIntegerType>(status_enum)
+        != status_int;
+}
+
+static inline bool 
+operator==(typename test::sys::Definition::StatusIntegerType status_int,
+    typename test::sys::Definition::Status status_enum)
+{
+    return static_cast<test::sys::Definition::StatusIntegerType>(status_enum)
+        == status_int;
+}
+
+static inline bool 
+operator!=(typename test::sys::Definition::StatusIntegerType status_int,
+    typename test::sys::Definition::Status status_enum)
+{
+    return static_cast<test::sys::Definition::StatusIntegerType>(status_enum)
+        != status_int;
+}
+
+namespace test
+{
+namespace sys
+{
 
 inline typename Definition::TimestampType Definition::GetTimestampNow()
 {
@@ -232,89 +358,92 @@ Definition::GetDateTime(const TimestampType& timestamp)
     return result;
 }
 
-inline const char* Definition::GetErrorName(Status code)
+inline std::size_t Definition::SumStatusNames(std::uint8_t tag, 
+    std::size_t sum)
 {
-    return GetErrorName(static_cast<StatusIntegerType>(code));
+    return (tag <= StatusTagMax) ? (tag == 0 ? 
+        (sum + StatusErrorNameMaxIndexs<>()[0] + 2) : 
+            SumStatusNames(tag - 1, sum + StatusErrorNameMaxIndexs<>()[tag] + 1)) :
+        SumStatusNames(StatusTagMax); 
 }
 
-inline const char* Definition::GetErrorName(StatusIntegerType code)
+template<std::size_t N, typename... TArgs>
+inline typename std::enable_if<N == 0, const char**>::type 
+Definition::StatusNames(TArgs... args)
 {
-    static const char unkown[] = "sUnknown"; 
-    static const char* error_names[] = {
-        // 00
-        "sOk",
-        "sUndefined",
-        // 01
-        "sSysAllocArgsFailed",
-        // 02
-        "sSignalsAllocFailed",
-        "sSignalsReallocFailed",
-        "sSignalsReallocOverflow",
-        // 03
-        "sMemoryReallocFailed",
-        "sMemoryReferenceCountOverflow",
-        // 04
-        "sMemRecordAllocFailed",
-        "sMemRecordReallocFailed",
-        "sMemRecordDuplicatePointer",
-        "sMemRecordPointerNotFound",
-        "sMemRecordSizeOverflow",
-        "sMemRecordCastFailed",
-        "sMemRecordIndexOutOfBounds"
-    };
-    static const std::uint8_t error_max[] = {
-        2, 1, 3, 2, 7
-    };
-    const uint8_t obj_code = code >> 8;
+    static const char* names[] = {args...};
+    return names;
+}
+
+template<std::size_t N, typename... TArgs>
+inline typename std::enable_if<N != 0, const char**>::type 
+Definition::StatusNames(TArgs... args)
+{
+    return StatusNames<N - 1>(args..., 
+        _StatusNames[_StatusNamesSize - N]);
+}
+
+template<std::size_t N, typename... TArgs>
+inline typename std::enable_if<N == 0, std::uint8_t*>::type 
+Definition::StatusErrorNameMaxIndexs(TArgs... args)
+{
+    static std::uint8_t max_indexs[] = {args...};
+    return max_indexs;
+}
+
+template<std::size_t N, typename... TArgs>
+inline typename std::enable_if<N != 0, std::uint8_t*>::type 
+Definition::StatusErrorNameMaxIndexs(TArgs... args)
+{
+    return StatusErrorNameMaxIndexs<N - 1>(args..., 
+        _StatusErrorNameMaxIndexs[_StatusErrorNameMaxIndexsSize - N]);
+}
+
+inline const char* Definition::GetStatusTagName(Status code)
+{
+    return GetStatusTagName(static_cast<StatusIntegerType>(code));
+}
+
+inline const char* Definition::GetStatusTagName(StatusIntegerType code)
+{
+    const uint8_t tag_code = code >> 8;
     const uint8_t num_code = 0x00FF & code;
-    const char * errorName = unkown;
-    if (obj_code < sizeof(error_max))
+
+    if (tag_code > StatusTagMax || tag_code < 0)
     {
-        if (num_code < error_max[obj_code])
-        {
-            std::uint16_t index = 0; 
-            for (int i = 0; i < sizeof(error_max); ++i)
-            {
-                if (i == obj_code)
-                {
-                    break;
-                }
-                index += error_max[i];
-            }
-            errorName = error_names[index + code];
-        }
+        return StatusNames<>()[1];
     }
-    return errorName;
+    const std::size_t name = SumStatusNames(tag_code);
+    return StatusNames<>()[name];
 }
 
-static inline bool operator==(typename Definition::Status status_enum,
-    typename Definition::StatusIntegerType status_int)
+inline const char* Definition::GetStatusName(Status code)
 {
-    return static_cast<Definition::StatusIntegerType>(status_enum)
-        == status_int;
+    return GetStatusName(static_cast<StatusIntegerType>(code));
 }
 
-static inline bool operator!=(typename Definition::Status status_enum,
-    typename Definition::StatusIntegerType status_int)
+inline const char* Definition::GetStatusName(StatusIntegerType code)
 {
-    return static_cast<Definition::StatusIntegerType>(status_enum)
-        != status_int;
-}
+    if (code == Status::sOk)
+    {
+        return StatusNames<>()[0];
+    }
 
-static inline bool 
-operator==(typename Definition::StatusIntegerType status_int,
-    typename Definition::Status status_enum)
-{
-    return static_cast<Definition::StatusIntegerType>(status_enum)
-        == status_int;
-}
-
-static inline bool 
-operator!=(typename Definition::StatusIntegerType status_int,
-    typename Definition::Status status_enum)
-{
-    return static_cast<Definition::StatusIntegerType>(status_enum)
-        != status_int;
+    const uint8_t tag_code = code >> 8;
+    const uint8_t num_code = (StatusIntegerType)Status::sError ^ (0x00FF & code);
+    
+    if (tag_code > StatusTagMax || tag_code < 0)
+    {
+        return StatusNames<>()[2];
+    }
+    
+    const StatusIntegerType max = StatusErrorNameMaxIndexs<>()[tag_code];
+    if (num_code >= max || num_code == 0)
+    {
+        return StatusNames<>()[2];
+    }
+    const std::size_t name = SumStatusNames(tag_code);
+    return StatusNames<>()[name + num_code];
 }
 
 } //!sys
