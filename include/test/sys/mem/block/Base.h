@@ -264,7 +264,7 @@ inline bool Base::Reallocate(ReallocateCallbackType callback)
         {
 
             SystemType::GetInstance().Error(
-                DefinitionType::Status::sMemoryReallocFailed, 
+                DefinitionType::Status::sMemBlockReallocationFailed, 
                 "Memory Reallocation is failed");
             m_status |= sRelocateNullpointer;
             m_data.pointer = Empty();
@@ -373,7 +373,7 @@ inline void Base::AddReference() const
     else
     {
         SystemType::GetInstance().Error(
-            DefinitionType::Status::sMemoryReferenceCountOverflow, 
+            DefinitionType::Status::sMemBlockReferenceCountOverflow, 
             "Memory Reference count is overflow");
     }
 }

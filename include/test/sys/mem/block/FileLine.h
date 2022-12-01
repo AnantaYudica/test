@@ -64,7 +64,7 @@ inline FileLine::FileLine(const char (&f)[N],
     else
     {
         SystemType::GetInstance().Error(
-            DefinitionType::Status::sMemRecordAllocFailed, 
+            DefinitionType::Status::sMemBlockAllocationFailed, 
             "Memory allocation is failed");
     }
 }

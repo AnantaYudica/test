@@ -98,7 +98,7 @@ inline char* Dummy::GetAllocation(const std::size_t& n)
             if (m_alloc == nullptr)
             {
                 SystemType::GetInstance().Error(
-                    DefinitionType::Status::sMemRecordAllocFailed,
+                    DefinitionType::Status::sMemDummyAllocationFailed,
                     "Memory allocation is failed"
                 );
                 return &heap;
@@ -110,7 +110,7 @@ inline char* Dummy::GetAllocation(const std::size_t& n)
             if (m_alloc == nullptr)
             {
                 SystemType::GetInstance().Error(
-                    DefinitionType::Status::sMemoryReallocFailed,
+                    DefinitionType::Status::sMemDummyReallocationFailed,
                     "Memory reallocation is failed"
                 );
                 return &heap;

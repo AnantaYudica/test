@@ -87,7 +87,7 @@ Pointer<TBlock>::Cast()
         if ((bool)(*this))
         {
             SystemType::GetInstance().Error(
-                DefinitionType::Status::sMemRecordCastFailed,
+                DefinitionType::Status::sMemPointerCastFailed,
                 "Cast is not enough size");
         }
         return {};

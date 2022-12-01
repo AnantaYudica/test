@@ -167,7 +167,7 @@ typename Const<TBlock>::CastConstType<T> Const<TBlock>::Cast()
         if (m_block != nullptr && m_block != Default())
         {
             SystemType::GetInstance().Error(
-                DefinitionType::Status::sMemRecordCastFailed,
+                DefinitionType::Status::sMemPointerCastFailed,
                 "Cast is not enough size");
         }
         return {};
@@ -184,7 +184,7 @@ typename Const<TBlock>::CastConstType<T> Const<TBlock>::Cast() const
         if (m_block != nullptr && m_block != Default())
         {
             SystemType::GetInstance().Error(
-                DefinitionType::Status::sMemRecordCastFailed,
+                DefinitionType::Status::sMemPointerCastFailed,
                 "Cast is not enough size");
         }
         return {};

@@ -74,7 +74,7 @@ T* Cast<T, TBlock>::operator[](const std::size_t& n)
     {
         const std::size_t last_index = Size() / sizeof(T);
         SystemType::GetInstance().Error(
-            DefinitionType::Status::sMemRecordIndexOutOfBounds,
+            DefinitionType::Status::sMemPointerIndexOutOfBounds,
             "index out of bounds");
         
         return static_cast<T*>(test::sys::mem::Dummy::Get<T>()); 
