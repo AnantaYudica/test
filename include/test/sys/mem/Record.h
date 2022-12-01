@@ -350,7 +350,7 @@ int Record<TBlock>::Register(void * pointer,
             if (size >= m_size)
             {
                 SystemType::GetInstance().Error(
-                    DefinitionType::Status::sMemRecordAllocFailed, 
+                    DefinitionType::Status::sMemRecordSizeOverflow, 
                     "Size Overflow");
                 return sRegisterSizeOverflow;
             }
