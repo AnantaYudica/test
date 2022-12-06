@@ -1,0 +1,105 @@
+#ifndef TEST_SYS_DBG_TYPE_PARAMETER_H_
+#define TEST_SYS_DBG_TYPE_PARAMETER_H_
+
+#include "../../Definition.h"
+
+#include <cstring>
+
+namespace test
+{
+namespace sys
+{
+namespace dbg
+{
+namespace type
+{
+
+template<typename ... TArgs>
+class Parameter
+{
+public:
+    static constexpr bool IsEnd = true;
+public:
+    static inline std::size_t WriteTagName(char *, std::size_t)
+    {
+        return 0;
+    }
+public:
+    static inline std::size_t WriteName(char *, std::size_t)
+    {
+        return 0;
+    }
+public:
+    inline Parameter() = delete;
+public:
+    inline ~Parameter() = delete;
+};
+
+template<typename TArg, typename ... TArgs>
+class Parameter<TArg, TArgs...>
+{
+public:
+    static constexpr bool IsEnd = false;
+public:
+    static inline std::size_t WriteName(char * name_out, std::size_t n)
+    {
+        const std::size_t t_size = TArg::WriteName(name_out, n);
+        if (t_size == n)
+        {
+            return n;
+        }
+        std::size_t conj_ch_size = 0;
+        if (!Parameter<TArgs...>::IsEnd)
+        {
+            conj_ch_size = snprintf(name_out + t_size, n - t_size, ", ");
+        }
+        const std::size_t before_size = t_size + conj_ch_size;
+        if (before_size == n)
+        {
+            return n;
+        }
+        return Parameter<TArgs...>::WriteName(name_out + before_size,
+            n - before_size) + before_size;
+         
+    }
+public:
+    static inline std::size_t WriteTagName(char * tag_out, std::size_t n)
+    {
+        return WriteName(tag_out, n);
+    }
+public:
+    inline Parameter() = delete;
+public:
+    inline ~Parameter() = delete;
+};
+
+template<>
+class Parameter<>
+{
+public:
+    static constexpr bool IsEnd = true;
+public:
+    static inline std::size_t WriteTagName(char *, std::size_t)
+    {
+        return 0;
+    }
+public:
+    static inline std::size_t WriteName(char *, std::size_t)
+    {
+        return 0;
+    }
+public:
+    inline Parameter() = delete;
+public:
+    inline ~Parameter() = delete;
+};
+
+} //!type
+
+} //!dbg
+
+} //!sys
+
+} //!test
+
+#endif //!TEST_SYS_DBG_TYPE_PARAMETER_H_
