@@ -3,6 +3,7 @@
 
 #include "../../Definition.h"
 #include "../../Interface.h"
+#include "../../Debug.h"
 
 #include <cstddef>
 #include <limits>
@@ -13,6 +14,13 @@
 #include <atomic>
 #include <functional>
 #include <type_traits>
+
+namespace test::sys::mem::block
+{
+class Base;
+}
+
+TEST_SYS_DBG_TYPE_DEFINE("test::sys::mem::block::Base", test::sys::mem::block::Base);
 
 namespace test
 {
@@ -28,6 +36,7 @@ class Base
 private:
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::block::Base> DebugType;
 public:
     typedef std::size_t IDType;
     typedef std::atomic_uint16_t StatusType;
@@ -130,7 +139,9 @@ inline Base::Base() :
     m_lock(),
     m_deallocator(DefaultDeallocation),
     m_data{0, Empty(), EmptySize, 0, 0}
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
+}
 
 inline Base::Base(const IDType& id) :
         m_status(sNeedAllocate),
@@ -138,7 +149,9 @@ inline Base::Base(const IDType& id) :
         m_lock(),
         m_deallocator(DefaultDeallocation),
         m_data{id, Empty(), EmptySize, 0, 0}
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Constructor(id=%zu)", id);
+}
 
 inline Base::Base(const IDType& id, 
     DeallocationFuncType deallocator) :
@@ -147,7 +160,10 @@ inline Base::Base(const IDType& id,
         m_lock(),
         m_deallocator(deallocator ? deallocator : DefaultDeallocation),
         m_data{id, Empty(), EmptySize, 0, 0}
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, 
+        this, "Constructor(id=%zu, deallocator=%p)", id, deallocator);
+}
 
 inline Base::Base(Base&& mov) :
     m_status(mov.m_status.load()),
@@ -157,6 +173,8 @@ inline Base::Base(Base&& mov) :
     m_data{mov.m_data.id, mov.m_data.pointer, mov.m_data.size,
         mov.m_data.alloc_timestamp, mov.m_data.dealloc_timestamp}
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, 
+        this, "Move Constructor(%p)", &mov);
     mov.m_status.store(sDefaultConstructor);
     mov.m_refCount = 0;
     mov.m_deallocator = DefaultDeallocation;
@@ -165,6 +183,7 @@ inline Base::Base(Base&& mov) :
 
 inline Base::~Base()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1,  this, "Destructor");
     {
         std::lock_guard<std::mutex> guard(m_lock);
         if (m_status.load() == sGood)
@@ -180,6 +199,9 @@ inline Base::~Base()
 
 inline Base& Base::operator=(Base&& mov)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Assignment(%p)", &mov);
+    
     m_status.store(mov.m_status.load());
     mov.m_status = sDefaultConstructor;
 
@@ -198,6 +220,8 @@ inline Base& Base::operator=(Base&& mov)
 
 inline bool Base::_Deallocate()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "_Deallocate()");
+
     bool res = false;
     m_data.dealloc_timestamp = test::sys::Definition::GetTimestampNow();
     Data data{m_data.id, m_data.pointer, m_data.size,
@@ -223,6 +247,9 @@ inline bool Base::_Deallocate()
 
 inline bool Base::Allocate(void* pointer, const std::size_t& size)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Allocate(pointer=%p, size=%zu)", pointer, size);
+
     if (pointer == nullptr || size == 0)
     {
         return false;
@@ -248,6 +275,9 @@ inline bool Base::Allocate(void* pointer, const std::size_t& size)
 
 inline bool Base::Reallocate(ReallocateCallbackType callback)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Reallocate(callback=%p)", callback);
+
     if(callback == nullptr)
     {
         m_status |= sBadRelocateCallback;
@@ -278,6 +308,8 @@ inline bool Base::Reallocate(ReallocateCallbackType callback)
 
 inline bool Base::Deallocate()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Deallocate()");
+
     std::lock_guard<std::mutex> guard(m_lock);
     if (IsBad())
     {
@@ -307,6 +339,9 @@ inline bool Base::Release(const bool& force)
 
 inline bool Base::SetDeallocator(DeallocationFuncType deallocator)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "SetDeallocator(deallocator=%p)", deallocator);
+
     if (m_deallocator != nullptr || 
         m_deallocator != &DefaultDeallocation || deallocator == nullptr)
     {
@@ -321,6 +356,8 @@ inline bool Base::SetDeallocator(DeallocationFuncType deallocator)
 
 inline void* Base::Pointer()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Pointer()");
+
     void * pointer = nullptr;
     {
         const std::lock_guard<std::mutex> guard(m_lock);
@@ -331,39 +368,57 @@ inline void* Base::Pointer()
 
 inline void* Base::Pointer() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Pointer() const");
+
     auto* cast_ptr = const_cast<Base*>(this);
     return cast_ptr->Pointer();
 }
 
 inline std::size_t Base::Size() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Size() const");
+
     return m_data.size;
 }
 
 inline std::size_t Base::ReferenceCount() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "ReferenceCount() const");
+
     return m_refCount.load();
 }
 
 inline typename Base::TimestampType 
 Base::AllocationTimestamp() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "AllocationTimestamp() const");
+
     return m_data.alloc_timestamp;
 }
 
 inline typename Base::TimestampType 
 Base::DeallocationTimestamp() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "DeallocationTimestamp() const");
+
     return m_data.dealloc_timestamp;
 }
 
 inline typename Base::IDType Base::ID() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "ID() const");
+
     return m_data.id;
 }
 
 inline void Base::AddReference() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "AddReference() const");
+
     if (m_data.pointer == Empty()) return;
     auto* cast_ptr = const_cast<Base*>(this);
     if (cast_ptr->m_refCount < std::numeric_limits<std::size_t>::max())
@@ -380,6 +435,9 @@ inline void Base::AddReference() const
 
 inline void Base::ReleaseReference() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "ReleaseReference() const");
+
     auto* cast_ptr = const_cast<Base*>(this);
     std::lock_guard<std::mutex> guard(cast_ptr->m_lock);
     if (m_data.pointer == Empty()) return;
@@ -400,31 +458,48 @@ inline void Base::ReleaseReference() const
 
 inline bool Base::IsGood() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsGood() const");
+
     return m_status.load() == sGood;
 }
 
 inline bool Base::IsBad() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsBad() const");
+
     return m_status.load() != sGood;
 }
 
 inline typename Base::StatusIntegerType Base::Status() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "Status() const");
+
     return m_status.load();
 }
 
 inline Base::operator bool() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator bool() const");
+
     return m_data.pointer != Empty();
 }
 
 inline bool Base::operator==(const Base& other) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator==(other=%p) const", &other);
+
     return m_data.id == other.m_data.id;
 }
 
 inline bool Base::operator!=(const Base& other) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator==(other=%p) const", &other);
     return m_data.id != other.m_data.id;
 }
 
