@@ -76,4 +76,13 @@ inline std::size_t Debug::Name(char* name_out, std::size_t n)
 
 } //!test
 
+#include "dbg/Type.h"
+
+#define TEST_SYS_DEBUG_SET_LEVEL(VAL, ...)\
+test::sys::dbg::Type<__VA_ARGS__>::GetInstance().SetLevel(VAL)
+
+#define TEST_SYS_DEBUG(SYS_TYPE, DEBUG_TYPE, ...)\
+    SYS_TYPE::GetInstance().Debug(DEBUG_TYPE::GetInstance(), __VA_ARGS__);
+
+
 #endif //!TEST_SYS_DEBUG_H_
