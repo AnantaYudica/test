@@ -170,7 +170,7 @@ TBlock* Record<TBlock>::MakeBlock(TBlock&& instance)
     if (block == nullptr) 
     {
         SystemType::GetInstance().Error(
-            DefinitionType::Status::sMemRecordAllocFailed, 
+            DefinitionType::Status::sMemRecordAllocationFailed, 
             "Memory allocation is failed");
         return nullptr;
     }
@@ -318,7 +318,7 @@ int Record<TBlock>::Register(void * pointer,
     if (block == nullptr)
     {
         SystemType::GetInstance().Error(
-            DefinitionType::Status::sMemRecordAllocFailed, 
+            DefinitionType::Status::sMemRecordAllocationFailed, 
             "Block Allocation is failed");
         return sRegisterAllocationMemoryFailed;
     }
@@ -328,7 +328,7 @@ int Record<TBlock>::Register(void * pointer,
     if (instance == nullptr)
     {
         SystemType::GetInstance().Error(
-            DefinitionType::Status::sMemRecordAllocFailed, 
+            DefinitionType::Status::sMemRecordAllocationFailed, 
             "Node Allocation is failed");
         return sRegisterAllocationMemoryFailed;
     }
