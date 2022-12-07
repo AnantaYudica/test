@@ -95,9 +95,10 @@ struct Definition
         sMemoryNotClearOnFinalize           = sMemory | sError | 0x01,
 
         sMemRecord                          = 0x0300,
-        sMemRecordDuplicatePointer          = sMemRecord | sError | 0x01,
-        sMemRecordPointerNotFound           = sMemRecord | sError | 0x02,
-        sMemRecordSizeOverflow              = sMemRecord | sError | 0x03,
+        sMemRecordAllocationFailed          = sMemRecord | sError | 0x01,
+        sMemRecordDuplicatePointer          = sMemRecord | sError | 0x02,
+        sMemRecordPointerNotFound           = sMemRecord | sError | 0x03,
+        sMemRecordSizeOverflow              = sMemRecord | sError | 0x04,
 
         sMemBlock                           = 0x0400,
         sMemBlockAllocationFailed           = sMemBlock | sError | 0x01,
@@ -135,6 +136,7 @@ struct Definition
         "sMemoryNotClearOnFinalize",
 
         "[sys][mem][Record]",
+        "sMemRecordAllocationFailed",
         "sMemRecordDuplicatePointer",
         "sMemRecordPointerNotFound",
         "sMemRecordSizeOverflow",
@@ -160,7 +162,7 @@ struct Definition
 
     static constexpr std::uint8_t _StatusErrorNameMaxIndexs[] = 
     {
-        1, 2, 3, 1, 3, 3, 2, 2
+        1, 2, 3, 1, 4, 3, 2, 2
     };
     static constexpr std::size_t _StatusErrorNameMaxIndexsSize = 
         sizeof(_StatusErrorNameMaxIndexs) / sizeof(std::uint8_t);
