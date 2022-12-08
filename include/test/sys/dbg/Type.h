@@ -6,6 +6,7 @@
 #include "Type.defn.h"
 
 #include <cstring>
+#include <type_traits>
 
 #define TEST_SYS_DBG_TYPE_DEFINE(NAME, ...)\
 template<>\
@@ -471,7 +472,7 @@ TEST_SYS_DBG_TYPE_T_PTR_MEM(T TM::*const volatile, "::*const volatile");
 
 #undef TEST_SYS_DBG_TYPE_T_PTR_MEM
 
-#define TEST_SYS_DBG_TYPE_T_ARRAY(TDEF, IS_BOUNDED, ...)\
+#define TEST_SYS_DBG_TYPE_T_ARRAY(TDEF, PRE, IS_BOUNDED, ...)\
 template<__VA_ARGS__>\
 class test::sys::dbg::Type<TDEF> :public test::sys::Debug\
 {\
@@ -522,8 +523,19 @@ public:\
 public:\
     static inline std::size_t WritePrefixName(char * name_out, std::size_t n)\
     {\
+        const char pre[] = PRE;\
+        const std::size_t pre_size = sizeof(pre);\
+        std::size_t pre_count = 0;\
+        if (pre_size > 1)\
+        {\
+            pre_count = snprintf(name_out, n, "%s", pre);\
+        }\
+        if (pre_count == n)\
+        {\
+            return pre_count;\
+        }\
         typedef typename std::remove_all_extents<T>::type RemovedType;\
-        return Type<RemovedType>::WriteName(name_out, n);\
+        return Type<RemovedType>::WriteName(name_out + pre_count, n - pre_count) + pre_count;\
     }\
 public:\
     static inline std::size_t WriteSufixName(char * name_out, std::size_t n)\
@@ -567,9 +579,15 @@ public:\
     }\
 }
 
-TEST_SYS_DBG_TYPE_T_ARRAY(T[], false, typename T);
+TEST_SYS_DBG_TYPE_T_ARRAY(T[], "", false, typename T);
+TEST_SYS_DBG_TYPE_T_ARRAY(const T[], "const ", false, typename T);
+TEST_SYS_DBG_TYPE_T_ARRAY(volatile T[], "volatile ", false, typename T);
+TEST_SYS_DBG_TYPE_T_ARRAY(const volatile T[], "const volatile ", false, typename T);
 
-TEST_SYS_DBG_TYPE_T_ARRAY(T[N], true, typename T, std::size_t N);
+TEST_SYS_DBG_TYPE_T_ARRAY(T[N], "", true, typename T, std::size_t N);
+TEST_SYS_DBG_TYPE_T_ARRAY(const T[N], "const ", true, typename T, std::size_t N);
+TEST_SYS_DBG_TYPE_T_ARRAY(volatile T[N], "volatile ", true, typename T, std::size_t N);
+TEST_SYS_DBG_TYPE_T_ARRAY(const volatile T[N], "const volatile ", true, typename T, std::size_t N);
 
 #undef TEST_SYS_DBG_TYPE_T_ARRAY
 
@@ -875,5 +893,7 @@ template<typename T, typename TContainer, typename TCompare>
 TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("std::priority_queue", std::priority_queue<T, TContainer, TCompare>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
+
+#include "../Debug.h"
 
 #endif //!TEST_SYS_DBG_TYPE_H_
