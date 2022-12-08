@@ -1,7 +1,7 @@
 #ifndef TEST_SYS_DBG_TYPE_PARAMETER_H_
 #define TEST_SYS_DBG_TYPE_PARAMETER_H_
 
-#include "../../Definition.h"
+#include "../CStr.h"
 
 #include <cstring>
 
@@ -28,6 +28,13 @@ public:
     static inline std::size_t WriteName(char *, std::size_t)
     {
         return 0;
+    }
+public:
+    template<std::size_t N>
+    static inline test::sys::dbg::CStr<N>& 
+        WriteName(test::sys::dbg::CStr<N>& cstr)
+    {
+        return cstr;
     }
 public:
     inline Parameter() = delete;
@@ -68,6 +75,14 @@ public:
         return WriteName(tag_out, n);
     }
 public:
+    template<std::size_t N>
+    static inline test::sys::dbg::CStr<N>& 
+        WriteName(test::sys::dbg::CStr<N>& cstr)
+    {
+        WriteName(cstr.Buffer(), cstr.BufferSize());
+        return cstr;
+    }
+public:
     inline Parameter() = delete;
 public:
     inline ~Parameter() = delete;
@@ -87,6 +102,13 @@ public:
     static inline std::size_t WriteName(char *, std::size_t)
     {
         return 0;
+    }
+public:
+    template<std::size_t N>
+    static inline test::sys::dbg::CStr<N>& 
+        WriteName(test::sys::dbg::CStr<N>& cstr)
+    {
+        return cstr;
     }
 public:
     inline Parameter() = delete;
