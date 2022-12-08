@@ -5,6 +5,8 @@
 
 #include <cstring>
 
+#define TEST_SYS_DBG_TYPE_PARAMETER_NAME_LENGTH 8
+
 namespace test
 {
 namespace sys
@@ -25,7 +27,7 @@ public:
         return 0;
     }
 public:
-    static inline std::size_t WriteName(char *, std::size_t)
+    static inline std::size_t WriteName(char *, std::size_t, int len = 0)
     {
         return 0;
     }
@@ -48,7 +50,7 @@ class Parameter<TArg, TArgs...>
 public:
     static constexpr bool IsEnd = false;
 public:
-    static inline std::size_t WriteName(char * name_out, std::size_t n)
+    static inline std::size_t WriteName(char * name_out, std::size_t n, int len = 0)
     {
         const std::size_t t_size = TArg::WriteName(name_out, n);
         if (t_size == n)
@@ -58,7 +60,15 @@ public:
         std::size_t conj_ch_size = 0;
         if (!Parameter<TArgs...>::IsEnd)
         {
-            conj_ch_size = snprintf(name_out + t_size, n - t_size, ", ");
+            if ((len + 1) >= TEST_SYS_DBG_TYPE_PARAMETER_NAME_LENGTH)
+            {
+                conj_ch_size = snprintf(name_out + t_size, n - t_size, ", ...");
+                return t_size + conj_ch_size;
+            }
+            else
+            {
+                conj_ch_size = snprintf(name_out + t_size, n - t_size, ", ");
+            }
         }
         const std::size_t before_size = t_size + conj_ch_size;
         if (before_size == n)
@@ -66,7 +76,7 @@ public:
             return n;
         }
         return Parameter<TArgs...>::WriteName(name_out + before_size,
-            n - before_size) + before_size;
+            n - before_size, len + 1) + before_size;
          
     }
 public:
@@ -99,7 +109,7 @@ public:
         return 0;
     }
 public:
-    static inline std::size_t WriteName(char *, std::size_t)
+    static inline std::size_t WriteName(char *, std::size_t, int len = 0)
     {
         return 0;
     }

@@ -10,6 +10,8 @@
 #include <utility>
 #include <type_traits>
 
+#define TEST_SYS_DBG_VAL_PARAMETER_LENGTH 8
+
 namespace test
 {
 namespace sys
@@ -19,13 +21,14 @@ namespace dbg
 namespace val
 {
 
+template<int LEN = 0>
 static std::size_t Parameter(char * buff_out, std::size_t n)
 {
     return 0;
 }
 
-template<typename TArg, typename... TArgs, typename TPrimary = 
-    typename std::remove_all_extents<
+template<int LEN = 0, typename TArg, typename... TArgs, 
+    typename TPrimary = typename std::remove_all_extents<
         typename std::remove_cv<typename std::remove_pointer<
             typename std::remove_reference<TArg>::type>::type>::type>::type>
 static std::size_t Parameter(char * buff_out, std::size_t n, TArg&& arg, TArgs&&... args)
@@ -36,19 +39,24 @@ static std::size_t Parameter(char * buff_out, std::size_t n, TArg&& arg, TArgs&&
         return size;
     }
     if (sizeof...(args) != 0)
-    {
+    {   
+        if ((LEN + 1) > TEST_SYS_DBG_VAL_PARAMETER_LENGTH)
+        {
+            return snprintf(buff_out + size, n - size, ", ...") + size;
+        }
+
         size = snprintf(buff_out + size, n - size, ", ") + size;
         if (size == n)
         {
             return size;
         }
     }
-    return test::sys::dbg::val::Parameter(buff_out + size, n - size, 
-        std::forward<TArgs>(args)...) + size;
+    return test::sys::dbg::val::Parameter<LEN + 1>(buff_out + size, 
+        n - size, std::forward<TArgs>(args)...) + size;
 }
 
-template<typename TArg, typename... TArgs, typename TPrimary = 
-    typename std::remove_all_extents<
+template<int LEN = 0, typename TArg, typename... TArgs,
+    typename TPrimary = typename std::remove_all_extents<
         typename std::remove_cv<typename std::remove_pointer<
             typename std::remove_reference<TArg>::type>::type>::type>::type>
 static std::size_t Parameter(char * buff_out, std::size_t n, TArg*&& arg, TArgs&&... args)
@@ -69,18 +77,23 @@ static std::size_t Parameter(char * buff_out, std::size_t n, TArg*&& arg, TArgs&
     }
     if (sizeof...(args) != 0)
     {
+        if ((LEN + 1) > TEST_SYS_DBG_VAL_PARAMETER_LENGTH)
+        {
+            return snprintf(buff_out + size, n - size, ", ...") + size;
+        }
+
         size = snprintf(buff_out + size, n - size, ", ") + size;
         if (size == n)
         {
             return size;
         }
     }
-    return test::sys::dbg::val::Parameter(buff_out + size, n - size, 
-        std::forward<TArgs>(args)...) + size;
+    return test::sys::dbg::val::Parameter<LEN + 1>(buff_out + size, 
+        n - size, std::forward<TArgs>(args)...) + size;
 }
 
-template<std::size_t N, typename TArg, typename... TArgs, typename TPrimary = 
-    typename std::remove_all_extents<
+template<int LEN = 0, std::size_t N, typename TArg, typename... TArgs, 
+    typename TPrimary = typename std::remove_all_extents<
         typename std::remove_cv<typename std::remove_pointer<
             typename std::remove_reference<TArg>::type>::type>::type>::type>
 static std::size_t Parameter(char * buff_out, std::size_t n, TArg(&& arg)[N], TArgs&&... args)
@@ -94,7 +107,23 @@ static std::size_t Parameter(char * buff_out, std::size_t n, TArg(&& arg)[N], TA
     {
         for (std::size_t i = 0; i < N && i < TEST_SYS_DBG_VALUE_ARRAY_LENGTH; ++i)
         {
-            size = test::sys::dbg::Value<TPrimary>::Write(buff_out, n, arg[0]);
+            if (size == n)
+            {
+                return size;
+            }
+            size += test::sys::dbg::Value<TPrimary>::Write(buff_out + size, n - size, arg[i]);
+            if (size == n)
+            {
+                return size;
+            }
+            if ((i + 1) < N)
+            {
+                if ((i + 1) >= TEST_SYS_DBG_VALUE_ARRAY_LENGTH)
+                {
+                    return snprintf(buff_out + size, n - size, ", ...") + size;
+                }
+                size += snprintf(buff_out + size, n - size, ",");
+            }
         }
     }
     if (size == n)
@@ -103,14 +132,18 @@ static std::size_t Parameter(char * buff_out, std::size_t n, TArg(&& arg)[N], TA
     }
     if (sizeof...(args) != 0)
     {
+        if ((LEN + 1) > TEST_SYS_DBG_VAL_PARAMETER_LENGTH)
+        {
+            return snprintf(buff_out + size, n - size, ", ...") + size;
+        }
         size = snprintf(buff_out + size, n - size, ", ") + size;
         if (size == n)
         {
             return size;
         }
     }
-    return test::sys::dbg::val::Parameter(buff_out + size, n - size, 
-        std::forward<TArgs>(args)...) + size;
+    return test::sys::dbg::val::Parameter<LEN + 1>(buff_out + size, 
+        n - size, std::forward<TArgs>(args)...) + size;
 }
 
 template<std::size_t N, typename... TArgs>
