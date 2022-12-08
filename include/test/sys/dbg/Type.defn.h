@@ -1,7 +1,7 @@
 #ifndef TEST_SYS_DBG_TYPE_H_DEFN_
 #define TEST_SYS_DBG_TYPE_H_DEFN_
 
-#include "../Debug.h"
+#include "../Debug.defn.h"
 
 namespace test
 {
