@@ -208,14 +208,12 @@ public:\
 public:\
     static inline std::size_t WriteName(char * name_out, std::size_t n)\
     {\
-        const char name[] = PRE;\
-        const std::size_t name_size = sizeof(name);\
-        std::size_t i = 0;\
-        for (;i < name_size && i < n; ++i)\
+        const std::size_t size = snprintf(name_out, n, PRE);\
+        if (size == n)\
         {\
-            name_out[i] = name[i];\
+            return size;\
         }\
-        return (i - 1) + Type<T>::WriteName(name_out + i, n - i);\
+        return Type<T>::WriteName(name_out + size, n - size) + size;\
     }\
 public:\
     static inline std::size_t WritePrefixName(char * name_out, std::size_t n)\
