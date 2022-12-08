@@ -12,6 +12,8 @@ template<>\
 class test::sys::dbg::Type<__VA_ARGS__> : public test::sys::Debug\
 {\
 public:\
+    typedef typename test::sys::Debug::CStrType CStrType;\
+public:\
     static constexpr bool HasSuffix = false;\
 public:\
     inline static test::sys::Debug& GetInstance()\
@@ -27,17 +29,36 @@ public:\
 public:\
     static inline std::size_t WriteTagName(char * tag_out, std::size_t n)\
     {\
-        const std::size_t bg = snprintf(tag_out, n, "[");\
-        if (bg == n)\
+        char name[] = NAME;\
+        const std::size_t name_size = sizeof(name);\
+        std::size_t i = 0;\
+        std::size_t j = 0;\
+        bool is_bg = false;\
+        while(i < name_size && j < n)\
         {\
-            return bg;\
+            if (name[i] == ':')\
+            {\
+                if (is_bg)\
+                {\
+                    tag_out[j++] = ']';\
+                    is_bg = false;\
+                }\
+                ++i; continue;\
+            }\
+            if (!is_bg)\
+            {\
+                tag_out[j++] = '[';\
+                is_bg = true;\
+                if (j >= n) break;\
+            }\
+            tag_out[j++] = name[i++];\
+            if (j >= n) break;\
         }\
-        const std::size_t t_size = WriteName(tag_out + bg, n - bg) + bg;\
-        if (t_size == n)\
+        if (is_bg && j < n)\
         {\
-            return t_size;\
+            tag_out[j++] = ']';\
         }\
-        return snprintf(tag_out + t_size, n - t_size, "]") + t_size;\
+        return j - 1;\
     }\
 public:\
     static inline std::size_t WritePrefixName(char * name_out, std::size_t n)\
@@ -68,11 +89,20 @@ public:\
     {\
         return WriteName(name_out, n);\
     }\
+public:\
+    virtual inline typename test::sys::Debug::CStrType&\
+        Name(CStrType& cstr)\
+    {\
+        WriteName(cstr.Buffer(), cstr.BufferSize());\
+        return cstr;\
+    }\
 }
 
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE(NAME, ...)\
 class test::sys::dbg::Type<__VA_ARGS__> : public test::sys::Debug\
 {\
+public:\
+    typedef typename test::sys::Debug::CStrType CStrType;\
 public:\
     static constexpr bool HasSuffix = false;\
 public:\
@@ -146,12 +176,21 @@ public:\
     {\
         return WriteName(name_out, n);\
     }\
+public:\
+    virtual inline typename test::sys::Debug::CStrType&\
+        Name(CStrType& cstr)\
+    {\
+        WriteName(cstr.Buffer(), cstr.BufferSize());\
+        return cstr;\
+    }\
 }
 
 #define TEST_SYS_DBG_TYPE_T_QUALIFIER(TPRE, PRE)\
 template<typename T>\
 class test::sys::dbg::Type<TPRE> : public Type<T>\
 {\
+public:\
+    typedef typename Type<T>::CStrType CStrType;\
 public:\
     static constexpr bool HasSuffix = Type<T>::HasSuffix;\
 public:\
@@ -206,6 +245,13 @@ public:\
     {\
         return WriteName(name_out, n);\
     }\
+public:\
+    virtual inline typename test::sys::Debug::CStrType&\
+        Name(CStrType& cstr)\
+    {\
+        WriteName(cstr.Buffer(), cstr.BufferSize());\
+        return cstr;\
+    }\
 }
 
 TEST_SYS_DBG_TYPE_T_QUALIFIER(const T, "const ");
@@ -218,6 +264,8 @@ TEST_SYS_DBG_TYPE_T_QUALIFIER(const volatile T, "const volatile ");
 template<typename T>\
 class test::sys::dbg::Type<TDEF> : public test::sys::Debug\
 {\
+public:\
+    typedef typename test::sys::Debug::CStrType CStrType;\
 public:\
     static constexpr bool HasSuffix = Type<T>::HasSuffix;\
 public:\
@@ -297,6 +345,13 @@ public:\
     {\
         return WriteName(name_out, n);\
     }\
+public:\
+    virtual inline typename test::sys::Debug::CStrType&\
+        Name(CStrType& cstr)\
+    {\
+        WriteName(cstr.Buffer(), cstr.BufferSize());\
+        return cstr;\
+    }\
 }
 
 TEST_SYS_DBG_TYPE_T_PTR_REF(T*, "*");
@@ -313,6 +368,8 @@ TEST_SYS_DBG_TYPE_T_PTR_REF(T&&, "&&");
 template<typename T, typename TM>\
 class test::sys::dbg::Type<TDEF> : public test::sys::Debug\
 {\
+public:\
+    typedef typename test::sys::Debug::CStrType CStrType;\
 public:\
     static constexpr bool HasSuffix = Type<T>::HasSuffix;\
 public:\
@@ -397,6 +454,13 @@ public:\
     {\
         return WriteName(name_out, n);\
     }\
+public:\
+    virtual inline typename test::sys::Debug::CStrType&\
+        Name(CStrType& cstr)\
+    {\
+        WriteName(cstr.Buffer(), cstr.BufferSize());\
+        return cstr;\
+    }\
 }
 
 
@@ -411,6 +475,8 @@ TEST_SYS_DBG_TYPE_T_PTR_MEM(T TM::*const volatile, "::*const volatile");
 template<__VA_ARGS__>\
 class test::sys::dbg::Type<TDEF> :public test::sys::Debug\
 {\
+public:\
+    typedef typename test::sys::Debug::CStrType CStrType;\
 public:\
     static constexpr bool HasSuffix = true;\
 public:\
@@ -492,6 +558,13 @@ public:\
     {\
         return WriteName(name_out, n);\
     }\
+public:\
+    virtual inline typename test::sys::Debug::CStrType&\
+        Name(CStrType& cstr)\
+    {\
+        WriteName(cstr.Buffer(), cstr.BufferSize());\
+        return cstr;\
+    }\
 }
 
 TEST_SYS_DBG_TYPE_T_ARRAY(T[], false, typename T);
@@ -504,6 +577,8 @@ TEST_SYS_DBG_TYPE_T_ARRAY(T[N], true, typename T, std::size_t N);
 template<typename T, typename... TArgs>\
 class test::sys::dbg::Type<TDEF> : public test::sys::Debug\
 {\
+public:\
+    typedef typename test::sys::Debug::CStrType CStrType;\
 public:\
     static constexpr bool HasSuffix = true;\
 public:\
@@ -573,6 +648,13 @@ public:\
     inline std::size_t Name(char * name_out, std::size_t n) override\
     {\
         return WriteName(name_out, n);\
+    }\
+public:\
+    virtual inline typename test::sys::Debug::CStrType&\
+        Name(CStrType& cstr)\
+    {\
+        WriteName(cstr.Buffer(), cstr.BufferSize());\
+        return cstr;\
     }\
 }
 

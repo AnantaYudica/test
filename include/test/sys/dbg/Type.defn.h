@@ -14,6 +14,8 @@ template<typename T>
 class Type : public test::sys::Debug
 {
 public:
+    typedef typename test::sys::Debug::CStrType CStrType;
+public:
     inline static test::sys::Debug& GetInstance()
     {
         static Type<T> instance;
