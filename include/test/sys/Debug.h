@@ -1,11 +1,11 @@
 #ifndef TEST_SYS_DEBUG_H_
 #define TEST_SYS_DEBUG_H_
 
-#include "Definition.h"
 #include "dbg\CStr.h"
 
 #include <cstring>
 #include <cstdint>
+#include <cstdio>
 
 #define TEST_SYS_DEBUG_T_NAME_BUFF_SIZE 255
 
@@ -16,8 +16,6 @@ namespace sys
 
 class Debug
 {
-private:
-    typedef test::sys::Definition DefinitionType;
 public:
     typedef test::sys::dbg::CStr<TEST_SYS_DEBUG_T_NAME_BUFF_SIZE> CStrType;
 public:
