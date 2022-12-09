@@ -153,5 +153,30 @@ TEST_SYS_DBG_VALUE_DEFINE("%Lf", long double);
 
 #undef TEST_SYS_DBG_VALUE_DEFINE
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE(FORMAT, ...)\
+struct test::sys::dbg::Value<TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T>\
+{\
+    static std::size_t Write(char * buff_out, std::size_t n,\
+        TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T& val)\
+    {\
+        return snprintf(buff_out, n, FORMAT, __VA_ARGS__);\
+    }\
+    static std::size_t Write(char * buff_out, std::size_t n,\
+        const TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T& val)\
+    {\
+        return snprintf(buff_out, n, FORMAT, __VA_ARGS__);\
+    }\
+    static std::size_t Write(char * buff_out, std::size_t n,\
+        TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T&& val)\
+    {\
+        return snprintf(buff_out, n, FORMAT, __VA_ARGS__);\
+    }\
+    static std::size_t Write(char * buff_out, std::size_t n,\
+        const TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T&& val)\
+    {\
+        return snprintf(buff_out, n, FORMAT, __VA_ARGS__);\
+    }\
+}
+
 
 #endif //!TEST_SYS_DBG_VALUE_H_
