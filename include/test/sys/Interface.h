@@ -231,4 +231,6 @@ inline int Interface::VError(StatusIntegerType code, const char* format,
 
 } //!test
 
+#include "Definition.impl.h"
+
 #endif //!TEST_SYS_INTERFACE_H_
