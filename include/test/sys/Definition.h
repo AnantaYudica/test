@@ -93,6 +93,8 @@ struct Definition
 
         sMemory                             = 0x0200,
         sMemoryNotClearOnFinalize           = sMemory | sError | 0x01,
+        sMemroyAllocationFailed             = sMemory | sError | 0x02,
+        sMemroyReallocationFailed           = sMemory | sError | 0x03,
 
         sMemRecord                          = 0x0300,
         sMemRecordAllocationFailed          = sMemRecord | sError | 0x01,
@@ -134,6 +136,8 @@ struct Definition
 
         "[sys][Memory]",
         "sMemoryNotClearOnFinalize",
+        "sMemroyAllocationFailed",
+        "sMemroyReallocationFailed",
 
         "[sys][mem][Record]",
         "sMemRecordAllocationFailed",
@@ -162,7 +166,7 @@ struct Definition
 
     static constexpr std::uint8_t _StatusErrorNameMaxIndexs[] = 
     {
-        1, 2, 3, 1, 4, 3, 2, 2
+        1, 2, 3, 3, 4, 3, 2, 2
     };
     static constexpr std::size_t _StatusErrorNameMaxIndexsSize = 
         sizeof(_StatusErrorNameMaxIndexs) / sizeof(std::uint8_t);
@@ -199,6 +203,10 @@ struct Definition
 
 } //!test
 
+#ifndef TEST_SYS_INTERFACE_H_
+
 #include "Definition.impl.h"
+
+#endif //!TEST_SYS_INTERFACE_H_
 
 #endif //!TEST_SYS_DEFINITION_H_
