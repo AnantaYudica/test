@@ -28,6 +28,8 @@ class Cast : public test::sys::mem::ptr::cast::Const<T, TBlock>
 private:
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::ptr::Cast<T, 
+        TBlock>> DebugType;
 public:
     typedef test::sys::mem::ptr::cast::Const<T, TBlock> BaseType;
     typedef TBlock BlockType;

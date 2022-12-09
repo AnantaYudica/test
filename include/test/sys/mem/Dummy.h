@@ -1,10 +1,20 @@
 #ifndef TEST_SYS_MEM_DUMMY_H_
 #define TEST_SYS_MEM_DUMMY_H_
 
+#include "../Definition.h"
 #include "../Interface.h"
+#include "../Debug.h"
 
 #include <cstdlib>
 #include <cstring>
+
+namespace test::sys::mem
+{
+class Dummy;
+}
+
+
+TEST_SYS_DBG_TYPE_DEFINE("test::sys::mem::Dummy", test::sys::mem::Dummy);
 
 namespace test
 {
@@ -18,6 +28,7 @@ class Dummy
 private:
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::Dummy> DebugType;
 private:
     static inline Dummy& GetInstance();
 public:
@@ -46,12 +57,16 @@ private:
 
 inline Dummy& Dummy::GetInstance()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "GetInstance()");
+
     static Dummy instance;
     return instance;
 }
 
 inline char* Dummy::Get(const std::size_t n)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "Get(n=%zu)", n);
+
     if (n == 0)
     {
         return GetInstance().GetAllocation(1);
@@ -62,21 +77,31 @@ inline char* Dummy::Get(const std::size_t n)
 template<typename T>
 inline T* Dummy::Get()
 {
+    TEST_SYS_DEBUG_T(SystemType, DebugType, 3, NULL, "Get<%s>()", 
+        TEST_SYS_DEBUG_T_NAME_STR(T));
+
     return reinterpret_cast<T*>(GetInstance().GetAllocation(sizeof(T)));
 }
 
 inline std::size_t Dummy::Size()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "Size()");
+    
     return GetInstance().m_size;
 }
 
 inline Dummy::Dummy() :
     m_alloc(nullptr),
     m_size(0)
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
+    
+}
 
 inline Dummy::~Dummy()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
+    
     if (m_alloc != nullptr)
     {
         free(m_alloc);
@@ -87,6 +112,8 @@ inline Dummy::~Dummy()
 
 inline char* Dummy::GetAllocation(const std::size_t& n)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetAllocation(n=%zu)", n);
+    
     static char heap = '\0';
     heap = '\0';
     const std::size_t& n1 = n + 1;

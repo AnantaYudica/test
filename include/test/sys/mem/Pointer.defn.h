@@ -24,9 +24,10 @@ template<typename TBlock>
 class Pointer : 
     public test::sys::mem::ptr::Const<TBlock>
 {
-protected:
+private:
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::Pointer<TBlock>> DebugType;
 public:
     typedef test::sys::mem::ptr::Const<TBlock> BaseType;
     typedef typename test::sys::Definition::TimestampType TimestampType; 

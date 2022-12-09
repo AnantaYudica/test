@@ -31,6 +31,8 @@ private:
     typedef test::sys::mem::Pointer<TBlock> BaseType;
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::ptr::cast::Const<T, 
+        TBlock>> DebugType;
 public:
     typedef TBlock BlockType;
     typedef typename BlockType::TimestampType TimestampType;

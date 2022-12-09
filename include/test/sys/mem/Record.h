@@ -7,6 +7,7 @@
 #include "../Interface.h"
 #include "../../Guard.h"
 #include "block/Pointer.h"
+#include "../Debug.h"
 
 #include <cstddef>
 #include <cstdlib>
@@ -16,6 +17,21 @@
 #include <chrono>
 #include <atomic>
 #include <cstring>
+
+namespace test::sys::mem
+{
+template<typename TBlock>
+class Record;
+}
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<TBlock>
+
+template<typename TBlock>
+TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::Record}", 
+    test::sys::mem::Record<TBlock>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
 
 namespace test
 {
@@ -30,6 +46,7 @@ class Record
 private:
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::Record<TBlock>> DebugType;
 public:
     typedef typename TBlock::TimestampType TimestampType; 
     typedef test::sys::mem::block::Pointer<TBlock> BlockPointerType;
@@ -105,6 +122,9 @@ public:
 template<typename TBlock>
 int Record<TBlock>::FindCondition(void* pointer, NodeType* node)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+        "FindCondition(pointer=%p, node=%p)", pointer, node);
+
     void* curr_ptr = (*node)->Pointer();
     if (pointer == curr_ptr)
     {
@@ -121,6 +141,9 @@ int Record<TBlock>::FindCondition(void* pointer, NodeType* node)
 template<typename TBlock>
 TBlock* Record<TBlock>::ReleaseNode(NodeType* node)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+        "ReleaseNode(node=%p)", node);
+
     TBlock* block = (TBlock*)*node;
     if (block != nullptr)
     {
@@ -139,6 +162,9 @@ typename Record<TBlock>::NodeType*
 Record<TBlock>::_Find(NodeType *& head, 
     NodeType *&, FindConditionFuncType f)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+        "_Find(head=%p, NodeType *&, f=%p)", head, f);
+    
     if (f && head != nullptr)
     {
         IteratorType it{head};
@@ -165,6 +191,9 @@ Record<TBlock>::_Find(NodeType *& head,
 template<typename TBlock>
 TBlock* Record<TBlock>::MakeBlock(TBlock&& instance)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+        "MakeBlock(instance=%p)", &instance);
+    
     TBlock default_block;
     TBlock* block = (TBlock*)malloc(sizeof(TBlock));
     if (block == nullptr) 
@@ -185,11 +214,16 @@ Record<TBlock>::Record() :
     m_tail(nullptr),
     m_size(0),
     m_lock()
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
+
+}
 
 template<typename TBlock>
 Record<TBlock>::~Record()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
+
     if (m_size > 0)
     {
         RemoveAll();
@@ -200,12 +234,16 @@ template<typename TBlock>
 typename Record<TBlock>::NodeType* 
 Record<TBlock>::Find(FindConditionFuncType f)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Find(f=%p)", f);
+
     return _Find(m_head, m_tail, f);
 }
 
 template<typename TBlock>
 bool Record<TBlock>::Insert(NodeType *node)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Insert(node=%p)", node);
+
     if (m_head == nullptr)
     {
         m_head = m_tail = node;
@@ -248,6 +286,8 @@ bool Record<TBlock>::Insert(NodeType *node)
 template<typename TBlock>
 TBlock* Record<TBlock>::Remove(NodeType *node)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Remove(node=%p)", node);
+
     if (m_head == nullptr)
     {
         return nullptr;
@@ -290,6 +330,8 @@ TBlock* Record<TBlock>::Remove(NodeType *node)
 template<typename TBlock>
 void Record<TBlock>::RemoveAll()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "RemoveAll()");
+
     NodeType * curr = m_head;
     m_head = nullptr;
     m_tail = nullptr;
@@ -307,6 +349,11 @@ template<typename... TArgs>
 int Record<TBlock>::Register(void * pointer, 
     TArgs&&... args)
 {
+    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 2, this, 
+        "Register<%s>(pointer=%p, args={%s})", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...), 
+        pointer, TEST_SYS_DEBUG_TARGS_VALUE_STR(args...));
+
     if (pointer == nullptr)
     {
         return sRegisterWithNullPointer;
@@ -366,6 +413,10 @@ template<typename TBlock>
 int Record<TBlock>::Unregister(void * pointer, 
     BlockPointerType* block, bool force)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Unregister(pointer=%p, block=%p, force=%s)", 
+        pointer, block, (force?"true":"false"));
+
     if (pointer == nullptr)
     {
         return sUnregisterWithNullPointer;
@@ -414,6 +465,9 @@ int Record<TBlock>::Unregister(void * pointer,
 template<typename TBlock>
 bool Record<TBlock>::HasRegister(void * pointer)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "HasRegister(pointer=%p)", pointer);
+
     if (pointer == nullptr)
     {
         return false;
@@ -429,6 +483,8 @@ bool Record<TBlock>::HasRegister(void * pointer)
 template<typename TBlock>
 std::size_t Record<TBlock>::AllocationSize()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "AllocationSize()");
+    
     std::lock_guard<std::mutex> guard(m_lock);
     return sizeof(NodeType) * m_size;
 }
@@ -436,6 +492,8 @@ std::size_t Record<TBlock>::AllocationSize()
 template<typename TBlock>
 std::size_t Record<TBlock>::Size()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Size()");
+    
     std::lock_guard<std::mutex> guard(m_lock);
     return m_size;
 }
@@ -443,6 +501,9 @@ std::size_t Record<TBlock>::Size()
 template<typename TBlock>
 TBlock* Record<TBlock>::operator[](void * pointer)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator[](pointer=%p)", pointer);
+    
     if (pointer == nullptr)
     {
         return nullptr;
@@ -459,6 +520,9 @@ TBlock* Record<TBlock>::operator[](void * pointer)
 template<typename TBlock>
 std::size_t Record<TBlock>::ForEach(std::function<void(TBlock*)> op)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "ForEach(op=%p)", op);
+    
     if (op == nullptr)
     {
         return 0;

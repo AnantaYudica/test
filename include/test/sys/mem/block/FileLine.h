@@ -3,12 +3,20 @@
 
 #include "../../Definition.h"
 #include "../../Interface.h"
+#include "../../Debug.h"
 
 #include <cstddef>
 #include <utility>
 #include <cstdlib>
 
 #define TEST_MEM_BLOCK_FILE_DEFAULT_STR ""
+
+namespace test::sys::mem::block
+{
+class FileLine;
+}
+
+TEST_SYS_DBG_TYPE_DEFINE("test::sys::mem::block::FileLine", test::sys::mem::block::FileLine);
 
 namespace test
 {
@@ -24,6 +32,7 @@ class FileLine
 private:
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::block::FileLine> DebugType;
 private:
     char * m_file;
     int m_line;
@@ -47,7 +56,9 @@ public:
 inline FileLine::FileLine() :
     m_file(nullptr),
     m_line(-1)
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
+}
 
 template<std::size_t N>
 inline FileLine::FileLine(const char (&f)[N], 
@@ -55,6 +66,9 @@ inline FileLine::FileLine(const char (&f)[N],
         m_file((char*)std::malloc((N + 1) * sizeof(char))),
         m_line(l)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Constructor(f=%s, l=%d)",
+        f, l);
+
     if (m_file != nullptr)
     {
         for (std::size_t i = 0; i < N; ++i)
@@ -73,12 +87,17 @@ inline FileLine::FileLine(FileLine&& mov) :
     m_file(std::move(mov.m_file)),
     m_line(std::move(mov.m_line))
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Move Constructor(%p)",
+        &mov);
+
     mov.m_file = nullptr;
     mov.m_line = -1;
 }
 
 inline FileLine::~FileLine()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
+
     if (m_file != nullptr)
     {
         free(m_file);
@@ -88,6 +107,9 @@ inline FileLine::~FileLine()
 
 inline FileLine& FileLine::operator=(FileLine&& mov)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Assignment(%p)", &mov);
+
     if (m_file != nullptr)
     {
         free(m_file);
@@ -101,6 +123,8 @@ inline FileLine& FileLine::operator=(FileLine&& mov)
 
 inline const char* FileLine::File() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "File()");
+
     const char * tmp = TEST_MEM_BLOCK_FILE_DEFAULT_STR;
     if(m_file == nullptr) return tmp;
     return m_file;
@@ -108,6 +132,8 @@ inline const char* FileLine::File() const
 
 inline int FileLine::Line() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Line()");
+
     return m_line;
 }
 

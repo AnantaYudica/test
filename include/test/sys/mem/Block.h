@@ -5,8 +5,24 @@
 #include "block/FileLine.h"
 #include "../Definition.h"
 #include "../Interface.h"
+#include "../Debug.h"
 
 #include <cstdlib>
+
+namespace test::sys::mem
+{
+template<typename... TDerives>
+class Block;
+}
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<TDerives>...
+
+template<typename... TDerives>
+TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::Block", 
+    test::sys::mem::Block<TDerives...>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
 
 namespace test
 {
@@ -29,6 +45,9 @@ class Block<test::sys::mem::block::Base,
 private:
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::Block<
+        test::sys::mem::block::Base,
+        test::sys::mem::block::FileLine>> DebugType;
 public:
     typedef typename test::sys::Definition::TimestampType TimestampType;
 public:
@@ -81,6 +100,8 @@ class Block<test::sys::mem::block::Base> :
 private:
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::Block<
+        test::sys::mem::block::Base>> DebugType;
 public:
     typedef typename test::sys::Definition::TimestampType TimestampType;
 public:
@@ -130,7 +151,10 @@ Block<test::sys::mem::block::Base,
     test::sys::mem::block::FileLine>::Block() :
         test::sys::mem::block::Base(),
         test::sys::mem::block::FileLine()
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
+
+}
 
 template<std::size_t N>
 Block<test::sys::mem::block::Base,
@@ -140,6 +164,10 @@ Block<test::sys::mem::block::Base,
         test::sys::mem::block::Base(id),
         test::sys::mem::block::FileLine(f, l)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor(pointer=%p, size=%zu, id=%zu, f=%s, l=%d)",
+        pointer, size, id, f, l);
+
     test::sys::mem::block::Base::Allocate(pointer, size);
 }
 
@@ -149,11 +177,18 @@ Block<test::sys::mem::block::Base,
         test::sys::mem::block::FileLine>&& mov) :
             test::sys::mem::block::Base(std::move(mov)),
             test::sys::mem::block::FileLine(std::move(mov))
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Constructor(mov=%d)", &mov);
+
+}
 
 Block<test::sys::mem::block::Base,
     test::sys::mem::block::FileLine>::~Block()
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
+
+}
 
 Block<test::sys::mem::block::Base,
     test::sys::mem::block::FileLine>& 
@@ -162,6 +197,9 @@ Block<test::sys::mem::block::Base,
         operator=(Block<test::sys::mem::block::Base,
             test::sys::mem::block::FileLine>&& mov)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Assignment(mov=%d)", &mov);
+
     test::sys::mem::block::Base::operator=(std::move(mov));
     test::sys::mem::block::FileLine::operator=(std::move(mov));
     return *this;
@@ -169,12 +207,19 @@ Block<test::sys::mem::block::Base,
 
 Block<test::sys::mem::block::Base>::Block() :
     test::sys::mem::block::Base()
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
+
+}
 
 Block<test::sys::mem::block::Base>::Block(void * pointer, 
     const std::size_t& size, const std::size_t& id) :
         test::sys::mem::block::Base(id)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor(pointer=%p, size=%zu, id=%zu)",
+        pointer, size, id);
+
     test::sys::mem::block::Base::Allocate(pointer, size);
 }
 
@@ -184,33 +229,51 @@ Block<test::sys::mem::block::Base>::Block(void * pointer,
     const char (&)[N], const int&) :
         test::sys::mem::block::Base(id)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor(pointer=%p, size=%zu, id=%zu, "
+        "const char(&)[%zu], const int&)",pointer, size, id, N);
+    
     test::sys::mem::block::Base::Allocate(pointer, size);
 }
 
 Block<test::sys::mem::block::Base>::
     Block(Block<test::sys::mem::block::Base>&& mov) :
         test::sys::mem::block::Base(std::move(mov))
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Constructor(mov=%d)", &mov);
+
+}
 
 Block<test::sys::mem::block::Base>::~Block()
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
+
+}
 
 Block<test::sys::mem::block::Base>& 
 Block<test::sys::mem::block::Base>::
     operator=(Block<test::sys::mem::block::Base>&& mov)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Constructor(mov=%d)", &mov);
+
     test::sys::mem::block::Base::operator=(std::move(mov));
     return *this;
 }
 
 const char* Block<test::sys::mem::block::Base>::File() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "File() const");
+
     static const char * tmp = TEST_MEM_BLOCK_FILE_DEFAULT_STR;
     return tmp;
 }
 
 int Block<test::sys::mem::block::Base>::Line() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Line() const");
+
     return -1;
 }
 

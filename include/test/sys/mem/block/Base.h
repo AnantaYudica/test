@@ -124,11 +124,17 @@ public:
 
 inline bool Base::DefaultDeallocation(StatusIntegerType status, Data data)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, 
+        NULL, "DefaultDeallocation(status=0x%04hx, data={"
+        "id=%zu, pointer=%p, size=%zu})", status, data.id, data.pointer, data.size);
+    
     return true;
 }
 
 inline void * Base::Empty()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "Empty()");
+
     static char _empty[EmptySize];
     return (void*)_empty;
 }
@@ -141,6 +147,7 @@ inline Base::Base() :
     m_data{0, Empty(), EmptySize, 0, 0}
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
+
 }
 
 inline Base::Base(const IDType& id) :
@@ -151,6 +158,7 @@ inline Base::Base(const IDType& id) :
         m_data{id, Empty(), EmptySize, 0, 0}
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Constructor(id=%zu)", id);
+
 }
 
 inline Base::Base(const IDType& id, 
@@ -163,6 +171,7 @@ inline Base::Base(const IDType& id,
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, 
         this, "Constructor(id=%zu, deallocator=%p)", id, deallocator);
+    
 }
 
 inline Base::Base(Base&& mov) :
@@ -175,6 +184,7 @@ inline Base::Base(Base&& mov) :
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, 
         this, "Move Constructor(%p)", &mov);
+    
     mov.m_status.store(sDefaultConstructor);
     mov.m_refCount = 0;
     mov.m_deallocator = DefaultDeallocation;
@@ -184,6 +194,7 @@ inline Base::Base(Base&& mov) :
 inline Base::~Base()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1,  this, "Destructor");
+
     {
         std::lock_guard<std::mutex> guard(m_lock);
         if (m_status.load() == sGood)
@@ -324,6 +335,9 @@ inline bool Base::Deallocate()
 
 inline bool Base::Release(const bool& force)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Release(force=%s)", (force ? "true" : "false"));
+
     std::lock_guard<std::mutex> guard(m_lock);
     if (IsBad())
     {
@@ -499,7 +513,8 @@ inline bool Base::operator==(const Base& other) const
 inline bool Base::operator!=(const Base& other) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "operator==(other=%p) const", &other);
+        "operator!=(other=%p) const", &other);
+
     return m_data.id != other.m_data.id;
 }
 

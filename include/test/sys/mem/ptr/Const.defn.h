@@ -23,9 +23,10 @@ namespace ptr
 template<typename TBlock>
 class Const
 {
-protected:
+private:
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::mem::ptr::Const<TBlock>> DebugType;
 public:
     typedef typename test::sys::Definition::TimestampType TimestampType; 
     typedef TBlock BlockType;
