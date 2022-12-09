@@ -31,6 +31,8 @@ public:
     typedef typename test::sys::Definition::TimestampType TimestampType; 
     typedef TBlock BlockType;
 public:
+    typedef typename BlockType::IDType IDType;
+public:
     template<typename T>
     using CastConstType = test::sys::mem::ptr::cast::Const<T, TBlock>;
 private:
@@ -72,6 +74,9 @@ public:
 public:
     TimestampType Timestamp();
     TimestampType Timestamp() const;
+public:
+    IDType ID();
+    IDType ID() const;
 public:
     template<typename T>
     CastConstType<T> Cast();

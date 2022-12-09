@@ -207,6 +207,22 @@ Const<TBlock>::Timestamp() const
 }
 
 template<typename TBlock>
+typename Const<TBlock>::IDType Const<TBlock>::ID()
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "ID()");
+
+    return m_block->ID();
+}
+
+template<typename TBlock>
+typename Const<TBlock>::IDType Const<TBlock>::ID() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "ID() const");
+    
+    return m_block->ID();
+}
+
+template<typename TBlock>
 template<typename T>
 typename Const<TBlock>::CastConstType<T> Const<TBlock>::Cast()
 {

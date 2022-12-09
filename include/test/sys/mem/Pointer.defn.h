@@ -33,6 +33,8 @@ public:
     typedef typename test::sys::Definition::TimestampType TimestampType; 
     typedef TBlock BlockType;
 public:
+    typedef typename BlockType::IDType IDType;
+public:
     typedef test::sys::mem::ptr::Const<TBlock> PointerConstType;
 public:
     template<typename T>
@@ -66,6 +68,7 @@ public:
     using BaseType::Size;
     using BaseType::Count;
     using BaseType::Timestamp;
+    using BaseType::ID;
 public:
     template<typename T>
     CastType<T> Cast();
