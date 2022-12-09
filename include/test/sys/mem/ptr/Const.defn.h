@@ -83,6 +83,15 @@ public:
     template<typename T>
     CastConstType<T> Cast() const;
 public:
+    bool operator<(void *ptr) const;
+    bool operator<(const void *ptr) const;
+    bool operator<=(void *ptr) const;
+    bool operator<=(const void *ptr) const;
+    bool operator>(void *ptr) const;
+    bool operator>(const void *ptr) const;
+    bool operator>=(void *ptr) const;
+    bool operator>=(const void *ptr) const;
+public:
     bool operator==(void * ptr) const;
     bool operator==(const void * ptr) const;
     bool operator==(std::nullptr_t) const;

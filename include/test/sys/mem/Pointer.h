@@ -155,6 +155,78 @@ Pointer<TBlock>::Cast() const
 }
 
 template<typename TBlock>
+bool Pointer<TBlock>::operator<(void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<(ptr=%p) const", ptr);
+    
+    return BaseType::operator<(ptr);
+}
+
+template<typename TBlock>
+bool Pointer<TBlock>::operator<(const void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<(ptr=%p) const", ptr);
+    
+    return BaseType::operator<(ptr);
+}
+
+template<typename TBlock>
+bool Pointer<TBlock>::operator<=(void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<=(ptr=%p) const", ptr);
+
+    return BaseType::operator<=(ptr);
+}
+
+template<typename TBlock>
+bool Pointer<TBlock>::operator<=(const void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<=(ptr=%p) const", ptr);
+
+    return BaseType::operator<=(ptr);
+}
+
+template<typename TBlock>
+bool Pointer<TBlock>::operator>(void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>(ptr=%p) const", ptr);
+
+    return BaseType::operator>(ptr);
+}
+
+template<typename TBlock>
+bool Pointer<TBlock>::operator>(const void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>(ptr=%p) const", ptr);
+    
+    return BaseType::operator>(ptr);
+}
+
+template<typename TBlock>
+bool Pointer<TBlock>::operator>=(void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>=(ptr=%p) const", ptr);
+    
+    return BaseType::operator>=(ptr);
+}
+
+template<typename TBlock>
+bool Pointer<TBlock>::operator>=(const void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>=(ptr=%p) const", ptr);
+        
+    return BaseType::operator>=(ptr);
+}
+
+template<typename TBlock>
 bool Pointer<TBlock>::operator==(void * ptr) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 

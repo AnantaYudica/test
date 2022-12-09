@@ -263,6 +263,87 @@ typename Const<TBlock>::CastConstType<T> Const<TBlock>::Cast() const
 }
 
 template<typename TBlock>
+bool Const<TBlock>::operator<(void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<(ptr=%p) const", ptr);
+    
+    if (m_block == Default())
+    {
+        return (void*)NULL < ptr;
+    }
+    return m_block->Pointer() < ptr;
+}
+
+template<typename TBlock>
+bool Const<TBlock>::operator<(const void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<(ptr=%p) const", ptr);
+    
+    return operator<(const_cast<void*>(ptr));
+}
+
+template<typename TBlock>
+bool Const<TBlock>::operator<=(void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<=(ptr=%p) const", ptr);
+    
+    return operator<(ptr) || operator==(ptr);
+}
+
+template<typename TBlock>
+bool Const<TBlock>::operator<=(const void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<=(ptr=%p) const", ptr);
+    
+    return operator<=(const_cast<void*>(ptr));
+}
+
+template<typename TBlock>
+bool Const<TBlock>::operator>(void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>(ptr=%p) const", ptr);
+    
+    if (m_block == Default())
+    {
+        return (void*)NULL > ptr;
+    }
+    return m_block->Pointer() > ptr;
+}
+
+template<typename TBlock>
+bool Const<TBlock>::operator>(const void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>(ptr=%p) const", ptr);
+    
+    return operator>(const_cast<void*>(ptr));
+}
+
+template<typename TBlock>
+bool Const<TBlock>::operator>=(void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>=(ptr=%p) const", ptr);
+    
+    return operator>(ptr) || operator==(ptr);
+}
+
+template<typename TBlock>
+bool Const<TBlock>::operator>=(const void *ptr) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>=(ptr=%p) const", ptr);
+    
+    
+    return operator>=(const_cast<void*>(ptr));
+}
+
+template<typename TBlock>
 bool Const<TBlock>::operator==(void * ptr) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
