@@ -5,8 +5,16 @@
 #include "ptr/Const.defn.h"
 #include "ptr/Cast.defn.h"
 #include "ptr/cast/Const.defn.h"
+#include "../Debug.h"
 
 #include <utility>
+
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::sys::mem::Pointer<TBlock>
+
+template<typename TBlock>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE("{id=%zu, size=%zu}", val.ID(), val.Size());
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
 
 namespace test
 {
