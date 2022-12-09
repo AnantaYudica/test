@@ -23,7 +23,7 @@ class Pointer;
     test::sys::dbg::Type<TBlock>
 
 template<typename TBlock>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::Pointer}", 
+TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::Pointer", 
     test::sys::mem::Pointer<TBlock>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
