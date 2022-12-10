@@ -91,6 +91,7 @@ public:
     using test::sys::mem::block::Base::operator!=;
     using test::sys::mem::block::FileLine::File;
     using test::sys::mem::block::FileLine::Line;
+    using test::sys::mem::block::FileLine::FileAllocationSize;
 };
 
 template<>
@@ -145,6 +146,7 @@ public:
 public:
     inline const char* File() const;
     inline int Line() const;
+    inline std::size_t FileAllocationSize() const;
 };
 
 Block<test::sys::mem::block::Base,
@@ -275,6 +277,13 @@ int Block<test::sys::mem::block::Base>::Line() const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Line() const");
 
     return -1;
+}
+
+std::size_t Block<test::sys::mem::block::Base>::FileAllocationSize() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "FileAllocationSize() const");
+
+    return 0;
 }
 
 } //!mem

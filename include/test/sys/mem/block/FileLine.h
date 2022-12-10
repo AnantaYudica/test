@@ -36,6 +36,7 @@ private:
 private:
     char * m_file;
     int m_line;
+    std::size_t m_fileAllocSize;
 protected:
     inline FileLine();
     template<std::size_t N>
@@ -51,11 +52,14 @@ public:
 public:
     inline const char* File() const;
     inline int Line() const;
+public:
+    inline std::size_t FileAllocationSize() const;
 };
 
 inline FileLine::FileLine() :
     m_file(nullptr),
-    m_line(-1)
+    m_line(-1),
+    m_fileAllocSize(0)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
 }
@@ -64,7 +68,8 @@ template<std::size_t N>
 inline FileLine::FileLine(const char (&f)[N], 
     const int& l) :
         m_file((char*)std::malloc((N + 1) * sizeof(char))),
-        m_line(l)
+        m_line(l),
+        m_fileAllocSize((N + 1) * sizeof(char))
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Constructor(f=%s, l=%d)",
         f, l);
@@ -77,6 +82,7 @@ inline FileLine::FileLine(const char (&f)[N],
     }
     else
     {
+        m_fileAllocSize = 0;
         SystemType::GetInstance().Error(
             DefinitionType::Status::sMemBlockAllocationFailed, 
             "Memory allocation is failed");
@@ -85,13 +91,15 @@ inline FileLine::FileLine(const char (&f)[N],
 
 inline FileLine::FileLine(FileLine&& mov) :
     m_file(std::move(mov.m_file)),
-    m_line(std::move(mov.m_line))
+    m_line(std::move(mov.m_line)),
+    m_fileAllocSize(std::move(mov.m_fileAllocSize))
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Move Constructor(%p)",
         &mov);
 
     mov.m_file = nullptr;
     mov.m_line = -1;
+    mov.m_fileAllocSize = 0;
 }
 
 inline FileLine::~FileLine()
@@ -103,6 +111,7 @@ inline FileLine::~FileLine()
         free(m_file);
     }
     m_file = nullptr;
+    m_fileAllocSize = 0;
 }
 
 inline FileLine& FileLine::operator=(FileLine&& mov)
@@ -118,6 +127,8 @@ inline FileLine& FileLine::operator=(FileLine&& mov)
     mov.m_file = nullptr;
     m_line = mov.m_line;
     mov.m_line = -1;
+    m_fileAllocSize = mov.m_fileAllocSize;
+    mov.m_fileAllocSize = 0;
     return *this;
 }
 
@@ -135,6 +146,13 @@ inline int FileLine::Line() const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Line()");
 
     return m_line;
+}
+
+inline std::size_t FileLine::FileAllocationSize() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "FileAllocationSize()");
+
+    return m_fileAllocSize;
 }
 
 } //!block
