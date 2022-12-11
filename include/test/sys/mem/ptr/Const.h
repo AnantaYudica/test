@@ -4,6 +4,12 @@
 #include "Const.defn.h"
 #include "cast/Const.defn.h"
 
+#ifndef TEST_SYS_MEMORY_H_
+#define TEST_SYS_MEMORY_H_IMPL_LATER
+#endif //!TEST_SYS_MEMORY_H_
+
+#include "../../Memory.h"
+
 #include <cstring>
 
 namespace test
@@ -117,8 +123,15 @@ void Const<TBlock>::Reset()
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Reset()");
 
     if (m_block != nullptr && m_block != Default())
-    {
+    {   
         m_block->ReleaseReference();
+        
+        TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "ReferenceCount = %zu",
+            m_block->ReferenceCount());
+        if (m_block->ReferenceCount() == 1)
+        {
+            test::sys::Memory::GetInstance().Free(m_block->Pointer());
+        }
     }
 }
 
@@ -457,6 +470,10 @@ Const<TBlock>::operator!=(const TValue& val) const
 
 
 #include "cast/Const.h"
+
+#ifdef TEST_SYS_MEMORY_H_IMPL_LATER
+#include "../../Memory.impl.h"
+#endif //!TEST_SYS_MEMORY_H_IMPL_LATER
 
 
 #endif //!TEST_SYS_MEM_PTR_CONST_H_
