@@ -53,13 +53,20 @@ public:\
                 if (j >= n) break;\
             }\
             tag_out[j++] = name[i++];\
-            if (j >= n) break;\
         }\
-        if (is_bg && j < n)\
+        if (j == n)\
         {\
-            tag_out[j++] = ']';\
+            return j;\
         }\
-        return j - 1;\
+        if (j != 0)\
+        {\
+            j -= 1;\
+        }\
+        if (is_bg)\
+        {\
+            return snprintf(tag_out + j, n - j, "]") + j;\
+        }\
+        return j;\
     }\
 public:\
     static inline std::size_t WritePrefixName(char * name_out, std::size_t n)\
@@ -136,17 +143,57 @@ public:\
 public:\
     static inline std::size_t WriteTagName(char * tag_out, std::size_t n)\
     {\
-        const std::size_t bg = snprintf(tag_out, n, "[");\
-        if (bg == n)\
+        char name[] = NAME;\
+        const std::size_t name_size = sizeof(name);\
+        std::size_t i = 0;\
+        std::size_t j = 0;\
+        bool is_bg = false;\
+        while(i < name_size && j < n)\
         {\
-            return bg;\
+            if (name[i] == ':')\
+            {\
+                if (is_bg)\
+                {\
+                    tag_out[j++] = ']';\
+                    is_bg = false;\
+                }\
+                ++i; continue;\
+            }\
+            if (!is_bg)\
+            {\
+                tag_out[j++] = '[';\
+                is_bg = true;\
+                if (j >= n) break;\
+            }\
+            tag_out[j++] = name[i++];\
         }\
-        const std::size_t t_size = WriteName(tag_out + bg, n - bg) + bg;\
-        if (t_size == n)\
+        if (j == n)\
         {\
-            return t_size;\
+            return j;\
         }\
-        return snprintf(tag_out + t_size, n - t_size, "]") + t_size;\
+        if (j != 0)\
+        {\
+            j -= 1;\
+        }\
+        const std::size_t bg_param = snprintf(tag_out + j, n - j, "<") + j;\
+        if (bg_param == n)\
+        {\
+            return bg_param;\
+        }\
+        const std::size_t param = test::sys::dbg::type::Parameter<TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS>::\
+            WriteName(tag_out + bg_param, n - bg_param) + bg_param;\
+        if (param == n)\
+        {\
+            return param;\
+        }\
+        if (is_bg)\
+        {\
+            return snprintf(tag_out + param, n - param, ">]") + param;\
+        }\
+        else\
+        {\
+            return snprintf(tag_out + param, n - param, ">") + param;\
+        }\
     }\
 public:\
     static inline std::size_t WritePrefixName(char * name_out, std::size_t n)\
