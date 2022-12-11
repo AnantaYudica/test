@@ -181,7 +181,7 @@ Block<test::sys::mem::block::Base,
             test::sys::mem::block::FileLine(std::move(mov))
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
-        "Move Constructor(mov=%d)", &mov);
+        "Move Constructor(mov=%p)", &mov);
 
 }
 
@@ -200,7 +200,7 @@ Block<test::sys::mem::block::Base,
             test::sys::mem::block::FileLine>&& mov)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
-        "Move Assignment(mov=%d)", &mov);
+        "Move Assignment(mov=%p)", &mov);
 
     test::sys::mem::block::Base::operator=(std::move(mov));
     test::sys::mem::block::FileLine::operator=(std::move(mov));
@@ -243,7 +243,7 @@ Block<test::sys::mem::block::Base>::
         test::sys::mem::block::Base(std::move(mov))
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
-        "Move Constructor(mov=%d)", &mov);
+        "Move Constructor(mov=%p)", &mov);
 
 }
 
@@ -258,7 +258,7 @@ Block<test::sys::mem::block::Base>::
     operator=(Block<test::sys::mem::block::Base>&& mov)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
-        "Move Constructor(mov=%d)", &mov);
+        "Move Constructor(mov=%p)", &mov);
 
     test::sys::mem::block::Base::operator=(std::move(mov));
     return *this;
