@@ -9,6 +9,9 @@
 #include "block/Pointer.h"
 #include "../Debug.h"
 
+#include "ptr/Const.defn.h"
+#include "Pointer.defn.h"
+
 #include <cstddef>
 #include <cstdlib>
 #include <mutex>
@@ -54,7 +57,9 @@ public:
     typedef test::sys::mem::rec::Node<TBlock> NodeType;
     typedef test::sys::mem::rec::Iterator<TBlock> IteratorType;
     typedef std::function<int(NodeType*)> FindConditionFuncType;
-    typedef void (*RemoveFuncType)(NodeType* node, Record<TBlock>& obj);
+public:
+    typedef test::sys::mem::Pointer<TBlock> PointerType;
+    typedef test::sys::mem::ptr::Const<TBlock> PointerConstType;
 public:
     static constexpr int sOk = 0;
 public:
@@ -69,7 +74,8 @@ public:
     static constexpr int sUnregisterPointerNotFound = -2;
     static constexpr int sUnregisterFailed = -3;
 private:
-    static int FindCondition(void* pointer, NodeType* node);
+    template<typename T>
+    static int FindCondition(T pointer, NodeType* node);
 private:
     static TBlock* ReleaseNode(NodeType* node);
 private:
@@ -101,29 +107,52 @@ private:
 private:
     bool Insert(NodeType *node);
 private:
-    TBlock* Remove(NodeType* node);
-    void RemoveAll();
+    NodeType* Remove(NodeType* node);
+private:
+    TBlock* Clear(NodeType* node);
+    void ClearAll();
 public:
     template<typename... TArgs>
-    int Register(void * pointer, TArgs&&... args);
+    int Register(BlockPointerType* ptr_out, 
+        std::function<void(int)> on_failed, 
+        void * pointer, TArgs&&... args);
+private:
+    int Unregister(NodeType * node, BlockPointerType* block = nullptr, 
+        bool force = false);
+public:
     int Unregister(void * pointer, BlockPointerType* block = nullptr, 
         bool force = false);
+    int Unregister(PointerType pointer, BlockPointerType* block = nullptr, 
+        bool force = false);
+private:
+    bool HasRegister(NodeType * node);
+public:
     bool HasRegister(void * pointer);
+    bool HasRegister(PointerConstType pointer);
 public:
     std::size_t AllocationSize();
 public:
     std::size_t Size();
 public:
     TBlock* operator[](void * pointer);
+    TBlock* operator[](PointerType pointer);
 public:
     std::size_t ForEach(std::function<void(TBlock*)> op);
+private:
+    void Reposition(NodeType * node);
+public:
+    void Reposition(void* pointer);
+    void Reposition(PointerType pointer);
 };
 
 template<typename TBlock>
-int Record<TBlock>::FindCondition(void* pointer, NodeType* node)
+template<typename T>
+int Record<TBlock>::FindCondition(T pointer, NodeType* node)
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
-        "FindCondition(pointer=%p, node=%p)", pointer, node);
+    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 2, NULL, 
+        "FindCondition<%s>(pointer=%s, node=%p)", 
+            TEST_SYS_DEBUG_T_NAME_STR(T),
+            TEST_SYS_DEBUG_TARGS_VALUE_STR(pointer), node);
 
     void* curr_ptr = (*node)->Pointer();
     if (pointer == curr_ptr)
@@ -226,7 +255,7 @@ Record<TBlock>::~Record()
 
     if (m_size > 0)
     {
-        RemoveAll();
+        ClearAll();
     }
 }
 
@@ -284,7 +313,7 @@ bool Record<TBlock>::Insert(NodeType *node)
 }
 
 template<typename TBlock>
-TBlock* Record<TBlock>::Remove(NodeType *node)
+typename Record<TBlock>::NodeType* Record<TBlock>::Remove(NodeType *node)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Remove(node=%p)", node);
 
@@ -323,14 +352,23 @@ TBlock* Record<TBlock>::Remove(NodeType *node)
         node->Next(nullptr);
         node->Prev(nullptr); 
     }
-    
+    return node;
+}
+
+template<typename TBlock>
+TBlock* Record<TBlock>::Clear(NodeType *node)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Clear(node=%p)", node);
+
+    Remove(node);
+
     return ReleaseNode(node);
 }
 
 template<typename TBlock>
-void Record<TBlock>::RemoveAll()
+void Record<TBlock>::ClearAll()
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "RemoveAll()");
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "ClearAll()");
 
     NodeType * curr = m_head;
     m_head = nullptr;
@@ -346,12 +384,13 @@ void Record<TBlock>::RemoveAll()
 
 template<typename TBlock>
 template<typename... TArgs>
-int Record<TBlock>::Register(void * pointer, 
-    TArgs&&... args)
+int Record<TBlock>::Register(BlockPointerType* ptr_out, 
+    std::function<void(int)> on_failed, 
+    void * pointer, TArgs&&... args)
 {
     TEST_SYS_DEBUG_T_V(SystemType, DebugType, 2, this, 
-        "Register<%s>(pointer=%p, args={%s})", 
-        TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...), 
+        "Register<%s>(ptr_out=%p, on_failed=%p, pointer=%p, args={%s})", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...), ptr_out, on_failed,
         pointer, TEST_SYS_DEBUG_TARGS_VALUE_STR(args...));
 
     if (pointer == nullptr)
@@ -364,6 +403,10 @@ int Record<TBlock>::Register(void * pointer,
     
     if (block == nullptr)
     {
+        if (on_failed)
+        {
+            on_failed(sRegisterAllocationMemoryFailed);
+        }
         SystemType::GetInstance().Error(
             DefinitionType::Status::sMemRecordAllocationFailed, 
             "Block Allocation is failed");
@@ -374,6 +417,10 @@ int Record<TBlock>::Register(void * pointer,
 
     if (instance == nullptr)
     {
+        if (on_failed)
+        {
+            on_failed(sRegisterAllocationMemoryFailed);
+        }
         SystemType::GetInstance().Error(
             DefinitionType::Status::sMemRecordAllocationFailed, 
             "Node Allocation is failed");
@@ -388,6 +435,10 @@ int Record<TBlock>::Register(void * pointer,
 
         if (!Insert(instance))
         {
+            if (on_failed)
+            {
+                on_failed(sRegisterDuplicatePointer);
+            }
             SystemType::GetInstance().Error(
                 DefinitionType::Status::sMemRecordDuplicatePointer, 
                 "Pointer(%p) registered", pointer);
@@ -398,6 +449,10 @@ int Record<TBlock>::Register(void * pointer,
             const auto size = m_size++;
             if (size >= m_size)
             {
+                if (on_failed)
+                {
+                    on_failed(sRegisterSizeOverflow);
+                }
                 SystemType::GetInstance().Error(
                     DefinitionType::Status::sMemRecordSizeOverflow, 
                     "Size Overflow");
@@ -406,7 +461,48 @@ int Record<TBlock>::Register(void * pointer,
         }
     }
 
+    if (ptr_out != nullptr)
+    {   
+        *ptr_out = BlockPointerType(&*node);
+    }
+
     return sRegisterOk;
+}
+
+template<typename TBlock>
+int Record<TBlock>::Unregister(NodeType * node, 
+    BlockPointerType* block, bool force)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Unregister(node=%p, block=%p, force=%s)", 
+        node, block, (force?"true":"false"));
+    
+    if ((*node)->ReferenceCount() <= 1 || force)
+    {
+        auto* block_removed = Clear(node);
+        if (block_removed == nullptr)
+        {
+            SystemType::GetInstance().Error(
+                DefinitionType::Status::sMemRecordPointerNotFound, 
+                "Pointer(%p) not registered", (*node)->Pointer());
+            return sUnregisterPointerNotFound;
+        }
+        else
+        {
+            BlockPointerType block_ptr{block_removed};
+            if (block != nullptr)
+            {
+                *block = std::move(block_ptr);
+            }
+            --m_size;
+        }
+    }
+    else
+    {
+        return sUnregisterFailed;
+    }
+    
+    return sUnregisterOk;
 }
 
 template<typename TBlock>
@@ -421,11 +517,13 @@ int Record<TBlock>::Unregister(void * pointer,
     {
         return sUnregisterWithNullPointer;
     }
+    int res = sUnregisterOk;
     {
         std::lock_guard<std::mutex> guard(m_lock);
 
-        auto found = Find(std::bind(FindCondition, pointer, 
+        auto found = Find(std::bind(FindCondition<void*>, pointer, 
             std::placeholders::_1));
+        
         if (found == nullptr)
         {
             SystemType::GetInstance().Error(
@@ -433,33 +531,50 @@ int Record<TBlock>::Unregister(void * pointer,
                 "Pointer(%p) not registered", pointer);
             return sUnregisterPointerNotFound;
         }
-
-        if ((*found)->ReferenceCount() <= 1 || force)
-        {
-            auto* block_removed = Remove(found);
-            if (block_removed == nullptr)
-            {
-                SystemType::GetInstance().Error(
-                    DefinitionType::Status::sMemRecordPointerNotFound, 
-                    "Pointer(%p) not registered", pointer);
-                return sUnregisterPointerNotFound;
-            }
-            else
-            {
-                BlockPointerType block_ptr{block_removed};
-                if (block != nullptr)
-                {
-                    *block = std::move(block_ptr);
-                }
-                --m_size;
-            }
-        }
-        else
-        {
-            return sUnregisterFailed;
-        }
+        res = Unregister(found , block, force);
     }
-    return sUnregisterOk;
+    return res;
+}
+
+template<typename TBlock>
+int Record<TBlock>::Unregister(PointerType pointer, 
+    BlockPointerType* block, bool force)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Unregister(pointer=%p, block=%p, force=%s)", 
+        pointer, block, (force?"true":"false"));
+
+    if (pointer == nullptr)
+    {
+        return sUnregisterWithNullPointer;
+    }
+    int res = sUnregisterOk;
+    {
+        std::lock_guard<std::mutex> guard(m_lock);
+
+        auto found = Find(std::bind(FindCondition<PointerType>, pointer, 
+            std::placeholders::_1));
+        
+        if (found == nullptr)
+        {
+            SystemType::GetInstance().Error(
+                DefinitionType::Status::sMemRecordPointerNotFound, 
+                "Pointer(id=%zu, size=%zu) not registered", 
+                    pointer.ID(), pointer.Size());
+            return sUnregisterPointerNotFound;
+        }
+        res = Unregister(found , block, force);
+    }
+    return res;
+}
+
+template<typename TBlock>
+bool Record<TBlock>::HasRegister(NodeType * node)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "HasRegister(node=%p)", node);
+    
+    return node != nullptr;
 }
 
 template<typename TBlock>
@@ -475,9 +590,29 @@ bool Record<TBlock>::HasRegister(void * pointer)
     
     std::lock_guard<std::mutex> guard(m_lock);
 
-    auto found = Find(std::bind(FindCondition, pointer, 
+    auto found = Find(std::bind(FindCondition<void*>, pointer, 
         std::placeholders::_1));
-    return found != nullptr;
+    
+    return HasRegister(found);
+}
+
+template<typename TBlock>
+bool Record<TBlock>::HasRegister(PointerConstType pointer)
+{
+    TEST_SYS_DEBUG_V(SystemType, DebugType, 3, this, 
+        "HasRegister(pointer=%s)", TEST_SYS_DEBUG_TARGS_VALUE_STR(pointer));
+
+    if (pointer == nullptr)
+    {
+        return false;
+    }
+    
+    std::lock_guard<std::mutex> guard(m_lock);
+
+    auto found = Find(std::bind(FindCondition<PointerConstType>, pointer, 
+        std::placeholders::_1));
+    
+    return HasRegister(found);
 }
 
 template<typename TBlock>
@@ -486,7 +621,20 @@ std::size_t Record<TBlock>::AllocationSize()
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "AllocationSize()");
     
     std::lock_guard<std::mutex> guard(m_lock);
-    return sizeof(NodeType) * m_size;
+    std::size_t sum = (sizeof(NodeType) + sizeof(TBlock)) * m_size;
+
+    IteratorType it(m_head);
+    while(it != nullptr)
+    {
+        std::size_t old_sum = sum;
+        sum += (*it)->FileAllocationSize();
+        if (sum < old_sum)
+        {
+            sum = (std::size_t)-1;
+        }
+        ++it;
+    }
+    return sum;
 }
 
 template<typename TBlock>
@@ -511,7 +659,26 @@ TBlock* Record<TBlock>::operator[](void * pointer)
     
     std::lock_guard<std::mutex> guard(m_lock);
     
-    auto found = Find(std::bind(FindCondition, pointer, 
+    auto found = Find(std::bind(FindCondition<void*>, pointer, 
+        std::placeholders::_1));
+    if (found == nullptr) return nullptr;
+    return &**found;
+}
+
+template<typename TBlock>
+TBlock* Record<TBlock>::operator[](PointerType pointer)
+{
+    TEST_SYS_DEBUG_V(SystemType, DebugType, 3, this, 
+        "operator[](pointer=%s)", TEST_SYS_DEBUG_TARGS_VALUE_STR(pointer));
+    
+    if (pointer == nullptr)
+    {
+        return nullptr;
+    }
+    
+    std::lock_guard<std::mutex> guard(m_lock);
+    
+    auto found = Find(std::bind(FindCondition<PointerType>, pointer, 
         std::placeholders::_1));
     if (found == nullptr) return nullptr;
     return &**found;
@@ -542,10 +709,74 @@ std::size_t Record<TBlock>::ForEach(std::function<void(TBlock*)> op)
     return count;
 }
 
+template<typename TBlock>
+void Record<TBlock>::Reposition(NodeType* node)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "Reposition(node=%p)", node);
+        
+    if (!(bool)node)
+    {
+        return;
+    }
+
+    if(Remove(node) == nullptr)
+    {
+        return;
+    }
+
+    Insert(node);
+}
+template<typename TBlock>
+void Record<TBlock>::Reposition(void* pointer)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "Reposition(pointer=%p)", pointer);
+    
+    if (pointer == nullptr)
+    {
+        return;
+    }
+    
+    std::lock_guard<std::mutex> guard(m_lock);
+    
+    auto found = Find(std::bind(FindCondition<void*>, pointer, 
+        std::placeholders::_1));
+
+    Reposition(found);
+}
+
+template<typename TBlock>
+void Record<TBlock>::Reposition(PointerType pointer)
+{
+    
+    TEST_SYS_DEBUG_V(SystemType, DebugType, 3, this, 
+        "Reposition(pointer=%s)", TEST_SYS_DEBUG_TARGS_VALUE_STR(pointer));
+    
+    if (pointer == nullptr)
+    {
+        return;
+    }
+    
+    std::lock_guard<std::mutex> guard(m_lock);
+    
+    auto found = Find(std::bind(FindCondition<PointerType>, pointer, 
+        std::placeholders::_1));
+    
+    Reposition(found);
+}
+
 } //!mem
 
 } //!sys
 
 } //!test
+
+#ifndef TEST_SYS_MEMORY_H_
+
+#include "ptr/Const.h"
+#include "Pointer.h"
+
+#endif //!TEST_SYS_MEMORY_H_
 
 #endif //!TEST_SYS_MEM_RECORD_H_
