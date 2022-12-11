@@ -90,32 +90,35 @@ inline typename Memory::PointerType Memory::Allocate(const std::size_t& s,
     
     {
         std::lock_guard<std::mutex> guard{m_lock};
-        test::sys::mem::block::Pointer<BlockType> added;
+        BlockType * block_ptr = nullptr;
 
-        auto res = m_record.Register(&added, 
-        [&](int status) -> void{
-            std::free(p);
-            p = NULL;
-        }, p, s, m_countId, f, l);
+        auto res = m_record.Register(
+            [&](BlockType* block) -> void 
+            {
+                block->SetDeallocator(Deallocator);
+                block_ptr = block;
+                ++m_countId;
+            }, 
+            [&](int status) -> void
+            {
+                std::free(p);
+                p = NULL;
+            }, p, s, m_countId, f, l);
 
         if (res != RecordType::sOk)
         {
             return {};
         }
         
-        added->SetDeallocator(Deallocator);
-        
-        ++m_countId;
-
-        return {&*added};
+        return {block_ptr};
     }
 }
 
 inline typename Memory::PointerType Memory::Allocate(const std::size_t& s)
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Allocate(s=%zu", s);
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Allocate(s=%zu)", s);
     
-    return Allocate(s, __FILE__, __LINE__);
+    return std::move(Allocate(s, __FILE__, __LINE__));
 }
 
 inline bool Memory::Reallocate(void* p, const std::size_t& s)
