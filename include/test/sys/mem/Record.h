@@ -31,7 +31,7 @@ class Record;
     test::sys::dbg::Type<TBlock>
 
 template<typename TBlock>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::Record}", 
+TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::Record", 
     test::sys::mem::Record<TBlock>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
@@ -113,7 +113,7 @@ private:
     void ClearAll();
 public:
     template<typename... TArgs>
-    int Register(BlockPointerType* ptr_out, 
+    int Register(std::function<void(TBlock*)> on_success, 
         std::function<void(int)> on_failed, 
         void * pointer, TArgs&&... args);
 private:
@@ -384,13 +384,13 @@ void Record<TBlock>::ClearAll()
 
 template<typename TBlock>
 template<typename... TArgs>
-int Record<TBlock>::Register(BlockPointerType* ptr_out, 
+int Record<TBlock>::Register(std::function<void(TBlock*)> on_success, 
     std::function<void(int)> on_failed, 
     void * pointer, TArgs&&... args)
 {
     TEST_SYS_DEBUG_T_V(SystemType, DebugType, 2, this, 
-        "Register<%s>(ptr_out=%p, on_failed=%p, pointer=%p, args={%s})", 
-        TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...), ptr_out, on_failed,
+        "Register<%s>(on_success=%p, on_failed=%p, pointer=%p, args={%s})", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...), on_success, on_failed,
         pointer, TEST_SYS_DEBUG_TARGS_VALUE_STR(args...));
 
     if (pointer == nullptr)
@@ -461,9 +461,9 @@ int Record<TBlock>::Register(BlockPointerType* ptr_out,
         }
     }
 
-    if (ptr_out != nullptr)
+    if (on_success != nullptr)
     {   
-        *ptr_out = BlockPointerType(&*node);
+        on_success(&*node);
     }
 
     return sRegisterOk;
