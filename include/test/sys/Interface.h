@@ -13,6 +13,39 @@
 #include <cstdio>
 #include <cstdarg>
 
+#ifdef TEST_SYS_DEBUG_ENABLE
+
+#define TEST_SYS_DEBUG_SYS_INSTANCE_IF(CONDITION, SYS_INSTANCE_TRUE,\
+    SYS_INSTANCE_FALSE, DEBUG_TYPE, ...)\
+do{\
+if (CONDITION)\
+{\
+    SYS_INSTANCE_TRUE.Debug(DEBUG_TYPE::GetInstance(), __VA_ARGS__);\
+}\
+else\
+{\
+    SYS_INSTANCE_FALSE.Debug(DEBUG_TYPE::GetInstance(), __VA_ARGS__);\
+}\
+} while(false)
+
+#define TEST_SYS_DEBUG_SYS_INSTANCE(SYS_INSTANCE, DEBUG_TYPE, ...)\
+    SYS_INSTANCE.Debug(DEBUG_TYPE::GetInstance(), __VA_ARGS__)
+
+#else
+
+#define TEST_SYS_DEBUG_SYS_INSTANCE_IF(...)
+
+#define TEST_SYS_DEBUG_SYS_INSTANCE(...)
+
+#endif 
+
+namespace test::sys
+{
+class Interface;
+}
+
+TEST_SYS_DBG_TYPE_DEFINE("test::sys::Interface", test::sys::Interface);
+
 namespace test
 {
 namespace sys
@@ -20,6 +53,9 @@ namespace sys
 
 class Interface
 {
+private:
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Interface> _DebugType;
 private:
     class Instance
     {
@@ -43,14 +79,16 @@ public:
     typedef typename test::sys::Debug DebugType;
 private:
     static inline typename Interface::Instance& _GetInstance();
+private:
+    static inline Interface& DefaultInstance();
 protected:
     static inline bool CreateInstance(Interface* intf);
 public:
     static Interface& GetInstance();
 protected:
-    Interface() = default;
+    inline Interface() = default;
 public:
-    virtual ~Interface() = default;
+    virtual inline ~Interface() = default;
 public:
     virtual inline void RegisterSignal(SignalType* signal);
 public:
@@ -85,38 +123,72 @@ public:
 
 inline Interface::Instance::Instance() :
     m_value(nullptr)
-{}
+{
+    TEST_SYS_DEBUG_SYS_INSTANCE_IF(m_value == nullptr, 
+        DefaultInstance(),
+        (*m_value),
+        _DebugType, 1, this, 
+        "Default Constructor Interface::Instance");
+}
 
 inline Interface::Instance::~Instance()
 {
+    TEST_SYS_DEBUG_SYS_INSTANCE_IF(m_value == nullptr, 
+        DefaultInstance(),
+        (*m_value),
+        _DebugType, 1, this, 
+        "Destructor Interface::Instance");
+    
     m_value = nullptr;
 }
 
 inline Interface::Instance::operator bool()
 {
+    TEST_SYS_DEBUG_SYS_INSTANCE_IF(m_value == nullptr, 
+        DefaultInstance(),
+        (*m_value),
+        _DebugType, 3, this, 
+        "Instance::operator bool()");
+    
     return m_value != nullptr;
 }
 
 inline void Interface::Instance::Set(Interface* instance)
 {
     m_value = instance;
+    
+    TEST_SYS_DEBUG_SYS_INSTANCE_IF(m_value == nullptr, 
+        DefaultInstance(),
+        (*m_value),
+        _DebugType, 3, this, 
+        "Instance::Set(instance=%p)", instance);
 }
 
 inline Interface* Interface::Instance::Get()
 {
+    TEST_SYS_DEBUG_SYS_INSTANCE_IF(m_value == nullptr, 
+        DefaultInstance(),
+        (*m_value),
+        _DebugType, 3, this, 
+        "Instance::Get()");
+    
     return m_value;
 }
-
-inline void Interface::RegisterSignal(SignalType*)
-{}
-
-inline void Interface::UnregisterSignal(SignalType*)
-{}
 
 inline typename Interface::Instance& Interface::_GetInstance()
 {
     static Instance instance;
     return instance;
+}
+
+inline Interface& Interface::DefaultInstance()
+{
+    static Interface value;
+
+    TEST_SYS_DEBUG_SYS_INSTANCE(value,
+        _DebugType, 1, NULL, "GetInstance()");
+
+    return value;
 }
 
 inline bool Interface::CreateInstance(Interface * intf)
@@ -126,19 +198,45 @@ inline bool Interface::CreateInstance(Interface * intf)
     {
         return false;
     }
+
+    TEST_SYS_DEBUG_SYS_INSTANCE((intf == NULL ? DefaultInstance() : *intf) ,
+        _DebugType, 1, NULL, "CreateInstance(intf=%p)", intf);
+
     instance.Set(intf);
     return true;
 }
 
-Interface& Interface::GetInstance()
+inline Interface& Interface::GetInstance()
 {
     Instance& instance = _GetInstance();
-    static Interface default_value;
     if (!(bool)instance)
     {
-        return default_value;
+        TEST_SYS_DEBUG_SYS_INSTANCE(DefaultInstance(),
+            _DebugType, 1, NULL, "GetInstance()");
+
+        return DefaultInstance();
     }
+    
+    TEST_SYS_DEBUG_SYS_INSTANCE((*(instance.Get())),
+        _DebugType, 1, NULL, "GetInstance()");
+
     return *(instance.Get());
+}
+
+inline void Interface::RegisterSignal(SignalType* sig)
+{
+    TEST_SYS_DEBUG_SYS_INSTANCE(DefaultInstance(),
+        _DebugType, 3, this, 
+        "Instance::RegisterSignal(sig=%p)", sig);
+    
+}
+
+inline void Interface::UnregisterSignal(SignalType* sig)
+{
+    TEST_SYS_DEBUG_SYS_INSTANCE(DefaultInstance(),
+        _DebugType, 3, this, 
+        "Instance::RegisterSignal(sig=%p)", sig);
+    
 }
 
 inline int Interface::Output(const char* format, ...)
@@ -176,9 +274,13 @@ inline int Interface::Debug(DebugType& dbg, std::int8_t level, const void * obj,
 {
 #if TEST_SYS_DEBUG_ENABLE
     int res = 0;
+    char buff[1025];
+    dbg.TagName(buff, 1024);
+    buff[1024] = '\0';
+    res += printf("%s: ", buff);
     va_list args;
     va_start(args, format);
-    res = VOutput(format, args);
+    res += VOutput(format, args);
     va_end(args);
     return res;
 #else
@@ -190,7 +292,12 @@ inline int Interface::VDebug(DebugType& dbg, std::int8_t level, const void * obj
     const char* format, va_list args)
 {
 #if TEST_SYS_DEBUG_ENABLE
-    return VOutput(format, args);
+    int res = 0;
+    char buff[1025];
+    dbg.TagName(buff, 1024);
+    buff[1024] = '\0';
+    res += printf("%s: ", buff);
+    return VOutput(format, args) + res;
 #else
     return 0;
 #endif
@@ -230,6 +337,9 @@ inline int Interface::VError(StatusIntegerType code, const char* format,
 } //!sys
 
 } //!test
+
+#undef TEST_SYS_DEBUG_SYS_INSTANCE_IF
+#undef TEST_SYS_DEBUG_SYS_INSTANCE
 
 #include "Definition.impl.h"
 
