@@ -22,6 +22,10 @@ inline Debug::Debug() :
     m_level(0xFF)
 {}
 
+inline Debug::Debug(std::int8_t level) :
+    m_level(level)
+{}
+
 inline Debug::~Debug()
 {}
 
@@ -64,6 +68,12 @@ test::sys::dbg::Type<__VA_ARGS__>::GetInstance().SetLevel(VAL)
 
 #define TEST_SYS_DEBUG(SYS_TYPE, DEBUG_TYPE, ...)\
     SYS_TYPE::GetInstance().Debug(DEBUG_TYPE::GetInstance(), __VA_ARGS__)
+
+#define TEST_SYS_DEBUG_DEFAULT(DEBUG_TYPE, ...)\
+do{\
+    static test::sys::Interface& __intf_default__ = test::sys::Interface::DefaultInstance();\
+    (__intf_default__).Debug(DEBUG_TYPE::GetInstance(), __VA_ARGS__);\
+} while(false)
 
 #define TEST_SYS_DEBUG_T_NAME_STR(...)\
     test::sys::dbg::Type<__VA_ARGS__>::GetInstance().Name(__t_name_cstr__).Buffer()

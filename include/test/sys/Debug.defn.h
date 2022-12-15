@@ -27,6 +27,7 @@ private:
     std::int8_t m_level;
 protected:
     inline Debug();
+    inline Debug(std::int8_t level);
 public:
     virtual inline ~Debug();
 public:
