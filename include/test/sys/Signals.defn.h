@@ -3,11 +3,28 @@
 
 #include "Signal.defn.h"
 #include "Definition.h"
-#include "Log.h"
+#include "Interface.h"
+#include "Debug.h"
 
 #include <cstddef>
 #include <mutex>
 #include <chrono>
+
+namespace test::sys
+{
+template<typename TStatus>
+class Signals;
+}
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<TStatus>
+
+template<typename TStatus>
+TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::Signals", 
+    test::sys::Signals<TStatus>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
+
 
 namespace test
 {
@@ -17,11 +34,13 @@ namespace sys
 template<typename TStatus>
 class Signals
 {
+private:
+    typedef test::sys::Definition DefinitionType;
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
 public:
     typedef TStatus StatusType;
     typedef typename test::sys::Definition::TimestampType TimestampType;
-public:
-    typedef test::sys::Log<TStatus> LogType;
     typedef test::sys::Signal SignalType;
 private:
     int m_lastSig;
@@ -29,10 +48,9 @@ private:
     std::size_t m_alloc;
     SignalType** m_list;
     StatusType& m_status;
-    LogType& m_log;
     std::mutex m_mutex;
 public:
-    Signals(StatusType& status, LogType& log);
+    Signals(StatusType& status);
 public:
     Signals(const Signals&) = delete;
     Signals(Signals&&) = delete;
