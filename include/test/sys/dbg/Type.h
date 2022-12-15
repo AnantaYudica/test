@@ -8,7 +8,7 @@
 #include <cstring>
 #include <type_traits>
 
-#define TEST_SYS_DBG_TYPE_DEFINE(NAME, ...)\
+#define TEST_SYS_DBG_TYPE_LEVEL_DEFINE(LEVEL, NAME, ...)\
 template<>\
 class test::sys::dbg::Type<__VA_ARGS__> : public test::sys::Debug\
 {\
@@ -84,7 +84,7 @@ public:\
         return 0;\
     }\
 protected:\
-    inline Type() = default;\
+    inline Type() : test::sys::Debug((std::int8_t)LEVEL) {};\
 public:\
     inline virtual ~Type() = default;\
 public:\
@@ -106,7 +106,10 @@ public:\
     }\
 }
 
-#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE(NAME, ...)\
+#define TEST_SYS_DBG_TYPE_DEFINE(NAME, ...)\
+    TEST_SYS_DBG_TYPE_LEVEL_DEFINE(0x7F, NAME, __VA_ARGS__)
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(LEVEL, NAME, ...)\
 class test::sys::dbg::Type<__VA_ARGS__> : public test::sys::Debug\
 {\
 public:\
@@ -211,7 +214,7 @@ public:\
         return 0;\
     }\
 protected:\
-    inline Type() = default;\
+    inline Type() : test::sys::Debug((std::int8_t)LEVEL) {};\
 public:\
     inline virtual ~Type() = default;\
 public:\
@@ -233,9 +236,12 @@ public:\
     }\
 }
 
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE(NAME, ...)\
+    TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(0x7f, NAME, __VA_ARGS__)
+
 #define TEST_SYS_DBG_TYPE_T_QUALIFIER(TPRE, PRE)\
 template<typename T>\
-class test::sys::dbg::Type<TPRE> : public Type<T>\
+class test::sys::dbg::Type<TPRE> : public test::sys::Debug\
 {\
 public:\
     typedef typename Type<T>::CStrType CStrType;\
