@@ -89,7 +89,8 @@ struct Definition
         sSignals                            = 0x0100,
         sSignalsAllocationFailed            = sSignals | sError | 0x01,
         sSignalsReallocationFailed          = sSignals | sError | 0x02,
-        sSignalsReallocationOutOfMemory     = sSignals | sError | 0x03,
+        sSignalsReallocationOverflow        = sSignals | sError | 0x03,
+        sSignalsReallocationOutOfMemory     = sSignals | sError | 0x04,
 
         sMemory                             = 0x0200,
         sMemoryNotClearOnFinalize           = sMemory | sError | 0x01,
@@ -132,6 +133,7 @@ struct Definition
         "[sys][Signals]",
         "sSignalsAllocationFailed",
         "sSignalsReallocationFailed",
+        "sSignalsReallocationOverflow",
         "sSignalsReallocationOutOfMemory"
 
         "[sys][Memory]",
@@ -166,7 +168,7 @@ struct Definition
 
     static constexpr std::uint8_t _StatusErrorNameMaxIndexs[] = 
     {
-        1, 2, 3, 3, 4, 3, 2, 2
+        1, 2, 4, 3, 4, 3, 2, 2
     };
     static constexpr std::size_t _StatusErrorNameMaxIndexsSize = 
         sizeof(_StatusErrorNameMaxIndexs) / sizeof(std::uint8_t);

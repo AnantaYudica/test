@@ -5,15 +5,14 @@
 #include "Debug.h"
 #include "Interface.h"
 
-TEST_SYS_DBG_TYPE_DEFINE("test::sys::Definition", test::sys::Definition);
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(1, "test::sys::Definition", test::sys::Definition);
 
 static inline bool 
 operator==(typename test::sys::Definition::Status status_enum,
     typename test::sys::Definition::StatusIntegerType status_int)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, 
         "operator==(status_enum=%d, status_int=%d)",
             test::sys::Definition::StatusIntegerType(status_enum), status_int);
 
@@ -26,8 +25,7 @@ operator!=(typename test::sys::Definition::Status status_enum,
     typename test::sys::Definition::StatusIntegerType status_int)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, 
         "operator!=(status_enum=%d, status_int=%d)",
             test::sys::Definition::StatusIntegerType(status_enum), status_int);
 
@@ -40,8 +38,7 @@ operator==(typename test::sys::Definition::StatusIntegerType status_int,
     typename test::sys::Definition::Status status_enum)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, 
         "operator==(status_int=%d, status_enum=%d)", status_int,
             test::sys::Definition::StatusIntegerType(status_enum));
 
@@ -54,8 +51,7 @@ operator!=(typename test::sys::Definition::StatusIntegerType status_int,
     typename test::sys::Definition::Status status_enum)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, 
         "operator!=(status_int=%d, status_enum=%d)", status_int,
             test::sys::Definition::StatusIntegerType(status_enum));
 
@@ -71,8 +67,7 @@ namespace sys
 inline typename Definition::TimestampType Definition::GetTimestampNow()
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "GetTimestampNow()");
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, "GetTimestampNow()");
 
     return std::chrono::duration_cast<TimestampDurationType>(
         std::chrono::high_resolution_clock::now().time_since_epoch()
@@ -85,8 +80,7 @@ Definition::GetTimeDuration(const TimestampType& before,
     const TimestampType& after)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, 
         "GetTimeDuration(before=%lld, after=%lld)", before, after);
 
     if (before >= after) return TimeDurationType();
@@ -114,8 +108,7 @@ inline typename test::sys::Definition::TimeType
 Definition::GetTime(const TimestampType& timestamp)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, 
         "GetTime(timestamp=%lld)", timestamp);
 
     TTimeDuration duration(timestamp);
@@ -155,8 +148,7 @@ inline typename test::sys::Definition::DateType
 Definition::GetDate(const TimestampType& timestamp)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, 
         "GetDate(timestamp=%lld)", timestamp);
 
     TTimeDuration duration(timestamp);
@@ -176,8 +168,7 @@ inline typename test::sys::Definition::DateTimeType
 Definition::GetDateTime(const TimestampType& timestamp)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, 
         "GetDateTime(timestamp=%lld)", timestamp);
 
     TTimeDuration duration(timestamp);
@@ -220,8 +211,7 @@ inline std::size_t Definition::SumStatusNames(std::uint8_t tag,
     std::size_t sum)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
-    typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG_DEFAULT(DebugType, 3, NULL, 
         "SumStatusNames(tag=%hhu, sum=%zu)", tag, sum);
 
     return (tag <= StatusTagMax) ? (tag == 0 ? 
