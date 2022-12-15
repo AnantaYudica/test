@@ -1,6 +1,16 @@
 #ifndef TEST_SYS_SIGNAL_H_DEFN_
 #define TEST_SYS_SIGNAL_H_DEFN_
 
+#include "Definition.h"
+#include "Debug.h"
+
+namespace test::sys
+{
+class Signal;
+}
+
+TEST_SYS_DBG_TYPE_DEFINE("test::sys::Signal", test::sys::Signal);
+
 namespace test
 {
 namespace sys
@@ -8,6 +18,9 @@ namespace sys
 
 class Signal
 {
+private:
+    typedef test::sys::Definition DefinitionType;
+    typedef test::sys::dbg::Type<test::sys::Signal> DebugType;
 protected:
     inline Signal();
 public:
