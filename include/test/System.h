@@ -151,6 +151,7 @@ public:
 public:
     inline void UnregisterSignal(SignalType* signal) override;
 public:
+    inline StatusType& GetStatus();
     inline const StatusType& GetStatus() const;
 public:
     inline MemoryType& GetMemory();
@@ -273,7 +274,7 @@ inline int System::LogFormat(char* buffer,
     if (dur.Day > 0)
     {
         return snprintf(buffer, buffer_size, 
-            "[%d Days %02d:%02d:%02d.%03d%03d[%s: %s",
+            "[%d Days %02d:%02d:%02d.%03d%03d]%s: %s",
             dur.Day, dur.Hour, dur.Minute, dur.Second, dur.Milisecond,
             dur.Microsecond, tag, msg);
     }
@@ -716,6 +717,14 @@ inline void System::UnregisterSignal(SignalType* signal)
         return;
     }
     m_signals.Remove(signal);
+}
+
+inline typename System::StatusType& System::GetStatus()
+{
+    TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), 
+        _DebugType, 3, this, "GetStatus()");
+
+    return m_status;
 }
 
 inline const typename System::StatusType& System::GetStatus() const
