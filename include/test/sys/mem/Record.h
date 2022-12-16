@@ -536,6 +536,9 @@ int Record<TBlock>::Unregister(void * pointer,
                 "Pointer(%p) not registered", pointer);
             return sUnregisterPointerNotFound;
         }
+        
+        (*found)->Lock();
+        
         res = Unregister(found , block, force);
     }
     return res;
