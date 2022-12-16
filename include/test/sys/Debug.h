@@ -41,7 +41,18 @@ inline std::int8_t Debug::GetLevel()
 
 inline std::size_t Debug::TagName(char * tag_out, std::size_t n)
 {
-    return WriteTagName(tag_out, n);
+    const std::size_t bg_size = snprintf(tag_out, n, "[");
+    if (bg_size == n)
+    {
+        return bg_size;
+    }
+    const std::size_t t_size = 
+        WriteTagName(tag_out + bg_size, n - bg_size) + bg_size;
+    if (t_size == n)
+    {
+        return t_size;
+    }
+    return snprintf(tag_out + t_size, n - t_size, "]") + t_size;
 }
 
 inline std::size_t Debug::Name(char* name_out, std::size_t n)
