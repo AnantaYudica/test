@@ -123,6 +123,14 @@ Pointer<TBlock>& Pointer<TBlock>::operator=(Pointer<TBlock>&& mov)
 }
 
 template<typename TBlock>
+void* Pointer<TBlock>::Unlock()
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Unlock()");
+
+    return test::sys::mem::ptr::Const<TBlock>::GetBlock()->Unlock();
+}
+
+template<typename TBlock>
 template<typename T>
 typename Pointer<TBlock>::CastType<T> 
 Pointer<TBlock>::Cast()

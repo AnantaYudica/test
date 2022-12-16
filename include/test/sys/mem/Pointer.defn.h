@@ -64,6 +64,8 @@ public:
     void operator delete(void*) = delete;
     void operator delete[](void*) = delete;
 public:
+    void* Unlock();
+public:
     using BaseType::operator bool;
     using BaseType::Size;
     using BaseType::Count;

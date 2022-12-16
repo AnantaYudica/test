@@ -46,6 +46,7 @@ public:
 public:
     struct Data
     {
+        bool unlock;
         IDType id;
         void * pointer;
         std::size_t size;
@@ -111,8 +112,11 @@ public:
     inline void AddReference() const;
     inline void ReleaseReference() const;
 public:
+    inline void* Unlock();
+public:
     inline bool IsGood() const;
     inline bool IsBad() const;
+    inline bool IsUnlock() const;
 public:
     inline StatusIntegerType Status() const;
 public:
@@ -144,7 +148,7 @@ inline Base::Base() :
     m_refCount(0),
     m_lock(),
     m_deallocator(DefaultDeallocation),
-    m_data{0, Empty(), EmptySize, 0, 0}
+    m_data{false, 0, Empty(), EmptySize, 0, 0}
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
 
@@ -155,7 +159,7 @@ inline Base::Base(const IDType& id) :
         m_refCount(0),
         m_lock(),
         m_deallocator(DefaultDeallocation),
-        m_data{id, Empty(), EmptySize, 0, 0}
+        m_data{false, id, Empty(), EmptySize, 0, 0}
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Constructor(id=%zu)", id);
 
@@ -167,7 +171,7 @@ inline Base::Base(const IDType& id,
         m_refCount(0),
         m_lock(),
         m_deallocator(deallocator ? deallocator : DefaultDeallocation),
-        m_data{id, Empty(), EmptySize, 0, 0}
+        m_data{false, id, Empty(), EmptySize, 0, 0}
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, 
         this, "Constructor(id=%zu, deallocator=%p)", id, deallocator);
@@ -179,8 +183,9 @@ inline Base::Base(Base&& mov) :
     m_refCount(mov.m_refCount.load()),
     m_lock(),
     m_deallocator(mov.m_deallocator),
-    m_data{mov.m_data.id, mov.m_data.pointer, mov.m_data.size,
-        mov.m_data.alloc_timestamp, mov.m_data.dealloc_timestamp}
+    m_data{mov.m_data.unlock, mov.m_data.id, mov.m_data.pointer, 
+        mov.m_data.size, mov.m_data.alloc_timestamp, 
+        mov.m_data.dealloc_timestamp}
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, 
         this, "Move Constructor(%p)", &mov);
@@ -188,7 +193,7 @@ inline Base::Base(Base&& mov) :
     mov.m_status.store(sDefaultConstructor);
     mov.m_refCount = 0;
     mov.m_deallocator = DefaultDeallocation;
-    mov.m_data = Data{0, Empty(), EmptySize, 0, 0};
+    mov.m_data = Data{false, 0, Empty(), EmptySize, 0, 0};
 }
 
 inline Base::~Base()
@@ -205,7 +210,7 @@ inline Base::~Base()
 
     this->m_status.store(0);
     this->m_refCount.store(0);
-    this->m_data = Data{0, NULL, 0, 0, 0};
+    this->m_data = Data{false, 0, NULL, 0, 0, 0};
 }
 
 inline Base& Base::operator=(Base&& mov)
@@ -222,9 +227,10 @@ inline Base& Base::operator=(Base&& mov)
     m_deallocator = mov.m_deallocator;
     mov.m_deallocator = DefaultDeallocation;
 
-    m_data = Data{mov.m_data.id, mov.m_data.pointer, mov.m_data.size,
-        mov.m_data.alloc_timestamp, mov.m_data.dealloc_timestamp};
-    mov.m_data = Data{0, Empty(), EmptySize, 0, 0};
+    m_data = Data{mov.m_data.unlock, mov.m_data.id, mov.m_data.pointer, 
+        mov.m_data.size, mov.m_data.alloc_timestamp,
+         mov.m_data.dealloc_timestamp};
+    mov.m_data = Data{false, 0, Empty(), EmptySize, 0, 0};
 
     return *this;
 }
@@ -235,7 +241,7 @@ inline bool Base::_Deallocate()
 
     bool res = false;
     m_data.dealloc_timestamp = test::sys::Definition::GetTimestampNow();
-    Data data{m_data.id, m_data.pointer, m_data.size,
+    Data data{m_data.unlock, m_data.id, m_data.pointer, m_data.size,
         m_data.alloc_timestamp, m_data.dealloc_timestamp};
     if (m_deallocator == nullptr)
     {
@@ -433,6 +439,9 @@ inline void Base::AddReference() const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "AddReference() const");
 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "Pointer = %p, Empty() %p", m_data.pointer, Empty());
+    
     if (m_data.pointer == Empty()) return;
     auto* cast_ptr = const_cast<Base*>(this);
     if (cast_ptr->m_refCount < std::numeric_limits<std::size_t>::max())
@@ -445,6 +454,9 @@ inline void Base::AddReference() const
             DefinitionType::Status::sMemBlockReferenceCountOverflow, 
             "Memory Reference count is overflow");
     }
+    
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "m_refCount = %zu", cast_ptr->m_refCount.load());
 }
 
 inline void Base::ReleaseReference() const
@@ -470,6 +482,22 @@ inline void Base::ReleaseReference() const
     }
 }
 
+inline void* Base::Unlock()
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Unlock()");
+    
+    std::lock_guard<std::mutex> guard(m_lock);
+    if (m_data.pointer == Empty()) return NULL;
+    if (m_data.unlock)
+    {
+        return m_data.pointer;
+    }
+    m_data.unlock = true;
+    AddReference();
+    return m_data.pointer;
+}
+
 inline bool Base::IsGood() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
@@ -484,6 +512,14 @@ inline bool Base::IsBad() const
         "IsBad() const");
 
     return m_status.load() != sGood;
+}
+
+inline bool Base::IsUnlock() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsUnlock() const");
+
+    return m_data.unlock;
 }
 
 inline typename Base::StatusIntegerType Base::Status() const

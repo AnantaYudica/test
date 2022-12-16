@@ -77,6 +77,8 @@ public:
     using test::sys::mem::block::Base::Deallocate;
     using test::sys::mem::block::Base::Release;
 public:
+    using test::sys::mem::block::Base::Unlock;
+public:
     using test::sys::mem::block::Base::SetDeallocator;
 public:
     using test::sys::mem::block::Base::Pointer;
@@ -87,8 +89,14 @@ public:
     using test::sys::mem::block::Base::AddReference;
     using test::sys::mem::block::Base::ReleaseReference;
     using test::sys::mem::block::Base::operator bool;
+public:
+    using test::sys::mem::block::Base::IsGood;
+    using test::sys::mem::block::Base::IsBad;
+    using test::sys::mem::block::Base::IsUnlock;
+public:
     using test::sys::mem::block::Base::operator==;
     using test::sys::mem::block::Base::operator!=;
+public:
     using test::sys::mem::block::FileLine::File;
     using test::sys::mem::block::FileLine::Line;
     using test::sys::mem::block::FileLine::FileAllocationSize;
@@ -131,6 +139,8 @@ public:
     using test::sys::mem::block::Base::Deallocate;
     using test::sys::mem::block::Base::Release;
 public:
+    using test::sys::mem::block::Base::Unlock;
+public:
     using test::sys::mem::block::Base::SetDeallocator;
 public:
     using test::sys::mem::block::Base::Pointer;
@@ -141,6 +151,11 @@ public:
     using test::sys::mem::block::Base::AddReference;
     using test::sys::mem::block::Base::ReleaseReference;
     using test::sys::mem::block::Base::operator bool;
+public:
+    using test::sys::mem::block::Base::IsGood;
+    using test::sys::mem::block::Base::IsBad;
+    using test::sys::mem::block::Base::IsUnlock;
+public:
     using test::sys::mem::block::Base::operator==;
     using test::sys::mem::block::Base::operator!=;
 public:
