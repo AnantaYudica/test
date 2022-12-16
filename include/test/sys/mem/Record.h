@@ -16,7 +16,6 @@
 #include <cstdlib>
 #include <mutex>
 #include <utility>
-#include <functional>
 #include <chrono>
 #include <atomic>
 #include <cstring>
@@ -56,7 +55,8 @@ public:
 public:
     typedef test::sys::mem::rec::Node<TBlock> NodeType;
     typedef test::sys::mem::rec::Iterator<TBlock> IteratorType;
-    typedef std::function<int(NodeType*)> FindConditionFuncType;
+    template<typename T>
+    using FindConditionFuncType = int(*)(T, NodeType*);
 public:
     typedef test::sys::mem::Pointer<TBlock> PointerType;
     typedef test::sys::mem::ptr::Const<TBlock> PointerConstType;
@@ -79,8 +79,9 @@ private:
 private:
     static TBlock* ReleaseNode(NodeType* node);
 private:
+    template<typename T>
     static NodeType* _Find(NodeType *& head, NodeType *& tail, 
-        FindConditionFuncType f);
+        FindConditionFuncType<T> f, T& pointer);
 private:
     static TBlock* MakeBlock(TBlock&& instance);
 private:
@@ -103,7 +104,8 @@ public:
     void operator delete(void*) = delete;
     void operator delete[](void*) = delete;
 private:
-    NodeType* Find(FindConditionFuncType f);
+    template<typename T>
+    NodeType* Find(FindConditionFuncType<T> f, T& pointer);
 private:
     bool Insert(NodeType *node);
 private:
@@ -187,19 +189,21 @@ TBlock* Record<TBlock>::ReleaseNode(NodeType* node)
 
 
 template<typename TBlock>
+template<typename T>
 typename Record<TBlock>::NodeType* 
 Record<TBlock>::_Find(NodeType *& head, 
-    NodeType *&, FindConditionFuncType f)
+    NodeType *&, FindConditionFuncType<T> f, T& pointer)
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
-        "_Find(head=%p, NodeType *&, f=%p)", head, f);
+    TEST_SYS_DEBUG_T(SystemType, DebugType, 2, NULL, 
+        "_Find<%s>(head=%p, NodeType *&, f=%p, pointer=%p)", 
+            TEST_SYS_DEBUG_TARGS_NAME_STR(T), head, f, pointer);
     
     if (f && head != nullptr)
     {
         IteratorType it{head};
         while(it != nullptr)
         {
-            const auto res = f(&(*it));
+            const auto res = f(pointer, &(*it));
             if (res == 0)
             {
                 return &*it;
@@ -260,12 +264,14 @@ Record<TBlock>::~Record()
 }
 
 template<typename TBlock>
+template<typename T>
 typename Record<TBlock>::NodeType* 
-Record<TBlock>::Find(FindConditionFuncType f)
+Record<TBlock>::Find(FindConditionFuncType<T> f, T& pointer)
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Find(f=%p)", f);
+    TEST_SYS_DEBUG_T(SystemType, DebugType, 2, this, "Find<%s>(f=%p, pointer=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(T), f, pointer);
 
-    return _Find(m_head, m_tail, f);
+    return _Find(m_head, m_tail, f, pointer);
 }
 
 template<typename TBlock>
@@ -521,8 +527,7 @@ int Record<TBlock>::Unregister(void * pointer,
     {
         std::lock_guard<std::mutex> guard(m_lock);
 
-        auto found = Find(std::bind(FindCondition<void*>, pointer, 
-            std::placeholders::_1));
+        auto found = Find(&FindCondition<void*>, pointer);
         
         if (found == nullptr)
         {
@@ -552,8 +557,7 @@ int Record<TBlock>::Unregister(PointerType pointer,
     {
         std::lock_guard<std::mutex> guard(m_lock);
 
-        auto found = Find(std::bind(FindCondition<PointerType>, pointer, 
-            std::placeholders::_1));
+        auto found = Find(&FindCondition<PointerType>, pointer);
         
         if (found == nullptr)
         {
@@ -590,8 +594,7 @@ bool Record<TBlock>::HasRegister(void * pointer)
     
     std::lock_guard<std::mutex> guard(m_lock);
 
-    auto found = Find(std::bind(FindCondition<void*>, pointer, 
-        std::placeholders::_1));
+    auto found = Find(&FindCondition<void*>, pointer);
     
     return HasRegister(found);
 }
@@ -609,8 +612,7 @@ bool Record<TBlock>::HasRegister(PointerConstType pointer)
     
     std::lock_guard<std::mutex> guard(m_lock);
 
-    auto found = Find(std::bind(FindCondition<PointerConstType>, pointer, 
-        std::placeholders::_1));
+    auto found = Find(&FindCondition<PointerConstType>, pointer);
     
     return HasRegister(found);
 }
@@ -659,8 +661,7 @@ TBlock* Record<TBlock>::operator[](void * pointer)
     
     std::lock_guard<std::mutex> guard(m_lock);
     
-    auto found = Find(std::bind(FindCondition<void*>, pointer, 
-        std::placeholders::_1));
+    auto found = Find(FindCondition<void*>, pointer);
     if (found == nullptr) return nullptr;
     return &**found;
 }
@@ -678,8 +679,7 @@ TBlock* Record<TBlock>::operator[](PointerType pointer)
     
     std::lock_guard<std::mutex> guard(m_lock);
     
-    auto found = Find(std::bind(FindCondition<PointerType>, pointer, 
-        std::placeholders::_1));
+    auto found = Find(FindCondition<PointerType>, pointer);
     if (found == nullptr) return nullptr;
     return &**found;
 }
@@ -740,8 +740,7 @@ void Record<TBlock>::Reposition(void* pointer)
     
     std::lock_guard<std::mutex> guard(m_lock);
     
-    auto found = Find(std::bind(FindCondition<void*>, pointer, 
-        std::placeholders::_1));
+    auto found = Find(FindCondition<void*>, pointer);
 
     Reposition(found);
 }
@@ -760,8 +759,7 @@ void Record<TBlock>::Reposition(PointerType pointer)
     
     std::lock_guard<std::mutex> guard(m_lock);
     
-    auto found = Find(std::bind(FindCondition<PointerType>, pointer, 
-        std::placeholders::_1));
+    auto found = Find(FindCondition<PointerType>, pointer);
     
     Reposition(found);
 }
