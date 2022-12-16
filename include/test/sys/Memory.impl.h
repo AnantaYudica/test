@@ -13,7 +13,31 @@ namespace sys
 inline Memory& Memory::GetInstance()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "GetInstance()");
-        
+    
+    static auto& dbg_mem_block_base = test::sys::dbg::Type<
+        test::sys::mem::block::Base>::GetInstance();
+    static auto& dbg_mem_block_fileline = test::sys::dbg::Type<
+        test::sys::mem::block::FileLine>::GetInstance();
+    static auto& dbg_mem_block_pointer = test::sys::dbg::Type<
+        test::sys::mem::block::Pointer<BlockType>>::GetInstance();
+
+    static auto& dbg_mem_block_ptr_const = test::sys::dbg::Type<
+        test::sys::mem::ptr::Const<BlockType>>::GetInstance();
+
+    static auto& dbg_mem_rec_node = test::sys::dbg::Type<
+        test::sys::mem::rec::Node<BlockType>>::GetInstance();
+    static auto& dbg_mem_rec_iterator = test::sys::dbg::Type<
+        test::sys::mem::rec::Iterator<BlockType>>::GetInstance();
+
+    static auto& dbg_mem_block = 
+        test::sys::dbg::Type<BlockType>::GetInstance();
+    static auto& dbg_mem_dummy = test::sys::dbg::Type<
+        test::sys::mem::Dummy>::GetInstance();
+    static auto& dbg_mem_pointer = test::sys::dbg::Type<
+        test::sys::mem::Pointer<BlockType>>::GetInstance();
+    static auto& dbg_mem_record = test::sys::dbg::Type<
+        test::sys::mem::Record<BlockType>>::GetInstance();
+
     static Memory instance;
     return instance;
 }
