@@ -113,6 +113,7 @@ public:
     inline void ReleaseReference() const;
 public:
     inline void* Unlock();
+    inline void Lock();
 public:
     inline bool IsGood() const;
     inline bool IsBad() const;
@@ -496,6 +497,18 @@ inline void* Base::Unlock()
     m_data.unlock = true;
     AddReference();
     return m_data.pointer;
+}
+
+inline void Base::Lock()
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "Lock()");
+    
+    std::lock_guard<std::mutex> guard(m_lock);
+    if (m_data.pointer == Empty() ||
+        !m_data.unlock) return;
+    m_data.unlock = false;
+    m_refCount -= 1;
 }
 
 inline bool Base::IsGood() const

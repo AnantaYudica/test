@@ -78,6 +78,7 @@ public:
     using test::sys::mem::block::Base::Release;
 public:
     using test::sys::mem::block::Base::Unlock;
+    using test::sys::mem::block::Base::Lock;
 public:
     using test::sys::mem::block::Base::SetDeallocator;
 public:
@@ -140,6 +141,7 @@ public:
     using test::sys::mem::block::Base::Release;
 public:
     using test::sys::mem::block::Base::Unlock;
+    using test::sys::mem::block::Base::Lock;
 public:
     using test::sys::mem::block::Base::SetDeallocator;
 public:
