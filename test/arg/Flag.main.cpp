@@ -2,6 +2,8 @@
 #define TEST_SYS_DEBUG_ENABLE 1
 #endif //!DEBUG
 
+#define TEST_ARG_FLAG_DLEVEL 0x7f
+
 #include "test/arg/Flag.h"
 
 #include <cassert>
