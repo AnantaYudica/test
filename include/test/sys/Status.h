@@ -15,7 +15,14 @@ namespace test::sys
 class Status;
 }
 
-TEST_SYS_DBG_TYPE_LEVEL_DEFINE(1, "test::sys::Status", test::sys::Status);
+#ifndef TEST_SYS_STATUS_DLEVEL
+
+#define TEST_SYS_STATUS_DLEVEL 1
+
+#endif //!TEST_SYS_STATUS_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_SYS_STATUS_DLEVEL, 
+    "test::sys::Status", test::sys::Status);
 
 namespace test
 {

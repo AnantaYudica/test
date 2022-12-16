@@ -28,7 +28,14 @@ namespace test::sys
 class Memory;
 }
 
-TEST_SYS_DBG_TYPE_DEFINE("test::sys::Memory", test::sys::Memory);
+#ifndef TEST_SYS_MEMORY_DLEVEL
+
+#define TEST_SYS_MEMORY_DLEVEL 2
+
+#endif //!TEST_SYS_MEMORY_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_SYS_MEMORY_DLEVEL, 
+    "test::sys::Memory", test::sys::Memory);
 
 namespace test
 {

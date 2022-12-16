@@ -14,11 +14,19 @@ template<typename TBlock>
 class Iterator;
 }
 
+#ifndef TEST_SYS_MEM_REC_ITERATOR_DLEVEL
+
+#define TEST_SYS_MEM_REC_ITERATOR_DLEVEL 2
+
+#endif //!TEST_SYS_MEM_REC_ITERATOR_DLEVEL
+
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TBlock>
 
 template<typename TBlock>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::rec::Iterator", 
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_SYS_MEM_REC_ITERATOR_DLEVEL, 
+    "test::sys::mem::rec::Iterator", 
     test::sys::mem::rec::Iterator<TBlock>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS

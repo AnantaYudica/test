@@ -20,11 +20,19 @@ template<typename TStatus>
 class Log;
 }
 
+#ifndef TEST_SYS_LOG_DLEVEL
+
+#define TEST_SYS_LOG_DLEVEL 2
+
+#endif //!TEST_SYS_LOG_DLEVEL
+
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TStatus>
 
 template<typename TStatus>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::Log", 
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_SYS_LOG_DLEVEL, 
+    "test::sys::Log", 
     test::sys::Log<TStatus>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS

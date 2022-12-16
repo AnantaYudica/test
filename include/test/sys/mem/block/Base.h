@@ -15,12 +15,20 @@
 #include <functional>
 #include <type_traits>
 
+#ifndef TEST_SYS_MEM_BLOCK_BASE_DLEVEL
+
+#define TEST_SYS_MEM_BLOCK_BASE_DLEVEL 2
+
+#endif //!TEST_SYS_MEM_BLOCK_BASE_DLEVEL
+
 namespace test::sys::mem::block
 {
 class Base;
 }
 
-TEST_SYS_DBG_TYPE_DEFINE("test::sys::mem::block::Base", test::sys::mem::block::Base);
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(
+    TEST_SYS_MEM_BLOCK_BASE_DLEVEL, 
+    "test::sys::mem::block::Base", test::sys::mem::block::Base);
 
 namespace test
 {
@@ -501,7 +509,7 @@ inline void* Base::Unlock()
 
 inline void Base::Lock()
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
         "Lock()");
     
     std::lock_guard<std::mutex> guard(m_lock);

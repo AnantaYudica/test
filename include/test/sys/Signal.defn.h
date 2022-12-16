@@ -9,7 +9,14 @@ namespace test::sys
 class Signal;
 }
 
-TEST_SYS_DBG_TYPE_DEFINE("test::sys::Signal", test::sys::Signal);
+#ifndef TEST_SYS_SIGNAL_DLEVEL
+
+#define TEST_SYS_SIGNAL_DLEVEL 2
+
+#endif //!TEST_SYS_SIGNAL_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_SYS_SIGNAL_DLEVEL, 
+    "test::sys::Signal", test::sys::Signal);
 
 namespace test
 {

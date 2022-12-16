@@ -16,11 +16,19 @@ template<typename TStatus>
 class Signals;
 }
 
+#ifndef TEST_SYS_SIGNALS_DLEVEL
+
+#define TEST_SYS_SIGNALS_DLEVEL 2
+
+#endif //!TEST_SYS_SIGNALS_DLEVEL
+
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TStatus>
 
 template<typename TStatus>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::Signals", 
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_SYS_SIGNALS_DLEVEL, 
+    "test::sys::Signals", 
     test::sys::Signals<TStatus>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS

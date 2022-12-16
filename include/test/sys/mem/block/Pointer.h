@@ -10,6 +10,12 @@
 #include <cstring>
 #include <type_traits>
 
+#ifndef TEST_SYS_MEM_BLOCK_POINTER_DLEVEL
+
+#define TEST_SYS_MEM_BLOCK_POINTER_DLEVEL 2
+
+#endif //!TEST_SYS_MEM_BLOCK_POINTER_DLEVEL
+
 namespace test::sys::mem::block
 {
 template<typename TBLock>
@@ -20,7 +26,9 @@ class Pointer;
     test::sys::dbg::Type<TBLock>
 
 template<typename TBLock>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::block::Pointer", 
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_SYS_MEM_BLOCK_POINTER_DLEVEL, 
+    "test::sys::mem::block::Pointer", 
     test::sys::mem::block::Pointer<TBLock>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS

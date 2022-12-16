@@ -13,8 +13,14 @@ namespace test::sys::mem
 class Dummy;
 }
 
+#ifndef TEST_SYS_MEM_DUMMY_DLEVEL
 
-TEST_SYS_DBG_TYPE_DEFINE("test::sys::mem::Dummy", test::sys::mem::Dummy);
+#define TEST_SYS_MEM_DUMMY_DLEVEL 2
+
+#endif //!TEST_SYS_MEM_DUMMY_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_SYS_MEM_DUMMY_DLEVEL, 
+    "test::sys::mem::Dummy", test::sys::mem::Dummy);
 
 namespace test
 {

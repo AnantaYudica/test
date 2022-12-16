@@ -15,11 +15,19 @@ template<typename... TDerives>
 class Block;
 }
 
+#ifndef TEST_SYS_MEM_BLOCK_DLEVEL
+
+#define TEST_SYS_MEM_BLOCK_DLEVEL 2
+
+#endif //!TEST_SYS_MEM_BLOCK_DLEVEL
+
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TDerives>...
 
 template<typename... TDerives>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::Block", 
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_SYS_MEM_BLOCK_DLEVEL, 
+    "test::sys::mem::Block", 
     test::sys::mem::Block<TDerives...>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS

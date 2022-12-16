@@ -11,7 +11,14 @@ namespace test::arg
 class Flag;
 }
 
-TEST_SYS_DBG_TYPE_DEFINE("test::arg::Flag", test::arg::Flag);
+#ifndef TEST_ARG_FLAG_DLEVEL
+
+#define TEST_ARG_FLAG_DLEVEL 2
+
+#endif //!TEST_ARG_FLAG_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_ARG_FLAG_DLEVEL, 
+    "test::arg::Flag", test::arg::Flag);
 
 namespace test
 {

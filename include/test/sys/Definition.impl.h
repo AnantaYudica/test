@@ -5,7 +5,16 @@
 #include "Debug.h"
 #include "Interface.h"
 
-TEST_SYS_DBG_TYPE_LEVEL_DEFINE(1, "test::sys::Definition", test::sys::Definition);
+#ifndef TEST_SYS_DEFINITION_DLEVEL
+
+#define TEST_SYS_DEFINITION_DLEVEL 1
+
+#endif //!TEST_SYS_DEFINITION_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(
+    TEST_SYS_DEFINITION_DLEVEL, 
+    "test::sys::Definition", 
+    test::sys::Definition);
 
 static inline bool 
 operator==(typename test::sys::Definition::Status status_enum,

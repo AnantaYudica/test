@@ -26,11 +26,19 @@ template<typename TBlock>
 class Record;
 }
 
+#ifndef TEST_SYS_MEM_RECORD_DLEVEL
+
+#define TEST_SYS_MEM_RECORD_DLEVEL 2
+
+#endif //!TEST_SYS_MEM_RECORD_DLEVEL
+
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TBlock>
 
 template<typename TBlock>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::Record", 
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_SYS_MEM_RECORD_DLEVEL, 
+    "test::sys::mem::Record", 
     test::sys::mem::Record<TBlock>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS

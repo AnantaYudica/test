@@ -28,7 +28,16 @@ namespace test::sys
 class Interface;
 }
 
-TEST_SYS_DBG_TYPE_LEVEL_DEFINE(2, "test::sys::Interface", test::sys::Interface);
+#ifndef TEST_SYS_INTERFACE_DLEVEL
+
+#define TEST_SYS_INTERFACE_DLEVEL 2
+
+#endif //!TEST_SYS_INTERFACE_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(
+    TEST_SYS_INTERFACE_DLEVEL, 
+    "test::sys::Interface", 
+    test::sys::Interface);
 
 namespace test
 {

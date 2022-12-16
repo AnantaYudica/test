@@ -24,7 +24,7 @@ namespace ptr
 template<typename TBlock>
 typename Const<TBlock>::BlockType* Const<TBlock>::Default()
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, "Default()");
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "Default()");
 
     static char instance[sizeof(BlockType)];
     memset(instance, 0, sizeof(BlockType));

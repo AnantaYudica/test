@@ -11,12 +11,19 @@
 
 #define TEST_MEM_BLOCK_FILE_DEFAULT_STR ""
 
+#ifndef TEST_SYS_MEM_BLOCK_FILELINE_DLEVEL
+
+#define TEST_SYS_MEM_BLOCK_FILELINE_DLEVEL 2
+
+#endif //!TEST_SYS_MEM_BLOCK_FILELINE_DLEVEL
+
 namespace test::sys::mem::block
 {
 class FileLine;
 }
 
-TEST_SYS_DBG_TYPE_DEFINE("test::sys::mem::block::FileLine", test::sys::mem::block::FileLine);
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_SYS_MEM_BLOCK_FILELINE_DLEVEL, 
+    "test::sys::mem::block::FileLine", test::sys::mem::block::FileLine);
 
 namespace test
 {

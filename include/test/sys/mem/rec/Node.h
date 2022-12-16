@@ -13,11 +13,19 @@ template<typename TBlock>
 class Node;
 }
 
+#ifndef TEST_SYS_MEM_REC_NODE_DLEVEL
+
+#define TEST_SYS_MEM_REC_NODE_DLEVEL 2
+
+#endif //!TEST_SYS_MEM_REC_NODE_DLEVEL
+
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TBlock>
 
 template<typename TBlock>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::rec::Node", 
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_SYS_MEM_REC_NODE_DLEVEL, 
+    "test::sys::mem::rec::Node", 
     test::sys::mem::rec::Node<TBlock>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
@@ -191,7 +199,7 @@ Node<TBlock>& Node<TBlock>::operator=(Node<TBlock>&& mov)
 template<typename TBlock>
 Node<TBlock>* Node<TBlock>::Next()
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Next()");
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Next()");
     
     return m_next;
 }
@@ -207,7 +215,7 @@ Node<TBlock>* Node<TBlock>::Next(Node<TBlock> *set)
 template<typename TBlock>
 Node<TBlock>* Node<TBlock>::Prev()
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Prev()");
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Prev()");
     
     return m_prev;
 }

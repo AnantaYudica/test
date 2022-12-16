@@ -19,11 +19,19 @@ class Pointer;
 
 } //!test
 
+#ifndef TEST_SYS_MEM_POINTER_DLEVEL
+
+#define TEST_SYS_MEM_POINTER_DLEVEL 2
+
+#endif //!TEST_SYS_MEM_POINTER_DLEVEL
+
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TBlock>
 
 template<typename TBlock>
-TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::sys::mem::Pointer", 
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_SYS_MEM_POINTER_DLEVEL, 
+    "test::sys::mem::Pointer", 
     test::sys::mem::Pointer<TBlock>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
