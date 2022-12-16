@@ -152,6 +152,14 @@ void * Const<TBlock>::Get() const
 }
 
 template<typename TBlock>
+typename Const<TBlock>::BlockType* Const<TBlock>::GetBlock()
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetBlock()");
+
+    return m_block;
+}
+
+template<typename TBlock>
 Const<TBlock>::operator bool()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 

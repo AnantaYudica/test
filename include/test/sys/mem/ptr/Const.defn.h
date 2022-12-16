@@ -62,6 +62,8 @@ private:
 protected:
     void * Get();
     void * Get() const;
+protected:
+    BlockType* GetBlock();
 public:
     operator bool();
     operator bool() const;
