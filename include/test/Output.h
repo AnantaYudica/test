@@ -1,9 +1,10 @@
 #ifndef TEST_OUTPUT_H_
 #define TEST_OUTPUT_H_
 
-#include "Status.h"
+#include "sys/Status.h"
 #include "out/Base.h"
 #include "out/Tag.h"
+#include "sys/Debug.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -19,13 +20,31 @@
 #define TEST_ATTRIBUTE(...)
 #endif
 #endif //!TEST_ATTRIBUTE
+namespace test
+{
+template<typename Ts>
+class Output;
+}
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<Ts>
+
+template<typename Ts>
+TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("test::Output", test::Output<Ts>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
+
 
 namespace test
 {
 
-template<typename Ts = Status>
+template<typename Ts = test::sys::Status>
 class Output : protected test::out::Base<>
 {
+private:
+    typedef test::sys::Definition DefinitionType;
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<Output<Ts>> DebugType;
 public:
     template<typename TChar>
     using LogType = typename test::out::Base<>::template LogType<TChar>;
@@ -100,7 +119,11 @@ Output<Ts>::Output(Ts& status) :
     m_infoEnable(true),
     m_debugEnable(true),
     m_status(&status)
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor(status=%p)", &status);
+
+}
 
 template<typename Ts>
 Output<Ts>::Output(Ts& status, const char* file_output) :
@@ -110,7 +133,11 @@ Output<Ts>::Output(Ts& status, const char* file_output) :
     m_infoEnable(true),
     m_debugEnable(true),
     m_status(&status)
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor(status=%p, file_output=%s)", &status, file_output);
+
+}
 
 template<typename Ts>
 Output<Ts>::Output(Output<Ts>&& mov) :
@@ -120,16 +147,25 @@ Output<Ts>::Output(Output<Ts>&& mov) :
     m_debugEnable(mov.m_debugEnable),
     m_status(NULL)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Constructor(mov=%p)", &mov);
+    
     mov.m_status = NULL;
 }
 
 template<typename Ts>
 Output<Ts>::~Output()
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
+
+}
 
 template<typename Ts>
 void Output<Ts>::Set(Ts& status)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Set(status=%p)", &status);
+
     assert(m_status == NULL);
     m_status = &status;
 }
@@ -320,35 +356,55 @@ bool Output<Ts>::Enable() const
 template<typename Ts>
 bool Output<Ts>::Enable(const test::out::tag::Error&) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Enable(const test::out::tag::Error&) const");
+    
     return m_enable;
 }
 
 template<typename Ts>
 bool Output<Ts>::Enable(const test::out::tag::Info&) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Enable(const test::out::tag::Info&) const");
+    
     return m_infoEnable;
 }
 
 template<typename Ts>
 bool Output<Ts>::Enable(const test::out::tag::Debug&) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Enable(const test::out::tag::Debug&) const");
+    
     return m_debugEnable;
 }
 
 template<typename Ts>
 void Output<Ts>::Enable(const bool& enable)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Enable(enable=%s)", enable ? "true" : "false");
+    
     m_enable = enable;
 }
 
 template<typename Ts>
 void Output<Ts>::Enable(const test::out::tag::Error&, const bool&)
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Enable(const test::out::tag::Error&, const bool&)");
+    
+}
 
 template<typename Ts>
 void Output<Ts>::Enable(const test::out::tag::Info&, 
     const bool& enable)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Enable(const test::out::tag::Info&, enable=%s)",
+        enable ? "true" : "false");
+    
     m_infoEnable = enable;
 }
 
@@ -356,30 +412,44 @@ template<typename Ts>
 void Output<Ts>::Enable(const test::out::tag::Debug&, 
     const bool& enable)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Enable(const test::out::tag::Debug&, enable=%s)",
+        enable ? "true" : "false");
+    
     m_debugEnable = enable;
 }
 
 template<typename Ts>
 bool Output<Ts>::InfoEnable()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "InfoEnable()");
+    
     return m_infoEnable;
 }
 
 template<typename Ts>
 void Output<Ts>::InfoEnable(bool info_enable)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "InfoEnable(info_enable=%s)", info_enable ? "true" : "false");
+    
     m_infoEnable = info_enable;
 }
 
 template<typename Ts>
 bool Output<Ts>::DebugEnable()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "DebugEnable()");
+    
     return m_debugEnable;
 }
 
 template<typename Ts>
 void Output<Ts>::DebugEnable(bool debug_enable)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "DebugEnable(debug_enable=%s)", debug_enable ? "true" : "false");
+    
     m_debugEnable = debug_enable;
 }
 
