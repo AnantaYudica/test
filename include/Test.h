@@ -1,9 +1,8 @@
 #ifndef TEST_H_
 #define TEST_H_
 
-#include "test/Status.h"
 #include "test/Output.h"
-#include "test/Memory.h"
+#include "test/System.h"
 #include "test/Base.h"
 #include "test/Register.h"
 #include "test/Trace.h"
@@ -14,6 +13,8 @@
 #include "test/type/name/tmpl/Parameter.h"
 #include "test/type/name/Template.h"
 #include "test/cstr/Format.h"
+#include "test/sys/Debug.h"
+#include "test/sys/Status.h"
 
 #include <cstdio>
 #include <cwchar>
@@ -35,45 +36,53 @@
 #endif
 #endif //!TEST_ATTRIBUTE
 
-namespace _helper
-{
-namespace _test
-{
+#ifndef TEST_SYS_DEF_STATUS
+#error TEST_SYS_DEF_STATUS is not define
+#endif //!TEST_SYS_DEF_STATUS
 
-template<typename>
-struct Void1T {};
+template<typename To>
+class Test;
 
-} //!_test
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<To>
 
-} //_helper
+template<typename To>
+TEST_SYS_DBG_TYPE_PARAMETER_DEFINE("Test", Test<To>);
 
-template<typename Ts = test::Status, 
-    template<typename> class To = test::Output, 
-    template<typename> class Tmem = _helper::_test::Void1T>
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
+
+
+template<typename To = test::Output<TEST_SYS_DEF_STATUS>>
 class Test
 {
-public:
-    typedef Ts StatusType;
-    typedef To<StatusType> OutputType;
-    typedef Tmem<StatusType> MemoryType;
 private:
-    static Test<Ts, To, Tmem>* ms_instance;
+    typedef test::sys::Interface SysInterfaceType;
+    typedef test::sys::Definition DefinitionType;
+    typedef test::sys::dbg::Type<Test<To>> _DebugType;
+public:
+    typedef typename test::System::StatusType StatusType;
+    typedef To OutputType;
+    typedef test::System SystemType;
+    typedef test::sys::Memory MemoryType;
+private:
+    static Test<To>* ms_instance;
 private:
     bool m_initialized;
     std::vector<test::reg::Base*>* m_list;
     std::stack<test::Trace>* m_traces;
-    StatusType m_status;
-    MemoryType m_memory;
+    SystemType& m_system;
+    StatusType& m_status;
+    MemoryType& m_memory;
     OutputType m_output;
 private:
     Test();
-    Test(const Test<Ts, To, Tmem>& cpy) = delete;
-    Test(Test<Ts, To, Tmem>&& mov);
+    Test(const Test<To>& cpy) = delete;
+    Test(Test<To>&& mov);
 public:
     ~Test();
 public:
-    Test<Ts, To, Tmem>& operator=(const Test<Ts, To, Tmem>& cpy) = delete;
-    Test<Ts, To, Tmem>& operator=(Test<Ts, To, Tmem>&& mov) = delete;
+    Test<To>& operator=(const Test<To>& cpy) = delete;
+    Test<To>& operator=(Test<To>&& mov) = delete;
 public:
     static void Info(const char* info_msg_cstr, ...)
         TEST_ATTRIBUTE((__format__ (__printf__, 1, 2)));
@@ -84,8 +93,8 @@ public:
     static bool Assert(bool test, const char* err_msg_cstr, 
         const char* file, const int& line);
 public:
-    static Test<Ts, To, Tmem>& CreateInstance();
-    static Test<Ts, To, Tmem>& GetInstance();
+    static Test<To>& CreateInstance();
+    static Test<To>& GetInstance();
 public:
     static const int& Run();
 private:
@@ -95,66 +104,66 @@ public:
     void Pop();
     std::stack<test::Trace> GetTrace();
 public:
-    typename Test<Ts, To, Tmem>::StatusType& Status();
-    typename Test<Ts, To, Tmem>::OutputType& Output();
-    typename Test<Ts, To, Tmem>::MemoryType& Memory();
+    typename Test<To>::StatusType& System();
+    typename Test<To>::StatusType& Status();
+    typename Test<To>::OutputType& Output();
+    typename Test<To>::MemoryType& Memory();
     std::vector<test::reg::Base*>& List();
     std::stack<test::Trace>& Traces();
 };
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-Test<Ts, To, Tmem>* Test<Ts, To, Tmem>::ms_instance;
+template<typename To>
+Test<To>* Test<To>::ms_instance;
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-Test<Ts, To, Tmem>::Test() :
+template<typename To>
+Test<To>::Test() :
     m_initialized(true),
     m_list(NULL),
     m_traces(NULL),
-    m_status(),
-#ifdef USING_TEST_MEMORY
-    m_memory(m_status),
-#endif //USING_TEST_MEMORY
+    m_system(test::System::GetInstance()),
+    m_status(m_system.GetStatus()),
+    m_memory(m_system.GetMemory()),
 #ifdef TEST_OUTPUT_FILENAME_EMPTY
     m_output(m_status)
 #else //!TEST_OUTPUT_FILENAME_EMPTY
     m_output(m_status, TEST_OUTPUT_FILENAME)
 #endif
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 1, this, 
+        "Default Constructor");
+
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-Test<Ts, To, Tmem>::Test(Test<Ts, To, Tmem>&& mov) :
+template<typename To>
+Test<To>::Test(Test<To>&& mov) :
     m_initialized(true),
     m_list(std::move(mov.m_list)),
     m_traces(std::move(mov.m_traces)),
+    m_system(std::move(mov.m_system)),
     m_status(std::move(mov.m_status)),
-#ifdef USING_TEST_MEMORY
     m_memory(std::move(mov.m_memory)),
-#endif //USING_TEST_MEMORY
     m_output(std::move(mov.m_output))
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 1, this, 
+        "Move Constructor(mov=%p)", &mov);
+
     m_output.Set(m_status);
-#ifdef USING_TEST_MEMORY
-    m_memory.Set(m_status);
-#endif //USING_TEST_MEMORY
+
     mov.m_list = NULL;
     mov.m_traces = NULL;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-Test<Ts, To, Tmem>::~Test()
+template<typename To>
+Test<To>::~Test()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 1, this, "Destructor");
+    
     assert(m_list == NULL);
     assert(m_traces == NULL);
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-void Test<Ts, To, Tmem>::Info(const char* info_msg_cstr, ...)
+template<typename To>
+void Test<To>::Info(const char* info_msg_cstr, ...)
 {
     va_list args;
     va_start(args, info_msg_cstr);
@@ -162,9 +171,8 @@ void Test<Ts, To, Tmem>::Info(const char* info_msg_cstr, ...)
     va_end(args);
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-void Test<Ts, To, Tmem>::Debug(const char* debug_msg_cstr, ...)
+template<typename To>
+void Test<To>::Debug(const char* debug_msg_cstr, ...)
 {
     va_list args;
     va_start(args, debug_msg_cstr);
@@ -172,9 +180,8 @@ void Test<Ts, To, Tmem>::Debug(const char* debug_msg_cstr, ...)
     va_end(args);
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-void Test<Ts, To, Tmem>::Error(const char* err_msg_cstr, ...)
+template<typename To>
+void Test<To>::Error(const char* err_msg_cstr, ...)
 {
     va_list args;
     va_start(args, err_msg_cstr);
@@ -189,9 +196,8 @@ void Test<Ts, To, Tmem>::Error(const char* err_msg_cstr, ...)
     }
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-bool Test<Ts, To, Tmem>::Assert(bool test, const char* err_msg_cstr,
+template<typename To>
+bool Test<To>::Assert(bool test, const char* err_msg_cstr,
     const char* file, const int& line)
 {
     if (!test)
@@ -199,29 +205,32 @@ bool Test<Ts, To, Tmem>::Assert(bool test, const char* err_msg_cstr,
     return test;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-Test<Ts, To, Tmem>& Test<Ts, To, Tmem>::CreateInstance()
+template<typename To>
+Test<To>& Test<To>::CreateInstance()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 2, NULL, "CreateInstance()");
+    
     assert(ms_instance == NULL);
-    static Test<Ts, To, Tmem> instance;
+    static Test<To> instance;
     ms_instance = &instance;
     return instance;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-Test<Ts, To, Tmem>& Test<Ts, To, Tmem>::GetInstance()
+template<typename To>
+Test<To>& Test<To>::GetInstance()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 3, NULL, "GetInstance()");
+    
     if (ms_instance == NULL)
         CreateInstance();
     return *ms_instance;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-const int& Test<Ts, To, Tmem>::Run()
+template<typename To>
+const int& Test<To>::Run()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 2, NULL, "Run()");
+    
     std::size_t i = 0, s = GetInstance().List().size();
     for (auto t : GetInstance().List())
     {
@@ -235,10 +244,11 @@ const int& Test<Ts, To, Tmem>::Run()
     return GetInstance().Status().Get();
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-void Test<Ts, To, Tmem>::Clear()
+template<typename To>
+void Test<To>::Clear()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 2, this, "Clear()");
+    
     m_list->clear();
     delete m_list;
     m_list = NULL;
@@ -246,75 +256,80 @@ void Test<Ts, To, Tmem>::Clear()
     m_traces = NULL;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-void Test<Ts, To, Tmem>::Push(const test::Trace& trace)
+template<typename To>
+void Test<To>::Push(const test::Trace& trace)
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 3, this, 
+        "Push(trace={file=%s, line=%d})", 
+        trace.File, trace.Line);
+
     Traces().push(trace);
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-void Test<Ts, To, Tmem>::Pop()
+template<typename To>
+void Test<To>::Pop()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 2, this, "Pop()");
+    
     Traces().pop();
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-std::stack<test::Trace> Test<Ts, To, Tmem>::GetTrace()
+template<typename To>
+std::stack<test::Trace> Test<To>::GetTrace()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 3, this, "GetTrace()");
+    
     if (m_traces == NULL)
         return {};
     return *m_traces;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-typename Test<Ts, To, Tmem>::StatusType& Test<Ts, To, Tmem>::Status()
+template<typename To>
+typename Test<To>::StatusType& Test<To>::Status()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 3, this, "Status()");
+    
     return m_status;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-typename Test<Ts, To, Tmem>::OutputType& Test<Ts, To, Tmem>::Output()
+template<typename To>
+typename Test<To>::OutputType& Test<To>::Output()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 3, this, "Output()");
+    
     return m_output;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-typename Test<Ts, To, Tmem>::MemoryType& Test<Ts, To, Tmem>::Memory()
+template<typename To>
+typename Test<To>::MemoryType& Test<To>::Memory()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 3, this, "Memory()");
+    
     return m_memory;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-std::vector<test::reg::Base*>& Test<Ts, To, Tmem>::List()
+template<typename To>
+std::vector<test::reg::Base*>& Test<To>::List()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 3, this, "List()");
+    
     if (m_list == NULL)
         m_list = new std::vector<test::reg::Base*>();
     return *m_list;
 }
 
-template<typename Ts, template<typename> class To,
-    template<typename> class Tmem>
-std::stack<test::Trace>& Test<Ts, To, Tmem>::Traces()
+template<typename To>
+std::stack<test::Trace>& Test<To>::Traces()
 {
+    TEST_SYS_DEBUG(SysInterfaceType, _DebugType, 3, this, "Traces()");
+    
     if (m_traces == NULL)
         m_traces = new std::stack<test::Trace>();
     return *m_traces;
 }
 
 #ifndef TEST
-#ifdef USING_TEST_MEMORY
-#define TEST Test<test::Status,\
-    test::Output, test::Memory>
-#else //ELSE USING_TEST_MEMORY
-#define TEST Test<test::Status>
-#endif //!USING_TEST_MEMORY
+#define TEST Test<>
 #endif //!TEST
 
 #ifdef USING_TEST_MEMORY
@@ -322,36 +337,32 @@ std::stack<test::Trace>& Test<Ts, To, Tmem>::Traces()
 
 void* operator new(std::size_t sz)
 {
-    auto p = std::malloc(sz);
-    TEST::GetInstance().Memory().Register(p, sz);
-    return p;
+    auto ptr = TEST::GetInstance().Memory().Allocate(sz);
+    return ptr.Unlock();
 }
 
 void* operator new[]( std::size_t sz)
 {
-    auto p = std::malloc(sz);
-    TEST::GetInstance().Memory().Register(p, sz);
-    return p;
+    auto ptr = TEST::GetInstance().Memory().Allocate(sz);
+    return ptr.Unlock();
 }
 
 template<std::size_t N>
 void* operator new(std::size_t sz, const char (&file)[N], const int& line) 
 {
-    auto p = std::malloc(sz);
-    TEST::GetInstance().Memory().Register(p, sz, file, line);
-    return p;
+    auto ptr = TEST::GetInstance().Memory().Allocate(sz, file, line);
+    return ptr.Unlock();
 }
 
 template<std::size_t N>
 void* operator new[]( std::size_t sz, const char (&file)[N], const int& line)
 {
-    auto p = std::malloc(sz);
-    TEST::GetInstance().Memory().Register(p, sz, file, line);
-    return p;
+    auto ptr = TEST::GetInstance().Memory().Allocate(sz, file, line);
+    return ptr.Unlock();
 }
 
 template<std::size_t N>
-void* operator new ( std::size_t sz, void* ptr,
+void* operator new (std::size_t sz, void* ptr,
     const char (&)[N], const int&)
 {
     auto p = ::operator new(sz, ptr);
@@ -359,7 +370,7 @@ void* operator new ( std::size_t sz, void* ptr,
 }
 
 template<std::size_t N>
-void* operator new[]( std::size_t sz, void* ptr,
+void* operator new[](std::size_t sz, void* ptr,
     const char (&)[N], const int& )
 {
     auto p = ::operator new[](sz, ptr);
@@ -368,13 +379,12 @@ void* operator new[]( std::size_t sz, void* ptr,
 
 void operator delete(void* p) noexcept
 {
-    TEST::GetInstance().Memory().Unregister(p);
-    std::free(p);
+    TEST::GetInstance().Memory().Free(p);
 }
 
 void operator delete[](void* p) noexcept
 {
-    TEST::GetInstance().Memory().Unregister(p);
+    TEST::GetInstance().Memory().Free(p);
     std::free(p);
 }
 
