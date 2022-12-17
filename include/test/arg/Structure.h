@@ -1,12 +1,27 @@
 #ifndef TEST_ARG_STRUCTURE_H_
 #define TEST_ARG_STRUCTURE_H_
 
+#include "../System.h"
 #include "../Pointer.h"
 #include "Value.h"
 
 #include <cstddef>
 #include <type_traits>
 #include <utility>
+
+namespace test::arg
+{
+class Structure;
+}
+
+#ifndef TEST_ARG_STRUCTURE_DLEVEL
+
+#define TEST_ARG_STRUCTURE_DLEVEL 2
+
+#endif //!TEST_ARG_STRUCTURE_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_ARG_STRUCTURE_DLEVEL, 
+    "test::arg::Structure", test::arg::Structure);
 
 namespace test
 {
@@ -15,6 +30,9 @@ namespace arg
 
 class Structure
 {
+private:
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::arg::Structure> DebugType;
 private:
     static inline std::size_t _Set(std::size_t total,
         test::Pointer<std::size_t>& list);
@@ -76,7 +94,10 @@ inline std::size_t Structure::_Set(std::size_t total,
 inline Structure::Structure() :
     m_size_list(),
     m_values()
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
+
+}
 
 template<typename TArg, typename... TArgs, typename _TArgs,
     typename std::enable_if<
@@ -85,23 +106,43 @@ inline Structure::Structure(TArg&& size_arg, TArgs&&... size_args) :
     m_size_list(test::ptr::arg::Array(sizeof...(TArgs) + 2)),
     m_values(_Set(0, m_size_list, std::forward<TArg>(size_arg),
         std::forward<TArgs>(size_args)...))
-{}
+{
+    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 1, this, 
+        "Constructor<%s>(args={%s})", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TArg, TArgs...),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(size_arg, size_args...));
+    
+}
 
 inline Structure::~Structure()
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
+
+}
 
 inline Structure::Structure(const Structure& cpy) :
     m_size_list(cpy.m_size_list),
     m_values(cpy.m_values)
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Copy Destructor(cpy=%p)", &cpy);
+
+}
 
 inline Structure::Structure(Structure&& mov) :
     m_size_list(mov.m_size_list),
     m_values(mov.m_values)
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Destructor(mov=%p)", &mov);
+
+}
 
 inline Structure& Structure::operator=(const Structure& cpy)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Copy Assignment(cpy=%p)", &cpy);
+
     m_size_list = cpy.m_size_list;
     m_values = cpy.m_values;
     return *this;
@@ -109,6 +150,9 @@ inline Structure& Structure::operator=(const Structure& cpy)
 
 inline Structure& Structure::operator=(Structure&& mov)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Assignment(mov=%p)", &mov);
+
     m_size_list = mov.m_size_list;
     m_values = mov.m_values;
     return *this;
@@ -117,28 +161,44 @@ inline Structure& Structure::operator=(Structure&& mov)
 template<typename T>
 inline void Structure::Set(const std::size_t& index, const T& val)
 {
+    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 2, this, 
+        "Set<%s>(index=%zu, val=%s)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(T),
+        index, TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+
     m_values.template Set<T>(m_size_list[index], val);
 }
 
 template<typename T>
 inline T* Structure::Get(const std::size_t& index)
 {
+    TEST_SYS_DEBUG_T(SystemType, DebugType, 3, this, 
+        "Get<%s>(index=%zu)", TEST_SYS_DEBUG_TARGS_NAME_STR(T), index);
+
     return m_values.template Get<T>(m_size_list[index]);
 }
 
 inline std::size_t Structure::Size() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Size() const");
+
     return m_size_list.Size() - 1;
 }
 
 inline std::size_t Structure::AllocationSize() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "AllocationSize() const");
+
     return m_values.AllocationSize();
 }
 
 inline std::size_t Structure::
     AllocationSize(const std::size_t& index) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "AllocationSize(index=%zu) const", index);
+
     const auto size = Size();
     if (size == 0 || index >= size) return 0;
     if (index == (size - 1)) return AllocationSize() -
@@ -149,12 +209,18 @@ inline std::size_t Structure::
 
 inline bool Structure::operator==(const Structure& other) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator==(other=%p) const", &other);
+
     return m_size_list == other.m_size_list.GetData() &&
         m_values == other.m_values;
 }
 
 inline bool Structure::operator!=(const Structure& other) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator!=(other=%p) const", &other);
+
     return  m_size_list != other.m_size_list.GetData() ||
         m_values != other.m_values;
 }
