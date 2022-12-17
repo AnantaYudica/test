@@ -31,9 +31,28 @@ template<int LEN = 0, typename TArg, typename... TArgs,
     typename TPrimary = typename std::remove_all_extents<
         typename std::remove_cv<typename std::remove_pointer<
             typename std::remove_reference<TArg>::type>::type>::type>::type>
-static std::size_t Parameter(char * buff_out, std::size_t n, TArg&& arg, TArgs&&... args)
+static typename std::enable_if<!std::is_pointer<
+    typename std::remove_reference<TArg>::type>::value  ||
+    std::is_same<char, TPrimary>::value, std::size_t>::type  
+Parameter(char * buff_out, std::size_t n, TArg&& arg, TArgs&&... args);
+
+template<int LEN = 0, typename TArg, typename... TArgs,
+    typename TPrimary = typename std::remove_all_extents<
+        typename std::remove_cv<typename std::remove_pointer<
+            typename std::remove_reference<TArg>::type>::type>::type>::type>
+static typename std::enable_if<std::is_pointer<
+    typename std::remove_reference<TArg>::type>::value &&
+    !std::is_same<char, TPrimary>::value, std::size_t>::type  
+Parameter(char * buff_out, std::size_t n, TArg&& arg, TArgs&&... args);
+
+template<int LEN , typename TArg, typename... TArgs, typename TPrimary>
+static typename std::enable_if<!std::is_pointer<
+    typename std::remove_reference<TArg>::type>::value ||
+    std::is_same<char, TPrimary>::value, std::size_t>::type  
+Parameter(char * buff_out, std::size_t n, TArg&& arg, TArgs&&... args)
 {
-    std::size_t size = test::sys::dbg::Value<TPrimary>::Write(buff_out, n, arg);
+    std::size_t size = test::sys::dbg::Value<TPrimary>::Write(buff_out, n, 
+        std::forward<TArg>(arg));
     if (size == n)
     {
         return size;
@@ -44,7 +63,6 @@ static std::size_t Parameter(char * buff_out, std::size_t n, TArg&& arg, TArgs&&
         {
             return snprintf(buff_out + size, n - size, ", ...") + size;
         }
-
         size = snprintf(buff_out + size, n - size, ", ") + size;
         if (size == n)
         {
@@ -55,77 +73,14 @@ static std::size_t Parameter(char * buff_out, std::size_t n, TArg&& arg, TArgs&&
         n - size, std::forward<TArgs>(args)...) + size;
 }
 
-template<int LEN = 0, typename TArg, typename... TArgs,
-    typename TPrimary = typename std::remove_all_extents<
-        typename std::remove_cv<typename std::remove_pointer<
-            typename std::remove_reference<TArg>::type>::type>::type>::type>
-static std::size_t Parameter(char * buff_out, std::size_t n, TArg*&& arg, TArgs&&... args)
+template<int LEN, typename TArg, typename... TArgs, typename TPrimary>
+static typename std::enable_if<std::is_pointer<
+    typename std::remove_reference<TArg>::type>::value &&
+    !std::is_same<char, TPrimary>::value, std::size_t>::type  
+Parameter(char * buff_out, std::size_t n, TArg&& arg, TArgs&&... args)
 {
-    std::size_t size = 0;
-    if (std::is_same<TPrimary, char>::value || std::is_integral<TPrimary>::value ||
-        std::is_floating_point<TPrimary>::value)
-    {
-        size = test::sys::dbg::Value<TPrimary>::Write(buff_out, n, arg);
-    }
-    else
-    {
-        size = test::sys::dbg::Value<void>::Write(buff_out, n, arg);
-    }
-    if (size == n)
-    {
-        return size;
-    }
-    if (sizeof...(args) != 0)
-    {
-        if ((LEN + 1) > TEST_SYS_DBG_VAL_PARAMETER_LENGTH)
-        {
-            return snprintf(buff_out + size, n - size, ", ...") + size;
-        }
-
-        size = snprintf(buff_out + size, n - size, ", ") + size;
-        if (size == n)
-        {
-            return size;
-        }
-    }
-    return test::sys::dbg::val::Parameter<LEN + 1>(buff_out + size, 
-        n - size, std::forward<TArgs>(args)...) + size;
-}
-
-template<int LEN = 0, std::size_t N, typename TArg, typename... TArgs, 
-    typename TPrimary = typename std::remove_all_extents<
-        typename std::remove_cv<typename std::remove_pointer<
-            typename std::remove_reference<TArg>::type>::type>::type>::type>
-static std::size_t Parameter(char * buff_out, std::size_t n, TArg(&& arg)[N], TArgs&&... args)
-{
-    std::size_t size = 0;
-    if (std::is_same<TPrimary, char>::value)
-    {
-        size = test::sys::dbg::Value<TPrimary>::Write(buff_out, n, arg);
-    }
-    else
-    {
-        for (std::size_t i = 0; i < N && i < TEST_SYS_DBG_VALUE_ARRAY_LENGTH; ++i)
-        {
-            if (size == n)
-            {
-                return size;
-            }
-            size += test::sys::dbg::Value<TPrimary>::Write(buff_out + size, n - size, arg[i]);
-            if (size == n)
-            {
-                return size;
-            }
-            if ((i + 1) < N)
-            {
-                if ((i + 1) >= TEST_SYS_DBG_VALUE_ARRAY_LENGTH)
-                {
-                    return snprintf(buff_out + size, n - size, ", ...") + size;
-                }
-                size += snprintf(buff_out + size, n - size, ",");
-            }
-        }
-    }
+    std::size_t size = test::sys::dbg::Value<void>::Write(buff_out, n, 
+        std::forward<TArg>(arg));
     if (size == n)
     {
         return size;
