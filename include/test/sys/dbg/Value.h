@@ -52,6 +52,16 @@ struct Value<void>
     {
        return snprintf(buff_out, n, "%p", val);
     }
+    template<typename T, typename... TArgs>
+    static std::size_t Write(char * buff_out, std::size_t n, T(*val)(TArgs...))
+    {
+       return snprintf(buff_out, n, "%p", val);
+    }
+    template<typename T, typename... TArgs>
+    static std::size_t Write(char * buff_out, std::size_t n, T(*val)(TArgs..., ...))
+    {
+       return snprintf(buff_out, n, "%p", val);
+    }
 };
 
 template<>
