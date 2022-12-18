@@ -19,7 +19,7 @@ public:\
 public:\
     inline static test::sys::Debug& GetInstance()\
     {\
-        static Type<__VA_ARGS__> instance;\
+        static test::sys::dbg::Type<__VA_ARGS__> instance;\
         return instance;\
     }\
 public:\
@@ -119,7 +119,7 @@ public:\
 public:\
     inline static test::sys::Debug& GetInstance()\
     {\
-        static Type<__VA_ARGS__> instance;\
+        static test::sys::dbg::Type<__VA_ARGS__> instance;\
         return instance;\
     }\
 public:\
