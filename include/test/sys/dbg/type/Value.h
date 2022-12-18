@@ -75,6 +75,24 @@ public:
 
 } //!test
 
+template<bool V>
+class test::sys::dbg::type::Value<bool, V>
+{
+public:
+   static inline std::size_t WriteTagName(char *, std::size_t)
+    {
+        return 0;
+    }
+public:
+    static inline std::size_t WriteName(char * name_out, std::size_t n)
+    {
+        return snprintf(name_out, n , "%s",  V ? "true" : "false");
+    }
+public:
+    inline Value() = delete;
+public:
+    inline ~Value() = delete;
+};
 
 #define TEST_SYS_DBG_TYPE_VALUE_DEFINE(FMT, ...)\
 template<__VA_ARGS__ V>\
