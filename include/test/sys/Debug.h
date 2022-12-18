@@ -86,6 +86,12 @@ do{\
     (__intf_default__).Debug(DEBUG_TYPE::GetInstance(), __VA_ARGS__);\
 } while(false)
 
+#define TEST_SYS_DEBUG_T_TYPE(...)\
+    test::sys::dbg::Type<__VA_ARGS__>
+
+#define TEST_SYS_DEBUG_TV_TYPE(...)\
+    test::sys::dbg::type::Value<__VA_ARGS__>
+
 #define TEST_SYS_DEBUG_T_NAME_STR(...)\
     test::sys::dbg::Type<__VA_ARGS__>::GetInstance().Name(__t_name_cstr__).Buffer()
 
