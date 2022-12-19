@@ -1,3 +1,9 @@
+#ifdef DEBUG
+#define TEST_SYS_DEBUG_ENABLE 1
+#endif //!DEBUG
+
+#define TEST_ARG_VALUE_DLEVEL 0x7f
+
 #define USING_TEST_MEMORY
 #include "Test.h"
 TEST_CONSTRUCT;
@@ -261,5 +267,5 @@ int main()
             assert(*val2_6 == &p0);
         }
     }
-    return TEST::GetInstance().Status().Get();
+    return TEST::GetInstance().Status().ReturnValue();
 }
