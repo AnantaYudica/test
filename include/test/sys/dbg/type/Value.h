@@ -34,7 +34,6 @@ public:
     inline ~Value() = delete;
 };
 
-
 template<typename T, T& V>
 class Value<T&, V>
 {
@@ -60,6 +59,38 @@ public:
         }
         return snprintf(name_out + before_size, n - before_size, ") %p", 
             &V) + before_size;
+    }
+public:
+    inline Value() = delete;
+public:
+    inline ~Value() = delete;
+};
+
+template<typename T, T* V>
+class Value<T*, V>
+{
+public:
+   static inline std::size_t WriteTagName(char *, std::size_t)
+    {
+        return 0;
+    }
+public:
+    static inline std::size_t WriteName(char * name_out, std::size_t n)
+    {
+        const std::size_t bg_size = snprintf(name_out, n, "(");
+        if (bg_size == n)
+        {
+            return bg_size;
+        }
+        const std::size_t t_size = test::sys::dbg::Type<T*>::WriteName(name_out + bg_size, 
+            n - bg_size);
+        const std::size_t before_size = t_size + bg_size;
+        if (before_size == n)
+        {
+            return before_size;
+        }
+        return snprintf(name_out + before_size, n - before_size, ") %p", 
+            V) + before_size;
     }
 public:
     inline Value() = delete;
