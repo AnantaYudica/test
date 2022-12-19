@@ -73,6 +73,7 @@ inline typename Debug::CStrType& Debug::Name(CStrType& cstr)
 #include "dbg/type/param/Make.h"
 #include "dbg/val/Parameter.h"
 #include "dbg/Type.h"
+#include "dbg/Function.h"
 
 #define TEST_SYS_DEBUG_SET_LEVEL(VAL, ...)\
 test::sys::dbg::Type<__VA_ARGS__>::GetInstance().SetLevel(VAL)
@@ -126,4 +127,41 @@ do\
 }\
 while(false)
 
+#define TEST_SYS_DEBUG_F(SYS_TYPE, DLEVEL, NAME, ...)\
+do\
+{\
+    typename test::sys::dbg::Function<sizeof(NAME)> __fun_debug__{NAME, DLEVEL};\
+    SYS_TYPE::GetInstance().Debug(__fun_debug__, __VA_ARGS__);\
+}\
+while(false)
+
+#define TEST_SYS_DEBUG_F_T(SYS_TYPE, DLEVEL, NAME, ...)\
+do\
+{\
+    typename test::sys::dbg::Function<sizeof(NAME)> __fun_debug__{NAME, DLEVEL};\
+    typename test::sys::Debug::CStrType __t_name_cstr__;\
+    SYS_TYPE::GetInstance().Debug(__fun_debug__, __VA_ARGS__);\
+}\
+while(false)
+
+#define TEST_SYS_DEBUG_F_V(SYS_TYPE, DLEVEL, NAME, ...)\
+do\
+{\
+    typename test::sys::dbg::Function<sizeof(NAME)> __fun_debug__{NAME, DLEVEL};\
+    typename test::sys::Debug::CStrType __t_value_cstr__;\
+    SYS_TYPE::GetInstance().Debug(__fun_debug__, __VA_ARGS__);\
+}\
+while(false)
+
+#define TEST_SYS_DEBUG_F_T_V(SYS_TYPE, DLEVEL, NAME, ...)\
+do\
+{\
+    typename test::sys::dbg::Function<sizeof(NAME)> __fun_debug__{DLEVEL, NAME};\
+    typename test::sys::Debug::CStrType __t_name_cstr__;\
+    typename test::sys::Debug::CStrType __t_value_cstr__;\
+    SYS_TYPE::GetInstance().Debug(__fun_debug__, __VA_ARGS__);\
+}\
+while(false)
+
+#define TEST_SYS_DEBU
 #endif //!TEST_SYS_DEBUG_H_
