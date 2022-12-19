@@ -22,13 +22,17 @@ class Parameter
 public:
     static constexpr bool IsEnd = true;
 public:
-    static inline std::size_t WriteTagName(char *, std::size_t)
+    static inline std::size_t WriteTagName(char * name_out, std::size_t n)
     {
+        if (n == 0) return 0;
+        name_out[0] = '\0';
         return 0;
     }
 public:
-    static inline std::size_t WriteName(char *, std::size_t, int len = 0)
+    static inline std::size_t WriteName(char * tag_out, std::size_t n, int len = 0)
     {
+        if (n == 0) return 0;
+        tag_out[0] = '\0';
         return 0;
     }
 public:
