@@ -23,6 +23,9 @@ public:
     static inline std::size_t WriteTagName(char * tag_out, std::size_t n);
 public:
     static inline std::size_t WriteName(char * name_out, std::size_t n);
+public:
+    static inline CStrType& GetBufferT();
+    static inline CStrType& GetBufferV();
 private:
     std::int8_t m_level;
 protected:
