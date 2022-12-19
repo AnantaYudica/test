@@ -159,7 +159,7 @@ template<typename TBlock>
 template<typename T>
 int Record<TBlock>::FindCondition(T pointer, NodeType* node)
 {
-    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 2, NULL, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
         "FindCondition<%s>(pointer=%s, node=%p)", 
             TEST_SYS_DEBUG_T_NAME_STR(T),
             TEST_SYS_DEBUG_TARGS_VALUE_STR(pointer), node);
@@ -202,7 +202,7 @@ typename Record<TBlock>::NodeType*
 Record<TBlock>::_Find(NodeType *& head, 
     NodeType *&, FindConditionFuncType<T> f, T& pointer)
 {
-    TEST_SYS_DEBUG_T(SystemType, DebugType, 2, NULL, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
         "_Find<%s>(head=%p, NodeType *&, f=%p, pointer=%p)", 
             TEST_SYS_DEBUG_TARGS_NAME_STR(T), head, f, pointer);
     
@@ -276,7 +276,7 @@ template<typename T>
 typename Record<TBlock>::NodeType* 
 Record<TBlock>::Find(FindConditionFuncType<T> f, T& pointer)
 {
-    TEST_SYS_DEBUG_T(SystemType, DebugType, 2, this, "Find<%s>(f=%p, pointer=%p)", 
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Find<%s>(f=%p, pointer=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(T), f, pointer);
 
     return _Find(m_head, m_tail, f, pointer);
@@ -402,7 +402,7 @@ int Record<TBlock>::Register(std::function<void(TBlock*)> on_success,
     std::function<void(int)> on_failed, 
     void * pointer, TArgs&&... args)
 {
-    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 2, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
         "Register<%s>(on_success=%p, on_failed=%p, pointer=%p, args={%s})", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...), on_success, on_failed,
         pointer, TEST_SYS_DEBUG_TARGS_VALUE_STR(args...));
@@ -613,7 +613,7 @@ bool Record<TBlock>::HasRegister(void * pointer)
 template<typename TBlock>
 bool Record<TBlock>::HasRegister(PointerConstType pointer)
 {
-    TEST_SYS_DEBUG_V(SystemType, DebugType, 3, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "HasRegister(pointer=%s)", TEST_SYS_DEBUG_TARGS_VALUE_STR(pointer));
 
     if (pointer == nullptr)
@@ -680,7 +680,7 @@ TBlock* Record<TBlock>::operator[](void * pointer)
 template<typename TBlock>
 TBlock* Record<TBlock>::operator[](PointerType pointer)
 {
-    TEST_SYS_DEBUG_V(SystemType, DebugType, 3, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator[](pointer=%s)", TEST_SYS_DEBUG_TARGS_VALUE_STR(pointer));
     
     if (pointer == nullptr)
@@ -760,7 +760,7 @@ template<typename TBlock>
 void Record<TBlock>::Reposition(PointerType pointer)
 {
     
-    TEST_SYS_DEBUG_V(SystemType, DebugType, 3, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "Reposition(pointer=%s)", TEST_SYS_DEBUG_TARGS_VALUE_STR(pointer));
     
     if (pointer == nullptr)

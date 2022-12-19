@@ -107,7 +107,7 @@ inline Structure::Structure(TArg&& size_arg, TArgs&&... size_args) :
     m_values(_Set(0, m_size_list, std::forward<TArg>(size_arg),
         std::forward<TArgs>(size_args)...))
 {
-    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Constructor<%s>(args={%s})", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(TArg, TArgs...),
         TEST_SYS_DEBUG_TARGS_VALUE_STR(size_arg, size_args...));
@@ -161,7 +161,7 @@ inline Structure& Structure::operator=(Structure&& mov)
 template<typename T>
 inline void Structure::Set(const std::size_t& index, const T& val)
 {
-    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 2, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
         "Set<%s>(index=%zu, val=%s)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(T),
         index, TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
@@ -172,7 +172,7 @@ inline void Structure::Set(const std::size_t& index, const T& val)
 template<typename T>
 inline T* Structure::Get(const std::size_t& index)
 {
-    TEST_SYS_DEBUG_T(SystemType, DebugType, 3, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "Get<%s>(index=%zu)", TEST_SYS_DEBUG_TARGS_NAME_STR(T), index);
 
     return m_values.template Get<T>(m_size_list[index]);

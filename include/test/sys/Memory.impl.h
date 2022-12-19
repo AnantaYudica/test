@@ -183,7 +183,7 @@ inline bool Memory::Reallocate(void* p, const std::size_t& s)
 
 inline bool Memory::Reallocate(PointerType p, const std::size_t& s)
 {
-    TEST_SYS_DEBUG_V(SystemType, DebugType, 2, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
         "Reallocate(p=%s, s=%zu)", 
             TEST_SYS_DEBUG_TARGS_VALUE_STR(p), s);
 
@@ -241,7 +241,7 @@ inline bool Memory::Free(void* p, bool force)
 
 inline bool Memory::Free(PointerType& p, bool force)
 {
-    TEST_SYS_DEBUG_V(SystemType, DebugType, 2, this, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
         "Free(p=%s, force=%s)", 
             TEST_SYS_DEBUG_TARGS_VALUE_STR(p), (force?"true":"false"));
 

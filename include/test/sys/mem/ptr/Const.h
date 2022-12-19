@@ -247,7 +247,7 @@ template<typename TBlock>
 template<typename T>
 typename Const<TBlock>::CastConstType<T> Const<TBlock>::Cast()
 {
-    TEST_SYS_DEBUG_T(SystemType, DebugType, 3, this, "Cast<%s>()",
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Cast<%s>()",
         TEST_SYS_DEBUG_T_NAME_STR(T));
     
     if (sizeof(T) > Size())
@@ -267,7 +267,7 @@ template<typename TBlock>
 template<typename T>
 typename Const<TBlock>::CastConstType<T> Const<TBlock>::Cast() const
 {
-    TEST_SYS_DEBUG_T(SystemType, DebugType, 3, this, "Cast<%s>() const",
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Cast<%s>() const",
         TEST_SYS_DEBUG_T_NAME_STR(T));
 
     if (sizeof(T) > Size())

@@ -235,7 +235,7 @@ Definition::StatusNames(TArgs... args)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
     typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "StatusNames<%zu, %s>(args={%s})", N, 
             TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...),
             TEST_SYS_DEBUG_TARGS_VALUE_STR(args...));
@@ -250,7 +250,7 @@ Definition::StatusNames(TArgs... args)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
     typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "StatusNames<%zu, %s>(args={%s})", N, 
             TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...),
             TEST_SYS_DEBUG_TARGS_VALUE_STR(args...));
@@ -266,7 +266,7 @@ Definition::StatusErrorNameMaxIndexs(TArgs... args)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
     typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "StatusNames<%zu, %s>(args={%s})", N, 
             TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...),
             TEST_SYS_DEBUG_TARGS_VALUE_STR(args...));
@@ -281,7 +281,7 @@ Definition::StatusErrorNameMaxIndexs(TArgs... args)
 {
     typedef test::sys::dbg::Type<test::sys::Definition> DebugType;
     typedef test::sys::Interface SystemType;
-    TEST_SYS_DEBUG_T_V(SystemType, DebugType, 3, NULL, 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "StatusNames<%zu, %s>(args={%s})", N, 
             TEST_SYS_DEBUG_TARGS_NAME_STR(TArgs...),
             TEST_SYS_DEBUG_TARGS_VALUE_STR(args...));

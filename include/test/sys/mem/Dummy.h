@@ -83,7 +83,7 @@ inline char* Dummy::Get(const std::size_t n)
 template<typename T>
 inline T* Dummy::Get()
 {
-    TEST_SYS_DEBUG_T(SystemType, DebugType, 3, NULL, "Get<%s>()", 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "Get<%s>()", 
         TEST_SYS_DEBUG_T_NAME_STR(T));
 
     return reinterpret_cast<T*>(GetInstance().GetAllocation(sizeof(T)));

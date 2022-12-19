@@ -135,7 +135,7 @@ template<typename T>
 typename Pointer<TBlock>::CastType<T> 
 Pointer<TBlock>::Cast()
 {
-    TEST_SYS_DEBUG_T(SystemType, DebugType, 3, this, "Cast<%s>()",
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Cast<%s>()",
         TEST_SYS_DEBUG_T_NAME_STR(T));
     
     if (sizeof(T) > Size())
@@ -156,7 +156,7 @@ template<typename T>
 typename Pointer<TBlock>::CastConstType<T> 
 Pointer<TBlock>::Cast() const
 {
-    TEST_SYS_DEBUG_T(SystemType, DebugType, 3, this, "Cast<%s>() const",
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Cast<%s>() const",
         TEST_SYS_DEBUG_T_NAME_STR(T));
     
     return BaseType::template Cast<T>();

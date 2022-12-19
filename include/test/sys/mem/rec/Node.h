@@ -239,7 +239,7 @@ Node<TBlock>::operator bool() const
 template<typename TBlock>
 Node<TBlock>::operator TBlock*()
 {
-    TEST_SYS_DEBUG_T(SystemType, DebugType, 3, this, "operator %s*()",
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "operator %s*()",
         TEST_SYS_DEBUG_T_NAME_STR(TBlock));
 
     return m_data;
