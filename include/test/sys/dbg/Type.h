@@ -689,7 +689,7 @@ public:\
         {\
             name_out[pbg_size + i] = close_bracket[i];\
         }\
-        return pbg_size + i;\
+        return pbg_size + (i == 0 ? i: i - 1);\
     }\
 public:\
     static inline std::size_t WriteInfixName(char * name_out, std::size_t n)\
