@@ -33,8 +33,6 @@ namespace byte
 
 class Operator
 {
-public:
-    static inline Operator& GetInstance();
 private:
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::byte::Operator> DebugType;
@@ -44,6 +42,8 @@ public:
     template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
     using ConstIteratorType = test::byte::Iterator<const std::uint8_t*, 
         TCast, NStep>;
+public:
+    static inline Operator& GetInstance();
 public:
     inline Operator();
 public:
