@@ -87,7 +87,7 @@ inline typename Debug::CStrType& Debug::Name(CStrType& cstr)
 #include "dbg/type/param/Make.h"
 #include "dbg/val/Parameter.h"
 #include "dbg/Type.h"
-#include "dbg/Function.h"
+#include "dbg/Namespace.h"
 
 #define TEST_SYS_DEBUG_SET_LEVEL(VAL, ...)\
 test::sys::dbg::Type<__VA_ARGS__>::GetInstance().SetLevel(VAL)
@@ -100,6 +100,17 @@ do{\
     static test::sys::Interface& __intf_default__ = test::sys::Interface::DefaultInstance();\
     (__intf_default__).Debug(DEBUG_TYPE::GetInstance(), __VA_ARGS__);\
 } while(false)
+
+#define TEST_SYS_DEBUG_NAMESPACE_TYPE(NAME)\
+    test::sys::dbg::Namespace<\
+            test::sys::dbg::nmspc::Index<sizeof(NAME)>{NAME}.Value<0>(),\
+            test::sys::dbg::nmspc::Index<sizeof(NAME)>{NAME}.Value<1>(),\
+            test::sys::dbg::nmspc::Index<sizeof(NAME)>{NAME}.Value<2>(),\
+            test::sys::dbg::nmspc::Index<sizeof(NAME)>{NAME}.Value<3>(),\
+            test::sys::dbg::nmspc::Index<sizeof(NAME)>{NAME}.Value<4>(),\
+            test::sys::dbg::nmspc::Index<sizeof(NAME)>{NAME}.Value<5>(),\
+            test::sys::dbg::nmspc::Index<sizeof(NAME)>{NAME}.Value<6>(),\
+            test::sys::dbg::nmspc::Index<sizeof(NAME)>{NAME}.Value<7>()>
 
 #define TEST_SYS_DEBUG_T_TYPE(...)\
     test::sys::dbg::Type<__VA_ARGS__>
@@ -116,13 +127,4 @@ do{\
 #define TEST_SYS_DEBUG_TARGS_VALUE_STR(...)\
     test::sys::dbg::val::Parameter(test::sys::Debug::GetBufferV(), __VA_ARGS__).Buffer()
 
-#define TEST_SYS_DEBUG_F(SYS_TYPE, DLEVEL, NAME, ...)\
-do\
-{\
-    typename test::sys::dbg::Function<sizeof(NAME)> __fun_debug__{NAME, DLEVEL};\
-    SYS_TYPE::GetInstance().Debug(__fun_debug__, __VA_ARGS__);\
-}\
-while(false)
-
-#define TEST_SYS_DEBU
 #endif //!TEST_SYS_DEBUG_H_
