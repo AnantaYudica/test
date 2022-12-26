@@ -16,7 +16,6 @@ template<typename T>
 class Offset;
 }
 
-
 #ifndef TEST_BYTE_OFFSET_DLEVEL
 
 #define TEST_BYTE_OFFSET_DLEVEL 2
@@ -33,7 +32,6 @@ TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
     test::byte::Offset<T>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
-
 
 namespace test
 {
