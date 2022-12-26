@@ -58,9 +58,6 @@ private:
     std::uint8_t m_block[N];
 protected:
     Base();
-    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
-    Base(ConstIteratorType<TCast, NStep> begin, ConstIteratorType<TCast, NStep> end);
-    Base(std::uint8_t* begin, std::uint8_t* end);
 public:
     ~Base();
 public:
@@ -116,21 +113,6 @@ Base<N, Sign>::Base() :
 }
 
 template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-Base<N, Sign>::Base(ConstIteratorType<TCast, NStep> begin, ConstIteratorType<TCast, NStep> end)
-{
-    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
-        "Constructor<%s>(begin=%p, end=%p)",
-        TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_T_TYPE(TCast),
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, NStep)),
-        &*begin, &*end);
-
-    OperatorType::GetInstance().SetZero(m_block, N);
-    OperatorType::GetInstance().Set(Begin(), End(), begin, end);
-}
-
-template<std::size_t N, bool Sign>
 Base<N, Sign>::~Base()
 {    
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
@@ -157,7 +139,7 @@ Base<N, Sign>::Base(Base<N, Sign>&& mov) :
     
     OperatorType::GetInstance().SetZero(m_block, N);
     OperatorType::GetInstance().Set(Begin(), End(), mov.Begin(), mov.End());
-    OperatorType::GetInstance().SetZero(mov.Get(), _N);
+    OperatorType::GetInstance().SetZero(mov.Get(), N);
 }
 
 template<std::size_t N, bool Sign>
