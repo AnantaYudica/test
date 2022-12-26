@@ -36,7 +36,7 @@ Make(const std::size_t& size, TValue&& value)
         TEST_SYS_DEBUG_TARGS_NAME_STR(TValue), size,
         TEST_SYS_DEBUG_TARGS_VALUE_STR(value));
 
-    return {size, std::forward<TValue>(value)};
+    return {size, std::move(value)};
 }
 
 } //!off
