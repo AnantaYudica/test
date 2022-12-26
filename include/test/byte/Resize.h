@@ -1,5 +1,5 @@
-#ifndef TEST_BYTE_COPY_H_
-#define TEST_BYTE_COPY_H_
+#ifndef TEST_BYTE_RESIZE_H_
+#define TEST_BYTE_RESIZE_H_
 
 #include "../System.h"
 #include "../Byte.h"
@@ -59,4 +59,4 @@ inline test::Byte<N, Sign> Resize(const test::Byte<RN, RSign>& src,
 
 } //!test
 
-#endif //!TEST_BYTE_COPY_H_
+#endif //!TEST_BYTE_RESIZE_H_
