@@ -1,131 +1,79 @@
 #ifndef TEST_BYTE_H_
 #define TEST_BYTE_H_
 
-#include <cstddef>
-
-namespace test
-{
-
-template<std::size_t N, bool Sign = false>
-class Byte;
-
-} //!test
-
+#include "System.h"
 #include "Pointer.h"
 #include "Queue.h"
 #include "trait/byte/IsBaseOf.h"
 #include "trait/byte/it/IsBaseOf.h"
 #include "trait/byte/off/IsBaseOf.h"
+#include "byte/Base.h"
+#include "byte/Operator.h"
 #include "byte/Offset.h"
 #include "byte/Iterator.h"
 #include "byte/Order.h"
+#include "byte/Sequence.h"
 
 #include <cstdint>
 #include <type_traits>
 #include <utility>
 #include <cstring>
 
+#include <cstddef>
+
 namespace test
 {
 
 template<std::size_t N, bool Sign>
-class Byte
+class Byte;
+
+} //!test
+
+#ifndef TEST_BYTE_DLEVEL
+
+#define TEST_BYTE_DLEVEL 2
+
+#endif //!TEST_BYTE_DLEVEL
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::type::Value<std::size_t, N>,\
+    test::sys::dbg::type::Value<bool, Sign>
+
+template<std::size_t N, bool Sign>
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_BYTE_DLEVEL, 
+    "test::Byte", 
+    test::Byte<N, Sign>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
+
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::Byte<N, Sign>
+
+template<std::size_t N, bool Sign>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE("%p", &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
+namespace test
 {
+
+template<std::size_t N, bool Sign = false>
+class Byte : public test::byte::Base<N, Sign>
+{
+private:
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::Byte<N, Sign>> DebugType;
 public:
     template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
     using IteratorType = test::byte::Iterator<std::uint8_t*, TCast, NStep>;
     template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
     using ConstIteratorType = test::byte::Iterator<const std::uint8_t*, 
         TCast, NStep>;
-private:
-    static void _SetZero(std::uint8_t* ptr, std::size_t size);
-private:
-    template<typename TIDestValue, typename TCast, std::size_t NStep>
-    static void _Set(IteratorType<TCast, NStep> dest_bg, 
-        IteratorType<TCast, NStep> dest_ed, 
-        test::byte::Iterator<TIDestValue> src_bg,
-        test::byte::Iterator<TIDestValue> src_ed);
-    template<typename TCast, std::size_t NStep>
-    static void _Set(IteratorType<TCast, NStep> dest_bg, 
-        IteratorType<TCast, NStep> dest_ed, 
-        const std::uint8_t* ptr, std::size_t size);
-    template<typename TIDestValue>
-    static void _Set(std::uint8_t* ptr, std::size_t size, 
-        test::byte::Iterator<TIDestValue> src_bg,
-        test::byte::Iterator<TIDestValue> src_ed);
-private:
-    template<typename TIDestValue, typename TCast, std::size_t NStep>
-    static void _And(IteratorType<TCast, NStep> dest_bg, 
-        IteratorType<TCast, NStep> dest_ed, 
-        test::byte::Iterator<TIDestValue> src_bg,
-        test::byte::Iterator<TIDestValue> src_ed);
-    template<typename TCast, std::size_t NStep>
-    static void _And(IteratorType<TCast, NStep> dest_bg, 
-        IteratorType<TCast, NStep> dest_ed, 
-        const std::uint8_t* ptr, std::size_t size);
-    template<typename TIDestValue>
-    static void _And(std::uint8_t* ptr, std::size_t size, 
-        test::byte::Iterator<TIDestValue> src_bg,
-        test::byte::Iterator<TIDestValue> src_ed);
-private:
-    template<typename TIDestValue, typename TCast, std::size_t NStep>
-    static void _Or(IteratorType<TCast, NStep> dest_bg, 
-        IteratorType<TCast, NStep> dest_ed, 
-        test::byte::Iterator<TIDestValue> src_bg,
-        test::byte::Iterator<TIDestValue> src_ed);
-    template<typename TCast, std::size_t NStep>
-    static void _Or(IteratorType<TCast, NStep> dest_bg, 
-        IteratorType<TCast, NStep> dest_ed, 
-        const std::uint8_t* ptr, std::size_t size);
-    template<typename TIDestValue>
-    static void _Or(std::uint8_t* ptr, std::size_t size, 
-        test::byte::Iterator<TIDestValue> src_bg,
-        test::byte::Iterator<TIDestValue> src_ed);
-private:
-    template<typename TIDestValue, typename TCast, std::size_t NStep>
-    static void _Xor(IteratorType<TCast, NStep> dest_bg, 
-        IteratorType<TCast, NStep> dest_ed, 
-        test::byte::Iterator<TIDestValue> src_bg,
-        test::byte::Iterator<TIDestValue> src_ed);
-    template<typename TCast, std::size_t NStep>
-    static void _Xor(IteratorType<TCast, NStep> dest_bg, 
-        IteratorType<TCast, NStep> dest_ed, 
-        const std::uint8_t* ptr, std::size_t size);
-    template<typename TIDestValue>
-    static void _Xor(std::uint8_t* ptr, std::size_t size, 
-        test::byte::Iterator<TIDestValue> src_bg,
-        test::byte::Iterator<TIDestValue> src_ed);
-private:
-    static void _Not(std::uint8_t* ptr, std::size_t size);
-private:
-    template<bool _Sign, typename std::enable_if<_Sign, int>::type = 1>
-    static void _RShift(std::uint8_t* ptr, std::size_t size, 
-        std::size_t shift);
-    template<bool _Sign, typename std::enable_if<!_Sign, int>::type = 1>
-    static void _RShift(std::uint8_t* ptr, std::size_t size,
-        std::size_t shift);
-private:
-    static void _LShift(std::uint8_t* ptr, std::size_t size, 
-        std::size_t shift);
-private:
-    template<typename TBValue, typename TCast, std::size_t NStep>
-    static bool _Equal(ConstIteratorType<TCast, NStep> a_bg, 
-        ConstIteratorType<TCast, NStep> a_ed, 
-        test::byte::Iterator<TBValue> b_bg, 
-        test::byte::Iterator<TBValue> b_ed);
-    template<typename TCast, std::size_t NStep>
-    static bool _Equal(ConstIteratorType<TCast, NStep> a_bg, 
-        ConstIteratorType<TCast, NStep> a_ed, 
-        const std::uint8_t* ptr, std::size_t size);
-    template<typename TBValue>
-    static bool _Equal(const std::uint8_t* ptr, std::size_t size, 
-        test::byte::Iterator<TBValue> b_bg,
-        test::byte::Iterator<TBValue> b_ed);
 public:
-    static test::byte::it::Operator GetOperator();
-    static test::byte::it::Operator GetReverseOperator();
-private:
-    std::uint8_t m_block[N];
+    typedef test::byte::Operator OperatorType;
+public:
+    static test::byte::it::Operator GetOrderOperator();
+    static test::byte::it::Operator GetReverseOrderOperator();
 public:
     Byte();
     template<typename TValue, typename _TValue = 
@@ -143,13 +91,15 @@ public:
     Byte(test::byte::Iterator<TIValue> bg, test::byte::Iterator<TIValue> ed);
     template<typename TValue>
     Byte(test::byte::Offset<TValue>&& offset_val);
+    template<test::byte::seq::Flag Flag, typename TValue>
+    Byte(test::byte::Sequence<Flag, TValue>&& seq_val);
 public:
-    ~Byte() = default;
+    ~Byte();
 public:
-    template<std::size_t _N, bool _Sign>
-    Byte(const Byte<_N, _Sign>& cpy);
-    template<std::size_t _N, bool _Sign>
-    Byte(Byte<_N, _Sign>&& mov);
+    template<std::size_t RN, bool RSign>
+    Byte(const Byte<RN, RSign>& cpy);
+    template<std::size_t RN, bool RSign>
+    Byte(Byte<RN, RSign>&& mov);
 public:
     template<typename TValue, typename _TValue = 
         typename std::remove_cv<typename std::remove_reference<
@@ -164,42 +114,30 @@ public:
     Byte<N, Sign>& operator=(const test::byte::Order& byte_order);
     template<typename TValue>
     Byte<N, Sign>& operator=(test::byte::Offset<TValue>&& offset_val);
+    template<test::byte::seq::Flag Flag, typename TValue>
+    Byte<N, Sign>& operator=(test::byte::Sequence<Flag, TValue>&& seq_val);
 public:
-    template<std::size_t _N, bool _Sign>
-    Byte<N, Sign>& operator=(const Byte<_N, _Sign>& cpy);
-    template<std::size_t _N, bool _Sign>
-    Byte<N, Sign>& operator=(Byte<_N, _Sign>&& mov);
+    template<std::size_t RN, bool RSign>
+    Byte<N, Sign>& operator=(const Byte<RN, RSign>& cpy);
+    template<std::size_t RN, bool RSign>
+    Byte<N, Sign>& operator=(Byte<RN, RSign>&& mov);
 public:
-    std::size_t Size() const;
+    using test::byte::Base<N, Sign>::Size;
 public:
-    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
-    IteratorType<TCast, NStep> Begin();
-    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
-    IteratorType<TCast, NStep> End();
+    using test::byte::Base<N, Sign>::Begin;
+    using test::byte::Base<N, Sign>::End;
 public:
-    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
-    ConstIteratorType<TCast, NStep> Begin() const;
-    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
-    ConstIteratorType<TCast, NStep> End() const;
+    using test::byte::Base<N, Sign>::ReverseBegin;
+    using test::byte::Base<N, Sign>::ReverseEnd;
 public:
-    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
-    IteratorType<TCast, NStep> ReverseBegin();
-    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
-    IteratorType<TCast, NStep> ReverseEnd();
+    using test::byte::Base<N, Sign>::CastTo;
 public:
-    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
-    ConstIteratorType<TCast, NStep> ReverseBegin() const;
-    template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
-    ConstIteratorType<TCast, NStep> ReverseEnd() const;
+    template<std::size_t LN = N, bool LSign = Sign>
+    test::Byte<LN, LSign> Resize(const std::size_t& r_off = 0, 
+        const std::size_t& r_size = LN, const std::size_t& l_off = 0, 
+        const std::size_t& l_size = LN) const;
 public:
-    template<typename T>
-    T CastTo(const std::size_t& off = 0) const;
-public:
-    template<std::size_t _N = N, bool _Sign = Sign>
-    Byte<_N, _Sign> GetBlock(const std::size_t& off = 0) const;
-public:
-    std::uint8_t* Get();
-    const std::uint8_t* Get() const;
+    using test::byte::Base<N, Sign>::Get;
 public:
     template<typename TValue, typename _TValue = 
         typename std::remove_cv<typename std::remove_reference<
@@ -214,8 +152,10 @@ public:
     Byte<N, Sign>& operator&=(const test::byte::Order& byte_order);
     template<typename TValue>
     Byte<N, Sign>& operator&=(test::byte::Offset<TValue>&& offset_val);
-    template<std::size_t _N, bool _Sign>
-    Byte<N, Sign>& operator&=(const Byte<_N, _Sign>& other);
+    template<test::byte::seq::Flag Flag, typename TValue>
+    Byte<N, Sign>& operator&=(test::byte::Sequence<Flag, TValue>&& seq_val);
+    template<std::size_t RN, bool RSign>
+    Byte<N, Sign>& operator&=(const test::byte::Base<RN, RSign>& other);
 public:
     template<typename TValue, typename _TValue = 
         typename std::remove_cv<typename std::remove_reference<
@@ -230,8 +170,10 @@ public:
     Byte<N, Sign>& operator|=(const test::byte::Order& byte_order);
     template<typename TValue>
     Byte<N, Sign>& operator|=(test::byte::Offset<TValue>&& offset_val);
-    template<std::size_t _N, bool _Sign>
-    Byte<N, Sign>& operator|=(const Byte<_N, _Sign>& other);
+    template<test::byte::seq::Flag Flag, typename TValue>
+    Byte<N, Sign>& operator|=(test::byte::Sequence<Flag, TValue>&& seq_val);
+    template<std::size_t RN, bool RSign>
+    Byte<N, Sign>& operator|=(const test::byte::Base<RN, RSign>& other);
 public:
     template<typename TValue, typename _TValue = 
         typename std::remove_cv<typename std::remove_reference<
@@ -246,8 +188,10 @@ public:
     Byte<N, Sign>& operator^=(const test::byte::Order& byte_order);
     template<typename TValue>
     Byte<N, Sign>& operator^=(test::byte::Offset<TValue>&& offset_val);
-    template<std::size_t _N, bool _Sign>
-    Byte<N, Sign>& operator^=(const Byte<_N, _Sign>& other);
+    template<test::byte::seq::Flag Flag, typename TValue>
+    Byte<N, Sign>& operator^=(test::byte::Sequence<Flag, TValue>&& seq_val);
+    template<std::size_t RN, bool RSign>
+    Byte<N, Sign>& operator^=(const test::byte::Base<RN, RSign>& other);
 public:
     Byte<N, Sign>& operator<<=(const std::size_t& size);
     Byte<N, Sign>& operator<<=(const int& size);
@@ -270,8 +214,10 @@ public:
     Byte<N, Sign> operator&(const test::byte::Order& byte_order) const;
     template<typename TValue>
     Byte<N, Sign> operator&(test::byte::Offset<TValue>&& offset_val) const;
-    template<std::size_t _N, bool _Sign>
-    Byte<N, Sign> operator&(const Byte<_N, _Sign>& other) const;
+    template<test::byte::seq::Flag Flag, typename TValue>
+    Byte<N, Sign> operator&(test::byte::Sequence<Flag, TValue>&& seq_val) const;
+    template<std::size_t RN, bool RSign>
+    Byte<N, Sign> operator&(const test::byte::Base<RN, RSign>& other) const;
 public:
     template<typename TValue, typename _TValue = 
         typename std::remove_cv<typename std::remove_reference<
@@ -286,8 +232,10 @@ public:
     Byte<N, Sign> operator|(const test::byte::Order& byte_order) const;
     template<typename TValue>
     Byte<N, Sign> operator|(test::byte::Offset<TValue>&& offset_val) const;
-    template<std::size_t _N, bool _Sign>
-    Byte<N, Sign> operator|(const Byte<_N, _Sign>& other) const;
+    template<test::byte::seq::Flag Flag, typename TValue>
+    Byte<N, Sign> operator|(test::byte::Sequence<Flag, TValue>&& seq_val) const;
+    template<std::size_t RN, bool RSign>
+    Byte<N, Sign> operator|(const test::byte::Base<RN, RSign>& other) const;
 public:
     template<typename TValue, typename _TValue = 
         typename std::remove_cv<typename std::remove_reference<
@@ -302,8 +250,10 @@ public:
     Byte<N, Sign> operator^(const test::byte::Order& byte_order) const;
     template<typename TValue>
     Byte<N, Sign> operator^(test::byte::Offset<TValue>&& offset_val) const;
-    template<std::size_t _N, bool _Sign>
-    Byte<N, Sign> operator^(const Byte<_N, _Sign>& other) const;
+    template<test::byte::seq::Flag Flag, typename TValue>
+    Byte<N, Sign> operator^(test::byte::Sequence<Flag, TValue>&& seq_val) const;
+    template<std::size_t RN, bool RSign>
+    Byte<N, Sign> operator^(const test::byte::Base<RN, RSign>& other) const;
 public:
     Byte<N, Sign> operator<<(const std::size_t& size) const;
     Byte<N, Sign> operator<<(const int& size) const;
@@ -327,8 +277,10 @@ public:
     bool operator==(const test::byte::Order& byte_order) const;
     template<typename TValue>
     bool operator==(test::byte::Offset<TValue>&& offset_val) const;
-    template<std::size_t _N, bool _Sign>
-    bool operator==(const Byte<_N, _Sign>& other) const;
+    template<test::byte::seq::Flag Flag, typename TValue>
+    bool operator==(test::byte::Sequence<Flag, TValue>&& seq_val) const;
+    template<std::size_t RN, bool RSign>
+    bool operator==(const test::byte::Base<RN, RSign>& other) const;
 public:
     template<typename TValue, typename _TValue = 
         typename std::remove_cv<typename std::remove_reference<
@@ -343,335 +295,35 @@ public:
     bool operator!=(const test::byte::Order& byte_order) const;
     template<typename TValue>
     bool operator!=(test::byte::Offset<TValue>&& offset_val) const;
-    template<std::size_t _N, bool _Sign>
-    bool operator!=(const Byte<_N, _Sign>& other) const;
+    template<test::byte::seq::Flag Flag, typename TValue>
+    bool operator!=(test::byte::Sequence<Flag, TValue>&& seq_val) const;
+    template<std::size_t RN, bool RSign>
+    bool operator!=(const test::byte::Base<RN, RSign>& other) const;
 };
 
 template<std::size_t N, bool Sign>
-void Byte<N, Sign>::_SetZero(std::uint8_t* ptr, std::size_t size)
+test::byte::it::Operator Byte<N, Sign>::GetOrderOperator()
 {
-    std::memset(ptr, 0, size);
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "GetOrderOperator()");
+
+    return test::byte::Operator::GetInstance().GetOrder();
 }
 
 template<std::size_t N, bool Sign>
-template<typename TIDestValue, typename TCast, std::size_t NStep>
-void Byte<N, Sign>::_Set(IteratorType<TCast, NStep> dest_bg, 
-    IteratorType<TCast, NStep> dest_ed, 
-    test::byte::Iterator<TIDestValue> src_bg,
-    test::byte::Iterator<TIDestValue> src_ed)
+test::byte::it::Operator Byte<N, Sign>::GetReverseOrderOperator()
 {
-    while(dest_bg != dest_ed && src_bg != src_ed)
-    {
-        *dest_bg = *src_bg;
-        ++dest_bg; ++src_bg;
-    }
-}
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "GetReverseOrderOperator()");
 
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-void Byte<N, Sign>::_Set(IteratorType<TCast, NStep> dest_bg, 
-    IteratorType<TCast, NStep> dest_ed, 
-    const std::uint8_t* ptr, std::size_t size)
-{
-    const auto op = GetOperator();
-    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
-        size, op.Begin(0, size), op};
-    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
-        size, op.End(0, size), op};
-    _Set(dest_bg, dest_ed, begin, end);
-}
-
-template<std::size_t N, bool Sign>
-template<typename TIDestValue>
-void Byte<N, Sign>::_Set(std::uint8_t* ptr, std::size_t size, 
-    test::byte::Iterator<TIDestValue> src_bg,
-    test::byte::Iterator<TIDestValue> src_ed)
-{
-    const auto op = GetOperator();
-    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
-    _Set(begin, end, src_bg, src_ed);
-}
-
-template<std::size_t N, bool Sign>
-template<typename TIDestValue, typename TCast, std::size_t NStep>
-void Byte<N, Sign>::_And(IteratorType<TCast, NStep> dest_bg, 
-    IteratorType<TCast, NStep> dest_ed,
-    test::byte::Iterator<TIDestValue> src_bg,
-    test::byte::Iterator<TIDestValue> src_ed)
-{
-    while(dest_bg != dest_ed && src_bg != src_ed)
-    {
-        *dest_bg &= *src_bg;
-        ++dest_bg; ++src_bg;
-    }
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-void Byte<N, Sign>::_And(IteratorType<TCast, NStep> dest_bg, 
-    IteratorType<TCast, NStep> dest_ed, 
-    const std::uint8_t* ptr, std::size_t size)
-{
-    const auto op = GetOperator();
-    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
-        size, op.Begin(0, size), op};
-    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
-        size, op.End(0, size), op};
-    _And(dest_bg, dest_ed, begin, end);
-}
-
-template<std::size_t N, bool Sign>
-template<typename TIDestValue>
-void Byte<N, Sign>::_And(std::uint8_t* ptr, std::size_t size, 
-    test::byte::Iterator<TIDestValue> src_bg,
-    test::byte::Iterator<TIDestValue> src_ed)
-{
-    const auto op = GetOperator();
-    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
-    _And(begin, end, src_bg, src_ed);
-}
-
-template<std::size_t N, bool Sign>
-template<typename TIDestValue, typename TCast, std::size_t NStep>
-void Byte<N, Sign>::_Or(IteratorType<TCast, NStep> dest_bg, 
-    IteratorType<TCast, NStep> dest_ed, 
-    test::byte::Iterator<TIDestValue> src_bg,
-    test::byte::Iterator<TIDestValue> src_ed)
-{
-    while(dest_bg != dest_ed && src_bg != src_ed)
-    {
-        *dest_bg |= *src_bg;
-        ++dest_bg; ++src_bg;
-    }
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-void Byte<N, Sign>::_Or(IteratorType<TCast, NStep> dest_bg, 
-    IteratorType<TCast, NStep> dest_ed, 
-    const std::uint8_t* ptr, std::size_t size)
-{
-    const auto op = GetOperator();
-    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
-        size, op.Begin(0, size), op};
-    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
-        size, op.End(0, size), op};
-    _Or(dest_bg, dest_ed, begin, end);
-}
-
-template<std::size_t N, bool Sign>
-template<typename TIDestValue>
-void Byte<N, Sign>::_Or(std::uint8_t* ptr, std::size_t size, 
-    test::byte::Iterator<TIDestValue> src_bg,
-    test::byte::Iterator<TIDestValue> src_ed)
-{
-    const auto op = GetOperator();
-    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
-    _Or(begin, end, src_bg, src_ed);
-}
-
-template<std::size_t N, bool Sign>
-template<typename TIDestValue, typename TCast, std::size_t NStep>
-void Byte<N, Sign>::_Xor(IteratorType<TCast, NStep> dest_bg, 
-    IteratorType<TCast, NStep> dest_ed, 
-    test::byte::Iterator<TIDestValue> src_bg,
-    test::byte::Iterator<TIDestValue> src_ed)
-{
-    while(dest_bg != dest_ed && src_bg != src_ed)
-    {
-        *dest_bg ^= *src_bg;
-        ++dest_bg; ++src_bg;
-    }
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-void Byte<N, Sign>::_Xor(IteratorType<TCast, NStep> dest_bg, 
-    IteratorType<TCast, NStep> dest_ed, 
-    const std::uint8_t* ptr, std::size_t size)
-{
-    const auto op = GetOperator();
-    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
-        size, op.Begin(0, size), op};
-    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
-        size, op.End(0, size), op};
-    _Xor(dest_bg, dest_ed, begin, end);
-}
-
-template<std::size_t N, bool Sign>
-template<typename TIDestValue>
-void Byte<N, Sign>::_Xor(std::uint8_t* ptr, std::size_t size, 
-    test::byte::Iterator<TIDestValue> src_bg,
-    test::byte::Iterator<TIDestValue> src_ed)
-{
-    const auto op = GetOperator();
-    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
-    _Xor(begin, end, src_bg, src_ed);
-}
-
-template<std::size_t N, bool Sign>
-void Byte<N, Sign>::_Not(std::uint8_t* ptr, std::size_t size)
-{
-    for(std::size_t i = 0; i < size; ++i)
-    {
-        ptr[i] = ~ptr[i];
-    }
-}
-
-template<std::size_t N, bool Sign>
-template<bool _Sign, typename std::enable_if<_Sign, int>::type>
-void Byte<N, Sign>::_RShift(std::uint8_t* ptr, std::size_t size, 
-    std::size_t shift)
-{
-    test::Queue<std::uint8_t> queue;
-    auto op = GetReverseOperator();
-    const std::size_t start = shift / 8;
-    const std::size_t rem = shift % 8;
-    const std::size_t inv_rem = 8 - rem;
-    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
-    auto it = begin;
-    std::uint8_t prev = *it, sign = (((std::int8_t)*it) < 0 ? 0xff : 0);
-    for(std::size_t i = 0; it != end; ++i, ++it)
-    {
-        if (it == begin)
-            queue.Push((std::uint8_t)((std::int8_t)*it >> rem));
-        else
-        {
-            queue.Push((*it >> rem) | (prev << inv_rem));
-            prev = *it;
-        }
-        if (i >= start)
-            *it = queue.Pop();
-        else
-            *it = sign;
-    }
-}
-
-template<std::size_t N, bool Sign>
-template<bool _Sign, typename std::enable_if<!_Sign, int>::type>
-void Byte<N, Sign>::_RShift(std::uint8_t* ptr, std::size_t size, 
-    std::size_t shift)
-{
-    test::Queue<std::uint8_t> queue;
-    auto op = GetReverseOperator();
-    const std::size_t start = shift / 8;
-    const std::size_t rem = shift % 8;
-    const std::size_t inv_rem = 8 - rem;
-    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
-    auto it = begin;
-    std::uint8_t prev = *it;
-    for(std::size_t i = 0; it != end; ++i, ++it)
-    {
-        if (it == begin)
-            queue.Push(*it >> rem);
-        else
-        {
-            queue.Push((*it >> rem) | (prev << inv_rem));
-            prev = *it;
-        }
-        if (i >= start)
-            *it = queue.Pop();
-        else
-            *it = 0;
-    }
-}
-
-template<std::size_t N, bool Sign>
-void Byte<N, Sign>::_LShift(std::uint8_t* ptr, std::size_t size, 
-    std::size_t shift)
-{
-    test::Queue<std::uint8_t> queue;
-    auto op = GetOperator();
-    const std::size_t start = shift / 8;
-    const std::size_t rem = shift % 8;
-    const std::size_t inv_rem = 8 - rem;
-    IteratorType<std::uint8_t> begin{ptr, 0, size, op.Begin(0, size), op};
-    IteratorType<std::uint8_t> end{ptr, 0, size, op.End(0, size), op};
-    auto it = begin;
-    std::uint8_t prev = *it;
-    for(std::size_t i = 0; it != end; ++i, ++it)
-    {
-        if (it == begin)
-            queue.Push(*it << rem);
-        else
-        {
-            queue.Push((*it << rem) | (prev >> inv_rem));
-            prev = *it;
-        }
-        if (i >= start)
-            *it = queue.Pop();
-        else
-            *it = 0;
-    }
-}
-
-template<std::size_t N, bool Sign>
-template<typename TBValue, typename TCast, std::size_t NStep>
-bool Byte<N, Sign>::_Equal(ConstIteratorType<TCast, NStep> a_bg, 
-    ConstIteratorType<TCast, NStep> a_ed, 
-    test::byte::Iterator<TBValue> b_bg, test::byte::Iterator<TBValue> b_ed)
-{
-    while(a_bg != a_ed && b_bg != b_ed)
-    {
-        if (*a_bg != *b_bg) return false;
-        ++a_bg; ++b_bg;
-    }
-    return true;
-}
-    
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-bool Byte<N, Sign>::_Equal(ConstIteratorType<TCast, NStep> a_bg, 
-    ConstIteratorType<TCast, NStep> a_ed, 
-    const std::uint8_t* ptr, std::size_t size)
-{
-    const auto op = GetOperator();
-    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0,
-        size, op.Begin(0, size), op};
-    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
-        size, op.End(0, size), op};
-    return _Equal(a_bg, a_ed, begin, end);
-}
-    
-template<std::size_t N, bool Sign>
-template<typename TBValue>
-bool Byte<N, Sign>::_Equal(const std::uint8_t* ptr, std::size_t size, 
-    test::byte::Iterator<TBValue> b_bg, test::byte::Iterator<TBValue> b_ed)
-{
-    const auto op = GetOperator();
-    ConstIteratorType<std::uint8_t> begin{const_cast<std::uint8_t*>(ptr), 0, 
-        size, op.Begin(0, size), op};
-    ConstIteratorType<std::uint8_t> end{const_cast<std::uint8_t*>(ptr), 0, 
-        size, op.End(0, size), op};
-    return _Equal(begin, end, b_bg, b_ed);
-}
-
-template<std::size_t N, bool Sign>
-test::byte::it::Operator Byte<N, Sign>::GetOperator()
-{
-    return test::byte::Order::GetOperatorInstance(
-        test::byte::Order::GetMachineEndian());
-}
-
-template<std::size_t N, bool Sign>
-test::byte::it::Operator Byte<N, Sign>::GetReverseOperator()
-{
-    return test::byte::Order::GetOperatorInstance(
-        test::byte::Order::GetReverseEndian(
-            test::byte::Order::GetMachineEndian()));
+    return test::byte::Operator::GetInstance().GetReverseOrder();
 }
 
 template<std::size_t N, bool Sign>
 Byte<N, Sign>::Byte() :
-    m_block{}
+    test::byte::Base<N, Sign>()
 {
-    _SetZero(m_block, N);
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
+
 }
 
 template<std::size_t N, bool Sign>
@@ -683,57 +335,112 @@ template<typename TValue, typename _TValue,
         !std::is_pointer<_TValue>::value &&
         !std::is_array<_TValue>::value, int>::type>
 Byte<N, Sign>::Byte(const TValue& val) :
-    m_block{}
+    test::byte::Base<N, Sign>()
 {
-    _SetZero(m_block, N);
-    _Set(Begin(), End(), (const std::uint8_t*)&val, sizeof(TValue));
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor<%s>(val=%s)", 
+            TEST_SYS_DEBUG_T_NAME_STR(TValue),
+            TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+
+    test::byte::Operator::GetInstance().Set(Begin(), End(),
+        (const std::uint8_t*)&val, sizeof(TValue));
 }
 
 template<std::size_t N, bool Sign>
 Byte<N, Sign>::Byte(const test::byte::Order& byte_order) :
-    m_block{}
+    test::byte::Base<N, Sign>()
 {
-    _SetZero(m_block, N);
-    _Set(Begin(), End(), byte_order.Begin(), byte_order.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor(byte_order=%p)", &byte_order);
+    
+    test::byte::Operator::GetInstance().Set(Begin(), End(),
+        byte_order.Begin(), byte_order.End());
 }
 
 template<std::size_t N, bool Sign>
 template<typename TIValue>
 Byte<N, Sign>::Byte(test::byte::Iterator<TIValue> bg, 
     test::byte::Iterator<TIValue> ed) :
-        m_block{}
+        test::byte::Base<N, Sign>()
 {
-    _SetZero(m_block, N);
-    _Set(Begin(), End(), bg, ed);
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor<%s>(bg=%p, ed=%p)", 
+        TEST_SYS_DEBUG_T_NAME_STR(TIValue),
+        &*bg, &*ed);
+    
+    test::byte::Operator::GetInstance().Set(Begin(), End(), bg, ed);
 }
 
 template<std::size_t N, bool Sign>
 template<typename TValue>
 Byte<N, Sign>::Byte(test::byte::Offset<TValue>&& offset_val) :
-    m_block{}
+    test::byte::Base<N, Sign>()
 {
-    _SetZero(m_block, N);
-    _Set(Begin() + std::move(offset_val).Size(), End(), 
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor<%s>(offset_val=%p)", 
+        TEST_SYS_DEBUG_T_NAME_STR(TValue),
+        &offset_val);
+    
+    test::byte::Operator::GetInstance().Set(
+        Begin() + std::move(offset_val).Size(), End(), 
         std::move(offset_val).Begin(), std::move(offset_val).End());
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign>::Byte(const Byte<_N, _Sign>& cpy) :
-    m_block{}
+template<test::byte::seq::Flag Flag, typename TValue>
+Byte<N, Sign>::Byte(test::byte::Sequence<Flag, TValue>&& seq_val) :
+    test::byte::Base<N, Sign>()
 {
-    _SetZero(m_block, N);
-    _Set(Begin(), End(), cpy.Begin(), cpy.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor<%s>(seq_val=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(test::byte::seq::Flag, Flag),
+            TEST_SYS_DEBUG_T_TYPE(TValue)),
+        &seq_val);
+    
+    test::byte::Operator::GetInstance().Set(
+        std::move(seq_val).LeftBegin(*this), 
+        std::move(seq_val).LeftEnd(*this),
+        std::move(seq_val).RightBegin(),
+        std::move(seq_val).RightEnd());
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign>::Byte(Byte<_N, _Sign>&& mov) :
-    m_block{}
+Byte<N, Sign>::~Byte()
 {
-    _SetZero(m_block, N);
-    _Set(Begin(), End(), mov.Begin(), mov.End());
-    _SetZero(mov.Get(), _N);
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
+
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+Byte<N, Sign>::Byte(const Byte<RN, RSign>& cpy) :
+    test::byte::Base<N, Sign>()
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Copy Constructor<%s>(cpy=%p)",
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &cpy);
+    
+    test::byte::Operator::GetInstance().Set(Begin(), End(),
+        cpy.Begin(), cpy.End());
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+Byte<N, Sign>::Byte(Byte<RN, RSign>&& mov) :
+    test::byte::Base<N, Sign>()
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Constructor<%s>(mov=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &mov);
+    
+    test::byte::Operator::GetInstance().Set(Begin(), End(),
+        std::move(mov).Begin(), std::move(mov).End());
+    OperatorType::GetInstance().SetZero(mov.Get(), RN);
 }
 
 template<std::size_t N, bool Sign>
@@ -746,14 +453,24 @@ template<typename TValue, typename _TValue,
         !std::is_array<_TValue>::value, int>::type>
 Byte<N, Sign>& Byte<N, Sign>::operator=(const TValue& val)
 {
-    _Set(Begin(), End(), (const std::uint8_t*)&val, sizeof(TValue));
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Assignment<%s>(val=%s)", 
+        TEST_SYS_DEBUG_T_NAME_STR(TValue),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
+    test::byte::Operator::GetInstance().Set(Begin(), End(), 
+        (const std::uint8_t*)&val, sizeof(TValue));
     return *this;
 }
 
 template<std::size_t N, bool Sign>
 Byte<N, Sign>& Byte<N, Sign>::operator=(const test::byte::Order& byte_order)
 {
-    _Set(Begin(), End(), byte_order.Begin(), byte_order.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Assignment(byte_order=%p)", &byte_order);
+    
+    test::byte::Operator::GetInstance().Set(Begin(), End(), 
+        byte_order.Begin(), byte_order.End());
     return *this;
 }
 
@@ -762,134 +479,87 @@ template<typename TValue>
 Byte<N, Sign>& Byte<N, Sign>::
     operator=(test::byte::Offset<TValue>&& offset_val)
 {
-    _Set(Begin() + std::move(offset_val).Size(), End(), 
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Assignment<%s>(offset_val=%p)", 
+        TEST_SYS_DEBUG_T_NAME_STR(TValue), &offset_val);
+    
+    test::byte::Operator::GetInstance().Set(
+        Begin() + std::move(offset_val).Size(), End(), 
         std::move(offset_val).Begin(), std::move(offset_val).End());
     return *this;
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign>& Byte<N, Sign>::operator=(const Byte<_N, _Sign>& cpy)
+template<test::byte::seq::Flag Flag, typename TValue>
+Byte<N, Sign>& Byte<N, Sign>::
+    operator=(test::byte::Sequence<Flag, TValue>&& seq_val)
 {
-    _Set(Begin(), End(), cpy.Begin(), cpy.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Assignment<%s>(seq_val=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(test::byte::seq::Flag, Flag),
+            TEST_SYS_DEBUG_T_TYPE(TValue)),
+        &seq_val);
+    
+    test::byte::Operator::GetInstance().Set(
+        std::move(seq_val).LeftBegin(*this),
+        std::move(seq_val).LeftEnd(*this),
+        std::move(seq_val).RightBegin(),
+        std::move(seq_val).RightEnd());
     return *this;
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign>& Byte<N, Sign>::operator=(Byte<_N, _Sign>&& mov)
+template<std::size_t RN, bool RSign>
+Byte<N, Sign>& Byte<N, Sign>::operator=(const Byte<RN, RSign>& cpy)
 {
-    _Set(Begin(), End(), mov.Begin(), mov.End());
-    _SetZero(mov.Get(), _N);
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Copy Assignment<%s>(cpy=%p)",
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &cpy);
+    
+    test::byte::Operator::GetInstance().Set(Begin(), End(),
+        cpy.Begin(), cpy.End());
     return *this;
 }
 
 template<std::size_t N, bool Sign>
-std::size_t Byte<N, Sign>::Size() const
+template<std::size_t RN, bool RSign>
+Byte<N, Sign>& Byte<N, Sign>::operator=(Byte<RN, RSign>&& mov)
 {
-    return N;
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Assignment<%s>(mov=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &mov);
+    
+    test::byte::Operator::GetInstance().Set(Begin(), End(),
+        std::move(mov).Begin(), std::move(mov).End());
+    OperatorType::GetInstance().SetZero(mov.Get(), RN);
+    return *this;
 }
 
 template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-typename Byte<N, Sign>::template IteratorType<TCast, NStep> 
-Byte<N, Sign>::Begin()
+template<std::size_t LN, bool LSign>
+test::Byte<LN, LSign> Byte<N, Sign>::Resize(const std::size_t& r_off, 
+    const std::size_t& r_size, const std::size_t& l_off, 
+    const std::size_t& l_size) const
 {
-    const auto op = GetOperator();
-    return {m_block, 0, N, op.Begin(0, N, NStep), op};
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-typename Byte<N, Sign>::template IteratorType<TCast, NStep>  
-Byte<N, Sign>::End()
-{
-    const auto op = GetOperator();
-    return {m_block, 0, N, op.End(0, N, NStep), op};
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-typename Byte<N, Sign>::template ConstIteratorType<TCast, NStep> 
-Byte<N, Sign>::Begin() const
-{
-    return const_cast<Byte<N, Sign>*>(this)->template Begin<TCast, NStep>();
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-typename Byte<N, Sign>::template ConstIteratorType<TCast, NStep> 
-Byte<N, Sign>::End() const
-{
-    return const_cast<Byte<N, Sign>*>(this)->template End<TCast, NStep>();
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-typename Byte<N, Sign>::template IteratorType<TCast, NStep> 
-Byte<N, Sign>::ReverseBegin()
-{
-    const auto op = GetReverseOperator();
-    return {m_block, 0, N, op.Begin(0, N, NStep), op};
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-typename Byte<N, Sign>::template IteratorType<TCast, NStep> 
-Byte<N, Sign>::ReverseEnd()
-{
-    const auto op = GetReverseOperator();
-    return {m_block, 0, N, op.End(0, N, NStep), op};
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-typename Byte<N, Sign>::template ConstIteratorType<TCast, NStep> 
-Byte<N, Sign>::ReverseBegin() const
-{
-    return const_cast<Byte<N, Sign>*>(this)->
-        template ReverseBegin<TCast, NStep>();
-}
-
-template<std::size_t N, bool Sign>
-template<typename TCast, std::size_t NStep>
-typename Byte<N, Sign>::template ConstIteratorType<TCast, NStep> 
-Byte<N, Sign>::ReverseEnd() const
-{
-    return const_cast<Byte<N, Sign>*>(this)->
-        template ReverseEnd<TCast, NStep>();
-}
-
-template<std::size_t N, bool Sign>
-template<typename T>
-T Byte<N, Sign>::CastTo(const std::size_t& off) const
-{
-    T ret;
-    std::memset(&ret, 0, sizeof(T));
-    const std::size_t size = (off >= N ? N : off);
-    _Set((std::uint8_t*)&ret, sizeof(T), Begin() + size, End());
-    return ret;
-}
-
-template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<_N, _Sign> Byte<N, Sign>::GetBlock(const std::size_t& off) const
-{
-    const std::size_t size = (off >= N ? N : off);
-    Byte<_N, _Sign> ret{Begin() + size, End()};
-    return ret;
-}
-
-template<std::size_t N, bool Sign>
-std::uint8_t* Byte<N, Sign>::Get()
-{
-    return m_block;
-}
-
-template<std::size_t N, bool Sign>
-const std::uint8_t* Byte<N, Sign>::Get() const
-{
-    return m_block;
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Resize<%s>(r_off=%zu, r_size=%zu, l_off=%zu, l_size=%zu) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, LN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, LSign)), r_off, r_size,
+            l_off, l_size);
+    
+    test::Byte<LN, LSign> res;
+    auto lend = (l_off + l_size) >= LN ? res.End() : res.Begin() + l_off + l_size;
+    auto rend = (r_off + r_size) >= N ? End() : (Begin() + r_off + r_size);
+    OperatorType::GetInstance().Set(res.Begin() + l_off, 
+        lend, Begin() + r_off, rend);
+    
+    return res;
 }
 
 template<std::size_t N, bool Sign>
@@ -902,14 +572,24 @@ template<typename TValue, typename _TValue,
         !std::is_array<_TValue>::value, int>::type>
 Byte<N, Sign>& Byte<N, Sign>::operator&=(const TValue& val)
 {
-    _And(Begin(), End(), (const std::uint8_t*)&val, sizeof(TValue));
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator&=<%s>(val=%s)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TValue),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
+    OperatorType::GetInstance().And(Begin(), End(), 
+        (const std::uint8_t*)&val, sizeof(TValue));
     return *this;
 }
 
 template<std::size_t N, bool Sign>
 Byte<N, Sign>& Byte<N, Sign>::operator&=(const test::byte::Order& byte_order)
 {
-    _And(Begin(), End(), byte_order.Begin(), byte_order.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator&=(byte_order=%p)", &byte_order);
+    
+    OperatorType::GetInstance().And(Begin(), End(), 
+        byte_order.Begin(), byte_order.End());
     return *this;
 }
 
@@ -918,16 +598,49 @@ template<typename TValue>
 Byte<N, Sign>& 
 Byte<N, Sign>::operator&=(test::byte::Offset<TValue>&& offset_val)
 {
-    _And(Begin() + std::move(offset_val).Size(), End(), 
-        std::move(offset_val).Begin(), std::move(offset_val).End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator&=<%s>(offset_val=%p)", 
+        TEST_SYS_DEBUG_T_NAME_STR(TValue),
+        &offset_val);
+    
+    OperatorType::GetInstance().And(Begin() + std::move(offset_val).Size(), 
+        End(), std::move(offset_val).Begin(), std::move(offset_val).End());
     return *this;
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign>& Byte<N, Sign>::operator&=(const Byte<_N, _Sign>& other)
+template<test::byte::seq::Flag Flag, typename TValue>
+Byte<N, Sign>& Byte<N, Sign>::
+    operator&=(test::byte::Sequence<Flag, TValue>&& seq_val)
 {
-    _And(Begin(), End(), other.Begin(), other.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "operator&=<%s>(seq_val=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(test::byte::seq::Flag, Flag),
+            TEST_SYS_DEBUG_T_TYPE(TValue)),
+        &seq_val);
+    
+    test::byte::Operator::GetInstance().And(
+        std::move(seq_val).LeftBegin(*this),
+        std::move(seq_val).LeftEnd(*this),
+        std::move(seq_val).RightBegin(),
+        std::move(seq_val).RightEnd());
+    return *this;
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+Byte<N, Sign>& Byte<N, Sign>::
+    operator&=(const test::byte::Base<RN, RSign>& other)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator&=<%s>(other=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &other);
+    
+    OperatorType::GetInstance().And(Begin(), End(), 
+        other.Begin(), other.End());
     return *this;
 }
 
@@ -941,14 +654,24 @@ template<typename TValue, typename _TValue,
         !std::is_array<_TValue>::value, int>::type>
 Byte<N, Sign>& Byte<N, Sign>::operator|=(const TValue& val)
 {
-    _Or(Begin(), End(), (const std::uint8_t*)&val, sizeof(TValue));
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator|=<%s>(val=%s)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TValue),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
+    OperatorType::GetInstance().Or(Begin(), End(), 
+        (const std::uint8_t*)&val, sizeof(TValue));
     return *this;
 }
 
 template<std::size_t N, bool Sign>
 Byte<N, Sign>& Byte<N, Sign>::operator|=(const test::byte::Order& byte_order)
 {
-    _Or(Begin(), End(), byte_order.Begin(), byte_order.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator|=(byte_order=%p)", &byte_order);
+    
+    OperatorType::GetInstance().Or(Begin(), End(), 
+        byte_order.Begin(), byte_order.End());
     return *this;
 }
 
@@ -957,16 +680,49 @@ template<typename TValue>
 Byte<N, Sign>& 
 Byte<N, Sign>::operator|=(test::byte::Offset<TValue>&& offset_val)
 {
-    _Or(Begin() + std::move(offset_val).Size(), End(), 
-        std::move(offset_val).Begin(), std::move(offset_val).End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator|=<%s>(offset_val=%p)", 
+        TEST_SYS_DEBUG_T_NAME_STR(TValue),
+        &offset_val);
+    
+    OperatorType::GetInstance().Or(Begin() + std::move(offset_val).Size(), 
+        End(), std::move(offset_val).Begin(), std::move(offset_val).End());
     return *this;
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign>& Byte<N, Sign>::operator|=(const Byte<_N, _Sign>& other)
+template<test::byte::seq::Flag Flag, typename TValue>
+Byte<N, Sign>& Byte<N, Sign>::
+    operator|=(test::byte::Sequence<Flag, TValue>&& seq_val)
 {
-    _Or(Begin(), End(), other.Begin(), other.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "operator|=<%s>(seq_val=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(test::byte::seq::Flag, Flag),
+            TEST_SYS_DEBUG_T_TYPE(TValue)),
+        &seq_val);
+    
+    test::byte::Operator::GetInstance().Or(
+        std::move(seq_val).LeftBegin(*this),
+        std::move(seq_val).LeftEnd(*this),
+        std::move(seq_val).RightBegin(),
+        std::move(seq_val).RightEnd());
+    return *this;
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+Byte<N, Sign>& Byte<N, Sign>::
+    operator|=(const test::byte::Base<RN, RSign>& other)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator|=<%s>(other=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &other);
+    
+    OperatorType::GetInstance().Or(Begin(), End(), 
+        other.Begin(), other.End());
     return *this;
 }
 
@@ -980,14 +736,24 @@ template<typename TValue, typename _TValue,
         !std::is_array<_TValue>::value, int>::type>
 Byte<N, Sign>& Byte<N, Sign>::operator^=(const TValue& val)
 {
-    _Xor(Begin(), End(), (const std::uint8_t*)&val, sizeof(TValue));
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator^=<%s>(val=%s)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TValue),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
+    OperatorType::GetInstance().Xor(Begin(), End(), 
+        (const std::uint8_t*)&val, sizeof(TValue));
     return *this;
 }
 
 template<std::size_t N, bool Sign>
 Byte<N, Sign>& Byte<N, Sign>::operator^=(const test::byte::Order& byte_order)
 {
-    _Xor(Begin(), End(), byte_order.Begin(), byte_order.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator^=(byte_order=%p)", &byte_order);
+    
+    OperatorType::GetInstance().Xor(Begin(), End(), 
+        byte_order.Begin(), byte_order.End());
     return *this;
 }
 
@@ -996,29 +762,68 @@ template<typename TValue>
 Byte<N, Sign>& 
 Byte<N, Sign>::operator^=(test::byte::Offset<TValue>&& offset_val)
 {
-    _Xor(Begin() + std::move(offset_val).Size(), End(), 
-        std::move(offset_val).Begin(), std::move(offset_val).End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator^=<%s>(offset_val=%p)", 
+        TEST_SYS_DEBUG_T_NAME_STR(TValue),
+        &offset_val);
+    
+    OperatorType::GetInstance().Xor(Begin() + std::move(offset_val).Size(), 
+        End(), std::move(offset_val).Begin(), std::move(offset_val).End());
     return *this;
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign>& Byte<N, Sign>::operator^=(const Byte<_N, _Sign>& other)
+template<test::byte::seq::Flag Flag, typename TValue>
+Byte<N, Sign>& Byte<N, Sign>::
+    operator^=(test::byte::Sequence<Flag, TValue>&& seq_val)
 {
-    _Xor(Begin(), End(), other.Begin(), other.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "operator^=<%s>(seq_val=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(test::byte::seq::Flag, Flag),
+            TEST_SYS_DEBUG_T_TYPE(TValue)),
+        &seq_val);
+    
+    test::byte::Operator::GetInstance().Xor(
+        std::move(seq_val).LeftBegin(*this),
+        std::move(seq_val).LeftEnd(*this),
+        std::move(seq_val).RightBegin(),
+        std::move(seq_val).RightEnd());
+    return *this;
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+Byte<N, Sign>& Byte<N, Sign>::
+    operator^=(const test::byte::Base<RN, RSign>& other)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator^=<%s>(other=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &other);
+    
+    OperatorType::GetInstance().Xor(Begin(), End(), 
+        other.Begin(), other.End());
     return *this;
 }
 
 template<std::size_t N, bool Sign>
 Byte<N, Sign>& Byte<N, Sign>::operator<<=(const std::size_t& size)
 {
-    _LShift(m_block, N, size);
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<<=(size=%zu)", size);
+    
+    OperatorType::GetInstance().LShift(Get(), N, size);
     return *this;
 }
 
 template<std::size_t N, bool Sign>
 Byte<N, Sign>& Byte<N, Sign>::operator<<=(const int& size)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<<=(size=%d)", size);
+    
     if (size < 0) return *this >>= (std::size_t)-size;
     *this <<= (std::size_t)size;
     return *this;
@@ -1027,13 +832,19 @@ Byte<N, Sign>& Byte<N, Sign>::operator<<=(const int& size)
 template<std::size_t N, bool Sign>
 Byte<N, Sign>& Byte<N, Sign>::operator>>=(const std::size_t& size)
 {
-    _RShift<Sign>(m_block, N, size);
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>>=(size=%zu)", size);
+    
+    OperatorType::GetInstance().RShift<Sign>(Get(), N, size);
     return *this;
 }
 
 template<std::size_t N, bool Sign>
 Byte<N, Sign>& Byte<N, Sign>::operator>>=(const int& size)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>>=(size=%d)", size);
+    
     if (size < 0) return *this <<= (std::size_t)-size;
     *this >>= (std::size_t)size;
     return *this;
@@ -1042,8 +853,10 @@ Byte<N, Sign>& Byte<N, Sign>::operator>>=(const int& size)
 template<std::size_t N, bool Sign>
 Byte<N, Sign> Byte<N, Sign>::operator~() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "operator~() const");
+    
     Byte<N, Sign> ret{*this};
-    _Not(ret.m_block, N);
+    OperatorType::GetInstance().Not(ret.Get(), N);
     return ret;
 }
 
@@ -1057,6 +870,11 @@ template<typename TValue, typename _TValue,
         !std::is_array<_TValue>::value, int>::type>
 Byte<N, Sign> Byte<N, Sign>::operator&(const TValue& val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator&<%s>(val=%s) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TValue),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
     Byte<N, Sign> ret{*this};
     ret &= val;
     return ret;
@@ -1066,6 +884,9 @@ template<std::size_t N, bool Sign>
 Byte<N, Sign> 
 Byte<N, Sign>::operator&(const test::byte::Order& byte_order) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator&(byte_order=%p) const", &byte_order);
+    
     Byte<N, Sign> ret{*this};
     ret &= byte_order;
     return ret;
@@ -1076,15 +897,44 @@ template<typename TValue>
 Byte<N, Sign> 
 Byte<N, Sign>::operator&(test::byte::Offset<TValue>&& offset_val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator&<%s>(offset_val=%p) const", 
+            TEST_SYS_DEBUG_T_NAME_STR(TValue),
+            &offset_val);
+    
     Byte<N, Sign> ret{*this};
     ret &= std::forward<test::byte::Offset<TValue>>(offset_val);
     return ret;
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign> Byte<N, Sign>::operator&(const Byte<_N, _Sign>& other) const
+template<test::byte::seq::Flag Flag, typename TValue>
+Byte<N, Sign> Byte<N, Sign>::
+    operator&(test::byte::Sequence<Flag, TValue>&& seq_val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "operator&<%s>(seq_val=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(test::byte::seq::Flag, Flag),
+            TEST_SYS_DEBUG_T_TYPE(TValue)),
+        &seq_val);
+    
+    Byte<N, Sign> ret{*this};
+    ret &= std::forward<test::byte::Sequence<Flag, TValue>>(seq_val);
+    return ret;
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+Byte<N, Sign> Byte<N, Sign>::
+    operator&(const test::byte::Base<RN, RSign>& other) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator&<%s>(other=%p) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &other);
+    
     Byte<N, Sign> ret{*this};
     ret &= other;
     return ret;
@@ -1100,6 +950,11 @@ template<typename TValue, typename _TValue,
         !std::is_array<_TValue>::value, int>::type>
 Byte<N, Sign> Byte<N, Sign>::operator|(const TValue& val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator|<%s>(val=%s) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TValue),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
     Byte<N, Sign> ret{*this};
     ret |= val;
     return ret;
@@ -1109,6 +964,9 @@ template<std::size_t N, bool Sign>
 Byte<N, Sign> 
 Byte<N, Sign>::operator|(const test::byte::Order& byte_order) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator|(byte_order=%p) const", &byte_order);
+    
     Byte<N, Sign> ret{*this};
     ret |= byte_order;
     return ret;
@@ -1119,15 +977,44 @@ template<typename TValue>
 Byte<N, Sign> 
 Byte<N, Sign>::operator|(test::byte::Offset<TValue>&& offset_val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator|<%s>(offset_val=%p) const", 
+            TEST_SYS_DEBUG_T_NAME_STR(TValue),
+            &offset_val);
+    
     Byte<N, Sign> ret{*this};
     ret |= std::forward<test::byte::Offset<TValue>>(offset_val);
     return ret;
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign> Byte<N, Sign>::operator|(const Byte<_N, _Sign>& other) const
+template<test::byte::seq::Flag Flag, typename TValue>
+Byte<N, Sign> Byte<N, Sign>::
+    operator|(test::byte::Sequence<Flag, TValue>&& seq_val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "operator|<%s>(seq_val=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(test::byte::seq::Flag, Flag),
+            TEST_SYS_DEBUG_T_TYPE(TValue)),
+        &seq_val);
+    
+    Byte<N, Sign> ret{*this};
+    ret |= std::forward<test::byte::Sequence<Flag, TValue>>(seq_val);
+    return ret;
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+Byte<N, Sign> Byte<N, Sign>::
+    operator|(const test::byte::Base<RN, RSign>& other) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator|<%s>(other=%p) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &other);
+    
     Byte<N, Sign> ret{*this};
     ret |= other;
     return ret;
@@ -1143,6 +1030,11 @@ template<typename TValue, typename _TValue,
         !std::is_array<_TValue>::value, int>::type>
 Byte<N, Sign> Byte<N, Sign>::operator^(const TValue& val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator^<%s>(val=%s) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TValue),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
     Byte<N, Sign> ret{*this};
     ret ^= val;
     return ret;
@@ -1152,6 +1044,9 @@ template<std::size_t N, bool Sign>
 Byte<N, Sign> 
 Byte<N, Sign>::operator^(const test::byte::Order& byte_order) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator^(byte_order=%p) const", &byte_order);
+    
     Byte<N, Sign> ret{*this};
     ret ^= byte_order;
     return ret;
@@ -1162,15 +1057,44 @@ template<typename TValue>
 Byte<N, Sign> 
 Byte<N, Sign>::operator^(test::byte::Offset<TValue>&& offset_val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator^<%s>(offset_val=%p) const", 
+            TEST_SYS_DEBUG_T_NAME_STR(TValue),
+            &offset_val);
+    
     Byte<N, Sign> ret{*this};
     ret ^= std::forward<test::byte::Offset<TValue>>(offset_val);
     return ret;
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-Byte<N, Sign> Byte<N, Sign>::operator^(const Byte<_N, _Sign>& other) const
+template<test::byte::seq::Flag Flag, typename TValue>
+Byte<N, Sign> Byte<N, Sign>::
+    operator^(test::byte::Sequence<Flag, TValue>&& seq_val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "operator^<%s>(seq_val=%p)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(test::byte::seq::Flag, Flag),
+            TEST_SYS_DEBUG_T_TYPE(TValue)),
+        &seq_val);
+    
+    Byte<N, Sign> ret{*this};
+    ret ^= std::forward<test::byte::Sequence<Flag, TValue>>(seq_val);
+    return ret;
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+Byte<N, Sign> Byte<N, Sign>::
+    operator^(const test::byte::Base<RN, RSign>& other) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator^<%s>(other=%p) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, RN),
+            TEST_SYS_DEBUG_TV_TYPE(bool, RSign)), &other);
+    
     Byte<N, Sign> ret{*this};
     ret ^= other;
     return ret;
@@ -1179,6 +1103,9 @@ Byte<N, Sign> Byte<N, Sign>::operator^(const Byte<_N, _Sign>& other) const
 template<std::size_t N, bool Sign>
 Byte<N, Sign> Byte<N, Sign>::operator<<(const std::size_t& size) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<<(size=%zu) const", size);
+    
     Byte<N, Sign> ret{*this};
     ret <<= size;
     return ret;
@@ -1187,6 +1114,9 @@ Byte<N, Sign> Byte<N, Sign>::operator<<(const std::size_t& size) const
 template<std::size_t N, bool Sign>
 Byte<N, Sign> Byte<N, Sign>::operator<<(const int& size) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<<(size=%d) const", size);
+    
     Byte<N, Sign> ret{*this};
     ret <<= size;
     return ret;
@@ -1195,6 +1125,9 @@ Byte<N, Sign> Byte<N, Sign>::operator<<(const int& size) const
 template<std::size_t N, bool Sign>
 Byte<N, Sign> Byte<N, Sign>::operator>>(const std::size_t& size) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>>(size=%zu) const", size);
+    
     Byte<N, Sign> ret{*this};
     ret >>= size;
     return ret;
@@ -1203,6 +1136,9 @@ Byte<N, Sign> Byte<N, Sign>::operator>>(const std::size_t& size) const
 template<std::size_t N, bool Sign>
 Byte<N, Sign> Byte<N, Sign>::operator>>(const int& size) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>>(size=%d) const", size);
+    
     Byte<N, Sign> ret{*this};
     ret >>= size;
     return ret;
@@ -1211,6 +1147,9 @@ Byte<N, Sign> Byte<N, Sign>::operator>>(const int& size) const
 template<std::size_t N, bool Sign>
 std::uint8_t& Byte<N, Sign>::operator[](const std::size_t& index)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator[](index=%zu)", index);
+    
     static std::uint8_t tmp;
     tmp = 0;
     if (index >= N) return tmp;
@@ -1220,6 +1159,9 @@ std::uint8_t& Byte<N, Sign>::operator[](const std::size_t& index)
 template<std::size_t N, bool Sign>
 std::uint8_t Byte<N, Sign>::operator[](const std::size_t& index) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator[](index=%zu) const", index);
+    
     return const_cast<Byte<N, Sign>*>(this)->operator[](index);
 }
 
@@ -1233,28 +1175,62 @@ template<typename TValue, typename _TValue,
         !std::is_array<_TValue>::value, int>::type>
 bool Byte<N, Sign>::operator==(const TValue& val) const
 {
-    return _Equal(Begin(), End(), (const std::uint8_t*)&val, sizeof(TValue));
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator==(val=%s) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TValue),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
+    return OperatorType::GetInstance().Equal(Begin(), End(), 
+        (const std::uint8_t*)&val, sizeof(TValue));
 }
 
 template<std::size_t N, bool Sign>
 bool Byte<N, Sign>::operator==(const test::byte::Order& byte_order) const
 {
-    return _Equal(Begin(), End(), byte_order.Begin(), byte_order.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator==(byte_order=%p) const", &byte_order);
+    
+    return OperatorType::GetInstance().Equal(Begin(), End(), 
+        byte_order.Begin(), byte_order.End());
 }
 
 template<std::size_t N, bool Sign>
 template<typename TValue>
 bool Byte<N, Sign>::operator==(test::byte::Offset<TValue>&& offset_val) const
 {
-    return _Equal(Begin() + std::move(offset_val).Size(), End(), 
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator==(offset_val=%p) const", &offset_val);
+    
+    return OperatorType::GetInstance().
+        Equal(Begin() + std::move(offset_val).Size(), End(), 
         std::move(offset_val).Begin(), std::move(offset_val).End());
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-bool Byte<N, Sign>::operator==(const Byte<_N, _Sign>& other) const
+template<test::byte::seq::Flag Flag, typename TValue>
+bool Byte<N, Sign>::
+    operator==(test::byte::Sequence<Flag, TValue>&& seq_val) const
 {
-    return _Equal(Begin(), End(), other.Begin(), other.End());
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator==(seq_val=%p) const", &seq_val);
+    
+    return OperatorType::GetInstance().Equal(
+        std::move(seq_val).LeftBegin(*this),
+        std::move(seq_val).LeftEnd(*this),
+        std::move(seq_val).RightBegin(),
+        std::move(seq_val).RightEnd());
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+bool Byte<N, Sign>::
+    operator==(const test::byte::Base<RN, RSign>& other) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator==(other=%p) const", &other);
+    
+    return OperatorType::GetInstance().Equal(Begin(), End(), 
+        other.Begin(), other.End());
 }
 
 template<std::size_t N, bool Sign>
@@ -1267,12 +1243,20 @@ template<typename TValue, typename _TValue,
         !std::is_array<_TValue>::value, int>::type>
 bool Byte<N, Sign>::operator!=(const TValue& val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator!=(val=%s) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TValue),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
     return !(*this == val);
 }
 
 template<std::size_t N, bool Sign>
 bool Byte<N, Sign>::operator!=(const test::byte::Order& byte_order) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator!=(byte_order=%p) const", &byte_order);
+    
     return !(*this == byte_order);
 }
 
@@ -1280,13 +1264,32 @@ template<std::size_t N, bool Sign>
 template<typename TValue>
 bool Byte<N, Sign>::operator!=(test::byte::Offset<TValue>&& offset_val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator!=(offset_val=%p) const", &offset_val);
+    
     return !(*this == std::forward<test::byte::Offset<TValue>>(offset_val));
 }
 
 template<std::size_t N, bool Sign>
-template<std::size_t _N, bool _Sign>
-bool Byte<N, Sign>::operator!=(const Byte<_N, _Sign>& other) const
+template<test::byte::seq::Flag Flag, typename TValue>
+bool Byte<N, Sign>::
+    operator!=(test::byte::Sequence<Flag, TValue>&& seq_val) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator!=(seq_val=%p) const", &seq_val);
+    
+    return !(*this == 
+        std::forward<test::byte::Sequence<Flag, TValue>>(seq_val));
+}
+
+template<std::size_t N, bool Sign>
+template<std::size_t RN, bool RSign>
+bool Byte<N, Sign>::
+    operator!=(const test::byte::Base<RN, RSign>& other) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator!=(other=%p) const", &other);
+    
     return !(*this == other);
 }
 
