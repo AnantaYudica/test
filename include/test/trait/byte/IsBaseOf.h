@@ -1,7 +1,7 @@
 #ifndef TEST_TRAIT_BYTE_ISBASEOF_H_
 #define TEST_TRAIT_BYTE_ISBASEOF_H_
 
-#include "../../Byte.h"
+#include "../../byte/Base.h"
 
 #include <type_traits>
 #include <utility>
@@ -18,8 +18,8 @@ template<typename T>
 class IsBaseOf
 {
 private:
-    template<std::size_t _N>
-    static constexpr std::true_type _IsBaseOf(const test::Byte<_N>&);
+    template<std::size_t N, bool Sign = false>
+    static constexpr std::true_type _IsBaseOf(const test::byte::Base<N, Sign>&);
     static constexpr std::false_type _IsBaseOf(...);
 public:
     IsBaseOf() = delete;
