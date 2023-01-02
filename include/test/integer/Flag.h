@@ -1,7 +1,25 @@
 #ifndef TEST_INTEGER_FLAG_H_
 #define TEST_INTEGER_FLAG_H_
 
+#include "../System.h"
+
 #include <cstdint>
+
+namespace test::integer
+{
+
+class Flag;
+
+}
+
+#ifndef TEST_INTEGER_FLAG_DLEVEL
+
+#define TEST_INTEGER_FLAG_DLEVEL 2
+
+#endif //!TEST_INTEGER_FLAG_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_INTEGER_FLAG_DLEVEL, 
+    "test::integer::Flag", test::integer::Flag);
 
 namespace test
 {
@@ -10,9 +28,13 @@ namespace integer
 
 class Flag
 {
+private:
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::integer::Flag> DebugType;
 public:
     typedef std::uint8_t ValueType;
     typedef std::uint16_t OperatorValueType;
+    typedef std::uint8_t ErrorValueType;
     enum : ValueType
     {
         kNegative = 1,
@@ -38,6 +60,13 @@ public:
         kIncrementOp = 4096,
         kConversionOp = 8192
     };
+    enum : ErrorValueType
+    {
+        kOk = 0,
+        kOverflow = 1,
+        kDivByZero = 2,
+        kDivError = 4
+    };
 private:
     static constexpr ValueType ms_signValueMask = kNegative |
         kSigned;
@@ -47,6 +76,7 @@ private:
         ms_formatValueMask;
 private:
     ValueType m_val;
+    ErrorValueType m_errVal;
 public:
     inline constexpr Flag();
     inline constexpr Flag(const ValueType& val);
@@ -72,6 +102,9 @@ public:
     inline constexpr bool IsDecimalFormat() const;
     inline constexpr ValueType Format() const;
 public:
+    inline void Error(const ErrorValueType& err);
+    inline ErrorValueType Error() const;
+public:
     inline OperatorValueType operator+=(const Flag& flag);
     inline OperatorValueType operator-=(const Flag& flag);
     inline OperatorValueType operator*=(const Flag& flag);
@@ -92,53 +125,86 @@ public:
 };
 
 constexpr Flag::Flag() :
-    m_val(0)
+    m_val(0),
+    m_errVal(0)
 {}
 
 constexpr Flag::Flag(const ValueType& val) :
-    m_val(val & ms_initValueMask)
+    m_val(val & ms_initValueMask),
+    m_errVal(0)
 {}
 
 inline Flag::Flag(const Flag& cpy) :
-    m_val(cpy.m_val)
-{}
+    m_val(cpy.m_val),
+    m_errVal(cpy.m_errVal)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Copy Constructor(cpy=%p)", &cpy);
+    
+}
 
 inline Flag::Flag(Flag&& mov) :
-    m_val(mov.m_val)
-{}
+    m_val(mov.m_val),
+    m_errVal(mov.m_errVal)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Constructor(mov=%p)", &mov);
+
+}
 
 inline Flag& Flag::operator=(const Flag& cpy)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Copy Assignment(cpy=%p)", &cpy);
+    
     if (this->Format() == cpy.Format() && m_val & kSigned)
+    {
         m_val = cpy.m_val; 
+        m_errVal = cpy.m_errVal;
+    }
     return *this;
 }
 
 inline Flag& Flag::operator=(Flag&& mov)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Move Assignment(mov=%p)", &mov);
+
     if (this->Format() == mov.Format() && m_val & kSigned)
+    {
         m_val = mov.m_val; 
+        m_errVal = mov.m_errVal;
+    }
     return *this;
 }
 
 inline bool Flag::IsSet(const ValueType& keys) const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsSet(keys=%s) const", TEST_SYS_DEBUG_VALUE_STR(0, keys));
+    
     return m_val & keys;
 }
 
 inline bool Flag::IsNegative() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "IsNegative() const");
+    
     return (m_val & ms_signValueMask) == 
         ms_signValueMask;
 }
 
 inline void Flag::SetNegative()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "SetNegative()");
+
     if (IsSigned()) m_val |= kNegative;
 }
 
 inline void Flag::UnsetNegative()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "UnsetNegative()");
+
     if (IsSigned()) m_val &= ~kNegative;
 }
 
@@ -172,9 +238,27 @@ inline constexpr typename Flag::ValueType Flag::Format() const
     return m_val & ms_formatValueMask;
 }
 
+inline void Flag::Error(const ErrorValueType& err)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "Error(err=%s)", TEST_SYS_DEBUG_VALUE_STR(0, err));
+    
+    m_errVal |= err;
+}
+
+inline typename Flag::ErrorValueType Flag::Error() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Error() const");
+    
+    return m_errVal;
+}
+
 inline typename Flag::OperatorValueType 
 Flag::operator+=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator+=(flag=%p)", &flag);
+    
     const OperatorValueType cnv = this->Format() != flag.Format() ?
         kConversionOp : 0;
     if (this->IsNegative() == flag.IsNegative())
@@ -185,6 +269,9 @@ Flag::operator+=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator-=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator-=(flag=%p)", &flag);
+    
     const OperatorValueType cnv = this->Format() != flag.Format() ?
         kConversionOp : 0;
     if (this->IsNegative() == flag.IsNegative()) 
@@ -195,6 +282,9 @@ Flag::operator-=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator*=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator*=(flag=%p)", &flag);
+    
     const OperatorValueType cnv = this->Format() != flag.Format() ?
         kConversionOp : 0;
     if (!this->IsSigned())
@@ -213,6 +303,9 @@ Flag::operator*=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator/=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator/=(flag=%p)", &flag);
+    
     const OperatorValueType cnv = this->Format() != flag.Format() ?
         kConversionOp : 0;
     if (!this->IsSigned())
@@ -231,6 +324,9 @@ Flag::operator/=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator%=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator%=(flag=%p)", &flag);
+    
     const OperatorValueType cnv = this->Format() != flag.Format() ?
         kConversionOp : 0;
     return cnv | kModuloOp;
@@ -239,6 +335,9 @@ Flag::operator%=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator|=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator|=(flag=%p)", &flag);
+    
     if (!this->IsBinaryFormat()) return 0;
     const OperatorValueType cnv = flag.Format() != kBinaryFormat ?
         kConversionOp : 0;
@@ -248,6 +347,9 @@ Flag::operator|=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator&=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator&=(flag=%p)", &flag);
+    
     if (!this->IsBinaryFormat()) return 0;
     const OperatorValueType cnv = flag.Format() != kBinaryFormat ?
         kConversionOp : 0;
@@ -257,6 +359,9 @@ Flag::operator&=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator^=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator^=(flag=%p)", &flag);
+    
     if (!this->IsBinaryFormat()) return 0;
     const OperatorValueType cnv = flag.Format() != kBinaryFormat ?
         kConversionOp : 0;
@@ -266,6 +371,9 @@ Flag::operator^=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator>>=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>>=(flag=%p)", &flag);
+    
     const OperatorValueType cnv = this->Format() != flag.Format() ?
         kConversionOp : 0;
     if (this->IsNegative() && this->IsBinaryFormat())
@@ -276,6 +384,9 @@ Flag::operator>>=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator<<=(const Flag& flag)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<<=(flag=%p)", &flag);
+    
     const OperatorValueType cnv = this->Format() != flag.Format() ?
         kConversionOp : 0;
     return cnv | kLShiftOp;
@@ -284,6 +395,9 @@ Flag::operator<<=(const Flag& flag)
 inline typename Flag::OperatorValueType 
 Flag::operator>>=(std::intmax_t)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>>=(std::intmax_t)");
+    
     if (!this->IsBinaryFormat()) return kRShiftOp;
     if (this->IsNegative())
         return kRShiftOp | kIncrementOp;
@@ -293,18 +407,27 @@ Flag::operator>>=(std::intmax_t)
 inline typename Flag::OperatorValueType 
 Flag::operator<<=(std::intmax_t)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<<=(std::intmax_t)");
+    
     return kLShiftOp;
 }
 
 inline typename Flag::OperatorValueType 
 Flag::operator~() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator~() const");
+    
     if (!this->IsBinaryFormat()) return 0;
     return kNotOp;
 }
 
 inline Flag Flag::operator-() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator-() const");
+    
     Flag ret(*this);
     if (ret.IsNegative())
         ret.UnsetNegative();
@@ -315,6 +438,9 @@ inline Flag Flag::operator-() const
 
 inline Flag::operator ValueType() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator %s() const", TEST_SYS_DEBUG_T_NAME_STR(ValueType));
+    
     return m_val;
 }
 
