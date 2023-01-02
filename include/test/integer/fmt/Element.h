@@ -82,11 +82,11 @@ public:
     bool operator==(const ElementType& elem) &&;
     bool operator!=(const ElementType& elem) &&;
 public:
-    bool operator<(const ElementType& elem) const;
-    bool operator>(const ElementType& elem) const;
+    bool operator<(const ElementType& elem) &&;
+    bool operator>(const ElementType& elem) &&;
 public:
-    bool operator<=(const ElementType& elem) const;
-    bool operator>=(const ElementType& elem) const;
+    bool operator<=(const ElementType& elem) &&;
+    bool operator>=(const ElementType& elem) &&;
 };
 
 template<std::size_t N, typename TDefinition>
@@ -166,7 +166,42 @@ bool Element<N, TDefinition>::operator!=(const ElementType& elem) &&
         "operator!=(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
         
     return *(*this) != elem;
+}
 
+template<std::size_t N, typename TDefinition>
+bool Element<N, TDefinition>::operator<(const ElementType& elem) &&
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
+
+    return *(*this) < elem;
+}
+
+template<std::size_t N, typename TDefinition>
+bool Element<N, TDefinition>::operator>(const ElementType& elem) &&
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
+    
+    return *(*this) > elem;
+}
+
+template<std::size_t N, typename TDefinition>
+bool Element<N, TDefinition>::operator<=(const ElementType& elem) &&
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator<=(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
+    
+    return *(*this) <= elem;
+}
+
+template<std::size_t N, typename TDefinition>
+bool Element<N, TDefinition>::operator>=(const ElementType& elem) &&
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator>=(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
+    
+    return *(*this) >= elem;
 }
 
 } //!fmt
