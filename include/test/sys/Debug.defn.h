@@ -26,6 +26,8 @@ public:
 public:
     static inline CStrType& GetBufferT();
     static inline CStrType& GetBufferV();
+    template<std::size_t ID>
+    static inline CStrType& GetBufferID();
 private:
     std::int8_t m_level;
 protected:

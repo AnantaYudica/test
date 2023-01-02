@@ -22,6 +22,14 @@ inline typename Debug::CStrType& Debug::GetBufferV()
     return instance;
 }
 
+template<std::size_t ID>
+inline typename Debug::CStrType& Debug::GetBufferID()
+{
+    static CStrType instance;
+    *(instance.Buffer()) = '\0';
+    return instance;
+}
+
 inline std::size_t Debug::WriteTagName(char * tag_out, std::size_t n)
 {
     return snprintf(tag_out, n, "unknown");
@@ -126,5 +134,8 @@ do{\
 
 #define TEST_SYS_DEBUG_TARGS_VALUE_STR(...)\
     test::sys::dbg::val::Parameter(test::sys::Debug::GetBufferV(), __VA_ARGS__).Buffer()
+    
+#define TEST_SYS_DEBUG_VALUE_STR(ID, ...)\
+    test::sys::dbg::val::Parameter(test::sys::Debug::GetBufferID<ID>(), __VA_ARGS__).Buffer()
 
 #endif //!TEST_SYS_DEBUG_H_
