@@ -1,10 +1,37 @@
 #ifndef TEST_INTEGER_FMT_DEFINITION_H_
 #define TEST_INTEGER_FMT_DEFINITION_H_
 
+#include "../../System.h"
 #include "../Flag.h"
 
 #include <cstddef>
 #include <cstdint>
+
+namespace test::integer::fmt
+{
+
+template<typename TInt, std::size_t NBase>
+struct Definition;
+
+}
+
+#ifndef TEST_INTEGER_FMT_DEFINITION_DLEVEL
+
+#define TEST_INTEGER_FMT_DEFINITION_DLEVEL 2
+
+#endif //!TEST_INTEGER_FMT_DEFINITION_DLEVEL
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<TInt>,\
+    test::sys::dbg::type::Value<std::size_t , NBase>
+
+template<typename TInt, std::size_t NBase>
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_INTEGER_FMT_DEFINITION_DLEVEL, 
+    "test::integer::fmt::Definition", 
+    test::integer::fmt::Definition<TInt, NBase>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
 
 namespace test
 {
@@ -25,11 +52,24 @@ struct Definition<std::uint8_t, 2>
     typedef std::size_t SizeType;
     typedef std::uint8_t DigitType; 
 
+    static constexpr bool HasAdditionOp = true;
+    static constexpr bool HasSubtractionOp = true;
+    static constexpr bool HasMultiplicationOp = true;
+    static constexpr bool HasDivisionOp = true;
+    static constexpr bool HasShiftOp = true;
+    static constexpr bool HasNegationOp = true;
+    static constexpr bool HasAndOp = true;
+    static constexpr bool HasOrOp = true;
+    static constexpr bool HasXorOp = true;
+    static constexpr bool HasNotOp = true;
+
     static constexpr bool Signed = false;
     static constexpr SizeType NMinSize = 1;
     static constexpr SizeType ElementAllocSize = sizeof(ElementType);
     static constexpr ElementType ElementMaxExponent = 8;
     static constexpr ElementType ElementMaxValue = 0xff;
+    static constexpr SizeType ElementAllocBitSize = 8;
+    static constexpr SizeType BitSize = 8;
 
     static constexpr test::integer::Flag Flag();
 
@@ -51,6 +91,8 @@ struct Definition<std::uint8_t, 2>
     
     static std::uint8_t DigitElementValue(const std::uint8_t& v, 
         const std::size_t& off, const std::size_t& n = 1);
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -58,7 +100,7 @@ struct Definition<std::int8_t, 2> :
     Definition<std::uint8_t, 2>
 {  
     static constexpr bool Signed = true;
-    
+
     static constexpr test::integer::Flag Flag();
 };
 
@@ -70,11 +112,24 @@ struct Definition<std::uint16_t, 2>
     typedef std::size_t SizeType;
     typedef std::uint16_t DigitType; 
 
+    static constexpr bool HasAdditionOp = true;
+    static constexpr bool HasSubtractionOp = true;
+    static constexpr bool HasMultiplicationOp = true;
+    static constexpr bool HasDivisionOp = true;
+    static constexpr bool HasShiftOp = true;
+    static constexpr bool HasNegationOp = true;
+    static constexpr bool HasAndOp = true;
+    static constexpr bool HasOrOp = true;
+    static constexpr bool HasXorOp = true;
+    static constexpr bool HasNotOp = true;
+
     static constexpr bool Signed = false;
     static constexpr SizeType NMinSize = 1;
     static constexpr SizeType ElementAllocSize = sizeof(ElementType);
     static constexpr ElementType ElementMaxExponent = 16;
     static constexpr ElementType ElementMaxValue = 0xffff;
+    static constexpr SizeType ElementAllocBitSize = 16;
+    static constexpr SizeType BitSize = 16;
 
     static constexpr test::integer::Flag Flag();
 
@@ -96,6 +151,8 @@ struct Definition<std::uint16_t, 2>
     
     static std::uint16_t DigitElementValue(const std::uint16_t& v, 
         const std::size_t& off, const std::size_t& n = 1);
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -115,11 +172,24 @@ struct Definition<std::uint32_t, 2>
     typedef std::size_t SizeType;
     typedef std::uint32_t DigitType; 
 
+    static constexpr bool HasAdditionOp = true;
+    static constexpr bool HasSubtractionOp = true;
+    static constexpr bool HasMultiplicationOp = true;
+    static constexpr bool HasDivisionOp = true;
+    static constexpr bool HasShiftOp = true;
+    static constexpr bool HasNegationOp = true;
+    static constexpr bool HasAndOp = true;
+    static constexpr bool HasOrOp = true;
+    static constexpr bool HasXorOp = true;
+    static constexpr bool HasNotOp = true;
+
     static constexpr bool Signed = false;
     static constexpr SizeType NMinSize = 1;
     static constexpr SizeType ElementAllocSize = sizeof(ElementType);
     static constexpr ElementType ElementMaxExponent = 32;
     static constexpr ElementType ElementMaxValue = 0xffffffff;
+    static constexpr SizeType ElementAllocBitSize = 32;
+    static constexpr SizeType BitSize = 32;
 
     static constexpr test::integer::Flag Flag();
     
@@ -141,6 +211,8 @@ struct Definition<std::uint32_t, 2>
     
     static std::uint32_t DigitElementValue(const std::uint32_t& v, 
         const std::size_t& off, const std::size_t& n = 1);
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -157,6 +229,9 @@ struct Definition<std::uint64_t, 2> :
     Definition<std::uint32_t, 2>
 {
     static constexpr SizeType NMinSize = 2;
+    static constexpr SizeType BitSize = 64;
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -164,6 +239,9 @@ struct Definition<std::int64_t, 2> :
     Definition<std::int32_t, 2>
 {  
     static constexpr SizeType NMinSize = 2;
+    static constexpr SizeType BitSize = 64;
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -174,11 +252,24 @@ struct Definition<std::uint8_t, 8>
     typedef std::size_t SizeType;
     typedef std::uint8_t DigitType; 
 
+    static constexpr bool HasAdditionOp = true;
+    static constexpr bool HasSubtractionOp = true;
+    static constexpr bool HasMultiplicationOp = true;
+    static constexpr bool HasDivisionOp = true;
+    static constexpr bool HasShiftOp = true;
+    static constexpr bool HasNegationOp = true;
+    static constexpr bool HasAndOp = false;
+    static constexpr bool HasOrOp = false;
+    static constexpr bool HasXorOp = false;
+    static constexpr bool HasNotOp = false;
+
     static constexpr bool Signed = false;
     static constexpr SizeType NMinSize = 1;
     static constexpr SizeType ElementAllocSize = sizeof(ElementType);
     static constexpr ElementType ElementMaxExponent = 2;
     static constexpr ElementType ElementMaxValue = 0x3f;
+    static constexpr SizeType ElementAllocBitSize = 6;
+    static constexpr SizeType BitSize = 6;
     
     static constexpr test::integer::Flag Flag();
 
@@ -200,6 +291,8 @@ struct Definition<std::uint8_t, 8>
     
     static std::uint8_t DigitElementValue(const std::uint8_t& v, 
         const std::size_t& off, const std::size_t& n = 1);
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -219,11 +312,24 @@ struct Definition<std::uint16_t, 8>
     typedef std::size_t SizeType;
     typedef std::uint16_t DigitType; 
 
+    static constexpr bool HasAdditionOp = true;
+    static constexpr bool HasSubtractionOp = true;
+    static constexpr bool HasMultiplicationOp = true;
+    static constexpr bool HasDivisionOp = true;
+    static constexpr bool HasShiftOp = true;
+    static constexpr bool HasNegationOp = true;
+    static constexpr bool HasAndOp = false;
+    static constexpr bool HasOrOp = false;
+    static constexpr bool HasXorOp = false;
+    static constexpr bool HasNotOp = false;
+
     static constexpr bool Signed = false;
     static constexpr SizeType NMinSize = 1;
     static constexpr SizeType ElementAllocSize = sizeof(ElementType);
     static constexpr ElementType ElementMaxExponent = 5;
     static constexpr ElementType ElementMaxValue = 0x7fff;
+    static constexpr SizeType ElementAllocBitSize = 15;
+    static constexpr SizeType BitSize = 15;
     
     static constexpr test::integer::Flag Flag();
 
@@ -245,6 +351,8 @@ struct Definition<std::uint16_t, 8>
     
     static std::uint16_t DigitElementValue(const std::uint16_t& v, 
         const std::size_t& off, const std::size_t& n = 1);
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -264,11 +372,24 @@ struct Definition<std::uint32_t, 8>
     typedef std::size_t SizeType;
     typedef std::uint32_t DigitType; 
 
+    static constexpr bool HasAdditionOp = true;
+    static constexpr bool HasSubtractionOp = true;
+    static constexpr bool HasMultiplicationOp = true;
+    static constexpr bool HasDivisionOp = true;
+    static constexpr bool HasShiftOp = true;
+    static constexpr bool HasNegationOp = true;
+    static constexpr bool HasAndOp = false;
+    static constexpr bool HasOrOp = false;
+    static constexpr bool HasXorOp = false;
+    static constexpr bool HasNotOp = false;
+
     static constexpr bool Signed = false;
     static constexpr SizeType NMinSize = 1;
     static constexpr SizeType ElementAllocSize = sizeof(ElementType);
     static constexpr ElementType ElementMaxExponent = 10;
     static constexpr ElementType ElementMaxValue = 0x3fffffff;
+    static constexpr SizeType ElementAllocBitSize = 30;
+    static constexpr SizeType BitSize = 30;
     
     static constexpr test::integer::Flag Flag();
 
@@ -290,6 +411,8 @@ struct Definition<std::uint32_t, 8>
     
     static std::uint32_t DigitElementValue(const std::uint32_t& v, 
         const std::size_t& off, const std::size_t& n = 1);
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -306,6 +429,9 @@ struct Definition<std::uint64_t, 8> :
     Definition<std::uint32_t, 8>
 {
     static constexpr SizeType NMinSize = 2;
+    static constexpr SizeType BitSize = 60;
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -313,6 +439,9 @@ struct Definition<std::int64_t, 8> :
     Definition<std::int32_t, 8>
 {  
     static constexpr SizeType NMinSize = 2;
+    static constexpr SizeType BitSize = 60;
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -323,11 +452,24 @@ struct Definition<std::uint8_t, 10>
     typedef std::size_t SizeType;
     typedef std::uint8_t DigitType; 
 
+    static constexpr bool HasAdditionOp = true;
+    static constexpr bool HasSubtractionOp = true;
+    static constexpr bool HasMultiplicationOp = true;
+    static constexpr bool HasDivisionOp = true;
+    static constexpr bool HasShiftOp = true;
+    static constexpr bool HasNegationOp = true;
+    static constexpr bool HasAndOp = false;
+    static constexpr bool HasOrOp = false;
+    static constexpr bool HasXorOp = false;
+    static constexpr bool HasNotOp = false;
+
     static constexpr bool Signed = false;
     static constexpr SizeType NMinSize = 1;
     static constexpr SizeType ElementAllocSize = sizeof(ElementType);
     static constexpr ElementType ElementMaxExponent = 2;
     static constexpr ElementType ElementMaxValue = 99;
+    static constexpr SizeType ElementAllocBitSize = 7;
+    static constexpr SizeType BitSize = 7;
     
     static constexpr test::integer::Flag Flag();
 
@@ -349,6 +491,8 @@ struct Definition<std::uint8_t, 10>
 
     static std::uint8_t DigitElementValue(const std::uint8_t& v, 
         const std::size_t& off, const std::size_t& n = 1);
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -368,11 +512,24 @@ struct Definition<std::uint16_t, 10>
     typedef std::size_t SizeType;
     typedef std::uint16_t DigitType; 
 
+    static constexpr bool HasAdditionOp = true;
+    static constexpr bool HasSubtractionOp = true;
+    static constexpr bool HasMultiplicationOp = true;
+    static constexpr bool HasDivisionOp = true;
+    static constexpr bool HasShiftOp = true;
+    static constexpr bool HasNegationOp = true;
+    static constexpr bool HasAndOp = false;
+    static constexpr bool HasOrOp = false;
+    static constexpr bool HasXorOp = false;
+    static constexpr bool HasNotOp = false;
+
     static constexpr bool Signed = false;
     static constexpr SizeType NMinSize = 1;
     static constexpr SizeType ElementAllocSize = sizeof(ElementType);
     static constexpr ElementType ElementMaxExponent = 4;
     static constexpr ElementType ElementMaxValue = 9999;
+    static constexpr SizeType ElementAllocBitSize = 14;
+    static constexpr SizeType BitSize = 14;
     
     static constexpr test::integer::Flag Flag();
 
@@ -394,6 +551,8 @@ struct Definition<std::uint16_t, 10>
     
     static std::uint16_t DigitElementValue(const std::uint16_t& v, 
         const std::size_t& off, const std::size_t& n = 1);
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -413,11 +572,24 @@ struct Definition<std::uint32_t, 10>
     typedef std::size_t SizeType;
     typedef std::uint32_t DigitType; 
 
+    static constexpr bool HasAdditionOp = true;
+    static constexpr bool HasSubtractionOp = true;
+    static constexpr bool HasMultiplicationOp = true;
+    static constexpr bool HasDivisionOp = true;
+    static constexpr bool HasShiftOp = true;
+    static constexpr bool HasNegationOp = true;
+    static constexpr bool HasAndOp = false;
+    static constexpr bool HasOrOp = false;
+    static constexpr bool HasXorOp = false;
+    static constexpr bool HasNotOp = false;
+
     static constexpr bool Signed = false;
     static constexpr SizeType NMinSize = 1;
     static constexpr SizeType ElementAllocSize = sizeof(ElementType);
     static constexpr ElementType ElementMaxExponent = 9;
     static constexpr ElementType ElementMaxValue = 999999999ul;
+    static constexpr SizeType ElementAllocBitSize = 30;
+    static constexpr SizeType BitSize = 30;
     
     static constexpr test::integer::Flag Flag();
 
@@ -439,6 +611,8 @@ struct Definition<std::uint32_t, 10>
     
     static std::uint32_t DigitElementValue(const std::uint32_t& v, 
         const std::size_t& off, const std::size_t& n = 1);
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -455,6 +629,9 @@ struct Definition<std::uint64_t, 10> :
     Definition<std::uint32_t, 10>
 {
     static constexpr SizeType NMinSize = 2;
+    static constexpr SizeType BitSize = 60;
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 template<>
@@ -462,6 +639,9 @@ struct Definition<std::int64_t, 10> :
     Definition<std::int32_t, 10>
 {  
     static constexpr SizeType NMinSize = 2;
+    static constexpr SizeType BitSize = 60;
+
+    static constexpr std::size_t AllocationSize(std::size_t n);
 };
 
 constexpr test::integer::Flag Definition<std::uint8_t, 2>::Flag()
@@ -526,6 +706,14 @@ std::uint8_t Definition<std::uint8_t, 2>::
     if (n == 0 || off >= 8) return 0;
     else if (n > 8) _n = 8;
     return (v & ((0xff >> (8 - _n)) << off)) >> off;
+}
+
+constexpr std::size_t Definition<std::uint8_t, 2>::
+    AllocationSize(std::size_t n)
+{
+    return n * test::integer::fmt::Definition<std::uint8_t, 2>::
+        ElementAllocSize * test::integer::fmt::Definition<std::uint8_t, 2>::
+        NMinSize;
 }
 
 constexpr test::integer::Flag Definition<std::int8_t, 2>::Flag()
@@ -597,6 +785,14 @@ std::uint16_t Definition<std::uint16_t, 2>::
     if (n == 0 || off >= 16) return 0;
     else if (n > 16) _n = 16;
     return (v & ((0xffff >> (16 - _n)) << off)) >> off;
+}
+
+constexpr std::size_t Definition<std::uint16_t, 2>::
+    AllocationSize(std::size_t n)
+{
+    return n * test::integer::fmt::Definition<std::uint16_t, 2>::
+        ElementAllocSize * test::integer::fmt::Definition<std::uint16_t, 2>::
+        NMinSize;
 }
 
 constexpr test::integer::Flag Definition<std::int16_t, 2>::Flag()
@@ -678,6 +874,14 @@ std::uint32_t Definition<std::uint32_t, 2>::
     return (v & ((0xffffffff >> (32 - _n)) << off)) >> off;
 }
 
+constexpr std::size_t Definition<std::uint32_t, 2>::
+    AllocationSize(std::size_t n)
+{
+    return n * test::integer::fmt::Definition<std::uint32_t, 2>::
+        ElementAllocSize * test::integer::fmt::Definition<std::uint32_t, 2>::
+        NMinSize;
+}
+
 constexpr test::integer::Flag Definition<std::int32_t, 2>::Flag()
 {
     return {test::integer::Flag::kSigned | 
@@ -721,6 +925,22 @@ std::uint8_t Definition<std::uint8_t, 8>::
     return 0;
 }
 
+constexpr std::size_t Definition<std::uint64_t, 2>::
+    AllocationSize(std::size_t n)
+{
+    return n * test::integer::fmt::Definition<std::uint64_t, 2>::
+        ElementAllocSize * test::integer::fmt::Definition<std::uint64_t, 2>::
+        NMinSize;
+}
+
+constexpr std::size_t Definition<std::int64_t, 2>::
+    AllocationSize(std::size_t n)
+{
+    return n * test::integer::fmt::Definition<std::int64_t, 2>::
+        ElementAllocSize * test::integer::fmt::Definition<std::int64_t, 2>::
+        NMinSize;
+}
+
 std::uint8_t Definition<std::uint8_t, 8>::
     ShiftRightElementValue(const std::uint8_t& v, const std::size_t& n)
 {
@@ -741,6 +961,16 @@ std::uint8_t Definition<std::uint8_t, 8>::
     if (n == 0 || off >= 2) return 0;
     else if (n > 2) _n = 2;
     return (v & ((0x3f >> (6 - (_n * 3))) << (off * 3))) >> (off * 3);
+}
+
+constexpr std::size_t Definition<std::uint8_t, 8>::
+    AllocationSize(std::size_t n)
+{
+    typedef test::integer::fmt::Definition<std::uint8_t, 8> DefOctType;
+    typedef test::integer::fmt::Definition<std::uint8_t, 2> DefBinType;
+    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
 }
 
 constexpr test::integer::Flag Definition<std::int8_t, 8>::Flag()
@@ -809,6 +1039,16 @@ std::uint16_t Definition<std::uint16_t, 8>::
     if (n == 0 || off >= 5) return 0;
     else if (n > 5) _n = 5;
     return (v & ((0x7fff >> (15 - (_n * 3))) << (off * 3))) >> (off * 3);
+}
+
+constexpr std::size_t Definition<std::uint16_t, 8>::
+    AllocationSize(std::size_t n)
+{
+    typedef test::integer::fmt::Definition<std::uint16_t, 8> DefOctType;
+    typedef test::integer::fmt::Definition<std::uint16_t, 2> DefBinType;
+    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
 }
 
 constexpr test::integer::Flag Definition<std::int16_t, 8>::Flag()
@@ -881,10 +1121,40 @@ std::uint32_t Definition<std::uint32_t, 8>::
     return (v & ((0x3fffffff >> (30 - (_n * 3))) << (off * 3))) >> (off * 3);
 }
 
+constexpr std::size_t Definition<std::uint32_t, 8>::
+    AllocationSize(std::size_t n)
+{
+    typedef test::integer::fmt::Definition<std::uint32_t, 8> DefOctType;
+    typedef test::integer::fmt::Definition<std::uint32_t, 2> DefBinType;
+    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+}
+
 constexpr test::integer::Flag Definition<std::int32_t, 8>::Flag()
 {
     return {test::integer::Flag::kSigned | 
         test::integer::Flag::kOctalFormat};
+}
+
+constexpr std::size_t Definition<std::uint64_t, 8>::
+    AllocationSize(std::size_t n)
+{
+    typedef test::integer::fmt::Definition<std::uint64_t, 8> DefOctType;
+    typedef test::integer::fmt::Definition<std::uint64_t, 2> DefBinType;
+    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+}
+
+constexpr std::size_t Definition<std::int64_t, 8>::
+    AllocationSize(std::size_t n)
+{
+    typedef test::integer::fmt::Definition<std::int64_t, 8> DefOctType;
+    typedef test::integer::fmt::Definition<std::int64_t, 2> DefBinType;
+    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
 }
 
 constexpr test::integer::Flag Definition<std::uint8_t, 10>::Flag()
@@ -958,6 +1228,17 @@ std::uint8_t Definition<std::uint8_t, 10>::
     if (div > (pwr - 1)) return div - ((div / pwr) * pwr);
     return div;
 }
+
+constexpr std::size_t Definition<std::uint8_t, 10>::
+    AllocationSize(std::size_t n)
+{
+    typedef test::integer::fmt::Definition<std::uint32_t, 8> DefOctType;
+    typedef test::integer::fmt::Definition<std::uint32_t, 2> DefBinType;
+    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
+        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+}
+
 
 constexpr test::integer::Flag Definition<std::int8_t, 10>::Flag()
 {
