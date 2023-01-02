@@ -2,6 +2,7 @@
 #define TEST_BYTE_BASE_H_
 
 #include "../System.h"
+#include "../sys/mem/Dummy.h"
 #include "../Queue.h"
 #include "Operator.h"
 #include "Iterator.h"
@@ -89,6 +90,8 @@ public:
     template<typename TCast = std::uint8_t, std::size_t NStep = sizeof(TCast)>
     ConstIteratorType<TCast, NStep> ReverseEnd() const;
 public:
+    template<typename T>
+    T& CastTo(const std::size_t& off = 0);
     template<typename T>
     T CastTo(const std::size_t& off = 0) const;
 public:
@@ -287,6 +290,26 @@ Base<N, Sign>::ReverseEnd() const
     
     return const_cast<Base<N, Sign>*>(this)->
         template ReverseEnd<TCast, NStep>();
+}
+
+template<std::size_t N, bool Sign>
+template<typename T>
+T& Base<N, Sign>::CastTo(const std::size_t& off)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "CastTo<%s>(off=%zu)",
+        TEST_SYS_DEBUG_T_NAME_STR(T), off);
+
+    const std::size_t size = sizeof(T);
+    const std::size_t bg = off;
+    const std::size_t ed = bg + size;
+
+    if (ed > N || bg >= N || bg >= ed)
+    {
+        return *(test::sys::mem::Dummy::Get<T>());
+    }
+    
+    return *(reinterpret_cast<T*>(m_block + off));
 }
 
 template<std::size_t N, bool Sign>
