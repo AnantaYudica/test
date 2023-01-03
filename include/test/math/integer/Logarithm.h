@@ -23,7 +23,7 @@ enum class Flag : int
 
 } //!log
 
-template<std::size_t NElementMaxExponent = -1, typename TValue,
+template<std::size_t NElementMaxExponent = (std::size_t)-1, typename TValue,
     typename TElement = typename test::math::integer::fmt::
         Trait<TValue>::ElementType,
     typename TExpand = typename test::math::integer::fmt::
@@ -69,7 +69,7 @@ static test::math::integer::log::Flag Logarithm(const TValue& v,
     return test::math::integer::log::Flag::ZeroValue;
 }
 
-template<std::size_t NElementMaxExponent = -1, typename TValue,
+template<std::size_t NElementMaxExponent = (std::size_t)-1, typename TValue,
     typename TElement = typename test::math::integer::fmt::
         Trait<TValue>::ElementType,
     typename TExpand = typename test::math::integer::fmt::
