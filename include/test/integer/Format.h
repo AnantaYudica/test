@@ -285,6 +285,18 @@ private:
         const FlagOperatorValType& op_val);
 public:
     bool IsZero() const;
+protected:
+    using BaseType::Begin;
+    using BaseType::End;
+protected:
+    using BaseType::ReverseBegin;
+    using BaseType::ReverseEnd;
+protected:
+    using BaseType::CastTo;
+protected:
+    using BaseType::Resize;
+protected:
+    using BaseType::Get;
 public:
     Format<TInt, NBase, N>& operator+=(const Format<TInt, NBase, N>& other);
 public:
