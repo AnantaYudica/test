@@ -1153,7 +1153,9 @@ Format<TInt, NBase, N>& Format<TInt, NBase, N>::operator++()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "operator++()");
 
-    *this += 1;
+    Format<TInt, NBase, N> one;
+    one[0] = 1;
+    *this += one;
 
     return *this;
 }
@@ -1165,7 +1167,7 @@ Format<TInt, NBase, N> Format<TInt, NBase, N>::operator++(int)
 
     Format<TInt, NBase, N> cpy = *this;
 
-    *this += 1;
+    ++(*this);
 
     return cpy;
 }
@@ -1175,7 +1177,9 @@ Format<TInt, NBase, N>& Format<TInt, NBase, N>::operator--()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "operator--()");
 
-    *this -= 1;
+    Format<TInt, NBase, N> one;
+    one[0] = 1;
+    *this -= one;
 
     return *this;
 }
@@ -1187,7 +1191,7 @@ Format<TInt, NBase, N> Format<TInt, NBase, N>::operator--(int)
 
     Format<TInt, NBase, N> cpy = *this;
 
-    *this += 1;
+    --(*this);
 
     return cpy;
 }
