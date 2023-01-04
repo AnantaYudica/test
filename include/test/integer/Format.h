@@ -908,7 +908,7 @@ Format<TInt, NBase, N>& Format<TInt, NBase, N>::AdditionSubtraction(
         Addition(*this, other, &carry);
         if (carry > 0)
         {
-            this->Flag().SetAdditionOverflow();
+            this->Flag().Error(FlagType::kOverflow);
         }
     }
     else if (op_val & FlagType::kNegationOp)
