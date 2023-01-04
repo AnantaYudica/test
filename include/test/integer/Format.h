@@ -260,7 +260,7 @@ public:
     static void Not(Format<TInt, NBase, N>& obj);
 public:
     Format();
-    Format(const ElementType& set);
+    explicit Format(const ElementType& set);
     ~Format();
 public:
     Format(const Format<TInt, NBase, N>& cpy);
