@@ -799,7 +799,7 @@ void Format<TInt, NBase, N>::Not(Format<TInt, NBase, N>& obj)
         TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition), &obj);
     
     BaseType& base_obj = static_cast<BaseType&>(obj);
-    base_obj = !base_obj;
+    base_obj = ~base_obj;
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
