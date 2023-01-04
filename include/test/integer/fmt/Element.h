@@ -77,16 +77,16 @@ public:
 public:
     Element<N, TDefinition>& operator=(const ElementType& elem) &&;
 public:
-    ElementType operator*() &&;
+    ElementType operator*() const &&;
 public:
-    bool operator==(const ElementType& elem) &&;
-    bool operator!=(const ElementType& elem) &&;
+    bool operator==(const ElementType& elem) const &&;
+    bool operator!=(const ElementType& elem) const &&;
 public:
-    bool operator<(const ElementType& elem) &&;
-    bool operator>(const ElementType& elem) &&;
+    bool operator<(const ElementType& elem) const &&;
+    bool operator>(const ElementType& elem) const &&;
 public:
-    bool operator<=(const ElementType& elem) &&;
-    bool operator>=(const ElementType& elem) &&;
+    bool operator<=(const ElementType& elem) const &&;
+    bool operator>=(const ElementType& elem) const &&;
 };
 
 template<std::size_t N, typename TDefinition>
@@ -143,7 +143,7 @@ Element<N, TDefinition>::operator=(const ElementType& elem) &&
 
 template<std::size_t N, typename TDefinition>
 typename Element<N, TDefinition>::ElementType
-Element<N, TDefinition>::operator*() &&
+Element<N, TDefinition>::operator*() const &&
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "operator*() &&");
 
@@ -151,7 +151,7 @@ Element<N, TDefinition>::operator*() &&
 }
 
 template<std::size_t N, typename TDefinition>
-bool Element<N, TDefinition>::operator==(const ElementType& elem) &&
+bool Element<N, TDefinition>::operator==(const ElementType& elem) const &&
 {    
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator==(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
@@ -160,7 +160,7 @@ bool Element<N, TDefinition>::operator==(const ElementType& elem) &&
 }
 
 template<std::size_t N, typename TDefinition>
-bool Element<N, TDefinition>::operator!=(const ElementType& elem) &&
+bool Element<N, TDefinition>::operator!=(const ElementType& elem) const &&
 {    
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator!=(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
@@ -169,7 +169,7 @@ bool Element<N, TDefinition>::operator!=(const ElementType& elem) &&
 }
 
 template<std::size_t N, typename TDefinition>
-bool Element<N, TDefinition>::operator<(const ElementType& elem) &&
+bool Element<N, TDefinition>::operator<(const ElementType& elem) const &&
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator<(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
@@ -178,7 +178,7 @@ bool Element<N, TDefinition>::operator<(const ElementType& elem) &&
 }
 
 template<std::size_t N, typename TDefinition>
-bool Element<N, TDefinition>::operator>(const ElementType& elem) &&
+bool Element<N, TDefinition>::operator>(const ElementType& elem) const &&
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator>(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
@@ -187,7 +187,7 @@ bool Element<N, TDefinition>::operator>(const ElementType& elem) &&
 }
 
 template<std::size_t N, typename TDefinition>
-bool Element<N, TDefinition>::operator<=(const ElementType& elem) &&
+bool Element<N, TDefinition>::operator<=(const ElementType& elem) const &&
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator<=(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
@@ -196,7 +196,7 @@ bool Element<N, TDefinition>::operator<=(const ElementType& elem) &&
 }
 
 template<std::size_t N, typename TDefinition>
-bool Element<N, TDefinition>::operator>=(const ElementType& elem) &&
+bool Element<N, TDefinition>::operator>=(const ElementType& elem) const &&
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator>=(elem=%s) &&",TEST_SYS_DEBUG_VALUE_STR(0, elem));
