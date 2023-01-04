@@ -53,16 +53,16 @@ namespace integer
 
 template<typename TInt, std::size_t NBase = 2, std::size_t N = 1>
 class Format :
-    public test::integer::Raw<N * test::integer::fmt::Definition<TInt, 
-        NBase>::ElementAllocSize>
+    public test::integer::Raw<test::integer::fmt::Definition<TInt, 
+        NBase>::AllocationSize(N)>
 {
 private:
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::integer::Format<TInt, 
         NBase, N>> DebugType;
 public:
-    typedef test::integer::Raw<N * test::integer::fmt::Definition<TInt, 
-        NBase>::ElementAllocSize> BaseType;
+    typedef test::integer::Raw<test::integer::fmt::Definition<TInt, 
+        NBase>::AllocationSize(N)> BaseType;
 public: 
     typedef test::integer::fmt::Definition<TInt, NBase> DefinitionType;
 public:
@@ -73,13 +73,13 @@ public:
     typedef test::integer::Flag FlagType;
     typedef typename FlagType::OperatorValueType FlagOperatorValType;
 public:
-    typedef test::integer::fmt::Element<N * 
-        DefinitionType::ElementAllocSize, DefinitionType> FmtElementType;
+    typedef test::integer::fmt::Element<DefinitionType::AllocationSize(N), 
+        DefinitionType> FmtElementType;
 public:
     static constexpr SizeType Size = N;
 public:
     static constexpr SizeType AllocationSize = 
-        N * DefinitionType::ElementAllocSize;
+        DefinitionType::AllocationSize(N);
 public:
     static constexpr ElementType ElementMaxExponent = 
         DefinitionType::ElementMaxExponent;
@@ -448,7 +448,7 @@ Format<TInt, NBase, N>::GetElement(const Format<TInt, NBase, N>& v,
         "GetElement(v=%p, at=%zu)", &v, at);
     
     return v.template CastTo<ElementType>(at * 
-        DefinitionType::ElementAllocSize);
+        DefinitionType::AllocationSize(N));
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
@@ -461,7 +461,7 @@ Format<TInt, NBase, N>::SetElement(Format<TInt, NBase, N>& v,
         TEST_SYS_DEBUG_VALUE_STR(0, set_v));
     
     return (v.template CastTo<ElementType>(at * 
-        DefinitionType::ElementAllocSize) = set_v);
+        DefinitionType::AllocationSize(N)) = set_v);
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
@@ -1271,7 +1271,7 @@ Format<TInt, NBase, N>::operator[](const SizeType& n)
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator[](n=%zu)", n);
 
-    return {*this, n * DefinitionType::ElementAllocSize};
+    return {*this, DefinitionType::AllocationSize(n)};
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
@@ -1282,7 +1282,7 @@ Format<TInt, NBase, N>::operator[](const SizeType& n) const
         "operator[](n=%zu) const", n);
     
     auto* cast = const_cast<Format<TInt, NBase, N>*>(this);
-    return {*cast, n* DefinitionType::ElementAllocSize};
+    return {*cast, DefinitionType::AllocationSize(n)};
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
