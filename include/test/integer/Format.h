@@ -329,7 +329,7 @@ public:
     Format<TInt, NBase, N> operator~() const;
 public:
     FmtElementType operator[](const SizeType& n);
-    ElementType operator[](const SizeType& n) const;
+    const FmtElementType operator[](const SizeType& n) const;
 public:
     Format<TInt, NBase, N> 
         operator+(const Format<TInt, NBase, N>& other) const;
@@ -1254,14 +1254,14 @@ Format<TInt, NBase, N>::operator[](const SizeType& n)
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-typename Format<TInt, NBase, N>::ElementType 
+const typename Format<TInt, NBase, N>::FmtElementType 
 Format<TInt, NBase, N>::operator[](const SizeType& n) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator[](n=%zu) const", n);
     
-    return this->template CastTo<ElementType>(n * 
-        DefinitionType::ElementAllocSize);
+    auto* cast = const_cast<Format<TInt, NBase, N>*>(this);
+    return {*cast, n* DefinitionType::ElementAllocSize};
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
