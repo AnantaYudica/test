@@ -76,7 +76,7 @@ public:
     typedef test::integer::fmt::Element<DefinitionType::AllocationSize(N), 
         DefinitionType> FmtElementType;
 public:
-    static constexpr SizeType Size = N;
+    static constexpr SizeType Size = N * DefinitionType::NMinSize;
 public:
     static constexpr SizeType AllocationSize = 
         DefinitionType::AllocationSize(N);
@@ -447,8 +447,8 @@ Format<TInt, NBase, N>::GetElement(const Format<TInt, NBase, N>& v,
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "GetElement(v=%p, at=%zu)", &v, at);
     
-    return v.template CastTo<ElementType>(at * 
-        DefinitionType::AllocationSize(N));
+    return v.template CastTo<ElementType>(at *
+        DefinitionType::ElementAllocSize);
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
@@ -460,8 +460,8 @@ Format<TInt, NBase, N>::SetElement(Format<TInt, NBase, N>& v,
         "SetElement(v=%p, at=%zu, set_v=%s)", &v, at,
         TEST_SYS_DEBUG_VALUE_STR(0, set_v));
     
-    return (v.template CastTo<ElementType>(at * 
-        DefinitionType::AllocationSize(N)) = set_v);
+    return (v.template CastTo<ElementType>(at *
+        DefinitionType::ElementAllocSize) = set_v);
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
@@ -1271,7 +1271,7 @@ Format<TInt, NBase, N>::operator[](const SizeType& n)
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator[](n=%zu)", n);
 
-    return {*this, DefinitionType::AllocationSize(n)};
+    return {*this, n * DefinitionType::ElementAllocSize};
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
@@ -1282,7 +1282,7 @@ Format<TInt, NBase, N>::operator[](const SizeType& n) const
         "operator[](n=%zu) const", n);
     
     auto* cast = const_cast<Format<TInt, NBase, N>*>(this);
-    return {*cast, DefinitionType::AllocationSize(n)};
+    return {*cast, n * DefinitionType::ElementAllocSize};
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
