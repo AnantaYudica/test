@@ -284,6 +284,9 @@ private:
         const Format<TInt, NBase, N>& other,
         const FlagOperatorValType& op_val);
 public:
+    BaseType& Raw();
+    const BaseType& Raw() const;
+public:
     bool IsZero() const;
 protected:
     using BaseType::Begin;
@@ -992,6 +995,24 @@ Format<TInt, NBase, N>::operator-=(const Format<TInt, NBase, N>& other)
     FlagOperatorValType op_val = (BaseType::Flag() -= other.Flag());
     
     return AdditionSubtraction(other, op_val);
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+typename Format<TInt, NBase, N>::BaseType& 
+Format<TInt, NBase, N>::Raw()
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Raw()");
+
+    return *this;
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+const typename Format<TInt, NBase, N>::BaseType& 
+Format<TInt, NBase, N>::Raw() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Raw() const");
+
+    return *this;
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
