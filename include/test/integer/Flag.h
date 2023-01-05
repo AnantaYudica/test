@@ -448,4 +448,12 @@ inline Flag::operator ValueType() const
 
 } //!test
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::integer::Flag
+
+template<>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE("{m_val=0x%hhx, m_errVal=0x%hhx}", 
+    (std::uint8_t)val, val.Error());
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_INTEGER_FLAG_H_
