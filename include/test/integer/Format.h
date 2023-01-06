@@ -107,61 +107,57 @@ public:
         const std::size_t& at, const ElementType& set_v);
 public:
     template<typename TDefinition = 
-            test::integer::fmt::Definition<TInt, NBase>,
+            test::integer::fmt::Definition<TInt, NBase>, typename TOther,
         typename std::enable_if<TDefinition::HasAdditionOp == true, 
             int>::type = 1>
     static void Addition(Format<TInt, NBase, N>& obj, 
-        const Format<TInt, NBase, N>& other, ElementType* carry = nullptr);
+        const TOther& other, ElementType* carry = nullptr);
     template<typename TDefinition = 
-            test::integer::fmt::Definition<TInt, NBase>,
+            test::integer::fmt::Definition<TInt, NBase>, typename TOther,
         typename std::enable_if<TDefinition::HasAdditionOp == false, 
             int>::type = 1>
     static void Addition(Format<TInt, NBase, N>& obj, 
-        const Format<TInt, NBase, N>& other, ElementType* carry = nullptr);
+        const TOther& other, ElementType* carry = nullptr);
 public:
     template<typename TDefinition = 
-            test::integer::fmt::Definition<TInt, NBase>,
+            test::integer::fmt::Definition<TInt, NBase>, typename TOther,
         typename std::enable_if<TDefinition::HasSubtractionOp == true, 
             int>::type = 1>
     static void Subtraction(Format<TInt, NBase, N>& obj, 
-        const Format<TInt, NBase, N>& other, ElementType* carry = nullptr);
+        const TOther& other, ElementType* carry = nullptr);
     template<typename TDefinition = 
-            test::integer::fmt::Definition<TInt, NBase>,
+            test::integer::fmt::Definition<TInt, NBase>, typename TOther,
         typename std::enable_if<TDefinition::HasSubtractionOp == false, 
             int>::type = 1>
     static void Subtraction(Format<TInt, NBase, N>& obj, 
-        const Format<TInt, NBase, N>& other, ElementType* carry = nullptr);
+        const TOther& other, ElementType* carry = nullptr);
 public:
     template<typename TDefinition = 
-            test::integer::fmt::Definition<TInt, NBase>,
+            test::integer::fmt::Definition<TInt, NBase>, typename TOther,
         typename std::enable_if<TDefinition::
             HasMultiplicationOp == true, int>::type = 1>
     static void Multiplication(Format<TInt, NBase, N>& obj, 
-        const Format<TInt, NBase, N>& other, 
-        Format<TInt, NBase, N>* overflow = nullptr);
+        const TOther& other, Format<TInt, NBase, N>* overflow = nullptr);
     template<typename TDefinition = 
-            test::integer::fmt::Definition<TInt, NBase>,
+            test::integer::fmt::Definition<TInt, NBase>, typename TOther,
         typename std::enable_if<TDefinition::
             HasMultiplicationOp == false, int>::type = 1>
     static void Multiplication(Format<TInt, NBase, N>& obj, 
-        const Format<TInt, NBase, N>& other, 
-        Format<TInt, NBase, N>* overflow = nullptr);
+        const TOther& other, Format<TInt, NBase, N>* overflow = nullptr);
 public:
     template<typename TDefinition = 
-            test::integer::fmt::Definition<TInt, NBase>,
+            test::integer::fmt::Definition<TInt, NBase>, typename TOther,
         typename std::enable_if<TDefinition::
             HasDivisionOp == true, int>::type = 1>
     static void Division(Format<TInt, NBase, N>& obj, 
-        const Format<TInt, NBase, N>& other, 
-        test::math::integer::div::Flag& flag,
+        const TOther& other, test::math::integer::div::Flag& flag,
         Format<TInt, NBase, N>* rem = nullptr);
     template<typename TDefinition = 
-            test::integer::fmt::Definition<TInt, NBase>,
+            test::integer::fmt::Definition<TInt, NBase>, typename TOther,
         typename std::enable_if<TDefinition::
             HasDivisionOp == false, int>::type = 1>
     static void Division(Format<TInt, NBase, N>& obj, 
-        const Format<TInt, NBase, N>& other, 
-        test::math::integer::div::Flag& flag,
+        const TOther& other, test::math::integer::div::Flag& flag,
         Format<TInt, NBase, N>* rem = nullptr);
 public:
     template<typename TDefinition = 
@@ -273,16 +269,30 @@ private:
             test::integer::fmt::Definition<TInt, NBase>,
         typename std::enable_if<TDefinition::Signed == true, 
             int>::type = 1>
-    Format<TInt, NBase, N>& AdditionSubtraction(
-        const Format<TInt, NBase, N>& other,
-        const FlagOperatorValType& op_val);
+    Format<TInt, NBase, N>& 
+        AdditionSubtraction(const Format<TInt, NBase, N>& other,
+            const FlagOperatorValType& op_val);
     template<typename TDefinition = 
             test::integer::fmt::Definition<TInt, NBase>,
         typename std::enable_if<TDefinition::Signed == false, 
             int>::type = 1>
-    Format<TInt, NBase, N>& AdditionSubtraction(
-        const Format<TInt, NBase, N>& other,
-        const FlagOperatorValType& op_val);
+    Format<TInt, NBase, N>& 
+        AdditionSubtraction(const Format<TInt, NBase, N>& other,
+            const FlagOperatorValType& op_val);
+    template<typename TDefinition = 
+            test::integer::fmt::Definition<TInt, NBase>,
+        typename std::enable_if<TDefinition::Signed == true, 
+            int>::type = 1>
+    Format<TInt, NBase, N>& 
+        AdditionSubtraction(const ExpandType& expand_val,
+            const FlagOperatorValType& op_val);
+    template<typename TDefinition = 
+            test::integer::fmt::Definition<TInt, NBase>,
+        typename std::enable_if<TDefinition::Signed == false, 
+            int>::type = 1>
+    Format<TInt, NBase, N>& 
+        AdditionSubtraction(const ExpandType& expand_val,
+            const FlagOperatorValType& op_val);
 public:
     BaseType& Raw();
     const BaseType& Raw() const;
@@ -302,14 +312,19 @@ protected:
     using BaseType::Get;
 public:
     Format<TInt, NBase, N>& operator+=(const Format<TInt, NBase, N>& other);
+    Format<TInt, NBase, N>& operator+=(const ExpandType& expand_val);
 public:
     Format<TInt, NBase, N>& operator-=(const Format<TInt, NBase, N>& other);
+    Format<TInt, NBase, N>& operator-=(const ExpandType& expand_val);
 public:
     Format<TInt, NBase, N>& operator*=(const Format<TInt, NBase, N>& other);
+    Format<TInt, NBase, N>& operator*=(const ExpandType& expand_val);
 public:
     Format<TInt, NBase, N>& operator/=(const Format<TInt, NBase, N>& other);
+    Format<TInt, NBase, N>& operator/=(const ExpandType& expand_val);
 public:
     Format<TInt, NBase, N>& operator%=(const Format<TInt, NBase, N>& other);
+    Format<TInt, NBase, N>& operator%=(const ExpandType& expand_val);
 public:
     Format<TInt, NBase, N>& operator&=(const Format<TInt, NBase, N>& other);
 public:
@@ -337,13 +352,23 @@ public:
     Format<TInt, NBase, N> 
         operator+(const Format<TInt, NBase, N>& other) const;
     Format<TInt, NBase, N> 
+        operator+(const ExpandType& expand_val) const;
+    Format<TInt, NBase, N> 
         operator-(const Format<TInt, NBase, N>& other) const;
+    Format<TInt, NBase, N> 
+        operator-(const ExpandType& expand_val) const;
     Format<TInt, NBase, N> 
         operator*(const Format<TInt, NBase, N>& other) const;
     Format<TInt, NBase, N> 
+        operator*(const ExpandType& expand_val) const;
+    Format<TInt, NBase, N> 
         operator/(const Format<TInt, NBase, N>& other) const;
     Format<TInt, NBase, N> 
+        operator/(const ExpandType& expand_val) const;
+    Format<TInt, NBase, N> 
         operator%(const Format<TInt, NBase, N>& other) const;
+    Format<TInt, NBase, N> 
+        operator%(const ExpandType& expand_val) const;
     Format<TInt, NBase, N> 
         operator&(const Format<TInt, NBase, N>& other) const;
     Format<TInt, NBase, N> 
@@ -465,14 +490,14 @@ Format<TInt, NBase, N>::SetElement(Format<TInt, NBase, N>& v,
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
-    HasAdditionOp == true, int>::type>
+template<typename TDefinition, typename TOther, 
+    typename std::enable_if<TDefinition::HasAdditionOp == true, int>::type>
 void Format<TInt, NBase, N>::Addition(Format<TInt, NBase, N>& obj, 
-    const Format<TInt, NBase, N>& other, ElementType* carry)
+    const TOther& other, ElementType* carry)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "Addition<%s, true>(obj=%p, other=%p, carry=%p)", 
-        TEST_SYS_DEBUG_T_NAME_STR(TDefinition),
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition, TOther),
         &obj, &other, carry);
     
     if (carry != nullptr)
@@ -486,27 +511,27 @@ void Format<TInt, NBase, N>::Addition(Format<TInt, NBase, N>& obj,
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
-    HasAdditionOp == false, int>::type>
+template<typename TDefinition, typename TOther, 
+    typename std::enable_if<TDefinition::HasAdditionOp == false, int>::type>
 void Format<TInt, NBase, N>::Addition(Format<TInt, NBase, N>& obj, 
-    const Format<TInt, NBase, N>& other, ElementType* carry)
+    const TOther& other, ElementType* carry)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "Addition<%s, false>(obj=%p, other=%p, carry=%p)", 
-        TEST_SYS_DEBUG_T_NAME_STR(TDefinition),
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition, TOther),
         &obj, &other, carry);
     
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
-    HasSubtractionOp == true, int>::type>
+template<typename TDefinition, typename TOther, 
+    typename std::enable_if<TDefinition::HasSubtractionOp == true, int>::type>
 void Format<TInt, NBase, N>::Subtraction(Format<TInt, NBase, N>& obj, 
-    const Format<TInt, NBase, N>& other, ElementType* carry)
+    const TOther& other, ElementType* carry)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "Subtraction<%s, true>(obj=%p, other=%p, carry=%p)", 
-        TEST_SYS_DEBUG_T_NAME_STR(TDefinition),
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition, TOther),
         &obj, &other, carry);
     
     if (carry != nullptr)
@@ -520,27 +545,28 @@ void Format<TInt, NBase, N>::Subtraction(Format<TInt, NBase, N>& obj,
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
-    HasSubtractionOp == false, int>::type>
+template<typename TDefinition, typename TOther, 
+    typename std::enable_if<TDefinition::HasSubtractionOp == false, int>::type>
 void Format<TInt, NBase, N>::Subtraction(Format<TInt, NBase, N>& obj, 
-    const Format<TInt, NBase, N>& other, ElementType* carry)
+    const TOther& other, ElementType* carry)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "Subtraction<%s, false>(obj=%p, other=%p, carry=%p)", 
-        TEST_SYS_DEBUG_T_NAME_STR(TDefinition),
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition, TOther),
         &obj, &other, carry);
     
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
-    HasMultiplicationOp == true, int>::type>
+template<typename TDefinition, typename TOther, 
+    typename std::enable_if<TDefinition::
+        HasMultiplicationOp == true, int>::type>
 void Format<TInt, NBase, N>::Multiplication(Format<TInt, NBase, N>& obj, 
-    const Format<TInt, NBase, N>& other, Format<TInt, NBase, N>* overflow)
+    const TOther& other, Format<TInt, NBase, N>* overflow)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "Multiplication<%s, true>(obj=%p, other=%p, overflow=%p)", 
-        TEST_SYS_DEBUG_T_NAME_STR(TDefinition),
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition, TOther),
         &obj, &other, overflow);
     
     if (overflow != nullptr)
@@ -554,29 +580,29 @@ void Format<TInt, NBase, N>::Multiplication(Format<TInt, NBase, N>& obj,
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
+template<typename TDefinition, typename TOther, 
+    typename std::enable_if<TDefinition::
         HasMultiplicationOp == false, int>::type>
 void Format<TInt, NBase, N>::Multiplication(Format<TInt, NBase, N>& obj, 
-    const Format<TInt, NBase, N>& other, Format<TInt, NBase, N>* overflow)
+    const TOther& other, Format<TInt, NBase, N>* overflow)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "Multiplication<%s, false>(obj=%p, other=%p, overflow=%p)", 
-        TEST_SYS_DEBUG_T_NAME_STR(TDefinition),
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition, TOther),
         &obj, &other, overflow);
     
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
-        HasDivisionOp == true, int>::type>
+template<typename TDefinition, typename TOther, 
+    typename std::enable_if<TDefinition::HasDivisionOp == true, int>::type>
 void Format<TInt, NBase, N>::Division(Format<TInt, NBase, N>& obj, 
-    const Format<TInt, NBase, N>& other, 
-    test::math::integer::div::Flag& flag,
+    const TOther& other, test::math::integer::div::Flag& flag,
     Format<TInt, NBase, N>* rem)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "Division<%s, true>(obj=%p, other=%p, flag=%p, rem=%p)", 
-        TEST_SYS_DEBUG_T_NAME_STR(TDefinition),
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition, TOther),
         &obj, &other, &flag, rem);
     
     if (rem != nullptr)
@@ -590,16 +616,15 @@ void Format<TInt, NBase, N>::Division(Format<TInt, NBase, N>& obj,
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
-    HasDivisionOp == false, int>::type>
+template<typename TDefinition, typename TOther, 
+    typename std::enable_if<TDefinition::HasDivisionOp == false, int>::type>
 void Format<TInt, NBase, N>::Division(Format<TInt, NBase, N>& obj, 
-    const Format<TInt, NBase, N>& other, 
-    test::math::integer::div::Flag& flag,
+    const TOther& other, test::math::integer::div::Flag& flag,
     Format<TInt, NBase, N>* rem)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "Division<%s, false>(obj=%p, other=%p, flag=%p, rem=%p)", 
-        TEST_SYS_DEBUG_T_NAME_STR(TDefinition),
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition, TOther),
         &obj, &other, &flag, rem);
 }
 
@@ -894,11 +919,11 @@ Format<TInt, NBase, N>::operator=(Format<TInt, NBase, N>&& mov)
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
-    Signed == true, int>::type>
-Format<TInt, NBase, N>& Format<TInt, NBase, N>::AdditionSubtraction(
-    const Format<TInt, NBase, N>& other,
-    const FlagOperatorValType& op_val)
+template<typename TDefinition, 
+    typename std::enable_if<TDefinition::Signed == true, int>::type>
+Format<TInt, NBase, N>& Format<TInt, NBase, N>::
+    AdditionSubtraction(const Format<TInt, NBase, N>& other,
+        const FlagOperatorValType& op_val)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "AdditionSubtraction<%s, true>(other=%p, op=%d)", 
@@ -945,10 +970,10 @@ Format<TInt, NBase, N>& Format<TInt, NBase, N>::AdditionSubtraction(
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-template<typename TDefinition, typename std::enable_if<TDefinition::
-    Signed == false, int>::type>
+template<typename TDefinition, 
+    typename std::enable_if<TDefinition::Signed == false, int>::type>
 Format<TInt, NBase, N>& Format<TInt, NBase, N>::
-    AdditionSubtraction(const Format<TInt, NBase, N>& other,
+        AdditionSubtraction(const Format<TInt, NBase, N>& other,
     const FlagOperatorValType& op_val)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
@@ -972,29 +997,98 @@ Format<TInt, NBase, N>& Format<TInt, NBase, N>::
 
     return *this;
 }
-    
+
 template<typename TInt, std::size_t NBase, std::size_t N>
-Format<TInt, NBase, N>&
-Format<TInt, NBase, N>::operator+=(const Format<TInt, NBase, N>& other)
+template<typename TDefinition,
+    typename std::enable_if<TDefinition::Signed == true, int>::type>
+Format<TInt, NBase, N>& Format<TInt, NBase, N>::
+    AdditionSubtraction(const ExpandType& expand_val,
+        const FlagOperatorValType& op_val)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "operator+=(other=%p)", &other);
+        "AdditionSubtraction<%s, true>(expand_val=%s, op=%d)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition), 
+        TEST_SYS_DEBUG_VALUE_STR(0, expand_val), op_val);
     
-    FlagOperatorValType op_val = (BaseType::Flag() += other.Flag());
-    
-    return AdditionSubtraction(other, op_val);
+    ElementType carry = 0;
+
+    if (op_val & FlagType::kAdditionOp)
+    {
+        Addition(*this, expand_val, &carry);
+        if (carry > 0)
+        {
+            this->Flag().Error(FlagType::kOverflow);
+        }
+    }
+    else if (op_val & FlagType::kNegationOp)
+    {
+        ExpandType expand_split = DefinitionType::ExpandSplit(expand_val);
+        const ElementType elem0 = DefinitionType::
+            ExpandElementValue(expand_split);
+        const ElementType elem1 = DefinitionType::
+            ExpandCarryValue(expand_split);
+        Format<TInt, NBase, N> fmt_expand_val;
+        if (N > 0)
+        {
+            fmt_expand_val[0] = elem0;
+        }
+        if (N > 1)
+        {
+            fmt_expand_val[1] = elem1;
+        }
+
+        const auto comp = test::math::integer::
+            Comparison(*this, fmt_expand_val);
+        if (comp < 0)
+        {
+            if (!this->Flag().IsNegative())
+            {
+                fmt_expand_val.Flag().SetNegative();
+            }
+            Subtraction(fmt_expand_val, *this);
+            *this = fmt_expand_val;
+        }
+        else
+        {
+            Subtraction(*this, fmt_expand_val);
+            if (comp == 0 && this->Flag().IsNegative())
+            {
+                this->Flag().UnsetNegative();
+            }
+        }
+    }
+
+    return *this;
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
-Format<TInt, NBase, N>& 
-Format<TInt, NBase, N>::operator-=(const Format<TInt, NBase, N>& other)
+template<typename TDefinition,
+    typename std::enable_if<TDefinition::Signed == false, int>::type>
+Format<TInt, NBase, N>& Format<TInt, NBase, N>::
+    AdditionSubtraction(const ExpandType& expand_val,
+        const FlagOperatorValType& op_val)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "operator-=(other=%p)", &other);
-    
-    FlagOperatorValType op_val = (BaseType::Flag() -= other.Flag());
-    
-    return AdditionSubtraction(other, op_val);
+        "AdditionSubtraction<%s, false>(expand_val=%s, op=%d)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TDefinition), 
+        TEST_SYS_DEBUG_VALUE_STR(0, expand_val), op_val);
+
+    ElementType carry = 0;
+
+    if (op_val & FlagType::kAdditionOp)
+    {
+        Addition(*this, expand_val, &carry);
+        if (carry > 0)
+        {
+            this->Flag().Error(FlagType::kOverflow);
+        }
+    }
+    else if (op_val & FlagType::kNegationOp)
+    {
+        Subtraction(*this, expand_val);
+    }
+
+    return *this;
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
@@ -1031,6 +1125,54 @@ bool Format<TInt, NBase, N>::IsZero() const
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N>&
+Format<TInt, NBase, N>::operator+=(const Format<TInt, NBase, N>& other)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator+=(other=%p)", &other);
+    
+    FlagOperatorValType op_val = (BaseType::Flag() += other.Flag());
+    
+    return AdditionSubtraction(other, op_val);
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N>& 
+Format<TInt, NBase, N>::operator+=(const ExpandType& expand_val)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator+=(expand_val=%s)", TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+    
+    FlagOperatorValType op_val = (BaseType::Flag() += DefinitionType::Flag());
+    
+    return AdditionSubtraction(expand_val, op_val);
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N>& 
+Format<TInt, NBase, N>::operator-=(const Format<TInt, NBase, N>& other)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator-=(other=%p)", &other);
+    
+    FlagOperatorValType op_val = (BaseType::Flag() -= other.Flag());
+    
+    return AdditionSubtraction(other, op_val);
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N>& 
+Format<TInt, NBase, N>::operator-=(const ExpandType& expand_val)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator-=(expand_val=%s)", TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+    
+    FlagOperatorValType op_val = (BaseType::Flag() -= DefinitionType::Flag());
+    
+    return AdditionSubtraction(expand_val, op_val);
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
 Format<TInt, NBase, N>& 
 Format<TInt, NBase, N>::operator*=(const Format<TInt, NBase, N>& other)
 {
@@ -1042,6 +1184,27 @@ Format<TInt, NBase, N>::operator*=(const Format<TInt, NBase, N>& other)
     Format<TInt, NBase, N> overflow;
     
     Multiplication(*this, other, &overflow);
+
+    if (!overflow.IsZero())
+    {
+        this->Flag().Error(FlagType::kOverflow);
+    }
+
+    return *this;
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N>& 
+Format<TInt, NBase, N>::operator*=(const ExpandType& expand_val)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator*=(expand_val=%s)", TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+
+    BaseType::Flag() *= DefinitionType::Flag();
+
+    Format<TInt, NBase, N> overflow;
+    
+    Multiplication(*this, expand_val, &overflow);
 
     if (!overflow.IsZero())
     {
@@ -1082,6 +1245,32 @@ Format<TInt, NBase, N>::operator/=(const Format<TInt, NBase, N>& other)
 
 template<typename TInt, std::size_t NBase, std::size_t N>
 Format<TInt, NBase, N>& 
+Format<TInt, NBase, N>::operator/=(const ExpandType& expand_val)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator/=(expand_val=%s)", TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+    
+    ExpandType expand_split = DefinitionType::ExpandSplit(expand_val);
+    const ElementType elem0 = DefinitionType::
+        ExpandElementValue(expand_split);
+    const ElementType elem1 = DefinitionType::
+        ExpandCarryValue(expand_split);
+    
+    Format<TInt, NBase, N> fmt_expand_val;
+    if (N > 0)
+    {
+        fmt_expand_val[0] = elem0;
+    }
+    if (N > 1)
+    {
+        fmt_expand_val[1] = elem1;
+    }
+    
+    return (*this) /= fmt_expand_val;
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N>& 
 Format<TInt, NBase, N>::operator%=(const Format<TInt, NBase, N>& other)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
@@ -1097,6 +1286,33 @@ Format<TInt, NBase, N>::operator%=(const Format<TInt, NBase, N>& other)
 
     *this = rem;
     return *this;
+}
+
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N>& 
+Format<TInt, NBase, N>::operator%=(const ExpandType& expand_val)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator%=(other=%s)", TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+    
+    ExpandType expand_split = DefinitionType::ExpandSplit(expand_val);
+    const ElementType elem0 = DefinitionType::
+        ExpandElementValue(expand_split);
+    const ElementType elem1 = DefinitionType::
+        ExpandCarryValue(expand_split);
+    
+    Format<TInt, NBase, N> fmt_expand_val;
+    if (N > 0)
+    {
+        fmt_expand_val[0] = elem0;
+    }
+    if (N > 1)
+    {
+        fmt_expand_val[1] = elem1;
+    }
+    
+    return (*this) %= fmt_expand_val;
 }
 
 template<typename TInt, std::size_t NBase, std::size_t N>
@@ -1301,6 +1517,21 @@ Format<TInt, NBase, N>::operator+(const Format<TInt, NBase, N>& other) const
 
 template<typename TInt, std::size_t NBase, std::size_t N>
 Format<TInt, NBase, N> 
+Format<TInt, NBase, N>::operator+(const ExpandType& expand_val) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator+(element_val=%s) const", 
+        TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+    
+    Format<TInt, NBase, N> cpy(*this);
+
+    cpy += expand_val;
+
+    return cpy;
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N> 
 Format<TInt, NBase, N>::operator-(const Format<TInt, NBase, N>& other) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
@@ -1309,6 +1540,21 @@ Format<TInt, NBase, N>::operator-(const Format<TInt, NBase, N>& other) const
     Format<TInt, NBase, N> cpy(*this);
 
     cpy -= other;
+
+    return cpy;
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N> 
+Format<TInt, NBase, N>::operator-(const ExpandType& expand_val) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator-(expand_val=%s) const", 
+        TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+    
+    Format<TInt, NBase, N> cpy(*this);
+
+    cpy -= expand_val;
 
     return cpy;
 }
@@ -1329,6 +1575,21 @@ Format<TInt, NBase, N>::operator*(const Format<TInt, NBase, N>& other) const
 
 template<typename TInt, std::size_t NBase, std::size_t N>
 Format<TInt, NBase, N> 
+Format<TInt, NBase, N>::operator*(const ExpandType& expand_val) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator*(expand_val=%s) const", 
+        TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+    
+    Format<TInt, NBase, N> cpy(*this);
+
+    cpy *= expand_val;
+
+    return cpy;
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N> 
 Format<TInt, NBase, N>::operator/(const Format<TInt, NBase, N>& other) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
@@ -1343,6 +1604,21 @@ Format<TInt, NBase, N>::operator/(const Format<TInt, NBase, N>& other) const
 
 template<typename TInt, std::size_t NBase, std::size_t N>
 Format<TInt, NBase, N> 
+Format<TInt, NBase, N>::operator/(const ExpandType& expand_val) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator/(expand_val=%s) const", 
+        TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+    
+    Format<TInt, NBase, N> cpy(*this);
+
+    cpy /= expand_val;
+
+    return cpy;
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N> 
 Format<TInt, NBase, N>::operator%(const Format<TInt, NBase, N>& other) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
@@ -1351,6 +1627,21 @@ Format<TInt, NBase, N>::operator%(const Format<TInt, NBase, N>& other) const
     Format<TInt, NBase, N> cpy(*this);
 
     cpy %= other;
+
+    return cpy;
+}
+
+template<typename TInt, std::size_t NBase, std::size_t N>
+Format<TInt, NBase, N> 
+Format<TInt, NBase, N>::operator%(const ExpandType& expand_val) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator%(expand_val=%s) const", 
+        TEST_SYS_DEBUG_VALUE_STR(0, expand_val));
+    
+    Format<TInt, NBase, N> cpy(*this);
+
+    cpy %= expand_val;
 
     return cpy;
 }
