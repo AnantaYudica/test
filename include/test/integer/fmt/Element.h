@@ -135,7 +135,11 @@ Element<N, TDefinition>::operator=(const ElementType& elem) &&
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "operator=(elem=%s) &&", TEST_SYS_DEBUG_VALUE_STR(0, elem));
 
-    ElementType set = elem & DefinitionType::ElementMaxValue;
+    ElementType set = DefinitionType::ElementMaxValue;
+    if (elem < set)
+    {
+        set = elem;
+    }
     GetValue(m_ref, m_index) = set;
 
     return *this;
