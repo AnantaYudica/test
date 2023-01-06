@@ -62,12 +62,12 @@ public:
     using FormatType = test::integer::Format<TInt, 2, N>;
 public:
     template<std::size_t N = 1, typename TValue>
-    static FormatType<N> From(const TValue& val)
+    static void From(const TValue& val, FormatType<N>& out_ref)
     {
         TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
-            "From<%s>(val=%s)", TEST_SYS_DEBUG_TARGS_NAME_STR(
+            "From<%s>(out_ref= %p, val=%s)", TEST_SYS_DEBUG_TARGS_NAME_STR(
                 TEST_SYS_DEBUG_TV_TYPE(std::size_t, N),
-                TEST_SYS_DEBUG_T_TYPE(TValue)), 
+                TEST_SYS_DEBUG_T_TYPE(TValue)), &out_ref,
                 TEST_SYS_DEBUG_VALUE_STR(0, val));
         
         typedef test::integer::fmt::Definition<TValue, 2> DefinitionValueType;
@@ -78,7 +78,6 @@ public:
         const bool cast_is_signed = DefinitionType::Signed;
         const bool value_is_negative = val < (TValue)0;
         
-        FormatType<N> fmt;
         TValue value_copy = val;
         if (cast_is_signed)
         {
@@ -95,11 +94,11 @@ public:
             {
                 value_copy = ~val;
                 value_copy += 1;
-                fmt.Flag().SetNegative();
+                out_ref.Flag().SetNegative();
             }
             test::Byte<val_alloc_size> val_byte{value_copy};
 
-            auto& raw = static_cast<RawType&>(fmt);
+            auto& raw = static_cast<RawType&>(out_ref);
             auto raw_it = raw.Begin();
             for (auto val_it = val_byte.Begin(); raw_it != raw.End() && 
                 val_it != val_byte.End(); ++raw_it, ++val_it)
@@ -113,7 +112,7 @@ public:
             value_copy += 1;
 
             test::Byte<val_alloc_size> val_byte(value_copy);
-            auto& raw = static_cast<RawType&>(fmt);
+            auto& raw = static_cast<RawType&>(out_ref);
             auto raw_it = raw.Begin();
             for (auto val_it = val_byte.Begin(); raw_it != raw.End() && 
                 val_it != val_byte.End(); ++raw_it, ++val_it)
@@ -121,14 +120,14 @@ public:
                 *raw_it = *val_it;
             }
 
-            fmt = ~fmt;
+            out_ref = ~out_ref;
             
-            ++fmt;
+            ++out_ref;
         }
         else
         {
             test::Byte<val_alloc_size> val_byte(val);
-            auto& raw = static_cast<RawType&>(fmt);
+            auto& raw = static_cast<RawType&>(out_ref);
             auto raw_it = raw.Begin();
             for (auto val_it = val_byte.Begin(); raw_it != raw.End() && 
                 val_it != val_byte.End(); ++raw_it, ++val_it)
@@ -136,7 +135,19 @@ public:
                 *raw_it = *val_it;
             }
         }
-        return fmt;
+    }
+    template<std::size_t N = 1, typename TValue>
+    static FormatType<N> From(const TValue& val)
+    {
+        TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+            "From<%s>(val=%s)", TEST_SYS_DEBUG_TARGS_NAME_STR(
+                TEST_SYS_DEBUG_TV_TYPE(std::size_t, N),
+                TEST_SYS_DEBUG_T_TYPE(TValue)), 
+                TEST_SYS_DEBUG_VALUE_STR(0, val));
+        
+        FormatType<N> res;
+        From<N>(val, res);
+        return res;
     }
 public:
     template<typename TValue, std::size_t N>
