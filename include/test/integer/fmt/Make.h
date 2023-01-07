@@ -1,5 +1,5 @@
-#ifndef TEST_INTEGER_FMT_CAST_H_
-#define TEST_INTEGER_FMT_CAST_H_
+#ifndef TEST_INTEGER_FMT_MAKE_H_
+#define TEST_INTEGER_FMT_MAKE_H_
 
 #include "../../System.h"
 #include "../../Byte.h"
@@ -13,14 +13,14 @@
 namespace test::integer::fmt
 {
 template<typename TInt, std::size_t NBase>
-class Cast;
+class Make;
 }
 
-#ifndef TEST_INTEGER_FMT_CAST_DLEVEL
+#ifndef TEST_INTEGER_FMT_MAKE_DLEVEL
 
-#define TEST_INTEGER_FMT_CAST_DLEVEL 2
+#define TEST_INTEGER_FMT_MAKE_DLEVEL 2
 
-#endif //!TEST_INTEGER_FMT_CAST_DLEVEL
+#endif //!TEST_INTEGER_FMT_MAKE_DLEVEL
 
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TInt>,\
@@ -28,9 +28,9 @@ class Cast;
 
 template<typename TInt, std::size_t NBase>
 TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
-    TEST_INTEGER_FMT_CAST_DLEVEL, 
-    "test::integer::fmt::Cast", 
-    test::integer::fmt::Cast<TInt, NBase>);
+    TEST_INTEGER_FMT_MAKE_DLEVEL, 
+    "test::integer::fmt::Make", 
+    test::integer::fmt::Make<TInt, NBase>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
 
@@ -42,20 +42,20 @@ namespace fmt
 {
 
 template<typename TInt, std::size_t NBase>
-class Cast
+class Make
 {
 public:
     typedef void DefinitionType;
 public:
-    Cast() = delete;
+    Make() = delete;
 };
 
 template<typename TInt>
-class Cast<TInt, 2>
+class Make<TInt, 2>
 {
 private:
     typedef test::sys::Interface SystemType;
-    typedef test::sys::dbg::Type<test::integer::fmt::Cast<TInt, 2>> DebugType;
+    typedef test::sys::dbg::Type<test::integer::fmt::Make<TInt, 2>> DebugType;
 public:
     typedef test::integer::fmt::Definition<TInt, 2> DefinitionType;
     template<std::size_t N>
@@ -183,15 +183,15 @@ public:
         return res_raw.template CastTo<TValue>();
     }
 public:
-    Cast() = delete;
+    Make() = delete;
 };
 
 template<typename TInt>
-class Cast<TInt, 8>
+class Make<TInt, 8>
 {
 private:
     typedef test::sys::Interface SystemType;
-    typedef test::sys::dbg::Type<test::integer::fmt::Cast<TInt, 8>> DebugType;
+    typedef test::sys::dbg::Type<test::integer::fmt::Make<TInt, 8>> DebugType;
 public:
     typedef test::integer::fmt::Definition<TInt, 8> DefinitionType;
     template<std::size_t N>
@@ -222,15 +222,15 @@ public:
         return 0;
     }
 public:
-    Cast() = delete;
+    Make() = delete;
 };
 
 template<typename TInt>
-class Cast<TInt, 10>
+class Make<TInt, 10>
 {
 private:
     typedef test::sys::Interface SystemType;
-    typedef test::sys::dbg::Type<test::integer::fmt::Cast<TInt, 10>> DebugType;
+    typedef test::sys::dbg::Type<test::integer::fmt::Make<TInt, 10>> DebugType;
 public:
     typedef test::integer::fmt::Definition<TInt, 10> DefinitionType;
     template<std::size_t N>
@@ -261,7 +261,7 @@ public:
         return 0;
     }
 public:
-    Cast() = delete;
+    Make() = delete;
 };
 
 } //!fmt
@@ -270,4 +270,4 @@ public:
 
 } //!test
 
-#endif //!TEST_INTEGER_FMT_CAST_H_
+#endif //!TEST_INTEGER_FMT_MAKE_H_
