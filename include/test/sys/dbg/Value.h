@@ -23,13 +23,21 @@ namespace dbg
 template<typename T>
 struct Value
 {
+    static std::size_t Write(char * buff_out, std::size_t n, T& val)
+    {
+        return snprintf(buff_out, n, "{..., %p}", &val);
+    }
+    static std::size_t Write(char * buff_out, std::size_t n, const T& val)
+    {
+        return snprintf(buff_out, n, "{..., %p}", &val);
+    }
     static std::size_t Write(char * buff_out, std::size_t n, T&& val)
     {
-        return snprintf(buff_out, n, "{...}");
+        return snprintf(buff_out, n, "{..., %p}", &val);
     }
     static std::size_t Write(char * buff_out, std::size_t n, const T&& val)
     {
-        return snprintf(buff_out, n, "{...}");
+        return snprintf(buff_out, n, "{..., %p}", &val);
     }
 };
 
