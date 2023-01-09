@@ -2,6 +2,7 @@
 #define TEST_INTEGER_FMT_MAKE_H_
 
 #include "../../System.h"
+#include "../../Pointer.h"
 #include "../../Byte.h"
 #include "../../trait/type/Definition.h"
 #include "../Format.h"
@@ -82,10 +83,10 @@ public:
         if (cast_is_signed)
         {
             const bool value_is_signed = DefinitionValueType::Signed;
-            test::Byte<alloc_size> tmp_last_bit(val);
+            test::Pointer<test::Byte<alloc_size>> tmp_last_bit(val);
             bool cast_is_negative = false;
             const bool last_bit = 
-                (*(tmp_last_bit.ReverseBegin()) & 0x80) != (std::uint8_t)0;
+                (*(tmp_last_bit->ReverseBegin()) & 0x80) != (std::uint8_t)0;
             if (value_is_signed && (val_alloc_size < alloc_size))
             {
                 cast_is_negative = value_is_negative;
@@ -96,12 +97,12 @@ public:
                 value_copy += 1;
                 out_ref.Flag().SetNegative();
             }
-            test::Byte<val_alloc_size> val_byte{value_copy};
+           test::Pointer<test::Byte<val_alloc_size>> val_byte{value_copy};
 
             auto& raw = static_cast<RawType&>(out_ref);
             auto raw_it = raw.Begin();
-            for (auto val_it = val_byte.Begin(); raw_it != raw.End() && 
-                val_it != val_byte.End(); ++raw_it, ++val_it)
+            for (auto val_it = val_byte->Begin(); raw_it != raw.End() && 
+                val_it != val_byte->End(); ++raw_it, ++val_it)
             {
                 *raw_it = *val_it;
             }
@@ -111,11 +112,11 @@ public:
             value_copy = ~val;
             value_copy += 1;
 
-            test::Byte<val_alloc_size> val_byte(value_copy);
+            test::Pointer<test::Byte<val_alloc_size>> val_byte(value_copy);
             auto& raw = static_cast<RawType&>(out_ref);
             auto raw_it = raw.Begin();
-            for (auto val_it = val_byte.Begin(); raw_it != raw.End() && 
-                val_it != val_byte.End(); ++raw_it, ++val_it)
+            for (auto val_it = val_byte->Begin(); raw_it != raw.End() && 
+                val_it != val_byte->End(); ++raw_it, ++val_it)
             {
                 *raw_it = *val_it;
             }
@@ -126,11 +127,11 @@ public:
         }
         else
         {
-            test::Byte<val_alloc_size> val_byte(val);
+            test::Pointer<test::Byte<val_alloc_size>> val_byte(val);
             auto& raw = static_cast<RawType&>(out_ref);
             auto raw_it = raw.Begin();
-            for (auto val_it = val_byte.Begin(); raw_it != raw.End() && 
-                val_it != val_byte.End(); ++raw_it, ++val_it)
+            for (auto val_it = val_byte->Begin(); raw_it != raw.End() && 
+                val_it != val_byte->End(); ++raw_it, ++val_it)
             {
                 *raw_it = *val_it;
             }
@@ -166,8 +167,8 @@ public:
         const bool cast_is_signed = DefinitionType::Signed;
         const bool value_is_signed = DefinitionValueType::Signed;
 
-        ValueFormatType val_fmt;
-        auto& res_raw = static_cast<ValueRawType&>(val_fmt);
+        test::Pointer<ValueFormatType> val_fmt;
+        auto& res_raw = static_cast<ValueRawType&>(*val_fmt);
         auto& raw = static_cast<const RawType&>(fmt);
         auto raw_it = raw.Begin();
         for (auto res_it = res_raw.Begin(); raw_it != raw.End() && 
@@ -177,8 +178,8 @@ public:
         }
         if (fmt.Flag().IsNegative())
         {
-            val_fmt = ~val_fmt;
-            ++val_fmt;
+            *val_fmt = ~(*val_fmt);
+            ++*val_fmt;
         }
         return res_raw.template CastTo<TValue>();
     }
