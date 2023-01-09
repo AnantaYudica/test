@@ -17,11 +17,11 @@ class Conversion;
 
 }
 
-#ifndef TEST_INTEGER_FMT_CONVERSION__DLEVEL
+#ifndef TEST_INTEGER_FMT_CONVERSION_DLEVEL
 
-#define TEST_INTEGER_FMT_CONVERSION__DLEVEL 2
+#define TEST_INTEGER_FMT_CONVERSION_DLEVEL 2
 
-#endif //!TEST_INTEGER_FMT_CONVERSION__DLEVEL
+#endif //!TEST_INTEGER_FMT_CONVERSION_DLEVEL
 
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TInt>,\
@@ -29,7 +29,7 @@ class Conversion;
 
 template<typename TInt, std::size_t NBase>
 TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
-    TEST_INTEGER_FMT_CONVERSION__DLEVEL, 
+    TEST_INTEGER_FMT_CONVERSION_DLEVEL, 
     "test::integer::fmt::Conversion", 
     test::integer::fmt::Conversion<TInt, NBase>);
 
