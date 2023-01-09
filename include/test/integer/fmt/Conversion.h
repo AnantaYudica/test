@@ -2,6 +2,7 @@
 #define TEST_INTEGER_FMT_CONVERSION_H_
 
 #include "../../System.h"
+#include "../../Pointer.h"
 #include "Definition.h"
 #include "../Format.h"
 
@@ -146,18 +147,18 @@ void Conversion<TInt, 2>::To(const test::integer::Format<TInt, 2, N>& from,
     
     typedef test::integer::fmt::Definition<TInt, NToBase> ToDefinitionType;
 
-    test::integer::Format<TInt, 2, N> divisor;
-    test::integer::Format<TInt, 2, N> rem;
-    test::integer::Format<TInt, 2, N> tmp(from);
+    test::Pointer<test::integer::Format<TInt, 2, N>> divisor;
+    test::Pointer<test::integer::Format<TInt, 2, N>> rem;
+    test::Pointer<test::integer::Format<TInt, 2, N>> tmp(from);
     test::math::integer::div::Flag flag;
     
-    divisor += ExpandType(ToDefinitionType::ElementMaxValue + 1);
+    *divisor += ExpandType(ToDefinitionType::ElementMaxValue + 1);
     
     for (std::size_t i = 0; i < NTo; ++i)
     {
-        test::integer::Format<TInt, 2, N>::Division(tmp, divisor, flag, &rem);
-        out_ref[i] = *(rem[0]);
-        rem = test::integer::Format<TInt, 2, N>();
+        test::integer::Format<TInt, 2, N>::Division(*tmp, *divisor, flag, &*rem);
+        out_ref[i] = *((*rem)[0]);
+        *rem = test::integer::Format<TInt, 2, N>();
     }
 }
 
