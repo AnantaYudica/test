@@ -7,6 +7,7 @@
 #include "../../trait/type/Definition.h"
 #include "../Format.h"
 #include "Definition.h"
+#include "Conversion.h"
 
 #include <cstddef>
 #include <cstdint>
@@ -199,6 +200,22 @@ public:
     using FormatType = test::integer::Format<TInt, 8, N>;
 public:
     template<std::size_t N = 1, typename TValue>
+    static void From(const TValue& val, FormatType<N>& out_ref)
+    {
+        TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+            "From<%s>(out_ref= %p, val=%s)", TEST_SYS_DEBUG_TARGS_NAME_STR(
+                TEST_SYS_DEBUG_TV_TYPE(std::size_t, N),
+                TEST_SYS_DEBUG_T_TYPE(TValue)), &out_ref,
+                TEST_SYS_DEBUG_VALUE_STR(0, val));
+        
+        constexpr std::size_t NBase2 = 
+            test::integer::fmt::Conversion<TInt, 8>::template Resize<2>(N);
+        test::Pointer<test::integer::Format<TInt, 2, NBase2>> fmt_base2;
+        test::integer::fmt::Make<TInt, 2>::From(val, *fmt_base2);
+        test::integer::fmt::Conversion<TInt, 2>::
+            template To<8>(*fmt_base2, out_ref);
+    }
+    template<std::size_t N = 1, typename TValue>
     static FormatType<N> From(const TValue& val)
     {
         TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
@@ -207,8 +224,9 @@ public:
                 TEST_SYS_DEBUG_T_TYPE(TValue)), 
                 TEST_SYS_DEBUG_VALUE_STR(0, val));
         
-        //todo implementing
-        return {};
+        FormatType<N> res;
+        From<N>(val, res);
+        return res;
     }
 public:
     template<typename TValue, std::size_t N>
@@ -219,8 +237,12 @@ public:
                 TEST_SYS_DEBUG_T_TYPE(TValue),
                 TEST_SYS_DEBUG_TV_TYPE(std::size_t, N)), &fmt);
         
-        //todo implementing
-        return 0;
+        constexpr std::size_t NBase2 = 
+            test::integer::fmt::Conversion<TInt, 8>::template Resize<2>(N);
+        test::Pointer<test::integer::Format<TInt, 2, NBase2>> fmt_base2;
+        test::integer::fmt::Conversion<TInt, 8>::
+            template To<2>(fmt, *fmt_base2);
+        return test::integer::fmt::Make<TInt, 2>::template To<TValue>(*fmt_base2);
     }
 public:
     Make() = delete;
@@ -238,6 +260,22 @@ public:
     using FormatType = test::integer::Format<TInt, 10, N>;
 public:
     template<std::size_t N = 1, typename TValue>
+    static void From(const TValue& val, FormatType<N>& out_ref)
+    {
+        TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+            "From<%s>(out_ref= %p, val=%s)", TEST_SYS_DEBUG_TARGS_NAME_STR(
+                TEST_SYS_DEBUG_TV_TYPE(std::size_t, N),
+                TEST_SYS_DEBUG_T_TYPE(TValue)), &out_ref,
+                TEST_SYS_DEBUG_VALUE_STR(0, val));
+        
+        constexpr std::size_t NBase2 = 
+            test::integer::fmt::Conversion<TInt, 10>::template Resize<2>(N);
+        test::Pointer<test::integer::Format<TInt, 2, NBase2>> fmt_base2;
+        test::integer::fmt::Make<TInt, 2>::From(val, *fmt_base2);
+        test::integer::fmt::Conversion<TInt, 2>::
+            template To<10>(*fmt_base2, out_ref);
+    }
+    template<std::size_t N = 1, typename TValue>
     static FormatType<N> From(const TValue& val)
     {
         TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
@@ -246,8 +284,9 @@ public:
                 TEST_SYS_DEBUG_T_TYPE(TValue)), 
                 TEST_SYS_DEBUG_VALUE_STR(0, val));
         
-        //todo implementing
-        return {};
+        FormatType<N> res;
+        From<N>(val, res);
+        return res;
     }
 public:
     template<typename TValue, std::size_t N>
@@ -258,8 +297,12 @@ public:
                 TEST_SYS_DEBUG_T_TYPE(TValue),
                 TEST_SYS_DEBUG_TV_TYPE(std::size_t, N)), &fmt);
         
-        //todo implementing
-        return 0;
+        constexpr std::size_t NBase2 = 
+            test::integer::fmt::Conversion<TInt, 10>::template Resize<2>(N);
+        test::Pointer<test::integer::Format<TInt, 2, NBase2>> fmt_base2;
+        test::integer::fmt::Conversion<TInt, 10>::
+            template To<2>(fmt, *fmt_base2);
+        return test::integer::fmt::Make<TInt, 2>::template To<TValue>(*fmt_base2);
     }
 public:
     Make() = delete;
