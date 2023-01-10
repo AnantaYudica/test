@@ -109,6 +109,9 @@ struct Definition<std::uint8_t, 2>
     template<typename TElement>
     static std::uint8_t ElementValueAt(const TElement& element, 
         const SizeType& at);
+        
+    template<std::size_t NToBase>
+    static constexpr SizeType ElementBaseResize(const std::size_t& n);
 };
 
 template<>
@@ -185,6 +188,9 @@ struct Definition<std::uint16_t, 2>
     template<typename TElement>
     static std::uint16_t ElementValueAt(const TElement& element, 
         const SizeType& at);
+        
+    template<std::size_t NToBase>
+    static constexpr SizeType ElementBaseResize(const std::size_t& n);
 };
 
 template<>
@@ -261,6 +267,9 @@ struct Definition<std::uint32_t, 2>
     template<typename TElement>
     static std::uint32_t ElementValueAt(const TElement& element, 
         const SizeType& at);
+        
+    template<std::size_t NToBase>
+    static constexpr SizeType ElementBaseResize(const std::size_t& n);
 };
 
 template<>
@@ -357,6 +366,9 @@ struct Definition<std::uint8_t, 8>
     template<typename TElement>
     static std::uint8_t ElementValueAt(const TElement& element, 
         const SizeType& at);
+        
+    template<std::size_t NToBase>
+    static constexpr SizeType ElementBaseResize(const std::size_t& n);
 };
 
 template<>
@@ -433,6 +445,9 @@ struct Definition<std::uint16_t, 8>
     template<typename TElement>
     static std::uint16_t ElementValueAt(const TElement& element, 
         const SizeType& at);
+        
+    template<std::size_t NToBase>
+    static constexpr SizeType ElementBaseResize(const std::size_t& n);
 };
 
 template<>
@@ -509,6 +524,9 @@ struct Definition<std::uint32_t, 8>
     template<typename TElement>
     static std::uint32_t ElementValueAt(const TElement& element, 
         const SizeType& at);
+        
+    template<std::size_t NToBase>
+    static constexpr SizeType ElementBaseResize(const std::size_t& n);
 };
 
 template<>
@@ -605,6 +623,9 @@ struct Definition<std::uint8_t, 10>
     template<typename TElement>
     static std::uint8_t ElementValueAt(const TElement& element, 
         const SizeType& at);
+        
+    template<std::size_t NToBase>
+    static constexpr SizeType ElementBaseResize(const std::size_t& n);
 };
 
 template<>
@@ -681,6 +702,9 @@ struct Definition<std::uint16_t, 10>
     template<typename TElement>
     static std::uint16_t ElementValueAt(const TElement& element, 
         const SizeType& at);
+        
+    template<std::size_t NToBase>
+    static constexpr SizeType ElementBaseResize(const std::size_t& n);
 };
 
 template<>
@@ -757,6 +781,9 @@ struct Definition<std::uint32_t, 10>
     template<typename TElement>
     static std::uint32_t ElementValueAt(const TElement& element, 
         const SizeType& at);
+        
+    template<std::size_t NToBase>
+    static constexpr SizeType ElementBaseResize(const std::size_t& n);
 };
 
 template<>
@@ -895,6 +922,17 @@ std::uint8_t Definition<std::uint8_t, 2>::
     return (std::uint8_t)(element >> at);
 }
 
+template<std::size_t NToBase>
+constexpr typename Definition<std::uint8_t, 2>::SizeType 
+Definition<std::uint8_t, 2>::ElementBaseResize(const std::size_t& n)
+{
+    static_assert((NToBase == 2 || NToBase == 8 || NToBase == 10),
+        "Require base implementation");
+    return NToBase == 2 ? n :
+        NToBase == 8 ? ((134 * n) / 100) + ((134 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 10 ? ((121 * n) / 100) + ((121 * n) % 100 == 0 ? 0 : 1) : 0;
+}
+
 constexpr test::integer::Flag Definition<std::int8_t, 2>::Flag()
 {
     return {test::integer::Flag::kSigned | 
@@ -1007,6 +1045,17 @@ std::uint16_t Definition<std::uint16_t, 2>::
     ElementValueAt(const TElement& element, const SizeType& at)
 {
     return (std::uint16_t)(element >> at);
+}
+
+template<std::size_t NToBase>
+constexpr typename Definition<std::uint16_t, 2>::SizeType 
+Definition<std::uint16_t, 2>::ElementBaseResize(const std::size_t& n)
+{
+    static_assert((NToBase == 2 || NToBase == 8 || NToBase == 10),
+        "Require base implementation");
+    return NToBase == 2 ? n :
+        NToBase == 8 ? ((107 * n) / 100) + ((107 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 10 ? ((121 * n) / 100) + ((121 * n) % 100 == 0 ? 0 : 1) : 0;
 }
 
 constexpr test::integer::Flag Definition<std::int16_t, 2>::Flag()
@@ -1129,6 +1178,17 @@ std::uint32_t Definition<std::uint32_t, 2>::
     ElementValueAt(const TElement& element, const SizeType& at)
 {
     return (std::uint32_t)(element >> at);
+}
+
+template<std::size_t NToBase>
+constexpr typename Definition<std::uint32_t, 2>::SizeType 
+Definition<std::uint32_t, 2>::ElementBaseResize(const std::size_t& n)
+{
+    static_assert((NToBase == 2 || NToBase == 8 || NToBase == 10),
+        "Require base implementation");
+    return NToBase == 2 ? n :
+        NToBase == 8 ? ((107 * n) / 100) + ((107 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 10 ? ((108 * n) / 100) + ((108 * n) % 100 == 0 ? 0 : 1) : 0;
 }
 
 constexpr test::integer::Flag Definition<std::int32_t, 2>::Flag()
@@ -1260,6 +1320,17 @@ std::uint8_t Definition<std::uint8_t, 8>::
     return (std::uint8_t)((element / rshift1) - ((element / rshift) * lshift));
 }
 
+template<std::size_t NToBase>
+constexpr typename Definition<std::uint8_t, 8>::SizeType 
+Definition<std::uint8_t, 8>::ElementBaseResize(const std::size_t& n)
+{
+    static_assert((NToBase == 2 || NToBase == 8 || NToBase == 10),
+        "Require base implementation");
+    return NToBase == 2 ? ((76 * n) / 100) + ((76 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 8 ? n :
+        NToBase == 10 ? ((91 * n) / 100) + ((91 * n) % 100 == 0 ? 0 : 1) : 0;
+}
+
 constexpr test::integer::Flag Definition<std::int8_t, 8>::Flag()
 {
     return {test::integer::Flag::kSigned | 
@@ -1373,6 +1444,17 @@ std::uint16_t Definition<std::uint16_t, 8>::
     const ExpandType rshift = at == 0 ? 1 : at * max;
     const ExpandType lshift = at == 0 ? 0 : max;
     return (std::uint16_t)((element / rshift1) - ((element / rshift) * lshift));
+}
+
+template<std::size_t NToBase>
+constexpr typename Definition<std::uint16_t, 8>::SizeType 
+Definition<std::uint16_t, 8>::ElementBaseResize(const std::size_t& n)
+{
+    static_assert((NToBase == 2 || NToBase == 8 || NToBase == 10),
+        "Require base implementation");
+    return NToBase == 2 ? ((94 * n) / 100) + ((94 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 8 ? n :
+        NToBase == 10 ? ((113* n) / 100) + ((113 * n) % 100 == 0 ? 0 : 1) : 0;
 }
 
 constexpr test::integer::Flag Definition<std::int16_t, 8>::Flag()
@@ -1490,6 +1572,17 @@ std::uint32_t Definition<std::uint32_t, 8>::
     const ExpandType rshift = at == 0 ? 1 : at * max;
     const ExpandType lshift = at == 0 ? 0 : max;
     return (std::uint32_t)((element / rshift1) - ((element / rshift) * lshift));
+}
+
+template<std::size_t NToBase>
+constexpr typename Definition<std::uint32_t, 8>::SizeType 
+Definition<std::uint32_t, 8>::ElementBaseResize(const std::size_t& n)
+{
+    static_assert((NToBase == 2 || NToBase == 8 || NToBase == 10),
+        "Require base implementation");
+    return NToBase == 2 ? ((94 * n) / 100) + ((94 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 8 ? n :
+        NToBase == 10 ? ((101* n) / 100) + ((101 * n) % 100 == 0 ? 0 : 1) : 0;
 }
 
 constexpr test::integer::Flag Definition<std::int32_t, 8>::Flag()
@@ -1632,6 +1725,17 @@ std::uint8_t Definition<std::uint8_t, 10>::
     return (std::uint8_t)((element / rshift1) - ((element / rshift) * lshift));
 }
 
+template<std::size_t NToBase>
+constexpr typename Definition<std::uint8_t, 10>::SizeType 
+Definition<std::uint8_t, 10>::ElementBaseResize(const std::size_t& n)
+{
+    static_assert((NToBase == 2 || NToBase == 8 || NToBase == 10),
+        "Require base implementation");
+    return NToBase == 2 ? ((84 * n) / 100) + ((84 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 8 ? ((111* n) / 100) + ((111 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 10 ? n : 0;
+}
+
 constexpr test::integer::Flag Definition<std::int8_t, 10>::Flag()
 {
     return {test::integer::Flag::kSigned | 
@@ -1759,6 +1863,17 @@ std::uint16_t Definition<std::uint16_t, 10>::
     const ExpandType rshift = at == 0 ? 1 : at * max;
     const ExpandType lshift = at == 0 ? 0 : max;
     return (std::uint16_t)((element / rshift1) - ((element / rshift) * lshift));
+}
+
+template<std::size_t NToBase>
+constexpr typename Definition<std::uint16_t, 10>::SizeType 
+Definition<std::uint16_t, 10>::ElementBaseResize(const std::size_t& n)
+{
+    static_assert((NToBase == 2 || NToBase == 8 || NToBase == 10),
+        "Require base implementation");
+    return NToBase == 2 ? ((84 * n) / 100) + ((84 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 8 ? ((89* n) / 100) + ((89 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 10 ? n : 0;
 }
 
 constexpr test::integer::Flag Definition<std::int16_t, 10>::Flag()
@@ -1890,6 +2005,17 @@ std::uint32_t Definition<std::uint32_t, 10>::
     const ExpandType rshift = at == 0 ? 1 : at * max;
     const ExpandType lshift = at == 0 ? 0 : max;
     return (std::uint32_t)((element / rshift1) - ((element / rshift) * lshift));
+}
+
+template<std::size_t NToBase>
+constexpr typename Definition<std::uint32_t, 10>::SizeType 
+Definition<std::uint32_t, 10>::ElementBaseResize(const std::size_t& n)
+{
+    static_assert((NToBase == 2 || NToBase == 8 || NToBase == 10),
+        "Require base implementation");
+    return NToBase == 2 ? ((94 * n) / 100) + ((94 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 8 ? ((100* n) / 100) + ((100 * n) % 100 == 0 ? 0 : 1) :
+        NToBase == 10 ? n : 0;
 }
 
 constexpr test::integer::Flag Definition<std::int32_t, 10>::Flag()
