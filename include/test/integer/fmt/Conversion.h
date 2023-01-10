@@ -58,10 +58,18 @@ public:
     typedef test::integer::fmt::Definition<TInt, 2> DefinitionType;
     typedef typename DefinitionType::ExpandType ExpandType;
 public:
-    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 2 * N>
+    template<std::size_t NToBase>
+    static constexpr std::size_t Resize(const std::size_t n)
+    {
+        return DefinitionType::template ElementBaseResize<NToBase>(n);
+    }
+public:
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 2>::Resize<NToBase>(N)>
     static void To(const test::integer::Format<TInt, 2, N>& from, 
         test::integer::Format<TInt, NToBase, NTo>& out_ref);
-    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 2 * N>
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 2>::Resize<NToBase>(N)>
     static test::integer::Format<TInt, NToBase, NTo> 
         To(const test::integer::Format<TInt, 2, N>& from);
 };
@@ -77,24 +85,30 @@ public:
     typedef test::integer::fmt::Definition<TInt, 8> DefinitionType;
     typedef typename DefinitionType::ExpandType ExpandType;
 public:
-    template<std::size_t NToBase, std::size_t N, 
-        std::size_t NTo = (N <= 1 ? 1 : (N % 2 == 0 ? N : (N + 1)) / 2)>
+    template<std::size_t NToBase>
+    static constexpr std::size_t Resize(const std::size_t n)
+    {
+        return DefinitionType::template ElementBaseResize<NToBase>(n);
+    }
+public:
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 8>::Resize<NToBase>(N)>
     static typename std::enable_if<NToBase == 2>::type 
         To(const test::integer::Format<TInt, 8, N>& from, 
             test::integer::Format<TInt, NToBase, NTo>& out_ref);
-    template<std::size_t NToBase, std::size_t N, 
-        std::size_t NTo = (N <= 1 ? 1 : (N % 2 == 0 ? N : (N + 1)) / 2)>
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 8>::Resize<NToBase>(N)>
     static typename std::enable_if<NToBase == 2,
         test::integer::Format<TInt, NToBase, NTo>>::type 
             To(const test::integer::Format<TInt, 8, N>& from);
 public:
-    template<std::size_t NToBase, std::size_t N, 
-        std::size_t NTo = N>
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 8>::Resize<NToBase>(N)>
     static typename std::enable_if<NToBase == 10>::type 
         To(const test::integer::Format<TInt, 8, N>& from,
             test::integer::Format<TInt, NToBase, NTo>& out_ref);
-    template<std::size_t NToBase, std::size_t N, 
-        std::size_t NTo = N>
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 8>::Resize<NToBase>(N)>
     static typename std::enable_if<NToBase == 10,
         test::integer::Format<TInt, NToBase, NTo>>::type 
             To(const test::integer::Format<TInt, 8, N>& from);
@@ -111,24 +125,30 @@ public:
     typedef test::integer::fmt::Definition<TInt, 10> DefinitionType;
     typedef typename DefinitionType::ExpandType ExpandType;
 public:
-    template<std::size_t NToBase, std::size_t N, 
-        std::size_t NTo = (N <= 1 ? 1 : (N % 2 == 0 ? N : (N + 1)) / 2)>
+    template<std::size_t NToBase>
+    static constexpr std::size_t Resize(const std::size_t n)
+    {
+        return DefinitionType::template ElementBaseResize<NToBase>(n);
+    }
+public:
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 10>::Resize<NToBase>(N)>
     static typename std::enable_if<NToBase == 2>::type 
         To(const test::integer::Format<TInt, 10, N>& from, 
             test::integer::Format<TInt, NToBase, NTo>& out_ref);
-    template<std::size_t NToBase, std::size_t N, 
-        std::size_t NTo = (N <= 1 ? 1 : (N % 2 == 0 ? N : (N + 1)) / 2)>
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 10>::Resize<NToBase>(N)>
     static typename std::enable_if<NToBase == 2,
         test::integer::Format<TInt, NToBase, NTo>>::type 
             To(const test::integer::Format<TInt, 10, N>& from);
 public:
-    template<std::size_t NToBase, std::size_t N, 
-        std::size_t NTo = N>
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 10>::Resize<NToBase>(N)>
     static typename std::enable_if<NToBase == 8>::type 
         To(const test::integer::Format<TInt, 10, N>& from,
             test::integer::Format<TInt, NToBase, NTo>& out_ref);
-    template<std::size_t NToBase, std::size_t N, 
-        std::size_t NTo = N>
+    template<std::size_t NToBase, std::size_t N, std::size_t NTo = 
+        Conversion<TInt, 10>::Resize<NToBase>(N)>
     static typename std::enable_if<NToBase == 8,
         test::integer::Format<TInt, NToBase, NTo>>::type 
             To(const test::integer::Format<TInt, 10, N>& from);
