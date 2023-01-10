@@ -1215,11 +1215,8 @@ std::uint8_t Definition<std::uint8_t, 8>::
 constexpr std::size_t Definition<std::uint8_t, 8>::
     AllocationSize(std::size_t n)
 {
-    typedef test::integer::fmt::Definition<std::uint8_t, 8> DefOctType;
-    typedef test::integer::fmt::Definition<std::uint8_t, 2> DefBinType;
-    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+    return test::integer::fmt::Definition<std::uint8_t, 8>::ElementAllocSize *
+        test::integer::fmt::Definition<std::uint8_t, 8>::NMinSize * n;
 }
 
 template<typename TElement>
@@ -1334,11 +1331,8 @@ std::uint16_t Definition<std::uint16_t, 8>::
 constexpr std::size_t Definition<std::uint16_t, 8>::
     AllocationSize(std::size_t n)
 {
-    typedef test::integer::fmt::Definition<std::uint16_t, 8> DefOctType;
-    typedef test::integer::fmt::Definition<std::uint16_t, 2> DefBinType;
-    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+    return test::integer::fmt::Definition<std::uint16_t, 8>::ElementAllocSize *
+        test::integer::fmt::Definition<std::uint16_t, 8>::NMinSize * n;
 }
 
 template<typename TElement>
@@ -1454,11 +1448,8 @@ std::uint32_t Definition<std::uint32_t, 8>::
 constexpr std::size_t Definition<std::uint32_t, 8>::
     AllocationSize(std::size_t n)
 {
-    typedef test::integer::fmt::Definition<std::uint32_t, 8> DefOctType;
-    typedef test::integer::fmt::Definition<std::uint32_t, 2> DefBinType;
-    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+    return test::integer::fmt::Definition<std::uint32_t, 8>::ElementAllocSize *
+        test::integer::fmt::Definition<std::uint32_t, 8>::NMinSize * n;
 }
 
 template<typename TElement>
@@ -1510,21 +1501,15 @@ constexpr test::integer::Flag Definition<std::int32_t, 8>::Flag()
 constexpr std::size_t Definition<std::uint64_t, 8>::
     AllocationSize(std::size_t n)
 {
-    typedef test::integer::fmt::Definition<std::uint64_t, 8> DefOctType;
-    typedef test::integer::fmt::Definition<std::uint64_t, 2> DefBinType;
-    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+    return test::integer::fmt::Definition<std::uint64_t, 8>::ElementAllocSize *
+        test::integer::fmt::Definition<std::uint64_t, 8>::NMinSize * n;
 }
 
 constexpr std::size_t Definition<std::int64_t, 8>::
     AllocationSize(std::size_t n)
 {
-    typedef test::integer::fmt::Definition<std::int64_t, 8> DefOctType;
-    typedef test::integer::fmt::Definition<std::int64_t, 2> DefBinType;
-    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+    return test::integer::fmt::Definition<std::int64_t, 8>::ElementAllocSize *
+        test::integer::fmt::Definition<std::int64_t, 8>::NMinSize * n;
 }
 
 constexpr test::integer::Flag Definition<std::uint8_t, 10>::Flag()
@@ -1602,11 +1587,8 @@ std::uint8_t Definition<std::uint8_t, 10>::
 constexpr std::size_t Definition<std::uint8_t, 10>::
     AllocationSize(std::size_t n)
 {
-    typedef test::integer::fmt::Definition<std::uint32_t, 8> DefOctType;
-    typedef test::integer::fmt::Definition<std::uint32_t, 2> DefBinType;
-    return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
-        ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+    return test::integer::fmt::Definition<std::uint8_t, 10>::ElementAllocSize *
+        test::integer::fmt::Definition<std::uint8_t, 10>::NMinSize * n;
 }
 
 template<typename TElement>
@@ -1728,6 +1710,14 @@ std::uint16_t Definition<std::uint16_t, 10>::
     for (std::size_t i = 0; i < _n; ++i) pwr *= 10;
     if (div > (pwr - 1)) return div - ((div / pwr) * pwr);
     return div;
+}
+
+constexpr std::size_t Definition<std::uint16_t, 10>::
+    AllocationSize(std::size_t n)
+{
+    return test::integer::fmt::Definition<std::uint16_t, 10>::
+        ElementAllocSize * test::integer::fmt::Definition<std::uint16_t, 10>::
+        NMinSize * n;
 }
 
 template<typename TElement>
@@ -1854,6 +1844,14 @@ std::uint32_t Definition<std::uint32_t, 10>::
     return div;
 }
 
+constexpr std::size_t Definition<std::uint32_t, 10>::
+    AllocationSize(std::size_t n)
+{
+    return test::integer::fmt::Definition<std::uint32_t, 10>::
+        ElementAllocSize * test::integer::fmt::Definition<std::uint32_t, 10>::
+        NMinSize * n;
+}
+
 template<typename TElement>
 constexpr typename Definition<std::uint32_t, 10>::SizeType 
 Definition<std::uint32_t, 10>::ElementResize(const std::size_t& n)
@@ -1898,6 +1896,21 @@ constexpr test::integer::Flag Definition<std::int32_t, 10>::Flag()
 {
     return {test::integer::Flag::kSigned | 
         test::integer::Flag::kDecimalFormat};
+}
+
+constexpr std::size_t Definition<std::uint64_t, 10>::
+    AllocationSize(std::size_t n)
+{
+    return test::integer::fmt::Definition<std::uint64_t, 10>::
+        ElementAllocSize * test::integer::fmt::Definition<std::uint64_t, 10>::
+        NMinSize * n;
+}
+
+constexpr std::size_t Definition<std::int64_t, 10>::
+    AllocationSize(std::size_t n)
+{
+    return test::integer::fmt::Definition<std::int64_t, 10>::ElementAllocSize *
+        test::integer::fmt::Definition<std::int64_t, 10>::NMinSize * n;
 }
 
 } //!fmt
