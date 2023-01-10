@@ -93,6 +93,22 @@ struct Definition<std::uint8_t, 2>
         const std::size_t& off, const std::size_t& n = 1);
 
     static constexpr std::size_t AllocationSize(std::size_t n);
+    
+    template<typename TElement>
+    static constexpr SizeType ElementResize(const std::size_t& n);
+
+    static constexpr std::uint8_t ElementMaxValueAt(const std::uint8_t&, 
+        const SizeType& at);
+        
+    static constexpr std::uint8_t ElementMaxValueAt(const std::uint16_t&, 
+        const SizeType& at);
+    
+    static constexpr std::uint8_t ElementMaxValueAt(const std::uint32_t&, 
+        const SizeType& at);
+    
+    template<typename TElement>
+    static std::uint8_t ElementValueAt(const TElement& element, 
+        const SizeType& at);
 };
 
 template<>
@@ -153,6 +169,22 @@ struct Definition<std::uint16_t, 2>
         const std::size_t& off, const std::size_t& n = 1);
 
     static constexpr std::size_t AllocationSize(std::size_t n);
+
+    template<typename TElement>
+    static constexpr SizeType ElementResize(const std::size_t& n);
+
+    static constexpr std::uint16_t ElementMaxValueAt(const std::uint8_t&, 
+        const SizeType& at);
+        
+    static constexpr std::uint16_t ElementMaxValueAt(const std::uint16_t&, 
+        const SizeType& at);
+    
+    static constexpr std::uint16_t ElementMaxValueAt(const std::uint32_t&, 
+        const SizeType& at);
+    
+    template<typename TElement>
+    static std::uint16_t ElementValueAt(const TElement& element, 
+        const SizeType& at);
 };
 
 template<>
@@ -213,6 +245,22 @@ struct Definition<std::uint32_t, 2>
         const std::size_t& off, const std::size_t& n = 1);
 
     static constexpr std::size_t AllocationSize(std::size_t n);
+
+    template<typename TElement>
+    static constexpr SizeType ElementResize(const std::size_t& n);
+
+    static constexpr std::uint32_t ElementMaxValueAt(const std::uint8_t&, 
+        const SizeType& at);
+        
+    static constexpr std::uint32_t ElementMaxValueAt(const std::uint16_t&, 
+        const SizeType& at);
+    
+    static constexpr std::uint32_t ElementMaxValueAt(const std::uint32_t&, 
+        const SizeType& at);
+    
+    template<typename TElement>
+    static std::uint32_t ElementValueAt(const TElement& element, 
+        const SizeType& at);
 };
 
 template<>
@@ -293,6 +341,22 @@ struct Definition<std::uint8_t, 8>
         const std::size_t& off, const std::size_t& n = 1);
 
     static constexpr std::size_t AllocationSize(std::size_t n);
+
+    template<typename TElement>
+    static constexpr SizeType ElementResize(const std::size_t& n);
+
+    static constexpr std::uint8_t ElementMaxValueAt(const std::uint8_t&, 
+        const SizeType& at);
+        
+    static constexpr std::uint8_t ElementMaxValueAt(const std::uint16_t&, 
+        const SizeType& at);
+    
+    static constexpr std::uint8_t ElementMaxValueAt(const std::uint32_t&, 
+        const SizeType& at);
+    
+    template<typename TElement>
+    static std::uint8_t ElementValueAt(const TElement& element, 
+        const SizeType& at);
 };
 
 template<>
@@ -353,6 +417,22 @@ struct Definition<std::uint16_t, 8>
         const std::size_t& off, const std::size_t& n = 1);
 
     static constexpr std::size_t AllocationSize(std::size_t n);
+
+    template<typename TElement>
+    static constexpr SizeType ElementResize(const std::size_t& n);
+
+    static constexpr std::uint16_t ElementMaxValueAt(const std::uint8_t&, 
+        const SizeType& at);
+        
+    static constexpr std::uint16_t ElementMaxValueAt(const std::uint16_t&, 
+        const SizeType& at);
+    
+    static constexpr std::uint16_t ElementMaxValueAt(const std::uint32_t&, 
+        const SizeType& at);
+    
+    template<typename TElement>
+    static std::uint16_t ElementValueAt(const TElement& element, 
+        const SizeType& at);
 };
 
 template<>
@@ -413,6 +493,22 @@ struct Definition<std::uint32_t, 8>
         const std::size_t& off, const std::size_t& n = 1);
 
     static constexpr std::size_t AllocationSize(std::size_t n);
+
+    template<typename TElement>
+    static constexpr SizeType ElementResize(const std::size_t& n);
+
+    static constexpr std::uint32_t ElementMaxValueAt(const std::uint8_t&, 
+        const SizeType& at);
+        
+    static constexpr std::uint32_t ElementMaxValueAt(const std::uint16_t&, 
+        const SizeType& at);
+    
+    static constexpr std::uint32_t ElementMaxValueAt(const std::uint32_t&, 
+        const SizeType& at);
+    
+    template<typename TElement>
+    static std::uint32_t ElementValueAt(const TElement& element, 
+        const SizeType& at);
 };
 
 template<>
@@ -493,6 +589,22 @@ struct Definition<std::uint8_t, 10>
         const std::size_t& off, const std::size_t& n = 1);
 
     static constexpr std::size_t AllocationSize(std::size_t n);
+
+    template<typename TElement>
+    static constexpr SizeType ElementResize(const std::size_t& n);
+
+    static constexpr std::uint8_t ElementMaxValueAt(const std::uint8_t&, 
+        const SizeType& at);
+        
+    static constexpr std::uint8_t ElementMaxValueAt(const std::uint16_t&, 
+        const SizeType& at);
+    
+    static constexpr std::uint8_t ElementMaxValueAt(const std::uint32_t&, 
+        const SizeType& at);
+    
+    template<typename TElement>
+    static std::uint8_t ElementValueAt(const TElement& element, 
+        const SizeType& at);
 };
 
 template<>
@@ -553,6 +665,22 @@ struct Definition<std::uint16_t, 10>
         const std::size_t& off, const std::size_t& n = 1);
 
     static constexpr std::size_t AllocationSize(std::size_t n);
+
+    template<typename TElement>
+    static constexpr SizeType ElementResize(const std::size_t& n);
+
+    static constexpr std::uint16_t ElementMaxValueAt(const std::uint8_t&, 
+        const SizeType& at);
+        
+    static constexpr std::uint16_t ElementMaxValueAt(const std::uint16_t&, 
+        const SizeType& at);
+    
+    static constexpr std::uint16_t ElementMaxValueAt(const std::uint32_t&, 
+        const SizeType& at);
+    
+    template<typename TElement>
+    static std::uint16_t ElementValueAt(const TElement& element, 
+        const SizeType& at);
 };
 
 template<>
@@ -613,6 +741,22 @@ struct Definition<std::uint32_t, 10>
         const std::size_t& off, const std::size_t& n = 1);
 
     static constexpr std::size_t AllocationSize(std::size_t n);
+
+    template<typename TElement>
+    static constexpr SizeType ElementResize(const std::size_t& n);
+
+    static constexpr std::uint32_t ElementMaxValueAt(const std::uint8_t&, 
+        const SizeType& at);
+        
+    static constexpr std::uint32_t ElementMaxValueAt(const std::uint16_t&, 
+        const SizeType& at);
+    
+    static constexpr std::uint32_t ElementMaxValueAt(const std::uint32_t&, 
+        const SizeType& at);
+    
+    template<typename TElement>
+    static std::uint32_t ElementValueAt(const TElement& element, 
+        const SizeType& at);
 };
 
 template<>
@@ -716,6 +860,41 @@ constexpr std::size_t Definition<std::uint8_t, 2>::
         NMinSize;
 }
 
+template<typename TElement>
+constexpr typename Definition<std::uint8_t, 2>::SizeType 
+Definition<std::uint8_t, 2>::ElementResize(const std::size_t& n)
+{
+    return ((n * Definition<std::uint8_t, 2>::ElementMaxExponent) / 
+            Definition<TElement, 2>::ElementMaxExponent) + 
+        (((Definition<std::uint8_t, 2>::ElementMaxExponent * n) % 
+             Definition<TElement, 2>::ElementMaxExponent) == 0 ? 0 : 1);
+}
+
+constexpr std::uint8_t Definition<std::uint8_t, 2>::
+    ElementMaxValueAt(const std::uint8_t&, const SizeType& at)
+{
+    return at == 0 ? Definition<std::uint8_t, 2>::ElementMaxValue : 0;
+}
+        
+constexpr std::uint8_t Definition<std::uint8_t, 2>::
+    ElementMaxValueAt(const std::uint16_t&, const SizeType& at)
+{
+    return at <= 1 ? Definition<std::uint8_t, 2>::ElementMaxValue : 0;
+}
+    
+constexpr std::uint8_t Definition<std::uint8_t, 2>::
+    ElementMaxValueAt(const std::uint32_t&, const SizeType& at)
+{
+    return at <= 3 ? Definition<std::uint8_t, 2>::ElementMaxValue : 0;
+}
+    
+template<typename TElement>
+std::uint8_t Definition<std::uint8_t, 2>::
+    ElementValueAt(const TElement& element, const SizeType& at)
+{
+    return (std::uint8_t)(element >> at);
+}
+
 constexpr test::integer::Flag Definition<std::int8_t, 2>::Flag()
 {
     return {test::integer::Flag::kSigned | 
@@ -793,6 +972,41 @@ constexpr std::size_t Definition<std::uint16_t, 2>::
     return n * test::integer::fmt::Definition<std::uint16_t, 2>::
         ElementAllocSize * test::integer::fmt::Definition<std::uint16_t, 2>::
         NMinSize;
+}
+
+template<typename TElement>
+constexpr typename Definition<std::uint16_t, 2>::SizeType 
+Definition<std::uint16_t, 2>::ElementResize(const std::size_t& n)
+{
+    return ((n * Definition<std::uint16_t, 2>::ElementMaxExponent) /
+            Definition<TElement, 2>::ElementMaxExponent) + 
+        (((Definition<std::uint16_t, 2>::ElementMaxExponent * n) % 
+            Definition<TElement, 2>::ElementMaxExponent) == 0 ? 0 : 1);
+}
+
+constexpr std::uint16_t Definition<std::uint16_t, 2>::
+    ElementMaxValueAt(const std::uint8_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint8_t, 2>::ElementMaxValue : 0;
+}
+        
+constexpr std::uint16_t Definition<std::uint16_t, 2>::
+    ElementMaxValueAt(const std::uint16_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint16_t, 2>::ElementMaxValue : 0;
+}
+    
+constexpr std::uint16_t Definition<std::uint16_t, 2>::
+    ElementMaxValueAt(const std::uint32_t&, const SizeType& at)
+{
+    return at <= 1 ? Definition<std::uint16_t, 2>::ElementMaxValue : 0;
+}
+    
+template<typename TElement>
+std::uint16_t Definition<std::uint16_t, 2>::
+    ElementValueAt(const TElement& element, const SizeType& at)
+{
+    return (std::uint16_t)(element >> at);
 }
 
 constexpr test::integer::Flag Definition<std::int16_t, 2>::Flag()
@@ -880,6 +1094,41 @@ constexpr std::size_t Definition<std::uint32_t, 2>::
     return n * test::integer::fmt::Definition<std::uint32_t, 2>::
         ElementAllocSize * test::integer::fmt::Definition<std::uint32_t, 2>::
         NMinSize;
+}
+
+template<typename TElement>
+constexpr typename Definition<std::uint32_t, 2>::SizeType 
+Definition<std::uint32_t, 2>::ElementResize(const std::size_t& n)
+{
+    return ((n * Definition<std::uint32_t, 2>::ElementMaxExponent) /
+            Definition<TElement, 2>::ElementMaxExponent) + 
+        (((Definition<std::uint32_t, 2>::ElementMaxExponent * n) % 
+            Definition<TElement, 2>::ElementMaxExponent) == 0 ? 0 : 1);
+}
+
+constexpr std::uint32_t Definition<std::uint32_t, 2>::
+    ElementMaxValueAt(const std::uint8_t&, const SizeType& at)
+{
+    return at == 0 ?  Definition<std::uint8_t, 2>::ElementMaxValue : 0;
+}
+        
+constexpr std::uint32_t Definition<std::uint32_t, 2>::
+    ElementMaxValueAt(const std::uint16_t&, const SizeType& at)
+{
+    return at == 0 ?  Definition<std::uint16_t, 2>::ElementMaxValue : 0;
+}
+    
+constexpr std::uint32_t Definition<std::uint32_t, 2>::
+    ElementMaxValueAt(const std::uint32_t&, const SizeType& at)
+{
+    return at == 0 ?  Definition<std::uint32_t, 2>::ElementMaxValue : 0;
+}
+    
+template<typename TElement>
+std::uint32_t Definition<std::uint32_t, 2>::
+    ElementValueAt(const TElement& element, const SizeType& at)
+{
+    return (std::uint32_t)(element >> at);
 }
 
 constexpr test::integer::Flag Definition<std::int32_t, 2>::Flag()
@@ -973,6 +1222,47 @@ constexpr std::size_t Definition<std::uint8_t, 8>::
         ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
 }
 
+template<typename TElement>
+constexpr typename Definition<std::uint8_t, 8>::SizeType 
+Definition<std::uint8_t, 8>::ElementResize(const std::size_t& n)
+{
+    return ((n * Definition<std::uint8_t, 8>::ElementMaxExponent) /
+            Definition<TElement, 8>::ElementMaxExponent) + 
+        (((Definition<std::uint8_t, 8>::ElementMaxExponent * n) % 
+            Definition<TElement, 8>::ElementMaxExponent) == 0 ? 0 : 1);
+}
+
+constexpr std::uint8_t Definition<std::uint8_t, 8>::
+    ElementMaxValueAt(const std::uint8_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint8_t, 8>::ElementMaxValue : 0;
+}
+        
+constexpr std::uint8_t Definition<std::uint8_t, 8>::
+    ElementMaxValueAt(const std::uint16_t&, const SizeType& at)
+{
+    return at <= 1 ? Definition<std::uint8_t, 8>::ElementMaxValue : 
+        at == 2 ? 7 : 0;
+}
+    
+constexpr std::uint8_t Definition<std::uint8_t, 8>::
+    ElementMaxValueAt(const std::uint32_t&, const SizeType& at)
+{
+    return at <= 4 ? Definition<std::uint8_t, 8>::ElementMaxValue : 0;
+}
+    
+template<typename TElement>
+std::uint8_t Definition<std::uint8_t, 8>::
+    ElementValueAt(const TElement& element, const SizeType& at)
+{
+    constexpr ExpandType max = 
+        Definition<std::uint8_t, 8>::ElementMaxValue + 1;
+    const ExpandType rshift1 = at <= 1 ? 1 : (at - 1) * max;
+    const ExpandType rshift = at == 0 ? 1 : at * max;
+    const ExpandType lshift = at == 0 ? 0 : max;
+    return (std::uint8_t)((element / rshift1) - ((element / rshift) * lshift));
+}
+
 constexpr test::integer::Flag Definition<std::int8_t, 8>::Flag()
 {
     return {test::integer::Flag::kSigned | 
@@ -1049,6 +1339,46 @@ constexpr std::size_t Definition<std::uint16_t, 8>::
     return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
         ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
         ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+}
+
+template<typename TElement>
+constexpr typename Definition<std::uint16_t, 8>::SizeType 
+Definition<std::uint16_t, 8>::ElementResize(const std::size_t& n)
+{
+    return ((n * Definition<std::uint16_t, 8>::ElementMaxExponent) /
+            Definition<TElement, 8>::ElementMaxExponent) + 
+        (((Definition<std::uint16_t, 8>::ElementMaxExponent * n) % 
+            Definition<TElement, 8>::ElementMaxExponent) == 0 ? 0 : 1);
+}
+
+constexpr std::uint16_t Definition<std::uint16_t, 8>::
+    ElementMaxValueAt(const std::uint8_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint8_t, 8>::ElementMaxValue : 0;
+}
+        
+constexpr std::uint16_t Definition<std::uint16_t, 8>::
+    ElementMaxValueAt(const std::uint16_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint16_t, 8>::ElementMaxValue : 0;
+}
+    
+constexpr std::uint16_t Definition<std::uint16_t, 8>::
+    ElementMaxValueAt(const std::uint32_t&, const SizeType& at)
+{
+    return at <= 1 ? Definition<std::uint16_t, 8>::ElementMaxValue : 0;
+}
+    
+template<typename TElement>
+std::uint16_t Definition<std::uint16_t, 8>::
+    ElementValueAt(const TElement& element, const SizeType& at)
+{
+    constexpr ExpandType max = 
+        Definition<std::uint16_t, 8>::ElementMaxValue + 1;
+    const ExpandType rshift1 = at <= 1 ? 1 : (at - 1) * max;
+    const ExpandType rshift = at == 0 ? 1 : at * max;
+    const ExpandType lshift = at == 0 ? 0 : max;
+    return (std::uint16_t)((element / rshift1) - ((element / rshift) * lshift));
 }
 
 constexpr test::integer::Flag Definition<std::int16_t, 8>::Flag()
@@ -1129,6 +1459,46 @@ constexpr std::size_t Definition<std::uint32_t, 8>::
     return (((n * DefBinType::BitSize) % DefOctType::BitSize) == 0 ? 
         ((n * DefBinType::BitSize) / DefOctType::BitSize) : 
         ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
+}
+
+template<typename TElement>
+constexpr typename Definition<std::uint32_t, 8>::SizeType 
+Definition<std::uint32_t, 8>::ElementResize(const std::size_t& n)
+{
+    return ((n * Definition<std::uint32_t, 8>::ElementMaxExponent) /
+            Definition<TElement, 8>::ElementMaxExponent) + 
+        (((Definition<std::uint32_t, 8>::ElementMaxExponent * n) % 
+            Definition<TElement, 8>::ElementMaxExponent) == 0 ? 0 : 1);
+}
+
+constexpr std::uint32_t Definition<std::uint32_t, 8>::
+    ElementMaxValueAt(const std::uint8_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint8_t, 8>::ElementMaxValue : 0;
+}
+        
+constexpr std::uint32_t Definition<std::uint32_t, 8>::
+    ElementMaxValueAt(const std::uint16_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint16_t, 8>::ElementMaxValue : 0;
+}
+    
+constexpr std::uint32_t Definition<std::uint32_t, 8>::
+    ElementMaxValueAt(const std::uint32_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint32_t, 8>::ElementMaxValue : 0;
+}
+    
+template<typename TElement>
+std::uint32_t Definition<std::uint32_t, 8>::
+    ElementValueAt(const TElement& element, const SizeType& at)
+{
+    constexpr ExpandType max = 
+        Definition<std::uint32_t, 8>::ElementMaxValue + 1;
+    const ExpandType rshift1 = at <= 1 ? 1 : (at - 1) * max;
+    const ExpandType rshift = at == 0 ? 1 : at * max;
+    const ExpandType lshift = at == 0 ? 0 : max;
+    return (std::uint32_t)((element / rshift1) - ((element / rshift) * lshift));
 }
 
 constexpr test::integer::Flag Definition<std::int32_t, 8>::Flag()
@@ -1239,6 +1609,46 @@ constexpr std::size_t Definition<std::uint8_t, 10>::
         ((n * DefBinType::BitSize) / DefOctType::BitSize) + 1);
 }
 
+template<typename TElement>
+constexpr typename Definition<std::uint8_t, 10>::SizeType 
+Definition<std::uint8_t, 10>::ElementResize(const std::size_t& n)
+{
+    return ((n * Definition<std::uint8_t, 10>::ElementMaxExponent) /
+            Definition<TElement, 10>::ElementMaxExponent) + 
+        (((Definition<std::uint8_t, 10>::ElementMaxExponent * n) % 
+            Definition<TElement, 10>::ElementMaxExponent) == 0 ? 0 : 1);
+}
+
+constexpr std::uint8_t Definition<std::uint8_t, 10>::
+    ElementMaxValueAt(const std::uint8_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint8_t, 10>::ElementMaxValue : 0;
+}
+        
+constexpr std::uint8_t Definition<std::uint8_t, 10>::
+    ElementMaxValueAt(const std::uint16_t&, const SizeType& at)
+{
+    return at <= 1 ? Definition<std::uint8_t, 10>::ElementMaxValue : 0;
+}
+    
+constexpr std::uint8_t Definition<std::uint8_t, 10>::
+    ElementMaxValueAt(const std::uint32_t&, const SizeType& at)
+{
+    return at <= 3 ? Definition<std::uint8_t, 10>::ElementMaxValue : 
+        at == 4 ? 9 : 0;
+}
+    
+template<typename TElement>
+std::uint8_t Definition<std::uint8_t, 10>::
+    ElementValueAt(const TElement& element, const SizeType& at)
+{
+    constexpr ExpandType max = 
+        Definition<std::uint8_t, 10>::ElementMaxValue + 1;
+    const ExpandType rshift1 = at <= 1 ? 1 : (at - 1) * max;
+    const ExpandType rshift = at == 0 ? 1 : at * max;
+    const ExpandType lshift = at == 0 ? 0 : max;
+    return (std::uint8_t)((element / rshift1) - ((element / rshift) * lshift));
+}
 
 constexpr test::integer::Flag Definition<std::int8_t, 10>::Flag()
 {
@@ -1318,6 +1728,47 @@ std::uint16_t Definition<std::uint16_t, 10>::
     for (std::size_t i = 0; i < _n; ++i) pwr *= 10;
     if (div > (pwr - 1)) return div - ((div / pwr) * pwr);
     return div;
+}
+
+template<typename TElement>
+constexpr typename Definition<std::uint16_t, 10>::SizeType 
+Definition<std::uint16_t, 10>::ElementResize(const std::size_t& n)
+{
+    return ((n * Definition<std::uint16_t, 10>::ElementMaxExponent) /
+            Definition<TElement, 10>::ElementMaxExponent) + 
+        (((Definition<std::uint16_t, 10>::ElementMaxExponent * n) % 
+            Definition<TElement, 10>::ElementMaxExponent) == 0 ? 0 : 1);
+}
+
+constexpr std::uint16_t Definition<std::uint16_t, 10>::
+    ElementMaxValueAt(const std::uint8_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint8_t, 10>::ElementMaxValue : 0;
+}
+        
+constexpr std::uint16_t Definition<std::uint16_t, 10>::
+    ElementMaxValueAt(const std::uint16_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint16_t, 10>::ElementMaxValue : 0;
+}
+    
+constexpr std::uint16_t Definition<std::uint16_t, 10>::
+    ElementMaxValueAt(const std::uint32_t&, const SizeType& at)
+{
+    return at <= 1 ? Definition<std::uint16_t, 10>::ElementMaxValue : 
+        at == 2 ? 9 : 0;
+}
+    
+template<typename TElement>
+std::uint16_t Definition<std::uint16_t, 10>::
+    ElementValueAt(const TElement& element, const SizeType& at)
+{
+    constexpr ExpandType max = 
+        Definition<std::uint16_t, 10>::ElementMaxValue + 1;
+    const ExpandType rshift1 = at <= 1 ? 1 : (at - 1) * max;
+    const ExpandType rshift = at == 0 ? 1 : at * max;
+    const ExpandType lshift = at == 0 ? 0 : max;
+    return (std::uint16_t)((element / rshift1) - ((element / rshift) * lshift));
 }
 
 constexpr test::integer::Flag Definition<std::int16_t, 10>::Flag()
@@ -1401,6 +1852,46 @@ std::uint32_t Definition<std::uint32_t, 10>::
     for (std::size_t i = 0; i < _n; ++i) pwr *= 10;
     if (div > (pwr - 1)) return div - ((div / pwr) * pwr);
     return div;
+}
+
+template<typename TElement>
+constexpr typename Definition<std::uint32_t, 10>::SizeType 
+Definition<std::uint32_t, 10>::ElementResize(const std::size_t& n)
+{
+    return (((n * Definition<std::uint32_t, 10>::ElementMaxExponent) /
+            Definition<TElement, 10>::ElementMaxExponent) + 
+        (((Definition<std::uint32_t, 10>::ElementMaxExponent * n) % 
+            Definition<TElement, 10>::ElementMaxExponent) == 0 ? 0 : 1));
+}
+
+constexpr std::uint32_t Definition<std::uint32_t, 10>::
+    ElementMaxValueAt(const std::uint8_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint8_t, 10>::ElementMaxValue : 0;
+}
+        
+constexpr std::uint32_t Definition<std::uint32_t, 10>::
+    ElementMaxValueAt(const std::uint16_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint16_t, 10>::ElementMaxValue : 0;
+}
+    
+constexpr std::uint32_t  Definition<std::uint32_t, 10>::
+    ElementMaxValueAt(const std::uint32_t&, const SizeType& at)
+{
+    return at <= 0 ? Definition<std::uint32_t, 10>::ElementMaxValue : 0;
+}
+    
+template<typename TElement>
+std::uint32_t Definition<std::uint32_t, 10>::
+    ElementValueAt(const TElement& element, const SizeType& at)
+{
+    constexpr ExpandType max = 
+        Definition<std::uint32_t, 10>::ElementMaxValue + 1;
+    const ExpandType rshift1 = at <= 1 ? 1 : (at - 1) * max;
+    const ExpandType rshift = at == 0 ? 1 : at * max;
+    const ExpandType lshift = at == 0 ? 0 : max;
+    return (std::uint32_t)((element / rshift1) - ((element / rshift) * lshift));
 }
 
 constexpr test::integer::Flag Definition<std::int32_t, 10>::Flag()
