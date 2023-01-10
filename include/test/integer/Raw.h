@@ -109,7 +109,7 @@ Raw<N>::Raw(const FlagValueType& flag_val, const test::Byte<N_>& byte_val) :
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Constructor<%s>>flag_val=%s, byte_val=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)),
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)),
         TEST_SYS_DEBUG_VALUE_STR(0, flag_val), &byte_val);
     
 }
@@ -123,7 +123,7 @@ Raw<N>::Raw(const FlagType& flag, const test::Byte<N_>& byte_val) :
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Constructor<%s>(flag=%s, byte_val=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)),
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)),
         TEST_SYS_DEBUG_VALUE_STR(0, flag), &byte_val);
     
 }
@@ -137,7 +137,7 @@ Raw<N>::Raw(const FlagValueType& flag_val, test::Byte<N_>&& byte_rval) :
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Constructor<%s>(flag_val=%s, byte_rval=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)),
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)),
         TEST_SYS_DEBUG_VALUE_STR(0, flag_val), &byte_rval);
     
 }
@@ -151,7 +151,7 @@ Raw<N>::Raw(const FlagType& flag, test::Byte<N_>&& byte_rval) :
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Constructor<%s>(flag=%s, byte_rval=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)),
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)),
         TEST_SYS_DEBUG_VALUE_STR(0, flag), &byte_rval);
 
 }
@@ -171,7 +171,7 @@ Raw<N>::Raw(const Raw<N_>& cpy) :
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Copy Constructor<%s>(cpy=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)), &cpy);
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)), &cpy);
 
 }
 
@@ -184,7 +184,7 @@ Raw<N>::Raw(Raw<N_>&& mov) :
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Move Constructor<%s>(mov=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)), &mov);
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)), &mov);
 
 }
 
@@ -195,7 +195,7 @@ Raw<N>& Raw<N>::operator=(const Raw<N_>& cpy)
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Copy Assignment<%s>(cpy=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)), &cpy);
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)), &cpy);
 
     test::Byte<N>::operator=(cpy);
     m_flag = cpy.Flag();
@@ -209,7 +209,7 @@ Raw<N>& Raw<N>::operator=(Raw<N_>&& mov)
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Move Assignment<%s>(mov=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)), &mov);
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)), &mov);
 
     test::Byte<N>::operator=(std::move(mov));
     m_flag = std::move(mov.Flag());
@@ -223,7 +223,7 @@ Raw<N>& Raw<N>::operator=(const test::Byte<N_>& byte_val)
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "operator=<%s>(byte_val=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)), &byte_val);
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)), &byte_val);
 
     test::Byte<N>::operator=(byte_val);
     return *this;
@@ -236,7 +236,7 @@ Raw<N>& Raw<N>::operator=(test::Byte<N_>&& byte_rval)
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "operator=<%s>(byte_rval=%p)", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(
-            TEST_SYS_DEBUG_TV_TYPE(std::size_t, _N)), &byte_rval);
+            TEST_SYS_DEBUG_TV_TYPE(std::size_t, N_)), &byte_rval);
 
     test::Byte<N>::operator=(std::move(byte_rval));
     return *this;
