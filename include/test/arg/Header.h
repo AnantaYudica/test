@@ -35,51 +35,100 @@ private:
 public:
     typedef std::uint32_t FlagType;
 public:
-    static constexpr FlagType DefineBool                = 0x00001;
-    static constexpr FlagType DefineChar                = 0x00002;
-    static constexpr FlagType DefineSignedChar          = 0x00004;
-    static constexpr FlagType DefineShort               = 0x00008;
-    static constexpr FlagType DefineInt                 = 0x00010;
-    static constexpr FlagType DefineLong                = 0x00020;
-    static constexpr FlagType DefineLongLong            = 0x00040;
-    static constexpr FlagType DefineUnsignedChar        = 0x00080;
-    static constexpr FlagType DefineUnsignedShort       = 0x00100;
-    static constexpr FlagType DefineUnsignedInt         = 0x00200;
-    static constexpr FlagType DefineUnsignedLong        = 0x00400;
-    static constexpr FlagType DefineUnsignedLongLong    = 0x00800;
-    static constexpr FlagType DefineFloat               = 0x01000;
-    static constexpr FlagType DefineDouble              = 0x02000;
-    static constexpr FlagType DefineLongDouble          = 0x04000;
-    static constexpr FlagType DefineWchar               = 0x08000;
+    static constexpr FlagType DefineChar                = 0x00001;
+    static constexpr FlagType DefineWchar               = 0x00002;
+    static constexpr FlagType DefineBool                = 0x00004;
+    static constexpr FlagType DefineSignedChar          = 0x00008;
+    static constexpr FlagType DefineShort               = 0x00010;
+    static constexpr FlagType DefineInt                 = 0x00020;
+    static constexpr FlagType DefineLong                = 0x00040;
+    static constexpr FlagType DefineLongLong            = 0x00080;
+    static constexpr FlagType DefineUnsignedChar        = 0x00100;
+    static constexpr FlagType DefineUnsignedShort       = 0x00200;
+    static constexpr FlagType DefineUnsignedInt         = 0x00400;
+    static constexpr FlagType DefineUnsignedLong        = 0x00800;
+    static constexpr FlagType DefineUnsignedLongLong    = 0x01000;
+    static constexpr FlagType DefineFloat               = 0x02000;
+    static constexpr FlagType DefineDouble              = 0x04000;
+    static constexpr FlagType DefineLongDouble          = 0x08000;
     static constexpr FlagType DefinePointer             = 0x10000;
+public:
     static constexpr FlagType DefineString              = 
-        DefinePointer & DefineChar & DefineWchar;
+        DefinePointer | DefineChar | DefineWchar;
+    static constexpr FlagType DefineCharacter           =
+        DefineWchar | DefineChar;
+    static constexpr FlagType DefineSigned              =
+        DefineSignedChar | DefineShort | DefineInt |
+        DefineLong | DefineLongLong | DefineUnsignedChar;
+    static constexpr FlagType DefineUnsigned            =
+        DefineUnsignedShort | DefineUnsignedInt | 
+        DefineUnsignedLong | DefineUnsignedLongLong;
+    static constexpr FlagType DefineInteger             =
+        DefineBool | DefineSigned | DefineUnsigned;
+    static constexpr FlagType DefineFloatingPoint       =
+        DefineFloat | DefineDouble | DefineLongDouble;
     static constexpr FlagType DefineType                = 0x0000ffff;
     static constexpr FlagType DefinePadding             = 0xfffe0000;
 private:
     static constexpr inline FlagType Set(...);
-    static constexpr inline FlagType Set(bool&&);
-    static constexpr inline FlagType Set(char&&);
-    static constexpr inline FlagType Set(signed char&&);
-    static constexpr inline FlagType Set(short&&);
-    static constexpr inline FlagType Set(int&&);
-    static constexpr inline FlagType Set(long&&);
-    static constexpr inline FlagType Set(long long&&);
-    static constexpr inline FlagType Set(unsigned char&&);
-    static constexpr inline FlagType Set(unsigned short&&);
-    static constexpr inline FlagType Set(unsigned int&&);
-    static constexpr inline FlagType Set(unsigned long&&);
-    static constexpr inline FlagType Set(unsigned long long&&);
-    static constexpr inline FlagType Set(float&&);
-    static constexpr inline FlagType Set(double&&);
-    static constexpr inline FlagType Set(long double&&);
-    static constexpr inline FlagType Set(wchar_t&&);
-    template<typename T>
-    static constexpr inline FlagType Set(T*&&);
+    static constexpr inline FlagType Set(char*);
+    static constexpr inline FlagType Set(wchar_t*);
+    static constexpr inline FlagType Set(const char*);
+    static constexpr inline FlagType Set(const wchar_t*);
+    static constexpr inline FlagType Set(char);
+    static constexpr inline FlagType Set(wchar_t);
+    static constexpr inline FlagType Set(signed char);
+    static constexpr inline FlagType Set(short);
+    static constexpr inline FlagType Set(int);
+    static constexpr inline FlagType Set(long);
+    static constexpr inline FlagType Set(long long);
+    static constexpr inline FlagType Set(unsigned char);
+    static constexpr inline FlagType Set(unsigned short);
+    static constexpr inline FlagType Set(unsigned int);
+    static constexpr inline FlagType Set(unsigned long);
+    static constexpr inline FlagType Set(unsigned long long);
+    static constexpr inline FlagType Set(float);
+    static constexpr inline FlagType Set(double);
+    static constexpr inline FlagType Set(long double);
+private:
+    template<typename T, typename T_ = typename std::remove_reference<T>::type,
+        typename std::enable_if<std::is_same<bool, T_>::value, int>::type = 1>
+    static constexpr inline FlagType SetType(T&& t);
+    template<typename T, typename T_ = typename std::remove_reference<T>::type, 
+        typename std::enable_if<!std::is_same<bool, T_>::value, int>::type = 0>
+    static constexpr inline FlagType SetType(T&& t);
+    template<typename T, 
+        typename std::enable_if<std::is_same<bool, T>::value, int>::type = 1>
+    static constexpr inline FlagType SetType(const T& t);
+    template<typename T, 
+        typename std::enable_if<!std::is_same<bool, T>::value, int>::type = 0>
+    static constexpr inline FlagType SetType(const T& t);
+private:
+    template<typename T, 
+        typename std::enable_if<std::is_pointer<T>::value, int>::type = 1>
+    static constexpr inline FlagType SetPointer(T &&);
+    template<typename T, 
+        typename std::enable_if<std::is_array<T>::value, int>::type = 2>
+    static constexpr inline FlagType SetPointer(T &&);
+    template<typename T, 
+        typename std::enable_if<!std::is_pointer<T>::value &&
+            !std::is_array<T>::value, int>::type = 0>
+    static constexpr inline FlagType SetPointer(T &&);
+    template<typename T, 
+        typename std::enable_if<std::is_pointer<T>::value, int>::type = 1>
+    static constexpr inline FlagType SetPointer(T &);
+    template<typename T, 
+        typename std::enable_if<std::is_array<T>::value, int>::type = 2>
+    static constexpr inline FlagType SetPointer(T &);
+    template<typename T, 
+        typename std::enable_if<!std::is_pointer<T>::value &&
+            !std::is_array<T>::value, int>::type = 0>
+    static constexpr inline FlagType SetPointer(T &);
 private:
     FlagType m_flag;
     std::uint32_t m_size;
 public:
+    inline Header();
     template<typename T>
     inline Header(const std::size_t& size, T&& t);
 public:
@@ -113,7 +162,18 @@ public:
     inline bool IsDefinePointer() const;
     inline bool IsDefineString() const;
 public:
-    std::size_t Size() const;
+    inline bool IsDefineCharacter() const;
+    inline bool IsDefineInteger() const;
+    inline bool IsDefineSigned() const;
+    inline bool IsDefineUnsigned() const;
+    inline bool IsDefineFloatingPoint() const;
+public:
+    inline FlagType Flag() const;
+public:
+    inline std::size_t Size() const;
+public:
+    inline bool operator==(const Header& other) const;
+    inline bool operator!=(const Header& other) const;
 };
 
 constexpr inline typename test::arg::Header::FlagType 
@@ -123,112 +183,213 @@ test::arg::Header::Set(...)
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(bool&&)
-{
-    return test::arg::Header::DefineBool;
-}
-
-constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(char&&)
+test::arg::Header::Set(char*)
 {
     return test::arg::Header::DefineChar;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(signed char&&)
+test::arg::Header::Set(wchar_t*)
+{
+    return test::arg::Header::DefineWchar;
+}
+
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::Set(const char*)
+{
+    return test::arg::Header::DefineChar;
+}
+
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::Set(const wchar_t*)
+{
+    return test::arg::Header::DefineWchar;
+}
+
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::Set(char)
+{
+    return test::arg::Header::DefineChar;
+}
+
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::Set(wchar_t)
+{
+    return test::arg::Header::DefineWchar;
+}
+
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::Set(signed char)
 {
     return test::arg::Header::DefineSignedChar;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(short&&)
+test::arg::Header::Set(short)
 {
     return test::arg::Header::DefineShort;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(int&&)
+test::arg::Header::Set(int)
 {
     return test::arg::Header::DefineInt;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(long&&)
+test::arg::Header::Set(long)
 {
     return test::arg::Header::DefineLong;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(long long&&)
+test::arg::Header::Set(long long)
 {
     return test::arg::Header::DefineLongLong;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(unsigned char&&)
+test::arg::Header::Set(unsigned char)
 {
     return test::arg::Header::DefineUnsignedChar;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(unsigned short&&)
+test::arg::Header::Set(unsigned short)
 {
     return test::arg::Header::DefineUnsignedShort;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(unsigned int&&)
+test::arg::Header::Set(unsigned int)
 {
     return test::arg::Header::DefineUnsignedInt;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(unsigned long&&)
+test::arg::Header::Set(unsigned long)
 {
     return test::arg::Header::DefineUnsignedLong;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(unsigned long long&&)
+test::arg::Header::Set(unsigned long long)
 {
     return test::arg::Header::DefineUnsignedLongLong;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(float&&)
+test::arg::Header::Set(float)
 {
     return test::arg::Header::DefineFloat;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(double&&)
+test::arg::Header::Set(double)
 {
     return test::arg::Header::DefineDouble;
 }
 
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(long double&&)
+test::arg::Header::Set(long double)
 {
     return test::arg::Header::DefineLongDouble;
 }
 
+template<typename T, typename T_,
+    typename std::enable_if<std::is_same<bool, T_>::value, int>::type>
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(wchar_t&&)
+test::arg::Header::SetType(T&& t)
 {
-    return test::arg::Header::DefineWchar;
+    return test::arg::Header::DefineBool;
 }
 
-template<typename T>
+template<typename T, typename T_,
+    typename std::enable_if<!std::is_same<bool, T_>::value, int>::type>
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::Set(T*&& t)
+test::arg::Header::SetType(T&& t)
 {
-    return test::arg::Header::DefinePointer &
-        test::arg::Header::Set(std::forward<T>(*t));
+    return test::arg::Header::Set(std::forward<T>(t));
+}
+
+template<typename T, 
+    typename std::enable_if<std::is_same<bool, T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetType(const T& t)
+{
+    return test::arg::Header::DefineBool;
+}
+
+template<typename T,
+    typename std::enable_if<!std::is_same<bool, T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetType(const T& t)
+{
+    return test::arg::Header::Set(t);
+}
+
+template<typename T, 
+    typename std::enable_if<std::is_pointer<T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetPointer(T &&)
+{
+    return test::arg::Header::DefinePointer;
+}
+
+template<typename T, 
+    typename std::enable_if<std::is_array<T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetPointer(T &&)
+{
+    return test::arg::Header::DefinePointer;
+}
+
+template<typename T, 
+    typename std::enable_if<!std::is_pointer<T>::value &&
+        !std::is_array<T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetPointer(T &&)
+{
+    return 0;
+}
+
+template<typename T, 
+    typename std::enable_if<std::is_pointer<T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetPointer(T &)
+{
+    return test::arg::Header::DefinePointer;
+}
+
+template<typename T, 
+    typename std::enable_if<std::is_array<T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetPointer(T &)
+{
+    return test::arg::Header::DefinePointer;
+}
+
+template<typename T, 
+    typename std::enable_if<!std::is_pointer<T>::value &&
+        !std::is_array<T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetPointer(T &)
+{
+    return 0;
+}
+
+inline test::arg::Header::Header() :
+    m_flag(0),
+    m_size(0)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Default Constructor");
+    
 }
 
 template<typename T>
 inline test::arg::Header::Header(const std::size_t& size, T&& t) :
-    m_flag(Set(std::forward<T>(t))),
+    m_flag(SetType(std::forward<T>(t)) | SetPointer(std::forward<T>(t))),
     m_size((std::uint32_t)size)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
@@ -291,21 +452,22 @@ inline bool test::arg::Header::IsGood() const
     return (m_flag & DefinePadding) == 0 &&
         (m_flag & ~DefinePadding) != 0 &&
         ((m_flag & DefineBool) == DefineBool ||
-            (m_flag & DefineChar) == DefineChar ||
-            (m_flag & DefineSignedChar) == DefineSignedChar ||
-            (m_flag & DefineShort) == DefineShort ||
-            (m_flag & DefineInt) == DefineInt ||
-            (m_flag & DefineLong) == DefineLong ||
-            (m_flag & DefineLongLong) == DefineLongLong ||
-            (m_flag & DefineUnsignedChar) == DefineUnsignedChar ||
-            (m_flag & DefineUnsignedShort) == DefineUnsignedShort ||
-            (m_flag & DefineUnsignedInt) == DefineUnsignedInt ||
-            (m_flag & DefineUnsignedLong) == DefineUnsignedLong ||
-            (m_flag & DefineUnsignedLongLong) == DefineUnsignedLongLong ||
-            (m_flag & DefineFloat) == DefineFloat ||
-            (m_flag & DefineDouble) == DefineDouble ||
-            (m_flag & DefineLongDouble) == DefineLongDouble ||
-            (m_flag & DefineWchar) == DefineWchar);
+            (m_flag & DefineType) == DefineChar ||
+            (m_flag & DefineType) == DefineSignedChar ||
+            (m_flag & DefineType) == DefineShort ||
+            (m_flag & DefineType) == DefineInt ||
+            (m_flag & DefineType) == DefineLong ||
+            (m_flag & DefineType) == DefineLongLong ||
+            (m_flag & DefineType) == DefineUnsignedChar ||
+            (m_flag & DefineType) == DefineUnsignedShort ||
+            (m_flag & DefineType) == DefineUnsignedInt ||
+            (m_flag & DefineType) == DefineUnsignedLong ||
+            (m_flag & DefineType) == DefineUnsignedLongLong ||
+            (m_flag & DefineType) == DefineFloat ||
+            (m_flag & DefineType) == DefineDouble ||
+            (m_flag & DefineType) == DefineLongDouble ||
+            (m_flag & DefineType) == DefineWchar ||
+            (m_flag & DefinePointer) == DefinePointer);
 }
 
 inline bool test::arg::Header::IsBad() const
@@ -449,11 +611,80 @@ inline bool test::arg::Header::IsDefineString() const
         (IsDefinePointer() && IsDefineWchar());
 }
 
-std::size_t test::arg::Header::Size() const
+inline bool test::arg::Header::IsDefineCharacter() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsDefineCharacter() const");
+
+    return (IsDefineChar() || IsDefineWchar()) && !IsDefinePointer();
+}
+
+inline bool test::arg::Header::IsDefineInteger() const
+{    
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsDefineInteger() const");
+
+    return IsDefineBool() || IsDefineSigned() || IsDefineUnsigned();
+}
+
+inline bool test::arg::Header::IsDefineSigned() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsDefineSigned() const");
+
+    return IsDefineSignedChar() || IsDefineShort() || IsDefineInt() ||
+        IsDefineLong() || IsDefineLongLong();
+}
+
+inline bool test::arg::Header::IsDefineUnsigned() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsDefineUnsigned() const");
+
+    return IsDefineUnsignedChar() || IsDefineUnsignedShort() || 
+        IsDefineUnsignedInt() || IsDefineUnsignedLong() || 
+        IsDefineUnsignedLongLong();
+}
+
+inline bool test::arg::Header::IsDefineFloatingPoint() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsDefineFloatingPoint() const");
+
+    return IsDefineFloat() || IsDefineDouble() || IsDefineLongDouble();
+}
+
+inline typename test::arg::Header::FlagType 
+test::arg::Header::Flag() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Flag() const");
+
+    return m_flag;
+}
+
+inline std::size_t test::arg::Header::Size() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Size() const");
     
     return m_size;
+}
+
+inline bool test::arg::Header::operator==(const Header& other) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator==(other=%p) const", &other);
+
+    return m_flag == other.m_flag &&
+        m_size == other.m_size;
+}
+
+inline bool test::arg::Header::operator!=(const Header& other) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator!=(other=%p) const", &other);
+    
+    return m_flag != other.m_flag ||
+        m_size != other.m_size;
 }
 
 } //!arg
