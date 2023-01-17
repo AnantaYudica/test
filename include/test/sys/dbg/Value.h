@@ -229,6 +229,19 @@ TEST_SYS_DBG_VALUE_DEFINE("%f", double);
 
 TEST_SYS_DBG_VALUE_DEFINE("%Lf", long double);
 
+template<>
+struct test::sys::dbg::Value<bool>
+{
+    static std::size_t Write(char * buff_out, std::size_t n, const bool& val)
+    {
+        return snprintf(buff_out, n, "%s", val ? "true" : "false");
+    }
+    static std::size_t Write(char * buff_out, std::size_t n, bool&& val)
+    {
+        return snprintf(buff_out, n, "%s", val ? "true" : "false");
+    }
+};
+
 #undef TEST_SYS_DBG_VALUE_DEFINE
 
 #define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE(FORMAT, ...)\

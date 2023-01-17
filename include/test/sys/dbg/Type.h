@@ -756,6 +756,8 @@ TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)const volatile &&," ...) const volat
 
 TEST_SYS_DBG_TYPE_DEFINE("void", void);
 
+TEST_SYS_DBG_TYPE_DEFINE("bool", bool);
+
 TEST_SYS_DBG_TYPE_DEFINE("char", char);
 TEST_SYS_DBG_TYPE_DEFINE("signed char", signed char);
 TEST_SYS_DBG_TYPE_DEFINE("short", short);
