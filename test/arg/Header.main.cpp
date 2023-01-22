@@ -12,6 +12,7 @@ struct Obj1
 {
     int val;
     Obj1() : val(0) {}
+    Obj1(const Obj1& cpy) : val(cpy.val) {}
 };
 
 int main()
@@ -38,6 +39,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -80,6 +82,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -134,6 +137,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -187,6 +191,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -212,7 +217,6 @@ int main()
 
         const bool v2 = true;
         test::arg::Header h3(sizeof(bool), v2); 
-        
         assert(h3.Flag() == test::arg::Header::DefineBool);
         assert(h3.Size() == sizeof(bool));
         assert((h1 == h3) == true);
@@ -240,6 +244,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -293,6 +298,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -346,6 +352,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -399,6 +406,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -452,6 +460,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -505,6 +514,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -558,6 +568,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -611,6 +622,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -664,6 +676,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -718,6 +731,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -771,6 +785,7 @@ int main()
         assert(h1.IsDefineFloat() == true);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -824,6 +839,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == true);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -877,6 +893,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == true);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == false);
 
@@ -909,6 +926,60 @@ int main()
         assert((h1 != h3) == false);
     }
     {
+        test::arg::Header h1(sizeof(Obj1), Obj1());
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == true);
+
+        assert(h1.IsDefinePointer() == false);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == false);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == test::arg::Header::DefineObject);
+        assert(h1.Size() == sizeof(Obj1));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        Obj1 o1;
+        test::arg::Header h2(sizeof(Obj1), o1); 
+        
+        assert(h2.Flag() == test::arg::Header::DefineObject);
+        assert(h2.Size() == sizeof(Obj1));
+        assert((h1 == h2) == true);
+        assert((h1 != h2) == false);
+
+        const Obj1 o2;
+        test::arg::Header h3(sizeof(Obj1), o2); 
+        
+        assert(h3.Flag() == test::arg::Header::DefineObject);
+        assert(h3.Size() == sizeof(Obj1));
+        assert((h1 == h3) == true);
+        assert((h1 != h3) == false);
+    }
+    {
         test::arg::Header h1(sizeof(char*), "test");
         
         assert(h1.IsGood() == true);
@@ -930,6 +1001,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == true);
 
@@ -984,6 +1056,7 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == true);
 
@@ -1017,6 +1090,691 @@ int main()
         assert((h1 != h3) == false);
     }
     {
+        bool v0 = false;
+        test::arg::Header h1(sizeof(void*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == true);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineBool));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const bool v1 = false;
+        test::arg::Header h2(sizeof(void*), &v1);
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineBool));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        signed char v0 = (signed char)1;
+        test::arg::Header h1(sizeof(void*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == true);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == true);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineSignedChar));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const signed char v1 = (signed char)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineSignedChar));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        short v0 = (short)1;
+        test::arg::Header h1(sizeof(void*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == true);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == true);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineShort));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const short v1 = (short)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineShort));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        int v0 = (int)1;
+        test::arg::Header h1(sizeof(int*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == true);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == true);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineInt));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const int v1 = (int)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineInt));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        long v0 = (long)1;
+        test::arg::Header h1(sizeof(long*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == true);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == true);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineLong));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const long v1 = (long)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineLong));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        long long v0 = (long long)1;
+        test::arg::Header h1(sizeof(long long*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == true);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == true);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineLongLong));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const long long v1 = (long long)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineLongLong));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        unsigned char v0 = (unsigned char)1;
+        test::arg::Header h1(sizeof(unsigned char*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == true);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == true);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedChar));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const unsigned char v1 = (unsigned char)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedChar));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        unsigned short v0 = (unsigned short)1;
+        test::arg::Header h1(sizeof(unsigned short*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == true);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == true);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedShort));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const unsigned short v1 = (unsigned short)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedShort));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        unsigned int v0 = (unsigned int)1;
+        test::arg::Header h1(sizeof(unsigned int*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == true);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == true);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedInt));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const unsigned int v1 = (unsigned int)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedInt));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        unsigned long v0 = (unsigned long)1;
+        test::arg::Header h1(sizeof(unsigned long*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == true);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == true);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedLong));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const unsigned long v1 = (unsigned long)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedLong));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        unsigned long long v0 = (unsigned long long)1;
+        test::arg::Header h1(sizeof(unsigned long long*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == true);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == true);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == true);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedLongLong));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const unsigned long long v1 = (unsigned long long)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedLongLong));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        float v0 = (float)1;
+        test::arg::Header h1(sizeof(float*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == true);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == false);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == true);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineFloat));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const float v1 = (float)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineFloat));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        double v0 = (double)1;
+        test::arg::Header h1(sizeof(double*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == true);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == false);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == true);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineDouble));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const double v1 = (double)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineDouble));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
+        long double v0 = (long double)1;
+        test::arg::Header h1(sizeof(long double*), &v0);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == true);
+        assert(h1.IsDefineObject() == false);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == false);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == true);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineLongDouble));
+        assert(h1.Size() == sizeof(void*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const long double v1 = (long double)1;
+        test::arg::Header h2(sizeof(void*), &v1);
+
+        assert(h2.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineLongDouble));
+        assert(h2.Size() == sizeof(void*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+    }
+    {
         Obj1 obj1;
         test::arg::Header h1(sizeof(Obj1*), &obj1);
 
@@ -1039,6 +1797,63 @@ int main()
         assert(h1.IsDefineFloat() == false);
         assert(h1.IsDefineDouble() == false);
         assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == true);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == false);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer |
+            test::arg::Header::DefineObject));
+        assert(h1.Size() == sizeof(Obj1*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        const Obj1 obj2;
+        test::arg::Header h2(sizeof(Obj1*), &obj2);
+        assert(h2.Flag() == (test::arg::Header::DefinePointer |
+            test::arg::Header::DefineObject));
+        assert(h2.Size() == sizeof(Obj1*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+        const Obj1 *const obj3 = &obj2;
+        test::arg::Header h3(sizeof(void*), obj3);
+        assert(h3.Flag() == (test::arg::Header::DefinePointer |
+            test::arg::Header::DefineObject));
+        assert(h3.Size() == sizeof(void*));
+        assert((h3 == h1) == true);
+        assert((h3 != h1) == false);
+    }
+    {
+
+        Obj1 obj1;
+        test::arg::Header h1(sizeof(void*), (void*)&obj1);
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == false);
 
         assert(h1.IsDefinePointer() == true);
 
@@ -1050,23 +1865,16 @@ int main()
         assert(h1.IsDefineFloatingPoint() == false);
 
         assert(h1.Flag() == test::arg::Header::DefinePointer);
-        assert(h1.Size() == sizeof(Obj1*));
+        assert(h1.Size() == sizeof(void*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
-        
+
         const Obj1 obj2;
-        test::arg::Header h2(sizeof(Obj1*), &obj2);
+        test::arg::Header h2(sizeof(void*), (const void*)&obj2);
         assert(h2.Flag() == test::arg::Header::DefinePointer);
-        assert(h2.Size() == sizeof(Obj1*));
+        assert(h2.Size() == sizeof(void*));
         assert((h2 == h1) == true);
         assert((h2 != h1) == false);
-        
-        void* vo1 = &obj1;
-        test::arg::Header h3(sizeof(void*), vo1);
-        assert(h3.Flag() == test::arg::Header::DefinePointer);
-        assert(h3.Size() == sizeof(void*));
-        assert((h3 == h1) == true);
-        assert((h3 != h1) == false);
         
     }
     return 0;
