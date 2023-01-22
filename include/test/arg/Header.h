@@ -51,7 +51,8 @@ public:
     static constexpr FlagType DefineFloat               = 0x02000;
     static constexpr FlagType DefineDouble              = 0x04000;
     static constexpr FlagType DefineLongDouble          = 0x08000;
-    static constexpr FlagType DefinePointer             = 0x10000;
+    static constexpr FlagType DefineObject              = 0x10000;
+    static constexpr FlagType DefinePointer             = 0x20000;
 public:
     static constexpr FlagType DefineString              = 
         DefinePointer | DefineChar | DefineWchar;
@@ -67,8 +68,8 @@ public:
         DefineBool | DefineSigned | DefineUnsigned;
     static constexpr FlagType DefineFloatingPoint       =
         DefineFloat | DefineDouble | DefineLongDouble;
-    static constexpr FlagType DefineType                = 0x0000ffff;
-    static constexpr FlagType DefinePadding             = 0xfffe0000;
+    static constexpr FlagType DefineType                = 0x0001ffff;
+    static constexpr FlagType DefinePadding             = 0xfffc0000;
 private:
     static constexpr inline FlagType Set(...);
     static constexpr inline FlagType Set(char*);
@@ -91,18 +92,41 @@ private:
     static constexpr inline FlagType Set(double);
     static constexpr inline FlagType Set(long double);
 private:
-    template<typename T, typename T_ = typename std::remove_reference<T>::type,
+    template<typename T, typename T_ = typename std::remove_cv<
+        typename std::remove_reference<T>::type>::type,
         typename std::enable_if<std::is_same<bool, T_>::value, int>::type = 1>
     static constexpr inline FlagType SetType(T&& t);
-    template<typename T, typename T_ = typename std::remove_reference<T>::type, 
+    template<typename T, typename T_ = typename std::remove_cv<
+        typename std::remove_reference<T>::type>::type, 
         typename std::enable_if<!std::is_same<bool, T_>::value, int>::type = 0>
     static constexpr inline FlagType SetType(T&& t);
-    template<typename T, 
-        typename std::enable_if<std::is_same<bool, T>::value, int>::type = 1>
-    static constexpr inline FlagType SetType(const T& t);
-    template<typename T, 
-        typename std::enable_if<!std::is_same<bool, T>::value, int>::type = 0>
-    static constexpr inline FlagType SetType(const T& t);
+    template<typename T, typename T_ = typename std::remove_cv<
+        typename std::remove_reference<T>::type>::type,
+        typename std::enable_if<std::is_same<bool, T_>::value &&
+            !std::is_void<T_>::value, int>::type = 1>
+    static constexpr inline FlagType SetType(T* t);
+    template<typename T, typename T_ = typename std::remove_cv<
+        typename std::remove_reference<T>::type>::type, 
+        typename std::enable_if<!std::is_same<bool, T_>::value &&
+            !std::is_void<T_>::value, int>::type = 0>
+    static constexpr inline FlagType SetType(T* t);
+private:
+    template<typename T, typename T_ = typename std::remove_cv<
+        typename std::remove_reference<T>::type>::type, 
+        typename std::enable_if<std::is_class<T_>::value, int>::type = 1>
+    static constexpr inline FlagType SetObject(T&& t);
+    template<typename T, typename T_ = typename std::remove_cv<
+        typename std::remove_reference<T>::type>::type, 
+        typename std::enable_if<!std::is_class<T_>::value, int>::type = 0>
+    static constexpr inline FlagType SetObject(T&& t);
+    template<typename T, typename T_ = typename std::remove_cv<
+        typename std::remove_reference<T>::type>::type, 
+        typename std::enable_if<std::is_class<T>::value, int>::type = 1>
+    static constexpr inline FlagType SetObject(T* t);
+    template<typename T, typename T_ = typename std::remove_cv<
+        typename std::remove_reference<T>::type>::type, 
+        typename std::enable_if<!std::is_class<T>::value, int>::type = 0>
+    static constexpr inline FlagType SetObject(T* t);
 private:
     template<typename T, 
         typename std::enable_if<std::is_pointer<T>::value, int>::type = 1>
@@ -145,6 +169,7 @@ public:
 public:
     inline bool IsDefineBool() const;
     inline bool IsDefineChar() const;
+    inline bool IsDefineWchar() const;
     inline bool IsDefineSignedChar() const;
     inline bool IsDefineShort() const;
     inline bool IsDefineInt() const;
@@ -158,7 +183,7 @@ public:
     inline bool IsDefineFloat() const;
     inline bool IsDefineDouble() const;
     inline bool IsDefineLongDouble() const;
-    inline bool IsDefineWchar() const;
+    inline bool IsDefineObject() const;
     inline bool IsDefinePointer() const;
     inline bool IsDefineString() const;
 public:
@@ -312,20 +337,54 @@ test::arg::Header::SetType(T&& t)
     return test::arg::Header::Set(std::forward<T>(t));
 }
 
-template<typename T, 
-    typename std::enable_if<std::is_same<bool, T>::value, int>::type>
+template<typename T, typename T_, 
+    typename std::enable_if<std::is_same<bool, T_>::value &&
+        !std::is_void<T_>::value, int>::type>
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::SetType(const T& t)
+test::arg::Header::SetType(T* t)
 {
     return test::arg::Header::DefineBool;
 }
 
-template<typename T,
-    typename std::enable_if<!std::is_same<bool, T>::value, int>::type>
+template<typename T, typename T_, 
+    typename std::enable_if<!std::is_same<bool, T_>::value &&
+        !std::is_void<T_>::value, int>::type>
 constexpr inline typename test::arg::Header::FlagType 
-test::arg::Header::SetType(const T& t)
+test::arg::Header::SetType(T* t)
 {
-    return test::arg::Header::Set(t);
+    return test::arg::Header::Set(std::forward<T>(*t));
+}
+
+template<typename T, typename T_, 
+    typename std::enable_if<std::is_class<T_>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetObject(T&& t)
+{
+    return test::arg::Header::DefineObject;
+}
+
+template<typename T, typename T_, 
+    typename std::enable_if<!std::is_class<T_>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetObject(T&& t)
+{
+    return 0;
+}
+
+template<typename T, typename T_, 
+    typename std::enable_if<std::is_class<T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetObject(T* t)
+{
+    return test::arg::Header::DefineObject;
+}
+
+template<typename T, typename T_, 
+    typename std::enable_if<!std::is_class<T>::value, int>::type>
+constexpr inline typename test::arg::Header::FlagType 
+test::arg::Header::SetObject(T* t)
+{
+    return 0;
 }
 
 template<typename T, 
@@ -389,14 +448,16 @@ inline test::arg::Header::Header() :
 
 template<typename T>
 inline test::arg::Header::Header(const std::size_t& size, T&& t) :
-    m_flag(SetType(std::forward<T>(t)) | SetPointer(std::forward<T>(t))),
+    m_flag(SetType(std::forward<T>(t)) |  SetObject(std::forward<T>(t)) |
+        SetPointer(std::forward<T>(t))),
     m_size((std::uint32_t)size)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Constructor<%s>(size=%zu, t=%s)", 
         TEST_SYS_DEBUG_T_NAME_STR(T),
         size, TEST_SYS_DEBUG_TARGS_VALUE_STR(t));
-
+    const bool x = false;
+    SetType(x);
 }
 
 inline test::arg::Header::~Header()
@@ -467,7 +528,8 @@ inline bool test::arg::Header::IsGood() const
             (m_flag & DefineType) == DefineDouble ||
             (m_flag & DefineType) == DefineLongDouble ||
             (m_flag & DefineType) == DefineWchar ||
-            (m_flag & DefinePointer) == DefinePointer);
+            (m_flag & DefinePointer) == DefinePointer ||
+            (m_flag & DefineObject) == DefineObject);
 }
 
 inline bool test::arg::Header::IsBad() const
@@ -489,6 +551,13 @@ inline bool test::arg::Header::IsDefineChar() const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "IsDefineChar() const");
     
     return (m_flag & DefineType) == DefineChar;
+}
+
+inline bool test::arg::Header::IsDefineWchar() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "IsDefineWchar() const");
+    
+    return (m_flag & DefineType) == DefineWchar;
 }
 
 inline bool test::arg::Header::IsDefineSignedChar() const
@@ -589,11 +658,12 @@ inline bool test::arg::Header::IsDefineLongDouble() const
     return (m_flag & DefineType) == DefineLongDouble;
 }
 
-inline bool test::arg::Header::IsDefineWchar() const
+inline bool test::arg::Header::IsDefineObject() const
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "IsDefineWchar() const");
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "IsDefineObject() const");
     
-    return (m_flag & DefineType) == DefineWchar;
+    return (m_flag & DefineType) == DefineObject;
 }
 
 inline bool test::arg::Header::IsDefinePointer() const
