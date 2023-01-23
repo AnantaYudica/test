@@ -121,11 +121,13 @@ private:
     static constexpr inline FlagType SetObject(T&& t);
     template<typename T, typename T_ = typename std::remove_cv<
         typename std::remove_reference<T>::type>::type, 
-        typename std::enable_if<std::is_class<T>::value, int>::type = 1>
+        typename std::enable_if<std::is_class<T_>::value &&
+            !std::is_void<T_>::value, int>::type = 1>
     static constexpr inline FlagType SetObject(T* t);
     template<typename T, typename T_ = typename std::remove_cv<
         typename std::remove_reference<T>::type>::type, 
-        typename std::enable_if<!std::is_class<T>::value, int>::type = 0>
+        typename std::enable_if<!std::is_class<T_>::value &&
+            !std::is_void<T_>::value, int>::type = 0>
     static constexpr inline FlagType SetObject(T* t);
 private:
     template<typename T, 
@@ -148,6 +150,37 @@ private:
         typename std::enable_if<!std::is_pointer<T>::value &&
             !std::is_array<T>::value, int>::type = 0>
     static constexpr inline FlagType SetPointer(T &);
+public:
+    template<typename T, typename T_ = typename std::remove_cv<
+            typename std::remove_reference<T>::type>::type, 
+        typename T__ = typename std::remove_pointer<T_>::type,
+        typename std::enable_if<std::is_pointer<T_>::value &&
+            std::is_class<T__>::value, int>::type = 1>
+    static inline Header Make(const std::size_t& size);
+    template<typename T, typename T_ = typename std::remove_cv<
+            typename std::remove_reference<T>::type>::type, 
+        typename T__ = typename std::remove_pointer<T_>::type,
+        typename std::enable_if<std::is_pointer<T_>::value &&
+            std::is_void<T__>::value &&
+            !std::is_class<T__>::value, int>::type = 2>
+    static inline Header Make(const std::size_t& size);
+    template<typename T, typename T_ = typename std::remove_cv<
+            typename std::remove_reference<T>::type>::type, 
+        typename T__ = typename std::remove_pointer<T_>::type,
+        typename std::enable_if<std::is_pointer<T_>::value &&
+            !std::is_void<T__>::value &&
+            !std::is_class<T__>::value, int>::type = 3>
+    static inline Header Make(const std::size_t& size);
+    template<typename T, typename T_ = typename std::remove_cv<
+            typename std::remove_reference<T>::type>::type, 
+        typename std::enable_if<!std::is_pointer<T_>::value &&
+            std::is_class<T_>::value, int>::type = 4>
+    static inline Header Make(const std::size_t& size);
+    template<typename T, typename T_ = typename std::remove_cv<
+            typename std::remove_reference<T>::type>::type, 
+        typename std::enable_if<!std::is_pointer<T_>::value &&
+            !std::is_class<T_>::value, int>::type = 0>
+    static inline Header Make(const std::size_t& size);
 private:
     FlagType m_flag;
     std::uint32_t m_size;
@@ -368,11 +401,12 @@ template<typename T, typename T_,
 constexpr inline typename test::arg::Header::FlagType 
 test::arg::Header::SetObject(T&& t)
 {
-    return 0;
+    return test::arg::Header::SetType(std::forward<T>(t));
 }
 
 template<typename T, typename T_, 
-    typename std::enable_if<std::is_class<T>::value, int>::type>
+    typename std::enable_if<std::is_class<T_>::value &&
+        !std::is_void<T_>::value, int>::type>
 constexpr inline typename test::arg::Header::FlagType 
 test::arg::Header::SetObject(T* t)
 {
@@ -380,11 +414,12 @@ test::arg::Header::SetObject(T* t)
 }
 
 template<typename T, typename T_, 
-    typename std::enable_if<!std::is_class<T>::value, int>::type>
+    typename std::enable_if<!std::is_class<T_>::value &&
+        !std::is_void<T_>::value, int>::type>
 constexpr inline typename test::arg::Header::FlagType 
 test::arg::Header::SetObject(T* t)
 {
-    return 0;
+    return test::arg::Header::SetType(std::forward<T>(*t));
 }
 
 template<typename T, 
@@ -435,6 +470,100 @@ constexpr inline typename test::arg::Header::FlagType
 test::arg::Header::SetPointer(T &)
 {
     return 0;
+}
+
+template<typename T, typename T_, typename T__,
+    typename std::enable_if<std::is_pointer<T_>::value &&
+        std::is_class<T__>::value, int>::type>
+inline test::arg::Header 
+test::arg::Header::Make(const std::size_t& size)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "Make<%s, 1>(size=%zu)", 
+        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+    
+    constexpr FlagType set = SetObject((T)NULL) |
+        SetPointer((T)NULL);
+    Header instance;
+    instance.m_flag = set;
+    instance.m_size = size;
+    return instance;
+}
+
+template<typename T, typename T_, typename T__,
+    typename std::enable_if<std::is_pointer<T_>::value &&
+        std::is_void<T__>::value &&
+        !std::is_class<T__>::value, int>::type>
+inline test::arg::Header 
+test::arg::Header::Make(const std::size_t& size)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "Make<%s, 2>(size=%zu)", 
+        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+
+    constexpr FlagType set = SetObject((void*)NULL) |
+        SetPointer((void*)NULL);
+    Header instance;
+    instance.m_flag = set;
+    instance.m_size = size;
+    return instance;
+}
+
+template<typename T, typename T_, typename T__,
+    typename std::enable_if<std::is_pointer<T_>::value &&
+        !std::is_void<T__>::value &&
+        !std::is_class<T__>::value, int>::type>
+inline test::arg::Header 
+test::arg::Header::Make(const std::size_t& size)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "Make<%s, 3>(size=%zu)", 
+        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+    
+    typedef typename std::remove_pointer<T_>::type ValueType;
+
+    constexpr ValueType v = 0;
+    constexpr FlagType set = SetObject(&v) |
+        SetPointer(&v);
+    Header instance;
+    instance.m_flag = set;
+    instance.m_size = size;
+    return instance;
+}
+
+template<typename T, typename T_, 
+    typename std::enable_if<!std::is_pointer<T_>::value &&
+        std::is_class<T_>::value, int>::type>
+inline test::arg::Header 
+test::arg::Header::Make(const std::size_t& size)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "Make<%s, 4>(size=%zu)", 
+        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+    
+    constexpr FlagType set = SetObject((T*)NULL);
+    Header instance;
+    instance.m_flag = set;
+    instance.m_size = size;
+    return instance;
+}
+
+template<typename T, typename T_, 
+    typename std::enable_if<!std::is_pointer<T_>::value &&
+        !std::is_class<T_>::value, int>::type>
+inline test::arg::Header 
+test::arg::Header::Make(const std::size_t& size)
+{
+    
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "Make<%s, 0>(size=%zu)", 
+        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+    
+    constexpr FlagType set = SetObject((T)0);
+    Header instance;
+    instance.m_flag = set;
+    instance.m_size = size;
+    return instance;
 }
 
 inline test::arg::Header::Header() :
@@ -448,8 +577,7 @@ inline test::arg::Header::Header() :
 
 template<typename T>
 inline test::arg::Header::Header(const std::size_t& size, T&& t) :
-    m_flag(SetType(std::forward<T>(t)) |  SetObject(std::forward<T>(t)) |
-        SetPointer(std::forward<T>(t))),
+    m_flag(SetObject(std::forward<T>(t)) | SetPointer(std::forward<T>(t))),
     m_size((std::uint32_t)size)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
