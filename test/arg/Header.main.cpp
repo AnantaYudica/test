@@ -15,6 +15,17 @@ struct Obj1
     Obj1(const Obj1& cpy) : val(cpy.val) {}
 };
 
+
+struct Obj2
+{
+    char ch;
+    long val;
+    Obj2() = delete;
+    Obj2(long v) : ch('\0'), val(v) {}
+    Obj2(const Obj2& cpy) : ch(cpy.ch), val(cpy.val) {}
+};
+
+
 int main()
 {
     {
@@ -97,6 +108,14 @@ int main()
         assert(h1.Size() == sizeof(char));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = 
+            test::arg::Header::Make<char>(sizeof(char));
+
+        assert(mk1.Flag() == test::arg::Header::DefineChar);
+        assert(mk1.Size() == sizeof(char));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
 
         char v1 = 4;
         test::arg::Header h2(sizeof(char), v1); 
@@ -153,6 +172,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = 
+            test::arg::Header::Make<wchar_t>(sizeof(wchar_t));
+
+        assert(mk1.Flag() == test::arg::Header::DefineWchar);
+        assert(mk1.Size() == sizeof(wchar_t));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         wchar_t v1 = 4;
         test::arg::Header h2(sizeof(wchar_t), v1); 
         
@@ -207,6 +234,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = 
+            test::arg::Header::Make<bool>(sizeof(bool));
+
+        assert(mk1.Flag() == test::arg::Header::DefineBool);
+        assert(mk1.Size() == sizeof(bool));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         bool v1 = false;
         test::arg::Header h2(sizeof(bool), v1); 
         
@@ -260,6 +295,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<signed char>(sizeof(signed char));
+
+        assert(mk1.Flag() == test::arg::Header::DefineSignedChar);
+        assert(mk1.Size() == sizeof(signed char));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         signed char v1 = 4;
         test::arg::Header h2(sizeof(signed char), v1); 
         
@@ -314,6 +357,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<short>(sizeof(short));
+
+        assert(mk1.Flag() == test::arg::Header::DefineShort);
+        assert(mk1.Size() == sizeof(short));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         short v1 = 4;
         test::arg::Header h2(sizeof(short), v1); 
         
@@ -368,6 +419,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<int>(sizeof(int));
+
+        assert(mk1.Flag() == test::arg::Header::DefineInt);
+        assert(mk1.Size() == sizeof(int));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         int v1 = 4;
         test::arg::Header h2(sizeof(int), v1); 
         
@@ -422,6 +481,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<long>(sizeof(long));
+
+        assert(mk1.Flag() == test::arg::Header::DefineLong);
+        assert(mk1.Size() == sizeof(long));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         long v1 = 4;
         test::arg::Header h2(sizeof(long), v1); 
         
@@ -476,6 +543,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<long long>(sizeof(long long));
+
+        assert(mk1.Flag() == test::arg::Header::DefineLongLong);
+        assert(mk1.Size() == sizeof(long long));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         long long v1 = 4;
         test::arg::Header h2(sizeof(long long), v1); 
         
@@ -530,6 +605,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned char>(sizeof(unsigned char));
+
+        assert(mk1.Flag() == test::arg::Header::DefineUnsignedChar);
+        assert(mk1.Size() == sizeof(unsigned char));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         unsigned char v1 = 4;
         test::arg::Header h2(sizeof(unsigned char), v1); 
         
@@ -584,6 +667,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned short>(sizeof(unsigned short));
+
+        assert(mk1.Flag() == test::arg::Header::DefineUnsignedShort);
+        assert(mk1.Size() == sizeof(unsigned short));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         unsigned short v1 = 4;
         test::arg::Header h2(sizeof(unsigned short), v1); 
         
@@ -638,6 +729,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned int>(sizeof(unsigned int));
+
+        assert(mk1.Flag() == test::arg::Header::DefineUnsignedInt);
+        assert(mk1.Size() == sizeof(unsigned int));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         unsigned int v1 = 4;
         test::arg::Header h2(sizeof(unsigned int), v1); 
         
@@ -692,6 +791,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned long>(sizeof(unsigned long));
+
+        assert(mk1.Flag() == test::arg::Header::DefineUnsignedLong);
+        assert(mk1.Size() == sizeof(unsigned long));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         unsigned long v1 = 4;
         test::arg::Header h2(sizeof(unsigned long), v1); 
         
@@ -747,6 +854,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned long long>(sizeof(unsigned long long));
+
+        assert(mk1.Flag() == test::arg::Header::DefineUnsignedLongLong);
+        assert(mk1.Size() == sizeof(unsigned long long));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         unsigned long long v1 = 4;
         test::arg::Header h2(sizeof(unsigned long long), v1); 
         
@@ -801,6 +916,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<float>(sizeof(float));
+
+        assert(mk1.Flag() == test::arg::Header::DefineFloat);
+        assert(mk1.Size() == sizeof(float));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         float v1 = 3.14;
         test::arg::Header h2(sizeof(float), v1); 
         
@@ -854,6 +977,14 @@ int main()
         assert(h1.Size() == sizeof(double));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+
+        test::arg::Header mk1 = test::arg::Header::
+            Make<double>(sizeof(double));
+
+        assert(mk1.Flag() == test::arg::Header::DefineDouble);
+        assert(mk1.Size() == sizeof(double));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
 
         double v1 = 3.14;
         test::arg::Header h2(sizeof(double), v1); 
@@ -909,6 +1040,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<long double>(sizeof(long double));
+
+        assert(mk1.Flag() == test::arg::Header::DefineLongDouble);
+        assert(mk1.Size() == sizeof(long double));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         long double v1 = 3.14;
         test::arg::Header h2(sizeof(long double), v1); 
         
@@ -963,6 +1102,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<Obj1>(sizeof(Obj1));
+
+        assert(mk1.Flag() == test::arg::Header::DefineObject);
+        assert(mk1.Size() == sizeof(Obj1));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+
         Obj1 o1;
         test::arg::Header h2(sizeof(Obj1), o1); 
         
@@ -976,6 +1123,68 @@ int main()
         
         assert(h3.Flag() == test::arg::Header::DefineObject);
         assert(h3.Size() == sizeof(Obj1));
+        assert((h1 == h3) == true);
+        assert((h1 != h3) == false);
+    }
+    {
+        test::arg::Header h1(sizeof(Obj2), Obj2(2));
+        
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == true);
+
+        assert(h1.IsDefinePointer() == false);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == false);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == test::arg::Header::DefineObject);
+        assert(h1.Size() == sizeof(Obj2));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+
+        test::arg::Header mk1 = 
+            test::arg::Header::Make<Obj2>(sizeof(Obj2));
+
+        assert(mk1.Flag() == test::arg::Header::DefineObject);
+        assert(mk1.Size() == sizeof(Obj2));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
+        Obj2 o1(4);
+        test::arg::Header h2(sizeof(Obj2), o1); 
+        
+        assert(h2.Flag() == test::arg::Header::DefineObject);
+        assert(h2.Size() == sizeof(Obj2));
+        assert((h1 == h2) == true);
+        assert((h1 != h2) == false);
+
+        const Obj2 o2(6);
+        test::arg::Header h3(sizeof(Obj2), o2); 
+        
+        assert(h3.Flag() == test::arg::Header::DefineObject);
+        assert(h3.Size() == sizeof(Obj2));
         assert((h1 == h3) == true);
         assert((h1 != h3) == false);
     }
@@ -1016,6 +1225,14 @@ int main()
         assert(h1.Size() == sizeof(char*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<char*>(sizeof(char*));
+        
+        assert((mk1.Flag() & test::arg::Header::DefineString) == mk1.Flag());
+        assert(mk1.Size() == sizeof(char*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
         
         char _v1[] = "v1";
         char* v1 =_v1;
@@ -1071,6 +1288,14 @@ int main()
         assert(h1.Size() == sizeof(wchar_t*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<wchar_t*>(sizeof(wchar_t*));
+        
+        assert((mk1.Flag() & test::arg::Header::DefineString) == mk1.Flag());
+        assert(mk1.Size() == sizeof(wchar_t*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
         
         wchar_t _v1[] = L"v1";
         wchar_t* v1 = _v1;
@@ -1129,6 +1354,15 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<bool*>(sizeof(bool*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineBool));
+        assert(mk1.Size() == sizeof(bool*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
         const bool v1 = false;
         test::arg::Header h2(sizeof(void*), &v1);
         assert(h2.Flag() == (test::arg::Header::DefinePointer | 
@@ -1176,6 +1410,15 @@ int main()
         assert(h1.Size() == sizeof(void*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<signed char*>(sizeof(signed char*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineSignedChar));
+        assert(mk1.Size() == sizeof(signed char*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
         
         const signed char v1 = (signed char)1;
         test::arg::Header h2(sizeof(void*), &v1);
@@ -1226,6 +1469,15 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<short*>(sizeof(short*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineShort));
+        assert(mk1.Size() == sizeof(short*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
         const short v1 = (short)1;
         test::arg::Header h2(sizeof(void*), &v1);
 
@@ -1274,6 +1526,15 @@ int main()
         assert(h1.Size() == sizeof(void*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<int*>(sizeof(int*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineInt));
+        assert(mk1.Size() == sizeof(int*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
         
         const int v1 = (int)1;
         test::arg::Header h2(sizeof(void*), &v1);
@@ -1324,6 +1585,15 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<long*>(sizeof(long*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineLong));
+        assert(mk1.Size() == sizeof(long*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
         const long v1 = (long)1;
         test::arg::Header h2(sizeof(void*), &v1);
 
@@ -1372,6 +1642,15 @@ int main()
         assert(h1.Size() == sizeof(void*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<long long*>(sizeof(long long*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineLongLong));
+        assert(mk1.Size() == sizeof(long long*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
         
         const long long v1 = (long long)1;
         test::arg::Header h2(sizeof(void*), &v1);
@@ -1422,6 +1701,15 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned char*>(sizeof(unsigned char*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedChar));
+        assert(mk1.Size() == sizeof(unsigned char*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
         const unsigned char v1 = (unsigned char)1;
         test::arg::Header h2(sizeof(void*), &v1);
 
@@ -1470,6 +1758,15 @@ int main()
         assert(h1.Size() == sizeof(void*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned short*>(sizeof(unsigned short*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedShort));
+        assert(mk1.Size() == sizeof(unsigned short*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
         
         const unsigned short v1 = (unsigned short)1;
         test::arg::Header h2(sizeof(void*), &v1);
@@ -1520,6 +1817,15 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned int*>(sizeof(unsigned int*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedInt));
+        assert(mk1.Size() == sizeof(unsigned int*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
         const unsigned int v1 = (unsigned int)1;
         test::arg::Header h2(sizeof(void*), &v1);
 
@@ -1568,6 +1874,15 @@ int main()
         assert(h1.Size() == sizeof(void*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned long*>(sizeof(unsigned long*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedLong));
+        assert(mk1.Size() == sizeof(unsigned long*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
         
         const unsigned long v1 = (unsigned long)1;
         test::arg::Header h2(sizeof(void*), &v1);
@@ -1618,6 +1933,15 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<unsigned long long*>(sizeof(unsigned long long*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineUnsignedLongLong));
+        assert(mk1.Size() == sizeof(unsigned long long*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
         const unsigned long long v1 = (unsigned long long)1;
         test::arg::Header h2(sizeof(void*), &v1);
 
@@ -1666,6 +1990,15 @@ int main()
         assert(h1.Size() == sizeof(void*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<float*>(sizeof(float*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineFloat));
+        assert(mk1.Size() == sizeof(float*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
         
         const float v1 = (float)1;
         test::arg::Header h2(sizeof(void*), &v1);
@@ -1716,6 +2049,15 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<double*>(sizeof(double*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineDouble));
+        assert(mk1.Size() == sizeof(double*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
         const double v1 = (double)1;
         test::arg::Header h2(sizeof(void*), &v1);
 
@@ -1764,6 +2106,15 @@ int main()
         assert(h1.Size() == sizeof(void*));
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<long double*>(sizeof(long double*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineLongDouble));
+        assert(mk1.Size() == sizeof(long double*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
         
         const long double v1 = (long double)1;
         test::arg::Header h2(sizeof(void*), &v1);
@@ -1814,6 +2165,15 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
         
+        test::arg::Header mk1 = test::arg::Header::
+            Make<Obj1*>(sizeof(Obj1*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineObject));
+        assert(mk1.Size() == sizeof(Obj1*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
         const Obj1 obj2;
         test::arg::Header h2(sizeof(Obj1*), &obj2);
         assert(h2.Flag() == (test::arg::Header::DefinePointer |
@@ -1822,6 +2182,71 @@ int main()
         assert((h2 == h1) == true);
         assert((h2 != h1) == false);
         const Obj1 *const obj3 = &obj2;
+        test::arg::Header h3(sizeof(void*), obj3);
+        assert(h3.Flag() == (test::arg::Header::DefinePointer |
+            test::arg::Header::DefineObject));
+        assert(h3.Size() == sizeof(void*));
+        assert((h3 == h1) == true);
+        assert((h3 != h1) == false);
+    }
+    
+    {
+        Obj2 obj1(4);
+        test::arg::Header h1(sizeof(Obj2*), &obj1);
+
+        assert(h1.IsGood() == true);
+        assert(h1.IsBad() == false);
+
+        assert(h1.IsDefineChar() == false);
+        assert(h1.IsDefineWchar() == false);
+        assert(h1.IsDefineBool() == false);
+        assert(h1.IsDefineSignedChar() == false);
+        assert(h1.IsDefineShort() == false);
+        assert(h1.IsDefineInt() == false);
+        assert(h1.IsDefineLong() == false);
+        assert(h1.IsDefineLongLong() == false);
+        assert(h1.IsDefineUnsignedChar() == false);
+        assert(h1.IsDefineUnsignedShort() == false);
+        assert(h1.IsDefineUnsignedInt() == false);
+        assert(h1.IsDefineUnsignedLong() == false);
+        assert(h1.IsDefineUnsignedLongLong() == false);
+        assert(h1.IsDefineFloat() == false);
+        assert(h1.IsDefineDouble() == false);
+        assert(h1.IsDefineLongDouble() == false);
+        assert(h1.IsDefineObject() == true);
+
+        assert(h1.IsDefinePointer() == true);
+
+        assert(h1.IsDefineString() == false);
+        assert(h1.IsDefineCharacter() == false);
+        assert(h1.IsDefineInteger() == false);
+        assert(h1.IsDefineSigned() == false);
+        assert(h1.IsDefineUnsigned() == false);
+        assert(h1.IsDefineFloatingPoint() == false);
+
+        assert(h1.Flag() == (test::arg::Header::DefinePointer |
+            test::arg::Header::DefineObject));
+        assert(h1.Size() == sizeof(Obj2*));
+        assert((h1 == test::arg::Header()) == false);
+        assert((h1 != test::arg::Header()) == true);
+        
+        test::arg::Header mk1 = test::arg::Header::
+            Make<Obj2*>(sizeof(Obj2*));
+        
+        assert(mk1.Flag() == (test::arg::Header::DefinePointer | 
+            test::arg::Header::DefineObject));
+        assert(mk1.Size() == sizeof(Obj2*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
+        const Obj2 obj2(6);
+        test::arg::Header h2(sizeof(Obj2*), &obj2);
+        assert(h2.Flag() == (test::arg::Header::DefinePointer |
+            test::arg::Header::DefineObject));
+        assert(h2.Size() == sizeof(Obj2*));
+        assert((h2 == h1) == true);
+        assert((h2 != h1) == false);
+        const Obj2 *const obj3 = &obj2;
         test::arg::Header h3(sizeof(void*), obj3);
         assert(h3.Flag() == (test::arg::Header::DefinePointer |
             test::arg::Header::DefineObject));
@@ -1869,6 +2294,14 @@ int main()
         assert((h1 == test::arg::Header()) == false);
         assert((h1 != test::arg::Header()) == true);
 
+        test::arg::Header mk1 = test::arg::Header::
+            Make<void*>(sizeof(void*));
+        
+        assert(mk1.Flag() == test::arg::Header::DefinePointer);
+        assert(mk1.Size() == sizeof(void*));
+        assert((mk1 == h1) == true);
+        assert((mk1 != h1) == false);
+        
         const Obj1 obj2;
         test::arg::Header h2(sizeof(void*), (const void*)&obj2);
         assert(h2.Flag() == test::arg::Header::DefinePointer);
