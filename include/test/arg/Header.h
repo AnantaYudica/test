@@ -156,38 +156,37 @@ public:
         typename T__ = typename std::remove_pointer<T_>::type,
         typename std::enable_if<std::is_pointer<T_>::value &&
             std::is_class<T__>::value, int>::type = 1>
-    static inline Header Make(const std::size_t& size);
+    static inline Header Make();
     template<typename T, typename T_ = typename std::remove_cv<
             typename std::remove_reference<T>::type>::type, 
         typename T__ = typename std::remove_pointer<T_>::type,
         typename std::enable_if<std::is_pointer<T_>::value &&
             std::is_void<T__>::value &&
             !std::is_class<T__>::value, int>::type = 2>
-    static inline Header Make(const std::size_t& size);
+    static inline Header Make();
     template<typename T, typename T_ = typename std::remove_cv<
             typename std::remove_reference<T>::type>::type, 
         typename T__ = typename std::remove_pointer<T_>::type,
         typename std::enable_if<std::is_pointer<T_>::value &&
             !std::is_void<T__>::value &&
             !std::is_class<T__>::value, int>::type = 3>
-    static inline Header Make(const std::size_t& size);
+    static inline Header Make();
     template<typename T, typename T_ = typename std::remove_cv<
             typename std::remove_reference<T>::type>::type, 
         typename std::enable_if<!std::is_pointer<T_>::value &&
             std::is_class<T_>::value, int>::type = 4>
-    static inline Header Make(const std::size_t& size);
+    static inline Header Make();
     template<typename T, typename T_ = typename std::remove_cv<
             typename std::remove_reference<T>::type>::type, 
         typename std::enable_if<!std::is_pointer<T_>::value &&
             !std::is_class<T_>::value, int>::type = 0>
-    static inline Header Make(const std::size_t& size);
+    static inline Header Make();
 private:
     FlagType m_flag;
-    std::uint32_t m_size;
 public:
     inline Header();
     template<typename T>
-    inline Header(const std::size_t& size, T&& t);
+    inline Header(T&& t);
 public:
     inline ~Header();
 public:
@@ -227,8 +226,6 @@ public:
     inline bool IsDefineFloatingPoint() const;
 public:
     inline FlagType Flag() const;
-public:
-    inline std::size_t Size() const;
 public:
     inline bool operator==(const Header& other) const;
     inline bool operator!=(const Header& other) const;
@@ -475,18 +472,15 @@ test::arg::Header::SetPointer(T &)
 template<typename T, typename T_, typename T__,
     typename std::enable_if<std::is_pointer<T_>::value &&
         std::is_class<T__>::value, int>::type>
-inline test::arg::Header 
-test::arg::Header::Make(const std::size_t& size)
+inline test::arg::Header test::arg::Header::Make()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
-        "Make<%s, 1>(size=%zu)", 
-        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+        "Make<%s, 1>()", TEST_SYS_DEBUG_T_NAME_STR(T));
     
     constexpr FlagType set = SetObject((T)NULL) |
         SetPointer((T)NULL);
     Header instance;
     instance.m_flag = set;
-    instance.m_size = size;
     return instance;
 }
 
@@ -494,18 +488,15 @@ template<typename T, typename T_, typename T__,
     typename std::enable_if<std::is_pointer<T_>::value &&
         std::is_void<T__>::value &&
         !std::is_class<T__>::value, int>::type>
-inline test::arg::Header 
-test::arg::Header::Make(const std::size_t& size)
+inline test::arg::Header test::arg::Header::Make()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
-        "Make<%s, 2>(size=%zu)", 
-        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+        "Make<%s, 2>()", TEST_SYS_DEBUG_T_NAME_STR(T));
 
     constexpr FlagType set = SetObject((void*)NULL) |
         SetPointer((void*)NULL);
     Header instance;
     instance.m_flag = set;
-    instance.m_size = size;
     return instance;
 }
 
@@ -513,62 +504,50 @@ template<typename T, typename T_, typename T__,
     typename std::enable_if<std::is_pointer<T_>::value &&
         !std::is_void<T__>::value &&
         !std::is_class<T__>::value, int>::type>
-inline test::arg::Header 
-test::arg::Header::Make(const std::size_t& size)
+inline test::arg::Header test::arg::Header::Make()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
-        "Make<%s, 3>(size=%zu)", 
-        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+        "Make<%s, 3>()", TEST_SYS_DEBUG_T_NAME_STR(T));
     
     typedef typename std::remove_pointer<T_>::type ValueType;
 
     constexpr ValueType v = {0};
-    constexpr FlagType set = SetObject(&v) |
-        SetPointer(&v);
+    constexpr FlagType set = SetObject(&v) | SetPointer(&v);
     Header instance;
     instance.m_flag = set;
-    instance.m_size = size;
     return instance;
 }
 
 template<typename T, typename T_, 
     typename std::enable_if<!std::is_pointer<T_>::value &&
         std::is_class<T_>::value, int>::type>
-inline test::arg::Header 
-test::arg::Header::Make(const std::size_t& size)
+inline test::arg::Header test::arg::Header::Make()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
-        "Make<%s, 4>(size=%zu)", 
-        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+        "Make<%s, 4>()", TEST_SYS_DEBUG_T_NAME_STR(T));
     
     constexpr FlagType set = SetObject((T*)NULL);
     Header instance;
     instance.m_flag = set;
-    instance.m_size = size;
     return instance;
 }
 
 template<typename T, typename T_, 
     typename std::enable_if<!std::is_pointer<T_>::value &&
         !std::is_class<T_>::value, int>::type>
-inline test::arg::Header 
-test::arg::Header::Make(const std::size_t& size)
+inline test::arg::Header test::arg::Header::Make()
 {
-    
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
-        "Make<%s, 0>(size=%zu)", 
-        TEST_SYS_DEBUG_T_NAME_STR(T), size);
+        "Make<%s, 0>()", TEST_SYS_DEBUG_T_NAME_STR(T));
     
     constexpr FlagType set = SetObject((T)0);
     Header instance;
     instance.m_flag = set;
-    instance.m_size = size;
     return instance;
 }
 
 inline test::arg::Header::Header() :
-    m_flag(0),
-    m_size(0)
+    m_flag(0)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Default Constructor");
@@ -576,16 +555,14 @@ inline test::arg::Header::Header() :
 }
 
 template<typename T>
-inline test::arg::Header::Header(const std::size_t& size, T&& t) :
-    m_flag(SetObject(std::forward<T>(t)) | SetPointer(std::forward<T>(t))),
-    m_size((std::uint32_t)size)
+inline test::arg::Header::Header(T&& t) :
+    m_flag(SetObject(std::forward<T>(t)) | SetPointer(std::forward<T>(t)))
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
-        "Constructor<%s>(size=%zu, t=%s)", 
+        "Constructor<%s>( t=%s)", 
         TEST_SYS_DEBUG_T_NAME_STR(T),
-        size, TEST_SYS_DEBUG_TARGS_VALUE_STR(t));
-    const bool x = false;
-    SetType(x);
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(t));
+    
 }
 
 inline test::arg::Header::~Header()
@@ -593,25 +570,21 @@ inline test::arg::Header::~Header()
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
 
     m_flag = 0;
-    m_size = 0;
 }
 
 inline test::arg::Header::Header(const Header& cpy) :
-    m_flag(cpy.m_flag),
-    m_size(cpy.m_size)
+    m_flag(cpy.m_flag)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Copy Constructor");
 
 }
 
 inline test::arg::Header::Header(Header&& mov) :
-    m_flag(mov.m_flag),
-    m_size(mov.m_size)
+    m_flag(mov.m_flag)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Move Constructor");
 
     mov.m_flag = 0;
-    mov.m_size = 0;
 }
 
 inline Header& test::arg::Header::operator=(const Header& cpy)
@@ -619,7 +592,6 @@ inline Header& test::arg::Header::operator=(const Header& cpy)
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Copy Assignment");
 
     m_flag = cpy.m_flag;
-    m_size = cpy.m_size;
     return *this;
 }
 
@@ -628,9 +600,7 @@ inline Header& test::arg::Header::operator=(Header&& mov)
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Move Assignment");
 
     m_flag = mov.m_flag;
-    m_size = mov.m_size;
     mov.m_flag = 0;
-    mov.m_size = 0;
     return *this;
 }
 
@@ -860,20 +830,12 @@ test::arg::Header::Flag() const
     return m_flag;
 }
 
-inline std::size_t test::arg::Header::Size() const
-{
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Size() const");
-    
-    return m_size;
-}
-
 inline bool test::arg::Header::operator==(const Header& other) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator==(other=%p) const", &other);
 
-    return m_flag == other.m_flag &&
-        m_size == other.m_size;
+    return m_flag == other.m_flag;
 }
 
 inline bool test::arg::Header::operator!=(const Header& other) const
@@ -881,8 +843,7 @@ inline bool test::arg::Header::operator!=(const Header& other) const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator!=(other=%p) const", &other);
     
-    return m_flag != other.m_flag ||
-        m_size != other.m_size;
+    return m_flag != other.m_flag;
 }
 
 } //!arg
