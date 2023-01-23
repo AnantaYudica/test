@@ -522,7 +522,7 @@ test::arg::Header::Make(const std::size_t& size)
     
     typedef typename std::remove_pointer<T_>::type ValueType;
 
-    constexpr ValueType v = 0;
+    constexpr ValueType v = {0};
     constexpr FlagType set = SetObject(&v) |
         SetPointer(&v);
     Header instance;
