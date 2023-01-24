@@ -4,6 +4,7 @@
 #include "Flag.h"
 #include "Definition.h"
 #include "Block.h"
+#include "../sys/mem/Dummy.h"
 
 #include <cstdint>
 #include <atomic>
@@ -221,6 +222,12 @@ inline T* Base::Get()
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Get<%s>()",
         TEST_SYS_DEBUG_TARGS_NAME_STR(T));
 
+    const std::size_t size = m_block.GetDataSize();
+    const std::size_t req_size = *m_offset + sizeof(T);
+    if (req_size > size)
+    {
+        return test::sys::mem::Dummy::Get<T>();
+    }
     char * data = (char *)m_block.GetData();
     return reinterpret_cast<T*>(data + *m_offset);
 }
@@ -231,6 +238,12 @@ inline T* Base::Get() const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Get<%s>() const",
         TEST_SYS_DEBUG_TARGS_NAME_STR(T));
 
+    const std::size_t size = const_cast<Block&>(m_block).GetDataSize();
+    const std::size_t req_size = *m_offset + sizeof(T);
+    if (req_size > size)
+    {
+        return test::sys::mem::Dummy::Get<T>();
+    }
     char * data = (char *) const_cast<Block&>(m_block).GetData();
     return reinterpret_cast<T*>(data + *m_offset);
 }
