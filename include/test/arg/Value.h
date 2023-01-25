@@ -3,13 +3,17 @@
 
 #include "../System.h"
 #include "../Pointer.h"
+#include "val/Const.h"
 
 #include <cstddef>
 #include <cstdint>
 
 namespace test::arg
 {
+
+template<typename T, typename TBuffer>
 class Value;
+
 }
 
 #ifndef TEST_ARG_VALUE_DLEVEL
@@ -18,147 +22,174 @@ class Value;
 
 #endif //!TEST_ARG_VALUE_DLEVEL
 
-TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_ARG_VALUE_DLEVEL, 
-    "test::arg::Value", test::arg::Value);
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<T>,\
+    test::sys::dbg::Type<TBuffer>
+
+template<typename T, typename TBuffer>
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_ARG_VALUE_DLEVEL, 
+    "test::arg::Value", 
+    test::arg::Value<T, TBuffer>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
 
 namespace test
 {
 namespace arg
 {
 
-class Value
+template<typename T, typename TBuffer = test::Pointer<std::uint8_t>>
+class Value : public test::arg::val::Const<T, TBuffer>
 {
 private:
     typedef test::sys::Interface SystemType;
-    typedef test::sys::dbg::Type<test::arg::Value> DebugType;
-private:
-    test::Pointer<std::uint8_t> m_values;
+    typedef test::sys::dbg::Type<test::arg::Value<T, TBuffer>> DebugType;
 public:
-    inline Value();
-    inline Value(const std::size_t& alloc_size);
+    typedef test::arg::val::Const<T, TBuffer> ConstType;
 public:
-    inline ~Value();
+    typedef typename ConstType::HeaderType HeaderType;
+    typedef typename ConstType::BlockType BlockType;
+    typedef typename ConstType::BufferType BufferType;
 public:
-    inline Value(const Value& cpy);
-    inline Value(Value&& mov);
+    Value();
+    Value(const BlockType& block, BufferType buffer);
+    ~Value();
 public:
-    inline Value& operator=(const Value& cpy);
-    inline Value& operator=(Value&& mov);
+    Value(const Value<T, TBuffer>& cpy);
+    Value(Value<T, TBuffer>&& mov);
 public:
-    template<typename T>
-    inline void Set(const std::size_t& off, const T& val);
+    Value<T, TBuffer>& operator=(const Value<T, TBuffer>& cpy);
+    Value<T, TBuffer>& operator=(Value<T, TBuffer>&& mov);
+    Value<T, TBuffer>& operator=(T&& val);
 public:
-    template<typename T>
-    inline T* Get(const std::size_t& off);
+    HeaderType Header() const;
 public:
-    inline std::size_t AllocationSize() const;
+    std::size_t Size() const;
 public:
-    inline bool operator==(const Value& other) const;
-    inline bool operator!=(const Value& other) const;
+    T operator*() const;
+public:
+    bool operator==(T&& other) const;
+    bool operator!=(T&& other) const;
 };
 
-inline Value::Value() :
-    m_values()
+template<typename T, typename TBuffer>
+Value<T, TBuffer>::Value() :
+    ConstType()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
 
 }
 
-inline Value::Value(const std::size_t& alloc_size) :
-    m_values(test::ptr::arg::Array(alloc_size + 1), 
-        test::ptr::arg::Foreach{}, 0)
+template<typename T, typename TBuffer>
+Value<T, TBuffer>::Value(const BlockType& block, BufferType buffer) :
+    ConstType(block, buffer)
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 1, this,
-        "Constructor(alloc_size=%zu)", alloc_size);
-
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor(block=%p, buffer=%p)", &block, &buffer);
+    
 }
 
-inline Value::~Value()
-{
+template<typename T, typename TBuffer>
+Value<T, TBuffer>::~Value()
+{    
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
 
 }
 
-inline Value::Value(const Value& cpy) :
-    m_values(cpy.m_values)
+template<typename T, typename TBuffer>
+Value<T, TBuffer>::Value(const Value<T, TBuffer>& cpy) :
+    ConstType(cpy)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Copy Constructor(cpy=%p)", &cpy);
 
 }
 
-inline Value::Value(Value&& mov) :
-    m_values(mov.m_values)
-{
+template<typename T, typename TBuffer>
+Value<T, TBuffer>::Value(Value<T, TBuffer>&& mov) :
+    ConstType(std::move(mov))
+{    
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Move Constructor(mov=%p)", &mov);
 
 }
 
-inline Value& Value::operator=(const Value& cpy)
+template<typename T, typename TBuffer>
+Value<T, TBuffer>& 
+Value<T, TBuffer>::operator=(const Value<T, TBuffer>& cpy)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Copy Assignment(cpy=%p)", &cpy);
 
-    m_values = cpy.m_values;
+    ConstType::operator=(cpy);
     return *this;
 }
 
-inline Value& Value::operator=(Value&& mov)
+template<typename T, typename TBuffer>
+Value<T, TBuffer>& Value<T, TBuffer>::operator=(Value<T, TBuffer>&& mov)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
-        "Move Assignment(mov=%p)", &mov);
+        "Move Assignment(cpy=%p)", &mov);
 
-    m_values = mov.m_values;
+    ConstType::operator=(std::move(mov));
     return *this;
 }
 
-template<typename T>
-inline void Value::Set(const std::size_t& off, const T& val)
+template<typename T, typename TBuffer>
+Value<T, TBuffer>& Value<T, TBuffer>::operator=(T&& val)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
-        "Set<%s>(off=%zu, val=%s)", 
-        TEST_SYS_DEBUG_TARGS_NAME_STR(T), off,
-        TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
-
-    m_values.SetIndex(off);
-    auto cast = m_values.template ReinterpretCast<T>();
-    *cast = val;
+        "operator=(val=%s)", TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
+    
+    ConstType::m_block.template Set<T>(ConstType::m_buffer, 
+        std::forward<T>(val));
+    return *this;
 }
 
-template<typename T>
-inline T* Value::Get(const std::size_t& off)
+template<typename T, typename TBuffer>
+typename Value<T, TBuffer>::HeaderType
+Value<T, TBuffer>::Header() const
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "Set<%s>(off=%zu)", TEST_SYS_DEBUG_TARGS_NAME_STR(T), off);
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Header() const");
 
-    m_values.SetIndex(off);
-    auto cast = m_values.template ReinterpretCast<T>();
-    return &*cast;
+    return ConstType::Header();
 }
 
-inline std::size_t Value::AllocationSize() const
+template<typename T, typename TBuffer>
+std::size_t Value<T, TBuffer>::Size() const
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "AllocationSize() const");
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Size() const");
 
-    return m_values.AllocationSize() - 1;
+    return ConstType::Size();
 }
 
-inline bool Value::operator==(const Value& other) const
+template<typename T, typename TBuffer>
+T Value<T, TBuffer>::operator*() const
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "operator==(other=%p) const", &other);
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "operator*() const");
 
-    return m_values == other.m_values.GetData();
+    return ConstType::operator*();
 }
 
-inline bool Value::operator!=(const Value& other) const
+template<typename T, typename TBuffer>
+bool Value<T, TBuffer>::operator==(T&& other) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "operator!=(other=%p) const", &other);
+        "operator==(%s) const", 
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(other));
 
-    return m_values != other.m_values.GetData();
+    return ConstType::operator==(std::forward<T>(other));
+}
+
+template<typename T, typename TBuffer>
+bool Value<T, TBuffer>::operator!=(T&& other) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator!=(%s) const", 
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(other));
+    
+    return ConstType::operator!=(std::forward<T>(other));
 }
 
 } //!arg
