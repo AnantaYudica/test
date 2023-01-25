@@ -95,6 +95,8 @@ inline Block::~Block()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
 
+    m_off = 0;
+    m_size = 0;
 }
 
 inline Block::Block(const Block& cpy) :
@@ -115,6 +117,8 @@ inline Block::Block(Block&& mov) :
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Move Constructor(mov=%p)", &mov);
 
+    mov.m_off = 0;
+    mov.m_size = 0;
 }
 
 inline Block& Block::operator=(const Block& cpy)
@@ -136,6 +140,8 @@ inline Block& Block::operator=(Block&& mov)
     m_header = std::move(mov.m_header);
     m_off = mov.m_off;
     m_size = mov.m_size;
+    mov.m_off = 0;
+    mov.m_size = 0;
     return *this;
 }
 
