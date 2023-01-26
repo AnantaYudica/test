@@ -40,6 +40,12 @@ private:
         typedef T BaseType;
         static constexpr std::size_t Size = sizeof(T);
     };
+    template<typename T>
+    struct Type<T&>
+    {
+        typedef T BaseType;
+        static constexpr std::size_t Size = sizeof(T);
+    };
     template<typename T, std::size_t N>
     struct Type<T(&)[N]>
     {
