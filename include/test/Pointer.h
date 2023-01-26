@@ -70,8 +70,10 @@ public:
         typename std::enable_if<
             !std::is_base_of<Pointer<T, TDefinition>, _TArg>::value &&
             !std::is_base_of<test::ptr::Base, _TArg>::value &&
-            !std::is_base_of<test::ptr::arg::Array, _TArg>::value, int>::type = 0>
+            !std::is_base_of<test::ptr::arg::Array, _TArg>::value &&
+            !std::is_same<std::nullptr_t, _TArg>::value, int>::type = 0>
     Pointer(TArg&& arg, TArgs&&... args);
+    Pointer(std::nullptr_t);
     Pointer(test::ptr::arg::Array&& array);
     template<typename TArg, typename... TArgs, typename _TArg = 
         typename std::remove_cv<typename std::remove_pointer<
@@ -179,7 +181,8 @@ template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<
         !std::is_base_of<Pointer<T, TDefinition>, _TArg>::value &&
         !std::is_base_of<test::ptr::Base, _TArg>::value &&
-        !std::is_base_of<test::ptr::arg::Array, _TArg>::value, int>::type>
+        !std::is_base_of<test::ptr::arg::Array, _TArg>::value &&
+        !std::is_same<std::nullptr_t, _TArg>::value, int>::type>
 Pointer<T, TDefinition>::Pointer(TArg&& arg, TArgs&&... args) :
     BaseType(),
     m_step(sizeof(typename TDefinition::ValueType))
@@ -194,6 +197,16 @@ Pointer<T, TDefinition>::Pointer(TArg&& arg, TArgs&&... args) :
         1, defn);
     defn->Constructor(data, std::forward<TArg>(arg), 
         std::forward<TArgs>(args)...);
+}
+
+template<typename T, typename TDefinition>
+Pointer<T, TDefinition>::Pointer(std::nullptr_t) :
+    BaseType(),
+    m_step(sizeof(typename TDefinition::ValueType))
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor(nullptr)");
+    
 }
 
 template<typename T, typename TDefinition>
