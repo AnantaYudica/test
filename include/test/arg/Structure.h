@@ -172,8 +172,8 @@ inline std::size_t Structure::_Set(BufferType& buff, MapType& maps,
 }
 
 inline Structure::Structure() :
-    m_maps(),
-    m_buff()
+    m_maps(nullptr),
+    m_buff(nullptr)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
 }
