@@ -13,11 +13,12 @@ TEST_CONSTRUCT;
 #include <cassert>
 #include <climits>
 #include <cfloat>
+#include <cstring>
 
 int main()
 {
     {
-        test::arg::Structure s1{sizeof(int)};
+        test::arg::Structure s1{(int)1};
 
         assert(s1.Size() == 1);
         assert(s1.AllocationSize() == sizeof(int));
@@ -25,15 +26,17 @@ int main()
         assert(s1.AllocationSize(0) == sizeof(int));
         assert(s1.AllocationSize(1) == 0);
 
+        assert(s1.template Get<int>(0) == 1);
+
         s1.template Set<int>(0, 234);
         auto v0 = s1.template Get<int>(0);
 
-        assert(*v0 == 234);
+        assert(v0 == 234);
     }
     {
-        test::arg::Structure s1{sizeof(int), sizeof(int), sizeof(int),
-            sizeof(int), sizeof(int), sizeof(int), sizeof(int), sizeof(int),
-            sizeof(int), sizeof(int)};
+        test::arg::Structure s1{(int)0, (int)1, (int)2,
+            (int)3, (int)4, (int)5, (int)6, (int)7,
+            (int)8, (int)9};
 
         assert(s1.Size() == 10);
         assert(s1.AllocationSize() == sizeof(int) * 10);
@@ -48,6 +51,17 @@ int main()
         assert(s1.AllocationSize(8) == sizeof(int));
         assert(s1.AllocationSize(9) == sizeof(int));
         assert(s1.AllocationSize(10) == 0);
+
+        assert(s1.template Get<int>(0) == 0);
+        assert(s1.template Get<int>(1) == 1);
+        assert(s1.template Get<int>(2) == 2);
+        assert(s1.template Get<int>(3) == 3);
+        assert(s1.template Get<int>(4) == 4);
+        assert(s1.template Get<int>(5) == 5);
+        assert(s1.template Get<int>(6) == 6);
+        assert(s1.template Get<int>(7) == 7);
+        assert(s1.template Get<int>(8) == 8);
+        assert(s1.template Get<int>(9) == 9);
 
         s1.template Set<int>(0, 234);
         s1.template Set<int>(1, 567);
@@ -70,23 +84,23 @@ int main()
         auto v8 = s1.template Get<int>(8);
         auto v9 = s1.template Get<int>(9);
         
-        assert(*v0 == 234);
-        assert(*v1 == 567);
-        assert(*v2 == 890);
-        assert(*v3 == 123);
-        assert(*v4 == 456);
-        assert(*v5 == 789);
-        assert(*v6 == 12);
-        assert(*v7 == 345);
-        assert(*v8 == 678);
-        assert(*v9 == 901);
+        assert(v0 == 234);
+        assert(v1 == 567);
+        assert(v2 == 890);
+        assert(v3 == 123);
+        assert(v4 == 456);
+        assert(v5 == 789);
+        assert(v6 == 12);
+        assert(v7 == 345);
+        assert(v8 == 678);
+        assert(v9 == 901);
     }
     {
         const std::size_t size_alloc = sizeof(int) +
             sizeof(char) + sizeof(long long) + sizeof(char) +
             sizeof(long double) + sizeof(short) + sizeof(int*);
-        test::arg::Structure s1{sizeof(int), sizeof(char), sizeof(long long), 
-            sizeof(char), sizeof(long double), sizeof(short), sizeof(int*)};
+        test::arg::Structure s1{(int)1, (char)'2', (long long)3, 
+            (char)'4', (long double)5.6, (short)7, (int*)nullptr};
         int p0 = INT_MIN;
         
         assert(s1.Size() == 7);
@@ -99,6 +113,15 @@ int main()
         assert(s1.AllocationSize(5) == sizeof(short));
         assert(s1.AllocationSize(6) == sizeof(int*));
         assert(s1.AllocationSize(7) == 0);
+
+        assert(s1.template Get<int>(0) == 1);
+        assert(s1.template Get<char>(1) == '2');
+        assert(s1.template Get<long long>(2) == 3);
+        assert(s1.template Get<char>(3) == '4');
+        assert(s1.template Get<long double>(4) == (long double)5.6);
+        assert(s1.template Get<short>(5) == 7);
+        assert(s1.template Get<int*>(6) == NULL);
+
 
         s1.template Set<int>(0, INT_MAX);
         s1.template Set<char>(1, 'L');
@@ -115,13 +138,13 @@ int main()
         auto v4 = s1.template Get<long double>(4);
         auto v5 = s1.template Get<short>(5);
         auto v6 = s1.template Get<int*>(6);
-        assert(*v0 == INT_MAX);
-        assert(*v1 == 'L');
-        assert(*v2 == LLONG_MAX);
-        assert(*v3 == 'a');
-        assert(*v4 == LDBL_MIN);
-        assert(*v5 == SHRT_MIN);
-        assert(*v6 == &p0);
+        assert(v0 == INT_MAX);
+        assert(v1 == 'L');
+        assert(v2 == LLONG_MAX);
+        assert(v3 == 'a');
+        assert(v4 == LDBL_MIN);
+        assert(v5 == SHRT_MIN);
+        assert(v6 == &p0);
 
         test::arg::Structure s2{s1};
         {
@@ -143,13 +166,13 @@ int main()
             auto v2_4 = s2.template Get<long double>(4);
             auto v2_5 = s2.template Get<short>(5);
             auto v2_6 = s2.template Get<int*>(6);
-            assert(*v2_0 == INT_MAX);
-            assert(*v2_1 == 'L');
-            assert(*v2_2 == LLONG_MAX);
-            assert(*v2_3 == 'a');
-            assert(*v2_4 == LDBL_MIN);
-            assert(*v2_5 == SHRT_MIN);
-            assert(*v2_6 == &p0);
+            assert(v2_0 == INT_MAX);
+            assert(v2_1 == 'L');
+            assert(v2_2 == LLONG_MAX);
+            assert(v2_3 == 'a');
+            assert(v2_4 == LDBL_MIN);
+            assert(v2_5 == SHRT_MIN);
+            assert(v2_6 == &p0);
         }
         test::arg::Structure s3{std::move(s2)};
         {
@@ -171,13 +194,13 @@ int main()
             auto v2_4 = s3.template Get<long double>(4);
             auto v2_5 = s3.template Get<short>(5);
             auto v2_6 = s3.template Get<int*>(6);
-            assert(*v2_0 == INT_MAX);
-            assert(*v2_1 == 'L');
-            assert(*v2_2 == LLONG_MAX);
-            assert(*v2_3 == 'a');
-            assert(*v2_4 == LDBL_MIN);
-            assert(*v2_5 == SHRT_MIN);
-            assert(*v2_6 == &p0);
+            assert(v2_0 == INT_MAX);
+            assert(v2_1 == 'L');
+            assert(v2_2 == LLONG_MAX);
+            assert(v2_3 == 'a');
+            assert(v2_4 == LDBL_MIN);
+            assert(v2_5 == SHRT_MIN);
+            assert(v2_6 == &p0);
         }
         {
             assert(s2.Size() == 7);
@@ -198,13 +221,13 @@ int main()
             auto v2_4 = s2.template Get<long double>(4);
             auto v2_5 = s2.template Get<short>(5);
             auto v2_6 = s2.template Get<int*>(6);
-            assert(*v2_0 == INT_MAX);
-            assert(*v2_1 == 'L');
-            assert(*v2_2 == LLONG_MAX);
-            assert(*v2_3 == 'a');
-            assert(*v2_4 == LDBL_MIN);
-            assert(*v2_5 == SHRT_MIN);
-            assert(*v2_6 == &p0);
+            assert(v2_0 == INT_MAX);
+            assert(v2_1 == 'L');
+            assert(v2_2 == LLONG_MAX);
+            assert(v2_3 == 'a');
+            assert(v2_4 == LDBL_MIN);
+            assert(v2_5 == SHRT_MIN);
+            assert(v2_6 == &p0);
         }
         test::arg::Structure s4;
         s4 = s3;
@@ -227,13 +250,13 @@ int main()
             auto v2_4 = s4.template Get<long double>(4);
             auto v2_5 = s4.template Get<short>(5);
             auto v2_6 = s4.template Get<int*>(6);
-            assert(*v2_0 == INT_MAX);
-            assert(*v2_1 == 'L');
-            assert(*v2_2 == LLONG_MAX);
-            assert(*v2_3 == 'a');
-            assert(*v2_4 == LDBL_MIN);
-            assert(*v2_5 == SHRT_MIN);
-            assert(*v2_6 == &p0);
+            assert(v2_0 == INT_MAX);
+            assert(v2_1 == 'L');
+            assert(v2_2 == LLONG_MAX);
+            assert(v2_3 == 'a');
+            assert(v2_4 == LDBL_MIN);
+            assert(v2_5 == SHRT_MIN);
+            assert(v2_6 == &p0);
         }
         test::arg::Structure s5;
         s5 = std::move(s4);
@@ -256,14 +279,21 @@ int main()
             auto v2_4 = s5.template Get<long double>(4);
             auto v2_5 = s5.template Get<short>(5);
             auto v2_6 = s5.template Get<int*>(6);
-            assert(*v2_0 == INT_MAX);
-            assert(*v2_1 == 'L');
-            assert(*v2_2 == LLONG_MAX);
-            assert(*v2_3 == 'a');
-            assert(*v2_4 == LDBL_MIN);
-            assert(*v2_5 == SHRT_MIN);
-            assert(*v2_6 == &p0);
+            assert(v2_0 == INT_MAX);
+            assert(v2_1 == 'L');
+            assert(v2_2 == LLONG_MAX);
+            assert(v2_3 == 'a');
+            assert(v2_4 == LDBL_MIN);
+            assert(v2_5 == SHRT_MIN);
+            assert(v2_6 == &p0);
         }
+    }
+    {
+        test::arg::Structure s1{(int)1, "2", (char)'3'};
+        
+        assert(s1.template Get<int>(0) == 1);
+        assert(strncmp(*(s1.template Get<const char*>(1)), "2", 2) == 0);
+        assert(s1.template Get<char>(2) == '3');
     }
     return TEST::GetInstance().Status().ReturnValue();
 }
