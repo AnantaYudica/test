@@ -65,6 +65,8 @@ public:
     template<typename T, typename TP, typename TD>
     inline void Set(test::Pointer<TP, TD> blocks, T&& val) const;
     template<typename T, typename TP, typename TD>
+    inline void Set(test::Pointer<TP, TD> blocks, const T& val) const;
+    template<typename T, typename TP, typename TD>
     inline T Get(test::Pointer<TP, TD> blocks) const;
 public:
     inline bool operator==(const Block& other) const;
@@ -192,6 +194,23 @@ inline std::size_t Block::GetSize() const
 
 template<typename T, typename TP, typename TD>
 inline void Block::Set(test::Pointer<TP, TD> blocks, T&& val) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Set<%s>(blocks=%p, val=%s)", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(T, TP, TD),
+        &blocks, TEST_SYS_DEBUG_VALUE_STR(0, val));
+    
+    if (sizeof(T) > m_size || m_size == 0)
+    {
+        return;
+    }
+
+    blocks.SetIndex(m_off);
+    *(blocks.template ReinterpretCast<T>()) = val;
+}
+
+template<typename T, typename TP, typename TD>
+inline void Block::Set(test::Pointer<TP, TD> blocks, const T& val) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
         "Set<%s>(blocks=%p, val=%s)", 
