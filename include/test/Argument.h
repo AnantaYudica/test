@@ -16,11 +16,6 @@ class Argument :
     public test::arg::Structure
 {
 private:
-    static void _Set(test::arg::Structure& st, std::size_t i);
-    template<typename TArg, typename... TArgs>
-    static void _Set(test::arg::Structure& st, std::size_t i, TArg&& arg, 
-        TArgs&&... args);
-private:
     test::arg::Flag m_flag;
     std::size_t m_pos;
 public:
@@ -75,20 +70,6 @@ public:
     inline operator bool() const;
 };
 
-inline void Argument::_Set(test::arg::Structure&, std::size_t)
-{
-    return;
-}
-
-template<typename TArg, typename... TArgs>
-inline void Argument::_Set(test::arg::Structure& st, std::size_t i, 
-    TArg&& arg, TArgs&&... args)
-{
-    st.template Set<typename std::remove_cv<typename std::remove_reference<
-        TArg>::type>::type>(i, std::forward<TArg>(arg));
-    _Set(st, i + 1, std::forward<TArgs>(args)...);
-}
-
 inline Argument::Argument() :
     test::arg::Structure(),
     m_flag(),
@@ -99,13 +80,11 @@ template<typename TArg, typename... TArgs, typename _TArg,
     typename std::enable_if<
         !std::is_base_of<Argument, _TArg>::value ,int>::type >
 inline Argument::Argument(TArg&& arg, TArgs&&... args) :
-    test::arg::Structure(sizeof(TArg), sizeof(TArgs)...),
+    test::arg::Structure(std::forward<TArg>(arg),
+        std::forward<TArgs>(args)...),
     m_flag(sizeof...(TArgs) + 1),
     m_pos(m_flag.Position(0, sizeof...(TArgs) + 1))
-{
-    _Set(*this, 0, std::forward<TArg>(arg),
-        std::forward<TArgs>(args)...);
-}
+{}
 
 inline Argument::~Argument()
 {
