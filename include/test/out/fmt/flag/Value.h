@@ -65,7 +65,7 @@ constexpr T Value<T>::GetValue() const
 #endif //!TEST_OUT_FMT_FLAG_VALUE_DLEVEL
 
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
-    test::sys::dbg::Type<T>,
+    test::sys::dbg::Type<T>
 
 template<typename T>
 TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
