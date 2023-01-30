@@ -27,18 +27,18 @@ public:
 
 } //!test
 
-#ifndef TEST_OUT_FMT_FLAG_DEFINEL_DLEVEL
+#ifndef TEST_OUT_FMT_FLAG_DEFINE_DLEVEL
 
-#define TEST_OUT_FMT_FLAG_DEFINEL_DLEVEL 2
+#define TEST_OUT_FMT_FLAG_DEFINE_DLEVEL 2
 
-#endif //!TEST_OUT_FMT_FLAG_DEFINEL_DLEVEL
+#endif //!TEST_OUT_FMT_FLAG_DEFINE_DLEVEL
 
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<T>,
 
 template<typename T>
 TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
-    TEST_OUT_FMT_FLAG_DEFINEL_DLEVEL, 
+    TEST_OUT_FMT_FLAG_DEFINE_DLEVEL, 
     "test::out::fmt::flag::Define", 
     test::out::fmt::flag::Define<T>);
 
