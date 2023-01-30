@@ -1,6 +1,8 @@
 #ifndef TEST_OUT_FMT_FLAG_LENGTH_H_
 #define TEST_OUT_FMT_FLAG_LENGTH_H_
 
+#include "../../../System.h"
+
 namespace test
 {
 namespace out
@@ -50,5 +52,14 @@ inline constexpr int Length::GetValue() const
 } //!out
 
 } //!test
+
+#ifndef TEST_OUT_FMT_FLAG_LENGTH_DLEVEL
+
+#define TEST_OUT_FMT_FLAG_LENGTH_DLEVEL 2
+
+#endif //!TEST_OUT_FMT_FLAG_LENGTH_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_LENGTH_DLEVEL, 
+    "test::out::fmt::flag::Length", test::out::fmt::flag::Length);
 
 #endif //!TEST_OUT_FMT_FLAG_LENGTH_H_

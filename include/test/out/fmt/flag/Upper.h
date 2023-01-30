@@ -1,6 +1,8 @@
 #ifndef TEST_OUT_FMT_FLAG_UPPER_H_
 #define TEST_OUT_FMT_FLAG_UPPER_H_
 
+#include "../../../System.h"
+
 namespace test
 {
 namespace out
@@ -23,5 +25,14 @@ public:
 } //!out
 
 } //!test
+
+#ifndef TEST_OUT_FMT_FLAG_UPPER_DLEVEL
+
+#define TEST_OUT_FMT_FLAG_UPPER_DLEVEL 2
+
+#endif //!TEST_OUT_FMT_FLAG_UPPER_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_UPPER_DLEVEL, 
+    "test::out::fmt::flag::Upper", test::out::fmt::flag::Upper);
 
 #endif //!TEST_OUT_FMT_FLAG_UPPER_H_

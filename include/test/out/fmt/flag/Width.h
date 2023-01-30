@@ -1,6 +1,8 @@
 #ifndef TEST_OUT_FMT_FLAG_WIDTH_H_
 #define TEST_OUT_FMT_FLAG_WIDTH_H_
 
+#include "../../../System.h"
+
 namespace test
 {
 namespace out
@@ -50,5 +52,14 @@ inline constexpr int Width::GetValue() const
 } //!out
 
 } //!test
+
+#ifndef TEST_OUT_FMT_FLAG_WIDTH_DLEVEL
+
+#define TEST_OUT_FMT_FLAG_WIDTH_DLEVEL 2
+
+#endif //!TEST_OUT_FMT_FLAG_WIDTH_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_WIDTH_DLEVEL, 
+    "test::out::fmt::flag::Width", test::out::fmt::flag::Width);
 
 #endif //!TEST_OUT_FMT_FLAG_WIDTH_H_
