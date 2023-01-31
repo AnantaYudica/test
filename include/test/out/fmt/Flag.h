@@ -1,6 +1,7 @@
 #ifndef TEST_OUT_FMT_FLAG_H_
 #define TEST_OUT_FMT_FLAG_H_
 
+#include "../../System.h"
 #include "flag/Decimal.h"
 #include "flag/Define.h"
 #include "flag/Exponent.h"
@@ -19,10 +20,38 @@
 #include "flag/Unsigned.h"
 #include "flag/Upper.h"
 #include "flag/Width.h"
+#include "flag/Value.h"
 
 #include <cstdint>
 #include <utility>
 #include <cwchar>
+
+namespace test::out::fmt
+{
+
+template<typename TValue = std::uint32_t, 
+    typename TIntegerValue = std::uint32_t>
+class Flag;
+
+}
+
+#ifndef TEST_OUT_FMT_FLAG_DLEVEL
+
+#define TEST_OUT_FMT_FLAG_DLEVEL 2
+
+#endif //!TEST_OUT_FMT_FLAG_DLEVEL
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<TValue>,\
+    test::sys::dbg::Type<TIntegerValue>
+
+template<typename TValue, typename TIntegerValue>
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_OUT_FMT_FLAG_DLEVEL, 
+    "test::out::fmt::Flag", 
+    test::out::fmt::Flag<TValue, TIntegerValue>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
 
 namespace test
 {
@@ -30,10 +59,6 @@ namespace out
 {
 namespace fmt
 {
-
-template<typename TValue = std::uint32_t, 
-    typename TIntegerValue = std::uint32_t>
-class Flag;
 
 typedef Flag<std::uint32_t, std::uint32_t> FlagType;
 
@@ -63,28 +88,33 @@ public:
     typedef test::out::fmt::flag::PrefixPlus PrefixPlusType;
     typedef test::out::fmt::flag::PrefixSpace PrefixSpaceType;
     typedef test::out::fmt::flag::PrefixZero PrefixZeroType;
+    template<typename T>
+    using SetValueType = test::out::fmt::flag::Value<T>;
 public:
     static constexpr IntegerValueType define_type_offset = 0;
     static constexpr IntegerValueType define_type_mask = 
         0x1 | 0x2 | 0x4 | 0x8;
     static constexpr IntegerValueType define_signed_offset = 4;
-    static constexpr IntegerValueType define_signed_mask = 0x10;
-    static constexpr IntegerValueType specifier_type_offset = 5;
+    static constexpr IntegerValueType define_signed_mask = 0x10 | 0x20;
+    static constexpr IntegerValueType specifier_type_offset = 6;
     static constexpr IntegerValueType specifier_type_mask = 
-        0x20 | 0x40 | 0x80;
-    static constexpr IntegerValueType specifier_sub_offset = 8;
-    static constexpr IntegerValueType specifier_sub_mask = 0x100 | 0x200;
-    static constexpr IntegerValueType specifier_int_offset = 10;
-    static constexpr IntegerValueType specifier_int_mask = 0x400 | 0x800;
-    static constexpr IntegerValueType specifier_fp_offset = 12;
-    static constexpr IntegerValueType specifier_fp_mask = 0x1000 | 0x2000;
-    static constexpr IntegerValueType specifier_base_offset = 14;
-    static constexpr IntegerValueType specifier_base_mask = 0x4000 | 0x8000;
-    static constexpr IntegerValueType specifier_case_offset = 16;
-    static constexpr IntegerValueType specifier_case_mask = 0x10000;
-    static constexpr IntegerValueType specifier_flag_offset = 17;
-    static constexpr IntegerValueType specifier_flag_mask = 0x20000 | 0x40000 |
-        0x80000 | 0x100000;
+        0x40 | 0x80 | 0x100 | 0x200;
+    static constexpr IntegerValueType specifier_sub_offset = 10;
+    static constexpr IntegerValueType specifier_sub_mask = 0x400 | 0x800;
+    static constexpr IntegerValueType specifier_int_offset = 12;
+    static constexpr IntegerValueType specifier_int_mask = 0x1000 | 0x2000;
+    static constexpr IntegerValueType specifier_fp_offset = 14;
+    static constexpr IntegerValueType specifier_fp_mask = 0x4000 | 0x8000;
+    static constexpr IntegerValueType specifier_base_offset = 16;
+    static constexpr IntegerValueType specifier_base_mask = 0x10000 | 0x20000;
+    static constexpr IntegerValueType specifier_case_offset = 18;
+    static constexpr IntegerValueType specifier_case_mask = 0x40000;
+    static constexpr IntegerValueType specifier_flag_offset = 19;
+    static constexpr IntegerValueType specifier_flag_mask = 0x80000 | 0x100000 |
+        0x200000 | 0x400000;
+    static constexpr IntegerValueType input_offset= 23;
+    static constexpr IntegerValueType input_mask = 0x800000 | 0x1000000 |
+        0x2000000;
 public:
     static constexpr IntegerValueType define_mask = define_type_mask | 
         define_signed_mask;
@@ -113,10 +143,12 @@ public:
     static constexpr IntegerValueType define_double = 8 << define_type_offset;
     static constexpr IntegerValueType define_long_double = 
         9 << define_type_offset;
+    static constexpr IntegerValueType define_bool = 
+        10 << define_type_offset;
     static constexpr IntegerValueType define_unsigned = 
-        0 << define_signed_offset;
-    static constexpr IntegerValueType define_signed = 
         1 << define_signed_offset;
+    static constexpr IntegerValueType define_signed = 
+        2 << define_signed_offset;
 
     static constexpr IntegerValueType specifier_undefined = 
         0 << specifier_type_offset;
@@ -134,12 +166,14 @@ public:
         6 << specifier_type_offset;
     static constexpr IntegerValueType specifier_blank = 
         7 << specifier_type_offset;
+    static constexpr IntegerValueType specifier_bool = 
+        8 << specifier_type_offset;
 
     static constexpr IntegerValueType specifier_sub_width = 
         1 << specifier_sub_offset;
-    static constexpr IntegerValueType specifier_sub_precision = 
-        2 << specifier_sub_offset;
     static constexpr IntegerValueType specifier_sub_length = 
+        2 << specifier_sub_offset;
+    static constexpr IntegerValueType specifier_sub_precision = 
         2 << specifier_sub_offset;
 
     static constexpr IntegerValueType specifier_int_signed = 
@@ -177,6 +211,11 @@ public:
     static constexpr IntegerValueType specifier_flag_prefix_zero = 
         8 << specifier_flag_offset;
 
+    static constexpr IntegerValueType input_value = 1 << input_offset;
+    static constexpr IntegerValueType input_width = 2 << input_offset;
+    static constexpr IntegerValueType input_length = 4 << input_offset;
+    static constexpr IntegerValueType input_precision = input_length;
+
 private:
     static constexpr IntegerValueType _Value(IntegerValueType val);
     template<typename... TArgs>
@@ -184,10 +223,10 @@ private:
         DefineType<wchar_t>&&, TArgs&&... args);
     template<typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
-        DefineType<signed char>&&, TArgs&&... args);
+        DefineType<char>&&, TArgs&&... args);
     template<typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
-        DefineType<char>&&, TArgs&&... args);
+        DefineType<signed char>&&, TArgs&&... args);
     template<typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
         DefineType<short>&&, TArgs&&... args);
@@ -226,7 +265,13 @@ private:
         DefineType<long double>&&, TArgs&&... args);
     template<typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
+        DefineType<bool>&&, TArgs&&... args);
+    template<typename... TArgs>
+    static constexpr IntegerValueType _Value(IntegerValueType val, 
         WidthType&&, TArgs&&... args);
+    template<typename... TArgs>
+    static constexpr IntegerValueType _Value(IntegerValueType val, 
+        LengthType&&, TArgs&&... args);
     template<typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
         PrecisionType&&, TArgs&&... args);
@@ -272,6 +317,9 @@ private:
     template<typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
         PrefixZeroType&&, TArgs&&... args);
+    template<typename T, typename... TArgs>
+    static constexpr IntegerValueType _Value(IntegerValueType val, 
+        SetValueType<T>&&, TArgs&&... args);
 private:
     ValueType m_value;
 public:
@@ -310,6 +358,7 @@ public:
     constexpr bool IsSpecifierFloatingPoint() const;
     constexpr bool IsSpecifierNumberCharacter() const;
     constexpr bool IsSpecifierBlank() const;
+    constexpr bool IsSpecifierBoolean() const;
     constexpr IntegerValueType GetSpecifierType() const;
     void SetSpecifierType(const IntegerValueType& val);
 public:
@@ -349,6 +398,12 @@ public:
     constexpr IntegerValueType GetSpecifierCase() const;
     void SetSpecifierCase(const IntegerValueType& val);
 public:
+    constexpr bool HasInputValue() const;
+    constexpr bool HasInputWidth() const;
+    constexpr bool HasInputLength() const;
+    constexpr bool HasInputPrecision() const;
+    void SetInput(const IntegerValueType& val);
+public:
     bool IsGood() const;
     bool IsBad() const;
 public:
@@ -376,22 +431,23 @@ Flag<TValue, TIntegerValue>::_Value(IntegerValueType val,
 template<typename TValue, typename TIntegerValue>
 template<typename... TArgs>
 constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
-Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
-    DefineType<signed char>&&, TArgs&&... args)
-{
-    return _Value((val & ~define_mask) | (define_char | define_signed),
-        std::forward<TArgs>(args)...);
-}
-
-template<typename TValue, typename TIntegerValue>
-template<typename... TArgs>
-constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DefineType<char>&&, 
     TArgs&&... args)
 {
     return _Value((val & ~define_mask) | define_char,
         std::forward<TArgs>(args)...);
 }
+
+template<typename TValue, typename TIntegerValue>
+template<typename... TArgs>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DefineType<signed char>&&, 
+    TArgs&&... args)
+{
+    return _Value((val & ~define_mask) | (define_char | define_signed),
+        std::forward<TArgs>(args)...);
+}
+
 
 template<typename TValue, typename TIntegerValue>
 template<typename... TArgs>
@@ -516,19 +572,43 @@ Flag<TValue, TIntegerValue>::_Value(IntegerValueType val,
 template<typename TValue, typename TIntegerValue>
 template<typename... TArgs>
 constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
-Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, WidthType&&,
-    TArgs&&... args)
+Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
+    DefineType<bool>&&, TArgs&&... args)
 {
-    return _Value((val | specifier_sub_width), std::forward<TArgs>(args)...);
+    return _Value((val & ~define_mask) | define_bool,
+        std::forward<TArgs>(args)...);
 }
 
 template<typename TValue, typename TIntegerValue>
 template<typename... TArgs>
 constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
-Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrecisionType&&,
+Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, WidthType&& width,
     TArgs&&... args)
 {
-    return _Value((val | specifier_sub_precision), 
+    return _Value((val | specifier_sub_width | 
+        (width.IsDefault() ? 0 : input_width)), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TValue, typename TIntegerValue>
+template<typename... TArgs>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
+    LengthType&& length, TArgs&&... args)
+{
+    return _Value((val | specifier_sub_length | 
+        (length.IsDefault() ? 0 : input_length)), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TValue, typename TIntegerValue>
+template<typename... TArgs>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
+    PrecisionType&& precision, TArgs&&... args)
+{
+    return _Value((val | specifier_sub_precision |
+        (precision.IsDefault() ? 0 : input_precision)), 
         std::forward<TArgs>(args)...);
 }
 
@@ -669,6 +749,16 @@ Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrefixZeroType&&,
     TArgs&&... args)
 {
     return _Value(val | specifier_flag_prefix_zero, 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TValue, typename TIntegerValue>
+template<typename T, typename... TArgs>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
+    SetValueType<T>&& value, TArgs&&... args)
+{
+    return _Value(val | (value.IsDefault() ? 0 : input_value), 
         std::forward<TArgs>(args)...);
 }
 
@@ -848,6 +938,12 @@ constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierBlank() const
 }
 
 template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierBoolean() const
+{
+    return (m_value & specifier_type_mask) == specifier_bool;
+}
+
+template<typename TValue, typename TIntegerValue>
 constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
 Flag<TValue, TIntegerValue>::GetSpecifierType() const
 {
@@ -914,21 +1010,21 @@ void Flag<TValue, TIntegerValue>::SetSpecifierFlag(const IntegerValueType& val)
 template<typename TValue, typename TIntegerValue>
 constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierSubWidth() const
 {
-    return ((m_value & specifier_sub_mask) == specifier_sub_width) &&
+    return ((m_value & specifier_sub_mask) & specifier_sub_width) &&
         !IsSpecifierUndefined();
 }
 
 template<typename TValue, typename TIntegerValue>
 constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierSubPrecision() const
 {
-    return ((m_value & specifier_sub_mask) == specifier_sub_precision) &&
+    return ((m_value & specifier_sub_mask) & specifier_sub_precision) &&
         !IsSpecifierUndefined();
 }
 
 template<typename TValue, typename TIntegerValue>
 constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierSubLength() const
 {
-    return ((m_value & specifier_sub_mask) == specifier_sub_length) &&
+    return ((m_value & specifier_sub_mask) & specifier_sub_length) &&
         !IsSpecifierUndefined();
 }
 
@@ -1079,6 +1175,36 @@ template<typename TValue, typename TIntegerValue>
 void Flag<TValue, TIntegerValue>::SetSpecifierCase(const IntegerValueType& val)
 {
     m_value = (m_value & ~specifier_case_mask) | (val & specifier_case_mask);
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::HasInputValue() const
+{
+    return ((m_value & input_mask) & input_value);
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::HasInputWidth() const
+{
+    return ((m_value & input_mask) & input_width);
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::HasInputLength() const
+{
+    return ((m_value & input_mask) & input_length);
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::HasInputPrecision() const
+{
+    return ((m_value & input_mask) & input_precision);
+}
+
+template<typename TValue, typename TIntegerValue>
+void Flag<TValue, TIntegerValue>::SetInput(const IntegerValueType& val)
+{
+    m_value = (m_value & ~input_mask) | (val & input_mask);
 }
 
 template<typename TValue, typename TIntegerValue>
