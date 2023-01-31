@@ -166,6 +166,8 @@ public:
         7 << specifier_type_offset;
     static constexpr IntegerValueType specifier_bool = 
         8 << specifier_type_offset;
+    static constexpr IntegerValueType specifier_object = 
+        9 << specifier_type_offset;
 
     static constexpr IntegerValueType specifier_sub_width = 
         1 << specifier_sub_offset;
@@ -357,6 +359,7 @@ public:
     constexpr bool IsSpecifierNumberCharacter() const;
     constexpr bool IsSpecifierBlank() const;
     constexpr bool IsSpecifierBoolean() const;
+    constexpr bool IsSpecifierObject() const;
     constexpr IntegerValueType GetSpecifierType() const;
     void SetSpecifierType(const IntegerValueType& val);
 public:
@@ -939,6 +942,12 @@ template<typename TValue, typename TIntegerValue>
 constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierBoolean() const
 {
     return (m_value & specifier_type_mask) == specifier_bool;
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierObject() const
+{
+    return (m_value & specifier_type_mask) == specifier_object;
 }
 
 template<typename TValue, typename TIntegerValue>
