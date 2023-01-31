@@ -60,8 +60,6 @@ namespace out
 namespace fmt
 {
 
-typedef Flag<std::uint32_t, std::uint32_t> FlagType;
-
 template<typename TValue, typename TIntegerValue>
 class Flag
 {
