@@ -1,3 +1,7 @@
+#ifdef DEBUG
+#define TEST_SYS_DEBUG_ENABLE 1
+#endif //!DEBUG
+
 #include "test/out/fmt/Flag.h"
 
 #include <cassert>
