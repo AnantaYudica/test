@@ -325,7 +325,7 @@ private:
 public:
     constexpr Flag();
     template<typename... TArgs>
-    constexpr Flag(const IntegerValueType& specifier, TArgs&& ... args);
+    constexpr Flag(IntegerValueType specifier, TArgs&& ... args);
     ~Flag() = default;
 public:
     constexpr Flag(const Flag<TValue, TIntegerValue>& cpy);
@@ -770,7 +770,7 @@ constexpr Flag<TValue, TIntegerValue>::Flag() :
 
 template<typename TValue, typename TIntegerValue>
 template<typename... TArgs>
-constexpr Flag<TValue, TIntegerValue>::Flag(const IntegerValueType& specifier,
+constexpr Flag<TValue, TIntegerValue>::Flag(IntegerValueType specifier,
     TArgs&& ... args) :
         m_value(Flag<TValue, TIntegerValue>::_Value(specifier & specifier_mask, 
             std::forward<TArgs>(args)...))

@@ -118,7 +118,7 @@ private:
 public:
     constexpr Argument();
     template<typename... TFlagArgs>
-    constexpr Argument(const FlagIntegerValueType& specifier, 
+    constexpr Argument(FlagIntegerValueType specifier, 
         TFlagArgs&&... flags);
 public:
     Argument(const Argument<T>&) = delete;
@@ -229,7 +229,7 @@ constexpr Argument<T, TFlag>::Argument() :
 
 template<typename T, typename TFlag>
 template<typename... TFlagArgs>
-constexpr Argument<T, TFlag>::Argument(const FlagIntegerValueType& specifier, 
+constexpr Argument<T, TFlag>::Argument(FlagIntegerValueType specifier, 
         TFlagArgs&&... flags) :
     m_flag(specifier, std::forward<TFlagArgs>(flags)...),
     m_value(Value(std::forward<TFlagArgs>(flags)...)),
