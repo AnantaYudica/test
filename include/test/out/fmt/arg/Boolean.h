@@ -57,14 +57,14 @@ public:
 };
 
 constexpr inline Boolean::Boolean() :
-    test::out::fmt::Argument<bool>(FlagType::specifier_bool |
-        FlagType::define_bool)
+    test::out::fmt::Argument<bool>(FlagType::specifier_bool,
+        test::out::fmt::flag::Define<bool>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline Boolean::Boolean(bool val, TFlagArgs&&... flags) :
-    test::out::fmt::Argument<bool>(FlagType::specifier_bool |
-        FlagType::define_bool, 
+    test::out::fmt::Argument<bool>(FlagType::specifier_bool,
+        test::out::fmt::flag::Define<bool>{},
         test::out::fmt::flag::Value<bool>{val},
         std::forward<TFlagArgs>(flags)...)
 {}
@@ -73,8 +73,8 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<!std::is_same<TFlagArg_, bool>::value, 
         int>::type>
 constexpr inline Boolean::Boolean(TFlagArg&& flag, TFlagArgs&&... flags) :
-    test::out::fmt::Argument<bool>(FlagType::specifier_bool |
-        FlagType::define_bool,
+    test::out::fmt::Argument<bool>(FlagType::specifier_bool,
+        test::out::fmt::flag::Define<bool>{},
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
 {}
