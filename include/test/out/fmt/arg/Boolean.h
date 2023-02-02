@@ -5,6 +5,7 @@
 #include "../Argument.h"
 #include "../Flag.h"
 
+#include <type_traits>
 #include <utility>
 
 namespace test::out::fmt::arg
