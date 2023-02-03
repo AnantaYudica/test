@@ -7,6 +7,7 @@
 #include "../Definition.h"
 
 #include <type_traits>
+#include <utility>
 #include <cwchar>
 
 namespace test::out::fmt::arg
@@ -97,14 +98,14 @@ public:
 };
 
 constexpr inline Character<char>::Character() :
-    test::out::fmt::Argument<char>(FlagType::specifier_ch |
-        FlagType::define_char)
+    test::out::fmt::Argument<char>(FlagType::specifier_ch, 
+        test::out::fmt::flag::Define<char>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline Character<char>::Character(char val, TFlagArgs&&... flags) :
-    test::out::fmt::Argument<char>(FlagType::specifier_ch |
-        FlagType::define_char, 
+    test::out::fmt::Argument<char>(FlagType::specifier_ch, 
+        test::out::fmt::flag::Define<char>{},
         test::out::fmt::flag::Value<char>{val},
         std::forward<TFlagArgs>(flags)...)
 {}
@@ -114,22 +115,22 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         int>::type>
 constexpr inline Character<char>::Character(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<char>(FlagType::specifier_ch |
-                FlagType::define_char,
-                std::forward<TFlagArg>(flag),
-                std::forward<TFlagArgs>(flags)...)
+        test::out::fmt::Argument<char>(FlagType::specifier_ch,
+            test::out::fmt::flag::Define<char>{},
+            std::forward<TFlagArg>(flag),
+            std::forward<TFlagArgs>(flags)...)
 {}
 
 constexpr inline Character<wchar_t>::Character() :
-    test::out::fmt::Argument<wchar_t>(FlagType::specifier_ch |
-        FlagType::define_wchar)
+    test::out::fmt::Argument<wchar_t>(FlagType::specifier_ch,
+        test::out::fmt::flag::Define<wchar_t>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline Character<wchar_t>::Character(wchar_t val, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<wchar_t>(FlagType::specifier_ch |
-            FlagType::define_wchar, 
+        test::out::fmt::Argument<wchar_t>(FlagType::specifier_ch,
+            test::out::fmt::flag::Define<wchar_t>{}, 
             test::out::fmt::flag::Value<wchar_t>{val},
             std::forward<TFlagArgs>(flags)...)
 {}
@@ -139,10 +140,10 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         int>::type>
 constexpr inline Character<wchar_t>::Character(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<wchar_t>(FlagType::specifier_ch |
-                FlagType::define_wchar,
-                std::forward<TFlagArg>(flag),
-                std::forward<TFlagArgs>(flags)...)
+        test::out::fmt::Argument<wchar_t>(FlagType::specifier_ch,
+            test::out::fmt::flag::Define<wchar_t>{}, 
+            std::forward<TFlagArg>(flag),
+            std::forward<TFlagArgs>(flags)...)
 {}
 
 } //arg
