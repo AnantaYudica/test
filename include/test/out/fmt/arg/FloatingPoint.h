@@ -119,15 +119,15 @@ public:
 };
 
 constexpr inline FloatingPoint<float>::FloatingPoint() :
-    test::out::fmt::Argument<float>(FlagType::specifier_fp |
-        FlagType::define_float)
+    test::out::fmt::Argument<float>(FlagType::specifier_fp,
+        test::out::fmt::flag::Define<float>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline FloatingPoint<float>::FloatingPoint(float val, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<float>(FlagType::specifier_fp |
-            FlagType::define_float, 
+        test::out::fmt::Argument<float>(FlagType::specifier_fp,
+        test::out::fmt::flag::Define<float>{},
         test::out::fmt::flag::Value<float>{val},
         std::forward<TFlagArgs>(flags)...)
 {}
@@ -137,22 +137,22 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         int>::type>
 constexpr inline FloatingPoint<float>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<float>(FlagType::specifier_fp |
-            FlagType::define_float,
+        test::out::fmt::Argument<float>(FlagType::specifier_fp,
+        test::out::fmt::flag::Define<float>{},
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
 {}
 
 constexpr inline FloatingPoint<double>::FloatingPoint() :
-    test::out::fmt::Argument<double>(FlagType::specifier_fp |
-        FlagType::define_double)
+    test::out::fmt::Argument<double>(FlagType::specifier_fp,
+        test::out::fmt::flag::Define<double>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline FloatingPoint<double>::FloatingPoint(double val, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<double>(FlagType::specifier_fp |
-            FlagType::define_double, 
+        test::out::fmt::Argument<double>(FlagType::specifier_fp,
+        test::out::fmt::flag::Define<double>{},
         test::out::fmt::flag::Value<double>{val},
         std::forward<TFlagArgs>(flags)...)
 
@@ -163,23 +163,23 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         int>::type>
 constexpr inline FloatingPoint<double>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<double>(FlagType::specifier_fp |
-            FlagType::define_double, 
+        test::out::fmt::Argument<double>(FlagType::specifier_fp,
+        test::out::fmt::flag::Define<double>{},
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
 
 {}
 
 constexpr inline FloatingPoint<long double>::FloatingPoint() :
-    test::out::fmt::Argument<long double>(FlagType::specifier_fp |
-        FlagType::define_long_double)
+    test::out::fmt::Argument<long double>(FlagType::specifier_fp,
+        test::out::fmt::flag::Define<long double>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline FloatingPoint<long double>::FloatingPoint(long double val, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<long double>(FlagType::specifier_fp |
-            FlagType::define_long_double, 
+        test::out::fmt::Argument<long double>(FlagType::specifier_fp,
+        test::out::fmt::flag::Define<long double>{},
         test::out::fmt::flag::Value<long double>{val},
         std::forward<TFlagArgs>(flags)...)
 
@@ -190,8 +190,8 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         int>::type>
 constexpr inline FloatingPoint<long double>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<long double>(FlagType::specifier_fp |
-            FlagType::define_long_double, 
+        test::out::fmt::Argument<long double>(FlagType::specifier_fp,
+        test::out::fmt::flag::Define<long double>{}, 
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
 {}
