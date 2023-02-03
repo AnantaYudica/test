@@ -16,6 +16,11 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{3.14f};
@@ -25,6 +30,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
     }
     {
         float val1 = 3.14f;
@@ -35,6 +46,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
     }
     {
         const float val1 = 3.14f;
@@ -45,6 +62,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -56,6 +79,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
     }
     {
         float val1 = 3.14f;
@@ -68,6 +97,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
     }
     {
         const float val1 = 3.14f;
@@ -80,6 +115,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -91,6 +132,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetWidth() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -102,6 +149,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetLength() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -113,6 +166,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetPrecision() == 20);
     }
     
     {
@@ -126,6 +185,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
+        assert(arg1.GetWidth() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -138,6 +204,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
+        assert(arg1.GetLength() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -150,12 +223,19 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
+        assert(arg1.GetPrecision() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
             3.14f,
             test::out::fmt::flag::Width{20},
-            test::out::fmt::flag::Length{20}
+            test::out::fmt::flag::Length{40}
         };
 
         assert(arg1.GetFlag().IsSpecifierFloatingPoint() == true);
@@ -163,12 +243,20 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
+        assert(arg1.GetWidth() == 20);
+        assert(arg1.GetLength() == 40);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
             3.14f,
             test::out::fmt::flag::Width{20},
-            test::out::fmt::flag::Precision{20}
+            test::out::fmt::flag::Precision{40}
         };
 
         assert(arg1.GetFlag().IsSpecifierFloatingPoint() == true);
@@ -176,6 +264,14 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        assert(arg1.GetValue() == 3.14f);
+        assert(arg1.GetWidth() == 20);
+        assert(arg1.GetPrecision() == 40);
     }
 
     {
@@ -186,6 +282,11 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{3.14};
@@ -195,6 +296,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
     }
     {
         double val1 = 3.14;
@@ -205,6 +312,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
     }
     {
         const double val1 = 3.14;
@@ -215,6 +328,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -226,6 +345,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
     }
     {
         double val1 = 3.14;
@@ -238,6 +363,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
     }
     {
         const double val1 = 3.14;
@@ -250,6 +381,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -261,6 +398,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetWidth() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -272,6 +415,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetLength() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -283,6 +432,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetPrecision() == 20);
     }
     
     {
@@ -296,6 +451,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
+        assert(arg1.GetWidth() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -308,6 +470,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
+        assert(arg1.GetLength() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -320,12 +489,19 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
+        assert(arg1.GetPrecision() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
             3.14,
             test::out::fmt::flag::Width{20},
-            test::out::fmt::flag::Length{20}
+            test::out::fmt::flag::Length{40}
         };
 
         assert(arg1.GetFlag().IsSpecifierFloatingPoint() == true);
@@ -333,12 +509,20 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
+        assert(arg1.GetWidth() == 20);
+        assert(arg1.GetLength() == 40);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
             3.14,
             test::out::fmt::flag::Width{20},
-            test::out::fmt::flag::Precision{20}
+            test::out::fmt::flag::Precision{40}
         };
 
         assert(arg1.GetFlag().IsSpecifierFloatingPoint() == true);
@@ -346,6 +530,14 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        assert(arg1.GetValue() == 3.14);
+        assert(arg1.GetWidth() == 20);
+        assert(arg1.GetPrecision() == 40);
     }
 
     {
@@ -356,6 +548,12 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{3.14L};
@@ -365,6 +563,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
     }
     {
         long double val1 = 3.14L;
@@ -375,6 +580,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
     }
     {
         const long double val1 = 3.14L;
@@ -385,6 +597,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -396,6 +615,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
     }
     {
         long double val1 = 3.14L;
@@ -408,6 +634,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
     }
     {
         const long double val1 = 3.14L;
@@ -420,6 +653,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -431,6 +671,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetWidth() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -442,6 +689,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetLength() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -453,6 +707,13 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetPrecision() == 20);
     }
     
     {
@@ -466,6 +727,14 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == false);
         assert(arg1.GetFlag().HasInputPrecision() == false);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
+        assert(arg1.GetWidth() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -478,6 +747,14 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
+        assert(arg1.GetLength() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -490,12 +767,20 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == false);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
+        assert(arg1.GetPrecision() == 20);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
             3.14L,
             test::out::fmt::flag::Width{20},
-            test::out::fmt::flag::Length{20}
+            test::out::fmt::flag::Length{40}
         };
 
         assert(arg1.GetFlag().IsSpecifierFloatingPoint() == true);
@@ -503,12 +788,21 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
+        assert(arg1.GetWidth() == 20);
+        assert(arg1.GetLength() == 40);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
             3.14L,
             test::out::fmt::flag::Width{20},
-            test::out::fmt::flag::Precision{20}
+            test::out::fmt::flag::Precision{40}
         };
 
         assert(arg1.GetFlag().IsSpecifierFloatingPoint() == true);
@@ -516,6 +810,15 @@ int main()
         assert(arg1.GetFlag().HasInputWidth() == true);
         assert(arg1.GetFlag().HasInputLength() == true);
         assert(arg1.GetFlag().HasInputPrecision() == true);
+        
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() == 
+            arg1.GetFlag().define_long_double);
+        assert(arg1.GetValue() == 3.14L);
+        assert(arg1.GetWidth() == 20);
+        assert(arg1.GetPrecision() == 40);
     }
     return 0;
 }
