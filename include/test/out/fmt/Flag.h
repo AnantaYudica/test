@@ -425,7 +425,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<wchar_t>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_char | define_signed),
+    return _Value((val & ~define_mask) | define_wchar,
         std::forward<TArgs>(args)...);
 }
 
