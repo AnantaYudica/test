@@ -2,6 +2,7 @@
 #define TEST_OUT_FMT_ARG_FLOATINGPOINT_H_
 
 #include "../../../System.h"
+#include "../../../trait/out/fmt/IsFlag.h"
 #include "../Flag.h"
 #include "../Argument.h"
 
@@ -59,8 +60,8 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename std::enable_if<!std::is_same<TFlagArg_, float>::value, 
-            int>::type = 0>
+        typename std::enable_if<test::trait::out::fmt::
+            IsFlag<TFlagArg_>::Value, int>::type = 0>
     constexpr inline FloatingPoint(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<float>::GetFlag;
@@ -83,8 +84,8 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename std::enable_if<!std::is_same<TFlagArg_, double>::value, 
-            int>::type = 0>
+        typename std::enable_if<test::trait::out::fmt::
+            IsFlag<TFlagArg_>::Value, int>::type = 0>
     constexpr inline FloatingPoint(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<double>::GetFlag;
@@ -107,8 +108,8 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename std::enable_if<!std::is_same<TFlagArg_, long double>::value, 
-            int>::type = 0>
+        typename std::enable_if<test::trait::out::fmt::
+            IsFlag<TFlagArg_>::Value, int>::type = 0>
     constexpr inline FloatingPoint(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<long double>::GetFlag;
@@ -133,7 +134,7 @@ constexpr inline FloatingPoint<float>::FloatingPoint(float val,
 {}
 
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename std::enable_if<!std::is_same<TFlagArg_, float>::value, 
+    typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
 constexpr inline FloatingPoint<float>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
@@ -159,7 +160,7 @@ constexpr inline FloatingPoint<double>::FloatingPoint(double val,
 {}
 
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename std::enable_if<!std::is_same<TFlagArg_, double>::value, 
+    typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
 constexpr inline FloatingPoint<double>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
@@ -186,7 +187,7 @@ constexpr inline FloatingPoint<long double>::FloatingPoint(long double val,
 {}
 
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename std::enable_if<!std::is_same<TFlagArg_, long double>::value, 
+    typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
 constexpr inline FloatingPoint<long double>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
