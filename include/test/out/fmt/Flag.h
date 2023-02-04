@@ -321,6 +321,17 @@ private:
     static constexpr IntegerValueType _Value(IntegerValueType val, 
         SetValueType<T>&&, TArgs&&... args);
 private:
+    static constexpr IntegerValueType __Value(IntegerValueType val);
+    template<typename TArg, typename... TArgs>
+    static constexpr IntegerValueType __Value(IntegerValueType val, 
+        TArg&& arg, TArgs&&... args);
+private:
+    static constexpr std::false_type ___Value(...);
+    template<typename ... TArgs>
+    static constexpr auto ___Value(TArgs&&... args) -> 
+        decltype(_Value(std::forward<TArgs>(args)...), 
+            std::true_type());
+private:
     ValueType m_value;
 public:
     constexpr Flag();
@@ -425,7 +436,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<wchar_t>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | define_wchar,
+    return __Value((val & ~define_mask) | define_wchar,
         std::forward<TArgs>(args)...);
 }
 
@@ -435,7 +446,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DefineType<char>&&, 
     TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | define_char,
+    return __Value((val & ~define_mask) | define_char,
         std::forward<TArgs>(args)...);
 }
 
@@ -445,7 +456,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DefineType<signed char>&&, 
     TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_char | define_signed),
+    return __Value((val & ~define_mask) | (define_char | define_signed),
         std::forward<TArgs>(args)...);
 }
 
@@ -456,7 +467,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DefineType<short>&&,
     TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_short | define_signed),
+    return __Value((val & ~define_mask) | (define_short | define_signed),
         std::forward<TArgs>(args)...);
 }
 
@@ -466,7 +477,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DefineType<int>&&,
     TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_int | define_signed),
+    return __Value((val & ~define_mask) | (define_int | define_signed),
         std::forward<TArgs>(args)...);
 }
 
@@ -476,7 +487,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DefineType<long>&&,
     TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_long | define_signed),
+    return __Value((val & ~define_mask) | (define_long | define_signed),
         std::forward<TArgs>(args)...);
 }
 
@@ -486,7 +497,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<long long>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_long_long | define_signed),
+    return __Value((val & ~define_mask) | (define_long_long | define_signed),
         std::forward<TArgs>(args)...);
 }
 
@@ -496,7 +507,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<unsigned char>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_char | define_unsigned),
+    return __Value((val & ~define_mask) | (define_char | define_unsigned),
         std::forward<TArgs>(args)...);
 }
 
@@ -506,7 +517,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<unsigned short>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_short | define_unsigned),
+    return __Value((val & ~define_mask) | (define_short | define_unsigned),
         std::forward<TArgs>(args)...);
 }
 
@@ -516,7 +527,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<unsigned int>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_int | define_unsigned),
+    return __Value((val & ~define_mask) | (define_int | define_unsigned),
         std::forward<TArgs>(args)...);
 }
 
@@ -526,7 +537,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<unsigned long>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_long | define_unsigned),
+    return __Value((val & ~define_mask) | (define_long | define_unsigned),
         std::forward<TArgs>(args)...);
 }
 
@@ -536,7 +547,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<unsigned long long>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | (define_long_long | define_unsigned),
+    return __Value((val & ~define_mask) | (define_long_long | define_unsigned),
         std::forward<TArgs>(args)...);
 }
 
@@ -546,7 +557,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DefineType<float>&&,
     TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | define_float,
+    return __Value((val & ~define_mask) | define_float,
         std::forward<TArgs>(args)...);
 }
 
@@ -556,7 +567,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DefineType<double>&&,
     TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | define_double,
+    return __Value((val & ~define_mask) | define_double,
         std::forward<TArgs>(args)...);
 }
 
@@ -566,7 +577,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<long double>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | define_long_double,
+    return __Value((val & ~define_mask) | define_long_double,
         std::forward<TArgs>(args)...);
 }
 
@@ -576,7 +587,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     DefineType<bool>&&, TArgs&&... args)
 {
-    return _Value((val & ~define_mask) | define_bool,
+    return __Value((val & ~define_mask) | define_bool,
         std::forward<TArgs>(args)...);
 }
 
@@ -586,7 +597,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, WidthType&& width,
     TArgs&&... args)
 {
-    return _Value((val | specifier_sub_width | 
+    return __Value((val | specifier_sub_width | 
         (width.IsDefault() ? 0 : input_width)), 
         std::forward<TArgs>(args)...);
 }
@@ -597,7 +608,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     LengthType&& length, TArgs&&... args)
 {
-    return _Value((val | specifier_sub_length | 
+    return __Value((val | specifier_sub_length | 
         (length.IsDefault() ? 0 : input_length)), 
         std::forward<TArgs>(args)...);
 }
@@ -608,7 +619,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     PrecisionType&& precision, TArgs&&... args)
 {
-    return _Value((val | specifier_sub_precision |
+    return __Value((val | specifier_sub_precision |
         (precision.IsDefault() ? 0 : input_precision)), 
         std::forward<TArgs>(args)...);
 }
@@ -619,7 +630,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, SignedType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_int_mask) | specifier_int_signed, 
+    return __Value((val & ~specifier_int_mask) | specifier_int_signed, 
         std::forward<TArgs>(args)...);
 }
 
@@ -629,7 +640,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, UnsignedType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_int_mask) | specifier_int_unsigned, 
+    return __Value((val & ~specifier_int_mask) | specifier_int_unsigned, 
         std::forward<TArgs>(args)...);
 }
 
@@ -639,7 +650,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, FixedType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_fp_mask) | specifier_fp_fixed, 
+    return __Value((val & ~specifier_fp_mask) | specifier_fp_fixed, 
         std::forward<TArgs>(args)...);
 }
 
@@ -649,7 +660,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, ExponentType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_fp_mask) | specifier_fp_exponent, 
+    return __Value((val & ~specifier_fp_mask) | specifier_fp_exponent, 
         std::forward<TArgs>(args)...);
 }
 
@@ -659,7 +670,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, ShortType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_fp_mask) | specifier_fp_short, 
+    return __Value((val & ~specifier_fp_mask) | specifier_fp_short, 
         std::forward<TArgs>(args)...);
 }
 
@@ -669,7 +680,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, DecimalType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_base_mask) | specifier_base_dec, 
+    return __Value((val & ~specifier_base_mask) | specifier_base_dec, 
         std::forward<TArgs>(args)...);
 }
 
@@ -679,7 +690,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, OctalType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_base_mask) | specifier_base_oct, 
+    return __Value((val & ~specifier_base_mask) | specifier_base_oct, 
         std::forward<TArgs>(args)...);
 }
 
@@ -689,7 +700,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, HexadecimalType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_base_mask) | specifier_base_hex, 
+    return __Value((val & ~specifier_base_mask) | specifier_base_hex, 
         std::forward<TArgs>(args)...);
 }
 
@@ -699,7 +710,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, LowerType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_case_mask) | specifier_lower_case, 
+    return __Value((val & ~specifier_case_mask) | specifier_lower_case, 
         std::forward<TArgs>(args)...);
 }
 
@@ -709,7 +720,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, UpperType&&,
     TArgs&&... args)
 {
-    return _Value((val & ~specifier_case_mask) | specifier_upper_case, 
+    return __Value((val & ~specifier_case_mask) | specifier_upper_case, 
         std::forward<TArgs>(args)...);
 }
 
@@ -719,7 +730,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrefixType&&,
     TArgs&&... args)
 {
-    return _Value(val | specifier_flag_prefix, 
+    return __Value(val | specifier_flag_prefix, 
         std::forward<TArgs>(args)...);
 }
 
@@ -729,7 +740,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrefixPlusType&&,
     TArgs&&... args)
 {
-    return _Value(val | specifier_flag_prefix_plus, 
+    return __Value(val | specifier_flag_prefix_plus, 
         std::forward<TArgs>(args)...);
 }
 
@@ -739,7 +750,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrefixSpaceType&&,
     TArgs&&... args)
 {
-    return _Value(val | specifier_flag_prefix_space, 
+    return __Value(val | specifier_flag_prefix_space, 
         std::forward<TArgs>(args)...);
 }
 
@@ -749,7 +760,7 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, PrefixZeroType&&,
     TArgs&&... args)
 {
-    return _Value(val | specifier_flag_prefix_zero, 
+    return __Value(val | specifier_flag_prefix_zero, 
         std::forward<TArgs>(args)...);
 }
 
@@ -759,7 +770,26 @@ constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType
 Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
     SetValueType<T>&& value, TArgs&&... args)
 {
-    return _Value(val | (value.IsDefault() ? 0 : input_value), 
+    return __Value(val | (value.IsDefault() ? 0 : input_value), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::__Value(IntegerValueType val)
+{
+    return val;
+}
+
+template<typename TValue, typename TIntegerValue>
+template<typename TArg, typename... TArgs>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::__Value(IntegerValueType val, 
+    TArg&& arg, TArgs&&... args)
+{
+    static_assert(decltype(___Value(val, std::forward<TArg>(arg), 
+        std::forward<TArgs>(args)...))::value, "Argument is not valid");
+    return _Value(val, std::forward<TArg>(arg), 
         std::forward<TArgs>(args)...);
 }
 
