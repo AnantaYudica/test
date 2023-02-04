@@ -2,6 +2,7 @@
 #define TEST_OUT_FMT_ARG_CHARACTER_H_
 
 #include "../../../System.h"
+#include "../../../trait/out/fmt/IsFlag.h"
 #include "../Flag.h"
 #include "../Argument.h"
 #include "../Definition.h"
@@ -61,8 +62,8 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename std::enable_if<!std::is_same<TFlagArg_, char>::value, 
-            int>::type = 0>
+        typename std::enable_if<test::trait::out::fmt::
+            IsFlag<TFlagArg_>::Value, int>::type = 0>
     constexpr inline Character(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<char>::GetFlag;
@@ -85,8 +86,8 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename std::enable_if<!std::is_same<TFlagArg_, wchar_t>::value, 
-            int>::type = 0>
+        typename std::enable_if<test::trait::out::fmt::
+            IsFlag<TFlagArg_>::Value, int>::type = 0>
     constexpr inline Character(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<wchar_t>::GetFlag;
@@ -111,7 +112,7 @@ constexpr inline Character<char>::Character(char val, TFlagArgs&&... flags) :
 {}
 
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename std::enable_if<!std::is_same<TFlagArg_, char>::value, 
+    typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
 constexpr inline Character<char>::Character(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
@@ -136,7 +137,7 @@ constexpr inline Character<wchar_t>::Character(wchar_t val,
 {}
 
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename std::enable_if<!std::is_same<TFlagArg_, wchar_t>::value, 
+    typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
 constexpr inline Character<wchar_t>::Character(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
