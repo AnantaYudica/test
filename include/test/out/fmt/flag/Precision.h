@@ -19,7 +19,7 @@ private:
     int m_value;
 public:
     inline constexpr Precision();
-    inline constexpr Precision(const int& val);
+    inline constexpr explicit Precision(const int& val);
 public:
     inline constexpr bool IsDefault() const;
     inline constexpr int GetValue() const;

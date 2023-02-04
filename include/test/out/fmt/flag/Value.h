@@ -20,7 +20,7 @@ private:
     T m_value;
 public:
     constexpr Value();
-    constexpr Value(const T& val);
+    constexpr explicit Value(const T& val);
 public:
     constexpr bool IsDefault() const;
     constexpr T GetValue() const;

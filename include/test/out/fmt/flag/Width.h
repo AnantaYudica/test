@@ -19,7 +19,7 @@ private:
     int m_value;
 public:
     inline constexpr Width();
-    inline constexpr Width(const int& val);
+    inline constexpr explicit Width(const int& val);
 public:
     inline constexpr bool IsDefault() const;
     inline constexpr int GetValue() const;
