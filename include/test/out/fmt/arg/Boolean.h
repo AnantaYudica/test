@@ -46,8 +46,8 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
-            int>::type = 0>
+        typename std::enable_if<test::trait::out::fmt::
+            IsFlag<TFlagArg_>::Value, int>::type = 0>
     constexpr inline Boolean(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<bool>::GetFlag;
