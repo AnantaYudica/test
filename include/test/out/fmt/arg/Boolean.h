@@ -2,6 +2,7 @@
 #define TEST_OUT_FMT_ARG_BOOLEAN_H_
 
 #include "../../../System.h"
+#include "../../../trait/out/fmt/IsFlag.h"
 #include "../Argument.h"
 #include "../Flag.h"
 
@@ -45,7 +46,7 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename std::enable_if<!std::is_same<TFlagArg_, bool>::value, 
+        typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
             int>::type = 0>
     constexpr inline Boolean(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
@@ -70,7 +71,7 @@ constexpr inline Boolean::Boolean(bool val, TFlagArgs&&... flags) :
 {}
 
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename std::enable_if<!std::is_same<TFlagArg_, bool>::value, 
+    typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value,
         int>::type>
 constexpr inline Boolean::Boolean(TFlagArg&& flag, TFlagArgs&&... flags) :
     test::out::fmt::Argument<bool>(FlagType::specifier_bool,
