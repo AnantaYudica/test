@@ -33,7 +33,6 @@ int main()
         assert(fl1.IsSpecifierPointer() == false);
         assert(fl1.IsSpecifierInteger() == false);
         assert(fl1.IsSpecifierFloatingPoint() == false);
-        assert(fl1.IsSpecifierNumberCharacter() == false);
         assert(fl1.IsSpecifierBlank() == false);
         assert(fl1.IsSpecifierBoolean() == false);
         
@@ -102,7 +101,6 @@ int main()
         assert(fl1.IsSpecifierPointer() == false);
         assert(fl1.IsSpecifierInteger() == false);
         assert(fl1.IsSpecifierFloatingPoint() == false);
-        assert(fl1.IsSpecifierNumberCharacter() == false);
         assert(fl1.IsSpecifierBlank() == false);
         assert(fl1.IsSpecifierBoolean() == false);
         
@@ -171,7 +169,6 @@ int main()
         assert(fl1.IsSpecifierPointer() == false);
         assert(fl1.IsSpecifierInteger() == false);
         assert(fl1.IsSpecifierFloatingPoint() == false);
-        assert(fl1.IsSpecifierNumberCharacter() == false);
         assert(fl1.IsSpecifierBlank() == false);
         assert(fl1.IsSpecifierBoolean() == false);
         
@@ -241,7 +238,6 @@ int main()
         assert(fl1.IsSpecifierPointer() == false);
         assert(fl1.IsSpecifierInteger() == false);
         assert(fl1.IsSpecifierFloatingPoint() == false);
-        assert(fl1.IsSpecifierNumberCharacter() == false);
         assert(fl1.IsSpecifierBlank() == false);
         assert(fl1.IsSpecifierBoolean() == false);
         
@@ -310,7 +306,6 @@ int main()
         assert(fl1.IsSpecifierPointer() == false);
         assert(fl1.IsSpecifierInteger() == false);
         assert(fl1.IsSpecifierFloatingPoint() == false);
-        assert(fl1.IsSpecifierNumberCharacter() == false);
         assert(fl1.IsSpecifierBlank() == false);
         assert(fl1.IsSpecifierBoolean() == false);
         
@@ -381,7 +376,6 @@ int main()
         assert(fl1.IsSpecifierPointer() == false);
         assert(fl1.IsSpecifierInteger() == false);
         assert(fl1.IsSpecifierFloatingPoint() == false);
-        assert(fl1.IsSpecifierNumberCharacter() == false);
         assert(fl1.IsSpecifierBlank() == false);
         assert(fl1.IsSpecifierBoolean() == false);
         
@@ -455,7 +449,6 @@ int main()
         assert(fl1.IsSpecifierPointer() == false);
         assert(fl1.IsSpecifierInteger() == false);
         assert(fl1.IsSpecifierFloatingPoint() == false);
-        assert(fl1.IsSpecifierNumberCharacter() == false);
         assert(fl1.IsSpecifierBlank() == false);
         assert(fl1.IsSpecifierBoolean() == false);
         
