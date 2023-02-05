@@ -18,6 +18,8 @@ class Definition
 public:
     typedef test::out::fmt::Flag<std::uint32_t, std::uint32_t> FlagType;
 public:
+    static constexpr std::size_t string_max_len = 1024;
+public:
     static constexpr int value_character = 1;
     static constexpr int value_boolean = 2;
     static constexpr int value_integer = 3;
