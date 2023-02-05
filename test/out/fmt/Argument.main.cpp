@@ -712,7 +712,65 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
-        assert(arg1.GetValue() == str1);
+        assert(strcmp(&*(arg1.GetValue()), "test") == 0);
+    }
+    {
+        const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_str;
+        const char * str1 = "test";
+        test::out::fmt::Argument<char*> arg1{
+            specifier,
+            test::out::fmt::flag::Value<const char*>(str1)
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierString());
+        assert(arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+        assert(strcmp(&*(arg1.GetValue()), "test") == 0);
+    }
+    {
+        const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_str;
+        const wchar_t * str1 = L"test";
+        wchar_t * str2 = const_cast<wchar_t*>(str1);
+        test::out::fmt::Argument<wchar_t*> arg1{
+            specifier,
+            test::out::fmt::flag::Value<wchar_t*>(str2)
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierString());
+        assert(arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+        assert(wcscmp(&*(arg1.GetValue()), L"test") == 0);
+    }
+    {
+        const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_str;
+        const wchar_t * str1 = L"test";
+        test::out::fmt::Argument<wchar_t*> arg1{
+            specifier,
+            test::out::fmt::flag::Value<const wchar_t*>(str1)
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierString());
+        assert(arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+        assert(wcscmp(&*(arg1.GetValue()), L"test") == 0);
     }
     {
         const auto specifier = 
@@ -789,7 +847,65 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
-        assert(arg1.GetValue() == str1);
+        assert(strcmp(&*(arg1.GetValue()), "test1") == 0);
+    }
+    {
+        const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_num_ch;
+        const char * str1 = "test1";
+        test::out::fmt::Argument<char*> arg1{
+            specifier,
+            test::out::fmt::flag::Value<const char *>(str1)
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierNumberCharacter());
+        assert(arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+        assert(strcmp(&*(arg1.GetValue()), "test1") == 0);
+    }
+    {
+        const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_num_ch;
+        const wchar_t * str1 = L"test1";
+        wchar_t * str2 = const_cast<wchar_t *>(str1);
+        test::out::fmt::Argument<wchar_t*> arg1{
+            specifier,
+            test::out::fmt::flag::Value<wchar_t *>(str2)
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierNumberCharacter());
+        assert(arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+        assert(wcscmp(&*(arg1.GetValue()), L"test1") == 0);
+    }
+    {
+        const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_num_ch;
+        const wchar_t * str1 = L"test1";
+        test::out::fmt::Argument<wchar_t*> arg1{
+            specifier,
+            test::out::fmt::flag::Value<const wchar_t *>(str1)
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierNumberCharacter());
+        assert(arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+        assert(wcscmp(&*(arg1.GetValue()), L"test1") == 0);
     }
     {
         const auto specifier = 
