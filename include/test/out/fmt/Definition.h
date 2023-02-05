@@ -2,9 +2,11 @@
 #define TEST_OUT_FMT_DEFINITION_H_
 
 #include "../../System.h"
+#include "../Interface.h"
 #include "Flag.h"
 
 #include <cstdint>
+#include <cwchar>
 
 namespace test
 {
@@ -17,6 +19,14 @@ class Definition
 {
 public:
     typedef test::out::fmt::Flag<std::uint32_t, std::uint32_t> FlagType;
+public:
+    template<typename TChar>
+    using OutputInterfaceType = test::out::Interface<TChar>;
+public:
+    template<typename TChar>
+    using FormatOutputFuncType = std::size_t (*)(OutputInterfaceType<TChar>& out, 
+        void* value, std::size_t value_size, FlagType flag, 
+        int width, int len_pred);
 public:
     static constexpr std::size_t string_max_len = 1024;
 public:
