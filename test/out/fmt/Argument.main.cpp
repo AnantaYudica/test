@@ -20,6 +20,164 @@ struct Obj
 int main()
 {
     {
+        test::out::fmt::Argument<void> arg1;
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierUndefined());
+        assert(!arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+    }
+    {
+         const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_blank;
+        test::out::fmt::Argument<void> arg1{
+            specifier
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierBlank());
+        assert(!arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+    }
+    {
+         const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_blank;
+        test::out::fmt::Argument<void> arg1{
+            specifier,
+            test::out::fmt::flag::Width{},
+            test::out::fmt::flag::Length{}
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierBlank());
+        assert(!arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+    }
+    {
+         const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_blank;
+        test::out::fmt::Argument<void> arg1{
+            specifier,
+            test::out::fmt::flag::Width{},
+            test::out::fmt::flag::Precision{}
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierBlank());
+        assert(!arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+    }
+    {
+         const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_blank;
+        test::out::fmt::Argument<void> arg1{
+            specifier,
+            test::out::fmt::flag::Width{10}
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierBlank());
+        assert(!arg1.GetFlag().HasInputValue());
+        assert(arg1.GetFlag().HasInputWidth());
+        assert(!arg1.GetFlag().HasInputLength());
+        assert(!arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetWidth() == 10);
+    }
+    {
+         const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_blank;
+        test::out::fmt::Argument<void> arg1{
+            specifier,
+            test::out::fmt::flag::Length{10}
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierBlank());
+        assert(!arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(arg1.GetFlag().HasInputLength());
+        assert(arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetLength() == 10);
+    }
+    {
+         const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_blank;
+        test::out::fmt::Argument<void> arg1{
+            specifier,
+            test::out::fmt::flag::Precision{10}
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierBlank());
+        assert(!arg1.GetFlag().HasInputValue());
+        assert(!arg1.GetFlag().HasInputWidth());
+        assert(arg1.GetFlag().HasInputLength());
+        assert(arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetPrecision() == 10);
+    }
+    {
+         const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_blank;
+        test::out::fmt::Argument<void> arg1{
+            specifier,
+            test::out::fmt::flag::Width{10},
+            test::out::fmt::flag::Length{20}
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierBlank());
+        assert(!arg1.GetFlag().HasInputValue());
+        assert(arg1.GetFlag().HasInputWidth());
+        assert(arg1.GetFlag().HasInputLength());
+        assert(arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetWidth() == 10);
+        assert(arg1.GetLength() == 20);
+    }
+    {
+         const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_blank;
+        test::out::fmt::Argument<void> arg1{
+            specifier,
+            test::out::fmt::flag::Width{10},
+            test::out::fmt::flag::Precision{20}
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierBlank());
+        assert(!arg1.GetFlag().HasInputValue());
+        assert(arg1.GetFlag().HasInputWidth());
+        assert(arg1.GetFlag().HasInputLength());
+        assert(arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetWidth() == 10);
+        assert(arg1.GetPrecision() == 20);
+    }
+    {
         test::out::fmt::Argument<char> arg1;
 
         assert(arg1.GetFlag().IsBad() == false);
