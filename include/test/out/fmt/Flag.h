@@ -160,14 +160,12 @@ public:
         4 << specifier_type_offset;
     static constexpr IntegerValueType specifier_fp = 
         5 << specifier_type_offset;
-    static constexpr IntegerValueType specifier_num_ch = 
-        6 << specifier_type_offset;
     static constexpr IntegerValueType specifier_blank = 
-        7 << specifier_type_offset;
+        6 << specifier_type_offset;
     static constexpr IntegerValueType specifier_bool = 
-        8 << specifier_type_offset;
+        7 << specifier_type_offset;
     static constexpr IntegerValueType specifier_object = 
-        9 << specifier_type_offset;
+        8 << specifier_type_offset;
 
     static constexpr IntegerValueType specifier_sub_width = 
         1 << specifier_sub_offset;
@@ -367,7 +365,6 @@ public:
     constexpr bool IsSpecifierPointer() const;
     constexpr bool IsSpecifierInteger() const;
     constexpr bool IsSpecifierFloatingPoint() const;
-    constexpr bool IsSpecifierNumberCharacter() const;
     constexpr bool IsSpecifierBlank() const;
     constexpr bool IsSpecifierBoolean() const;
     constexpr bool IsSpecifierObject() const;
@@ -954,12 +951,6 @@ template<typename TValue, typename TIntegerValue>
 constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierFloatingPoint() const
 {
     return (m_value & specifier_type_mask) == specifier_fp;
-}
-
-template<typename TValue, typename TIntegerValue>
-constexpr bool Flag<TValue, TIntegerValue>::IsSpecifierNumberCharacter() const
-{
-    return (m_value & specifier_type_mask) == specifier_num_ch;
 }
 
 template<typename TValue, typename TIntegerValue>
