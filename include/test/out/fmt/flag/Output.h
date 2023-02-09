@@ -2,6 +2,15 @@
 #define TEST_OUT_FMT_FLAG_OUTPUT_H_
 
 #include "../../../System.h"
+
+namespace test::out::fmt::flag
+{
+
+template<typename... TCharArgs>
+class Output;
+
+}
+
 #include "../Definition.h"
 
 #include <type_traits>
