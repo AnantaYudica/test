@@ -3,7 +3,7 @@
 
 #include "../../System.h"
 #include "../Interface.h"
-#include "Flag.h"
+#include "Flag.decl.h"
 
 #include <cstdint>
 #include <cwchar>
@@ -82,5 +82,6 @@ TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_DEFINITION_DLEVEL,
     "test::out::fmt::Definition", test::out::fmt::Definition);
 
 #include "Output.h"
+#include "Flag.h"
 
 #endif //!TEST_OUT_FMT_DEFINITION_H_
