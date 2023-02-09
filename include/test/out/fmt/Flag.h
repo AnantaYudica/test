@@ -2,6 +2,7 @@
 #define TEST_OUT_FMT_FLAG_H_
 
 #include "../../System.h"
+#include "Flag.decl.h"
 #include "flag/Decimal.h"
 #include "flag/Define.h"
 #include "flag/Exponent.h"
@@ -21,19 +22,11 @@
 #include "flag/Upper.h"
 #include "flag/Width.h"
 #include "flag/Value.h"
+#include "flag/Output.h"
 
 #include <cstdint>
 #include <utility>
 #include <cwchar>
-
-namespace test::out::fmt
-{
-
-template<typename TValue = std::uint32_t, 
-    typename TIntegerValue = std::uint32_t>
-class Flag;
-
-}
 
 #ifndef TEST_OUT_FMT_FLAG_DLEVEL
 
@@ -88,6 +81,8 @@ public:
     typedef test::out::fmt::flag::PrefixZero PrefixZeroType;
     template<typename T>
     using SetValueType = test::out::fmt::flag::Value<T>;
+    template<typename... TCharArgs>
+    using SetOutputType = test::out::fmt::flag::Output<TCharArgs...>;
 public:
     static constexpr IntegerValueType define_type_offset = 0;
     static constexpr IntegerValueType define_type_mask = 
@@ -113,6 +108,8 @@ public:
     static constexpr IntegerValueType input_offset= 23;
     static constexpr IntegerValueType input_mask = 0x800000 | 0x1000000 |
         0x2000000;
+    static constexpr IntegerValueType output_offset= 26;
+    static constexpr IntegerValueType output_mask = 0x4000000 | 0x8000000;
 public:
     static constexpr IntegerValueType define_mask = define_type_mask | 
         define_signed_mask;
@@ -122,8 +119,8 @@ public:
         specifier_base_mask | specifier_case_mask | specifier_flag_mask;
     static constexpr IntegerValueType specifier_offset = define_signed_offset;
     static constexpr IntegerValueType bad_mask = 
-        ~(define_mask | specifier_mask);
-    static constexpr IntegerValueType bad_offset = 20;
+        ~(define_mask | specifier_mask | input_mask | output_mask);
+    static constexpr IntegerValueType bad_offset = 28;
 public:
     static constexpr IntegerValueType good = 0;
     static constexpr IntegerValueType bad = 
@@ -214,6 +211,8 @@ public:
     static constexpr IntegerValueType input_length = 4 << input_offset;
     static constexpr IntegerValueType input_precision = input_length;
 
+    static constexpr IntegerValueType output_char = 1 << output_offset;
+    static constexpr IntegerValueType output_wchar = 2 << output_offset;
 private:
     static constexpr IntegerValueType _Value(IntegerValueType val);
     template<typename... TArgs>
@@ -318,6 +317,9 @@ private:
     template<typename T, typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
         SetValueType<T>&&, TArgs&&... args);
+    template<typename... TCharArgs, typename... TArgs>
+    static constexpr IntegerValueType _Value(IntegerValueType val, 
+        SetOutputType<TCharArgs...>&&, TArgs&&... args);
 private:
     static constexpr IntegerValueType __Value(IntegerValueType val);
     template<typename TArg, typename... TArgs>
@@ -412,6 +414,11 @@ public:
     constexpr bool HasInputLength() const;
     constexpr bool HasInputPrecision() const;
     void SetInput(const IntegerValueType& val);
+public:
+    constexpr bool HasOutput() const;
+    template<typename TChar>
+    constexpr bool HasOutput(TChar&&) const;
+    void SetOutput(const IntegerValueType& val);
 public:
     bool IsGood() const;
     bool IsBad() const;
@@ -768,6 +775,20 @@ Flag<TValue, TIntegerValue>::_Value(IntegerValueType val,
     SetValueType<T>&& value, TArgs&&... args)
 {
     return __Value(val | (value.IsDefault() ? 0 : input_value), 
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TValue, typename TIntegerValue>
+template<typename... TCharArgs, typename... TArgs>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
+    SetOutputType<TCharArgs...>&& value, TArgs&&... args)
+{
+    return __Value(val | 
+            (value.template GetFormatOutput<char>() == nullptr ?
+                0 : output_char) | 
+            (value.template GetFormatOutput<wchar_t>() == nullptr ?
+                0 : output_wchar), 
         std::forward<TArgs>(args)...);
 }
 
@@ -1233,6 +1254,29 @@ template<typename TValue, typename TIntegerValue>
 void Flag<TValue, TIntegerValue>::SetInput(const IntegerValueType& val)
 {
     m_value = (m_value & ~input_mask) | (val & input_mask);
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::HasOutput() const
+{
+    return (m_value & output_mask);
+}
+
+template<typename TValue, typename TIntegerValue>
+template<typename TChar>
+constexpr bool Flag<TValue, TIntegerValue>::HasOutput(TChar&& ch) const
+{
+    typedef test::out::fmt::Definition DefinitionType;
+    return DefinitionType::OutputValue(std::forward<TChar>(ch)) ==
+            DefinitionType::output_char ? (m_value & output_char) :
+        DefinitionType::OutputValue(std::forward<TChar>(ch)) == 
+            DefinitionType::output_wchar ? (m_value & output_wchar) : false;
+}
+
+template<typename TValue, typename TIntegerValue>
+void Flag<TValue, TIntegerValue>::SetOutput(const IntegerValueType& val)
+{
+    m_value = (m_value & ~output_mask) | (val & output_mask);
 }
 
 template<typename TValue, typename TIntegerValue>
