@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <cwchar>
+#include <type_traits>
 
 namespace test
 {
@@ -14,6 +15,9 @@ namespace out
 {
 namespace fmt
 {
+    
+template<typename... TCharArgs>
+class Output;
 
 class Definition
 {
@@ -30,6 +34,8 @@ public:
 public:
     typedef std::uint8_t OutputIntegerType;
 public:
+    typedef test::out::fmt::Output<char, wchar_t> FormatOutputType; 
+public:
     static constexpr std::size_t string_max_len = 1024;
 public:
     static constexpr int value_character = 1;
@@ -45,27 +51,19 @@ public:
     static constexpr OutputIntegerType output_char = 1;
     static constexpr OutputIntegerType output_wchar = 2;
 public:
-    static constexpr inline OutputIntegerType OutputValue(...);
-    static constexpr inline OutputIntegerType OutputValue(char&&);
-    static constexpr inline OutputIntegerType OutputValue(wchar_t&&);
+    template<typename T>
+    static constexpr inline OutputIntegerType OutputValue(T&&);
 };
 
+template<typename T>
 constexpr inline typename Definition::OutputIntegerType 
-Definition::OutputValue(...)
+Definition::OutputValue(T&&)
 {
-    return output_undefined;
-}
-
-constexpr inline typename Definition::OutputIntegerType 
-Definition::OutputValue(char&&)
-{
-    return output_char;
-}
-
-constexpr inline typename Definition::OutputIntegerType 
-Definition::OutputValue(wchar_t&&)
-{
-    return output_wchar;
+    typedef typename std::remove_cv<
+        typename std::remove_reference<T>::type>::type Type;
+    return (std::is_same<Type, char>::value ? output_char :
+        (std::is_same<Type, wchar_t>::value ? output_wchar : 
+            output_undefined));
 }
 
 } //!fmt
@@ -82,5 +80,7 @@ Definition::OutputValue(wchar_t&&)
 
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_DEFINITION_DLEVEL, 
     "test::out::fmt::Definition", test::out::fmt::Definition);
+
+#include "Output.h"
 
 #endif //!TEST_OUT_FMT_DEFINITION_H_
