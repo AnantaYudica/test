@@ -17,6 +17,15 @@ struct Obj
     void operator=(Obj&& o) {val = o.val;}
 };
 
+template<typename TChar>
+std::size_t Fun1(test::out::Interface<TChar>& out, 
+    void* value, std::size_t value_size, 
+    typename test::out::fmt::Definition::FlagType flag, 
+    int width, int len_pred)
+{
+    return 0;
+}
+
 int main()
 {
     {
@@ -209,7 +218,8 @@ int main()
         const auto specifier = 
             test::out::fmt::Definition::FlagType::specifier_str;
         test::out::fmt::Argument<char*> arg1{
-            specifier
+            specifier,
+            test::out::fmt::flag::Output<char>(&Fun1<char>)
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -220,6 +230,9 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetFlag().HasOutput());
+        assert(arg1.GetFormatOutput().template Get<char>() ==
+            &Fun1<char>);
     }
     {
         const auto specifier = 
@@ -324,7 +337,8 @@ int main()
             specifier,
             test::out::fmt::flag::Value<char>{},
             test::out::fmt::flag::Width{},
-            test::out::fmt::flag::Length{}
+            test::out::fmt::flag::Length{},
+            test::out::fmt::flag::Output<char>()
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -335,6 +349,10 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
+        assert(!arg1.GetFlag().HasOutput());
+
+        assert(arg1.GetFormatOutput().template Get<char>() ==
+            nullptr);
     }
     {
         const auto specifier = 
@@ -343,7 +361,8 @@ int main()
             specifier,
             test::out::fmt::flag::Value<char*>{},
             test::out::fmt::flag::Width{},
-            test::out::fmt::flag::Length{}
+            test::out::fmt::flag::Length{},
+            test::out::fmt::flag::Output<char>(&Fun1<char>)
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -354,6 +373,10 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetFlag().HasOutput());
+
+        assert(arg1.GetFormatOutput().template Get<char>() ==
+            &Fun1<char>);
     }
     {
         const auto specifier = 
@@ -496,7 +519,8 @@ int main()
             specifier,
             test::out::fmt::flag::Value<char*>{},
             test::out::fmt::flag::Width{},
-            test::out::fmt::flag::Precision{}
+            test::out::fmt::flag::Precision{},
+            test::out::fmt::flag::Output<char>(&Fun1<char>)
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -507,6 +531,9 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetFlag().HasOutput());
+        assert(arg1.GetFormatOutput().template Get<char>() ==
+            &Fun1<char>);
     }
     {
         const auto specifier = 
@@ -647,7 +674,8 @@ int main()
         char * str2 = const_cast<char *>(str1);
         test::out::fmt::Argument<char*> arg1{
             specifier,
-            test::out::fmt::flag::Value<char*>(str2)
+            test::out::fmt::flag::Value<char*>(str2),
+            test::out::fmt::flag::Output<char>(&Fun1<char>)
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -658,7 +686,10 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetFlag().HasOutput());
         assert(strcmp(&*(arg1.GetValue()), "test") == 0);
+        assert(arg1.GetFormatOutput().template Get<char>() ==
+            &Fun1<char>);
     }
     {
         const auto specifier = 
@@ -666,7 +697,8 @@ int main()
         const char * str1 = "test";
         test::out::fmt::Argument<char*> arg1{
             specifier,
-            test::out::fmt::flag::Value<const char*>(str1)
+            test::out::fmt::flag::Value<const char*>(str1),
+            test::out::fmt::flag::Output<char>(&Fun1<char>)
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -677,7 +709,10 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetFlag().HasOutput());
         assert(strcmp(&*(arg1.GetValue()), "test") == 0);
+        assert(arg1.GetFormatOutput().template Get<char>() ==
+            &Fun1<char>);
     }
     {
         const auto specifier = 
@@ -686,7 +721,8 @@ int main()
         wchar_t * str2 = const_cast<wchar_t*>(str1);
         test::out::fmt::Argument<wchar_t*> arg1{
             specifier,
-            test::out::fmt::flag::Value<wchar_t*>(str2)
+            test::out::fmt::flag::Value<wchar_t*>(str2),
+            test::out::fmt::flag::Output<wchar_t>(&Fun1<wchar_t>)
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -697,7 +733,10 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetFlag().HasOutput());
         assert(wcscmp(&*(arg1.GetValue()), L"test") == 0);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() ==
+            &Fun1<wchar_t>);
     }
     {
         const auto specifier = 
@@ -705,7 +744,8 @@ int main()
         const wchar_t * str1 = L"test";
         test::out::fmt::Argument<wchar_t*> arg1{
             specifier,
-            test::out::fmt::flag::Value<const wchar_t*>(str1)
+            test::out::fmt::flag::Value<const wchar_t*>(str1),
+            test::out::fmt::flag::Output<wchar_t>(&Fun1<wchar_t>)
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -716,7 +756,10 @@ int main()
         assert(!arg1.GetFlag().HasInputWidth());
         assert(!arg1.GetFlag().HasInputLength());
         assert(!arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetFlag().HasOutput());
         assert(wcscmp(&*(arg1.GetValue()), L"test") == 0);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() ==
+            &Fun1<wchar_t>);
     }
     {
         const auto specifier = 
@@ -1051,6 +1094,66 @@ int main()
         assert(arg1.GetWidth() == 10);
         assert(arg1.GetPrecision() == 20);
         assert(arg1.GetValue().val == obj1.val);
+    }
+    {
+        const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_object;
+        Obj obj1{10};
+    
+        test::out::fmt::Argument<Obj> arg1{
+            specifier,
+            test::out::fmt::flag::Width{10},
+            test::out::fmt::flag::Precision{20},
+            test::out::fmt::flag::Value<Obj>(obj1),
+            test::out::fmt::flag::Output<char>(&Fun1<char>)
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierObject());
+        assert(arg1.GetFlag().HasInputValue());
+        assert(arg1.GetFlag().HasInputWidth());
+        assert(arg1.GetFlag().HasInputLength());
+        assert(arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetFlag().HasOutput());
+
+        assert(arg1.GetWidth() == 10);
+        assert(arg1.GetPrecision() == 20);
+        assert(arg1.GetValue().val == obj1.val);
+        assert(arg1.GetFormatOutput().template Get<char>() == &Fun1<char>);
+    }
+    {
+        const auto specifier = 
+            test::out::fmt::Definition::FlagType::specifier_object;
+        Obj obj1{10};
+    
+        test::out::fmt::Argument<Obj> arg1{
+            specifier,
+            test::out::fmt::flag::Width{10},
+            test::out::fmt::flag::Precision{20},
+            test::out::fmt::flag::Value<Obj>(obj1),
+            test::out::fmt::flag::Output<char, wchar_t>(&Fun1<char>, 
+                &Fun1<wchar_t>)
+        };
+
+        assert(arg1.GetFlag().IsBad() == false);
+        assert(arg1.GetFlag().IsGood() == true);
+
+        assert(arg1.GetFlag().IsSpecifierObject());
+        assert(arg1.GetFlag().HasInputValue());
+        assert(arg1.GetFlag().HasInputWidth());
+        assert(arg1.GetFlag().HasInputLength());
+        assert(arg1.GetFlag().HasInputPrecision());
+        assert(arg1.GetFlag().HasOutput());
+
+        assert(arg1.GetWidth() == 10);
+        assert(arg1.GetPrecision() == 20);
+        assert(arg1.GetValue().val == obj1.val);
+        assert(arg1.GetFormatOutput().template Get<char>() == 
+            &Fun1<char>);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            &Fun1<wchar_t>);
     }
     return 0;
 }
