@@ -41,8 +41,8 @@ protected:
     template<typename... TCharArgs_>
     constexpr Output(std::size_t n, FlagOutputType<TCharArgs_...>&& flag);
 public:
-    Output(const Output<TCharArgs...>& cpy) = delete;
-    Output(Output<TCharArgs...>&& mov) = delete;
+    constexpr Output(const Output<TCharArgs...>& cpy);
+    constexpr Output(Output<TCharArgs...>&& mov);
 public:
     Output<TCharArgs...>& operator=(const Output<TCharArgs...>& cpy) = delete;
     Output<TCharArgs...>& operator=(Output<TCharArgs...>&& mov) = delete;
@@ -77,8 +77,8 @@ protected:
     template<typename... TCharArgs_>
     constexpr Output(std::size_t n, FlagOutputType<TCharArgs_...>&& flag);
 public:
-    Output(const Output<TChar, TCharArgs...>& cpy) = delete;
-    Output(Output<TChar, TCharArgs...>&& mov) = delete;
+    constexpr Output(const Output<TChar, TCharArgs...>& cpy);
+    constexpr Output(Output<TChar, TCharArgs...>&& mov);
 public:
     Output<TChar, TCharArgs...>& 
         operator=(const Output<TChar, TCharArgs...>& cpy) = delete;
@@ -116,6 +116,16 @@ template<typename... TCharArgs_>
 constexpr Output<TCharArgs...>::Output(std::size_t n, 
     FlagOutputType<TCharArgs_...>&& flag) :
         m_size(n)
+{}
+
+template<typename... TCharArgs>
+constexpr Output<TCharArgs...>::Output(const Output<TCharArgs...>& cpy) :
+    m_size(cpy.m_size)
+{}
+
+template<typename... TCharArgs>
+constexpr Output<TCharArgs...>::Output(Output<TCharArgs...>&& mov) :
+    m_size(mov.m_size)
 {}
 
 template<typename... TCharArgs>
@@ -160,6 +170,21 @@ constexpr Output<TChar, TCharArgs...>::Output(std::size_t n,
         Output<TCharArgs...>(n,
             std::forward<FlagOutputType<TCharArgs_...>>(flag)),
         m_value(flag.template GetFormatOutput<TChar>())
+{}
+
+template<typename TChar, typename... TCharArgs>
+constexpr Output<TChar, TCharArgs...>::Output(const Output<TChar, 
+    TCharArgs...>& cpy) :
+        Output<TCharArgs...>(cpy),
+        m_value(cpy.m_value)
+{}
+
+template<typename TChar, typename... TCharArgs>
+constexpr Output<TChar, TCharArgs...>:: Output(Output<TChar, 
+    TCharArgs...>&& mov) :
+        Output<TCharArgs...>(std::forward<Output<TChar, TCharArgs...>>(mov)),
+        m_value(mov.m_value)
+
 {}
 
 template<typename TChar, typename... TCharArgs>
