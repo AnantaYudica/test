@@ -1,6 +1,7 @@
 #ifndef TEST_OUT_FMT_OUTPUT_H_
 #define TEST_OUT_FMT_OUTPUT_H_
 
+#include "../../System.h"
 #include "../Interface.h"
 #include "Definition.h"
 #include "flag/Output.h"
@@ -210,5 +211,23 @@ Output<TChar, TCharArgs...>::Get() const
 } //!out
 
 } //!test
+
+#ifndef TEST_OUT_FMT_OUTPUT_DLEVEL
+
+#define TEST_OUT_FMT_OUTPUT_DLEVEL 2
+
+#endif //!TEST_OUT_FMT_OUTPUT_DLEVEL
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<TCharArgs>...
+
+template<typename... TCharArgs>
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_OUT_FMT_OUTPUT_DLEVEL, 
+    "test::out::fmt::Output", 
+    test::out::fmt::Output<TCharArgs...>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
+
 
 #endif //!TEST_OUT_FMT_OUTPUT_H_
