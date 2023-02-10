@@ -237,13 +237,13 @@ Output<TChar, TCharArgs...>::GetFormatOutput() const
 #endif //!TEST_OUT_FMT_FLAG_OUTPUT_DLEVEL
 
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
-    test::sys::dbg::Type<T>
+    test::sys::dbg::Type<TCharArgs>...
 
-template<typename T>
+template<typename... TCharArgs>
 TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
     TEST_OUT_FMT_FLAG_OUTPUT_DLEVEL, 
     "test::out::fmt::flag::Output", 
-    test::out::fmt::flag::Output<T>);
+    test::out::fmt::flag::Output<TCharArgs...>);
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
 
