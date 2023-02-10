@@ -55,6 +55,7 @@ public:
     using test::out::fmt::Argument<bool>::GetWidth;
     using test::out::fmt::Argument<bool>::GetLength;
     using test::out::fmt::Argument<bool>::GetPrecision;
+    using test::out::fmt::Argument<bool>::GetFormatOutput;
 };
 
 constexpr inline Boolean::Boolean() :

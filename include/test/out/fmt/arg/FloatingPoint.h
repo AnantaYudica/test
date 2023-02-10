@@ -69,6 +69,7 @@ public:
     using test::out::fmt::Argument<float>::GetWidth;
     using test::out::fmt::Argument<float>::GetLength;
     using test::out::fmt::Argument<float>::GetPrecision;
+    using test::out::fmt::Argument<float>::GetFormatOutput;
 };
 
 template<>
@@ -93,6 +94,7 @@ public:
     using test::out::fmt::Argument<double>::GetWidth;
     using test::out::fmt::Argument<double>::GetLength;
     using test::out::fmt::Argument<double>::GetPrecision;
+    using test::out::fmt::Argument<double>::GetFormatOutput;
 };
 
 template<>

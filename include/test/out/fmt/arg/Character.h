@@ -71,6 +71,7 @@ public:
     using test::out::fmt::Argument<char>::GetWidth;
     using test::out::fmt::Argument<char>::GetLength;
     using test::out::fmt::Argument<char>::GetPrecision;
+    using test::out::fmt::Argument<char>::GetFormatOutput;
 };
 
 template<>
@@ -95,6 +96,7 @@ public:
     using test::out::fmt::Argument<wchar_t>::GetWidth;
     using test::out::fmt::Argument<wchar_t>::GetLength;
     using test::out::fmt::Argument<wchar_t>::GetPrecision;
+    using test::out::fmt::Argument<wchar_t>::GetFormatOutput;
 
 };
 

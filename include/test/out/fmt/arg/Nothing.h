@@ -53,6 +53,7 @@ public:
     using test::out::fmt::Argument<void>::GetWidth;
     using test::out::fmt::Argument<void>::GetLength;
     using test::out::fmt::Argument<void>::GetPrecision;
+    using test::out::fmt::Argument<void>::GetFormatOutput;
 };
 
 

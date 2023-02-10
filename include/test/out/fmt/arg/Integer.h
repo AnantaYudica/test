@@ -69,6 +69,7 @@ public:
     using test::out::fmt::Argument<signed char>::GetWidth;
     using test::out::fmt::Argument<signed char>::GetLength;
     using test::out::fmt::Argument<signed char>::GetPrecision;
+    using test::out::fmt::Argument<signed char>::GetFormatOutput;
 };
 
 template<>
@@ -93,6 +94,7 @@ public:
     using test::out::fmt::Argument<short>::GetWidth;
     using test::out::fmt::Argument<short>::GetLength;
     using test::out::fmt::Argument<short>::GetPrecision;
+    using test::out::fmt::Argument<short>::GetFormatOutput;
 };
 
 template<>
@@ -117,6 +119,7 @@ public:
     using test::out::fmt::Argument<int>::GetWidth;
     using test::out::fmt::Argument<int>::GetLength;
     using test::out::fmt::Argument<int>::GetPrecision;
+    using test::out::fmt::Argument<int>::GetFormatOutput;
 };
 
 template<>
@@ -141,6 +144,7 @@ public:
     using test::out::fmt::Argument<long>::GetWidth;
     using test::out::fmt::Argument<long>::GetLength;
     using test::out::fmt::Argument<long>::GetPrecision;
+    using test::out::fmt::Argument<long>::GetFormatOutput;
 };
 
 template<>
@@ -165,6 +169,7 @@ public:
     using test::out::fmt::Argument<long long>::GetWidth;
     using test::out::fmt::Argument<long long>::GetLength;
     using test::out::fmt::Argument<long long>::GetPrecision;
+    using test::out::fmt::Argument<long long>::GetFormatOutput;
 };
 
 template<>
@@ -189,6 +194,7 @@ public:
     using test::out::fmt::Argument<unsigned char>::GetWidth;
     using test::out::fmt::Argument<unsigned char>::GetLength;
     using test::out::fmt::Argument<unsigned char>::GetPrecision;
+    using test::out::fmt::Argument<unsigned char>::GetFormatOutput;
 };
 
 template<>
@@ -213,6 +219,7 @@ public:
     using test::out::fmt::Argument<unsigned short>::GetWidth;
     using test::out::fmt::Argument<unsigned short>::GetLength;
     using test::out::fmt::Argument<unsigned short>::GetPrecision;
+    using test::out::fmt::Argument<unsigned short>::GetFormatOutput;
 };
 
 template<>
@@ -237,6 +244,7 @@ public:
     using test::out::fmt::Argument<unsigned int>::GetWidth;
     using test::out::fmt::Argument<unsigned int>::GetLength;
     using test::out::fmt::Argument<unsigned int>::GetPrecision;
+    using test::out::fmt::Argument<unsigned int>::GetFormatOutput;
 };
 
 template<>
@@ -261,6 +269,7 @@ public:
     using test::out::fmt::Argument<unsigned long>::GetWidth;
     using test::out::fmt::Argument<unsigned long>::GetLength;
     using test::out::fmt::Argument<unsigned long>::GetPrecision;
+    using test::out::fmt::Argument<unsigned long>::GetFormatOutput;
 };
 
 template<>
@@ -285,6 +294,7 @@ public:
     using test::out::fmt::Argument<unsigned long long>::GetWidth;
     using test::out::fmt::Argument<unsigned long long>::GetLength;
     using test::out::fmt::Argument<unsigned long long>::GetPrecision;
+    using test::out::fmt::Argument<unsigned long long>::GetFormatOutput;
 };
 
 constexpr inline Integer<signed char>::Integer() :
