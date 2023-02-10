@@ -53,6 +53,8 @@ public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
     typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+public:
+    typedef test::out::fmt::Definition DefinitionType;
 private:
     static constexpr std::false_type IsValueType_(...);
     template<typename T_>
@@ -93,8 +95,8 @@ public:
     using Argument<void, TFlag>::GetWidth;
     using Argument<void, TFlag>::GetLength;
     using Argument<void, TFlag>::GetPrecision;
+    using Argument<void, TFlag>::GetFormatOutput;
 };
-
 
 template<typename TFlag>
 class Argument<void, TFlag>
@@ -103,6 +105,10 @@ public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
     typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+public:
+    typedef test::out::fmt::Definition DefinitionType;
+public:
+    typedef typename DefinitionType::FormatOutputType FormatOutputType;
 private:
     static constexpr std::false_type IsWidthType_(...);
     static constexpr std::true_type 
@@ -114,11 +120,19 @@ private:
     static constexpr std::true_type 
         IsLengthType_(test::out::fmt::flag::Precision);
 private:
+    static constexpr std::false_type IsOutputType_(...);
+    template<typename... TCharArgs>
+    static constexpr std::true_type 
+        IsOutputType_(test::out::fmt::flag::Output<TCharArgs...>);
+private:
     template<typename T_>
     using IsWidthType = decltype(IsWidthType_(std::declval<T_>()));
 private:
     template<typename T_>
     using IsLengthType = decltype(IsLengthType_(std::declval<T_>()));
+private:
+    template<typename T_>
+    using IsOutputType = decltype(IsOutputType_(std::declval<T_>()));
 private:
     static constexpr int Width();
     template<typename... TFlagArgs>
@@ -145,9 +159,23 @@ private:
         typename std::enable_if<!TCond_::value, int>::type = 0>
     static constexpr int Length(TFlagArg&& flag, TFlagArgs&&... flags);
 private:
+    static constexpr FormatOutputType Output();
+    template<typename... TCharArgs, typename... TFlagArgs>
+    static constexpr FormatOutputType Output(test::out::fmt::flag::
+        Output<TCharArgs...>&& out, 
+        TFlagArgs&&... flags);
+    template<typename TFlagArg, typename... TFlagArgs,
+        typename TFlagArg_ = typename std::remove_cv<
+            typename std::remove_reference<TFlagArg>::type>::type,
+        typename TCond_ = IsOutputType<TFlagArg_>,
+        typename std::enable_if<!TCond_::value, int>::type = 0>
+    static constexpr FormatOutputType Output(TFlagArg&& flag, 
+        TFlagArgs&&... flags);
+private:
     FlagType m_flag;
     int m_width;
     int m_length;
+    FormatOutputType m_fmtout;
 public:
     constexpr Argument();
     template<typename... TFlagArgs>
@@ -167,6 +195,8 @@ public:
     constexpr int GetLength() const;
 public:
     constexpr int GetPrecision() const;
+public:
+    constexpr FormatOutputType GetFormatOutput() const;
 };
 
 template<typename TFlag>
@@ -176,12 +206,13 @@ public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
     typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+public:
+    typedef test::out::fmt::Definition DefinitionType;
 private:
     static constexpr std::false_type IsValueType_(...);
     template<typename T_>
     static constexpr std::true_type 
         IsValueType_(test::out::fmt::flag::Value<T_>);
-
 private:
     template<typename T_>
     using IsValueType = decltype(IsValueType_(std::declval<T_>()));
@@ -220,6 +251,7 @@ public:
     using Argument<void, TFlag>::GetWidth;
     using Argument<void, TFlag>::GetLength;
     using Argument<void, TFlag>::GetPrecision;
+    using Argument<void, TFlag>::GetFormatOutput;
 };
 
 template<typename TFlag>
@@ -229,6 +261,8 @@ public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
     typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+public:
+    typedef test::out::fmt::Definition DefinitionType;
 private:
     static constexpr std::false_type IsValueType_(...);
     template<typename T_>
@@ -273,6 +307,7 @@ public:
     using Argument<void, TFlag>::GetWidth;
     using Argument<void, TFlag>::GetLength;
     using Argument<void, TFlag>::GetPrecision;
+    using Argument<void, TFlag>::GetFormatOutput;
 };
 
 template<typename T, typename TFlag>
@@ -379,10 +414,36 @@ constexpr int Argument<void, TFlag>::
 }
 
 template<typename TFlag>
+constexpr typename Argument<void, TFlag>::FormatOutputType 
+Argument<void, TFlag>::Output()
+{
+    return {};
+}
+
+template<typename TFlag>
+    template<typename... TCharArgs, typename... TFlagArgs>
+constexpr typename Argument<void, TFlag>::FormatOutputType 
+Argument<void, TFlag>::Output(test::out::fmt::flag::
+    Output<TCharArgs...>&& out, TFlagArgs&&... flags)
+{
+    return {std::forward<test::out::fmt::flag::Output<TCharArgs...>>(out)};
+}
+
+template<typename TFlag>
+template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
+    typename TCond_, typename std::enable_if<!TCond_::value, int>::type>
+constexpr typename Argument<void, TFlag>::FormatOutputType 
+Argument<void, TFlag>::Output(TFlagArg&& flag, TFlagArgs&&... flags)
+{
+    return Output(std::forward<TFlagArgs>(flags)...);
+}
+
+template<typename TFlag>
 constexpr Argument<void, TFlag>::Argument() :
     m_flag(),
     m_width(0),
-    m_length(0)
+    m_length(0),
+    m_fmtout()
 {}
 
 template<typename TFlag>
@@ -391,7 +452,8 @@ constexpr Argument<void, TFlag>::Argument(FlagIntegerValueType specifier,
         TFlagArgs&&... flags) :
     m_flag(specifier, std::forward<TFlagArgs>(flags)...),
     m_width(Width(std::forward<TFlagArgs>(flags)...)),
-    m_length(Length(std::forward<TFlagArgs>(flags)...))
+    m_length(Length(std::forward<TFlagArgs>(flags)...)),
+    m_fmtout(Output(std::forward<TFlagArgs>(flags)...))
 {}
 
 template< typename TFlag>
@@ -417,6 +479,13 @@ template< typename TFlag>
 constexpr int Argument<void, TFlag>::GetPrecision() const
 {
     return m_length;
+}
+
+template< typename TFlag>
+constexpr typename Argument<void, TFlag>::FormatOutputType 
+Argument<void, TFlag>::GetFormatOutput() const
+{
+    return m_fmtout;
 }
 
 template< typename TFlag>
