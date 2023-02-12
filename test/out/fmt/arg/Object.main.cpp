@@ -274,5 +274,37 @@ int main()
         assert(arg1.GetValue().Value() == 10);
         assert(arg1.GetPrecision() == 20);
     }
+    {
+        test::out::fmt::arg::Object<int> arg1;
+        
+        assert(arg1.GetFlag().IsSpecifierObject() == true);
+        assert(arg1.GetFlag().HasInputValue() == false);
+        assert(arg1.GetFlag().HasInputWidth() == false);
+        assert(arg1.GetFlag().HasInputLength() == false);
+        assert(arg1.GetFlag().HasInputPrecision() == false);
+        assert(arg1.GetFlag().HasOutput() == false);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == true);
+        assert(arg1.GetFlag().IsDefineUnsigned() == false);
+        assert(arg1.GetFlag().GetDefine() ==
+            (arg1.GetFlag().define_int | arg1.GetFlag().define_signed));
+    }
+    {
+        test::out::fmt::arg::Object<unsigned int> arg1;
+        
+        assert(arg1.GetFlag().IsSpecifierObject() == true);
+        assert(arg1.GetFlag().HasInputValue() == false);
+        assert(arg1.GetFlag().HasInputWidth() == false);
+        assert(arg1.GetFlag().HasInputLength() == false);
+        assert(arg1.GetFlag().HasInputPrecision() == false);
+        assert(arg1.GetFlag().HasOutput() == false);
+
+        assert(arg1.GetFlag().IsDefine() == true);
+        assert(arg1.GetFlag().IsDefineSigned() == false);
+        assert(arg1.GetFlag().IsDefineUnsigned() == true);
+        assert(arg1.GetFlag().GetDefine() ==
+            (arg1.GetFlag().define_int | arg1.GetFlag().define_unsigned));
+    }
     return 0;
 }
