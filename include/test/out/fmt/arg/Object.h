@@ -72,23 +72,26 @@ public:
 
 template<typename T>
 constexpr inline Object<T>::Object() :
-    test::out::fmt::Argument<T>(FlagType::specifier_object)
+    test::out::fmt::Argument<T>(FlagType::specifier_object,
+        test::out::fmt::flag::Define<T>{})
 {}
 
 template<typename T>
 template<typename... TFlagArgs>
 constexpr inline Object<T>::Object(const T& val, TFlagArgs&&... flags) :
     test::out::fmt::Argument<T>(FlagType::specifier_object,
-    test::out::fmt::flag::Value<T>(val),
-    std::forward<TFlagArgs>(flags)...)
+        test::out::fmt::flag::Define<T>{},
+        test::out::fmt::flag::Value<T>(val),
+        std::forward<TFlagArgs>(flags)...)
 {}
 
 template<typename T>
 template<typename... TFlagArgs>
 constexpr inline Object<T>::Object(T&& val, TFlagArgs&&... flags) :
     test::out::fmt::Argument<T>(FlagType::specifier_object,
-    test::out::fmt::flag::Value<T>(std::forward<T>(val)),
-    std::forward<TFlagArgs>(flags)...)
+        test::out::fmt::flag::Define<T>{},
+        test::out::fmt::flag::Value<T>(std::forward<T>(val)),
+        std::forward<TFlagArgs>(flags)...)
 {}
 
 template<typename T>
@@ -97,6 +100,7 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         IsFlag<TFlagArg_>::Value, int>::type>
 constexpr inline Object<T>::Object(TFlagArg&& flag, TFlagArgs&&... flags) :
     test::out::fmt::Argument<T>(FlagType::specifier_object,
+        test::out::fmt::flag::Define<T>{},
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
 {}
