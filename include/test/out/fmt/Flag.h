@@ -263,6 +263,9 @@ private:
     template<typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
         DefineType<bool>&&, TArgs&&... args);
+    template<typename T, typename... TArgs>
+    static constexpr IntegerValueType _Value(IntegerValueType val, 
+        DefineType<T>&&, TArgs&&... args);
     template<typename... TArgs>
     static constexpr IntegerValueType _Value(IntegerValueType val, 
         WidthType&&, TArgs&&... args);
@@ -592,6 +595,16 @@ Flag<TValue, TIntegerValue>::_Value(IntegerValueType val,
     DefineType<bool>&&, TArgs&&... args)
 {
     return __Value((val & ~define_mask) | define_bool,
+        std::forward<TArgs>(args)...);
+}
+
+template<typename TValue, typename TIntegerValue>
+template<typename T, typename... TArgs>
+constexpr typename Flag<TValue, TIntegerValue>::IntegerValueType 
+Flag<TValue, TIntegerValue>::_Value(IntegerValueType val, 
+    DefineType<T>&&, TArgs&&... args)
+{
+    return __Value((val & ~define_mask) | undefined,
         std::forward<TArgs>(args)...);
 }
 
