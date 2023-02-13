@@ -4,10 +4,24 @@
 #include "../../../System.h"
 #include "../../it/Operator.h"
 
-namespace test::byte::order::op
+namespace test
 {
+namespace byte
+{
+namespace order
+{
+namespace op
+{
+
 class BigEndian;
-}
+
+} //!op
+
+} //!order
+
+} //!byte
+
+} //!test
 
 #ifndef TEST_BYTE_ORDER_OP_BIGENDIAN_DLEVEL
 

@@ -12,10 +12,16 @@
 #include <type_traits>
 #include <utility>
 
-namespace test::arg
+namespace test
 {
+namespace arg
+{
+
 class Structure;
-}
+
+} //!arg
+
+} //!test
 
 #ifndef TEST_ARG_STRUCTURE_DLEVEL
 

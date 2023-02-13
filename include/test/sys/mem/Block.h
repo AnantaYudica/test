@@ -9,11 +9,21 @@
 
 #include <cstdlib>
 
-namespace test::sys::mem
+namespace test
 {
+namespace sys
+{
+namespace mem
+{
+
 template<typename... TDerives>
 class Block;
-}
+
+} //!mem
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_MEM_BLOCK_DLEVEL
 

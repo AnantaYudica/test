@@ -9,12 +9,24 @@
 #include <utility>
 #include <type_traits>
 
-namespace test::out::fmt::out
+namespace test
+{
+namespace out
+{
+namespace fmt
+{
+namespace out
 {
 
 class Value;
 
-}
+} //!out
+
+} //!fmt
+
+} //!out
+
+} //!test
 
 #ifndef TEST_OUT_FMT_OUT_VALUE_DLEVEL
 

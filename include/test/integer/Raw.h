@@ -10,11 +10,18 @@
 #include <type_traits>
 #include <utility>
 
-namespace test::integer
+namespace test
 {
+namespace integer
+{
+
 template<std::size_t N>
 class Raw;  
-}
+
+} //!integer
+
+} //!test
+
 
 #ifndef TEST_INTEGER_RAW_DLEVEL
 

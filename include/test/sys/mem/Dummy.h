@@ -8,10 +8,20 @@
 #include <cstdlib>
 #include <cstring>
 
-namespace test::sys::mem
+namespace test
 {
+namespace sys
+{
+namespace mem
+{
+
 class Dummy;
-}
+
+} //!mem
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_MEM_DUMMY_DLEVEL
 

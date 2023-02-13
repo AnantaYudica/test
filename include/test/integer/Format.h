@@ -19,13 +19,17 @@
 #include <utility>
 #include <type_traits>
 
-namespace test::integer
+namespace test
+{
+namespace integer
 {
 
 template<typename TInt, std::size_t NBase, std::size_t N>
 class Format;
 
-}
+} //!integer
+
+} //!test
 
 #ifndef TEST_INTEGER_FORMAT_DLEVEL
 

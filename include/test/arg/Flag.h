@@ -6,10 +6,16 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace test::arg
+namespace test
 {
+namespace arg
+{
+
 class Flag;
-}
+
+} //!arg
+
+} //!test
 
 #ifndef TEST_ARG_FLAG_DLEVEL
 

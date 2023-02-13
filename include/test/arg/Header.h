@@ -7,12 +7,16 @@
 #include <cstdlib>
 #include <utility>
 
-namespace test::arg
+namespace test
+{
+namespace arg
 {
 
 class Header;
 
-}
+} //!arg
+
+} //!test
 
 #ifndef TEST_ARG_HEADER_DLEVEL
 

@@ -11,13 +11,21 @@
 #include <cstring>
 #include <cwchar>
 
-namespace test::out::fmt
+namespace test
+{
+namespace out
+{
+namespace fmt
 {
 
 template<typename T, typename TFlag, typename>
 class Argument;
 
-}
+} //!fmt
+
+} //!out
+
+} //!test
 
 #ifndef TEST_OUT_FMT_ARGUMENT_DLEVEL
 

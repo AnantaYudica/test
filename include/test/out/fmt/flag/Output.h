@@ -3,13 +3,25 @@
 
 #include "../../../System.h"
 
-namespace test::out::fmt::flag
+namespace test
+{
+namespace out
+{
+namespace fmt
+{
+namespace flag
 {
 
 template<typename... TCharArgs>
 class Output;
 
-}
+} //!flag
+
+} //!fmt
+
+} //!out
+
+} //!test
 
 #include "../Definition.h"
 

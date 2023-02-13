@@ -4,10 +4,16 @@
 #include "Definition.h"
 #include "Debug.h"
 
-namespace test::sys
+namespace test
 {
+namespace sys
+{
+
 class Signal;
-}
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_SIGNAL_DLEVEL
 

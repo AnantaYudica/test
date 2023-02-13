@@ -11,10 +11,17 @@
 #include <cstddef>
 #include <utility>
 
-namespace test::ptr
+namespace test
 {
+namespace ptr
+{
+
 class Base;
-}
+
+} //!ptr
+
+} //!test
+
 #ifndef TEST_PTR_BASE_DLEVEL
 
 #define TEST_PTR_BASE_DLEVEL 2

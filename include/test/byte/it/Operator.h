@@ -6,10 +6,20 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace test::byte::it
+namespace test
 {
+namespace byte
+{
+namespace it
+{
+
 class Operator;
-}
+
+} //!it
+
+} //!byte
+
+} //!test
 
 #ifndef TEST_BYTE_IT_OPERATOR_DLEVEL
 

@@ -10,11 +10,17 @@
 #include <mutex>
 #include <chrono>
 
-namespace test::sys
+namespace test
 {
+namespace sys
+{
+
 template<typename TStatus>
 class Signals;
-}
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_SIGNALS_DLEVEL
 

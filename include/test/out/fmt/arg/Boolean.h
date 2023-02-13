@@ -9,12 +9,24 @@
 #include <type_traits>
 #include <utility>
 
-namespace test::out::fmt::arg
+namespace test
+{
+namespace out
+{
+namespace fmt
+{
+namespace arg
 {
 
 class Boolean;
 
-}
+} //!arg
+
+} //!fmt
+
+} //!out
+
+} //!test
 
 #ifndef TEST_OUT_FMT_ARG_BOOLEAN_DLEVEL
 

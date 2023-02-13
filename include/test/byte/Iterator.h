@@ -7,11 +7,17 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace test::byte
+namespace test
 {
+namespace byte
+{
+
 template<typename TPointer, typename TCast, std::size_t NStep>
 class Iterator;
-}
+
+} //!byte
+
+} //!test
 
 #ifndef TEST_BYTE_ITERATOR_DLEVEL
 

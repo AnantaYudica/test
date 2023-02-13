@@ -12,10 +12,16 @@
 #include <cstring>
 #include <type_traits>
 
-namespace test::byte
+namespace test
 {
+namespace byte
+{
+
 class Order;
-}
+
+} //!byte
+
+} //!test
 
 #ifndef TEST_BYTE_ORDER_DLEVEL
 

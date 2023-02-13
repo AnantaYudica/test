@@ -21,10 +21,24 @@
 
 #endif //!TEST_SYS_MEM_BLOCK_BASE_DLEVEL
 
-namespace test::sys::mem::block
+namespace test
 {
+namespace sys
+{
+namespace mem
+{
+namespace block
+{
+
 class Base;
-}
+
+} //!block
+
+} //!mem
+
+} //!sys
+
+} //!test
 
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(
     TEST_SYS_MEM_BLOCK_BASE_DLEVEL, 

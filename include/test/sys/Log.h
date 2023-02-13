@@ -14,11 +14,17 @@
 #define TEST_SYS_LOG_OUTPUT_BUFFER 1024
 #endif //!TEST_SYS_LOG_OUTPUT_BUFFER
 
-namespace test::sys
+namespace test
 {
+namespace sys
+{
+
 template<typename TStatus>
 class Log;
-}
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_LOG_DLEVEL
 

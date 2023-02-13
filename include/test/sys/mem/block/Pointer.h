@@ -16,11 +16,25 @@
 
 #endif //!TEST_SYS_MEM_BLOCK_POINTER_DLEVEL
 
-namespace test::sys::mem::block
+namespace test
 {
+namespace sys
+{
+namespace mem
+{
+namespace block
+{
+
 template<typename TBLock>
 class Pointer;
-}
+
+} //!block
+
+} //!mem
+
+} //!sys
+
+} //!test
 
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TBLock>

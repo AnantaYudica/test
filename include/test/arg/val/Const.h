@@ -9,13 +9,21 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace test::arg::val
+namespace test
+{
+namespace arg
+{
+namespace val
 {
 
 template<typename T, typename TBuffer>
 class Const;
 
-}
+} //!val
+
+} //!arg
+
+} //!test
 
 #ifndef TEST_ARG_VAL_CONST_DLEVEL
 

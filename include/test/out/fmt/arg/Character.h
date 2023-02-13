@@ -11,13 +11,25 @@
 #include <utility>
 #include <cwchar>
 
-namespace test::out::fmt::arg
+namespace test
+{
+namespace out
+{
+namespace fmt
+{
+namespace arg
 {
 
 template<typename T>
 class Character;
 
-}
+} //!arg
+
+} //!fmt
+
+} //!out
+
+} //!test
 
 #ifndef TEST_OUT_FMT_ARG_CHARACTER_DLEVEL
 

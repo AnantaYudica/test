@@ -23,10 +23,16 @@
 
 #endif 
 
-namespace test::sys
+namespace test
 {
+namespace sys
+{
+
 class Interface;
-}
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_INTERFACE_DLEVEL
 

@@ -10,10 +10,16 @@
 #include <cstdint>
 #include <cstring>
 
-namespace test::byte
+namespace test
 {
+namespace byte
+{
+
 class Operator;
-}
+
+} //!byte
+
+} //!test
 
 #ifndef TEST_BYTE_OPERATOR_DLEVEL
 

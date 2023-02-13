@@ -12,11 +12,17 @@
 #include <cstdint>
 #include <cstring>
 
-namespace test::byte
+namespace test
 {
+namespace byte
+{
+
 template<std::size_t N, bool Sign>
 class Base;
-}
+
+} //!byte
+
+} //!test
 
 #ifndef TEST_BYTE_BASE_DLEVEL
 

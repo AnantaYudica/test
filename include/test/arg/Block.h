@@ -9,12 +9,16 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace test::arg
+namespace test
+{
+namespace arg
 {
 
 class Block;
 
-}
+} //!arg
+
+} //!test
 
 #ifndef TEST_ARG_BLOCK_DLEVEL
 

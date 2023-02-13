@@ -23,10 +23,16 @@
 #include <atomic>
 #include <functional>
 
-namespace test::sys
+namespace test
 {
+namespace sys
+{
+
 class Memory;
-}
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_MEMORY_DLEVEL
 

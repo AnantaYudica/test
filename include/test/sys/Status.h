@@ -10,10 +10,16 @@
 #include <cstdint>
 #include <atomic>
 
-namespace test::sys
+namespace test
 {
+namespace sys
+{
+
 class Status;
-}
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_STATUS_DLEVEL
 

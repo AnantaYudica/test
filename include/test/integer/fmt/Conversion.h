@@ -10,13 +10,21 @@
 #include <cstdint>
 #include <type_traits>
 
-namespace test::integer::fmt
+namespace test
+{
+namespace integer
+{
+namespace fmt
 {
 
 template<typename TInt, std::size_t NBase>
 class Conversion;
 
-}
+} //!fmt
+
+} //!integer
+
+} //!test
 
 #ifndef TEST_INTEGER_FMT_CONVERSION_DLEVEL
 

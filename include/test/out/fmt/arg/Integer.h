@@ -9,13 +9,25 @@
 #include <type_traits>
 #include <utility>
 
-namespace test::out::fmt::arg
+namespace test
+{
+namespace out
+{
+namespace fmt
+{
+namespace arg
 {
 
 template<typename T>
 class Integer;
 
-}
+} //!arg
+
+} //!fmt
+
+} //!out
+
+} //!test
 
 #ifndef TEST_OUT_FMT_ARG_INTEGER_DLEVEL
 

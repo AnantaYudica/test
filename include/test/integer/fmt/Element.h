@@ -8,13 +8,21 @@
 #include <cstddef>
 #include <utility>
 
-namespace test::integer::fmt
+namespace test
+{
+namespace integer
+{
+namespace fmt
 {
 
 template<std::size_t N, typename TDefinition>
 class Element;
 
-}
+} //!fmt
+
+} //!integer
+
+} //!test
 
 #ifndef TEST_INTEGER_FMT_ELEMENT_DLEVEL
 

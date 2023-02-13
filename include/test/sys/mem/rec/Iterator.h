@@ -8,11 +8,25 @@
 
 #include <cstddef>
 
-namespace test::sys::mem::rec
+namespace test
 {
+namespace sys
+{
+namespace mem
+{
+namespace rec
+{
+
 template<typename TBlock>
 class Iterator;
-}
+
+} //!rec
+
+} //!mem
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_MEM_REC_ITERATOR_DLEVEL
 

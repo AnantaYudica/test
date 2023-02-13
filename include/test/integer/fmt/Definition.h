@@ -7,13 +7,21 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace test::integer::fmt
+namespace test
+{
+namespace integer
+{
+namespace fmt
 {
 
 template<typename TInt, std::size_t NBase>
 struct Definition;
 
-}
+} //!fmt
+
+} //!integer
+
+} //!test
 
 #ifndef TEST_INTEGER_FMT_DEFINITION_DLEVEL
 

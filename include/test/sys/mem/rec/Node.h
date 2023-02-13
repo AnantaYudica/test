@@ -7,11 +7,25 @@
 #include <type_traits>
 #include <cstddef>
 
-namespace test::sys::mem::rec
+namespace test
 {
+namespace sys
+{
+namespace mem
+{
+namespace rec
+{
+
 template<typename TBlock>
 class Node;
-}
+
+} //!rec
+
+} //!mem
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_MEM_REC_NODE_DLEVEL
 

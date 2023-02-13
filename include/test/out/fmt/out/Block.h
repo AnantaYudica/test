@@ -8,12 +8,24 @@
 #include <type_traits>
 #include <cstdlib>
 
-namespace test::out::fmt::out
+namespace test
+{
+namespace out
+{
+namespace fmt
+{
+namespace out
 {
 
 class Block;
 
-}
+} //!out
+
+} //!fmt
+
+} //!out
+
+} //!test
 
 #ifndef TEST_OUT_FMT_OUT_BLOCK_DLEVEL
 

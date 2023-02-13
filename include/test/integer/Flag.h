@@ -5,12 +5,16 @@
 
 #include <cstdint>
 
-namespace test::integer
+namespace test
+{
+namespace integer
 {
 
 class Flag;
 
-}
+} //!integer
+
+} //!test
 
 #ifndef TEST_INTEGER_FLAG_DLEVEL
 

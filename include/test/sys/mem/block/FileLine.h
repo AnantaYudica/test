@@ -17,10 +17,24 @@
 
 #endif //!TEST_SYS_MEM_BLOCK_FILELINE_DLEVEL
 
-namespace test::sys::mem::block
+namespace test
 {
+namespace sys
+{
+namespace mem
+{
+namespace block
+{
+
 class FileLine;
-}
+
+} //!block
+
+} //!mem
+
+} //!sys
+
+} //!test
 
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_SYS_MEM_BLOCK_FILELINE_DLEVEL, 
     "test::sys::mem::block::FileLine", test::sys::mem::block::FileLine);

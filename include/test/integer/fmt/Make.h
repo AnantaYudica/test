@@ -12,11 +12,21 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace test::integer::fmt
+namespace test
 {
+namespace integer
+{
+namespace fmt
+{
+
 template<typename TInt, std::size_t NBase>
 class Make;
-}
+
+} //!fmt
+
+} //!integer
+
+} //!test
 
 #ifndef TEST_INTEGER_FMT_MAKE_DLEVEL
 

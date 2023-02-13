@@ -8,13 +8,17 @@
 #include <cstddef>
 #include <cstdint>
 
-namespace test::arg
+namespace test
+{
+namespace arg
 {
 
 template<typename T, typename TBuffer>
 class Value;
 
-}
+} //!arg
+
+} //!test
 
 #ifndef TEST_ARG_VALUE_DLEVEL
 

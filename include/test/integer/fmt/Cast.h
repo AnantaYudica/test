@@ -9,13 +9,21 @@
 #include <cstdint>
 #include <utility>
 
-namespace test::integer::fmt
+namespace test
+{
+namespace integer
+{
+namespace fmt
 {
 
 template<typename TInt, std::size_t NBase>
 class Cast;
 
-}
+} //!fmt
+
+} //!integer
+
+} //!test
 
 #ifndef TEST_INTEGER_FMT_CAST_DLEVEL
 

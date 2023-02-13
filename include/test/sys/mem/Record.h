@@ -20,11 +20,21 @@
 #include <atomic>
 #include <cstring>
 
-namespace test::sys::mem
+namespace test
 {
+namespace sys
+{
+namespace mem
+{
+
 template<typename TBlock>
 class Record;
-}
+
+} //!mem
+
+} //!sys
+
+} //!test
 
 #ifndef TEST_SYS_MEM_RECORD_DLEVEL
 

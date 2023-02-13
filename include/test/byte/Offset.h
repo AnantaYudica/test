@@ -10,11 +10,17 @@
 #include <utility>
 #include <new>
 
-namespace test::byte
+namespace test
 {
+namespace byte
+{
+
 template<typename T>
 class Offset;
-}
+
+} //!byte
+
+} //!test
 
 #ifndef TEST_BYTE_OFFSET_DLEVEL
 
