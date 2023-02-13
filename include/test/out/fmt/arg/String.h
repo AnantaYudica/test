@@ -62,7 +62,7 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename TCond_ = test::out::fmt::Argument<char*>::
+        typename TCond_ = typename test::out::fmt::Argument<char*>::
             IsContainValueType<TFlagArg, TFlagArgs...>,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value && !TCond_::value, int>::type = 0>
@@ -70,7 +70,7 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename TCond_ = test::out::fmt::Argument<char*>::
+        typename TCond_ = typename test::out::fmt::Argument<char*>::
             IsContainValueType<TFlagArg, TFlagArgs...>,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value && TCond_::value, int>::type = 1>
@@ -99,7 +99,7 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename TCond_ = test::out::fmt::Argument<wchar_t*>::
+        typename TCond_ = typename test::out::fmt::Argument<wchar_t*>::
             IsContainValueType<TFlagArg, TFlagArgs...>,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value && !TCond_::value, int>::type = 0>
@@ -107,7 +107,7 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename TCond_ = test::out::fmt::Argument<wchar_t*>::
+        typename TCond_ = typename test::out::fmt::Argument<wchar_t*>::
             IsContainValueType<TFlagArg, TFlagArgs...>,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value && TCond_::value, int>::type = 1>
