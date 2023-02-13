@@ -76,25 +76,25 @@ public:
 template<typename T>
 constexpr inline Pointer<T*>::Pointer() :
     test::out::fmt::Argument<T*>(FlagType::specifier_ptr,
-    test::out::fmt::flag::Define<T>{})
+        test::out::fmt::flag::Define<T>{})
 {}
 
 template<typename T>
 template<typename... TFlagArgs>
 constexpr inline Pointer<T*>::Pointer(const T* val, TFlagArgs&&... flags) :
     test::out::fmt::Argument<T*>(FlagType::specifier_ptr,
-    test::out::fmt::flag::Value<T*>(const_cast<T*>(val)),
-    test::out::fmt::flag::Define<T>{},
-    std::forward<TFlagArgs>(flags)...)
+        test::out::fmt::flag::Value<T*>(const_cast<T*>(val)),
+        test::out::fmt::flag::Define<T>{},
+        std::forward<TFlagArgs>(flags)...)
 {}
 
 template<typename T>
 template<typename... TFlagArgs>
 constexpr inline Pointer<T*>::Pointer(T* val, TFlagArgs&&... flags) :
     test::out::fmt::Argument<T*>(FlagType::specifier_ptr,
-    test::out::fmt::flag::Value<T*>(val),
-    test::out::fmt::flag::Define<T>{},
-    std::forward<TFlagArgs>(flags)...)
+        test::out::fmt::flag::Value<T*>(val),
+        test::out::fmt::flag::Define<T>{},
+        std::forward<TFlagArgs>(flags)...)
 {}
 
 template<typename T>
@@ -103,9 +103,9 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         IsFlag<TFlagArg_>::Value, int>::type>
 constexpr inline Pointer<T*>::Pointer(TFlagArg&& flag, TFlagArgs&&... flags) :
     test::out::fmt::Argument<T*>(FlagType::specifier_ptr,
-        test::out::fmt::flag::Define<T>{},
-        std::forward<TFlagArg>(flag),
-        std::forward<TFlagArgs>(flags)...)
+            test::out::fmt::flag::Define<T>{},
+            std::forward<TFlagArg>(flag),
+            std::forward<TFlagArgs>(flags)...)
 {}
 
 } //arg
