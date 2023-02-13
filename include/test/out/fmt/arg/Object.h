@@ -52,15 +52,15 @@ public:
 public:
     constexpr inline Object();
     template<typename... TFlagArgs>
-    constexpr inline Object(const T& val, TFlagArgs&&... flags);
+    inline Object(const T& val, TFlagArgs&&... flags);
     template<typename... TFlagArgs>
-    constexpr inline Object(T&& val, TFlagArgs&&... flags);
+    inline Object(T&& val, TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value, int>::type = 0>
-    constexpr inline Object(TFlagArg&& flag, TFlagArgs&&... flags);
+    inline Object(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<T>::GetFlag;
     using test::out::fmt::Argument<T>::GetValue;
@@ -78,7 +78,7 @@ constexpr inline Object<T>::Object() :
 
 template<typename T>
 template<typename... TFlagArgs>
-constexpr inline Object<T>::Object(const T& val, TFlagArgs&&... flags) :
+inline Object<T>::Object(const T& val, TFlagArgs&&... flags) :
     test::out::fmt::Argument<T>(FlagType::specifier_object,
         test::out::fmt::flag::Define<T>{},
         test::out::fmt::flag::Value<T>(val),
@@ -87,7 +87,7 @@ constexpr inline Object<T>::Object(const T& val, TFlagArgs&&... flags) :
 
 template<typename T>
 template<typename... TFlagArgs>
-constexpr inline Object<T>::Object(T&& val, TFlagArgs&&... flags) :
+inline Object<T>::Object(T&& val, TFlagArgs&&... flags) :
     test::out::fmt::Argument<T>(FlagType::specifier_object,
         test::out::fmt::flag::Define<T>{},
         test::out::fmt::flag::Value<T>(std::forward<T>(val)),
@@ -98,7 +98,7 @@ template<typename T>
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::
         IsFlag<TFlagArg_>::Value, int>::type>
-constexpr inline Object<T>::Object(TFlagArg&& flag, TFlagArgs&&... flags) :
+inline Object<T>::Object(TFlagArg&& flag, TFlagArgs&&... flags) :
     test::out::fmt::Argument<T>(FlagType::specifier_object,
         test::out::fmt::flag::Define<T>{},
         std::forward<TFlagArg>(flag),
