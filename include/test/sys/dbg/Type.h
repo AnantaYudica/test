@@ -728,29 +728,29 @@ public:\
 }
 
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...), ")");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...), " ...)");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...), " ...)");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)&, ") &");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)&, " ...) &");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)&, " ...) &");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)&&, ") &&");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)&&, " ...) &&");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)&&, " ...) &&");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)const, ") const");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)const, " ...) const");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)const, " ...) const");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)const &, ") const &");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)const &, " ...) const &");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)const &, " ...) const &");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)const &&, ") const &&");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)const &&, " ...) const &&");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)const &&, " ...) const &&");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)volatile, ") volatile");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)volatile, " ...) volatile");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)volatile, " ...) volatile");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)volatile &, ") volatile &");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)volatile &, " ...) volatile &");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)volatile &, " ...) volatile &");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)volatile &&, ") volatile &&");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)volatile &&, " ...) volatile &&");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)volatile &&, " ...) volatile &&");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)const volatile, ") const volatile");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...) const volatile, " ...) const volatile");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...) const volatile, " ...) const volatile");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)const volatile &, ") const volatile &");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)const volatile &, " ...) const volatile &");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)const volatile &, " ...) const volatile &");
 TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs...)const volatile &&, ") const volatile &&");
-TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs... ...)const volatile &&," ...) const volatile &&");
+TEST_SYS_DBG_TYPE_T_FUNCTION(T(TArgs..., ...)const volatile &&," ...) const volatile &&");
 
 #undef TEST_SYS_DBG_TYPE_T_FUNCTION
 
