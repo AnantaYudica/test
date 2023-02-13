@@ -255,10 +255,11 @@ private:
     {
         return true;
     }
-public:
+private:
     template<typename... TArgs>
     using IsContainValueType = std::integral_constant<bool, 
-        IsContainValueType_( typename std::remove_reference<TArgs>::type()...)>;
+        IsContainValueType_(typename std::remove_cv<typename 
+            std::remove_reference<TArgs>::type>::type()...)>;
 private:
     static constexpr const CharacterType* Value();
     template<typename... TFlagArgs>
