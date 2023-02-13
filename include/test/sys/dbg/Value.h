@@ -200,7 +200,7 @@ struct Value<wchar_t>
         const std::size_t min = std::min(n, (std::size_t)TEST_SYS_DBG_VALUE_STRING_LENGTH);
         if (min == TEST_SYS_DBG_VALUE_STRING_LENGTH)
         {
-            const std::size_t len = snprintf(buff_out, max, "\"%s\"", val);
+            const std::size_t len = snprintf(buff_out, max, "\"%ls\"", val);
             if (len == TEST_SYS_DBG_VALUE_STRING_LENGTH)
             {
                 const std::size_t last = TEST_SYS_DBG_VALUE_STRING_LENGTH - 4;
@@ -216,7 +216,7 @@ struct Value<wchar_t>
         const std::size_t min = std::min(n, (std::size_t)TEST_SYS_DBG_VALUE_STRING_LENGTH);
         if (min == TEST_SYS_DBG_VALUE_STRING_LENGTH)
         {
-            const std::size_t len = snprintf(buff_out, max, "\"%s\"", val);
+            const std::size_t len = snprintf(buff_out, max, "\"%ls\"", val);
             if (len == TEST_SYS_DBG_VALUE_STRING_LENGTH)
             {
                 const std::size_t last = TEST_SYS_DBG_VALUE_STRING_LENGTH - 4;
@@ -248,7 +248,7 @@ struct Value<wchar_t>
         const std::size_t min = std::min(n, (std::size_t)TEST_SYS_DBG_VALUE_STRING_LENGTH);
         if (min == TEST_SYS_DBG_VALUE_STRING_LENGTH)
         {
-            const std::size_t len = snprintf(buff_out, max, "\"%s\"", val);
+            const std::size_t len = snprintf(buff_out, max, "\"%ls\"", val);
             if (len == TEST_SYS_DBG_VALUE_STRING_LENGTH)
             {
                 const std::size_t last = TEST_SYS_DBG_VALUE_STRING_LENGTH - 4;
@@ -256,7 +256,7 @@ struct Value<wchar_t>
             }
             return len;
         }
-        return snprintf(buff_out, n, "\"%s\"", val);
+        return snprintf(buff_out, n, "\"%ls\"", val);
     }
     template<std::size_t N>
     static std::size_t Write(char * buff_out, std::size_t n, wchar_t(&val)[N])
