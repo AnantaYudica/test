@@ -36,6 +36,12 @@ public:
 public:
     typedef test::out::fmt::Output<char, wchar_t> FormatOutputType; 
 public:
+    template<typename T>
+    struct String
+    {
+        typedef void DefaultType;
+    };
+public:
     static constexpr std::size_t string_max_len = 1024;
 public:
     static constexpr int value_character = 1;
@@ -53,6 +59,22 @@ public:
 public:
     template<typename T>
     static constexpr inline OutputIntegerType OutputValue(T&&);
+};
+
+template<>
+struct Definition::String<char*>
+{
+    typedef char* Type;
+    typedef char CharacterType;
+    typedef char* DefaultType;
+};
+
+template<>
+struct Definition::String<wchar_t*>
+{
+    typedef wchar_t* Type;
+    typedef wchar_t CharacterType;
+    typedef wchar_t* DefaultType;
 };
 
 template<typename T>
