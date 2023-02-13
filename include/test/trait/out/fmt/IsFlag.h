@@ -20,6 +20,7 @@
 #include "../../../out/fmt/flag/Upper.h"
 #include "../../../out/fmt/flag/Value.h"
 #include "../../../out/fmt/flag/Width.h"
+#include "../../../out/fmt/flag/Output.h"
 
 #include <type_traits>
 #include <utility>
@@ -59,6 +60,8 @@ private:
     template<typename T_>
     static constexpr std::true_type _IsFlag(const test::out::fmt::flag::Value<T_>&);
     static constexpr std::true_type _IsFlag(const test::out::fmt::flag::Width&);
+    template<typename... TArgs_>
+    static constexpr std::true_type _IsFlag(const test::out::fmt::flag::Output<TArgs_...>&);
 public:
     IsFlag() = delete;
 public:
