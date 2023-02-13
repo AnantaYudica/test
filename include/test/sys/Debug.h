@@ -41,7 +41,7 @@ inline std::size_t Debug::WriteName(char * name_out, std::size_t n)
 }
 
 inline Debug::Debug() :
-    m_level(0xFF)
+    m_level(0x7F)
 {}
 
 inline Debug::Debug(std::int8_t level) :
