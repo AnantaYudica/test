@@ -247,7 +247,7 @@ private:
     {
         return true;
     }
-private:
+public:
     template<typename... TArgs>
     using IsContainValueType = std::integral_constant<bool, 
         IsContainValueType_( typename std::remove_reference<TArgs>::type()...)>;
