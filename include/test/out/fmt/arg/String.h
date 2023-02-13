@@ -74,18 +74,8 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename TCond_ = typename test::out::fmt::Argument<char*>::
-            IsContainValueType<TFlagArg, TFlagArgs...>,
         typename std::enable_if<test::trait::out::fmt::
-            IsFlag<TFlagArg_>::Value && !TCond_::value, int>::type = 0>
-    constexpr inline String(TFlagArg&& flag, TFlagArgs&&... flags);
-    template<typename TFlagArg, typename... TFlagArgs,
-        typename TFlagArg_ = typename std::remove_cv<
-            typename std::remove_reference<TFlagArg>::type>::type,
-        typename TCond_ = typename test::out::fmt::Argument<char*>::
-            IsContainValueType<TFlagArg, TFlagArgs...>,
-        typename std::enable_if<test::trait::out::fmt::
-            IsFlag<TFlagArg_>::Value && TCond_::value, int>::type = 1>
+            IsFlag<TFlagArg_>::Value, int>::type = 0>
     inline String(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<char*>::GetFlag;
@@ -111,18 +101,8 @@ public:
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename TCond_ = typename test::out::fmt::Argument<wchar_t*>::
-            IsContainValueType<TFlagArg, TFlagArgs...>,
         typename std::enable_if<test::trait::out::fmt::
-            IsFlag<TFlagArg_>::Value && !TCond_::value, int>::type = 0>
-    constexpr inline String(TFlagArg&& flag, TFlagArgs&&... flags);
-    template<typename TFlagArg, typename... TFlagArgs,
-        typename TFlagArg_ = typename std::remove_cv<
-            typename std::remove_reference<TFlagArg>::type>::type,
-        typename TCond_ = typename test::out::fmt::Argument<wchar_t*>::
-            IsContainValueType<TFlagArg, TFlagArgs...>,
-        typename std::enable_if<test::trait::out::fmt::
-            IsFlag<TFlagArg_>::Value && TCond_::value, int>::type = 1>
+            IsFlag<TFlagArg_>::Value, int>::type = 0>
     inline String(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<wchar_t*>::GetFlag;
@@ -156,18 +136,8 @@ inline String<char*>::String(char* val, TFlagArgs&&... flags) :
 {}
 
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename TCond_, typename std::enable_if<test::trait::out::fmt::
-        IsFlag<TFlagArg_>::Value && !TCond_::value, int>::type>
-constexpr inline String<char*>::String(TFlagArg&& flag, TFlagArgs&&... flags) :
-    test::out::fmt::Argument<char*>(FlagType::specifier_str,
-        test::out::fmt::flag::Define<char>{},
-        std::forward<TFlagArg>(flag),
-        std::forward<TFlagArgs>(flags)...)
-{}
-
-template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename TCond_, typename std::enable_if<test::trait::out::fmt::
-        IsFlag<TFlagArg_>::Value && TCond_::value, int>::type>
+    typename std::enable_if<test::trait::out::fmt::
+        IsFlag<TFlagArg_>::Value, int>::type>
 inline String<char*>::String(TFlagArg&& flag, TFlagArgs&&... flags) :
     test::out::fmt::Argument<char*>(FlagType::specifier_str,
         test::out::fmt::flag::Define<char>{},
@@ -197,20 +167,10 @@ inline String<wchar_t*>::String(wchar_t* val, TFlagArgs&&... flags) :
 {}
 
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename TCond_, typename std::enable_if<test::trait::out::fmt::
-        IsFlag<TFlagArg_>::Value && !TCond_::value, int>::type>
-constexpr inline String<wchar_t*>::String(TFlagArg&& flag, 
+    typename std::enable_if<test::trait::out::fmt::
+        IsFlag<TFlagArg_>::Value, int>::type>
+inline String<wchar_t*>::String(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<wchar_t*>(FlagType::specifier_str,
-            test::out::fmt::flag::Define<wchar_t>{},
-            std::forward<TFlagArg>(flag),
-            std::forward<TFlagArgs>(flags)...)
-{}
-
-template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename TCond_, typename std::enable_if<test::trait::out::fmt::
-        IsFlag<TFlagArg_>::Value && TCond_::value, int>::type>
-inline String<wchar_t*>::String(TFlagArg&& flag, TFlagArgs&&... flags) :
         test::out::fmt::Argument<wchar_t*>(FlagType::specifier_str,
             test::out::fmt::flag::Define<wchar_t>{},
             std::forward<TFlagArg>(flag),
