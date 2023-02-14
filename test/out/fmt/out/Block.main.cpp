@@ -28,6 +28,7 @@ int main()
             test::out::fmt::Definition::output_undefined);
         assert(b1.GetFormatOutput<char>() == nullptr);
         assert(b1.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b1.GetFormatOutput<void>() == nullptr);
 
         test::out::fmt::out::Block b2(b1);
         
@@ -35,6 +36,7 @@ int main()
             test::out::fmt::Definition::output_undefined);
         assert(b2.GetFormatOutput<char>() == nullptr);
         assert(b2.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b2.GetFormatOutput<void>() == nullptr);
 
         test::out::fmt::out::Block b3(std::move(b2));
         
@@ -42,11 +44,13 @@ int main()
             test::out::fmt::Definition::output_undefined);
         assert(b3.GetFormatOutput<char>() == nullptr);
         assert(b3.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b3.GetFormatOutput<void>() == nullptr);
         
         assert(b2.GetType() == 
             test::out::fmt::Definition::output_undefined);
         assert(b2.GetFormatOutput<char>() == nullptr);
         assert(b2.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b2.GetFormatOutput<void>() == nullptr);
 
         test::out::fmt::out::Block b4;
         b4 = b1;
@@ -55,6 +59,7 @@ int main()
             test::out::fmt::Definition::output_undefined);
         assert(b4.GetFormatOutput<char>() == nullptr);
         assert(b4.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b4.GetFormatOutput<void>() == nullptr);
         
         test::out::fmt::out::Block b5;
         b5 = std::move(b4);
@@ -63,11 +68,13 @@ int main()
             test::out::fmt::Definition::output_undefined);
         assert(b5.GetFormatOutput<char>() == nullptr);
         assert(b5.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b5.GetFormatOutput<void>() == nullptr);
         
-        assert(b5.GetType() == 
+        assert(b4.GetType() == 
             test::out::fmt::Definition::output_undefined);
-        assert(b5.GetFormatOutput<char>() == nullptr);
-        assert(b5.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b4.GetFormatOutput<char>() == nullptr);
+        assert(b4.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b4.GetFormatOutput<void>() == nullptr);
     }
     {
         test::out::fmt::out::Block b1{&Fun1<char>};
@@ -76,6 +83,7 @@ int main()
             test::out::fmt::Definition::output_char);
         assert(b1.GetFormatOutput<char>() == &Fun1<char>);
         assert(b1.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b1.GetFormatOutput<void>() == &Fun1<char>);
         
         test::out::fmt::out::Block b2(b1);
         
@@ -83,6 +91,7 @@ int main()
             test::out::fmt::Definition::output_char);
         assert(b2.GetFormatOutput<char>() == &Fun1<char>);
         assert(b2.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b2.GetFormatOutput<void>() == &Fun1<char>);
         
         test::out::fmt::out::Block b3(std::move(b2));
         
@@ -90,11 +99,13 @@ int main()
             test::out::fmt::Definition::output_char);
         assert(b3.GetFormatOutput<char>() == &Fun1<char>);
         assert(b3.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b3.GetFormatOutput<void>() == &Fun1<char>);
         
         assert(b2.GetType() == 
             test::out::fmt::Definition::output_undefined);
         assert(b2.GetFormatOutput<char>() == nullptr);
         assert(b2.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b2.GetFormatOutput<void>() == nullptr);
 
         test::out::fmt::out::Block b4;
         b4 = b1;
@@ -103,6 +114,7 @@ int main()
             test::out::fmt::Definition::output_char);
         assert(b4.GetFormatOutput<char>() == &Fun1<char>);
         assert(b4.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b4.GetFormatOutput<void>() == &Fun1<char>);
         
         test::out::fmt::out::Block b5;
         b5 = std::move(b4);
@@ -111,11 +123,13 @@ int main()
             test::out::fmt::Definition::output_char);
         assert(b5.GetFormatOutput<char>() == &Fun1<char>);
         assert(b5.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b5.GetFormatOutput<void>() == &Fun1<char>);
         
         assert(b4.GetType() == 
             test::out::fmt::Definition::output_undefined);
         assert(b4.GetFormatOutput<char>() == nullptr);
         assert(b4.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b4.GetFormatOutput<void>() == nullptr);
     }
     {
         test::out::fmt::out::Block b1{&Fun1<wchar_t>};
@@ -124,6 +138,7 @@ int main()
             test::out::fmt::Definition::output_wchar);
         assert(b1.GetFormatOutput<char>() == nullptr);
         assert(b1.GetFormatOutput<wchar_t>() == &Fun1<wchar_t>);
+        assert(b1.GetFormatOutput<void>() == &Fun1<wchar_t>);
         
         test::out::fmt::out::Block b2(b1);
 
@@ -131,6 +146,7 @@ int main()
             test::out::fmt::Definition::output_wchar);
         assert(b2.GetFormatOutput<char>() == nullptr);
         assert(b2.GetFormatOutput<wchar_t>() == &Fun1<wchar_t>);
+        assert(b2.GetFormatOutput<void>() == &Fun1<wchar_t>);
         
         test::out::fmt::out::Block b3(std::move(b2));
 
@@ -138,11 +154,13 @@ int main()
             test::out::fmt::Definition::output_wchar);
         assert(b3.GetFormatOutput<char>() == nullptr);
         assert(b3.GetFormatOutput<wchar_t>() == &Fun1<wchar_t>);
+        assert(b3.GetFormatOutput<void>() == &Fun1<wchar_t>);
         
         assert(b2.GetType() == 
             test::out::fmt::Definition::output_undefined);
         assert(b2.GetFormatOutput<char>() == nullptr);
         assert(b2.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b2.GetFormatOutput<void>() == nullptr);
 
         test::out::fmt::out::Block b4;
         b4 = b3;
@@ -151,6 +169,7 @@ int main()
             test::out::fmt::Definition::output_wchar);
         assert(b4.GetFormatOutput<char>() == nullptr);
         assert(b4.GetFormatOutput<wchar_t>() == &Fun1<wchar_t>);
+        assert(b4.GetFormatOutput<void>() == &Fun1<wchar_t>);
         
         test::out::fmt::out::Block b5;
         b5 = std::move(b4);
@@ -159,11 +178,13 @@ int main()
             test::out::fmt::Definition::output_wchar);
         assert(b5.GetFormatOutput<char>() == nullptr);
         assert(b5.GetFormatOutput<wchar_t>() == &Fun1<wchar_t>);
+        assert(b5.GetFormatOutput<void>() == &Fun1<wchar_t>);
         
         assert(b4.GetType() == 
             test::out::fmt::Definition::output_undefined);
         assert(b4.GetFormatOutput<char>() == nullptr);
         assert(b4.GetFormatOutput<wchar_t>() == nullptr);
+        assert(b4.GetFormatOutput<void>() == nullptr);
     }
     return 0;
 }
