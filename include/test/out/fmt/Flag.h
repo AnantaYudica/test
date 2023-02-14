@@ -421,6 +421,12 @@ public:
     constexpr bool HasOutput() const;
     template<typename TChar>
     constexpr bool HasOutput(TChar&&) const;
+private:
+    constexpr std::size_t OutputSize(std::size_t n, 
+        IntegerValueType v) const;
+public:
+    constexpr std::size_t OutputSize() const;
+public:
     void SetOutput(const IntegerValueType& val);
 public:
     bool IsGood() const;
@@ -1284,6 +1290,20 @@ constexpr bool Flag<TValue, TIntegerValue>::HasOutput(TChar&& ch) const
             DefinitionType::output_char ? (m_value & output_char) :
         DefinitionType::OutputValue(std::forward<TChar>(ch)) == 
             DefinitionType::output_wchar ? (m_value & output_wchar) : false;
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr std::size_t Flag<TValue, TIntegerValue>::OutputSize(std::size_t n, 
+    IntegerValueType v) const
+{
+    return (v & output_mask) == 0 ? n : 
+        OutputSize((m_value & v) != 0 ? n + 1 : n, v << 1);
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr std::size_t Flag<TValue, TIntegerValue>::OutputSize() const
+{
+    return OutputSize(0, output_char);
 }
 
 template<typename TValue, typename TIntegerValue>
