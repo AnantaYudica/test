@@ -91,6 +91,7 @@ int main()
         assert(fl1.HasOutput() == false);
         assert(fl1.HasOutput((char)0) == false);
         assert(fl1.HasOutput((wchar_t)0) == false);
+        assert(fl1.OutputSize() == 0);
     }
     {
         test::out::fmt::Flag<std::atomic<std::uint32_t>> fl1;
@@ -163,6 +164,7 @@ int main()
         assert(fl1.HasOutput() == false);
         assert(fl1.HasOutput((char)0) == false);
         assert(fl1.HasOutput((wchar_t)0) == false);
+        assert(fl1.OutputSize() == 0);
     }
     {
         const auto specifier1 = test::out::fmt::Flag<>::specifier_ch;
@@ -235,6 +237,7 @@ int main()
         assert(fl1.HasOutput() == false);
         assert(fl1.HasOutput((char)0) == false);
         assert(fl1.HasOutput((wchar_t)0) == false);
+        assert(fl1.OutputSize() == 0);
     }
     {
         const auto specifier1 = 
@@ -308,6 +311,7 @@ int main()
         assert(fl1.HasOutput() == false);
         assert(fl1.HasOutput((char)0) == false);
         assert(fl1.HasOutput((wchar_t)0) == false);
+        assert(fl1.OutputSize() == 0);
     }
     {
         const auto specifier1 = test::out::fmt::Flag<>::specifier_str;
@@ -380,6 +384,7 @@ int main()
         assert(fl1.HasOutput() == false);
         assert(fl1.HasOutput((char)0) == false);
         assert(fl1.HasOutput((wchar_t)0) == false);
+        assert(fl1.OutputSize() == 0);
     }
     {
         const auto specifier1 = 
@@ -454,6 +459,7 @@ int main()
         assert(fl1.HasOutput() == false);
         assert(fl1.HasOutput((char)0) == false);
         assert(fl1.HasOutput((wchar_t)0) == false);
+        assert(fl1.OutputSize() == 0);
     }
     {
         test::out::fmt::Flag<> fl1{test::out::fmt::Flag<>::specifier_str, 
@@ -532,6 +538,7 @@ int main()
         assert(fl1.HasOutput() == false);
         assert(fl1.HasOutput((char)0) == false);
         assert(fl1.HasOutput((wchar_t)0) == false);
+        assert(fl1.OutputSize() == 0);
     }
     {
         test::out::fmt::Flag<> fl1{test::out::fmt::Flag<>::specifier_str, 
@@ -611,6 +618,7 @@ int main()
         assert(fl1.HasOutput() == true);
         assert(fl1.HasOutput((char)0) == true);
         assert(fl1.HasOutput((wchar_t)0) == false);
+        assert(fl1.OutputSize() == 1);
     }
     {
         test::out::fmt::Flag<> fl1{test::out::fmt::Flag<>::specifier_str, 
@@ -690,6 +698,7 @@ int main()
         assert(fl1.HasOutput() == true);
         assert(fl1.HasOutput((char)0) == false);
         assert(fl1.HasOutput((wchar_t)0) == true);
+        assert(fl1.OutputSize() == 1);
     }
     {
         test::out::fmt::Flag<> fl1{test::out::fmt::Flag<>::specifier_str, 
@@ -770,6 +779,7 @@ int main()
         assert(fl1.HasOutput() == true);
         assert(fl1.HasOutput((char)0) == true);
         assert(fl1.HasOutput((wchar_t)0) == true);
+        assert(fl1.OutputSize() == 2);
     }
     {
         test::out::fmt::Flag<> fl1{test::out::fmt::Flag<>::specifier_str, 
@@ -850,6 +860,7 @@ int main()
         assert(fl1.HasOutput() == true);
         assert(fl1.HasOutput((char)0) == true);
         assert(fl1.HasOutput((wchar_t)0) == true);
+        assert(fl1.OutputSize() == 2);
     }
     return 0;
 }
