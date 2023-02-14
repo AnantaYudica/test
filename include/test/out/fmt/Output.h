@@ -5,6 +5,7 @@
 #include "../Interface.h"
 #include "Definition.h"
 #include "flag/Output.h"
+#include "out/Block.defn.h"
 
 #include <cstdint>
 #include <cstdlib>
@@ -24,6 +25,8 @@ class Output
 public:
     typedef typename test::out::fmt::Definition DefinitionType;
     typedef typename DefinitionType::FlagType FlagType;
+public:
+    typedef test::out::fmt::out::Block BlockType;
 public:
     template<typename TChar>
     using FormatOutputFuncType = 
@@ -50,8 +53,12 @@ public:
 public:
     constexpr std::size_t Size() const;
 public:
+    constexpr std::size_t GetSize(std::size_t count = 0) const;
+public:
     template<typename TChar>
     constexpr FormatOutputFuncType<TChar> Get() const;
+public:
+    constexpr BlockType Get(std::size_t index) const;
 };
 
 template<typename TChar, typename... TCharArgs>
@@ -60,6 +67,8 @@ class Output<TChar, TCharArgs...> : public Output<TCharArgs...>
 public:
     typedef typename Output<TCharArgs...>::DefinitionType DefinitionType;
     typedef typename Output<TCharArgs...>::FlagType FlagType;
+public:
+    typedef test::out::fmt::out::Block BlockType;
 public:
     using FormatOutputFuncType = 
         typename DefinitionType::FormatOutputFuncType<TChar>;
@@ -88,12 +97,16 @@ public:
 public:
     using Output<TCharArgs...>::Size;
 public:
+    constexpr std::size_t GetSize(std::size_t count = 0) const;
+public:
     template<typename TChar_, typename std::enable_if<std::is_same<TChar, 
         TChar_>::value, int>::type = 0>
     constexpr typename Output<TChar_>::FormatOutputFuncType Get() const;
     template<typename TChar_, typename std::enable_if<!std::is_same<TChar, 
         TChar_>::value, int>::type = 1>
     constexpr typename Output<TChar_>::FormatOutputFuncType Get() const;
+public:
+    constexpr BlockType Get(std::size_t index) const;
 };
 
 template<typename... TCharArgs>
@@ -136,11 +149,24 @@ constexpr std::size_t Output<TCharArgs...>::Size() const
 }
 
 template<typename... TCharArgs>
+constexpr std::size_t Output<TCharArgs...>::GetSize(std::size_t count) const
+{
+    return count <= Size() ? count : 0;
+}
+
+template<typename... TCharArgs>
 template<typename TChar>
 constexpr typename Output<TCharArgs...>::FormatOutputFuncType<TChar> 
 Output<TCharArgs...>::Get() const
 {
     return nullptr;
+}
+
+template<typename... TCharArgs>
+constexpr typename Output<TCharArgs...>::BlockType 
+Output<TCharArgs...>::Get(std::size_t index) const
+{
+    return BlockType{};
 }
 
 template<typename TChar, typename... TCharArgs>
@@ -189,6 +215,15 @@ constexpr Output<TChar, TCharArgs...>:: Output(Output<TChar,
 {}
 
 template<typename TChar, typename... TCharArgs>
+constexpr std::size_t Output<TChar, TCharArgs...>::
+    GetSize(std::size_t count) const
+{
+    return count <= Size() ? 
+        Output<TCharArgs...>::GetSize(m_value != nullptr ? 
+            count + 1 : count) : 0;
+}
+
+template<typename TChar, typename... TCharArgs>
 template<typename TChar_, typename std::enable_if<std::is_same<TChar, 
     TChar_>::value, int>::type>
 constexpr typename Output<TChar_>::FormatOutputFuncType 
@@ -204,6 +239,14 @@ constexpr typename Output<TChar_>::FormatOutputFuncType
 Output<TChar, TCharArgs...>::Get() const
 {
     return Output<TCharArgs...>::template Get<TChar_>();
+}
+
+template<typename TChar, typename... TCharArgs>
+constexpr typename Output<TChar, TCharArgs...>::BlockType 
+Output<TChar, TCharArgs...>::Get(std::size_t index) const
+{
+    return index < Size() ? (index == 0 ? BlockType{m_value} :
+        Output<TCharArgs...>::Get(index - 1)) : BlockType{}; 
 }
 
 } //!fmt
