@@ -15,7 +15,13 @@ namespace out
 {
 namespace fmt
 {
-    
+namespace out
+{
+
+class Block;
+
+} //!out
+
 template<typename... TCharArgs>
 class Output;
 
@@ -103,7 +109,14 @@ Definition::OutputValue(T&&)
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_DEFINITION_DLEVEL, 
     "test::out::fmt::Definition", test::out::fmt::Definition);
 
+#ifndef TEST_OUT_FMT_OUT_BLOCK_H_DEFN_
+
+#include "out/Block.defn.h"
 #include "Output.h"
+#include "out/Block.h"
+
+#endif //!TEST_OUT_FMT_OUT_BLOCK_H_DEFN_
+
 #include "Flag.h"
 
 #endif //!TEST_OUT_FMT_DEFINITION_H_
