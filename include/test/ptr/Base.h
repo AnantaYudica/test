@@ -52,7 +52,7 @@ private:
 private:
     static inline void _Reset(CountType*& count, BlockType& block);
 private:
-    std::size_t * m_offset;
+    std::size_t m_offset;
     CountType * m_count;
     BlockType m_block;
 protected:
@@ -127,7 +127,7 @@ inline void Base::_Reset(CountType *& count, BlockType& block)
 }
 
 inline Base::Base() :
-    m_offset(new std::size_t(0)),
+    m_offset(0),
     m_count(nullptr),
     m_block()
 {
@@ -140,12 +140,11 @@ inline Base::~Base()
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
 
     _Reset(m_count, m_block);
-    delete m_offset;
-    m_offset = nullptr;
+    m_offset = 0;
 }
 
 inline Base::Base(const Base& cpy) :
-    m_offset(new std::size_t(*(cpy.m_offset))),
+    m_offset(cpy.m_offset),
     m_count(cpy.m_count),
     m_block(cpy.m_block)
 {
@@ -156,14 +155,14 @@ inline Base::Base(const Base& cpy) :
 }
 
 inline Base::Base(Base&& mov) :
-    m_offset(new std::size_t(*(mov.m_offset))),
+    m_offset(mov.m_offset),
     m_count(mov.m_count),
     m_block(std::move(mov.m_block))
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Move Constructor(mov=%p)", &mov);
 
-    *(mov.m_offset) = 0;
+    mov.m_offset = 0;
     mov.m_count = nullptr;
     mov.m_block = Block{};
 }
@@ -174,7 +173,7 @@ inline Base& Base::operator=(const Base& cpy)
         "Copy Assignment(cpy=%p)", &cpy);
 
     _Reset(m_count, m_block);
-    *m_offset = *(cpy.m_offset);
+    m_offset = cpy.m_offset;
     m_count = cpy.m_count;
     m_block = cpy.m_block;
     if (m_count != nullptr) (*m_count)++;
@@ -187,11 +186,11 @@ inline Base& Base::operator=(Base&& mov)
         "Move Assignment(mov=%p)", &mov);
 
     _Reset(m_count, m_block);
-    *m_offset = *(mov.m_offset);
+    m_offset = mov.m_offset;
     m_count = mov.m_count;
     m_block = mov.m_block;
 
-    *(mov.m_offset) = 0;
+    mov.m_offset = 0;
     mov.m_count = nullptr;
     mov.m_block = Block{};
     return *this;
@@ -210,7 +209,7 @@ inline void* Base::Allocation(const FlagIntegerType& flag,
         flag, type_size, type_count, defn);
 
     _Reset(m_count, m_block);
-    *m_offset = 0;
+    m_offset = 0;
     m_count = new CountType(1);
     return m_block.Allocation(flag, type_size, type_count, defn);
 }
@@ -219,7 +218,7 @@ inline void Base::Deallocation()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Deallocation()");
 
-    *m_offset = 0;
+    m_offset = 0;
     _Reset(m_count, m_block);
 }
 
@@ -230,13 +229,13 @@ inline T* Base::Get()
         TEST_SYS_DEBUG_TARGS_NAME_STR(T));
 
     const std::size_t size = m_block.GetDataSize();
-    const std::size_t req_size = *m_offset + sizeof(T);
+    const std::size_t req_size = m_offset + sizeof(T);
     if (req_size > size)
     {
         return test::sys::mem::Dummy::Get<T>();
     }
     char * data = (char *)m_block.GetData();
-    return reinterpret_cast<T*>(data + *m_offset);
+    return reinterpret_cast<T*>(data + m_offset);
 }
 
 template<typename T>
@@ -246,13 +245,13 @@ inline T* Base::Get() const
         TEST_SYS_DEBUG_TARGS_NAME_STR(T));
 
     const std::size_t size = const_cast<Block&>(m_block).GetDataSize();
-    const std::size_t req_size = *m_offset + sizeof(T);
+    const std::size_t req_size = m_offset + sizeof(T);
     if (req_size > size)
     {
         return test::sys::mem::Dummy::Get<T>();
     }
     char * data = (char *) const_cast<Block&>(m_block).GetData();
-    return reinterpret_cast<T*>(data + *m_offset);
+    return reinterpret_cast<T*>(data + m_offset);
 }
 
 inline typename Base::FlagIntegerType Base::GetFlag() const
@@ -266,7 +265,7 @@ inline std::size_t Base::GetOffset() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetOffset() const");
 
-    return *m_offset;
+    return m_offset;
 }
 
 inline typename Base::IntegerCountType Base::GetCount() const
@@ -302,7 +301,7 @@ inline void Base::SetOffset(const std::size_t& size)
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "SetOffset(size=%zu)", size);
 
-    *m_offset = (size % GetDataSize());
+    m_offset = (size % GetDataSize());
 }
 
 inline Base& Base::operator+=(const std::size_t& size)
@@ -311,8 +310,8 @@ inline Base& Base::operator+=(const std::size_t& size)
         "operator+=(size=%zu)", size);
 
     if (GetDataSize() == 0) return *this;
-    *m_offset += size;
-    *m_offset %= GetDataSize();
+    m_offset += size;
+    m_offset %= GetDataSize();
     return *this;
 }
 
@@ -323,12 +322,12 @@ inline Base& Base::operator-=(const std::size_t& size)
 
     if (GetDataSize() == 0) return *this;
     const std::size_t rem_size = (size % GetDataSize());
-    if (*m_offset >= rem_size)
-        *m_offset -= rem_size;
+    if (m_offset >= rem_size)
+        m_offset -= rem_size;
     else
     {
-        *m_offset = (rem_size  - *m_offset);
-        *m_offset = (GetDataSize() - *m_offset);
+        m_offset = (rem_size  - m_offset);
+        m_offset = (GetDataSize() - m_offset);
     }
     return *this;
 }
@@ -394,7 +393,7 @@ inline bool Base::operator==(const Base& other) const
 
     return (const_cast<BlockType&>(m_block).GetData() == 
         const_cast<BlockType&>(other.m_block).GetData()) &&
-        *m_offset == *(other.m_offset);
+        m_offset == other.m_offset;
 }
 
 inline bool Base::operator!=(const Base& other) const
