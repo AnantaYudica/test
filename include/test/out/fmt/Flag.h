@@ -343,7 +343,7 @@ public:
     ~Flag() = default;
 public:
     constexpr Flag(const Flag<TValue, TIntegerValue>& cpy);
-    constexpr Flag(Flag<TValue, TIntegerValue>&& mov);
+    Flag(Flag<TValue, TIntegerValue>&& mov);
 public:
     Flag<TValue, TIntegerValue>& 
         operator=(const Flag<TValue, TIntegerValue>& cpy);
@@ -850,10 +850,12 @@ constexpr Flag<TValue, TIntegerValue>::
 {}
 
 template<typename TValue, typename TIntegerValue>
-constexpr Flag<TValue, TIntegerValue>::
+Flag<TValue, TIntegerValue>::
     Flag(Flag<TValue, TIntegerValue>&& mov) :
         m_value(mov.m_value)
-{}
+{
+    mov.m_value = IntegerValueType(0);
+}
 
 template<typename TValue, typename TIntegerValue>
 Flag<TValue, TIntegerValue>& 
@@ -868,6 +870,7 @@ Flag<TValue, TIntegerValue>&
 Flag<TValue, TIntegerValue>::operator=(Flag<TValue, TIntegerValue>&& mov)
 {
     m_value = mov.m_value;
+    mov.m_value = IntegerValueType(0);
     return *this;
 }
 
