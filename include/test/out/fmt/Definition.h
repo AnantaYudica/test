@@ -3,6 +3,7 @@
 
 #include "../../System.h"
 #include "../Interface.h"
+#include "../Definition.h"
 #include "Flag.decl.h"
 
 #include <cstdint>
@@ -28,15 +29,15 @@ class Output;
 class Definition
 {
 public:
-    typedef test::out::fmt::Flag<std::uint32_t, std::uint32_t> FlagType;
+    typedef typename test::out::Definition::FlagType FlagType;
 public:
     template<typename TChar>
-    using OutputInterfaceType = test::out::Interface<TChar>;
+    using OutputInterfaceType = typename test::out::Definition::
+        OutputInterfaceType<TChar>;
 public:
     template<typename TChar>
-    using FormatOutputFuncType = std::size_t (*)(OutputInterfaceType<TChar>& out, 
-        void* value, std::size_t value_size, FlagType flag, 
-        int width, int len_pred);
+    using FormatOutputFuncType = typename test::out::Definition::
+        FormatOutputFuncType<TChar>;
 public:
     typedef std::uint8_t OutputIntegerType;
 public:
