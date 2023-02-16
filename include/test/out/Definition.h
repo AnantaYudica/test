@@ -2,7 +2,7 @@
 #define TEST_OUT_DEFINITION_H_
 
 #include "../System.h"
-#include "fmt/Definition.h"
+#include "fmt/Flag.h"
 
 #include <cstdint>
 #include <cwchar>
@@ -16,14 +16,15 @@ namespace out
 class Definition
 {
 public:
-    typedef typename test::out::fmt::Definition::FlagType FlagType;
+    typedef test::out::fmt::Flag<std::uint32_t, std::uint32_t> FlagType;
 public:
     template<typename TChar>
     using OutputInterfaceType = test::out::Interface<TChar>;
 public:
     template<typename TChar>
-    using FormatOutputFuncType = typename test::out::fmt::Definition::
-        FormatOutputFuncType<TChar>;
+    using FormatOutputFuncType = std::size_t (*)(OutputInterfaceType<TChar>& out, 
+        void* value, std::size_t value_size, FlagType flag, 
+        int width, int len_pred);
 };
 
 } //!out
