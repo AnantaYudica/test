@@ -1,6 +1,7 @@
 #ifndef TEST_OUT_PRINT_IMP_CHARACTER_H_
 #define TEST_OUT_PRINT_IMP_CHARACTER_H_
 
+#include "../../../System.h"
 #include "../../Definition.h"
 #include "../Character.h"
 
@@ -16,13 +17,50 @@ namespace print
 namespace imp
 {
 
-template<test::out::Definition::FlagType::IntegerValueType Fmt>
+template<test::out::Definition::FlagType::IntegerValueType VFlagInteger>
 struct Character
 {
     
 };
-template<>
 
+} //!imp
+
+} //!print
+
+} //!out
+
+} //!test
+
+
+#ifndef TEST_OUT_PRINT_IMP_CHARACTER_DLEVEL
+
+#define TEST_OUT_PRINT_IMP_CHARACTER_DLEVEL 2
+
+#endif //!TEST_OUT_PRINT_IMP_CHARACTER_DLEVEL
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::type::Value<typename test::out::Definition::FlagType::\
+        IntegerValueType, VFlagInteger>
+
+template<test::out::Definition::FlagType::IntegerValueType VFlagInteger>
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_OUT_PRINT_IMP_CHARACTER_DLEVEL, 
+    "test::out::print::imp::Character", 
+    test::out::print::imp::Character<VFlagInteger>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
+
+
+namespace test
+{
+namespace out
+{
+namespace print
+{
+namespace imp
+{
+
+template<>
 struct Character<test::out::print::Character::char_fmt>
 {
     typedef typename test::out::Definition::FlagType FlagType;
