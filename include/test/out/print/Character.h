@@ -1,6 +1,7 @@
 #ifndef TEST_OUT_PRINT_CHARACTER_H_
 #define TEST_OUT_PRINT_CHARACTER_H_
 
+#include "../../System.h"
 #include "../fmt/Flag.h"
 #include "../Definition.h"
 
@@ -46,5 +47,15 @@ struct Character
 } //!out
 
 } //!test
+
+#ifndef TEST_OUT_PRINT_CHARACTER_DLEVEL
+
+#define TEST_OUT_PRINT_CHARACTER_DLEVEL 2
+
+#endif //!TEST_OUT_PRINT_CHARACTER_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_PRINT_CHARACTER_DLEVEL, 
+    "test::out::print::Character", test::out::print::Character);
+
 
 #endif //!TEST_OUT_PRINT_CHARACTER_H_
