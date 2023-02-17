@@ -2,7 +2,8 @@
 #define TEST_OUT_DEFINITION_H_
 
 #include "../System.h"
-#include "fmt/Flag.h"
+#include "Interface.h"
+#include "fmt/Flag.decl.h"
 
 #include <cstdint>
 #include <cwchar>
