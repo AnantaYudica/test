@@ -2,6 +2,7 @@
 #define TEST_OUT_PRINT_CHARACTER_H_
 
 #include "../fmt/Flag.h"
+#include "../Definition.h"
 
 #include <cstddef>
 
@@ -14,8 +15,17 @@ namespace print
 
 struct Character
 {
-    typedef test::out::fmt::FlagType FlagType;
+    typedef test::out::Definition::FlagType FlagType;
     typedef typename FlagType::IntegerValueType IntegerValueType;
+
+    static constexpr IntegerValueType MaskValue =
+        FlagType{FlagType::specifier_ch | 
+            FlagType::specifier_sub_width,
+            test::out::fmt::flag::Define<char>{}}.GetValue() |
+        FlagType{FlagType::specifier_ch | 
+            FlagType::specifier_sub_width,
+            test::out::fmt::flag::Define<wchar_t>{}}.GetValue();
+    
     enum : IntegerValueType
     {
         char_fmt = FlagType{FlagType::specifier_ch, 
