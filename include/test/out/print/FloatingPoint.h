@@ -10049,4 +10049,13 @@ struct FloatingPoint
 
 } //!test
 
+#ifndef TEST_OUT_PRINT_FLOATINGPOINT_DLEVEL
+
+#define TEST_OUT_PRINT_FLOATINGPOINT_DLEVEL 2
+
+#endif //!TEST_OUT_PRINT_FLOATINGPOINT_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_PRINT_FLOATINGPOINT_DLEVEL, 
+    "test::out::print::FloatingPoint", test::out::print::FloatingPoint);
+
 #endif //!TEST_OUT_PRINT_FLOATINGPOINT_H_
