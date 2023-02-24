@@ -2,6 +2,7 @@
 #define TEST_OUT_DEFINITION_H_
 
 #include "../System.h"
+#include "../Pointer.h"
 #include "Interface.h"
 #include "fmt/Flag.decl.h"
 
@@ -26,6 +27,9 @@ public:
     using FormatOutputFuncType = std::size_t (*)(OutputInterfaceType<TChar>& out, 
         void* value, std::size_t value_size, FlagType flag, 
         int width, int len_pred);
+public:
+    template<typename TChar>
+    using StringPointerType = test::Pointer<TChar>;
 };
 
 } //!out
