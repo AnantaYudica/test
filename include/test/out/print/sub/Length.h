@@ -45,4 +45,13 @@ struct Length
 
 } //!test
 
+#ifndef TEST_OUT_PRINT_SUB_LENGTH_DLEVEL
+
+#define TEST_OUT_PRINT_SUB_LENGTH_DLEVEL 2
+
+#endif //!TEST_OUT_PRINT_SUB_LENGTH_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_PRINT_SUB_LENGTH_DLEVEL, 
+    "test::out::print::sub::Length", test::out::print::sub::Length);
+
 #endif //!TEST_OUT_PRINT_SUB_LENGTH_H_
