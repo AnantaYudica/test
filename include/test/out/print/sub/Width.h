@@ -1,9 +1,9 @@
-#ifndef TEST_OUT_PRINT_WIDTH_H_
-#define TEST_OUT_PRINT_WIDTH_H_
+#ifndef TEST_OUT_PRINT_SUB_WIDTH_H_
+#define TEST_OUT_PRINT_SUB_WIDTH_H_
 
-#include "../fmt/Flag.h"
-#include "../../CString.h"
-#include "../../cstr/Format.h"
+#include "../../../System.h"
+#include "../../Definition.h"
+#include "../../fmt/Flag.h"
 
 #include <cmath>
 #include <cwchar>
@@ -16,45 +16,31 @@ namespace out
 {
 namespace print
 {
+namespace sub
+{
 
 struct Width
 {
-    typedef test::out::fmt::FlagType FlagType;
+    typedef test::out::Definition::FlagType FlagType;
     typedef typename FlagType::IntegerValueType IntegerValueType;
 
-    template<typename TChar = char, IntegerValueType IFormat = 0,
-        typename std::enable_if<std::is_same<TChar, char>::value ||
-            std::is_same<TChar, wchar_t>::value, int>::type = 0>
-    static test::CString<TChar> CStr(const test::CString<TChar>& val_cstr, ...)
-    {
-        return val_cstr;
-    }
-
-    template<typename TChar = char, IntegerValueType IFormat = 0,
-        typename std::enable_if<std::is_same<TChar, char>::value &&
-            FlagType{IFormat}.IsSpecifierSubWidth(), int>::type = 0>
-    static test::CString<TChar> CStr(const test::CString<TChar>& val_cstr, 
-        const int& size)
-    {
-        const int size_cstr = std::abs(size) < val_cstr.Size() ? 
-            val_cstr.Size() : std::abs(size);
-        return test::cstr::Format<TChar>(size_cstr + 1, "%*s", 
-                size, *val_cstr);
-    }
+    template<typename TChar>
+    using OutputInterfaceType = 
+        test::out::Definition::OutputInterfaceType<TChar>;
     
-    template<typename TChar = char, IntegerValueType IFormat = 0,
-        typename std::enable_if<!std::is_same<TChar, char>::value &&
-            std::is_same<TChar, wchar_t>::value &&
-            FlagType{IFormat}.IsSpecifierSubWidth(), int>::type = 0>
-    static test::CString<TChar> CStr(const test::CString<TChar>& val_cstr, 
-        const int& size)
+    static constexpr IntegerValueType MaskValue =
+        FlagType{FlagType::specifier_sub_width |
+            FlagType::specifier_sub_length}.GetValue();
+    
+    enum : IntegerValueType
     {
-        const int size_cstr = std::abs(size) < val_cstr.Size() ? 
-            val_cstr.Size() : std::abs(size);
-        return test::cstr::Format<TChar>(size_cstr + 1, L"%*ls", 
-                size, *val_cstr);
-    }
+        w_fmt = FlagType{FlagType::specifier_sub_width}.GetValue(),
+        l_w_fmt = FlagType{FlagType::specifier_sub_width |
+            FlagType::specifier_sub_length}.GetValue(),
+    };
 };
+
+} //!sub
 
 } //!print
 
@@ -62,4 +48,13 @@ struct Width
 
 } //!test
 
-#endif //!TEST_OUT_PRINT_WIDTH_H_
+#ifndef TEST_OUT_PRINT_SUB_WIDTH_DLEVEL
+
+#define TEST_OUT_PRINT_SUB_WIDTH_DLEVEL 2
+
+#endif //!TEST_OUT_PRINT_SUB_WIDTH_DLEVEL
+
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_PRINT_SUB_WIDTH_DLEVEL, 
+    "test::out::print::sub::Width", test::out::print::sub::Width);
+
+#endif //!TEST_OUT_PRINT_SUB_WIDTH_H_
