@@ -33,7 +33,7 @@ struct Length
     
     enum : IntegerValueType
     {
-        len_fmt = FlagType{FlagType::specifier_sub_length}.GetValue()
+        l_fmt = FlagType{FlagType::specifier_sub_length}.GetValue()
     };
 };
 

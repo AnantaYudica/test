@@ -17,7 +17,7 @@ int main()
         typedef test::out::Definition::FormatOutputFuncType<char> 
             FormatOutputCharFuncType;
         constexpr auto fmt_flag = 
-            test::out::print::sub::Length::len_fmt;
+            test::out::print::sub::Length::l_fmt;
         constexpr auto str_fmt_flag = 
             test::out::print::String::char_fmt;
         test::out::CString<char> out1;
@@ -37,7 +37,7 @@ int main()
         typedef test::out::Definition::FormatOutputFuncType<char> 
             FormatOutputCharFuncType;
         constexpr auto fmt_flag = 
-            test::out::print::sub::Length::len_fmt;
+            test::out::print::sub::Length::l_fmt;
         constexpr auto str_fmt_flag = 
             test::out::print::String::char_fmt;
         test::out::CString<wchar_t> out1;
@@ -57,7 +57,7 @@ int main()
         typedef test::out::Definition::FormatOutputFuncType<wchar_t> 
             FormatOutputCharFuncType;
         constexpr auto fmt_flag = 
-            test::out::print::sub::Length::len_fmt;
+            test::out::print::sub::Length::l_fmt;
         constexpr auto str_fmt_flag = 
             test::out::print::String::char_fmt;
         test::out::CString<wchar_t> out1;

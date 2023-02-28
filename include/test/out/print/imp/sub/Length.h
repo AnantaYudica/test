@@ -69,7 +69,7 @@ namespace sub
 {
 
 template<>
-struct Length<test::out::print::sub::Length::len_fmt>
+struct Length<test::out::print::sub::Length::l_fmt>
 {
     typedef test::out::Definition::FlagType FlagType;
     typedef typename FlagType::IntegerValueType IntegerValueType;

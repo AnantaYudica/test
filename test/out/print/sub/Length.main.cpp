@@ -9,9 +9,9 @@
 int main()
 {
     {
-        assert((test::out::print::sub::Length::len_fmt &
+        assert((test::out::print::sub::Length::l_fmt &
             test::out::print::sub::Length::MaskValue) ==
-            test::out::print::sub::Length::len_fmt);
+            test::out::print::sub::Length::l_fmt);
             
     }
     return 0;
