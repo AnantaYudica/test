@@ -5,6 +5,7 @@
 
 #include <cstdint>
 #include <utility>
+#include <atomic>
 
 namespace test
 {
@@ -13,7 +14,6 @@ namespace out
 namespace fmt
 {
 
-template<typename TValue, typename TIntegerValue>
 class Status;
 
 } //!fmt
@@ -22,24 +22,14 @@ class Status;
 
 } //!test
 
-
 #ifndef TEST_OUT_FMT_STATUS_DLEVEL
 
 #define TEST_OUT_FMT_STATUS_DLEVEL 2
 
 #endif //!TEST_OUT_FMT_STATUS_DLEVEL
 
-#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
-    test::sys::dbg::Type<TValue>,\
-    test::sys::dbg::Type<TIntegerValue>
-
-template<typename TValue, typename TIntegerValue>
-TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
-    TEST_OUT_FMT_STATUS_DLEVEL, 
-    "test::out::fmt::Status", 
-    test::out::fmt::Status<TValue, TIntegerValue>);
-
-#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_STATUS_DLEVEL, 
+    "test::out::fmt::Status", test::out::fmt::Status);
 
 
 namespace test
@@ -49,174 +39,139 @@ namespace out
 namespace fmt
 {
 
-template<typename TValue = std::uint8_t, typename TIntegerValue = TValue>
 class Status
 {
 private:
     typedef test::sys::Interface SystemType;
-    typedef test::sys::dbg::Type<test::out::fmt::Status<TValue, 
-        TIntegerValue>> DebugType;
+    typedef test::sys::dbg::Type<test::out::fmt::Status> DebugType;
 public:
-    typedef TValue ValueType;
-    typedef TIntegerValue IntegerValueType;
+    typedef std::uint8_t IntegerValueType;
+    typedef std::atomic<IntegerValueType> ValueType;
 private:
-    static constexpr IntegerValueType bad_offset = 2;
+    static constexpr IntegerValueType bad_offset = 1;
 public:
     enum : IntegerValueType
     {
-        good = 0,
-        bad = IntegerValueType(~((IntegerValueType)-1 >> 1)),
-        value_not_set = (1 << bad_offset) | bad,
-        load_failed = (2 << bad_offset) | bad,
-        flag_undefined = (3 << bad_offset) | bad
+        good = (IntegerValueType)-1,
+        bad = IntegerValueType((IntegerValueType)-1 << 1),
+        value_not_set = (0 << bad_offset) & bad,
+        load_failed = (1 << bad_offset) & bad
     };
 private:
     ValueType m_value; 
 public: 
-    Status();
+    inline Status();
 public:
-    ~Status();
+    inline ~Status();
 public:
-    Status(const Status<TValue, TIntegerValue>& cpy);
-    Status(Status<TValue, TIntegerValue>&& mov);
+    inline Status(const Status& cpy);
+    inline Status(Status&& mov);
 public:
-    Status<TValue, TIntegerValue>& 
-        operator=(const Status<TValue, TIntegerValue>& cpy);
-    Status<TValue, TIntegerValue>& 
-        operator=(Status<TValue, TIntegerValue>&& mov);
+    inline Status& operator=(const Status& cpy);
+    inline Status& operator=(Status&& mov);
 public:
-    bool IsGood() const;
-    bool IsBad() const;
+    inline bool IsGood() const;
+    inline bool IsBad() const;
 public:
-    void Reset();
-    bool Reset(const IntegerValueType& bad_code);
+    inline void Reset();
 public:
-    bool Bad(const IntegerValueType& code);
+    inline bool Bad(const IntegerValueType& code);
 public:
-    IntegerValueType GetBadCode() const;
+    inline IntegerValueType GetBadCode() const;
 };
 
-template<typename TValue, typename TIntegerValue>
-Status<TValue, TIntegerValue>::Status() :
-    m_value(good)
+inline Status::Status() :
+    m_value(value_not_set)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
 
 }
 
-template<typename TValue, typename TIntegerValue>
-Status<TValue, TIntegerValue>::~Status()
+inline Status::~Status()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
     
-    m_value = good;
+    m_value.store(value_not_set);
 }
 
-template<typename TValue, typename TIntegerValue>
-Status<TValue, TIntegerValue>::
-    Status(const Status<TValue, TIntegerValue>& cpy) :
-        m_value((TIntegerValue)cpy.m_value)
+inline Status::Status(const Status& cpy) :
+        m_value((IntegerValueType)cpy.m_value.load())
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Copy Constructor(cpy=%p)", &cpy);
     
 }
 
-template<typename TValue, typename TIntegerValue>
-Status<TValue, TIntegerValue>::
-    Status(Status<TValue, TIntegerValue>&& mov) :
-        m_value((TIntegerValue)mov.m_value)
+inline Status::Status(Status&& mov) :
+        m_value((IntegerValueType)mov.m_value.load())
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Move Constructor(mov=%p)", &mov);
     
-    mov.m_value = good;
+    mov.m_value.store(value_not_set);
 }
 
-template<typename TValue, typename TIntegerValue>
-Status<TValue, TIntegerValue>& 
-Status<TValue, TIntegerValue>::
-    operator=(const Status<TValue, TIntegerValue>& cpy)
+inline Status& Status::operator=(const Status& cpy)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Copy Assignment(cpy=%p)", &cpy);
+
+    m_value.store((IntegerValueType)cpy.m_value.load());
     
-    if (!(m_value & bad))
-        m_value = (TIntegerValue)cpy.m_value;
     return *this;
 }
-    
-template<typename TValue, typename TIntegerValue>
-Status<TValue, TIntegerValue>& 
-Status<TValue, TIntegerValue>::operator=(Status<TValue, TIntegerValue>&& mov)
+
+inline Status& Status::operator=(Status&& mov)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Move Assignment(mov=%p)", &mov);
     
-    if (!(m_value & bad))
-    {
-        m_value = (TIntegerValue)mov.m_value;
-        mov.m_value = good;
-    }
+    m_value.store((IntegerValueType)mov.m_value.load());
+    mov.m_value.store(value_not_set);
     return *this;
 }
 
-template<typename TValue, typename TIntegerValue>
-bool Status<TValue, TIntegerValue>::IsGood() const
+inline bool Status::IsGood() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "IsGood() const");
     
-    return !(m_value & bad);
+    return m_value.load() == good;
 }
 
-template<typename TValue, typename TIntegerValue>
-bool Status<TValue, TIntegerValue>::IsBad() const
+inline bool Status::IsBad() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "IsBad() const");
     
-    return m_value & bad;
+    return m_value.load() < good;
 }
- 
-template<typename TValue, typename TIntegerValue>
-void Status<TValue, TIntegerValue>::Reset()
+
+inline void Status::Reset()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Reset()");
     
-    m_value = good;
+    m_value.store(value_not_set);
 }
 
-template<typename TValue, typename TIntegerValue>
-bool Status<TValue, TIntegerValue>::Reset(const IntegerValueType& bad_code)
-{
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "Reset(bad_code=%s)", TEST_SYS_DEBUG_VALUE_STR(1, bad_code));
-    
-    if (bad_code == value_not_set)
-    {
-        m_value ^= value_not_set;
-        return true;
-    }
-    return false;
-}
-
-template<typename TValue, typename TIntegerValue>
-bool Status<TValue, TIntegerValue>::Bad(const IntegerValueType& code)
+inline bool Status::Bad(const IntegerValueType& code)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "Bad(code=%s)", TEST_SYS_DEBUG_VALUE_STR(1, code));
     
-    if (m_value & bad) return false;
-    m_value |= code;
+    if (m_value.load() < good && 
+        m_value.load() > value_not_set) 
+    {
+        return false;
+    }
+
+    m_value.store(code);
     return true;
 }
 
-template<typename TValue, typename TIntegerValue>
-typename Status<TValue, TIntegerValue>::IntegerValueType 
-Status<TValue, TIntegerValue>::GetBadCode() const
+inline typename Status::IntegerValueType Status::GetBadCode() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetBadCode() const");
     
-    return m_value;
+    return m_value.load();
 }
 
 } //!fmt
