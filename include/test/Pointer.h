@@ -676,7 +676,7 @@ bool Pointer<T, TDefinition>::operator==(std::nullptr_t other) const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator==(nullptr) const");
 
-    return false;
+    return BaseType::GetCount() == 0;
 }
 
 template<typename T, typename TDefinition>
@@ -685,7 +685,7 @@ bool Pointer<T, TDefinition>::operator!=(std::nullptr_t other) const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "operator!=(nullptr) const");
 
-    return true;
+    return BaseType::GetCount() != 0;
 }
 
 template<typename T, typename TDefinition>
