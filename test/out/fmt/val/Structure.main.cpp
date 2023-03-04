@@ -18,10 +18,11 @@ int main()
 
     assert(s1.m_status.IsBad() == true);
     assert(s1.m_status.IsGood() == false);
+    assert(s1.m_loadSize == 0);
     assert(s1.m_blocks == nullptr);
     assert(s1.m_raw == nullptr);
 
-    s1.m_blocks = StructureType::BlockType(test::ptr::arg::Array{2});
+    s1.m_blocks = StructureType::BlocksType(test::ptr::arg::Array{2});
     s1.m_raw = StructureType::RawType(test::ptr::arg::Array{4});
     
     assert(s1.m_blocks != nullptr);
