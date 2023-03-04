@@ -23,14 +23,18 @@ int main()
         assert(dat1.GetStatus().IsGood() == false);
         assert(dat1.GetStatus().IsBad() == true);
 
-        assert(dat1.GetBlock() == nullptr);
+        assert(dat1.GetLoadSize() == 0);
+
+        assert(dat1.GetBlocks() == nullptr);
 
         assert(dat1.GetRaw() == nullptr);
     }
     {
         DataType dat1;
         
-        dat1.GetBlock() = DataType::BlockType(test::ptr::arg::Array{2});
+        dat1.GetLoadSize() = 10;
+
+        dat1.GetBlocks() = DataType::BlocksType(test::ptr::arg::Array{2});
 
         dat1.GetRaw() = DataType::RawType(test::ptr::arg::Array{4});
 
@@ -51,8 +55,10 @@ int main()
         assert(dat1.GetStatus().IsGood() == false);
 
         assert(dat1.GetStatus().IsBad() == true);
+    
+        assert(dat1.GetLoadSize() == 10);
 
-        assert(dat2.GetBlock() == dat1.GetBlock());
+        assert(dat2.GetBlocks() == dat1.GetBlocks());
 
         assert(dat2.GetRaw() == dat1.GetRaw());
         
@@ -70,22 +76,29 @@ int main()
         
         dat1.GetLock().unlock();
         
-        assert(dat2.GetBlock() == nullptr);
+        assert(dat2.GetLoadSize() == 0);
+
+        assert(dat2.GetBlocks() == nullptr);
 
         assert(dat2.GetRaw() == nullptr);
+        
+        assert(dat3.GetLoadSize() == 10);
 
-        assert(dat3.GetBlock() == dat1.GetBlock());
+        assert(dat3.GetBlocks() == dat1.GetBlocks());
 
         assert(dat3.GetRaw() == dat1.GetRaw());
     }
     {
         DataType dat1;
+
+        dat1.GetLoadSize() = 10;
         
-        dat1.GetBlock() = DataType::BlockType(test::ptr::arg::Array{2});
+        dat1.GetBlocks() = DataType::BlocksType(test::ptr::arg::Array{2});
 
         dat1.GetRaw() = DataType::RawType(test::ptr::arg::Array{4});
 
         DataType dat2;
+
         dat2 = dat1;
 
         assert(dat1.GetLock().try_lock() == true);
@@ -104,7 +117,9 @@ int main()
 
         assert(dat1.GetStatus().IsBad() == true);
 
-        assert(dat2.GetBlock() == dat1.GetBlock());
+        assert(dat2.GetLoadSize() == 10);
+
+        assert(dat2.GetBlocks() == dat1.GetBlocks());
 
         assert(dat2.GetRaw() == dat1.GetRaw());
         
@@ -122,12 +137,16 @@ int main()
         assert(dat1.GetLock().try_lock() == false);
         
         dat1.GetLock().unlock();
-        
-        assert(dat2.GetBlock() == nullptr);
+
+        assert(dat2.GetLoadSize() == 0);
+
+        assert(dat2.GetBlocks() == nullptr);
 
         assert(dat2.GetRaw() == nullptr);
+        
+        assert(dat3.GetLoadSize() == 10);
 
-        assert(dat3.GetBlock() == dat1.GetBlock());
+        assert(dat3.GetBlocks() == dat1.GetBlocks());
 
         assert(dat3.GetRaw() == dat1.GetRaw());
     }
