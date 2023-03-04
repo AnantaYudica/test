@@ -69,7 +69,7 @@ public:
     typedef test::out::fmt::val::Structure<TStatus> StructureType;
 public:
     typedef typename StructureType::StatusType StatusType;
-    typedef typename StructureType::BlockType BlockType;
+    typedef typename StructureType::BlocksType BlocksType;
     typedef typename StructureType::RawType RawType;
 public:
     typedef typename StatusType::IntegerValueType StatusIntegerValueType;
@@ -87,10 +87,13 @@ public:
 public:
     std::mutex& GetLock();
 public:
+    std::size_t& GetLoadSize();
+    std::size_t GetLoadSize() const;
+public:
     StatusType& GetStatus();
     StatusType GetStatus() const;
 public:
-    BlockType& GetBlock();
+    BlocksType& GetBlocks();
 public:
     RawType& GetRaw();
 };
@@ -158,6 +161,22 @@ std::mutex& Data<TStatus>::GetLock()
 }
 
 template<typename TStatus>
+std::size_t& Data<TStatus>::GetLoadSize()
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetLoadSize()");
+
+    return m_ptr->m_loadSize;
+}
+
+template<typename TStatus>
+std::size_t Data<TStatus>::GetLoadSize() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetLoadSize() const");
+
+    return m_ptr->m_loadSize;
+}
+
+template<typename TStatus>
 typename Data<TStatus>::StatusType& Data<TStatus>::GetStatus()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetStatus()");
@@ -174,9 +193,9 @@ typename Data<TStatus>::StatusType Data<TStatus>::GetStatus() const
 }
 
 template<typename TStatus>
-typename Data<TStatus>::BlockType& Data<TStatus>::GetBlock()
+typename Data<TStatus>::BlocksType& Data<TStatus>::GetBlocks()
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetBlock()");
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetBlocks()");
 
     return m_ptr->m_blocks;
 }
