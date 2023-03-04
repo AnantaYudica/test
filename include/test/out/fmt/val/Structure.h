@@ -26,18 +26,20 @@ struct Structure
 public:
     typedef TStatus StatusType;
 public:
-    typedef test::Pointer<test::out::fmt::Block> BlockType;
+    typedef test::Pointer<test::out::fmt::Block> BlocksType;
 public:
     typedef test::Pointer<char> RawType;
 public:
-    std::mutex m_lock;
     StatusType m_status;
-    BlockType m_blocks;
+    std::mutex m_lock;
+    std::size_t m_loadSize;
+    BlocksType m_blocks;
     RawType m_raw;
 public:
     Structure() :
-        m_lock(),
         m_status(),
+        m_lock(),
+        m_loadSize(0),
         m_blocks(nullptr),
         m_raw(nullptr)
     {}
