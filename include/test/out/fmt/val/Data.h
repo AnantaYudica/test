@@ -173,7 +173,7 @@ std::size_t Data<TStatus>::GetLoadSize() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetLoadSize() const");
 
-    return m_ptr->m_loadSize;
+    return const_cast<Data<TStatus>*>(this)->m_ptr->m_loadSize;
 }
 
 template<typename TStatus>
@@ -189,7 +189,7 @@ typename Data<TStatus>::StatusType Data<TStatus>::GetStatus() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetStatus() const");
 
-    return m_ptr->m_status;
+    return const_cast<Data<TStatus>*>(this)->m_ptr->m_status;
 }
 
 template<typename TStatus>
