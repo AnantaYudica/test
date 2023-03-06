@@ -26,6 +26,9 @@ std::size_t Fun1(test::out::Interface<TChar>& out,
     return 0;
 }
 
+typedef test::out::fmt::Definition::FlagType FlagType;
+
+
 int main()
 {
     {
@@ -41,10 +44,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-         const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+         constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<void> arg1{
-            specifier
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<void>{}
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -57,10 +60,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-         const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+         constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<void> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<void>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Length{}
         };
@@ -75,10 +78,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-         const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+         constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<void> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<void>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Precision{}
         };
@@ -93,10 +96,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-         const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+         constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<void> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<void>{},
             test::out::fmt::flag::Width{10}
         };
 
@@ -111,10 +114,10 @@ int main()
         assert(arg1.GetWidth() == 10);
     }
     {
-         const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+         constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<void> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<void>{},
             test::out::fmt::flag::Length{10}
         };
 
@@ -129,10 +132,10 @@ int main()
         assert(arg1.GetLength() == 10);
     }
     {
-         const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+         constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<void> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<void>{},
             test::out::fmt::flag::Precision{10}
         };
 
@@ -147,10 +150,10 @@ int main()
         assert(arg1.GetPrecision() == 10);
     }
     {
-         const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+         constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<void> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<void>{},
             test::out::fmt::flag::Width{10},
             test::out::fmt::flag::Length{20}
         };
@@ -167,10 +170,10 @@ int main()
         assert(arg1.GetLength() == 20);
     }
     {
-         const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+         constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<void> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<void>{},
             test::out::fmt::flag::Width{10},
             test::out::fmt::flag::Precision{20}
         };
@@ -199,10 +202,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_ch;
+        constexpr auto specifier = FlagType::specifier_ch;
         test::out::fmt::Argument<char> arg1{
-            specifier
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<char>{},
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -215,10 +218,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_str;
+        constexpr auto specifier = FlagType::specifier_str;
         test::out::fmt::Argument<char*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<char>{},
             test::out::fmt::flag::Output<char>(&Fun1<char>)
         };
 
@@ -235,10 +238,9 @@ int main()
             &Fun1<char>);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_ptr;
+        constexpr auto specifier = FlagType::specifier_ptr;
         test::out::fmt::Argument<void*> arg1{
-            specifier
+            FlagType::SpecifierType<specifier>{}
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -251,10 +253,12 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_int;
+        constexpr auto specifier = FlagType::specifier_int;
         test::out::fmt::Argument<int> arg1{
-            specifier
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<int>{},
+            test::out::fmt::flag::Decimal{},
+            test::out::fmt::flag::Signed{}
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -267,10 +271,12 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_fp;
+        constexpr auto specifier = FlagType::specifier_fp;
         test::out::fmt::Argument<double> arg1{
-            specifier
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<double>{},
+            test::out::fmt::flag::Fixed{},
+            test::out::fmt::flag::Lower{}
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -283,10 +289,9 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+        constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<long> arg1{
-            specifier
+            FlagType::SpecifierType<specifier>{}
         };
         
         assert(arg1.GetFlag().IsBad() == false);
@@ -299,10 +304,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_bool;
+        constexpr auto specifier = FlagType::specifier_bool;
         test::out::fmt::Argument<bool> arg1{
-            specifier
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<bool>{}
         };
         
         assert(arg1.GetFlag().IsBad() == false);
@@ -315,10 +320,9 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         test::out::fmt::Argument<Obj> arg1{
-            specifier
+            FlagType::SpecifierType<specifier>{}
         };
         
         assert(arg1.GetFlag().IsBad() == false);
@@ -331,10 +335,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_ch;
+        constexpr auto specifier = FlagType::specifier_ch;
         test::out::fmt::Argument<char> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<char>{},
             test::out::fmt::flag::Value<char>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Length{},
@@ -355,10 +359,10 @@ int main()
             nullptr);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_str;
+        constexpr auto specifier = FlagType::specifier_str;
         test::out::fmt::Argument<char*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<char>{},
             test::out::fmt::flag::Value<char*>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Length{},
@@ -379,10 +383,9 @@ int main()
             &Fun1<char>);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_ptr;
+        constexpr auto specifier = FlagType::specifier_ptr;
         test::out::fmt::Argument<void*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Value<void*>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Length{}
@@ -398,10 +401,12 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_int;
+        constexpr auto specifier = FlagType::specifier_int;
         test::out::fmt::Argument<int> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Decimal{},
+            test::out::fmt::flag::Signed{},
+            test::out::fmt::flag::Define<short>{},
             test::out::fmt::flag::Value<short>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Length{}
@@ -417,11 +422,13 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_fp;
+        constexpr auto specifier = FlagType::specifier_fp;
         test::out::fmt::Argument<double> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Value<double>{},
+            test::out::fmt::flag::Define<double>{},
+            test::out::fmt::flag::Fixed{},
+            test::out::fmt::flag::Lower{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Length{}
         };
@@ -436,10 +443,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+        constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<long> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<int>{},
             test::out::fmt::flag::Value<int>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Length{}
@@ -455,10 +462,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_bool;
+        constexpr auto specifier = FlagType::specifier_bool;
         test::out::fmt::Argument<bool> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<bool>{},
             test::out::fmt::flag::Value<bool>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Length{}
@@ -474,10 +481,9 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Value<Obj>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Length{}
@@ -494,10 +500,10 @@ int main()
     }
 
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_ch;
+        constexpr auto specifier = FlagType::specifier_ch;
         test::out::fmt::Argument<char> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<char>{},
             test::out::fmt::flag::Value<char>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Precision{}
@@ -513,10 +519,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_str;
+        constexpr auto specifier = FlagType::specifier_str;
         test::out::fmt::Argument<char*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<char>{},
             test::out::fmt::flag::Value<char*>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Precision{},
@@ -536,10 +542,9 @@ int main()
             &Fun1<char>);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_ptr;
+        constexpr auto specifier = FlagType::specifier_ptr;
         test::out::fmt::Argument<void*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Value<void*>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Precision{}
@@ -555,10 +560,12 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_int;
+        constexpr auto specifier = FlagType::specifier_int;
         test::out::fmt::Argument<int> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Decimal{},
+            test::out::fmt::flag::Signed{},
+            test::out::fmt::flag::Define<short>{},
             test::out::fmt::flag::Value<short>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Precision{}
@@ -574,11 +581,13 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_fp;
+        constexpr auto specifier = FlagType::specifier_fp;
         test::out::fmt::Argument<double> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<double>{},
             test::out::fmt::flag::Value<double>{},
+            test::out::fmt::flag::Fixed{},
+            test::out::fmt::flag::Lower{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Precision{}
         };
@@ -593,10 +602,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+        constexpr auto specifier = FlagType::specifier_blank;
         test::out::fmt::Argument<long> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<int>{},
             test::out::fmt::flag::Value<int>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Precision{}
@@ -612,10 +621,10 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_bool;
+        constexpr auto specifier = FlagType::specifier_bool;
         test::out::fmt::Argument<bool> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<bool>{},
             test::out::fmt::flag::Value<bool>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Precision{}
@@ -631,10 +640,9 @@ int main()
         assert(!arg1.GetFlag().HasInputPrecision());
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Value<Obj>{},
             test::out::fmt::flag::Width{},
             test::out::fmt::flag::Precision{}
@@ -651,9 +659,10 @@ int main()
     }
 
     {
-        
+        constexpr auto specifier = FlagType::specifier_ch;
         test::out::fmt::Argument<char> arg1{
-            test::out::fmt::Definition::FlagType::specifier_ch,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<char>{},
             test::out::fmt::flag::Value<char>('a')
         };
 
@@ -668,12 +677,12 @@ int main()
         assert(arg1.GetValue() == 'a');
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_str;
+        constexpr auto specifier = FlagType::specifier_str;
         const char * str1 = "test";
         char * str2 = const_cast<char *>(str1);
         test::out::fmt::Argument<char*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<char>{},
             test::out::fmt::flag::Value<char*>(str2),
             test::out::fmt::flag::Output<char>(&Fun1<char>)
         };
@@ -692,11 +701,11 @@ int main()
             &Fun1<char>);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_str;
+        constexpr auto specifier = FlagType::specifier_str;
         const char * str1 = "test";
         test::out::fmt::Argument<char*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<char>{},
             test::out::fmt::flag::Value<const char*>(str1),
             test::out::fmt::flag::Output<char>(&Fun1<char>)
         };
@@ -715,12 +724,12 @@ int main()
             &Fun1<char>);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_str;
+        constexpr auto specifier = FlagType::specifier_str;
         const wchar_t * str1 = L"test";
         wchar_t * str2 = const_cast<wchar_t*>(str1);
         test::out::fmt::Argument<wchar_t*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<wchar_t>{},
             test::out::fmt::flag::Value<wchar_t*>(str2),
             test::out::fmt::flag::Output<wchar_t>(&Fun1<wchar_t>)
         };
@@ -739,11 +748,11 @@ int main()
             &Fun1<wchar_t>);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_str;
+        constexpr auto specifier = FlagType::specifier_str;
         const wchar_t * str1 = L"test";
         test::out::fmt::Argument<wchar_t*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<wchar_t>{},
             test::out::fmt::flag::Value<const wchar_t*>(str1),
             test::out::fmt::flag::Output<wchar_t>(&Fun1<wchar_t>)
         };
@@ -762,11 +771,10 @@ int main()
             &Fun1<wchar_t>);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_ptr;
+        constexpr auto specifier = FlagType::specifier_ptr;
         int val1 = 0;
         test::out::fmt::Argument<void*> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Value<void*>(&val1)
         };
 
@@ -781,11 +789,13 @@ int main()
         assert(arg1.GetValue() == &val1);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_int;
+        constexpr auto specifier = FlagType::specifier_int;
         int val1 = 4;
         test::out::fmt::Argument<int> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<int>{},
+            test::out::fmt::flag::Decimal{},
+            test::out::fmt::flag::Signed{},
             test::out::fmt::flag::Value<int>(val1)
         };
 
@@ -800,12 +810,14 @@ int main()
         assert(arg1.GetValue() == val1);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_fp;
+        constexpr auto specifier = FlagType::specifier_fp;
         double val1 = 3.14;
         test::out::fmt::Argument<double> arg1{
-            specifier,
-            test::out::fmt::flag::Value<double>(val1)
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<double>{},
+            test::out::fmt::flag::Value<double>(val1),
+            test::out::fmt::flag::Fixed{},
+            test::out::fmt::flag::Lower{}
         };
 
         assert(arg1.GetFlag().IsBad() == false);
@@ -819,11 +831,10 @@ int main()
         assert(arg1.GetValue() == val1);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_blank;
+        constexpr auto specifier = FlagType::specifier_blank;
         long val1 = 6;
         test::out::fmt::Argument<long> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Value<long>(val1)
         };
         
@@ -838,11 +849,11 @@ int main()
         assert(arg1.GetValue() == val1);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_bool;
+        constexpr auto specifier = FlagType::specifier_bool;
         bool val1 = true;
         test::out::fmt::Argument<bool> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
+            test::out::fmt::flag::Define<bool>{},
             test::out::fmt::flag::Value<bool>(val1)
         };
         
@@ -857,11 +868,10 @@ int main()
         assert(arg1.GetValue() == val1);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         Obj obj1{10};
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Value<Obj>(obj1)
         };
         
@@ -876,10 +886,9 @@ int main()
         assert(arg1.GetValue().val == obj1.val);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Width{4}
         };
 
@@ -895,10 +904,9 @@ int main()
         assert(arg1.GetWidth() == 4);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Length{10}
         };
 
@@ -914,10 +922,9 @@ int main()
         assert(arg1.GetLength() == 10);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Precision{8}
         };
 
@@ -933,10 +940,9 @@ int main()
         assert(arg1.GetPrecision() == 8);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Width{10},
             test::out::fmt::flag::Length{20}
         };
@@ -954,10 +960,9 @@ int main()
         assert(arg1.GetLength() == 20);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Width{10},
             test::out::fmt::flag::Precision{20}
         };
@@ -977,12 +982,11 @@ int main()
 
     
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         Obj obj1{10};
     
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Width{4},
             test::out::fmt::flag::Value<Obj>(obj1)
         };
@@ -1000,12 +1004,11 @@ int main()
         assert(arg1.GetValue().val == obj1.val);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         Obj obj1{10};
     
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Length{10},
             test::out::fmt::flag::Value<Obj>(obj1)
         };
@@ -1023,12 +1026,11 @@ int main()
         assert(arg1.GetValue().val == obj1.val);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         Obj obj1{10};
     
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Precision{8},
             test::out::fmt::flag::Value<Obj>(obj1)
         };
@@ -1046,12 +1048,11 @@ int main()
         assert(arg1.GetValue().val == obj1.val);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         Obj obj1{10};
     
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Width{10},
             test::out::fmt::flag::Length{20},
             test::out::fmt::flag::Value<Obj>(obj1)
@@ -1071,12 +1072,11 @@ int main()
         assert(arg1.GetValue().val == obj1.val);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         Obj obj1{10};
     
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Width{10},
             test::out::fmt::flag::Precision{20},
             test::out::fmt::flag::Value<Obj>(obj1)
@@ -1096,12 +1096,11 @@ int main()
         assert(arg1.GetValue().val == obj1.val);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         Obj obj1{10};
     
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Width{10},
             test::out::fmt::flag::Precision{20},
             test::out::fmt::flag::Value<Obj>(obj1),
@@ -1124,12 +1123,11 @@ int main()
         assert(arg1.GetFormatOutput().template Get<char>() == &Fun1<char>);
     }
     {
-        const auto specifier = 
-            test::out::fmt::Definition::FlagType::specifier_object;
+        constexpr auto specifier = FlagType::specifier_object;
         Obj obj1{10};
     
         test::out::fmt::Argument<Obj> arg1{
-            specifier,
+            FlagType::SpecifierType<specifier>{},
             test::out::fmt::flag::Width{10},
             test::out::fmt::flag::Precision{20},
             test::out::fmt::flag::Value<Obj>(obj1),
