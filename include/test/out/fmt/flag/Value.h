@@ -3,6 +3,9 @@
 
 #include "../../../System.h"
 
+#include <type_traits>
+#include <cstring>
+
 namespace test
 {
 namespace out
@@ -15,28 +18,34 @@ namespace flag
 template<typename T>
 class Value
 {
+public:
+    typedef typename std::remove_cv<typename std::remove_reference<T>::
+        type>::type Type;
 private:
     bool m_default;
-    T m_value;
+    char m_value[sizeof(Type)];
 public:
     constexpr Value();
-    constexpr explicit Value(const T& val);
+    explicit Value(const Type& val);
 public:
     constexpr bool IsDefault() const;
-    constexpr T GetValue() const;
+    constexpr Type GetValue() const;
 };
 
 template<typename T>
 constexpr Value<T>::Value() :
     m_default(true),
-    m_value()
+    m_value{}
 {}
 
 template<typename T>
-constexpr Value<T>::Value(const T& val) :
+Value<T>::Value(const Type& val) :
     m_default(false),
-    m_value(val)
-{}
+    m_value{}
+{
+    std::memset(m_value, 0, sizeof(Type));
+    (reinterpret_cast<Type&>(*m_value)) = val;
+}
 
 template<typename T>
 constexpr bool Value<T>::IsDefault() const
@@ -45,9 +54,9 @@ constexpr bool Value<T>::IsDefault() const
 }
 
 template<typename T>
-constexpr T Value<T>::GetValue() const
+constexpr typename Value<T>::Type Value<T>::GetValue() const
 {
-    return m_value;
+    return reinterpret_cast<const Type&>(*m_value);
 }
 
 } //!flag
