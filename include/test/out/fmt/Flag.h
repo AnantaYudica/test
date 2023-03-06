@@ -52,6 +52,18 @@ namespace out
 {
 namespace fmt
 {
+namespace flag
+{
+
+template<typename TIntegerValue, TIntegerValue V>
+struct Specifier
+{
+    static constexpr TIntegerValue Value = V;
+    Specifier() = default;
+};
+
+
+} //!flag
 
 template<typename TValue, typename TIntegerValue>
 class Flag
@@ -83,6 +95,9 @@ public:
     using SetValueType = test::out::fmt::flag::Value<T>;
     template<typename... TCharArgs>
     using SetOutputType = test::out::fmt::flag::Output<TCharArgs...>;
+public:
+    template<IntegerValueType V>
+    using SpecifierType = test::out::fmt::flag::Specifier<IntegerValueType, V>;
 public:
     static constexpr IntegerValueType define_type_offset = 0;
     static constexpr IntegerValueType define_type_mask = 
@@ -1346,5 +1361,23 @@ Flag<TValue, TIntegerValue>::GetBadCode() const
 } //!out
 
 } //!test
+
+#ifndef TEST_OUT_FMT_FLAG_SPECIFIER_DLEVEL
+
+#define TEST_OUT_FMT_FLAG_SPECIFIER_DLEVEL 2
+
+#endif //!TEST_OUT_FMT_FLAG_SPECIFIER_DLEVEL
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<TIntegerValue>,\
+    test::sys::dbg::type::Value<TIntegerValue, V>
+
+template<typename TIntegerValue, TIntegerValue V>
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_OUT_FMT_FLAG_SPECIFIER_DLEVEL, 
+    "test::out::fmt::flag::Specifier", 
+    test::out::fmt::flag::Specifier<TIntegerValue, V>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
 
 #endif //!TEST_OUT_FMT_FLAG_H_
