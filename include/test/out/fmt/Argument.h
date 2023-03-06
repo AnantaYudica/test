@@ -3,6 +3,15 @@
 
 #include "../../System.h"
 #include "../../Pointer.h"
+#include "../Definition.h"
+#include "../print/imp/Boolean.h"
+#include "../print/imp/Character.h"
+#include "../print/imp/FloatingPoint.h"
+#include "../print/imp/Integer.h"
+#include "../print/imp/Nothing.h"
+#include "../print/imp/Object.h"
+#include "../print/imp/Pointer.h"
+#include "../print/imp/String.h"
 #include "Definition.h"
 #include "Flag.h"
 
@@ -63,6 +72,8 @@ public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
     typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+    template<FlagValueType V>
+    using FlagSpecifierType = typename FlagType::template SpecifierType<V>;
 public:
     typedef test::out::fmt::Definition DefinitionType;
 private:
@@ -88,8 +99,9 @@ private:
     T m_value;
 public:
     constexpr Argument();
-    template<typename... TFlagArgs>
-    constexpr Argument(FlagIntegerValueType specifier, 
+    template<typename TFlagIntegerValue = FlagIntegerValueType,
+        TFlagIntegerValue VIntegerValueFlag, typename... TFlagArgs>
+    constexpr Argument(FlagSpecifierType<VIntegerValueFlag> specifier, 
         TFlagArgs&&... flags);
 public:
     Argument(const Argument<T>&) = delete;
@@ -115,10 +127,18 @@ public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
     typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+    template<FlagValueType V>
+    using FlagSpecifierType = typename FlagType::template SpecifierType<V>;
+    template<typename T>
+    using FlagDefineType = test::out::fmt::flag::Define<T>;
 public:
     typedef test::out::fmt::Definition DefinitionType;
 public:
     typedef typename DefinitionType::FormatOutputType FormatOutputType;
+public:
+    template<typename TChar>
+    using FormatOutputFuncType = 
+        typename DefinitionType::template FormatOutputFuncType<TChar>;
 private:
     static constexpr std::false_type IsWidthType_(...);
     static constexpr std::true_type 
@@ -169,18 +189,85 @@ private:
         typename std::enable_if<!TCond_::value, int>::type = 0>
     static constexpr int Length(TFlagArg&& flag, TFlagArgs&&... flags);
 private:
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+        typename T, TIntegerValueFlag VFlagSpecifier_ = 
+            (VIntegerValueFlag & FlagType::specifier_type_mask), 
+        typename TFlag_ = FlagType,
+        typename std::enable_if<TFlag_::specifier_bool == VFlagSpecifier_, 
+            int>::type = 1>
+    static constexpr FormatOutputType OutputDefault();
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+        typename T, TIntegerValueFlag VFlagSpecifier_ = 
+            (VIntegerValueFlag & FlagType::specifier_type_mask), 
+        typename TFlag_ = FlagType,
+        typename std::enable_if<TFlag_::specifier_ch == VFlagSpecifier_, 
+            int>::type = 2>
+    static constexpr FormatOutputType OutputDefault();
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+        typename T, TIntegerValueFlag VFlagSpecifier_ = 
+            (VIntegerValueFlag & FlagType::specifier_type_mask), 
+        typename TFlag_ = FlagType,
+        typename std::enable_if<TFlag_::specifier_fp == VFlagSpecifier_, 
+            int>::type = 3>
+    static constexpr FormatOutputType OutputDefault();
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+        typename T, TIntegerValueFlag VFlagSpecifier_ = 
+            (VIntegerValueFlag & FlagType::specifier_type_mask), 
+        typename TFlag_ = FlagType,
+        typename std::enable_if<TFlag_::specifier_int == VFlagSpecifier_, 
+            int>::type = 4>
+    static constexpr FormatOutputType OutputDefault();
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+        typename T, TIntegerValueFlag VFlagSpecifier_ = 
+            (VIntegerValueFlag & FlagType::specifier_type_mask), 
+        typename TFlag_ = FlagType,
+        typename std::enable_if<TFlag_::specifier_blank == VFlagSpecifier_, 
+            int>::type = 5>
+    static constexpr FormatOutputType OutputDefault();
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+        typename T, TIntegerValueFlag VFlagSpecifier_ = 
+            (VIntegerValueFlag & FlagType::specifier_type_mask), 
+        typename TFlag_ = FlagType,
+        typename std::enable_if<TFlag_::specifier_object == VFlagSpecifier_, 
+            int>::type = 6>
+    static constexpr FormatOutputType OutputDefault();
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+        typename T, TIntegerValueFlag VFlagSpecifier_ = 
+            (VIntegerValueFlag & FlagType::specifier_type_mask), 
+        typename TFlag_ = FlagType,
+        typename std::enable_if<TFlag_::specifier_ptr == VFlagSpecifier_, 
+            int>::type = 7>
+    static constexpr FormatOutputType OutputDefault();
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+        typename T, TIntegerValueFlag VFlagSpecifier_ = 
+            (VIntegerValueFlag & FlagType::specifier_type_mask), 
+        typename TFlag_ = FlagType,
+        typename std::enable_if<TFlag_::specifier_str == VFlagSpecifier_, 
+            int>::type = 8>
+    static constexpr FormatOutputType OutputDefault();
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+        typename T, TIntegerValueFlag VFlagSpecifier_ = 
+            (VIntegerValueFlag & FlagType::specifier_type_mask), 
+        typename TFlag_ = FlagType,
+        typename std::enable_if<TFlag_::specifier_undefined == VFlagSpecifier_,
+            int>::type = 0>
+    static constexpr FormatOutputType OutputDefault();
+private:
+    template<typename TIntegerValueFlag, 
+        TIntegerValueFlag VIntegerValueFlag, typename T>
     static constexpr FormatOutputType Output();
-    template<typename... TCharArgs, typename... TFlagArgs>
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag, 
+        typename T, typename... TCharArgs, typename... TFlagArgs>
     static constexpr FormatOutputType Output(test::out::fmt::flag::
-        Output<TCharArgs...>&& out, 
-        TFlagArgs&&... flags);
-    template<typename TFlagArg, typename... TFlagArgs,
+        Output<TCharArgs...>&& flag_out, TFlagArgs&&... flag_args);
+    template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag, 
+        typename T, typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename TCond_ = IsOutputType<TFlagArg_>,
         typename std::enable_if<!TCond_::value, int>::type = 0>
-    static constexpr FormatOutputType Output(TFlagArg&& flag, 
-        TFlagArgs&&... flags);
+    static constexpr FormatOutputType Output(TFlagArg&& flag_arg, 
+        TFlagArgs&&... flag_args);
 private:
     FlagType m_flag;
     int m_width;
@@ -188,9 +275,10 @@ private:
     FormatOutputType m_fmtout;
 public:
     constexpr Argument();
-    template<typename... TFlagArgs>
-    constexpr Argument(FlagIntegerValueType specifier, 
-        TFlagArgs&&... flags);
+    template<typename TFlagIntegerValue = FlagIntegerValueType,
+        TFlagIntegerValue VFlagSpecifier, typename T, typename... TFlagArgs>
+    constexpr Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
+        FlagDefineType<T> define, TFlagArgs&&... flags);
 public:
     Argument(const Argument<void, TFlag>&) = delete;
     Argument(Argument<void, TFlag>&&) = delete;
@@ -218,12 +306,15 @@ public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
     typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+    template<FlagValueType V>
+    using FlagSpecifierType = typename FlagType::template SpecifierType<V>;
 public:
     typedef test::out::fmt::Definition DefinitionType;
 public:
     typedef typename DefinitionType::String<TCharPtr>::CharacterType 
         CharacterType;
-    typedef typename test::Pointer<CharacterType> StringPointerType;
+    typedef typename test::out::Definition::StringPointerType<CharacterType> 
+        StringPointerType;
 private:
     static constexpr std::false_type IsValueType_(...);
     template<typename T_>
@@ -279,22 +370,28 @@ private:
     StringPointerType m_value;
 public:
     constexpr Argument();
-    template<typename... TFlagArgs, 
+    template<typename TFlagIntegerValue = FlagIntegerValueType,
+        TFlagIntegerValue VFlagSpecifier, typename... TFlagArgs, 
         typename TCond_ = IsContainValueType<TFlagArgs...>,
         typename std::enable_if<!TCond_::value, int>::type = 0>
-    constexpr Argument(FlagIntegerValueType specifier, TFlagArgs&&... flags);
-    template<typename... TFlagArgs, 
+    constexpr Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
+        TFlagArgs&&... flags);
+    template<typename TFlagIntegerValue = FlagIntegerValueType,
+        TFlagIntegerValue VFlagSpecifier, typename... TFlagArgs, 
         typename TCond_ = IsContainValueType<TFlagArgs...>,
         typename TChar_ = CharacterType,
         typename std::enable_if<TCond_::value &&
             std::is_same<char, TChar_>::value, int>::type = 1>
-    Argument(FlagIntegerValueType specifier, TFlagArgs&&... flags);
-    template<typename... TFlagArgs, 
+    Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
+        TFlagArgs&&... flags);
+    template<typename TFlagIntegerValue = FlagIntegerValueType,
+        TFlagIntegerValue VFlagSpecifier, typename... TFlagArgs, 
         typename TCond_ = IsContainValueType<TFlagArgs...>,
         typename TChar_ = CharacterType,
         typename std::enable_if<TCond_::value &&
             std::is_same<wchar_t, TChar_>::value, int>::type = 2>
-    Argument(FlagIntegerValueType specifier, TFlagArgs&&... flags);
+    Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
+        TFlagArgs&&... flags);
 public:
     Argument(const Argument<TCharPtr, TFlag>&) = delete;
     Argument(Argument<TCharPtr, TFlag>&&) = delete;
@@ -346,11 +443,15 @@ constexpr Argument<T, TFlag, TEnable>::Argument() :
 {}
 
 template<typename T, typename TFlag, typename TEnable>
-template<typename... TFlagArgs>
-constexpr Argument<T, TFlag, TEnable>::Argument(FlagIntegerValueType specifier,
+template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier, 
+    typename... TFlagArgs>
+constexpr Argument<T, TFlag, TEnable>::
+    Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
         TFlagArgs&&... flags) :
-    Argument<void, TFlag>(specifier, std::forward<TFlagArgs>(flags)...),
-    m_value(Value(std::forward<TFlagArgs>(flags)...))
+            Argument<void, TFlag>(specifier, 
+                test::out::fmt::flag::Define<T>{},
+                std::forward<TFlagArgs>(flags)...),
+            m_value(Value(std::forward<TFlagArgs>(flags)...))
 {}
 
 template<typename T, typename TFlag, typename TEnable>
@@ -419,28 +520,189 @@ constexpr int Argument<void, TFlag, void>::
 }
 
 template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T, TIntegerValueFlag VFlagSpecifier_, typename TFlag_,
+    typename std::enable_if<TFlag_::specifier_bool == VFlagSpecifier_, 
+        int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::Output()
+Argument<void, TFlag, void>::OutputDefault()
+{
+    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
+    typedef test::out::print::Boolean BooleanType;
+    typedef test::out::print::imp::Boolean<VIntegerValueFlag & 
+        BooleanType::MaskValue> PrintType;
+    return FormatOutputType{FlagOutputType{
+        (FormatOutputFuncType<char>)&PrintType::Output,
+        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
+    }};
+}
+
+template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T, TIntegerValueFlag VFlagSpecifier_, typename TFlag_,
+    typename std::enable_if<TFlag_::specifier_ch == VFlagSpecifier_, 
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::OutputDefault()
+{
+    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
+    typedef test::out::print::Character CharacterType;
+    typedef test::out::print::imp::Character<VIntegerValueFlag & 
+        CharacterType::MaskValue> PrintType;
+    return FormatOutputType{FlagOutputType{
+        (FormatOutputFuncType<char>)&PrintType::Output,
+        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
+    }};
+}
+
+template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T, TIntegerValueFlag VFlagSpecifier_, typename TFlag_,
+    typename std::enable_if<TFlag_::specifier_fp == VFlagSpecifier_, 
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::OutputDefault()
+{
+    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
+    typedef test::out::print::FloatingPoint FloatingPointType;
+    typedef test::out::print::imp::FloatingPoint<VIntegerValueFlag & 
+        FloatingPointType::MaskValue> PrintType;
+    return FormatOutputType{FlagOutputType{
+        (FormatOutputFuncType<char>)&PrintType::Output,
+        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
+    }};
+}
+
+template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T, TIntegerValueFlag VFlagSpecifier_, typename TFlag_,
+    typename std::enable_if<TFlag_::specifier_int == VFlagSpecifier_, 
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::OutputDefault()
+{
+    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
+    typedef test::out::print::Integer IntegerType;
+    typedef test::out::print::imp::Integer<VIntegerValueFlag & 
+        IntegerType::MaskValue> PrintType;
+    return FormatOutputType{FlagOutputType{
+        (FormatOutputFuncType<char>)&PrintType::Output,
+        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
+    }};
+}
+
+template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T, TIntegerValueFlag VFlagSpecifier_, typename TFlag_,
+    typename std::enable_if<TFlag_::specifier_blank == VFlagSpecifier_, 
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::OutputDefault()
+{
+    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
+    typedef test::out::print::imp::Nothing PrintType;
+    return FormatOutputType{FlagOutputType{
+        (FormatOutputFuncType<char>)&PrintType::Output,
+        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
+    }};
+}
+
+template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T, TIntegerValueFlag VFlagSpecifier_ , typename TFlag_,
+    typename std::enable_if<TFlag_::specifier_object == VFlagSpecifier_, 
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::OutputDefault()
+{
+    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
+    typedef test::out::print::Object ObjectType;
+    typedef test::out::print::imp::Object<T, VIntegerValueFlag & 
+        ObjectType::MaskValue> PrintType;
+    return FormatOutputType{FlagOutputType{
+        (FormatOutputFuncType<char>)&PrintType::Output,
+        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
+    }};
+}
+
+template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T, TIntegerValueFlag VFlagSpecifier_, typename TFlag_,
+    typename std::enable_if<TFlag_::specifier_ptr == VFlagSpecifier_, 
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::OutputDefault()
+{
+    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
+    typedef test::out::print::Pointer PointerType;
+    typedef test::out::print::imp::Pointer<VIntegerValueFlag & 
+        PointerType::MaskValue> PrintType;
+    return FormatOutputType{FlagOutputType{
+        (FormatOutputFuncType<char>)&PrintType::Output,
+        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
+    }};
+}
+
+template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T, TIntegerValueFlag VFlagSpecifier_, typename TFlag_,
+    typename std::enable_if<TFlag_::specifier_str == VFlagSpecifier_, 
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::OutputDefault()
+{
+    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
+    typedef test::out::print::String StringType;
+    typedef test::out::print::imp::String<VIntegerValueFlag & 
+        StringType::MaskValue> PrintType;
+    return FormatOutputType{FlagOutputType{
+        (FormatOutputFuncType<char>)&PrintType::Output,
+        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
+    }};
+}
+
+template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T, TIntegerValueFlag VFlagSpecifier_, typename TFlag_,
+    typename std::enable_if<TFlag_::specifier_undefined == VFlagSpecifier_,
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::OutputDefault()
 {
     return {};
 }
 
 template<typename TFlag>
-    template<typename... TCharArgs, typename... TFlagArgs>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
+    typename T>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::Output(test::out::fmt::flag::
-    Output<TCharArgs...>&& out, TFlagArgs&&... flags)
+Argument<void, TFlag, void>::Output()
 {
-    return {std::forward<test::out::fmt::flag::Output<TCharArgs...>>(out)};
+    return OutputDefault<TIntegerValueFlag, VIntegerValueFlag, T>();
 }
 
 template<typename TFlag>
-template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename TCond_, typename std::enable_if<!TCond_::value, int>::type>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag, 
+    typename T, typename... TCharArgs, typename... TFlagArgs>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag>::Output(TFlagArg&& flag, TFlagArgs&&... flags)
+Argument<void, TFlag, void>::Output(test::out::fmt::flag::
+    Output<TCharArgs...>&& flag_out, TFlagArgs&&... flag_args)
 {
-    return Output(std::forward<TFlagArgs>(flags)...);
+    return {std::forward<test::out::fmt::flag::
+        Output<TCharArgs...>>(flag_out)};
+}
+
+template<typename TFlag>
+template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag, 
+    typename T, typename TFlagArg, typename... TFlagArgs, 
+    typename TFlagArg_, typename TCond_, 
+    typename std::enable_if<!TCond_::value, int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag>::Output(TFlagArg&& flag_arg, 
+    TFlagArgs&&... flag_args)
+{
+    return Output<TIntegerValueFlag, 
+        VIntegerValueFlag, T>(std::forward<TFlagArgs>(flag_args)...);
 }
 
 template<typename TFlag>
@@ -452,13 +714,17 @@ constexpr Argument<void, TFlag, void>::Argument() :
 {}
 
 template<typename TFlag>
-template<typename... TFlagArgs>
-constexpr Argument<void, TFlag, void>::Argument(FlagIntegerValueType specifier,
-        TFlagArgs&&... flags) :
-    m_flag(specifier, std::forward<TFlagArgs>(flags)...),
-    m_width(Width(std::forward<TFlagArgs>(flags)...)),
-    m_length(Length(std::forward<TFlagArgs>(flags)...)),
-    m_fmtout(Output(std::forward<TFlagArgs>(flags)...))
+template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier, 
+    typename T, typename... TFlagArgs>
+constexpr Argument<void, TFlag, void>::
+    Argument(FlagSpecifierType<VFlagSpecifier> specifier,
+        FlagDefineType<T> define, TFlagArgs&&... flags) :
+            m_flag(VFlagSpecifier, std::forward<TFlagArgs>(flags)...),
+            m_width(Width(std::forward<TFlagArgs>(flags)...)),
+            m_length(Length(std::forward<TFlagArgs>(flags)...)),
+            m_fmtout(Output<FlagIntegerValueType, 
+                TFlag{VFlagSpecifier, TFlagArgs{}...}.GetValue(), 
+                T>(std::forward<TFlagArgs>(flags)...))
 {}
 
 template< typename TFlag>
@@ -548,26 +814,32 @@ constexpr Argument<TCharPtr, TFlag, typename test::out::fmt::
 {}
 
 template<typename TCharPtr, typename TFlag>
-template<typename... TFlagArgs, typename TCond_,
+template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier, 
+    typename... TFlagArgs, typename TCond_,
     typename std::enable_if<!TCond_::value, int>::type>
 constexpr Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
-        Argument(FlagIntegerValueType specifier, TFlagArgs&&... flags) :
-            Argument<void, TFlag>(specifier, 
-                std::forward<TFlagArgs>(flags)...),
-            m_value(nullptr)
+        Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
+            TFlagArgs&&... flags) :
+                Argument<void, TFlag>(specifier, 
+                    test::out::fmt::flag::Define<CharacterType*>{},
+                    std::forward<TFlagArgs>(flags)...),
+                m_value(nullptr)
 {}
 
 template<typename TCharPtr, typename TFlag>
-template<typename... TFlagArgs, typename TCond_, typename TChar_,
+template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier, 
+    typename... TFlagArgs, typename TCond_, typename TChar_,
     typename std::enable_if<TCond_::value &&
         std::is_same<char, TChar_>::value, int>::type>
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
-        Argument(FlagIntegerValueType specifier, TFlagArgs&&... flags) :
-            Argument<void, TFlag>(specifier, 
-                std::forward<TFlagArgs>(flags)...),
-            m_value(nullptr)
+        Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
+            TFlagArgs&&... flags) :
+                Argument<void, TFlag>(specifier, 
+                    test::out::fmt::flag::Define<CharacterType*>{},
+                    std::forward<TFlagArgs>(flags)...),
+                m_value(nullptr)
 {
     const char* value = Value(std::forward<TFlagArgs>(flags)...);
     if (value != NULL)
@@ -595,15 +867,18 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
 }
     
 template<typename TCharPtr, typename TFlag>
-template<typename... TFlagArgs, typename TCond_, typename TChar_,
+template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier, 
+    typename... TFlagArgs, typename TCond_, typename TChar_,
     typename std::enable_if<TCond_::value &&
         std::is_same<wchar_t, TChar_>::value, int>::type>
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
-        Argument(FlagIntegerValueType specifier, TFlagArgs&&... flags) :
-            Argument<void, TFlag>(specifier, 
-                std::forward<TFlagArgs>(flags)...),
-            m_value(nullptr)
+        Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
+            TFlagArgs&&... flags) :
+                Argument<void, TFlag>(specifier, 
+                    test::out::fmt::flag::Define<CharacterType*>{},
+                    std::forward<TFlagArgs>(flags)...),
+                m_value(nullptr)
 {
     const wchar_t* value = Value(std::forward<TFlagArgs>(flags)...);
     if (value != NULL)
