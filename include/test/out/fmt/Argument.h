@@ -195,63 +195,63 @@ private:
         typename TFlag_ = FlagType,
         typename std::enable_if<TFlag_::specifier_bool == VFlagSpecifier_, 
             int>::type = 1>
-    static constexpr FormatOutputType OutputDefault();
+    static constexpr FormatOutputType DefaultOutput();
     template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
         typename T, TIntegerValueFlag VFlagSpecifier_ = 
             (VIntegerValueFlag & FlagType::specifier_type_mask), 
         typename TFlag_ = FlagType,
         typename std::enable_if<TFlag_::specifier_ch == VFlagSpecifier_, 
             int>::type = 2>
-    static constexpr FormatOutputType OutputDefault();
+    static constexpr FormatOutputType DefaultOutput();
     template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
         typename T, TIntegerValueFlag VFlagSpecifier_ = 
             (VIntegerValueFlag & FlagType::specifier_type_mask), 
         typename TFlag_ = FlagType,
         typename std::enable_if<TFlag_::specifier_fp == VFlagSpecifier_, 
             int>::type = 3>
-    static constexpr FormatOutputType OutputDefault();
+    static constexpr FormatOutputType DefaultOutput();
     template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
         typename T, TIntegerValueFlag VFlagSpecifier_ = 
             (VIntegerValueFlag & FlagType::specifier_type_mask), 
         typename TFlag_ = FlagType,
         typename std::enable_if<TFlag_::specifier_int == VFlagSpecifier_, 
             int>::type = 4>
-    static constexpr FormatOutputType OutputDefault();
+    static constexpr FormatOutputType DefaultOutput();
     template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
         typename T, TIntegerValueFlag VFlagSpecifier_ = 
             (VIntegerValueFlag & FlagType::specifier_type_mask), 
         typename TFlag_ = FlagType,
         typename std::enable_if<TFlag_::specifier_blank == VFlagSpecifier_, 
             int>::type = 5>
-    static constexpr FormatOutputType OutputDefault();
+    static constexpr FormatOutputType DefaultOutput();
     template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
         typename T, TIntegerValueFlag VFlagSpecifier_ = 
             (VIntegerValueFlag & FlagType::specifier_type_mask), 
         typename TFlag_ = FlagType,
         typename std::enable_if<TFlag_::specifier_object == VFlagSpecifier_, 
             int>::type = 6>
-    static constexpr FormatOutputType OutputDefault();
+    static constexpr FormatOutputType DefaultOutput();
     template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
         typename T, TIntegerValueFlag VFlagSpecifier_ = 
             (VIntegerValueFlag & FlagType::specifier_type_mask), 
         typename TFlag_ = FlagType,
         typename std::enable_if<TFlag_::specifier_ptr == VFlagSpecifier_, 
             int>::type = 7>
-    static constexpr FormatOutputType OutputDefault();
+    static constexpr FormatOutputType DefaultOutput();
     template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
         typename T, TIntegerValueFlag VFlagSpecifier_ = 
             (VIntegerValueFlag & FlagType::specifier_type_mask), 
         typename TFlag_ = FlagType,
         typename std::enable_if<TFlag_::specifier_str == VFlagSpecifier_, 
             int>::type = 8>
-    static constexpr FormatOutputType OutputDefault();
+    static constexpr FormatOutputType DefaultOutput();
     template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
         typename T, TIntegerValueFlag VFlagSpecifier_ = 
             (VIntegerValueFlag & FlagType::specifier_type_mask), 
         typename TFlag_ = FlagType,
         typename std::enable_if<TFlag_::specifier_undefined == VFlagSpecifier_,
             int>::type = 0>
-    static constexpr FormatOutputType OutputDefault();
+    static constexpr FormatOutputType DefaultOutput();
 private:
     template<typename TIntegerValueFlag, 
         TIntegerValueFlag VIntegerValueFlag, typename T>
@@ -525,7 +525,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename std::enable_if<TFlag_::specifier_bool == VFlagSpecifier_, 
         int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::OutputDefault()
+Argument<void, TFlag, void>::DefaultOutput()
 {
     typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Boolean BooleanType;
@@ -543,7 +543,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename std::enable_if<TFlag_::specifier_ch == VFlagSpecifier_, 
         int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::OutputDefault()
+Argument<void, TFlag, void>::DefaultOutput()
 {
     typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Character CharacterType;
@@ -561,7 +561,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename std::enable_if<TFlag_::specifier_fp == VFlagSpecifier_, 
         int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::OutputDefault()
+Argument<void, TFlag, void>::DefaultOutput()
 {
     typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::FloatingPoint FloatingPointType;
@@ -579,7 +579,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename std::enable_if<TFlag_::specifier_int == VFlagSpecifier_, 
         int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::OutputDefault()
+Argument<void, TFlag, void>::DefaultOutput()
 {
     typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Integer IntegerType;
@@ -597,7 +597,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename std::enable_if<TFlag_::specifier_blank == VFlagSpecifier_, 
         int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::OutputDefault()
+Argument<void, TFlag, void>::DefaultOutput()
 {
     typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::imp::Nothing PrintType;
@@ -613,7 +613,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename std::enable_if<TFlag_::specifier_object == VFlagSpecifier_, 
         int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::OutputDefault()
+Argument<void, TFlag, void>::DefaultOutput()
 {
     typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Object ObjectType;
@@ -631,7 +631,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename std::enable_if<TFlag_::specifier_ptr == VFlagSpecifier_, 
         int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::OutputDefault()
+Argument<void, TFlag, void>::DefaultOutput()
 {
     typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Pointer PointerType;
@@ -649,7 +649,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename std::enable_if<TFlag_::specifier_str == VFlagSpecifier_, 
         int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::OutputDefault()
+Argument<void, TFlag, void>::DefaultOutput()
 {
     typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::String StringType;
@@ -667,7 +667,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename std::enable_if<TFlag_::specifier_undefined == VFlagSpecifier_,
         int>::type>
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
-Argument<void, TFlag, void>::OutputDefault()
+Argument<void, TFlag, void>::DefaultOutput()
 {
     return {};
 }
@@ -678,7 +678,7 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
 Argument<void, TFlag, void>::Output()
 {
-    return OutputDefault<TIntegerValueFlag, VIntegerValueFlag, T>();
+    return DefaultOutput<TIntegerValueFlag, VIntegerValueFlag, T>();
 }
 
 template<typename TFlag>
