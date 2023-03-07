@@ -164,6 +164,16 @@ private:
     template<typename T_>
     using IsOutputType = decltype(IsOutputType_(std::declval<T_>()));
 private:
+    template<typename TImpPrint, typename TChar>
+    static constexpr std::false_type HasOutputFormatFuncType_(...);
+    template<typename TImpPrint, typename TChar>
+    static constexpr auto HasOutputFormatFuncType_(int) ->
+        decltype((FormatOutputFuncType<TChar>)&TImpPrint::Output, std::true_type{});
+private:
+    template<typename TImpPrint, typename TChar>
+    using HasOutputFormatFuncType = 
+        decltype(HasOutputFormatFuncType_<TImpPrint, TChar>(0));
+private:
     static constexpr int Width();
     template<typename... TFlagArgs>
     static constexpr int Width(test::out::fmt::flag::Width&& width, 
@@ -188,6 +198,19 @@ private:
         typename TCond_ = IsLengthType<TFlagArg_>,
         typename std::enable_if<!TCond_::value, int>::type = 0>
     static constexpr int Length(TFlagArg&& flag, TFlagArgs&&... flags);
+private:
+    template<typename TImpPrint, 
+        typename TCond1_ = HasOutputFormatFuncType<TImpPrint, char>,
+        typename TCond2_ = HasOutputFormatFuncType<TImpPrint, wchar_t>,
+        typename std::enable_if<TCond1_::value && TCond2_::value, 
+            int>::type = 1>
+    static constexpr FormatOutputType DefaultOutput_();
+    template<typename TImpPrint,
+        typename TCond1_ = HasOutputFormatFuncType<TImpPrint, char>,
+        typename TCond2_ = HasOutputFormatFuncType<TImpPrint, wchar_t>,
+        typename std::enable_if<!TCond1_::value || !TCond2_::value, 
+            int>::type = 0>
+    static constexpr FormatOutputType DefaultOutput_();
 private:
     template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
         typename T, TIntegerValueFlag VFlagSpecifier_ = 
@@ -520,6 +543,34 @@ constexpr int Argument<void, TFlag, void>::
 }
 
 template<typename TFlag>
+template<typename TImpPrint, typename TCond1_, typename TCond2_,
+    typename std::enable_if<TCond1_::value && TCond2_::value, 
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::DefaultOutput_()
+{
+    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
+    return FormatOutputType{FlagOutputType{
+        (FormatOutputFuncType<char>)&TImpPrint::Output,
+        (FormatOutputFuncType<wchar_t>)&TImpPrint::Output,
+    }};
+}
+
+template<typename TFlag>
+template<typename TImpPrint, typename TCond1_, typename TCond2_,
+    typename std::enable_if<!TCond1_::value || !TCond2_::value, 
+        int>::type>
+constexpr typename Argument<void, TFlag, void>::FormatOutputType 
+Argument<void, TFlag, void>::DefaultOutput_()
+{
+    static_assert(HasOutputFormatFuncType<TImpPrint, char>::value,
+        "(FormatOutputFuncType<char>)&TImpPrint::Output isn't implemented");
+    static_assert(HasOutputFormatFuncType<TImpPrint, wchar_t>::value,
+        "(FormatOutputFuncType<char>)&TImpPrint::Output isn't implemented");
+    return {};
+}
+
+template<typename TFlag>
 template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
     typename T, TIntegerValueFlag VFlagSpecifier_, typename TFlag_,
     typename std::enable_if<TFlag_::specifier_bool == VFlagSpecifier_, 
@@ -527,14 +578,10 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
 Argument<void, TFlag, void>::DefaultOutput()
 {
-    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Boolean BooleanType;
     typedef test::out::print::imp::Boolean<VIntegerValueFlag & 
         BooleanType::MaskValue> PrintType;
-    return FormatOutputType{FlagOutputType{
-        (FormatOutputFuncType<char>)&PrintType::Output,
-        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
-    }};
+    return DefaultOutput_<PrintType>();
 }
 
 template<typename TFlag>
@@ -545,14 +592,10 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
 Argument<void, TFlag, void>::DefaultOutput()
 {
-    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Character CharacterType;
     typedef test::out::print::imp::Character<VIntegerValueFlag & 
         CharacterType::MaskValue> PrintType;
-    return FormatOutputType{FlagOutputType{
-        (FormatOutputFuncType<char>)&PrintType::Output,
-        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
-    }};
+    return DefaultOutput_<PrintType>();
 }
 
 template<typename TFlag>
@@ -563,14 +606,10 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
 Argument<void, TFlag, void>::DefaultOutput()
 {
-    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::FloatingPoint FloatingPointType;
     typedef test::out::print::imp::FloatingPoint<VIntegerValueFlag & 
         FloatingPointType::MaskValue> PrintType;
-    return FormatOutputType{FlagOutputType{
-        (FormatOutputFuncType<char>)&PrintType::Output,
-        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
-    }};
+    return DefaultOutput_<PrintType>();
 }
 
 template<typename TFlag>
@@ -581,14 +620,10 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
 Argument<void, TFlag, void>::DefaultOutput()
 {
-    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Integer IntegerType;
     typedef test::out::print::imp::Integer<VIntegerValueFlag & 
         IntegerType::MaskValue> PrintType;
-    return FormatOutputType{FlagOutputType{
-        (FormatOutputFuncType<char>)&PrintType::Output,
-        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
-    }};
+    return DefaultOutput_<PrintType>();
 }
 
 template<typename TFlag>
@@ -599,12 +634,8 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
 Argument<void, TFlag, void>::DefaultOutput()
 {
-    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::imp::Nothing PrintType;
-    return FormatOutputType{FlagOutputType{
-        (FormatOutputFuncType<char>)&PrintType::Output,
-        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
-    }};
+    return DefaultOutput_<PrintType>();
 }
 
 template<typename TFlag>
@@ -615,14 +646,10 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
 Argument<void, TFlag, void>::DefaultOutput()
 {
-    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Object ObjectType;
     typedef test::out::print::imp::Object<T, VIntegerValueFlag & 
         ObjectType::MaskValue> PrintType;
-    return FormatOutputType{FlagOutputType{
-        (FormatOutputFuncType<char>)&PrintType::Output,
-        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
-    }};
+    return DefaultOutput_<PrintType>();
 }
 
 template<typename TFlag>
@@ -633,14 +660,10 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
 Argument<void, TFlag, void>::DefaultOutput()
 {
-    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::Pointer PointerType;
     typedef test::out::print::imp::Pointer<VIntegerValueFlag & 
         PointerType::MaskValue> PrintType;
-    return FormatOutputType{FlagOutputType{
-        (FormatOutputFuncType<char>)&PrintType::Output,
-        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
-    }};
+    return DefaultOutput_<PrintType>();
 }
 
 template<typename TFlag>
@@ -651,14 +674,10 @@ template<typename TIntegerValueFlag, TIntegerValueFlag VIntegerValueFlag,
 constexpr typename Argument<void, TFlag, void>::FormatOutputType 
 Argument<void, TFlag, void>::DefaultOutput()
 {
-    typedef test::out::fmt::flag::Output<char, wchar_t> FlagOutputType;
     typedef test::out::print::String StringType;
     typedef test::out::print::imp::String<VIntegerValueFlag & 
         StringType::MaskValue> PrintType;
-    return FormatOutputType{FlagOutputType{
-        (FormatOutputFuncType<char>)&PrintType::Output,
-        (FormatOutputFuncType<wchar_t>)&PrintType::Output,
-    }};
+    return DefaultOutput_<PrintType>();
 }
 
 template<typename TFlag>
