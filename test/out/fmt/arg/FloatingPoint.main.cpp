@@ -6,6 +6,10 @@
 
 #include <cassert>
 
+template<typename TChar>
+using FormatOutputFuncType = test::out::fmt::Definition::
+    FormatOutputFuncType<TChar>;
+
 int main()
 {
     {
@@ -21,6 +25,16 @@ int main()
         assert(arg1.GetFlag().IsDefineSigned() == false);
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{3.14f};
@@ -36,6 +50,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetValue() == 3.14f);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+
     }
     {
         float val1 = 3.14f;
@@ -52,6 +76,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetValue() == 3.14f);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+
     }
     {
         const float val1 = 3.14f;
@@ -68,6 +102,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetValue() == 3.14f);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -85,6 +129,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetValue() == 3.14f);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+
     }
     {
         float val1 = 3.14f;
@@ -103,6 +157,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetValue() == 3.14f);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+
     }
     {
         const float val1 = 3.14f;
@@ -121,6 +185,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetValue() == 3.14f);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -138,6 +212,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::w_ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -155,6 +239,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::p_ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -172,6 +265,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::p_ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     
     {
@@ -192,6 +294,15 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetValue() == 3.14f);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::w_ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -211,6 +322,15 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetValue() == 3.14f);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::p_ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -230,6 +350,15 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_float);
         assert(arg1.GetValue() == 3.14f);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::p_ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -251,6 +380,15 @@ int main()
         assert(arg1.GetValue() == 3.14f);
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetLength() == 40);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::wp_ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<float> arg1{
@@ -272,6 +410,15 @@ int main()
         assert(arg1.GetValue() == 3.14f);
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetPrecision() == 40);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::wp_ldf_float_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
 
     {
@@ -287,6 +434,15 @@ int main()
         assert(arg1.GetFlag().IsDefineSigned() == false);
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{3.14};
@@ -302,6 +458,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetValue() == 3.14);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         double val1 = 3.14;
@@ -318,6 +483,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetValue() == 3.14);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         const double val1 = 3.14;
@@ -334,6 +508,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetValue() == 3.14);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -351,6 +534,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetValue() == 3.14);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         double val1 = 3.14;
@@ -369,6 +561,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetValue() == 3.14);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         const double val1 = 3.14;
@@ -387,6 +588,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetValue() == 3.14);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -404,6 +614,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::w_ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -421,6 +640,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::p_ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -438,6 +666,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::p_ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     
     {
@@ -458,6 +695,15 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetValue() == 3.14);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::w_ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -477,6 +723,15 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetValue() == 3.14);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::p_ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -496,6 +751,15 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_double);
         assert(arg1.GetValue() == 3.14);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::p_ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -517,6 +781,16 @@ int main()
         assert(arg1.GetValue() == 3.14);
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetLength() == 40);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            wp_ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<double> arg1{
@@ -538,6 +812,16 @@ int main()
         assert(arg1.GetValue() == 3.14);
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetPrecision() == 40);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            wp_ldf_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
 
     {
@@ -554,6 +838,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
+
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{3.14L};
@@ -570,6 +864,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
         assert(arg1.GetValue() == 3.14L);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         long double val1 = 3.14L;
@@ -587,6 +891,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
         assert(arg1.GetValue() == 3.14L);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         const long double val1 = 3.14L;
@@ -604,6 +918,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
         assert(arg1.GetValue() == 3.14L);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -622,6 +946,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
         assert(arg1.GetValue() == 3.14L);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         long double val1 = 3.14L;
@@ -641,6 +975,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
         assert(arg1.GetValue() == 3.14L);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         const long double val1 = 3.14L;
@@ -660,6 +1004,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
         assert(arg1.GetValue() == 3.14L);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -678,6 +1032,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            w_ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -696,6 +1060,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            p_ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -714,6 +1088,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == 
             arg1.GetFlag().define_long_double);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            p_ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     
     {
@@ -735,6 +1119,16 @@ int main()
             arg1.GetFlag().define_long_double);
         assert(arg1.GetValue() == 3.14L);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            w_ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -755,6 +1149,16 @@ int main()
             arg1.GetFlag().define_long_double);
         assert(arg1.GetValue() == 3.14L);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            p_ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -775,6 +1179,16 @@ int main()
             arg1.GetFlag().define_long_double);
         assert(arg1.GetValue() == 3.14L);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            p_ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -797,6 +1211,16 @@ int main()
         assert(arg1.GetValue() == 3.14L);
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetLength() == 40);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            wp_ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::FloatingPoint<long double> arg1{
@@ -819,6 +1243,16 @@ int main()
         assert(arg1.GetValue() == 3.14L);
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetPrecision() == 40);
+        
+        constexpr auto fmt = test::out::print::FloatingPoint::
+            wp_ldf_long_double_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::FloatingPoint<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     return 0;
 }
