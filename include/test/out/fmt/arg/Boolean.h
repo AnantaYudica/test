@@ -51,6 +51,9 @@ class Boolean :
 {
 public:
     typedef typename test::out::fmt::Definition::FlagType FlagType;
+    typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+    using FlagSpecifierType = 
+        typename FlagType::template SpecifierType<FlagType::specifier_bool>;
 public:
     constexpr inline Boolean();
     template<typename... TFlagArgs>
@@ -71,13 +74,13 @@ public:
 };
 
 constexpr inline Boolean::Boolean() :
-    test::out::fmt::Argument<bool>(FlagType::specifier_bool,
+    test::out::fmt::Argument<bool>(FlagSpecifierType{},
         test::out::fmt::flag::Define<bool>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline Boolean::Boolean(bool val, TFlagArgs&&... flags) :
-    test::out::fmt::Argument<bool>(FlagType::specifier_bool,
+    test::out::fmt::Argument<bool>(FlagSpecifierType{},
         test::out::fmt::flag::Define<bool>{},
         test::out::fmt::flag::Value<bool>{val},
         std::forward<TFlagArgs>(flags)...)
@@ -87,7 +90,7 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value,
         int>::type>
 constexpr inline Boolean::Boolean(TFlagArg&& flag, TFlagArgs&&... flags) :
-    test::out::fmt::Argument<bool>(FlagType::specifier_bool,
+    test::out::fmt::Argument<bool>(FlagSpecifierType{},
         test::out::fmt::flag::Define<bool>{},
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
