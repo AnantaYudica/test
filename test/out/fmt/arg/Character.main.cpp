@@ -6,6 +6,10 @@
 
 #include <cassert>
 
+template<typename TChar>
+using FormatOutputFuncType = test::out::fmt::Definition::
+    FormatOutputFuncType<TChar>;
+
 int main()
 {
     {
@@ -21,6 +25,16 @@ int main()
         assert(arg1.GetFlag().IsDefineSigned() == false);
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
+
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<char> arg1{'a'};
@@ -36,6 +50,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetValue() == 'a');
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         char val1 = 'a';
@@ -52,6 +76,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetValue() == 'a');
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         const char val1 = 'a';
@@ -68,6 +102,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetValue() == 'a');
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<char> arg1{
@@ -85,6 +129,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetValue() == 'a');
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         char val1 = 'a';
@@ -103,6 +157,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetValue() == 'a');
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         const char val1 = 'a';
@@ -121,6 +185,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetValue() == 'a');
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<char> arg1{
@@ -138,6 +212,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::w_char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<char> arg1{
@@ -155,6 +239,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<char> arg1{
@@ -172,6 +266,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     
     {
@@ -192,6 +296,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetValue() == 'a');
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::w_char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<char> arg1{
@@ -211,6 +325,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetValue() == 'a');
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<char> arg1{
@@ -230,6 +354,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_char);
         assert(arg1.GetValue() == 'a');
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<char> arg1{
@@ -251,6 +385,16 @@ int main()
         assert(arg1.GetValue() == 'a');
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetLength() == 40);
+        
+        constexpr auto fmt = test::out::print::Character::w_char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<char> arg1{
@@ -272,6 +416,16 @@ int main()
         assert(arg1.GetValue() == 'a');
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetPrecision() == 40);
+        
+        constexpr auto fmt = test::out::print::Character::w_char_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{};
@@ -286,6 +440,16 @@ int main()
         assert(arg1.GetFlag().IsDefineSigned() == false);
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{L'a'};
@@ -301,6 +465,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetValue() == L'a');
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         wchar_t val1 = L'a';
@@ -317,6 +491,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetValue() == L'a');
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         const wchar_t val1 = L'a';
@@ -333,6 +517,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetValue() == L'a');
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{
@@ -350,6 +544,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetValue() == L'a');
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         wchar_t val1 = L'a';
@@ -368,6 +572,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetValue() == L'a');
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         const wchar_t val1 = L'a';
@@ -386,6 +600,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetValue() == L'a');
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{
@@ -403,6 +627,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::w_wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{
@@ -420,6 +654,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{
@@ -437,6 +681,16 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     
     {
@@ -457,6 +711,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetValue() == L'a');
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::w_wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{
@@ -476,6 +740,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetValue() == L'a');
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{
@@ -495,6 +769,16 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_wchar);
         assert(arg1.GetValue() == L'a');
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::Character::wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{
@@ -516,6 +800,16 @@ int main()
         assert(arg1.GetValue() == L'a');
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetLength() == 40);
+        
+        constexpr auto fmt = test::out::print::Character::w_wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     {
         test::out::fmt::arg::Character<wchar_t> arg1{
@@ -537,6 +831,16 @@ int main()
         assert(arg1.GetValue() == L'a');
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetPrecision() == 40);
+        
+        constexpr auto fmt = test::out::print::Character::w_wchar_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Character<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+            
     }
     return 0;
 }
