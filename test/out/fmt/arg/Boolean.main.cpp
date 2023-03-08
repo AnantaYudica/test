@@ -6,6 +6,10 @@
 
 #include <cassert>
 
+template<typename TChar>
+using FormatOutputFuncType = test::out::fmt::Definition::
+    FormatOutputFuncType<TChar>;
+
 int main()
 {
     {
@@ -21,6 +25,16 @@ int main()
         assert(arg1.GetFlag().IsDefineSigned() == false);
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
+
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
+
     }
     {
         test::out::fmt::arg::Boolean arg1{true};
@@ -36,6 +50,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetValue() == true);
+
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         bool val1 = true;
@@ -52,6 +75,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetValue() == true);
+
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         const bool val1 = true;
@@ -68,6 +100,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetValue() == true);
+        
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::Boolean arg1{
@@ -85,6 +126,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetValue() == true);
+        
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         bool val1 = true;
@@ -103,6 +153,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetValue() == true);
+        
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         const bool val1 = true;
@@ -121,6 +180,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetValue() == true);
+        
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::Boolean arg1{
@@ -138,6 +206,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::Boolean::w_bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::Boolean arg1{
@@ -155,6 +232,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::Boolean arg1{
@@ -172,6 +258,15 @@ int main()
         assert(arg1.GetFlag().IsDefineUnsigned() == false);
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     
     {
@@ -192,6 +287,15 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetValue() == true);
         assert(arg1.GetWidth() == 20);
+        
+        constexpr auto fmt = test::out::print::Boolean::w_bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::Boolean arg1{
@@ -211,6 +315,15 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetValue() == true);
         assert(arg1.GetLength() == 20);
+        
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::Boolean arg1{
@@ -230,6 +343,15 @@ int main()
         assert(arg1.GetFlag().GetDefine() == arg1.GetFlag().define_bool);
         assert(arg1.GetValue() == true);
         assert(arg1.GetPrecision() == 20);
+        
+        constexpr auto fmt = test::out::print::Boolean::bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::Boolean arg1{
@@ -251,6 +373,15 @@ int main()
         assert(arg1.GetValue() == true);
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetLength() == 40);
+        
+        constexpr auto fmt = test::out::print::Boolean::w_bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     {
         test::out::fmt::arg::Boolean arg1{
@@ -272,6 +403,15 @@ int main()
         assert(arg1.GetValue() == true);
         assert(arg1.GetWidth() == 20);
         assert(arg1.GetPrecision() == 40);
+        
+        constexpr auto fmt = test::out::print::Boolean::w_bool_fmt;
+        FormatOutputFuncType<char> fmt_char_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        FormatOutputFuncType<wchar_t> fmt_wchar_fun = 
+            &test::out::print::imp::Boolean<fmt>::Output;
+        assert(arg1.GetFormatOutput().template Get<char>() == fmt_char_fun);
+        assert(arg1.GetFormatOutput().template Get<wchar_t>() == 
+            fmt_wchar_fun);
     }
     return 0;
 }
