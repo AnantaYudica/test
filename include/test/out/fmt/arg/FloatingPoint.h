@@ -3,6 +3,7 @@
 
 #include "../../../System.h"
 #include "../../../trait/out/fmt/IsFlag.h"
+#include "../../print/imp/FloatingPoint.h"
 #include "../Flag.h"
 #include "../Argument.h"
 
@@ -65,6 +66,28 @@ class FloatingPoint<float> :
 {
 public:
     typedef typename test::out::fmt::Definition::FlagType FlagType;
+    typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+private:
+    template<typename TFlagIntegerValue, TFlagIntegerValue VFlagIntegerValue>
+    using FlagSpecifierType_ = 
+        typename FlagType::template SpecifierType<VFlagIntegerValue>;
+private:
+    template<typename TFlagIntegerValue, typename... TFlagArgs,
+        TFlagIntegerValue VSpecifierFloatingPoint_ = 
+            (FlagType{0, TFlagArgs{}...}.GetSpecifierFloatingPoint() == 0 ?
+                FlagType::specifier_fp_fixed : 0),
+        TFlagIntegerValue VSpecifierCase_ = 
+            (VSpecifierFloatingPoint_ != 0 &&
+                FlagType{0, TFlagArgs{}...}.GetSpecifierCase() == 0 ?
+                FlagType::specifier_lower_case : 0),
+        TFlagIntegerValue VFlagIntegerValue = FlagType::specifier_fp |
+            VSpecifierFloatingPoint_ | VSpecifierCase_>
+    static constexpr FlagSpecifierType_<TFlagIntegerValue, VFlagIntegerValue> 
+        Specifier_(TFlagArgs&&...);
+public:
+    template<typename... TFlagArgs>
+    using FlagSpecifierType = 
+        decltype(Specifier_<FlagIntegerValueType>(TFlagArgs{}...));
 public:
     constexpr inline FloatingPoint();
     template<typename... TFlagArgs>
@@ -90,6 +113,28 @@ class FloatingPoint<double> :
 {
 public:
     typedef typename test::out::fmt::Definition::FlagType FlagType;
+    typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+private:
+    template<typename TFlagIntegerValue, TFlagIntegerValue VFlagIntegerValue>
+    using FlagSpecifierType_ = 
+        typename FlagType::template SpecifierType<VFlagIntegerValue>;
+private:
+    template<typename TFlagIntegerValue, typename... TFlagArgs,
+        TFlagIntegerValue VSpecifierFloatingPoint_ = 
+            (FlagType{0, TFlagArgs{}...}.GetSpecifierFloatingPoint() == 0 ?
+                FlagType::specifier_fp_fixed : 0),
+        TFlagIntegerValue VSpecifierCase_ = 
+            (VSpecifierFloatingPoint_ != 0 &&
+                FlagType{0, TFlagArgs{}...}.GetSpecifierCase() == 0 ?
+                FlagType::specifier_lower_case : 0),
+        TFlagIntegerValue VFlagIntegerValue = FlagType::specifier_fp |
+            VSpecifierFloatingPoint_ | VSpecifierCase_>
+    static constexpr FlagSpecifierType_<TFlagIntegerValue, VFlagIntegerValue> 
+        Specifier_(TFlagArgs&&...);
+public:
+    template<typename... TFlagArgs>
+    using FlagSpecifierType = 
+        decltype(Specifier_<FlagIntegerValueType>(TFlagArgs{}...));
 public:
     constexpr inline FloatingPoint();
     template<typename... TFlagArgs>
@@ -115,6 +160,28 @@ class FloatingPoint<long double> :
 {
 public:
     typedef typename test::out::fmt::Definition::FlagType FlagType;
+    typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+private:
+    template<typename TFlagIntegerValue, TFlagIntegerValue VFlagIntegerValue>
+    using FlagSpecifierType_ = 
+        typename FlagType::template SpecifierType<VFlagIntegerValue>;
+private:
+    template<typename TFlagIntegerValue, typename... TFlagArgs,
+        TFlagIntegerValue VSpecifierFloatingPoint_ = 
+            (FlagType{0, TFlagArgs{}...}.GetSpecifierFloatingPoint() == 0 ?
+                FlagType::specifier_fp_fixed : 0),
+        TFlagIntegerValue VSpecifierCase_ = 
+            (VSpecifierFloatingPoint_ != 0 &&
+                FlagType{0, TFlagArgs{}...}.GetSpecifierCase() == 0 ?
+                FlagType::specifier_lower_case : 0),
+        TFlagIntegerValue VFlagIntegerValue = FlagType::specifier_fp |
+            VSpecifierFloatingPoint_ | VSpecifierCase_>
+    static constexpr FlagSpecifierType_<TFlagIntegerValue, VFlagIntegerValue> 
+        Specifier_(TFlagArgs&&...);
+public:
+    template<typename... TFlagArgs>
+    using FlagSpecifierType = 
+        decltype(Specifier_<FlagIntegerValueType>(TFlagArgs{}...));
 public:
     constexpr inline FloatingPoint();
     template<typename... TFlagArgs>
@@ -134,14 +201,14 @@ public:
 };
 
 constexpr inline FloatingPoint<float>::FloatingPoint() :
-    test::out::fmt::Argument<float>(FlagType::specifier_fp,
+    test::out::fmt::Argument<float>(FlagSpecifierType<>{},
         test::out::fmt::flag::Define<float>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline FloatingPoint<float>::FloatingPoint(float val, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<float>(FlagType::specifier_fp,
+        test::out::fmt::Argument<float>(FlagSpecifierType<TFlagArgs...>{},
         test::out::fmt::flag::Define<float>{},
         test::out::fmt::flag::Value<float>{val},
         std::forward<TFlagArgs>(flags)...)
@@ -152,21 +219,21 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         int>::type>
 constexpr inline FloatingPoint<float>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<float>(FlagType::specifier_fp,
+        test::out::fmt::Argument<float>(FlagSpecifierType<TFlagArgs...>{},
         test::out::fmt::flag::Define<float>{},
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
 {}
 
 constexpr inline FloatingPoint<double>::FloatingPoint() :
-    test::out::fmt::Argument<double>(FlagType::specifier_fp,
+    test::out::fmt::Argument<double>(FlagSpecifierType<>{},
         test::out::fmt::flag::Define<double>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline FloatingPoint<double>::FloatingPoint(double val, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<double>(FlagType::specifier_fp,
+        test::out::fmt::Argument<double>(FlagSpecifierType<TFlagArgs...>{},
         test::out::fmt::flag::Define<double>{},
         test::out::fmt::flag::Value<double>{val},
         std::forward<TFlagArgs>(flags)...)
@@ -178,7 +245,8 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         int>::type>
 constexpr inline FloatingPoint<double>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<double>(FlagType::specifier_fp,
+        test::out::fmt::Argument<double>(FlagSpecifierType<TFlagArg, 
+            TFlagArgs...>{},
         test::out::fmt::flag::Define<double>{},
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
@@ -186,14 +254,14 @@ constexpr inline FloatingPoint<double>::FloatingPoint(TFlagArg&& flag,
 {}
 
 constexpr inline FloatingPoint<long double>::FloatingPoint() :
-    test::out::fmt::Argument<long double>(FlagType::specifier_fp,
+    test::out::fmt::Argument<long double>(FlagSpecifierType<>{},
         test::out::fmt::flag::Define<long double>{})
 {}
 
 template<typename... TFlagArgs>
 constexpr inline FloatingPoint<long double>::FloatingPoint(long double val, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<long double>(FlagType::specifier_fp,
+        test::out::fmt::Argument<long double>(FlagSpecifierType<TFlagArgs...>{},
         test::out::fmt::flag::Define<long double>{},
         test::out::fmt::flag::Value<long double>{val},
         std::forward<TFlagArgs>(flags)...)
@@ -205,7 +273,8 @@ template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
         int>::type>
 constexpr inline FloatingPoint<long double>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
-        test::out::fmt::Argument<long double>(FlagType::specifier_fp,
+        test::out::fmt::Argument<long double>(FlagSpecifierType<TFlagArg,
+            TFlagArgs...>{},
         test::out::fmt::flag::Define<long double>{}, 
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
