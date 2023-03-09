@@ -91,13 +91,13 @@ public:
 public:
     constexpr inline FloatingPoint();
     template<typename... TFlagArgs>
-    constexpr inline FloatingPoint(float val, TFlagArgs&&... flags);
+    inline FloatingPoint(float val, TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value, int>::type = 0>
-    constexpr inline FloatingPoint(TFlagArg&& flag, TFlagArgs&&... flags);
+    inline FloatingPoint(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<float>::GetFlag;
     using test::out::fmt::Argument<float>::GetValue;
@@ -138,13 +138,13 @@ public:
 public:
     constexpr inline FloatingPoint();
     template<typename... TFlagArgs>
-    constexpr inline FloatingPoint(double val, TFlagArgs&&... flags);
+    inline FloatingPoint(double val, TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value, int>::type = 0>
-    constexpr inline FloatingPoint(TFlagArg&& flag, TFlagArgs&&... flags);
+    inline FloatingPoint(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<double>::GetFlag;
     using test::out::fmt::Argument<double>::GetValue;
@@ -185,13 +185,13 @@ public:
 public:
     constexpr inline FloatingPoint();
     template<typename... TFlagArgs>
-    constexpr inline FloatingPoint(long double val, TFlagArgs&&... flags);
+    inline FloatingPoint(long double val, TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value, int>::type = 0>
-    constexpr inline FloatingPoint(TFlagArg&& flag, TFlagArgs&&... flags);
+    inline FloatingPoint(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<long double>::GetFlag;
     using test::out::fmt::Argument<long double>::GetValue;
@@ -206,7 +206,7 @@ constexpr inline FloatingPoint<float>::FloatingPoint() :
 {}
 
 template<typename... TFlagArgs>
-constexpr inline FloatingPoint<float>::FloatingPoint(float val, 
+inline FloatingPoint<float>::FloatingPoint(float val, 
     TFlagArgs&&... flags) :
         test::out::fmt::Argument<float>(FlagSpecifierType<TFlagArgs...>{},
         test::out::fmt::flag::Define<float>{},
@@ -217,7 +217,7 @@ constexpr inline FloatingPoint<float>::FloatingPoint(float val,
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
-constexpr inline FloatingPoint<float>::FloatingPoint(TFlagArg&& flag, 
+inline FloatingPoint<float>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
         test::out::fmt::Argument<float>(FlagSpecifierType<TFlagArgs...>{},
         test::out::fmt::flag::Define<float>{},
@@ -231,7 +231,7 @@ constexpr inline FloatingPoint<double>::FloatingPoint() :
 {}
 
 template<typename... TFlagArgs>
-constexpr inline FloatingPoint<double>::FloatingPoint(double val, 
+inline FloatingPoint<double>::FloatingPoint(double val, 
     TFlagArgs&&... flags) :
         test::out::fmt::Argument<double>(FlagSpecifierType<TFlagArgs...>{},
         test::out::fmt::flag::Define<double>{},
@@ -243,7 +243,7 @@ constexpr inline FloatingPoint<double>::FloatingPoint(double val,
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
-constexpr inline FloatingPoint<double>::FloatingPoint(TFlagArg&& flag, 
+inline FloatingPoint<double>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
         test::out::fmt::Argument<double>(FlagSpecifierType<TFlagArg, 
             TFlagArgs...>{},
@@ -259,7 +259,7 @@ constexpr inline FloatingPoint<long double>::FloatingPoint() :
 {}
 
 template<typename... TFlagArgs>
-constexpr inline FloatingPoint<long double>::FloatingPoint(long double val, 
+inline FloatingPoint<long double>::FloatingPoint(long double val, 
     TFlagArgs&&... flags) :
         test::out::fmt::Argument<long double>(FlagSpecifierType<TFlagArgs...>{},
         test::out::fmt::flag::Define<long double>{},
@@ -271,7 +271,7 @@ constexpr inline FloatingPoint<long double>::FloatingPoint(long double val,
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
-constexpr inline FloatingPoint<long double>::FloatingPoint(TFlagArg&& flag, 
+inline FloatingPoint<long double>::FloatingPoint(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
         test::out::fmt::Argument<long double>(FlagSpecifierType<TFlagArg,
             TFlagArgs...>{},
