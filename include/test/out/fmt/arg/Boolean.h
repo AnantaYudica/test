@@ -57,13 +57,13 @@ public:
 public:
     constexpr inline Boolean();
     template<typename... TFlagArgs>
-    constexpr inline Boolean(bool val, TFlagArgs&&... flags);
+    inline Boolean(bool val, TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value, int>::type = 0>
-    constexpr inline Boolean(TFlagArg&& flag, TFlagArgs&&... flags);
+    inline Boolean(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<bool>::GetFlag;
     using test::out::fmt::Argument<bool>::GetValue;
@@ -79,7 +79,7 @@ constexpr inline Boolean::Boolean() :
 {}
 
 template<typename... TFlagArgs>
-constexpr inline Boolean::Boolean(bool val, TFlagArgs&&... flags) :
+inline Boolean::Boolean(bool val, TFlagArgs&&... flags) :
     test::out::fmt::Argument<bool>(FlagSpecifierType{},
         test::out::fmt::flag::Define<bool>{},
         test::out::fmt::flag::Value<bool>{val},
@@ -89,7 +89,7 @@ constexpr inline Boolean::Boolean(bool val, TFlagArgs&&... flags) :
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value,
         int>::type>
-constexpr inline Boolean::Boolean(TFlagArg&& flag, TFlagArgs&&... flags) :
+inline Boolean::Boolean(TFlagArg&& flag, TFlagArgs&&... flags) :
     test::out::fmt::Argument<bool>(FlagSpecifierType{},
         test::out::fmt::flag::Define<bool>{},
         std::forward<TFlagArg>(flag),
