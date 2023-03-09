@@ -73,13 +73,13 @@ public:
 public:
     constexpr inline Character();
     template<typename... TFlagArgs>
-    constexpr inline Character(char val, TFlagArgs&&... flags);
+    inline Character(char val, TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value, int>::type = 0>
-    constexpr inline Character(TFlagArg&& flag, TFlagArgs&&... flags);
+    inline Character(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<char>::GetFlag;
     using test::out::fmt::Argument<char>::GetValue;
@@ -101,13 +101,13 @@ public:
 public:
     constexpr inline Character();
     template<typename... TFlagArgs>
-    constexpr inline Character(wchar_t val, TFlagArgs&&... flags);
+    inline Character(wchar_t val, TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value, int>::type = 0>
-    constexpr inline Character(TFlagArg&& flag, TFlagArgs&&... flags);
+    inline Character(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<wchar_t>::GetFlag;
     using test::out::fmt::Argument<wchar_t>::GetValue;
@@ -124,7 +124,7 @@ constexpr inline Character<char>::Character() :
 {}
 
 template<typename... TFlagArgs>
-constexpr inline Character<char>::Character(char val, TFlagArgs&&... flags) :
+inline Character<char>::Character(char val, TFlagArgs&&... flags) :
     test::out::fmt::Argument<char>(FlagSpecifierType{}, 
         test::out::fmt::flag::Define<char>{},
         test::out::fmt::flag::Value<char>{val},
@@ -134,7 +134,7 @@ constexpr inline Character<char>::Character(char val, TFlagArgs&&... flags) :
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
-constexpr inline Character<char>::Character(TFlagArg&& flag, 
+inline Character<char>::Character(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
         test::out::fmt::Argument<char>(FlagSpecifierType{},
             test::out::fmt::flag::Define<char>{},
@@ -148,7 +148,7 @@ constexpr inline Character<wchar_t>::Character() :
 {}
 
 template<typename... TFlagArgs>
-constexpr inline Character<wchar_t>::Character(wchar_t val, 
+inline Character<wchar_t>::Character(wchar_t val, 
     TFlagArgs&&... flags) :
         test::out::fmt::Argument<wchar_t>(FlagSpecifierType{},
             test::out::fmt::flag::Define<wchar_t>{}, 
@@ -159,7 +159,7 @@ constexpr inline Character<wchar_t>::Character(wchar_t val,
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::IsFlag<TFlagArg_>::Value, 
         int>::type>
-constexpr inline Character<wchar_t>::Character(TFlagArg&& flag, 
+inline Character<wchar_t>::Character(TFlagArg&& flag, 
     TFlagArgs&&... flags) :
         test::out::fmt::Argument<wchar_t>(FlagSpecifierType{},
             test::out::fmt::flag::Define<wchar_t>{}, 
