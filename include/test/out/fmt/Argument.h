@@ -85,23 +85,27 @@ private:
     template<typename T_>
     using IsValueType = decltype(IsValueType_(std::declval<T_>()));
 private:
-    static constexpr T Value();
+    static T Value();
     template<typename T_, typename... TFlagArgs>
-    static constexpr T Value(test::out::fmt::flag::Value<T_>&& val, 
+    static T Value(test::out::fmt::flag::Value<T_>&& val, 
         TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename TCond_ = IsValueType<TFlagArg_>,
         typename std::enable_if<!TCond_::value, int>::type = 0>
-    static constexpr T Value(TFlagArg&& flag, TFlagArgs&&... flags);
+    static T Value(TFlagArg&& flag, TFlagArgs&&... flags);
 private:
     T m_value;
 public:
     constexpr Argument();
     template<typename TFlagIntegerValue = FlagIntegerValueType,
+        TFlagIntegerValue VIntegerValueFlag, typename TDefine>
+    constexpr Argument(FlagSpecifierType<VIntegerValueFlag> specifier,
+        test::out::fmt::flag::Define<TDefine>&& define_flag);
+    template<typename TFlagIntegerValue = FlagIntegerValueType,
         TFlagIntegerValue VIntegerValueFlag, typename... TFlagArgs>
-    constexpr Argument(FlagSpecifierType<VIntegerValueFlag> specifier, 
+    Argument(FlagSpecifierType<VIntegerValueFlag> specifier, 
         TFlagArgs&&... flags);
 public:
     Argument(const Argument<T>&) = delete;
@@ -112,7 +116,7 @@ public:
 public:
     using Argument<void, TFlag>::GetFlag;
 public:
-    constexpr T GetValue() const;
+    const T& GetValue() const;
 public:
     using Argument<void, TFlag>::GetWidth;
     using Argument<void, TFlag>::GetLength;
@@ -375,19 +379,19 @@ private:
         IsContainValueType_(typename std::remove_cv<typename 
             std::remove_reference<TArgs>::type>::type()...)>;
 private:
-    static constexpr const CharacterType* Value();
+    static const CharacterType* Value();
     template<typename... TFlagArgs>
-    static constexpr const CharacterType* Value(test::out::fmt::flag::
+    static const CharacterType* Value(test::out::fmt::flag::
         Value<const CharacterType*>&& val, TFlagArgs&&... flags);
     template<typename... TFlagArgs>
-    static constexpr const CharacterType* Value(test::out::fmt::flag::
+    static const CharacterType* Value(test::out::fmt::flag::
         Value<CharacterType*>&& val, TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
         typename TCond_ = IsValueType<TFlagArg_>,
         typename std::enable_if<!TCond_::value, int>::type = 0>
-    static constexpr const CharacterType* Value(TFlagArg&& flag,
+    static const CharacterType* Value(TFlagArg&& flag,
         TFlagArgs&&... flags);
 private:
     StringPointerType m_value;
@@ -435,25 +439,25 @@ public:
 };
 
 template<typename T, typename TFlag, typename TEnable>
-constexpr T Argument<T, TFlag, TEnable>::Value()
+T Argument<T, TFlag, TEnable>::Value()
 {
     return {};
 }
 
 template<typename T, typename TFlag, typename TEnable>
 template<typename T_, typename... TFlagArgs>
-constexpr T Argument<T, TFlag, TEnable>::
+T Argument<T, TFlag, TEnable>::
     Value(test::out::fmt::flag::Value<T_>&& val, TFlagArgs&&... flags)
 {
     return val.IsDefault() ? Value(std::forward<TFlagArgs>(flags)...) : 
-        val.GetValue();
+        T{std::move(val).GetValue()};
 }
 
 template<typename T, typename TFlag, typename TEnable>
 template<typename TFlagArg, typename... TFlagArgs, 
     typename TFlagArg_, typename TCond_,
     typename std::enable_if<!TCond_::value, int>::type>
-constexpr T Argument<T, TFlag, TEnable>::Value(TFlagArg&& flag, 
+T Argument<T, TFlag, TEnable>::Value(TFlagArg&& flag, 
     TFlagArgs&&... flags)
 {
     return Value(std::forward<TFlagArgs>(flags)...);
@@ -466,9 +470,22 @@ constexpr Argument<T, TFlag, TEnable>::Argument() :
 {}
 
 template<typename T, typename TFlag, typename TEnable>
+template<typename TFlagIntegerValue, TFlagIntegerValue VIntegerValueFlag,
+    typename TDefine>
+constexpr Argument<T, TFlag, TEnable>::
+    Argument(FlagSpecifierType<VIntegerValueFlag> specifier,
+        test::out::fmt::flag::Define<TDefine>&& define_flag) :
+        Argument<void, TFlag>(specifier, 
+            test::out::fmt::flag::Define<T>{}, 
+            std::forward<test::out::fmt::flag::Define<TDefine>>(define_flag)),
+        m_value()
+{}
+
+
+template<typename T, typename TFlag, typename TEnable>
 template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier, 
     typename... TFlagArgs>
-constexpr Argument<T, TFlag, TEnable>::
+Argument<T, TFlag, TEnable>::
     Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
         TFlagArgs&&... flags) :
             Argument<void, TFlag>(specifier, 
@@ -478,7 +495,7 @@ constexpr Argument<T, TFlag, TEnable>::
 {}
 
 template<typename T, typename TFlag, typename TEnable>
-constexpr T Argument<T, TFlag, TEnable>::GetValue() const
+const T& Argument<T, TFlag, TEnable>::GetValue() const
 {
     return m_value;
 }
@@ -779,7 +796,7 @@ Argument<void, TFlag, void>::GetFormatOutput() const
 }
 
 template<typename TCharPtr, typename TFlag>
-constexpr const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
+const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::CharacterType * 
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::Value()
@@ -789,7 +806,7 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
 
 template<typename TCharPtr, typename TFlag>
 template<typename... TFlagArgs>
-constexpr const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
+const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::CharacterType * 
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
@@ -797,12 +814,12 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
             TFlagArgs&&... flags)
 {
     return val.IsDefault() ? Value(std::forward<TFlagArgs>(flags)...) : 
-        val.GetValue();
+        std::move(val).GetValue();
 }
 
 template<typename TCharPtr, typename TFlag>
 template<typename... TFlagArgs>
-constexpr const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
+const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::CharacterType * 
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
@@ -810,13 +827,13 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
             TFlagArgs&&... flags)
 {
     return val.IsDefault() ? Value(std::forward<TFlagArgs>(flags)...) : 
-        val.GetValue();
+        std::move(val).GetValue();
 }
 
 template<typename TCharPtr, typename TFlag>
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename TCond_, typename std::enable_if<!TCond_::value, int>::type>
-constexpr const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
+const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::CharacterType * 
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
@@ -831,7 +848,6 @@ constexpr Argument<TCharPtr, TFlag, typename test::out::fmt::
         Argument<void, TFlag>(),
         m_value(nullptr)
 {}
-
 template<typename TCharPtr, typename TFlag>
 template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier, 
     typename... TFlagArgs, typename TCond_,
