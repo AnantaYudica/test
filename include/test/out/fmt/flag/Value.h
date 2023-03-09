@@ -25,11 +25,17 @@ private:
     bool m_default;
     char m_value[sizeof(Type)];
 public:
-    constexpr Value();
+    constexpr Value() ;
     explicit Value(const Type& val);
 public:
+    Value(const Value<T>& cpy);
+    Value(Value<T>&& mov);
+public:
+    Value<T>& operator=(const Value<T>& cpy) = delete;
+    Value<T>& operator=(Value<T>&& mov) = delete;
+public:
     constexpr bool IsDefault() const;
-    constexpr Type GetValue() const;
+    const Type& GetValue() &&;
 };
 
 template<typename T>
@@ -44,7 +50,24 @@ Value<T>::Value(const Type& val) :
     m_value{}
 {
     std::memset(m_value, 0, sizeof(Type));
-    (reinterpret_cast<Type&>(*m_value)) = val;
+    auto ptr = reinterpret_cast<const char*>(&val);
+    std::memcpy(m_value, ptr, sizeof(Type));
+}
+
+template<typename T>
+Value<T>::Value(const Value<T>& cpy) :
+    m_default(cpy.m_default),
+    m_value{}
+{
+    std::memcpy(m_value, cpy.m_value, sizeof(Type));
+}
+
+template<typename T>
+Value<T>::Value(Value<T>&& mov) :
+    m_default(mov.m_default),
+    m_value{}
+{
+    std::memcpy(m_value, mov.m_value, sizeof(Type));
 }
 
 template<typename T>
@@ -54,9 +77,9 @@ constexpr bool Value<T>::IsDefault() const
 }
 
 template<typename T>
-constexpr typename Value<T>::Type Value<T>::GetValue() const
+const typename Value<T>::Type& Value<T>::GetValue() &&
 {
-    return reinterpret_cast<const Type&>(*m_value);
+    return *(reinterpret_cast<const Type*>(m_value));
 }
 
 } //!flag
