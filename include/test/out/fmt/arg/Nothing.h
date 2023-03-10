@@ -52,6 +52,9 @@ class Nothing :
 {
 public:
     typedef typename test::out::fmt::Definition::FlagType FlagType;
+    typedef typename FlagType::IntegerValueType FlagIntegerValueType;
+    using FlagSpecifierType = 
+        typename FlagType::template SpecifierType<FlagType::specifier_blank>; 
 public:
     constexpr inline Nothing();
     template<typename TFlagArg, typename... TFlagArgs,
@@ -59,7 +62,7 @@ public:
             typename std::remove_reference<TFlagArg>::type>::type,
         typename std::enable_if<test::trait::out::fmt::
             IsFlag<TFlagArg_>::Value, int>::type = 0>
-    constexpr inline Nothing(TFlagArg&& flag, TFlagArgs&&... flags);
+    inline Nothing(TFlagArg&& flag, TFlagArgs&&... flags);
 public:
     using test::out::fmt::Argument<void>::GetFlag;
     using test::out::fmt::Argument<void>::GetWidth;
@@ -70,14 +73,16 @@ public:
 
 
 constexpr inline Nothing::Nothing() :
-    test::out::fmt::Argument<void>(FlagType::specifier_blank)
+    test::out::fmt::Argument<void>(FlagSpecifierType{},
+        test::out::fmt::flag::Define<void>{})
 {}
 
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::
         IsFlag<TFlagArg_>::Value, int>::type>
-constexpr inline Nothing::Nothing(TFlagArg&& flag, TFlagArgs&&... flags) :
-    test::out::fmt::Argument<void>(FlagType::specifier_blank,
+inline Nothing::Nothing(TFlagArg&& flag, TFlagArgs&&... flags) :
+    test::out::fmt::Argument<void>(FlagSpecifierType{},
+        test::out::fmt::flag::Define<void>{},
         std::forward<TFlagArg>(flag),
         std::forward<TFlagArgs>(flags)...)
 {}
