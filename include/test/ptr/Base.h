@@ -79,10 +79,11 @@ protected:
 protected:
     inline FlagIntegerType GetFlag() const;
     inline std::size_t GetOffset() const;
-    inline IntegerCountType GetCount() const;
     inline std::size_t GetTypeSize() const;
     inline std::size_t GetDataSize() const;
     inline void* GetData();
+public:
+    inline IntegerCountType GetCount() const;
 protected:
     inline void SetOffset(const std::size_t& size);
 protected:
@@ -110,7 +111,8 @@ protected:
 inline void Base::_Reset(CountType *& count, BlockType& block)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
-        "_Reset(count=%p, block%p)", count, &block);
+        "_Reset(count={&=%p, v=%zu}, block%p)", count, 
+        (count == nullptr ? IntegerCountType(0) : count->load()), &block);
 
     const auto is_count_null = (count == nullptr);
     if (!is_count_null && *count == 1)
@@ -268,13 +270,6 @@ inline std::size_t Base::GetOffset() const
     return m_offset;
 }
 
-inline typename Base::IntegerCountType Base::GetCount() const
-{
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetCount() const");
-
-    return m_count == nullptr ? 0 : IntegerCountType(*m_count);
-}
-
 inline std::size_t Base::GetTypeSize() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetTypeSize() const");
@@ -294,6 +289,13 @@ inline void* Base::GetData()
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetData()");
 
     return m_block.GetData();
+}
+
+inline typename Base::IntegerCountType Base::GetCount() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetCount() const");
+
+    return m_count == nullptr ? 0 : IntegerCountType(*m_count);
 }
 
 inline void Base::SetOffset(const std::size_t& size)
