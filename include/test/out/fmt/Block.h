@@ -9,8 +9,10 @@
 #include "Definition.h"
 #include "out/Block.h"
 
+#include <type_traits>
 #include <utility>
 #include <cstdlib>
+#include <cstring>
 
 namespace test
 {
@@ -55,6 +57,8 @@ public:
     typedef test::Pointer<char> RawType;
     typedef test::out::fmt::out::Block OutputBlockType;
 public:
+    typedef void (*DestructorFuncType)(Block*, RawType);
+public:
     typedef decltype(test::out::fmt::flag::Width{}.GetValue()) 
         WidthIntegerType;
     typedef decltype(test::out::fmt::flag::Length{}.GetValue()) 
@@ -90,10 +94,14 @@ private:
 public:
     template<typename TArg>
     static inline std::size_t DataAllocationSize(const ArgumentType<TArg>& arg);
+public:
+    template<typename TValue>
+    static inline void Destructor(Block* t, RawType raw);
 private:
     FlagType m_flag;
     std::size_t m_off;
     std::size_t m_alloc;
+    DestructorFuncType m_destructor;
 public:
     inline Block();
     inline Block(const FlagType& flag, const std::size_t& off,
@@ -142,6 +150,8 @@ public:
 public:
     template<typename TChar>
     inline FormatOutputFuncType<TChar> GetFormatOutput(RawType raw) const;
+public:
+    inline void Destroy(RawType raw) const;
 };
 
 constexpr inline std::size_t Block::WidthAllocSize(FlagType flag)
@@ -187,17 +197,30 @@ std::size_t Block::DataAllocationSize(const ArgumentType<TArg>& arg)
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "DataAllocationSize(arg=%p)", &arg);
 
-    typedef decltype(arg.GetValue()) ValueType;
+    typedef typename std::remove_cv<typename std::remove_reference<
+        decltype(arg.GetValue())>::type>::type ValueType;
     const FlagType flag = arg.GetFlag();
 
     return sizeof(ValueType) + WidthAllocSize(flag) +
         LengthPrecisionAllocSize(flag) + OutputAllocSize(flag);
 }
 
+template<typename TValue>
+inline void Block::Destructor(Block* t, RawType raw)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL,
+        "Destructor(raw=%p)", raw.GetData());
+
+    RawType curr = raw + (t->m_off + ValueOffset(t->m_flag));
+
+    (*(curr.ReinterpretCast<TValue>())).~TValue();
+}
+
 inline Block::Block() :
     m_flag(),
     m_off(0),
-    m_alloc(0)
+    m_alloc(0),
+    m_destructor(nullptr)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
 
@@ -207,7 +230,8 @@ inline Block::Block(const FlagType& flag, const std::size_t& off,
     const std::size_t& size) :
         m_flag{flag},
         m_off(off),
-        m_alloc(size)
+        m_alloc(size),
+        m_destructor(nullptr)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Constructor(flag=%x, off=%zu, alloc=%zu)", 
@@ -222,12 +246,14 @@ inline Block::~Block()
     m_flag = FlagType();
     m_off = 0;
     m_alloc = 0;
+    m_destructor = nullptr;
 }
 
 inline Block::Block(const Block& cpy) :
     m_flag(cpy.m_flag),
     m_off(cpy.m_off),
-    m_alloc(cpy.m_alloc)
+    m_alloc(cpy.m_alloc),
+    m_destructor(cpy.m_destructor)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Copy Constructor(cpy=%p)", &cpy);
@@ -236,13 +262,15 @@ inline Block::Block(const Block& cpy) :
 inline Block::Block(Block&& mov) :
     m_flag(std::move(mov.m_flag)),
     m_off(mov.m_off),
-    m_alloc(mov.m_alloc)
+    m_alloc(mov.m_alloc),
+    m_destructor(mov.m_destructor)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Move Constructor(mov=%p)", &mov);
 
     mov.m_off = 0;
     mov.m_alloc = 0;
+    mov.m_destructor = nullptr;
 }
 
 inline Block& Block::operator=(const Block& cpy)
@@ -253,6 +281,7 @@ inline Block& Block::operator=(const Block& cpy)
     m_flag = cpy.m_flag;
     m_off = cpy.m_off;
     m_alloc = cpy.m_alloc;
+    m_destructor = cpy.m_destructor;
     return *this;
 }
 
@@ -264,8 +293,10 @@ inline Block& Block::operator=(Block&& mov)
     m_flag = std::move(mov.m_flag);
     m_off = mov.m_off;
     m_alloc = mov.m_alloc;
+    m_destructor = mov.m_destructor;
     mov.m_off = 0;
     mov.m_alloc = 0;
+    mov.m_destructor = nullptr;
 
     return *this;
 }
@@ -281,7 +312,7 @@ inline std::size_t Block::AllocationSize() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "AllocationSize() const");
 
-    return m_alloc;
+    return m_alloc + ValueOffset(m_flag);
 }
 
 inline std::size_t Block::Offset() const
@@ -311,6 +342,8 @@ inline void Block::Initialize(RawType raw)
     {
         memset(&*curr, 0, m_alloc);
     }
+
+    m_destructor = nullptr;
 }
 
 template<typename TArg>
@@ -322,7 +355,8 @@ inline void Block::Initialize(RawType raw, const ArgumentType<TArg>& arg)
     
     if (m_alloc == 0) return;
 
-    typedef decltype(arg.GetValue()) ValueType;
+    typedef typename std::remove_cv<typename std::remove_reference<
+        decltype(arg.GetValue())>::type>::type ValueType;
     
     RawType curr = raw + m_off;
     const auto width_alloc_size = WidthAllocSize(m_flag);
@@ -353,15 +387,17 @@ inline void Block::Initialize(RawType raw, const ArgumentType<TArg>& arg)
         }
     }
     
+    m_destructor = &Destructor<ValueType>;
+
     memset(&*curr, 0, sizeof(ValueType));
-    *(curr.ReinterpretCast<ValueType>()) = arg.GetValue();
+    new (&*curr)ValueType(arg.GetValue());
 }
 
 template<typename T>
 inline void Block::SetValue(RawType raw, const T& val) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
-        "SetValue<%s>(raw=%p, val=%p)", TEST_SYS_DEBUG_T_NAME_STR(T), 
+        "SetValue<%s>(raw=%p, val=%s)", TEST_SYS_DEBUG_T_NAME_STR(T), 
         raw.GetData(), TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
 
     if (m_alloc == 0)
@@ -415,8 +451,7 @@ inline std::size_t Block::GetValueSize() const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "GetValueSize() const");
 
-    const auto offset = ValueOffset(m_flag);
-    return m_alloc > offset ? m_alloc - offset : 0; 
+    return m_alloc;
 }
 
 inline void Block::SetWidth(RawType raw, const WidthIntegerType& val)
@@ -544,6 +579,19 @@ Block::GetFormatOutput(RawType raw) const
     }
 
     return nullptr;
+}
+
+inline void Block::Destroy(RawType raw) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this,
+        "Destroy(raw=%p)", raw.GetData());
+    
+    if (m_destructor == nullptr)
+    {
+        return;
+    }
+
+    m_destructor(const_cast<Block*>(this), raw);
 }
 
 } //!fmt
