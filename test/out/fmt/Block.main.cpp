@@ -20,6 +20,8 @@ std::size_t Fun1(test::out::Interface<TChar>& out,
     return 0;
 }
 
+static int count_obj1 = 0;
+
 class Obj1
 {
 public:
@@ -31,18 +33,29 @@ public:
         ch('l'),
         dl(3.14),
         sz(-1)
-    {}
+    {
+        count_obj1++;
+    }
     Obj1(double d) :
         ch('k'),
         dl(d),
         sz(0xffff)
-    {}
+    {
+        count_obj1++;
+    }
 public:
     Obj1(const Obj1& c) :
         ch(c.ch),
         dl(c.dl),
         sz(c.sz)
-    {}
+    {
+        count_obj1++;
+    }
+public:
+    ~Obj1()
+    {
+        count_obj1--;
+    }
 public:
     Obj1& operator=(const Obj1& c)
     {
@@ -165,6 +178,8 @@ int main()
         assert(b4.GetPrecision(raw) == 0);
         assert(b4.GetFormatOutput<char>(raw) == nullptr);
         assert(b4.GetFormatOutput<wchar_t>(raw) == nullptr);
+
+        b5.Destroy(raw);
     }
     {
         test::out::fmt::arg::Integer<int> arg1{
@@ -178,7 +193,7 @@ int main()
         const std::size_t size = 
             test::out::fmt::Block::DataAllocationSize(arg1); 
         test::Pointer<char> raw{test::ptr::arg::Array{size}};
-        test::out::fmt::Block b1{arg1.GetFlag(), 0, size};
+        test::out::fmt::Block b1{arg1.GetFlag(), 0, sizeof(int)};
 
         b1.Initialize(raw, arg1);
         
@@ -289,6 +304,8 @@ int main()
         assert(b4.GetPrecision(raw) == 0);
         assert(b4.GetFormatOutput<char>(raw) == nullptr);
         assert(b4.GetFormatOutput<wchar_t>(raw) == nullptr);
+
+        b5.Destroy(raw);
     }
     {
         const char str1[] = "test out 1234";
@@ -304,7 +321,8 @@ int main()
             test::out::fmt::Block::DataAllocationSize(arg1);
         test::Pointer<char> raw{test::ptr::arg::Array{size}};
         test::Pointer<char> raw_str2{test::ptr::arg::Array{sizeof(str2)}};
-        test::out::fmt::Block b1{arg1.GetFlag(), 0, size};
+        test::out::fmt::Block b1{arg1.GetFlag(), 0, 
+            sizeof(test::Pointer<char>)};
 
         memcpy(&*raw_str2, str2, sizeof(str2));
 
@@ -328,6 +346,8 @@ int main()
         assert(b1.GetValue<void>(raw) == 
             &b1.GetValue<test::Pointer<char>>(raw));
         assert(b1.GetValueSize() == sizeof(test::Pointer<char>));
+
+        b1.Destroy(raw);
         
     }
     {
@@ -355,8 +375,10 @@ int main()
         test::Pointer<char> raw{test::ptr::arg::Array{size1 +size2 }};
         test::Pointer<char> raw_str2{test::ptr::arg::Array{sizeof(str2)}};
             
-        test::out::fmt::Block b1{arg1.GetFlag(), 0, size1};
-        test::out::fmt::Block b2{arg2.GetFlag(), size1, size2};
+        test::out::fmt::Block b1{arg1.GetFlag(), 0, 
+            sizeof(test::Pointer<char>)};
+        test::out::fmt::Block b2{arg2.GetFlag(), size1, 
+            sizeof(int)};
         
         memcpy(&*raw_str2, str2, sizeof(str2));
 
@@ -387,7 +409,7 @@ int main()
         assert(b2.GetPrecision(raw) == 40);
         assert(b2.GetFormatOutput<char>(raw) == &Fun1<char>);
         assert(b2.GetFormatOutput<wchar_t>(raw) == &Fun1<wchar_t>);
-        
+
         b1.SetValue(raw, raw_str2);
         assert(strcmp(&*(b1.GetValue<test::Pointer<char>>(raw)), str2) == 0);
         assert(b1.GetValue<void>(raw) == 
@@ -398,6 +420,10 @@ int main()
         assert(b2.GetValue<int>(raw) == 44);
         assert(b2.GetValue<void>(raw) == &b2.GetValue<int>(raw));
         assert(b2.GetValueSize() == sizeof(int));
+
+        b1.Destroy(raw);
+        b2.Destroy(raw);
+
     }
     
     {
@@ -443,10 +469,14 @@ int main()
         test::Pointer<char> raw_str1{test::ptr::arg::Array{sizeof(str1)}};
         test::Pointer<char> raw_str2{test::ptr::arg::Array{sizeof(str2)}};
             
-        test::out::fmt::Block b1{arg1.GetFlag(), 0, size1};
-        test::out::fmt::Block b2{arg2.GetFlag(), size1, size2};
-        test::out::fmt::Block b3{arg3.GetFlag(), size1 + size2, size3};
-        test::out::fmt::Block b4{arg4.GetFlag(), size1 + size2 + size3, size4};
+        test::out::fmt::Block b1{arg1.GetFlag(), 0, 
+            sizeof(test::Pointer<char>)};
+        test::out::fmt::Block b2{arg2.GetFlag(), size1, 
+            sizeof(int)};
+        test::out::fmt::Block b3{arg3.GetFlag(), size1 + size2, 
+             sizeof(test::Pointer<char>)};
+        test::out::fmt::Block b4{arg4.GetFlag(), size1 + size2 + size3, 
+             sizeof(Obj1)};
         
         memcpy(&*raw_str1, str1, sizeof(str1));
         memcpy(&*raw_str2, str2, sizeof(str2));
@@ -531,7 +561,15 @@ int main()
         assert(b4.GetValue<Obj1>(raw).sz == -1);
         assert(b4.GetValue<void>(raw) == &b4.GetValue<Obj1>(raw));
         assert(b4.GetValueSize() == sizeof(Obj1));
+
+        b1.Destroy(raw);
+        b2.Destroy(raw);
+        b3.Destroy(raw);
+        b4.Destroy(raw);
         
     }
+
+    assert(count_obj1 == 0);
+
     return 0;
 }
