@@ -14,7 +14,7 @@ using FormatOutputFuncType = test::out::fmt::Definition::
 int main()
 {
     {
-        test::out::fmt::arg::Nothing arg1;
+        test::out::fmt::arg::Nothing<int> arg1;
         
         assert(arg1.GetFlag().IsSpecifierBlank() == true);
         assert(arg1.GetFlag().HasInputValue() == false);
@@ -35,7 +35,7 @@ int main()
             fmt_wchar_fun);
     }
     {
-        test::out::fmt::arg::Nothing arg1{
+        test::out::fmt::arg::Nothing<int> arg1{
             test::out::fmt::flag::Width{20}
         };
 
@@ -59,7 +59,7 @@ int main()
             fmt_wchar_fun);
     }
     {
-        test::out::fmt::arg::Nothing arg1{
+        test::out::fmt::arg::Nothing<int> arg1{
             test::out::fmt::flag::Length{20}
         };
 
@@ -83,7 +83,7 @@ int main()
             fmt_wchar_fun);
     }
     {
-        test::out::fmt::arg::Nothing arg1{
+        test::out::fmt::arg::Nothing<int> arg1{
             test::out::fmt::flag::Precision{20}
         };
 
