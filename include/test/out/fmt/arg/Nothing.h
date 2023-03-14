@@ -18,6 +18,7 @@ namespace fmt
 namespace arg
 {
 
+template<typename T>
 class Nothing;
 
 } //!arg
@@ -28,15 +29,22 @@ class Nothing;
 
 } //!test
 
-#ifndef TEST_OUT_FMT_ARG_BOOLEAN_DLEVEL
+#ifndef TEST_OUT_FMT_ARG_NOTHING_DLEVEL
 
-#define TEST_OUT_FMT_ARG_BOOLEAN_DLEVEL 2
+#define TEST_OUT_FMT_ARG_NOTHING_DLEVEL 2
 
-#endif //!TEST_OUT_FMT_ARG_BOOLEAN_DLEVEL
+#endif //!TEST_OUT_FMT_ARG_NOTHING_DLEVEL
 
-TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_ARG_BOOLEAN_DLEVEL, 
-    "test::out::fmt::arg::Nothing", test::out::fmt::arg::Nothing);
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<T>
 
+template<typename T>
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_OUT_FMT_ARG_NOTHING_DLEVEL,
+    "test::out::fmt::arg::Nothing",
+    test::out::fmt::arg::Nothing<T>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
     
 namespace test
 {
@@ -47,6 +55,7 @@ namespace fmt
 namespace arg
 {
 
+template<typename T>
 class Nothing :
     public test::out::fmt::Argument<void>
 {
@@ -71,16 +80,17 @@ public:
     using test::out::fmt::Argument<void>::GetFormatOutput;
 };
 
-
-constexpr inline Nothing::Nothing() :
+template<typename T>
+constexpr inline Nothing<T>::Nothing() :
     test::out::fmt::Argument<void>(FlagSpecifierType{},
         test::out::fmt::flag::Define<void>{})
 {}
 
+template<typename T>
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
     typename std::enable_if<test::trait::out::fmt::
         IsFlag<TFlagArg_>::Value, int>::type>
-inline Nothing::Nothing(TFlagArg&& flag, TFlagArgs&&... flags) :
+inline Nothing<T>::Nothing(TFlagArg&& flag, TFlagArgs&&... flags) :
     test::out::fmt::Argument<void>(FlagSpecifierType{},
         test::out::fmt::flag::Define<void>{},
         std::forward<TFlagArg>(flag),
