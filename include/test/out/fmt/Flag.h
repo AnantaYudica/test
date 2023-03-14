@@ -433,6 +433,11 @@ public:
     constexpr bool HasInputPrecision() const;
     void SetInput(const IntegerValueType& val);
 public:
+    constexpr bool IsRequireValueInput() const;
+    constexpr bool IsRequireWidthInput() const;
+    constexpr bool IsRequireLengthInput() const;
+    constexpr bool IsRequirePrecisionInput() const;
+public:
     constexpr bool HasOutput() const;
     template<typename TChar>
     constexpr bool HasOutput(TChar&&) const;
@@ -1291,6 +1296,31 @@ template<typename TValue, typename TIntegerValue>
 void Flag<TValue, TIntegerValue>::SetInput(const IntegerValueType& val)
 {
     m_value = (m_value & ~input_mask) | (val & input_mask);
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::IsRequireValueInput() const
+{
+    return (m_value & specifier_type_mask) &&
+        !HasInputValue();
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::IsRequireWidthInput() const
+{
+    return IsSpecifierSubWidth() && !HasInputWidth();
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::IsRequireLengthInput() const
+{
+    return IsSpecifierSubLength() && !HasInputLength();
+}
+
+template<typename TValue, typename TIntegerValue>
+constexpr bool Flag<TValue, TIntegerValue>::IsRequirePrecisionInput() const
+{
+    return IsSpecifierSubPrecision() && !HasInputLength();
 }
 
 template<typename TValue, typename TIntegerValue>
