@@ -55,7 +55,7 @@ public:
     typedef test::out::fmt::Definition DefinitionType;
     typedef typename DefinitionType::FlagType FlagType;
     typedef test::Pointer<char> RawType;
-    typedef test::out::fmt::out::Block OutputBlockType;
+    typedef typename DefinitionType::FormatOutputType OutputBlockType;
 public:
     typedef void (*DestructorFuncType)(Block*, RawType);
 public:
@@ -167,7 +167,7 @@ constexpr inline std::size_t Block::LengthPrecisionAllocSize(FlagType flag)
 
 constexpr inline std::size_t Block::OutputAllocSize(FlagType flag)
 {
-    return flag.OutputSize() * sizeof(OutputBlockType);
+    return flag.IsSpecifierUndefined() ? std::size_t(0) : sizeof(OutputBlockType);
 }
 
 constexpr inline std::size_t Block::WidthOffset(FlagType flag)
@@ -353,7 +353,7 @@ inline void Block::Initialize(RawType raw, const ArgumentType<TArg>& arg)
         "Initialize<%s>(raw=%p, arg=%p)", TEST_SYS_DEBUG_T_NAME_STR(TArg), 
         raw.GetData(), &arg);
     
-    if (m_alloc == 0) return;
+    if (m_alloc == 0 || raw.Size() == 0) return;
 
     typedef typename std::remove_cv<typename std::remove_reference<
         decltype(arg.GetValue())>::type>::type ValueType;
@@ -362,7 +362,6 @@ inline void Block::Initialize(RawType raw, const ArgumentType<TArg>& arg)
     const auto width_alloc_size = WidthAllocSize(m_flag);
     const auto length_precision_alloc_size = LengthPrecisionAllocSize(m_flag);
     const auto output_alloc_size = OutputAllocSize(m_flag);
-    const auto output_size = m_flag.OutputSize();
 
     if (width_alloc_size > 0)
     {
@@ -370,27 +369,30 @@ inline void Block::Initialize(RawType raw, const ArgumentType<TArg>& arg)
 
         curr += width_alloc_size;
     }
+
     if (length_precision_alloc_size > 0)
     {
         *(curr.ReinterpretCast<LengthIntegerType>()) = arg.GetLength();
 
         curr += length_precision_alloc_size;
     }
+
     if (output_alloc_size > 0)
     {
-        for(std::size_t i = 0; i < output_size; ++i)
-        {
-            *(curr.ReinterpretCast<OutputBlockType>()) = 
-                arg.GetFormatOutput().Get(i);
-            
-            curr += sizeof(OutputBlockType);
-        }
+        new (&*(curr.ReinterpretCast<OutputBlockType>()))
+            OutputBlockType(arg.GetFormatOutput());
+        curr += output_alloc_size;
     }
     
-    m_destructor = &Destructor<ValueType>;
-
-    memset(&*curr, 0, sizeof(ValueType));
-    new (&*curr)ValueType(arg.GetValue());
+    if (m_alloc > 0)
+    {
+        memset(&*curr, 0, sizeof(ValueType));
+        if (m_flag.HasInputValue())
+        {
+            new (&*curr)ValueType(arg.GetValue());
+        }
+        m_destructor = &Destructor<ValueType>;
+    }
 }
 
 template<typename T>
@@ -400,7 +402,7 @@ inline void Block::SetValue(RawType raw, const T& val) const
         "SetValue<%s>(raw=%p, val=%s)", TEST_SYS_DEBUG_T_NAME_STR(T), 
         raw.GetData(), TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
 
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return;
     }
@@ -418,7 +420,7 @@ inline void* Block::GetValue(RawType raw) const
         "GetValue<%s>(raw=%p)", TEST_SYS_DEBUG_T_NAME_STR(T), 
         raw.GetData());
     
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return (void*)test::sys::mem::Dummy::Get<char>();
     }
@@ -436,7 +438,7 @@ inline T& Block::GetValue(RawType raw) const
         "GetValue<%s>(raw=%p)", TEST_SYS_DEBUG_T_NAME_STR(T), 
         raw.GetData());
     
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return *test::sys::mem::Dummy::Get<T>();
     }
@@ -460,7 +462,7 @@ inline void Block::SetWidth(RawType raw, const WidthIntegerType& val)
         "SetWidth(raw=%p, val=%p)", raw.GetData(), 
         TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
 
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return;
     }
@@ -476,7 +478,7 @@ Block::GetWidth(RawType raw) const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "GetWidth(raw=%p)", raw.GetData());
     
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return (WidthIntegerType)0;
     }
@@ -492,7 +494,7 @@ inline void Block::SetLength(RawType raw, const LengthIntegerType& val)
         "SetLength(raw=%p, val=%p)", raw.GetData(), 
         TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
     
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return;
     }
@@ -508,7 +510,7 @@ Block::GetLength(RawType raw) const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "GetLength(raw=%p)", raw.GetData());
     
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return (LengthIntegerType)0;
     }
@@ -524,7 +526,7 @@ inline void Block::SetPrecision(RawType raw, const PrecisionIntegerType& val)
         "SetPrecision(raw=%p, val=%p)", raw.GetData(), 
         TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
     
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return;
     }
@@ -541,7 +543,7 @@ Block::Block::GetPrecision(RawType raw) const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "GetLength(raw=%p)", raw.GetData());
     
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return (PrecisionIntegerType)0;
     }
@@ -556,29 +558,17 @@ inline typename Block::FormatOutputFuncType<TChar>
 Block::GetFormatOutput(RawType raw) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "GetOutput<%s>(raw=%p)", 
+        "GetFormatOutput<%s>(raw=%p)", 
         TEST_SYS_DEBUG_T_NAME_STR(TChar), raw.GetData());
     
-    if (m_alloc == 0)
+    if (m_alloc == 0 || raw.Size() == 0)
     {
         return nullptr;
     }
 
     RawType curr = raw + (m_off + OutputOffset(m_flag));
-    const auto type = DefinitionType::OutputValue((TChar)0);
-    const auto size = m_flag.OutputSize();
-    for(std::size_t i = 0; i < size; ++i)
-    {
-        auto cast = curr.ReinterpretCast<OutputBlockType>();
-        const auto curr_type = cast->GetType();
-        if (curr_type == type)
-        {
-            return cast->template GetFormatOutput<TChar>();
-        }
-        curr += sizeof(OutputBlockType);
-    }
 
-    return nullptr;
+    return (*(curr.ReinterpretCast<OutputBlockType>())).template Get<TChar>();
 }
 
 inline void Block::Destroy(RawType raw) const
