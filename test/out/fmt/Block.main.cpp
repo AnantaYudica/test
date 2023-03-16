@@ -192,6 +192,8 @@ int main()
 
         const std::size_t size = 
             test::out::fmt::Block::DataAllocationSize(arg1); 
+        const std::size_t val_size = 
+            test::out::fmt::Block::ValueAllocationSize(arg1); 
         test::Pointer<char> raw{test::ptr::arg::Array{size}};
         test::out::fmt::Block b1{arg1.GetFlag(), 0, sizeof(int)};
 
@@ -319,6 +321,8 @@ int main()
         
         const std::size_t size = 
             test::out::fmt::Block::DataAllocationSize(arg1);
+        const std::size_t val_size = 
+            test::out::fmt::Block::ValueAllocationSize(arg1);
         test::Pointer<char> raw{test::ptr::arg::Array{size}};
         test::Pointer<char> raw_str2{test::ptr::arg::Array{sizeof(str2)}};
         test::out::fmt::Block b1{arg1.GetFlag(), 0, 
@@ -371,6 +375,11 @@ int main()
             test::out::fmt::Block::DataAllocationSize(arg1);
         const std::size_t size2 =
             test::out::fmt::Block::DataAllocationSize(arg2); 
+            
+        const std::size_t val_size1 = 
+            test::out::fmt::Block::ValueAllocationSize(arg1);
+        const std::size_t val_size2 = 
+            test::out::fmt::Block::ValueAllocationSize(arg2);
 
         test::Pointer<char> raw{test::ptr::arg::Array{size1 +size2 }};
         test::Pointer<char> raw_str2{test::ptr::arg::Array{sizeof(str2)}};
@@ -463,6 +472,17 @@ int main()
             test::out::fmt::Block::DataAllocationSize(arg3); 
         const std::size_t size4 =
             test::out::fmt::Block::DataAllocationSize(arg4); 
+            
+        const std::size_t val_size1 = 
+            test::out::fmt::Block::ValueAllocationSize(arg1);
+        const std::size_t val_size2 = 
+            test::out::fmt::Block::ValueAllocationSize(arg2);
+        const std::size_t val_size3 = 
+            test::out::fmt::Block::ValueAllocationSize(arg3);
+        const std::size_t val_size4 = 
+            test::out::fmt::Block::ValueAllocationSize(arg4);
+
+
 
         test::Pointer<char> raw{test::ptr::arg::Array{size1 + size2 +
             size3 + size4}};
