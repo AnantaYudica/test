@@ -77,6 +77,14 @@ public:
 public:
     typedef test::out::fmt::Definition DefinitionType;
 private:
+    static constexpr std::false_type IsDefineType_(...);
+    template<typename T_>
+    static constexpr std::true_type 
+        IsDefineType_(test::out::fmt::flag::Define<T_>);
+private:
+    template<typename T_>
+    using IsDefineType = decltype(IsDefineType_(std::declval<T_>()));
+private:
     static constexpr std::false_type IsValueType_(...);
     template<typename T_>
     static constexpr std::true_type 
@@ -100,13 +108,21 @@ private:
 public:
     constexpr Argument();
     template<typename TFlagIntegerValue = FlagIntegerValueType,
+        TFlagIntegerValue VIntegerValueFlag>
+    constexpr Argument(FlagSpecifierType<VIntegerValueFlag> specifier);
+    template<typename TFlagIntegerValue = FlagIntegerValueType,
         TFlagIntegerValue VIntegerValueFlag, typename TDefine>
     constexpr Argument(FlagSpecifierType<VIntegerValueFlag> specifier,
         test::out::fmt::flag::Define<TDefine>&& define_flag);
     template<typename TFlagIntegerValue = FlagIntegerValueType,
-        TFlagIntegerValue VIntegerValueFlag, typename... TFlagArgs>
-    Argument(FlagSpecifierType<VIntegerValueFlag> specifier, 
-        TFlagArgs&&... flags);
+        TFlagIntegerValue VIntegerValueFlag, typename TFlagArg,
+        typename... TFlagArgs, typename TFlagArg_ = typename std::remove_cv<
+            typename std::remove_reference<TFlagArg>::type>::type,
+        typename TCond_ = IsDefineType<TFlagArg_>,
+        typename std::enable_if<!TCond_::value ||
+            sizeof...(TFlagArgs) != 0, int>::type = 1>
+    Argument(FlagSpecifierType<VIntegerValueFlag> specifier,
+        TFlagArg&& flag_arg, TFlagArgs&&... flag_args);
 public:
     Argument(const Argument<T>&) = delete;
     Argument(Argument<T>&&) = delete;
@@ -470,6 +486,16 @@ constexpr Argument<T, TFlag, TEnable>::Argument() :
 {}
 
 template<typename T, typename TFlag, typename TEnable>
+template<typename TFlagIntegerValue, TFlagIntegerValue VIntegerValueFlag>
+constexpr Argument<T, TFlag, TEnable>::
+    Argument(FlagSpecifierType<VIntegerValueFlag> specifier) :
+        Argument<void, TFlag>(specifier, 
+            test::out::fmt::flag::Define<T>{}, 
+            test::out::fmt::flag::Define<T>{}),
+        m_value()
+{}
+
+template<typename T, typename TFlag, typename TEnable>
 template<typename TFlagIntegerValue, TFlagIntegerValue VIntegerValueFlag,
     typename TDefine>
 constexpr Argument<T, TFlag, TEnable>::
@@ -483,15 +509,19 @@ constexpr Argument<T, TFlag, TEnable>::
 
 
 template<typename T, typename TFlag, typename TEnable>
-template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier, 
-    typename... TFlagArgs>
+template<typename TFlagIntegerValue, TFlagIntegerValue VIntegerValueFlag, 
+    typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
+    typename TCond_, typename std::enable_if<!TCond_::value ||
+        sizeof...(TFlagArgs) != 0, int>::type>
 Argument<T, TFlag, TEnable>::
-    Argument(FlagSpecifierType<VFlagSpecifier> specifier, 
-        TFlagArgs&&... flags) :
+    Argument(FlagSpecifierType<VIntegerValueFlag> specifier, 
+        TFlagArg&& flag_arg, TFlagArgs&&... flag_args) :
             Argument<void, TFlag>(specifier, 
                 test::out::fmt::flag::Define<T>{},
-                std::forward<TFlagArgs>(flags)...),
-            m_value(Value(std::forward<TFlagArgs>(flags)...))
+                std::forward<TFlagArg>(flag_arg),
+                std::forward<TFlagArgs>(flag_args)...),
+            m_value(Value(std::forward<TFlagArg>(flag_arg),
+                std::forward<TFlagArgs>(flag_args)...))
 {}
 
 template<typename T, typename TFlag, typename TEnable>
@@ -755,12 +785,14 @@ template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier,
 constexpr Argument<void, TFlag, void>::
     Argument(FlagSpecifierType<VFlagSpecifier> specifier,
         FlagDefineType<T> define, TFlagArgs&&... flags) :
-            m_flag(VFlagSpecifier, std::forward<TFlagArgs>(flags)...),
+            m_flag(VFlagSpecifier, FlagDefineType<T>{},
+                std::forward<TFlagArgs>(flags)...),
             m_width(Width(std::forward<TFlagArgs>(flags)...)),
             m_length(Length(std::forward<TFlagArgs>(flags)...)),
             m_fmtout(Output<FlagIntegerValueType, 
-                TFlag{VFlagSpecifier, TFlagArgs{}...}.GetValue(), 
-                T>(std::forward<TFlagArgs>(flags)...))
+                TFlag{VFlagSpecifier, FlagDefineType<T>{}, 
+                TFlagArgs{}...}.GetValue(), 
+                    T>(std::forward<TFlagArgs>(flags)...))
 {}
 
 template< typename TFlag>
