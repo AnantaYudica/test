@@ -72,7 +72,15 @@ public:
 public:
     template<typename T>
     using ArgumentType = test::out::fmt::Argument<T, FlagType>;
-public: 
+private:
+    static constexpr std::false_type HasGetValue_(...);
+    template<typename T>
+    static constexpr auto HasGetValue_(ArgumentType<T>&& arg) -> 
+        decltype(arg.GetValue(), std::true_type());
+public:
+    template<typename TArg>
+    using HasGetValue = decltype(HasGetValue_(TArg{}));
+public:
     template<typename TChar>
     using FormatOutputFuncType = typename DefinitionType::
         FormatOutputFuncType<TChar>;
@@ -92,8 +100,16 @@ private:
 private:
     static constexpr inline std::size_t ValueOffset(FlagType flag);
 public:
+    template<typename TArg, typename TCond_ = HasGetValue<ArgumentType<TArg>>,
+        typename std::enable_if<TCond_::value, int>::type = 0>
+    static inline std::size_t 
+        ValueAllocationSize(const ArgumentType<TArg>& arg);
+    static inline std::size_t 
+        ValueAllocationSize(const ArgumentType<void>& arg);
+public:
     template<typename TArg>
-    static inline std::size_t DataAllocationSize(const ArgumentType<TArg>& arg);
+    static inline std::size_t 
+        DataAllocationSize(const ArgumentType<TArg>& arg);
 public:
     template<typename TValue>
     static inline void Destructor(Block* t, RawType raw);
@@ -122,8 +138,10 @@ public:
     inline std::size_t Offset() const;
 public:
     inline void Initialize(RawType raw);
-    template<typename TArg>
+    template<typename TArg, typename TCond_ = HasGetValue<ArgumentType<TArg>>,
+        typename std::enable_if<TCond_::value, int>::type = 0>
     inline void Initialize(RawType raw, const ArgumentType<TArg>& arg);
+    inline void Initialize(RawType raw, const ArgumentType<void>& arg);
 public:
     template<typename T>
     inline void SetValue(RawType raw, const T& val) const;
@@ -191,17 +209,38 @@ constexpr inline std::size_t Block::ValueOffset(FlagType flag)
         OutputAllocSize(flag);
 }
 
-template<typename TArg>
-std::size_t Block::DataAllocationSize(const ArgumentType<TArg>& arg)
+template<typename TArg, typename TCond_,
+    typename std::enable_if<TCond_::value, int>::type>
+inline std::size_t Block::ValueAllocationSize(const ArgumentType<TArg>& arg)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "ValueAllocationSize<%s>(arg=%p)", 
+        TEST_SYS_DEBUG_T_NAME_STR(TArg), &arg);
+    
+    typedef typename std::remove_cv<typename std::remove_reference<
+        decltype(arg.GetValue())>::type>::type ValueType;
+
+    return sizeof(ValueType);
+}
+
+inline std::size_t Block::ValueAllocationSize(const ArgumentType<void>& arg)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
         "DataAllocationSize(arg=%p)", &arg);
+    
+    return 0;
+}
 
-    typedef typename std::remove_cv<typename std::remove_reference<
-        decltype(arg.GetValue())>::type>::type ValueType;
+template<typename TArg>
+inline std::size_t Block::DataAllocationSize(const ArgumentType<TArg>& arg)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "DataAllocationSize<%s>(arg=%p)", 
+        TEST_SYS_DEBUG_T_NAME_STR(TArg), &arg);
+
     const FlagType flag = arg.GetFlag();
 
-    return sizeof(ValueType) + WidthAllocSize(flag) +
+    return ValueAllocationSize(arg) + WidthAllocSize(flag) +
         LengthPrecisionAllocSize(flag) + OutputAllocSize(flag);
 }
 
@@ -346,7 +385,8 @@ inline void Block::Initialize(RawType raw)
     m_destructor = nullptr;
 }
 
-template<typename TArg>
+template<typename TArg, typename TCond_,
+    typename std::enable_if<TCond_::value, int>::type>
 inline void Block::Initialize(RawType raw, const ArgumentType<TArg>& arg)
 {    
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
@@ -395,6 +435,42 @@ inline void Block::Initialize(RawType raw, const ArgumentType<TArg>& arg)
     }
 }
 
+inline void Block::Initialize(RawType raw, const ArgumentType<void>& arg)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Initialize(raw=%p, arg=%p)", raw.GetData(), &arg);
+    
+    if (raw.Size() == 0) return;
+    
+    RawType curr = raw + m_off;
+    const auto width_alloc_size = WidthAllocSize(m_flag);
+    const auto length_precision_alloc_size = LengthPrecisionAllocSize(m_flag);
+    const auto output_alloc_size = OutputAllocSize(m_flag);
+
+    if (width_alloc_size > 0)
+    {
+        *(curr.ReinterpretCast<WidthIntegerType>()) = arg.GetWidth();
+
+        curr += width_alloc_size;
+    }
+
+    if (length_precision_alloc_size > 0)
+    {
+        *(curr.ReinterpretCast<LengthIntegerType>()) = arg.GetLength();
+
+        curr += length_precision_alloc_size;
+    }
+
+    if (output_alloc_size > 0)
+    {
+        new (&*(curr.ReinterpretCast<OutputBlockType>()))
+            OutputBlockType(arg.GetFormatOutput());
+        curr += output_alloc_size;
+    }
+    
+    m_destructor = nullptr;
+}
+
 template<typename T>
 inline void Block::SetValue(RawType raw, const T& val) const
 {
@@ -402,7 +478,10 @@ inline void Block::SetValue(RawType raw, const T& val) const
         "SetValue<%s>(raw=%p, val=%s)", TEST_SYS_DEBUG_T_NAME_STR(T), 
         raw.GetData(), TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
 
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + ValueOffset(m_flag) + m_alloc;
+    
+    if (m_alloc == 0 || raw_size < size)
     {
         return;
     }
@@ -420,7 +499,10 @@ inline void* Block::GetValue(RawType raw) const
         "GetValue<%s>(raw=%p)", TEST_SYS_DEBUG_T_NAME_STR(T), 
         raw.GetData());
     
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + ValueOffset(m_flag) + m_alloc;
+
+    if (m_alloc == 0 || raw_size < size)
     {
         return (void*)test::sys::mem::Dummy::Get<char>();
     }
@@ -438,7 +520,10 @@ inline T& Block::GetValue(RawType raw) const
         "GetValue<%s>(raw=%p)", TEST_SYS_DEBUG_T_NAME_STR(T), 
         raw.GetData());
     
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + ValueOffset(m_flag) + m_alloc;
+
+    if (m_alloc == 0 || raw_size < size)
     {
         return *test::sys::mem::Dummy::Get<T>();
     }
@@ -462,7 +547,10 @@ inline void Block::SetWidth(RawType raw, const WidthIntegerType& val)
         "SetWidth(raw=%p, val=%p)", raw.GetData(), 
         TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
 
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + WidthOffset(m_flag) + WidthAllocSize(m_flag);
+
+    if (WidthAllocSize(m_flag) == 0 || raw_size < size)
     {
         return;
     }
@@ -478,7 +566,10 @@ Block::GetWidth(RawType raw) const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "GetWidth(raw=%p)", raw.GetData());
     
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + WidthOffset(m_flag) + WidthAllocSize(m_flag);
+
+    if (WidthAllocSize(m_flag) == 0 || raw_size < size)
     {
         return (WidthIntegerType)0;
     }
@@ -494,7 +585,11 @@ inline void Block::SetLength(RawType raw, const LengthIntegerType& val)
         "SetLength(raw=%p, val=%p)", raw.GetData(), 
         TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
     
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + LengthPrecisionOffset(m_flag) + 
+        LengthPrecisionAllocSize(m_flag);
+
+    if (LengthPrecisionAllocSize(m_flag) == 0 || raw_size < size)
     {
         return;
     }
@@ -510,7 +605,11 @@ Block::GetLength(RawType raw) const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "GetLength(raw=%p)", raw.GetData());
     
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + LengthPrecisionOffset(m_flag) + 
+        LengthPrecisionAllocSize(m_flag);
+
+    if (LengthPrecisionAllocSize(m_flag) == 0 || raw_size < size)
     {
         return (LengthIntegerType)0;
     }
@@ -526,7 +625,11 @@ inline void Block::SetPrecision(RawType raw, const PrecisionIntegerType& val)
         "SetPrecision(raw=%p, val=%p)", raw.GetData(), 
         TEST_SYS_DEBUG_TARGS_VALUE_STR(val));
     
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + LengthPrecisionOffset(m_flag) + 
+        LengthPrecisionAllocSize(m_flag);
+
+    if (LengthPrecisionAllocSize(m_flag) == 0 || raw_size < size)
     {
         return;
     }
@@ -543,7 +646,11 @@ Block::Block::GetPrecision(RawType raw) const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
         "GetLength(raw=%p)", raw.GetData());
     
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + LengthPrecisionOffset(m_flag) + 
+        LengthPrecisionAllocSize(m_flag);
+
+    if (LengthPrecisionAllocSize(m_flag) == 0 || raw_size < size)
     {
         return (PrecisionIntegerType)0;
     }
@@ -561,7 +668,11 @@ Block::GetFormatOutput(RawType raw) const
         "GetFormatOutput<%s>(raw=%p)", 
         TEST_SYS_DEBUG_T_NAME_STR(TChar), raw.GetData());
     
-    if (m_alloc == 0 || raw.Size() == 0)
+    const auto raw_size = raw.Size() - raw.Offset();
+    const auto size = m_off + OutputOffset(m_flag) + 
+        OutputAllocSize(m_flag);
+
+    if (OutputAllocSize(m_flag) == 0 || raw_size < size)
     {
         return nullptr;
     }
