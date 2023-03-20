@@ -5,6 +5,7 @@
 #include "../Pointer.h"
 #include "../sys/mem/Dummy.h"
 #include "Header.h"
+#include "Type.h"
 
 #include <cstddef>
 #include <cstdint>
@@ -40,11 +41,19 @@ private:
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::arg::Block> DebugType;
 public:
+    typedef test::Pointer<std::uint8_t> BufferType;
+private:
+    typedef void (*DestructorFuncType)(Block*, BufferType);
+public:
     typedef test::arg::Header HeaderType;
+private:
+    template<typename T>
+    static inline void Destructor(Block* block, BufferType buff);
 private:
     HeaderType m_header;
     std::size_t m_off;
     std::size_t m_size;
+    DestructorFuncType m_destructor;
 public:
     inline Block();
     inline Block(const HeaderType& header, const std::size_t& off, 
@@ -66,21 +75,41 @@ public:
     inline void SetSize(const std::size_t& size);
     inline std::size_t GetSize() const;
 public:
-    template<typename T, typename TP, typename TD>
-    inline void Set(test::Pointer<TP, TD> blocks, T&& val) const;
-    template<typename T, typename TP, typename TD>
-    inline void Set(test::Pointer<TP, TD> blocks, const T& val) const;
-    template<typename T, typename TP, typename TD>
-    inline T Get(test::Pointer<TP, TD> blocks) const;
+    template<typename T>
+    inline void Initialize(BufferType buff);
+    template<typename T>
+    inline void Initialize(BufferType buff, T&& val);
+public:
+    template<typename T>
+    inline void Set(BufferType buff, T&& val) const;
+    template<typename T>
+    inline void Set(BufferType buff, const T& val) const;
+    template<typename T>
+    inline typename test::arg::Type<T>::RValueType Get(BufferType buff) const;
+public:
+    inline void Destroy(BufferType buff) const;
 public:
     inline bool operator==(const Block& other) const;
     inline bool operator!=(const Block& other) const;
 };
 
+template<typename T>
+inline void Block::Destructor(Block* block, BufferType buff)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, NULL, 
+        "Destructor<%s>(block=%p, buff=%p)", TEST_SYS_DEBUG_T_NAME_STR(T),
+            block, buff.GetData());
+
+    buff.SetIndex(block->m_off);
+    T& cast = *(buff.template ReinterpretCast<T>());
+    cast.~T();
+}
+
 inline Block::Block() :
     m_header(),
     m_off(0),
-    m_size(0)
+    m_size(0),
+    m_destructor(nullptr)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Default Constructor");
 
@@ -90,7 +119,8 @@ inline Block::Block(const HeaderType& header, const std::size_t& off,
     const std::size_t& size) :
         m_header(header),
         m_off(off),
-        m_size(size)
+        m_size(size),
+        m_destructor(nullptr)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Constructor(header=%x, off=%zu, size=%zu)", header.Flag(), off, size);
@@ -196,49 +226,97 @@ inline std::size_t Block::GetSize() const
     return m_size;
 }
 
-template<typename T, typename TP, typename TD>
-inline void Block::Set(test::Pointer<TP, TD> blocks, T&& val) const
+template<typename T>
+inline void Block::Initialize(BufferType buff)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
-        "Set<%s>(blocks=%p, val=%s)", 
-        TEST_SYS_DEBUG_TARGS_NAME_STR(T, TP, TD),
-        &blocks, TEST_SYS_DEBUG_VALUE_STR(0, val));
+        "Initialize<%s>(buff=%p)", TEST_SYS_DEBUG_T_NAME_STR(T),
+            buff.GetData());
+
+    buff.SetIndex(m_off);
     
-    if (sizeof(T) > m_size || m_size == 0)
+    new (&*(buff.template ReinterpretCast<T>()))T();
+
+    m_destructor = Destructor<T>;
+}
+
+template<typename T>
+inline void Block::Initialize(BufferType buff, T&& val)
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Initialize<%s>(buff=%p, val=%s)", TEST_SYS_DEBUG_T_NAME_STR(T),
+            buff.GetData(), TEST_SYS_DEBUG_VALUE_STR(0, val));
+
+    buff.SetIndex(m_off);
+    
+    new (&*(buff.template ReinterpretCast<T>()))T(std::forward<T>(val));
+
+    m_destructor = Destructor<T>;
+}
+
+template<typename T>
+inline void Block::Set(BufferType buff, T&& val) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Set<%s>(buff=%p, val=%s)", 
+        TEST_SYS_DEBUG_T_NAME_STR(T),
+        buff.GetData(), TEST_SYS_DEBUG_VALUE_STR(0, val));
+
+    typedef test::arg::Type<T> Type;
+    
+    if (Type::Size > m_size || m_size == 0)
     {
         return;
     }
 
-    blocks.SetIndex(m_off);
-    *(blocks.template ReinterpretCast<T>()) = val;
+    buff.SetIndex(m_off);
+    return Type::Set(buff, std::move(val));
 }
 
-template<typename T, typename TP, typename TD>
-inline void Block::Set(test::Pointer<TP, TD> blocks, const T& val) const
+template<typename T>
+inline void Block::Set(BufferType buff, const T& val) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
-        "Set<%s>(blocks=%p, val=%s)", 
-        TEST_SYS_DEBUG_TARGS_NAME_STR(T, TP, TD),
-        &blocks, TEST_SYS_DEBUG_VALUE_STR(0, val));
+        "Set<%s>(buff=%p, val=%s)", 
+        TEST_SYS_DEBUG_T_NAME_STR(T),
+        buff.GetData(), TEST_SYS_DEBUG_VALUE_STR(0, val));
     
-    if (sizeof(T) > m_size || m_size == 0)
+    typedef test::arg::Type<T> Type;
+
+    if (Type::Size > m_size || m_size == 0)
     {
         return;
     }
 
-    blocks.SetIndex(m_off);
-    *(blocks.template ReinterpretCast<T>()) = val;
+    buff.SetIndex(m_off);
+    return Type::Set(buff, val);
 }
 
-template<typename T, typename TP, typename TD>
-inline T Block::Get(test::Pointer<TP, TD> blocks) const
+template<typename T>
+inline typename test::arg::Type<T>::RValueType 
+Block::Get(BufferType buff) const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "Get<%s>(blocks=%p) const", 
-        TEST_SYS_DEBUG_TARGS_NAME_STR(T, TP, TD), &blocks);
+        "Get<%s>(buff=%p) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(T), buff.GetData());
 
-    blocks.SetIndex(m_off);
-    return *(blocks.template ReinterpretCast<T>());
+    typedef test::arg::Type<T> Type;
+
+    buff.SetIndex(m_off);
+    return Type::Get(buff);
+}
+
+inline void Block::Destroy(BufferType buff) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, this, 
+        "Destroy(buff=%p)", buff.GetData());
+
+    if (m_destructor == nullptr)
+    {
+        return;
+    }
+
+    (*m_destructor)(const_cast<Block*>(this), buff);
 }
 
 inline bool Block::operator==(const Block& other) const
