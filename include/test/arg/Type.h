@@ -46,13 +46,14 @@ struct Type
 {
     typedef T BaseType;
     typedef T ValueType;
+    typedef const T& RValueType;
     static constexpr std::size_t Size = sizeof(T);
     static BaseType Initialize(ValueType&& val)
     {
         return std::move(val);
     }
     template<typename Tp, typename TpD>
-    static const ValueType& Get(test::Pointer<Tp, TpD> buff)
+    static RValueType Get(test::Pointer<Tp, TpD> buff)
     {
         return *(buff.template ReinterpretCast<ValueType>());
     }
@@ -68,6 +69,7 @@ struct Type<char*>
 {
     typedef test::Pointer<char> BaseType;
     typedef const char* ValueType;
+    typedef const char* RValueType;
     static constexpr std::size_t Size = sizeof(test::Pointer<char>);
     static BaseType Initialize(ValueType&& val)
     {
@@ -79,7 +81,7 @@ struct Type<char*>
         return base_val;
     }
     template<typename Tp, typename TpD>
-    static ValueType Get(test::Pointer<Tp, TpD> buff)
+    static RValueType Get(test::Pointer<Tp, TpD> buff)
     {
         return &**(buff.template ReinterpretCast<BaseType>());
     }
@@ -101,6 +103,7 @@ struct Type<wchar_t*>
 {
     typedef test::Pointer<wchar_t> BaseType;
     typedef const wchar_t* ValueType;
+    typedef const wchar_t* RValueType;
     static constexpr std::size_t Size = sizeof(test::Pointer<wchar_t>);
     static BaseType Initialize(ValueType&& val)
     {
@@ -112,9 +115,9 @@ struct Type<wchar_t*>
         return base_val;
     }
     template<typename Tp, typename TpD>
-    static ValueType Get(test::Pointer<Tp, TpD> buff)
+    static RValueType Get(test::Pointer<Tp, TpD> buff)
     {
-        return &*(*(buff.template ReinterpretCast<BaseType>()));
+        return &**(buff.template ReinterpretCast<BaseType>());
     }
     template<typename Tp, typename TpD>
     static void Set(test::Pointer<Tp, TpD> buff, ValueType&& val)
@@ -130,47 +133,107 @@ struct Type<wchar_t*>
 };
 
 template<typename T>
-struct Type<T&>
-{
-    typedef typename Type<T>::BaseType BaseType;
-    typedef typename Type<T>::ValueType ValueType;
-    static constexpr std::size_t Size = sizeof(T);
-    static BaseType Initialize(ValueType&& val)
-    {
-        return Type<T>::Initialize(std::forward<ValueType>(val));
-    }
-    template<typename Tp, typename TpD>
-    static const ValueType& Get(test::Pointer<Tp, TpD> buff)
-    {
-        return Type<T>::Get(buff);
-    }
-    template<typename Tp, typename TpD>
-    static void Set(test::Pointer<Tp, TpD> buff, ValueType&& val)
-    {
-        Type<T>::Set(buff, std::forward<ValueType>(val));
-    }
-};
-
-template<typename T, std::size_t N>
-struct Type<T(&)[N]>
+struct Type<const T*> : Type<T*>
 {
     typedef typename Type<T*>::BaseType BaseType;
     typedef typename Type<T*>::ValueType ValueType;
+    typedef typename Type<T*>::RValueType RValueType;
     static constexpr std::size_t Size = Type<T*>::Size;
-    static BaseType Initialize(ValueType&& val)
-    {
-        return Type<T*>::Initialize(std::forward<ValueType>(val));
-    }
-    template<typename Tp, typename TpD>
-    static const ValueType Get(test::Pointer<Tp, TpD> buff)
-    {
-        return Type<T*>::Get(buff);
-    }
-    template<typename Tp, typename TpD>
-    static void Set(test::Pointer<Tp, TpD> buff, ValueType&& val)
-    {
-        Type<T*>::Set(buff, std::forward<ValueType>(val));
-    }
+    
+    using Type<T*>::Initialize;
+    using Type<T*>::Get;
+    using Type<T*>::Set;
+};
+
+template<typename T>
+struct Type<volatile T*> : Type<T*>
+{
+    typedef typename Type<T*>::BaseType BaseType;
+    typedef typename Type<T*>::ValueType ValueType;
+    typedef typename Type<T*>::RValueType RValueType;
+    static constexpr std::size_t Size = Type<T*>::Size;
+    
+    using Type<T*>::Initialize;
+    using Type<T*>::Get;
+    using Type<T*>::Set;
+};
+
+template<typename T>
+struct Type<const volatile T*> : Type<T*>
+{
+    typedef typename Type<T*>::BaseType BaseType;
+    typedef typename Type<T*>::ValueType ValueType;
+    typedef typename Type<T*>::RValueType RValueType;
+    static constexpr std::size_t Size = Type<T*>::Size;
+    
+    using Type<T*>::Initialize;
+    using Type<T*>::Get;
+    using Type<T*>::Set;
+};
+
+template<typename T, std::size_t N>
+struct Type<T(&)[N]> : Type<T*>
+{
+    typedef typename Type<T*>::BaseType BaseType;
+    typedef typename Type<T*>::ValueType ValueType;
+    typedef typename Type<T*>::RValueType RValueType;
+    static constexpr std::size_t Size = Type<T*>::Size;
+
+    using Type<T*>::Initialize;
+    using Type<T*>::Get;
+    using Type<T*>::Set;
+};
+
+template<typename T>
+struct Type<const T> : Type<T>
+{
+    typedef typename Type<T>::BaseType BaseType;
+    typedef typename Type<T>::ValueType ValueType;
+    typedef typename Type<T>::RValueType RValueType;
+    static constexpr std::size_t Size = Type<T>::Size;
+    
+    using Type<T>::Initialize;
+    using Type<T>::Get;
+    using Type<T>::Set;
+};
+
+template<typename T>
+struct Type<volatile T> : Type<T>
+{
+    typedef typename Type<T>::BaseType BaseType;
+    typedef typename Type<T>::ValueType ValueType;
+    typedef typename Type<T>::RValueType RValueType;
+    static constexpr std::size_t Size = Type<T>::Size;
+    
+    using Type<T>::Initialize;
+    using Type<T>::Get;
+    using Type<T>::Set;
+};
+
+template<typename T>
+struct Type<const volatile T> : Type<T>
+{
+    typedef typename Type<T>::BaseType BaseType;
+    typedef typename Type<T>::ValueType ValueType;
+    typedef typename Type<T>::RValueType RValueType;
+    static constexpr std::size_t Size = Type<T>::Size;
+    
+    using Type<T>::Initialize;
+    using Type<T>::Get;
+    using Type<T>::Set;
+};
+
+template<typename T>
+struct Type<T&> : Type<T>
+{
+    typedef typename Type<T>::BaseType BaseType;
+    typedef typename Type<T>::ValueType ValueType;
+    typedef typename Type<T>::RValueType RValueType;
+    static constexpr std::size_t Size = Type<T>::Size;
+    
+    using Type<T>::Initialize;
+    using Type<T>::Get;
+    using Type<T>::Set;
 };
 
 } //!arg
