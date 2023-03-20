@@ -10,21 +10,24 @@
 #include <cassert>
 #include <utility>
 
+static int count_obj1 = 0;
+
 struct Obj1
 {
     char ch;
     int v1;
     long v2;
     Obj1() = delete;
-    Obj1(int v) : ch('a'), v1(v), v2(-1) {}
-    Obj1(const Obj1& cpy) : ch(cpy.ch) , v1(cpy.v1), v2(-1) {};
-    Obj1(Obj1&& mov) : ch(mov.ch) , v1(mov.v1), v2(-1) {};
+    Obj1(int v) : ch('a'), v1(v), v2(-1) {++count_obj1;}
+    Obj1(const Obj1& cpy) : ch(cpy.ch) , v1(cpy.v1), v2(-1) {++count_obj1;}
+    Obj1(Obj1&& mov) : ch(mov.ch) , v1(mov.v1), v2(-1) {++count_obj1;}
     void operator=(const Obj1& cpy)
     {
         ch = cpy.ch;
         v1 = cpy.v1;
         v2 = -1;
     }
+    ~Obj1() {--count_obj1;}
 };
 
 int main()
@@ -147,6 +150,8 @@ int main()
         assert(bck7.Get<Obj1*>(blocks2) == &obj1);
         assert(bck8.Get<char>(blocks2) == 'Z');
     }
+
+    assert(count_obj1 == 0);
 
     return 0;
 }
