@@ -5,6 +5,7 @@
 #include "../../Pointer.h"
 #include "../Header.h"
 #include "../Block.h"
+#include "../Type.h"
 
 #include <cstddef>
 #include <cstdint>
@@ -50,7 +51,7 @@ namespace arg
 namespace val
 {
 
-template<typename T, typename TBuffer = test::Pointer<std::uint8_t>>
+template<typename T, typename TBuffer = typename test::arg::Block::BufferType>
 class Const
 {
 private:
@@ -60,6 +61,8 @@ public:
     typedef test::arg::Header HeaderType;
     typedef test::arg::Block BlockType;
     typedef TBuffer BufferType;
+public:
+    typedef typename test::arg::Type<T>::RValueType ValueType;
 protected:
     BlockType m_block;
     BufferType m_buffer;
@@ -78,7 +81,7 @@ public:
 public:
     std::size_t Size() const;
 public:
-    T operator*() const;
+    ValueType operator*() const;
 public:
     bool operator==(T&& other) const;
     bool operator!=(T&& other) const;
@@ -172,7 +175,7 @@ std::size_t Const<T, TBuffer>::Size() const
 }
 
 template<typename T, typename TBuffer>
-T Const<T, TBuffer>::operator*() const
+typename Const<T, TBuffer>::ValueType Const<T, TBuffer>::operator*() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "operator*() const");
 

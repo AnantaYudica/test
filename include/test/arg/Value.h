@@ -43,7 +43,7 @@ namespace test
 namespace arg
 {
 
-template<typename T, typename TBuffer = test::Pointer<std::uint8_t>>
+template<typename T, typename TBuffer = typename test::arg::Block::BufferType>
 class Value : public test::arg::val::Const<T, TBuffer>
 {
 private:
@@ -55,6 +55,8 @@ public:
     typedef typename ConstType::HeaderType HeaderType;
     typedef typename ConstType::BlockType BlockType;
     typedef typename ConstType::BufferType BufferType;
+public:
+    typedef typename test::arg::Type<T>::RValueType ValueType;
 public:
     Value();
     Value(const BlockType& block, BufferType buffer);
@@ -71,7 +73,7 @@ public:
 public:
     std::size_t Size() const;
 public:
-    T operator*() const;
+    ValueType operator*() const;
 public:
     bool operator==(T&& other) const;
     bool operator!=(T&& other) const;
@@ -169,7 +171,7 @@ std::size_t Value<T, TBuffer>::Size() const
 }
 
 template<typename T, typename TBuffer>
-T Value<T, TBuffer>::operator*() const
+typename Value<T, TBuffer>::ValueType Value<T, TBuffer>::operator*() const
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "operator*() const");
 
