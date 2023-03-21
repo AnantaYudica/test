@@ -60,9 +60,15 @@ public:
     inline std::size_t Size() const;
 public:
     inline std::size_t AllocationSize() const;
-    inline std::size_t AllocationSize(const std::size_t& index) const;
 public:
     inline std::size_t Current() const;
+public:
+    template<typename T>
+    inline ValueType<T> Get();
+    template<typename T>
+    inline ValueConstType<T> Get() const;
+public:
+    inline test::arg::Header GetHeader() const;
 public:
     inline Argument Begin() const;
     inline Argument End() const;
@@ -80,6 +86,7 @@ public:
     inline Argument operator-(const std::size_t& n) const;
     inline Argument operator+(const int& n) const;
     inline Argument operator-(const int& n) const;
+    inline std::size_t operator-(const test::Argument& diff) const;
 public:
     inline bool operator==(const Argument& other) const;
     inline bool operator!=(const Argument& other) const;
@@ -186,17 +193,10 @@ inline std::size_t Argument::Size() const
 
 inline std::size_t Argument::AllocationSize() const
 {
-    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "AllocationSize() const");
-
-    return test::arg::Structure::AllocationSize();
-}
-
-inline std::size_t Argument::AllocationSize(const std::size_t& index) const
-{
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
-        "AllocationSize(index=%zu) const", index);
+        "AllocationSize() const");
 
-    return test::arg::Structure::AllocationSize(index);
+    return test::arg::Structure::AllocationSize(m_pos);
 }
 
 inline std::size_t Argument::Current() const
@@ -204,6 +204,32 @@ inline std::size_t Argument::Current() const
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Current() const");
 
     return m_flag.Position(m_pos, test::arg::Structure::Size());
+}
+
+template<typename T>
+inline typename Argument::ValueType<T> Argument::Get()
+{    
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "Get<%s>()", TEST_SYS_DEBUG_T_NAME_STR(T));
+
+    return test::arg::Structure::Get<T>(m_pos);
+}
+
+template<typename T>
+inline typename Argument::ValueConstType<T> Argument::Get() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "Get<%s>() const", TEST_SYS_DEBUG_T_NAME_STR(T));
+
+    return test::arg::Structure::Get<T>(m_pos);
+}
+
+inline test::arg::Header Argument::GetHeader() const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetHeader() const");
+
+    return const_cast<Argument*>(this)->
+        ::test::arg::Structure::GetHeader(m_pos);
 }
 
 inline Argument Argument::Begin() const
@@ -300,6 +326,15 @@ inline Argument Argument::operator-(const std::size_t& n) const
     Argument ret{*this};
     ret -= n;
     return ret;
+}
+
+inline std::size_t Argument::operator-(const test::Argument& diff) const
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, 
+        "operator-(diff=%p) const", &diff);
+
+    return diff.Current() > m_pos ? diff.Current() - m_pos :
+        m_pos - diff.Current();
 }
 
 inline Argument Argument::operator+(const int& n) const
