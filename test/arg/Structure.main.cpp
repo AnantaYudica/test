@@ -15,6 +15,26 @@ TEST_CONSTRUCT;
 #include <cfloat>
 #include <cstring>
 
+static int count_obj = 0;
+
+struct Obj
+{
+    char ch;
+    int v1;
+    long v2;
+    Obj() = delete;
+    Obj(int v) : ch('a'), v1(v), v2(-1) {++count_obj;}
+    Obj(const Obj& cpy) : ch(cpy.ch) , v1(cpy.v1), v2(-1) {++count_obj;}
+    Obj(Obj&& mov) : ch(mov.ch) , v1(mov.v1), v2(-1) {++count_obj;}
+    void operator=(const Obj& cpy)
+    {
+        ch = cpy.ch;
+        v1 = cpy.v1;
+        v2 = -1;
+    }
+    ~Obj() {--count_obj;}
+};
+
 int main()
 {
     {
@@ -295,5 +315,51 @@ int main()
         assert(strncmp(*(s1.template Get<const char*>(1)), "2", 2) == 0);
         assert(s1.template Get<char>(2) == '3');
     }
+    {
+        Obj obj1{2};
+
+        typedef test::arg::Type<const char*>::ValueType A;
+        test::arg::Structure s1{Obj{1}, obj1};
+        
+        assert(s1.Size() == 2);
+        assert(s1.AllocationSize() == sizeof(Obj) * 2);
+
+        assert(s1.AllocationSize(0) == sizeof(Obj));
+        assert(s1.AllocationSize(1) == sizeof(Obj));
+
+        assert((*(s1.template Get<Obj>(0))).ch == 'a');
+        assert((*(s1.template Get<Obj>(0))).v1 == 1);
+        assert((*(s1.template Get<Obj>(0))).v2 == -1);
+        
+        assert((*(s1.template Get<Obj>(1))).ch == 'a');
+        assert((*(s1.template Get<Obj>(1))).v1 == 2);
+        assert((*(s1.template Get<Obj>(1))).v2 == -1);
+
+        s1.template Set<Obj>(0, Obj{4});
+
+        assert((*(s1.template Get<Obj>(0))).ch == 'a');
+        assert((*(s1.template Get<Obj>(0))).v1 == 4);
+        assert((*(s1.template Get<Obj>(0))).v2 == -1);
+        
+        s1.template Set<Obj>(1, Obj{10});
+        
+        assert((*(s1.template Get<Obj>(1))).ch == 'a');
+        assert((*(s1.template Get<Obj>(1))).v1 == 10);
+        assert((*(s1.template Get<Obj>(1))).v2 == -1);
+    }
+    {
+        char str1[] = "test1";
+        test::arg::Structure s1{"test0", str1};
+        
+        assert(s1.Size() == 2);
+        assert(s1.AllocationSize() == sizeof(test::Pointer<char>) * 2);
+
+        assert(s1.AllocationSize(0) == sizeof(test::Pointer<char>));
+        assert(s1.AllocationSize(1) == sizeof(test::Pointer<char>));
+
+    }
+    
+    assert(count_obj == 0);
+
     return TEST::GetInstance().Status().ReturnValue();
 }
