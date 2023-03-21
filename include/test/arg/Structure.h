@@ -6,6 +6,7 @@
 #include "Header.h"
 #include "Block.h"
 #include "Value.h"
+#include "Type.h"
 #include "val/Const.h"
 
 #include <cstddef>
@@ -40,35 +41,17 @@ namespace arg
 class Structure
 {
 private:
-    template<typename T>
-    struct Type
-    {
-        typedef T BaseType;
-        static constexpr std::size_t Size = sizeof(T);
-    };
-    template<typename T>
-    struct Type<T&>
-    {
-        typedef T BaseType;
-        static constexpr std::size_t Size = sizeof(T);
-    };
-    template<typename T, std::size_t N>
-    struct Type<T(&)[N]>
-    {
-        typedef T* BaseType;
-        static constexpr std::size_t Size = sizeof(void*);
-    };
-private:
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::arg::Structure> DebugType;
 public:
-    typedef test::arg::Block BlockType;
-    typedef test::Pointer<BlockType> MapType;
-    typedef test::Pointer<std::uint8_t> BufferType;
+    typedef typename test::arg::Block::BufferType BufferType;
     template<typename T = char>
     using ValueType = test::arg::Value<T, BufferType>;
     template<typename T = char>
     using ValueConstType = test::arg::val::Const<T, BufferType>;
+public:
+    typedef test::arg::Block BlockType;
+    typedef test::Pointer<BlockType> MapType;
 private:
     static inline std::size_t _Count(std::size_t total, std::size_t index,
         MapType& maps);
@@ -76,10 +59,10 @@ private:
     static inline std::size_t _Count(std::size_t total, std::size_t index,
         MapType& maps, TArg&& size_arg, TArgs&&... size_args);
 private:
-    static inline std::size_t _Set(BufferType& buff,
+    static inline std::size_t _Initialize(BufferType& buff,
         MapType& maps, std::size_t index, std::size_t total);
     template<typename TArg, typename... TArgs>
-    static inline std::size_t _Set(BufferType& buff,
+    static inline std::size_t _Initialize(BufferType& buff,
         MapType& maps, std::size_t index, std::size_t total, 
         TArg&& arg, TArgs&&... args);
 private:
@@ -139,37 +122,42 @@ inline std::size_t Structure::_Count(std::size_t total, std::size_t index,
         TEST_SYS_DEBUG_TARGS_NAME_STR(TArg, TArgs...),
         total, index, &maps, TEST_SYS_DEBUG_TARGS_VALUE_STR(arg, args...));
 
-    typedef typename test::arg::Structure::Type<TArg>::BaseType BaseType;
+    typedef typename test::arg::Type<TArg>::BaseType BaseType;
 
-    const std::size_t size = test::arg::Structure::Type<TArg>::Size;
+    const std::size_t size = test::arg::Type<TArg>::Size;
     maps[index] = BlockType{test::arg::Header::Make<BaseType>(), total, size};
     return _Count(total + size, index + 1, maps, std::forward<TArgs>(args)...);
 }
 
-inline std::size_t Structure::_Set(BufferType& buff, MapType& maps, 
+inline std::size_t Structure::_Initialize(BufferType& buff, MapType& maps, 
     std::size_t index, std::size_t total)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
-        "_Set(buff=%p, maps=%p, index=%zu, total=%zu)", 
+        "_Initialize(buff=%p, maps=%p, index=%zu, total=%zu)", 
         &buff, &maps, index, total);
 
     return index;
 }
 
 template<typename TArg, typename... TArgs>
-inline std::size_t Structure::_Set(BufferType& buff, MapType& maps, 
+inline std::size_t Structure::_Initialize(BufferType& buff, MapType& maps, 
     std::size_t index, std::size_t total, TArg&& arg, TArgs&&... args)
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
-        "_Count<%s>(buff=%p, maps=%p, index=%zu, total=%zu, args={%s})", 
+        "_Initialize<%s>(buff=%p, maps=%p, index=%zu, total=%zu, args={%s})", 
         TEST_SYS_DEBUG_TARGS_NAME_STR(TArg, TArgs...), &buff, &maps, index, 
         total, TEST_SYS_DEBUG_TARGS_VALUE_STR(arg, args...));
 
-    typedef typename test::arg::Structure::Type<TArg>::BaseType BaseType;
+    typedef typename test::arg::Type<TArg> Type;
+    typedef typename Type::BaseType BaseType;
+    typedef typename Type::ValueType ValueType;
+
     if (index < total)
     {
-        maps[index].template Set<BaseType>(buff, std::forward<TArg>(arg));
-        return _Set(buff, maps, index + 1, total, std::forward<TArgs>(args)...);
+        maps[index].template Initialize<BaseType>(buff, 
+            Type::Initialize(std::forward<ValueType>(arg)));
+        return _Initialize(buff, maps, index + 1, total, 
+            std::forward<TArgs>(args)...);
     }
     else
     {
@@ -197,14 +185,21 @@ inline Structure::Structure(TArg&& arg, TArgs&&... args) :
         TEST_SYS_DEBUG_TARGS_NAME_STR(TArg, TArgs...),
         TEST_SYS_DEBUG_TARGS_VALUE_STR(arg, args...));
 
-    _Set(m_buff, m_maps, 0, m_maps.Size(), std::forward<TArg>(arg),
+    _Initialize(m_buff, m_maps, 0, m_maps.Size(), std::forward<TArg>(arg),
         std::forward<TArgs>(args)...);
 }
 
 inline Structure::~Structure()
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
-
+    
+    if (m_maps != nullptr && m_maps.GetCount() == 1)
+    {
+        for (auto it = m_maps.Begin(); it != m_maps.End(); ++it)
+        {
+            it->Destroy(m_buff);
+        }
+    }
 }
 
 inline Structure::Structure(const Structure& cpy) :
