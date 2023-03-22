@@ -270,7 +270,7 @@ inline void Block::Set(BufferType buff, T&& val) const
     }
 
     buff.SetIndex(m_off);
-    return Type::Set(buff, std::move(val));
+    return Type::Set(buff, std::forward<T>(val));
 }
 
 template<typename T>
