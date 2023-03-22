@@ -32,7 +32,7 @@ struct Obj
         v1 = cpy.v1;
         v2 = -1;
     }
-    ~Obj() {--count_obj;}
+    ~Obj() {ch='\0'; v1=0; v2=0l; --count_obj;}
 };
 
 int main()
@@ -155,15 +155,16 @@ int main()
         const std::size_t size_alloc = sizeof(int) +
             sizeof(char) + sizeof(long long) + sizeof(char) +
             sizeof(long double) + sizeof(short) + sizeof(int*) + 
-            sizeof(Obj);
+            sizeof(Obj) + sizeof(Obj);
         short sh1 = SHRT_MIN;
         int po1 = INT_MIN;
+        Obj obj1{44};
         test::Argument arg1{INT_MAX, 'L', LLONG_MAX, 'a', 
-            LDBL_MIN, sh1, &po1, Obj{255}};
+            LDBL_MIN, sh1, &po1, Obj{255}, obj1};
         test::arg::Structure& struc_arg1 = arg1;
         assert((bool)arg1 == true);
-        assert(arg1.Size() == 8);
-        assert((arg1.End() - arg1.Begin()) == 8);
+        assert(arg1.Size() == 9);
+        assert((arg1.End() - arg1.Begin()) == 9);
         assert(struc_arg1.AllocationSize() == size_alloc);
 
         assert((arg1++).AllocationSize() == sizeof(int));
@@ -174,8 +175,9 @@ int main()
         assert((arg1++).AllocationSize() == sizeof(short));
         assert((arg1++).AllocationSize() == sizeof(int*));
         assert((arg1++).AllocationSize() == sizeof(Obj));
+        assert((arg1++).AllocationSize() == sizeof(Obj));
         assert(arg1.AllocationSize() == 0);
-        assert(arg1.Current() == 8);
+        assert(arg1.Current() == 9);
 
         {
             int val0;
@@ -186,6 +188,7 @@ int main()
             short val5;
             int* val6;
             Obj val7{0};
+            Obj val8{0};
 
             auto arg2 = arg1.Begin();
 
@@ -205,6 +208,8 @@ int main()
             auto sz6 = (arg2++).Load(val6);
             auto c7 = arg2.Current();
             auto sz7 = (arg2++).Load(val7);
+            auto c8 = arg2.Current();
+            auto sz8 = (arg2++).Load(val8);
 
             assert(val0 == INT_MAX);
             assert(val1 == 'L');
@@ -216,7 +221,10 @@ int main()
             assert(val7.ch == 'a');
             assert(val7.v1 == 255);
             assert(val7.v2 == -1);
-            
+            assert(val8.ch == 'a');
+            assert(val8.v1 == 44);
+            assert(val8.v2 == -1);
+
             assert(sz0 == sizeof(int));
             assert(sz1 == sizeof(char));
             assert(sz2 == sizeof(long long));
@@ -225,6 +233,7 @@ int main()
             assert(sz5 == sizeof(short));
             assert(sz6 == sizeof(int*));
             assert(sz7 == sizeof(Obj));
+            assert(sz8 == sizeof(Obj));
             
             assert(c0 == 0);
             assert(c1 == 1);
@@ -234,6 +243,7 @@ int main()
             assert(c5 == 5);
             assert(c6 == 6);
             assert(c7 == 7);
+            assert(c8 == 8);
         }
         {
             int val0;
@@ -244,6 +254,7 @@ int main()
             short val5;
             int* val6;
             Obj val7{0};
+            Obj val8{0};
 
             test::Argument arg2{arg1.Begin()};
 
@@ -263,6 +274,8 @@ int main()
             auto sz6 = (arg2++).Load(val6);
             auto c7 = arg2.Current();
             auto sz7 = (arg2++).Load(val7);
+            auto c8 = arg2.Current();
+            auto sz8 = (arg2++).Load(val8);
 
             assert(val0 == INT_MAX);
             assert(val1 == 'L');
@@ -274,6 +287,9 @@ int main()
             assert(val7.ch == 'a');
             assert(val7.v1 == 255);
             assert(val7.v2 == -1);
+            assert(val8.ch == 'a');
+            assert(val8.v1 == 44);
+            assert(val8.v2 == -1);
             
             assert(sz0 == sizeof(int));
             assert(sz1 == sizeof(char));
@@ -283,6 +299,7 @@ int main()
             assert(sz5 == sizeof(short));
             assert(sz6 == sizeof(int*));
             assert(sz7 == sizeof(Obj));
+            assert(sz8 == sizeof(Obj));
             
             assert(c0 == 0);
             assert(c1 == 1);
@@ -292,6 +309,7 @@ int main()
             assert(c5 == 5);
             assert(c6 == 6);
             assert(c7 == 7);
+            assert(c8 == 8);
         }
         {
             int val0;
@@ -302,6 +320,7 @@ int main()
             short val5;
             int* val6;
             Obj val7{0};
+            Obj val8{0};
             
             auto arg2 = arg1.Begin();
             test::Argument arg3{std::move(arg2)};
@@ -322,6 +341,8 @@ int main()
             auto sz6 = (arg3++).Load(val6);
             auto c7 = arg3.Current();
             auto sz7 = (arg3++).Load(val7);
+            auto c8 = arg3.Current();
+            auto sz8 = (arg3++).Load(val8);
 
             assert(val0 == INT_MAX);
             assert(val1 == 'L');
@@ -333,6 +354,9 @@ int main()
             assert(val7.ch == 'a');
             assert(val7.v1 == 255);
             assert(val7.v2 == -1);
+            assert(val8.ch == 'a');
+            assert(val8.v1 == 44);
+            assert(val8.v2 == -1);
             
             assert(sz0 == sizeof(int));
             assert(sz1 == sizeof(char));
@@ -342,6 +366,7 @@ int main()
             assert(sz5 == sizeof(short));
             assert(sz6 == sizeof(int*));
             assert(sz7 == sizeof(Obj));
+            assert(sz8 == sizeof(Obj));
             
             assert(c0 == 0);
             assert(c1 == 1);
@@ -351,6 +376,7 @@ int main()
             assert(c5 == 5);
             assert(c6 == 6);
             assert(c7 == 7);
+            assert(c8 == 8);
         }
         {
             int val0;
@@ -361,6 +387,7 @@ int main()
             short val5;
             int* val6;
             Obj val7{0};
+            Obj val8{0};
             
             test::Argument arg2;
             arg2 = arg1.Begin();
@@ -381,6 +408,8 @@ int main()
             auto sz6 = (arg2++).Load(val6);
             auto c7 = arg2.Current();
             auto sz7 = (arg2++).Load(val7);
+            auto c8 = arg2.Current();
+            auto sz8 = (arg2++).Load(val8);
 
             assert(val0 == INT_MAX);
             assert(val1 == 'L');
@@ -392,6 +421,9 @@ int main()
             assert(val7.ch == 'a');
             assert(val7.v1 == 255);
             assert(val7.v2 == -1);
+            assert(val8.ch == 'a');
+            assert(val8.v1 == 44);
+            assert(val8.v2 == -1);
             
             assert(sz0 == sizeof(int));
             assert(sz1 == sizeof(char));
@@ -401,6 +433,7 @@ int main()
             assert(sz5 == sizeof(short));
             assert(sz6 == sizeof(int*));
             assert(sz7 == sizeof(Obj));
+            assert(sz8 == sizeof(Obj));
             
             assert(c0 == 0);
             assert(c1 == 1);
@@ -410,6 +443,7 @@ int main()
             assert(c5 == 5);
             assert(c6 == 6);
             assert(c7 == 7);
+            assert(c8 == 8);
         }
         {
             int val0;
@@ -420,6 +454,7 @@ int main()
             short val5;
             int* val6;
             Obj val7{0};
+            Obj val8{0};
             
 
             auto arg2 = arg1.Begin();
@@ -442,6 +477,8 @@ int main()
             auto sz6 = (arg3++).Load(val6);
             auto c7 = arg3.Current();
             auto sz7 = (arg3++).Load(val7);
+            auto c8 = arg3.Current();
+            auto sz8 = (arg3++).Load(val8);
 
             assert(val0 == INT_MAX);
             assert(val1 == 'L');
@@ -453,6 +490,9 @@ int main()
             assert(val7.ch == 'a');
             assert(val7.v1 == 255);
             assert(val7.v2 == -1);
+            assert(val8.ch == 'a');
+            assert(val8.v1 == 44);
+            assert(val8.v2 == -1);
             
             assert(sz0 == sizeof(int));
             assert(sz1 == sizeof(char));
@@ -462,6 +502,7 @@ int main()
             assert(sz5 == sizeof(short));
             assert(sz6 == sizeof(int*));
             assert(sz7 == sizeof(Obj));
+            assert(sz8 == sizeof(Obj));
             
             assert(c0 == 0);
             assert(c1 == 1);
@@ -471,7 +512,28 @@ int main()
             assert(c5 == 5);
             assert(c6 == 6);
             assert(c7 == 7);
+            assert(c8 == 8);
         }
+    }
+    {
+        Obj obj1{444};
+        const Obj& obj2 = obj1;
+        {
+            test::Argument arg1{obj1};
+            test::Argument arg2{obj2};
+        }
+        assert(obj1.v1 == 444);
+    }
+    
+    {
+        test::Pointer<char> ptr1{test::ptr::arg::Array{2}};
+        *ptr1 = 'a';
+        const test::Pointer<char>& ptr2 = ptr1;
+        {
+            test::Argument arg1{ptr1};
+            test::Argument arg2{ptr2};
+        }
+        assert(*ptr1 == 'a');
     }
     assert(count_obj == 0);
 
