@@ -431,6 +431,10 @@ inline void Block::Initialize(RawType raw, const ArgumentType<TArg>& arg)
         {
             new (&*curr)ValueType(arg.GetValue());
         }
+        else
+        {
+            new (&*curr)ValueType();
+        }
         m_destructor = &Destructor<ValueType>;
     }
 }
