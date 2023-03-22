@@ -50,7 +50,11 @@ struct Type
     static constexpr std::size_t Size = sizeof(T);
     static BaseType Initialize(ValueType&& val)
     {
-        return std::move(val);
+        return BaseType{std::forward<ValueType>(val)};
+    }
+    static BaseType Initialize(const ValueType& val)
+    {
+        return BaseType{val};
     }
     template<typename Tp, typename TpD>
     static RValueType Get(test::Pointer<Tp, TpD> buff)
@@ -60,7 +64,8 @@ struct Type
     template<typename Tp, typename TpD>
     static void Set(test::Pointer<Tp, TpD> buff, ValueType&& val)
     {
-        *(buff.template ReinterpretCast<ValueType>()) = std::move(val);
+        *(buff.template ReinterpretCast<ValueType>()) = 
+            std::forward<ValueType>(val);
     }
 };
 
