@@ -155,7 +155,7 @@ inline std::size_t Structure::_Initialize(BufferType& buff, MapType& maps,
     if (index < total)
     {
         maps[index].template Initialize<BaseType>(buff, 
-            Type::Initialize(std::forward<ValueType>(arg)));
+            std::move(Type::Initialize(std::forward<TArg>(arg))));
         return _Initialize(buff, maps, index + 1, total, 
             std::forward<TArgs>(args)...);
     }
@@ -212,8 +212,8 @@ inline Structure::Structure(const Structure& cpy) :
 }
 
 inline Structure::Structure(Structure&& mov) :
-    m_maps(mov.m_maps),
-    m_buff(mov.m_buff)
+    m_maps(std::move(mov.m_maps)),
+    m_buff(std::move(mov.m_buff))
 {
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Move Destructor(mov=%p)", &mov);
