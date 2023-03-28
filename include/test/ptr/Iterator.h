@@ -19,11 +19,11 @@ class Iterator;
 
 } //!test
 
-#ifndef TEST_PTR_DEFINITION_DLEVEL
+#ifndef TEST_PTR_ITERATOR_DLEVEL
 
-#define TEST_PTR_DEFINITION_DLEVEL 2
+#define TEST_PTR_ITERATOR_DLEVEL 2
 
-#endif //!TEST_PTR_DEFINITION_DLEVEL
+#endif //!TEST_PTR_ITERATOR_DLEVEL
 
 #define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
     test::sys::dbg::Type<TTClass<T, TArgs...>>,\
@@ -33,7 +33,7 @@ class Iterator;
 template<template<typename, typename...> class TTClass, 
     typename T, typename... TArgs>
 TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
-    TEST_PTR_DEFINITION_DLEVEL, 
+    TEST_PTR_ITERATOR_DLEVEL, 
     "test::ptr::Iterator", 
     test::ptr::Iterator<TTClass, T, TArgs...>);
 
