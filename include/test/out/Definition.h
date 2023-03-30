@@ -3,6 +3,7 @@
 
 #include "../System.h"
 #include "../Pointer.h"
+#include "../ptr/Reference.h"
 #include "Interface.h"
 #include "fmt/Flag.decl.h"
 
@@ -29,7 +30,7 @@ public:
         int width, int len_pred);
 public:
     template<typename TChar>
-    using StringPointerType = test::Pointer<TChar>;
+    using StringPointerType = test::ptr::Reference<TChar>;
 };
 
 } //!out
