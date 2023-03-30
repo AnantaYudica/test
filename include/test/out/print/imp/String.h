@@ -71,6 +71,16 @@ struct String<0, test::Pointer<TChar, TDefinition>>
     }
 };
 
+template<typename TChar>
+struct String<0, test::ptr::Reference<TChar>>
+{
+    static const TChar* Get(void* value, std::size_t size)
+    {
+        auto cast = (test::ptr::Reference<TChar>*)value;
+        return &**cast;
+    }
+};
+
 template<>
 struct String<test::out::print::String::char_fmt, void>
 {
