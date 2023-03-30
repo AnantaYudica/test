@@ -3,6 +3,7 @@
 
 #include "../../System.h"
 #include "../../Pointer.h"
+#include "../../ptr/Reference.h"
 #include "../Definition.h"
 #include "../print/imp/Boolean.h"
 #include "../print/imp/Character.h"
@@ -354,18 +355,44 @@ public:
 public:
     typedef test::out::fmt::Definition DefinitionType;
 public:
+    template<typename T>
+    using FmtFlagValueType = test::out::fmt::flag::Value<T>;
+public:
     typedef typename DefinitionType::String<TCharPtr>::CharacterType 
         CharacterType;
     typedef typename test::out::Definition::StringPointerType<CharacterType> 
         StringPointerType;
+public:
+    typedef test::ptr::Reference<CharacterType> PointerReferenceType;
 private:
     static constexpr std::false_type IsValueType_(...);
     template<typename T_>
-    static constexpr std::true_type 
-        IsValueType_(test::out::fmt::flag::Value<T_>);
+    static constexpr std::true_type IsValueType_(FmtFlagValueType<T_>);
 private:
     template<typename T_>
     using IsValueType = decltype(IsValueType_(std::declval<T_>()));
+private:
+    static constexpr std::false_type IsStringValue_(...);
+    static constexpr std::true_type 
+        IsStringValue_(FmtFlagValueType<char*>&&);
+    static constexpr std::true_type 
+        IsStringValue_(FmtFlagValueType<wchar_t*>&&);
+    static constexpr std::true_type 
+        IsStringValue_(FmtFlagValueType<const char*>&&);
+    static constexpr std::true_type 
+        IsStringValue_(FmtFlagValueType<const wchar_t*>&&);
+private:
+    template<typename T_>
+    using IsStringValue = decltype(IsStringValue_(std::declval<T_>()));
+private:
+    static constexpr std::false_type IsPointerValue_(...);
+    static constexpr std::true_type 
+        IsPointerValue_(FmtFlagValueType<test::ptr::Reference<char>>&&);
+    static constexpr std::true_type 
+        IsPointerValue_(FmtFlagValueType<test::ptr::Reference<wchar_t>>&&);
+private:
+    template<typename T_>
+    using IsPointerValue = decltype(IsPointerValue_(std::declval<T_>()));
 private:
     static constexpr bool IsContainValueType_()
     {
@@ -395,20 +422,45 @@ private:
         IsContainValueType_(typename std::remove_cv<typename 
             std::remove_reference<TArgs>::type>::type()...)>;
 private:
-    static const CharacterType* Value();
+    static const CharacterType* StringValue();
     template<typename... TFlagArgs>
-    static const CharacterType* Value(test::out::fmt::flag::
+    static const CharacterType* StringValue(test::out::fmt::flag::
         Value<const CharacterType*>&& val, TFlagArgs&&... flags);
     template<typename... TFlagArgs>
-    static const CharacterType* Value(test::out::fmt::flag::
+    static const CharacterType* StringValue(test::out::fmt::flag::
         Value<CharacterType*>&& val, TFlagArgs&&... flags);
     template<typename TFlagArg, typename... TFlagArgs,
         typename TFlagArg_ = typename std::remove_cv<
             typename std::remove_reference<TFlagArg>::type>::type,
-        typename TCond_ = IsValueType<TFlagArg_>,
-        typename std::enable_if<!TCond_::value, int>::type = 0>
-    static const CharacterType* Value(TFlagArg&& flag,
+        typename TCond1_ = IsValueType<TFlagArg_>,
+        typename TCond2_ = IsStringValue<TFlagArg_>,
+        typename std::enable_if<!TCond1_::value || !TCond2_::value, 
+            int>::type = 0>
+    static const CharacterType* StringValue(TFlagArg&& flag,
         TFlagArgs&&... flags);
+private:
+    static PointerReferenceType PointerValue();
+    template<typename... TFlagArgs>
+    static PointerReferenceType PointerValue(test::out::fmt::flag::
+        Value<test::Pointer<char>>&& val, TFlagArgs&&... flags);
+    template<typename... TFlagArgs>
+    static PointerReferenceType PointerValue(test::out::fmt::flag::
+        Value<test::Pointer<wchar_t>>&& val, TFlagArgs&&... flags);
+    template<typename TFlagArg, typename... TFlagArgs,
+        typename TFlagArg_ = typename std::remove_cv<
+            typename std::remove_reference<TFlagArg>::type>::type,
+        typename TCond1_ = IsValueType<TFlagArg_>,
+        typename TCond2_ = IsPointerValue<TFlagArg_>,
+        typename std::enable_if<!TCond1_::value || !TCond2_::value, 
+            int>::type = 0>
+    static PointerReferenceType PointerValue(TFlagArg&& flag,
+        TFlagArgs&&... flags);
+private:
+    void InitializeValue();
+    void InitializeValue(const char* str_val);
+    void InitializeValue(const wchar_t* str_val);
+    template<typename T>
+    void InitializeValue(test::ptr::Reference<T> ptr_str_val);
 private:
     StringPointerType m_value;
 public:
@@ -831,7 +883,7 @@ template<typename TCharPtr, typename TFlag>
 const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::CharacterType * 
 Argument<TCharPtr, TFlag, typename test::out::fmt::
-    Definition::String<TCharPtr>::Type>::Value()
+    Definition::String<TCharPtr>::Type>::StringValue()
 {
     return NULL;
 }
@@ -842,10 +894,10 @@ const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::CharacterType * 
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
-        Value(test::out::fmt::flag::Value<const CharacterType*>&& val, 
+        StringValue(test::out::fmt::flag::Value<const CharacterType*>&& val, 
             TFlagArgs&&... flags)
 {
-    return val.IsDefault() ? Value(std::forward<TFlagArgs>(flags)...) : 
+    return val.IsDefault() ? StringValue(std::forward<TFlagArgs>(flags)...) : 
         std::move(val).GetValue();
 }
 
@@ -855,31 +907,153 @@ const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::CharacterType * 
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
-        Value(test::out::fmt::flag::Value<CharacterType*>&& val, 
+        StringValue(test::out::fmt::flag::Value<CharacterType*>&& val, 
             TFlagArgs&&... flags)
 {
-    return val.IsDefault() ? Value(std::forward<TFlagArgs>(flags)...) : 
+    return val.IsDefault() ? StringValue(std::forward<TFlagArgs>(flags)...) : 
         std::move(val).GetValue();
 }
 
 template<typename TCharPtr, typename TFlag>
 template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
-    typename TCond_, typename std::enable_if<!TCond_::value, int>::type>
+    typename TCond1_, typename TCond2_, 
+    typename std::enable_if<!TCond1_::value || !TCond2_::value,
+        int>::type>
 const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::CharacterType * 
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
-        Value(TFlagArg&& flag, TFlagArgs&&... flags)
+        StringValue(TFlagArg&& flag, TFlagArgs&&... flags)
 {
-    return Value(std::forward<TFlagArgs>(flags)...);
+    return StringValue(std::forward<TFlagArgs>(flags)...);
+}
+
+template<typename TCharPtr, typename TFlag>
+typename Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::PointerReferenceType
+Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::PointerValue()
+{
+    return PointerReferenceType{test::Pointer<CharacterType>{nullptr}};
+}
+
+template<typename TCharPtr, typename TFlag>
+template<typename... TFlagArgs>
+typename Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::PointerReferenceType
+Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::PointerValue(test::out::fmt::flag::
+    Value<test::Pointer<char>>&& val, TFlagArgs&&... flags)
+{
+    return val.IsDefault() ? PointerValue(std::forward<TFlagArgs>(flags)...) : 
+        std::move(val).GetValue().ReinterpretCast<CharacterType>();
+}
+
+template<typename TCharPtr, typename TFlag>
+template<typename... TFlagArgs>
+typename Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::PointerReferenceType
+Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::PointerValue(test::out::fmt::flag::
+    Value<test::Pointer<wchar_t>>&& val, TFlagArgs&&... flags)
+{
+    return val.IsDefault() ? PointerValue(std::forward<TFlagArgs>(flags)...) : 
+        std::move(val).GetValue().ReinterpretCast<CharacterType>();
+}
+
+template<typename TCharPtr, typename TFlag>
+template<typename TFlagArg, typename... TFlagArgs, typename TFlagArg_,
+    typename TCond1_, typename TCond2_, 
+    typename std::enable_if<!TCond1_::value || !TCond2_::value, 
+        int>::type>
+typename Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::PointerReferenceType
+Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::PointerValue(TFlagArg&& flag,
+    TFlagArgs&&... flags)
+{
+    return PointerValue(std::forward<TFlagArgs>(flags)...);
+}
+    
+template<typename TCharPtr, typename TFlag>
+void Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::
+        InitializeValue(const char* value)
+{
+    if (value != NULL)
+    {
+        const std::size_t max_len = test::out::fmt::Definition::string_max_len;
+
+#ifdef __STDC_LIB_EXT1__
+        const std::size_t len = strnlen_s(value, max_len);
+#else
+        std::size_t len = strlen(value);
+        if (len >= max_len)
+        {
+            len = max_len;
+        }
+#endif
+        m_value = test::ptr::Reference<char>{
+            test::Pointer<char>(test::ptr::arg::Array{len + 1})};
+
+#ifdef __STDC_LIB_EXT1__
+        memcpy_s(&*m_value, len, value, len);
+#else
+        memcpy(&*m_value, value, len);
+#endif 
+        m_value[len] = '\0';
+    }
+}
+
+template<typename TCharPtr, typename TFlag>
+void Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::
+        InitializeValue(const wchar_t* value)
+{
+    if (value != NULL)
+    {
+        const std::size_t max_len = test::out::fmt::Definition::string_max_len;
+
+#ifdef __STDC_LIB_EXT1__
+        const std::size_t len = wcsnlen_s(value, max_len);
+#else
+        std::size_t len = wcslen(value);
+        if (len >= max_len)
+        {
+            len = max_len;
+        }
+#endif
+        m_value = test::ptr::Reference<wchar_t>{
+            test::Pointer<wchar_t>(test::ptr::arg::Array{len + 1})};
+
+#ifdef __STDC_LIB_EXT1__
+        wmemcpy_s(&*m_value, len, value, len);
+#else
+        wmemcpy(&*m_value, value, len);
+#endif 
+        m_value[len] = L'\0';
+    }
+}
+
+template<typename TCharPtr, typename TFlag>
+template<typename T>
+void Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::
+        InitializeValue(test::ptr::Reference<T> value)
+{
+    if(value != nullptr)
+    {
+        m_value = value;
+    }
 }
 
 template<typename TCharPtr, typename TFlag>
 constexpr Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::Argument() :
         Argument<void, TFlag>(),
-        m_value(nullptr)
+        m_value(test::Pointer<CharacterType>{nullptr})
 {}
+
 template<typename TCharPtr, typename TFlag>
 template<typename TFlagIntegerValue, TFlagIntegerValue VFlagSpecifier, 
     typename... TFlagArgs, typename TCond_,
@@ -891,7 +1065,7 @@ constexpr Argument<TCharPtr, TFlag, typename test::out::fmt::
                 Argument<void, TFlag>(specifier, 
                     test::out::fmt::flag::Define<CharacterType*>{},
                     std::forward<TFlagArgs>(flags)...),
-                m_value(nullptr)
+                m_value(test::Pointer<CharacterType>{nullptr})
 {}
 
 template<typename TCharPtr, typename TFlag>
@@ -906,30 +1080,19 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
                 Argument<void, TFlag>(specifier, 
                     test::out::fmt::flag::Define<CharacterType*>{},
                     std::forward<TFlagArgs>(flags)...),
-                m_value(nullptr)
+                m_value(test::Pointer<CharacterType>{nullptr})
 {
-    const char* value = Value(std::forward<TFlagArgs>(flags)...);
-    if (value != NULL)
+    const char* str_value = StringValue(std::forward<TFlagArgs>(flags)...);
+    if (str_value != nullptr)
     {
-        const std::size_t max_len = test::out::fmt::Definition::string_max_len;
+        InitializeValue(str_value);
+    }
+    else
+    {
+        auto ptr_value = 
+            PointerValue(std::forward<TFlagArgs>(flags)...);
 
-#ifdef __STDC_LIB_EXT1__
-        const std::size_t len = strnlen_s(value, max_len);
-#else
-        std::size_t len = strlen(value);
-        if (len >= max_len)
-        {
-            len = max_len;
-        }
-#endif
-        m_value = test::Pointer<char>(test::ptr::arg::Array{len + 1});
-
-#ifdef __STDC_LIB_EXT1__
-        memcpy_s(&*m_value, len, value, len);
-#else
-        memcpy(&*m_value, value, len);
-#endif 
-        m_value[len] = '\0';
+        InitializeValue(ptr_value);
     }
 }
     
@@ -945,30 +1108,19 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
                 Argument<void, TFlag>(specifier, 
                     test::out::fmt::flag::Define<CharacterType*>{},
                     std::forward<TFlagArgs>(flags)...),
-                m_value(nullptr)
+                m_value(test::Pointer<CharacterType>{nullptr})
 {
-    const wchar_t* value = Value(std::forward<TFlagArgs>(flags)...);
-    if (value != NULL)
+    const wchar_t* str_value = StringValue(std::forward<TFlagArgs>(flags)...);
+    if (str_value != nullptr)
     {
-        const std::size_t max_len = test::out::fmt::Definition::string_max_len;
+        InitializeValue(str_value);
+    }
+    else
+    {
+        auto ptr_value = 
+            PointerValue(std::forward<TFlagArgs>(flags)...);
 
-#ifdef __STDC_LIB_EXT1__
-        const std::size_t len = wcsnlen_s(value, max_len);
-#else
-        std::size_t len = wcslen(value);
-        if (len >= max_len)
-        {
-            len = max_len;
-        }
-#endif
-        m_value = test::Pointer<wchar_t>(test::ptr::arg::Array{len + 1});
-
-#ifdef __STDC_LIB_EXT1__
-        wmemcpy_s(&*m_value, len, value, len);
-#else
-        wmemcpy(&*m_value, value, len);
-#endif 
-        m_value[len] = L'\0';
+        InitializeValue(ptr_value);
     }
 }
 
