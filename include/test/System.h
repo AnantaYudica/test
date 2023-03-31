@@ -247,7 +247,7 @@ inline int System::DebugFormat(char* buffer,
     constexpr std::size_t tag_buffsize = TEST_SYS_LOG_OUTPUT_BUFFER + 1;
     char tag[tag_buffsize];
     const std::size_t dbg_size = snprintf(tag, tag_buffsize, "[DEBUG]");
-    if (dbg_size == tag_buffsize) return dbg_size;
+    if (dbg_size == tag_buffsize) return (int)dbg_size;
     const std::size_t tsize = dbg.TagName(tag + dbg_size, 
         tag_buffsize - dbg_size) + dbg_size;
     tag[tag_buffsize] = '\0';
