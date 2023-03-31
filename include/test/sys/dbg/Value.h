@@ -361,22 +361,22 @@ struct test::sys::dbg::Value<TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T>\
     static std::size_t Write(char * buff_out, std::size_t n,\
         TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T& val)\
     {\
-        return snprintf(buff_out, n, FORMAT, __VA_ARGS__);\
+        return snprintf(buff_out, n, FORMAT, ##__VA_ARGS__);\
     }\
     static std::size_t Write(char * buff_out, std::size_t n,\
         const TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T& val)\
     {\
-        return snprintf(buff_out, n, FORMAT, __VA_ARGS__);\
+        return snprintf(buff_out, n, FORMAT, ##__VA_ARGS__);\
     }\
     static std::size_t Write(char * buff_out, std::size_t n,\
         TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T&& val)\
     {\
-        return snprintf(buff_out, n, FORMAT, __VA_ARGS__);\
+        return snprintf(buff_out, n, FORMAT, ##__VA_ARGS__);\
     }\
     static std::size_t Write(char * buff_out, std::size_t n,\
         const TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T&& val)\
     {\
-        return snprintf(buff_out, n, FORMAT, __VA_ARGS__);\
+        return snprintf(buff_out, n, FORMAT, ##__VA_ARGS__);\
     }\
 }
 
