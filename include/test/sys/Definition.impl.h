@@ -102,12 +102,12 @@ Definition::GetTimeDuration(const TimestampType& before,
     const auto count_inHour = count_inMin / 60;
     const auto count_inDay = count_inHour / 24;
     TimeDurationType result;
-    result.Microsecond = count_inMicroSec - (count_inMiliSec * 1000);
-    result.Milisecond = count_inMiliSec - (count_inSec * 1000);
-    result.Second = count_inSec - (count_inMin * 60);
-    result.Minute = count_inMin - (count_inHour * 60);
-    result.Hour = count_inHour - (count_inDay * 24);
-    result.Day = count_inDay;
+    result.Microsecond = (int)(count_inMicroSec - (count_inMiliSec * 1000));
+    result.Milisecond = (int)(count_inMiliSec - (count_inSec * 1000));
+    result.Second = (int)(count_inSec - (count_inMin * 60));
+    result.Minute = (int)(count_inMin - (count_inHour * 60));
+    result.Hour = (int)(count_inHour - (count_inDay * 24));
+    result.Day = (int)count_inDay;
     return result;
 }
 
@@ -215,8 +215,8 @@ Definition::GetDateTime(const TimestampType& timestamp)
         result.Hour = local->tm_hour;
         result.Minute = local->tm_min;
         result.Second = local->tm_sec;
-        result.Milisecond = miliSec / 1000;
-        result.Microsecond = miliSec - (result.Milisecond * 1000);
+        result.Milisecond = (int)(miliSec / 1000);
+        result.Microsecond = (int)(miliSec - (result.Milisecond * 1000));
     }
     {
 
@@ -236,8 +236,8 @@ Definition::GetDateTime(const TimestampType& timestamp)
         
         const auto gmt_time = mktime(gmt);
         const auto diff_time = local_time - gmt_time;
-        result.UTC_Hour = diff_time / 3600;
-        result.UTC_Minute = diff_time - (result.UTC_Hour * 3600);
+        result.UTC_Hour = (int)(diff_time / 3600);
+        result.UTC_Minute = (int)(diff_time - (result.UTC_Hour * 3600));
     }
     return result;
 }
