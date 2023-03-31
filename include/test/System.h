@@ -380,14 +380,32 @@ inline bool System::SetOutputFile(const char * outFilename)
         "SetOutputFile(outFilename=%s)", outFilename);
     
     if (m_status.IsStart()) return false;
+   
+#if (defined(WIN32) && !defined(_CRT_SECURE_NO_WARNINGS)) || \
+    defined(__STDC_LIB_EXT1__)
+
+    const auto err = fopen_s(&m_out, outFilename, "w");
+    if (err > 0)
+    {
+        return false;
+    }
+#else
     m_out = fopen(outFilename, "w");
     if (m_out == NULL)
     {
         return false;
     }
+#endif
+    
     const auto size = strlen(outFilename);
     m_outFilename = (char *) malloc(size + 1);
+
+#if (defined(WIN32) && !defined(_CRT_SECURE_NO_WARNINGS)) || \
+        defined(__STDC_LIB_EXT1__)
+    strncpy_s(m_outFilename, size, outFilename, size);
+#else
     strncpy(m_outFilename, outFilename, size);
+#endif
     m_outFilename[size] = '\0';
 
     m_log.SetFileOutput(m_out);
@@ -543,7 +561,14 @@ inline bool System::CopyArguments(int argc, char *argv[])
                 "System allocation arguments failed");
             return false;
         }
+
+#if (defined(WIN32) && !defined(_CRT_SECURE_NO_WARNINGS)) || \
+    defined(__STDC_LIB_EXT1__)
+
+        strncpy_s(m_argValue[i], size, argv[i], size);
+#else
         strncpy(m_argValue[i], argv[i], size);
+#endif
         m_argValue[i][size] = '\0';
     }
     return true;

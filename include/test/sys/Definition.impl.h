@@ -192,9 +192,21 @@ Definition::GetDateTime(const TimestampType& timestamp)
     time_t local_time = 0;
     DateTimeType result;
     {
-        const auto local = localtime(&tm);
+#if (defined(WIN32) && !defined(_CRT_SECURE_NO_WARNINGS))
 
-        local_time = mktime(local);
+        struct tm slocal;
+        localtime_s(&slocal, &tm);
+        struct tm* local = &slocal;
+
+#elif defined(__STDC_LIB_EXT1__)
+
+        struct tm slocal;
+        localtime_s(&tm, &slocal);
+        struct tm* local = &slocal;
+#else
+        const auto local = std::localtime(&tm);
+#endif
+        const auto local_time = mktime(local);
 
         result.Year = 1900 + local->tm_year;
         result.Month = local->tm_mon + 1;
@@ -207,7 +219,21 @@ Definition::GetDateTime(const TimestampType& timestamp)
         result.Microsecond = miliSec - (result.Milisecond * 1000);
     }
     {
+
+#if (defined(WIN32) && !defined(_CRT_SECURE_NO_WARNINGS))
+
+        struct tm sgmt;
+        gmtime_s(&sgmt, &tm);
+        struct tm *gmt = &sgmt;
+#elif defined(__STDC_LIB_EXT1__)
+
+        struct tm sgmt;
+        gmtime_s(&tm, &sgmt);
+        struct tm* gmt = &sgmt;
+#else
         const auto gmt = gmtime(&tm);
+#endif
+        
         const auto gmt_time = mktime(gmt);
         const auto diff_time = local_time - gmt_time;
         result.UTC_Hour = diff_time / 3600;
