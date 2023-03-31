@@ -95,6 +95,8 @@ inline typename Debug::CStrType& Debug::Name(CStrType& cstr)
 #include "dbg/type/param/Make.h"
 #include "dbg/val/Parameter.h"
 #include "dbg/Type.h"
+#include "dbg/Value.h"
+#include "dbg/val/Recursive.h"
 #include "dbg/Namespace.h"
 
 #define TEST_SYS_DEBUG_SET_LEVEL(VAL, ...)\
