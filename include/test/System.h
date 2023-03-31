@@ -250,7 +250,7 @@ inline int System::DebugFormat(char* buffer,
     if (dbg_size == tag_buffsize) return (int)dbg_size;
     const std::size_t tsize = dbg.TagName(tag + dbg_size, 
         tag_buffsize - dbg_size) + dbg_size;
-    tag[tag_buffsize] = '\0';
+    tag[TEST_SYS_LOG_OUTPUT_BUFFER] = '\0';
     if (tsize == tag_buffsize) return tag_buffsize;
     if (obj == NULL)
     {
@@ -260,7 +260,7 @@ inline int System::DebugFormat(char* buffer,
     {
         snprintf(tag + tsize, tag_buffsize - tsize, "[%p]", obj);
     }
-    tag[tag_buffsize] = '\0';
+    tag[TEST_SYS_LOG_OUTPUT_BUFFER] = '\0';
     return LogFormat(buffer, buffer_size, status, msg, tag);
 }
 
