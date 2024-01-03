@@ -69,6 +69,11 @@ template<typename T, typename TFlag =
         typename test::out::fmt::Definition::String<T>::DefaultType>
 class Argument : public Argument<void, TFlag>
 {
+private:
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::out::fmt::Argument<T, TFlag, 
+        typename test::out::fmt::Definition::String<T>::
+            DefaultType>> DebugType;
 public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
@@ -144,6 +149,10 @@ public:
 template<typename TFlag>
 class Argument<void, TFlag, void>
 {
+private:
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::out::fmt::Argument<void, TFlag, 
+        void>> DebugType;
 public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
@@ -346,6 +355,11 @@ class Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type> : 
         public Argument<void, TFlag>
 {
+private:
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::out::fmt::Argument<TCharPtr, TFlag, 
+        typename test::out::fmt::Definition::String<TCharPtr>::
+            Type>> DebugType;
 public:
     typedef TFlag FlagType;
     typedef typename FlagType::ValueType FlagValueType;
@@ -456,12 +470,6 @@ private:
     static PointerReferenceType PointerValue(TFlagArg&& flag,
         TFlagArgs&&... flags);
 private:
-    void InitializeValue();
-    void InitializeValue(const char* str_val);
-    void InitializeValue(const wchar_t* str_val);
-    template<typename T>
-    void InitializeValue(test::ptr::Reference<T> ptr_str_val);
-private:
     StringPointerType m_value;
 public:
     constexpr Argument();
@@ -495,6 +503,12 @@ public:
         operator=(const Argument<TCharPtr, TFlag>&) = delete;
     Argument<TCharPtr, TFlag>& 
         operator=(Argument<TCharPtr, TFlag>&&) = delete;
+private:
+    void InitializeValue();
+    void InitializeValue(const char* str_val);
+    void InitializeValue(const wchar_t* str_val);
+    template<typename T>
+    void InitializeValue(test::ptr::Reference<T> ptr_str_val);
 public:
     using Argument<void, TFlag>::GetFlag;
 public:
@@ -509,6 +523,8 @@ public:
 template<typename T, typename TFlag, typename TEnable>
 T Argument<T, TFlag, TEnable>::Value()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL,  "Value()");
+
     return {};
 }
 
@@ -517,6 +533,11 @@ template<typename T_, typename... TFlagArgs>
 T Argument<T, TFlag, TEnable>::
     Value(test::out::fmt::flag::Value<T_>&& val, TFlagArgs&&... flags)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL,  
+        "Value<%s>(val=%p, flags={%s})", 
+            TEST_SYS_DEBUG_TARGS_NAME_STR(T_, TFlagArgs...),
+            &val, TEST_SYS_DEBUG_TARGS_VALUE_STR(flags...));
+
     return val.IsDefault() ? Value(std::forward<TFlagArgs>(flags)...) : 
         T{std::move(val).GetValue()};
 }
@@ -528,6 +549,11 @@ template<typename TFlagArg, typename... TFlagArgs,
 T Argument<T, TFlag, TEnable>::Value(TFlagArg&& flag, 
     TFlagArgs&&... flags)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "Value<%s>(flags={%s})", 
+            TEST_SYS_DEBUG_TARGS_NAME_STR(TFlagArg, TFlagArgs...),
+            TEST_SYS_DEBUG_TARGS_VALUE_STR(flag, flags...));
+    
     return Value(std::forward<TFlagArgs>(flags)...);
 }
 
@@ -574,11 +600,22 @@ Argument<T, TFlag, TEnable>::
                 std::forward<TFlagArgs>(flag_args)...),
             m_value(Value(std::forward<TFlagArg>(flag_arg),
                 std::forward<TFlagArgs>(flag_args)...))
-{}
+{
+    TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
+        "Constructor<%s, %s, %s>(specifier=%s, flag_args={%s})",
+            TEST_SYS_DEBUG_T_NAME_STR(TFlagIntegerValue),
+            TEST_SYS_DEBUG_VALUE_STR(0, VIntegerValueFlag),
+            TEST_SYS_DEBUG_TARGS_NAME_STR(TFlagArg, TFlagArgs...),
+            TEST_SYS_DEBUG_VALUE_STR(1, specifier),
+            TEST_SYS_DEBUG_TARGS_VALUE_STR(flag_arg, flag_args...));
+    
+}
 
 template<typename T, typename TFlag, typename TEnable>
 const T& Argument<T, TFlag, TEnable>::GetValue() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetValue() const");
+    
     return m_value;
 }
 
@@ -851,6 +888,8 @@ template< typename TFlag>
 typename Argument<void, TFlag, void>:: FlagType
 Argument<void, TFlag, void>::GetFlag() const
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "GetFlag() const");
+
     return m_flag;
 }
 
@@ -885,6 +924,8 @@ const typename Argument<TCharPtr, TFlag, typename test::out::fmt::
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::StringValue()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "StringValue() const");
+
     return NULL;
 }
 
@@ -897,6 +938,12 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
         StringValue(test::out::fmt::flag::Value<const CharacterType*>&& val, 
             TFlagArgs&&... flags)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "StringValue<%s>(val=%s, flags={%s}) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TFlagArgs...),
+        TEST_SYS_DEBUG_VALUE_STR(0, val),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(flags...));
+
     return val.IsDefault() ? StringValue(std::forward<TFlagArgs>(flags)...) : 
         std::move(val).GetValue();
 }
@@ -910,6 +957,12 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
         StringValue(test::out::fmt::flag::Value<CharacterType*>&& val, 
             TFlagArgs&&... flags)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "StringValue<%s>(val=%s, flags={%s}) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TFlagArgs...),
+        TEST_SYS_DEBUG_VALUE_STR(0, val),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(flags...));
+
     return val.IsDefault() ? StringValue(std::forward<TFlagArgs>(flags)...) : 
         std::move(val).GetValue();
 }
@@ -925,6 +978,11 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::
         StringValue(TFlagArg&& flag, TFlagArgs&&... flags)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "StringValue<%s>(flags={%s}) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TFlagArg, TFlagArgs...),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(flag, flags...));
+
     return StringValue(std::forward<TFlagArgs>(flags)...);
 }
 
@@ -934,6 +992,8 @@ typename Argument<TCharPtr, TFlag, typename test::out::fmt::
 Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::PointerValue()
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, "PointerValue() const");
+
     return PointerReferenceType{test::Pointer<CharacterType>{nullptr}};
 }
 
@@ -945,6 +1005,12 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::PointerValue(test::out::fmt::flag::
     Value<test::Pointer<char>>&& val, TFlagArgs&&... flags)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "PointerValue<%s>(val=%s, flags={%s}) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TFlagArgs...),
+        TEST_SYS_DEBUG_VALUE_STR(0, val),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(flags...));
+
     return val.IsDefault() ? PointerValue(std::forward<TFlagArgs>(flags)...) : 
         std::move(val).GetValue().ReinterpretCast<CharacterType>();
 }
@@ -957,6 +1023,12 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::PointerValue(test::out::fmt::flag::
     Value<test::Pointer<wchar_t>>&& val, TFlagArgs&&... flags)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "PointerValue<%s>(val=%s, flags={%s}) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TFlagArgs...),
+        TEST_SYS_DEBUG_VALUE_STR(0, val),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(flags...));
+
     return val.IsDefault() ? PointerValue(std::forward<TFlagArgs>(flags)...) : 
         std::move(val).GetValue().ReinterpretCast<CharacterType>();
 }
@@ -972,79 +1044,12 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
     Definition::String<TCharPtr>::Type>::PointerValue(TFlagArg&& flag,
     TFlagArgs&&... flags)
 {
+    TEST_SYS_DEBUG(SystemType, DebugType, 3, NULL, 
+        "StringValue<%s>(flags={%s}) const", 
+        TEST_SYS_DEBUG_TARGS_NAME_STR(TFlagArg, TFlagArgs...),
+        TEST_SYS_DEBUG_TARGS_VALUE_STR(flag, flags...));
+
     return PointerValue(std::forward<TFlagArgs>(flags)...);
-}
-    
-template<typename TCharPtr, typename TFlag>
-void Argument<TCharPtr, TFlag, typename test::out::fmt::
-    Definition::String<TCharPtr>::Type>::
-        InitializeValue(const char* value)
-{
-    if (value != NULL)
-    {
-        const std::size_t max_len = test::out::fmt::Definition::string_max_len;
-
-#ifdef __STDC_LIB_EXT1__
-        const std::size_t len = strnlen_s(value, max_len);
-#else
-        std::size_t len = strlen(value);
-        if (len >= max_len)
-        {
-            len = max_len;
-        }
-#endif
-        m_value = test::ptr::Reference<char>{
-            test::Pointer<char>(test::ptr::arg::Array{len + 1})};
-
-#ifdef __STDC_LIB_EXT1__
-        memcpy_s(&*m_value, len, value, len);
-#else
-        memcpy(&*m_value, value, len);
-#endif 
-        m_value[len] = '\0';
-    }
-}
-
-template<typename TCharPtr, typename TFlag>
-void Argument<TCharPtr, TFlag, typename test::out::fmt::
-    Definition::String<TCharPtr>::Type>::
-        InitializeValue(const wchar_t* value)
-{
-    if (value != NULL)
-    {
-        const std::size_t max_len = test::out::fmt::Definition::string_max_len;
-
-#ifdef __STDC_LIB_EXT1__
-        const std::size_t len = wcsnlen_s(value, max_len);
-#else
-        std::size_t len = wcslen(value);
-        if (len >= max_len)
-        {
-            len = max_len;
-        }
-#endif
-        m_value = test::ptr::Reference<wchar_t>{
-            test::Pointer<wchar_t>(test::ptr::arg::Array{len + 1})};
-
-#ifdef __STDC_LIB_EXT1__
-        wmemcpy_s(&*m_value, len, value, len);
-#else
-        wmemcpy(&*m_value, value, len);
-#endif 
-        m_value[len] = L'\0';
-    }
-}
-
-template<typename TCharPtr, typename TFlag>
-template<typename T>
-void Argument<TCharPtr, TFlag, typename test::out::fmt::
-    Definition::String<TCharPtr>::Type>::
-        InitializeValue(test::ptr::Reference<T> value)
-{
-    if(value != nullptr)
-    {
-        m_value = value;
-    }
 }
 
 template<typename TCharPtr, typename TFlag>
@@ -1121,6 +1126,78 @@ Argument<TCharPtr, TFlag, typename test::out::fmt::
             PointerValue(std::forward<TFlagArgs>(flags)...);
 
         InitializeValue(ptr_value);
+    }
+}
+
+template<typename TCharPtr, typename TFlag>
+void Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::
+        InitializeValue(const char* value)
+{
+    if (value != NULL)
+    {
+        const std::size_t max_len = test::out::fmt::Definition::string_max_len;
+
+#ifdef __STDC_LIB_EXT1__
+        const std::size_t len = strnlen_s(value, max_len);
+#else
+        std::size_t len = strlen(value);
+        if (len >= max_len)
+        {
+            len = max_len;
+        }
+#endif
+        m_value = test::ptr::Reference<char>{
+            test::Pointer<char>(test::ptr::arg::Array{len + 1})};
+
+#ifdef __STDC_LIB_EXT1__
+        memcpy_s(&*m_value, len, value, len);
+#else
+        memcpy(&*m_value, value, len);
+#endif 
+        m_value[len] = '\0';
+    }
+}
+
+template<typename TCharPtr, typename TFlag>
+void Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::
+        InitializeValue(const wchar_t* value)
+{
+    if (value != NULL)
+    {
+        const std::size_t max_len = test::out::fmt::Definition::string_max_len;
+
+#ifdef __STDC_LIB_EXT1__
+        const std::size_t len = wcsnlen_s(value, max_len);
+#else
+        std::size_t len = wcslen(value);
+        if (len >= max_len)
+        {
+            len = max_len;
+        }
+#endif
+        m_value = test::ptr::Reference<wchar_t>{
+            test::Pointer<wchar_t>(test::ptr::arg::Array{len + 1})};
+
+#ifdef __STDC_LIB_EXT1__
+        wmemcpy_s(&*m_value, len, value, len);
+#else
+        wmemcpy(&*m_value, value, len);
+#endif 
+        m_value[len] = L'\0';
+    }
+}
+
+template<typename TCharPtr, typename TFlag>
+template<typename T>
+void Argument<TCharPtr, TFlag, typename test::out::fmt::
+    Definition::String<TCharPtr>::Type>::
+        InitializeValue(test::ptr::Reference<T> value)
+{
+    if(value != nullptr)
+    {
+        m_value = value;
     }
 }
 
