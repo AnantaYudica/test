@@ -35,4 +35,11 @@ public:
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_OCTAL_DLEVEL, 
     "test::out::fmt::flag::Octal", test::out::fmt::flag::Octal);
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::out::fmt::flag::Octal
+
+template<>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE("TestOutFmtFlagOctal{&=%p}", &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_OUT_FMT_FLAG_OCTAL_H_

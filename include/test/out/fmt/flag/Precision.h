@@ -62,4 +62,13 @@ inline constexpr int Precision::GetValue() const
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_PRECISION_DLEVEL, 
     "test::out::fmt::flag::Precision", test::out::fmt::flag::Precision);
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::out::fmt::flag::Precision
+
+template<>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE(
+    "TestOutFmtFlagPrecision{default=%s, v=%d, &=%p}", 
+        (val.IsDefault() ? "true" : "false"), val.GetValue(), &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_OUT_FMT_FLAG_PRECISION_H_

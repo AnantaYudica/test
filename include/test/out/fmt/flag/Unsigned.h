@@ -35,4 +35,11 @@ public:
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_UNSIGNED_DLEVEL, 
     "test::out::fmt::flag::Unsigned", test::out::fmt::flag::Unsigned);
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::out::fmt::flag::Unsigned
+
+template<>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE("TestOutFmtFlagUnsigned{&=%p}", &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_OUT_FMT_FLAG_UNSIGNED_H_

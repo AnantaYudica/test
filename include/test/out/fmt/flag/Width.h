@@ -62,4 +62,13 @@ inline constexpr int Width::GetValue() const
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_WIDTH_DLEVEL, 
     "test::out::fmt::flag::Width", test::out::fmt::flag::Width);
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::out::fmt::flag::Width
+
+template<>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE(
+    "TestOutFmtFlagWidth{default=%s, v=%d, &=%p}", 
+        (val.IsDefault() ? "true" : "false"), val.GetValue(), &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_OUT_FMT_FLAG_WIDTH_H_

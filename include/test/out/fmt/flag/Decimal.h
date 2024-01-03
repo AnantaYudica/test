@@ -35,4 +35,11 @@ public:
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_DECIMAL_DLEVEL, 
     "test::out::fmt::flag::Decimal", test::out::fmt::flag::Decimal);
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::out::fmt::flag::Decimal
+
+template<>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE("TestOutFmtFlagDecimal{&=%p}", &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_OUT_FMT_FLAG_DECIMAL_H_

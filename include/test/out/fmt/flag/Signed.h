@@ -35,4 +35,11 @@ public:
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_SIGNED_DLEVEL, 
     "test::out::fmt::flag::Signed", test::out::fmt::flag::Signed);
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::out::fmt::flag::Signed
+
+template<>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE("TestOutFmtFlagSigned{&=%p}", &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_OUT_FMT_FLAG_SIGNED_H_

@@ -62,4 +62,13 @@ inline constexpr int Length::GetValue() const
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_LENGTH_DLEVEL, 
     "test::out::fmt::flag::Length", test::out::fmt::flag::Length);
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::out::fmt::flag::Length
+
+template<>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE(
+    "TestOutFmtFlagLength{default=%s, v=%d, &=%p}", 
+        (val.IsDefault() ? "true" : "false"), val.GetValue(), &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_OUT_FMT_FLAG_LENGTH_H_

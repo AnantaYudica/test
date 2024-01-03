@@ -259,4 +259,13 @@ TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
 
 #undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T\
+    test::out::fmt::flag::Output<TCharArgs...>
+
+template<typename... TCharArgs>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE("TestOutFmtFlagOutput<%s>{&=%p}", 
+    TEST_SYS_DEBUG_TARGS_NAME_STR(TCharArgs...), &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_OUT_FMT_FLAG_OUTPUT_H_

@@ -35,4 +35,11 @@ public:
 TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_OUT_FMT_FLAG_LOWER_DLEVEL, 
     "test::out::fmt::flag::Lower", test::out::fmt::flag::Lower);
 
+#define TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T test::out::fmt::flag::Lower
+
+template<>
+TEST_SYS_DBG_VALUE_PARAMETER_DEFINE("TestOutFmtFlagLower{&=%p}", &val);
+
+#undef TEST_SYS_DBG_VALUE_PARAMETER_DEFINE_T
+
 #endif //!TEST_OUT_FMT_FLAG_LOWER_H_
