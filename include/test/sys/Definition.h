@@ -116,6 +116,11 @@ struct Definition
         sMemDummyAllocationFailed           = sMemDummy | sError | 0x01,
         sMemDummyReallocationFailed         = sMemDummy | sError | 0x02,
 
+        sTask = 0x0700,
+
+        sOutBuffer = 0x0800,
+        sOutBufferAllocationFailed          = sOutBuffer | sError | 0x01,
+
         sUnknown                            = 0xFFFF
     };
 
