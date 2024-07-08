@@ -1,3 +1,5 @@
+#define TEST_SYS_DEBUG_ENABLE 1
+#define TEST_SYS_TASK_DLEVEL 0x7f
 #include "test/sys/Task.h"
 
 #include <thread>
@@ -44,7 +46,7 @@ struct Runner
     {
         const std::size_t bg = begin;
         const std::size_t ed = end; 
-        return (bg < ed ? ed - bg: (ed + (N + 1)) - bg);
+        return (bg <= ed ? ed - bg: (ed + (N + 1)) - bg);
     }
     test::sys::Task* GetRequest(std::size_t index) const
     {
@@ -100,7 +102,7 @@ struct Runner
         taskReady[index].store(true);
 #else
 
-        printf("run task in thread-id %llu\n", std::this_thread::get_id());
+        TEST_SYS_INFO("run task in thread-id %llu", std::this_thread::get_id());
         new_task.Initialize(std::this_thread::get_id());
         new_task.Run();
         new_task.Finalize();
@@ -131,13 +133,13 @@ void MainThread(void* obj, std::size_t index)
             runner_obj->Finalize(index);
             break;
         }
-        printf("run task in thread-id %llu\n", std::this_thread::get_id());
+        TEST_SYS_INFO("run task in thread-id %llu", std::this_thread::get_id());
         task->Initialize(std::this_thread::get_id(), index);
         task->Run();
         runner_obj->Finalize(index);
         task = NULL;
     }
-    printf("finish, total job %zu thread-id %llu\n", runner_obj->jobCount[index], 
+    TEST_SYS_INFO("finish, total job %zu thread-id %llu", runner_obj->jobCount[index], 
         std::this_thread::get_id());
 }
 
@@ -147,11 +149,35 @@ int main()
 {
     std::srand(std::time(nullptr));
 #if __STDCPP_THREADS__ > 0
+    std::size_t main_hash = std::hash<std::thread::id>{}(std::this_thread::get_id());
+    std::size_t or_hash = main_hash;
+    std::size_t and_hash = main_hash;
+    TEST_SYS_INFO("hash Thread Id %zu %zu", main_hash,
+        std::hash<std::thread::id>{}(std::this_thread::get_id()));
     std::thread th[NTHREAD];
+    std::size_t check[NTHREAD + 1];
+    constexpr std::size_t key = 1021;
+    check[0] = main_hash % key;
+    std::size_t same = 0;
     for (std::size_t i = 0; i < NTHREAD; ++i)
     {
         runner.jobCount[i] = 0;
         th[i] = std::thread{MainThread, &runner, i};
+        TEST_SYS_INFO("hash Thread Id %zu %zu %zu", main_hash - std::hash<std::thread::id>{}(th[i].get_id()),
+            std::hash<std::thread::id>{}(th[i].get_id()),
+            std::hash<std::thread::id>{}(th[i].get_id()) % 1021);
+        or_hash |= std::hash<std::thread::id>{}(th[i].get_id());
+        and_hash &= std::hash<std::thread::id>{}(th[i].get_id());
+        const std::size_t ck = std::hash<std::thread::id>{}(th[i].get_id()) % key;
+        check[i+1] = ck;
+        for (std::size_t j = 0; j < (i + 1); ++j)
+        {
+            if (check[j] == ck)
+            {
+                ++same;
+                break;
+            }
+        }
     }
 #else
 #endif
@@ -160,7 +186,7 @@ int main()
         {
             test::sys::Task t{"test"};
             t.Main([](test::sys::Task& task){
-                printf("run task %zu in thread-id %llu\n", n_task++,
+                TEST_SYS_INFO("run task %zu in thread-id %llu", n_task++,
                     std::this_thread::get_id());
                 const auto random = (std::rand() % 900) + 100;
                 std::this_thread::sleep_for(std::chrono::milliseconds(random));
@@ -180,7 +206,7 @@ int main()
         th[i].join();
     }
 #endif
-    printf("total task = %zu\n", n_task.load());
+    TEST_SYS_INFO("total task = %zu", n_task.load());
     assert(n_task.load() == 1000);
     return 0;
 }
