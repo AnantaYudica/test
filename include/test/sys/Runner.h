@@ -1,0 +1,1029 @@
+#ifndef TEST_SYS_RUNNER_H_
+#define TEST_SYS_RUNNER_H_
+
+#include "out/Interface.h"
+#include "Definition.h"
+#include "Interface.h"
+#include "Task.h"
+#include "runner/Index.h"
+#include "runner/Key.h"
+
+#include <cstdlib>
+#include <thread>
+#include <chrono>
+#include <atomic>
+#include <mutex>
+#include <utility>
+
+namespace test
+{
+namespace sys
+{
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+class Runner;
+
+} //!sys
+
+} //!test
+
+
+#ifndef TEST_SYS_RUNNER_DLEVEL
+
+#define TEST_SYS_RUNNER_DLEVEL 1
+
+#endif //!TEST_SYS_RUNNER_DLEVEL
+
+#define TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS\
+    test::sys::dbg::Type<TStatus>,\
+    test::sys::dbg::Type<TBuffer>,\
+    test::sys::dbg::type::Value<std::size_t, N>
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+TEST_SYS_DBG_TYPE_PARAMETER_LEVEL_DEFINE(
+    TEST_SYS_RUNNER_DLEVEL, 
+    "test::sys::Runner", 
+    test::sys::Runner<TStatus, TBuffer, N>);
+
+#undef TEST_SYS_DBG_TYPE_PARAMETER_DEFINE_ARGS
+namespace test
+{
+namespace sys
+{
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+class Runner
+{
+private:
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::
+        Runner<TStatus, TBuffer, N>> _DebugType;
+    typedef test::sys::Definition DefinitionType;
+public:
+    typedef TStatus StatusType;
+    typedef test::sys::out::Interface<TStatus> LogType;
+    typedef TBuffer BufferType;
+public:
+    typedef test::sys::Task TaskType;
+    typedef typename TaskType::FormatBeginCallbackFunc 
+        FormatTaskBeginCallbackFunc;
+    typedef typename TaskType::FormatEndCallbackFunc 
+        FormatTaskEndCallbackFunc;
+    typedef typename TaskType::FormatAssertCallbackFunc 
+        FormatTaskAssertCallbackFunc;
+public:
+    typedef test::sys::runner::Index<
+                2,      3,      5,      7,     
+        11,     13,     17,     19,     23,
+        29,     31,     37,     41,     43, 
+        47,     53,     59,     61,     67,
+        71,     73,     79,     83,     89, 
+        97,     101,    103,    107,    109, 
+        113,    127,    131,    137,    139,
+        149,    151,    157,    163,    167, 
+        173,    179,    181,    191,    193, 
+        197,    199,    211,    223,    227, 
+        229,    233,    239,    241,    251, 
+        257,    263,    269,    271,    277, 
+        281,    283,    293,    307,    311, 
+        313,    317,    331,    337,    347, 
+        349,    353,    359,    367,    373, 
+        379,    383,    389,    397,    401, 
+        409,    419,    421,    431,    433, 
+        439,    443,    449,    457,    461, 
+        463,    467,    479,    487,    491, 
+        499,    503,    509,    521,    523, 
+        541,    547,    557,    563,    569, 
+        571,    577,    587,    593,    599, 
+        601,    607,    613,    617,    619, 
+        631,    641,    643,    647,    653, 
+        659,    661,    673,    677,    683, 
+        691,    701,    709,    719,    727, 
+        733,    739,    743,    751,    757, 
+        761,    769,    773,    787,    797, 
+        809,    811,    821,    823,    827, 
+        829,    839,    853,    857,    859, 
+        863,    877,    881,    883,    887, 
+        907,    911,    919,    929,    937, 
+        941,    947,    953,    967,    971, 
+        977,    983,    991,    997,    1009, 
+        1013,   1019,   1021,   1031,   1033 > IndexType;
+    typedef test::sys::runner::Key KeyType;
+private:
+    static void MainFunction(void* obj, std::size_t index);
+private:
+    static KeyType InitializeKey(std::thread::id main_id, std::thread(&threads)[N],
+        std::size_t(&index)[N + 1]);
+private:
+    static void InitializeBuffer(BufferType**& buffer, const KeyType& key,
+        std::size_t(&index)[N + 1], StatusType& status);
+private:
+    static void FinalizeBuffer(BufferType**& buffer, const KeyType& key,
+        std::size_t(&index)[N + 1]);
+private:
+    std::size_t m_queueBegin, m_queueEnd;
+    std::size_t m_keyIndex;
+    StatusType& m_status;
+    LogType& m_log;
+    KeyType m_key;
+    std::atomic_bool m_failed, m_start, m_stop, m_done;
+    std::atomic_size_t m_idleCount, m_runCount;
+    FormatTaskBeginCallbackFunc m_beginTaskFmtCb;
+    FormatTaskEndCallbackFunc m_endTaskFmtCb;
+    FormatTaskAssertCallbackFunc m_assertTaskFmtCb;
+    std::thread m_threads[N];
+    std::size_t m_queue[N + 1];
+    std::size_t m_indexThreads[N + 1];
+    std::mutex m_queueLock;
+    std::atomic_bool m_tasksReady[N];
+    test::sys::Task* m_tasks[N];
+    BufferType** m_buffers;
+public:
+    Runner(StatusType& status, LogType& log);
+public:
+    ~Runner();
+public:
+    Runner(const Runner<TStatus, TBuffer, N>& cpy) = delete;
+    Runner(Runner<TStatus, TBuffer, N>&& mov) = delete;
+public:
+    Runner<TStatus, TBuffer, N>& 
+        operator=(const Runner<TStatus, TBuffer, N>& cpy) = delete;
+    Runner<TStatus, TBuffer, N>& 
+        operator=(Runner<TStatus, TBuffer, N>&& mov) = delete;
+private:
+    void Initialize();
+private:
+    void Finalize();
+    void Finalize(const std::size_t& index, const bool& request);
+private:
+    void Clean(const std::size_t& index);
+private:
+    void Request(const std::size_t& index);
+private:
+    test::sys::Task* GetRequest(const std::size_t& index);
+private:
+    void PoolingLogBuffer(const std::size_t& thread_hid);
+public:
+    std::size_t QueueSize() const;
+public:
+    void LogBufferOutput(const std::size_t& thread_hid, const char* msg);
+public:
+    void SetBeginTaskFormatCallback(FormatTaskBeginCallbackFunc func);
+public:
+    void SetEndTaskFormatCallback(FormatTaskEndCallbackFunc func);
+public:
+    void SetAssertTaskFormatCallback(FormatTaskAssertCallbackFunc func);
+public:
+    void Job(test::sys::Task&& task);
+public:
+    void Stop();
+public:
+    void WaitAndStop();
+public:
+    std::size_t IdleCount() const;
+public:
+    std::size_t RunCount() const;
+public:
+    bool IsStart() const;
+public:
+    bool IsStop() const;
+public:
+    bool IsFailed() const;
+public:
+    bool IsFinish() const;
+};
+
+template<typename TStatus, typename TBuffer>
+class Runner<TStatus, TBuffer, 0>
+{
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::
+        Runner<TStatus, TBuffer, 0>> _DebugType;
+    typedef test::sys::Definition DefinitionType;
+public:
+    typedef TStatus StatusType;
+    typedef test::sys::out::Interface<TStatus> LogType;
+    typedef TBuffer BufferType;
+public:
+    typedef test::sys::Task TaskType;
+    typedef typename TaskType::FormatBeginCallbackFunc 
+        FormatTaskBeginCallbackFunc;
+    typedef typename TaskType::FormatEndCallbackFunc 
+        FormatTaskEndCallbackFunc;
+    typedef typename TaskType::FormatAssertCallbackFunc 
+        FormatTaskAssertCallbackFunc;
+private:
+    bool m_failed, m_stop;
+    StatusType& m_status;
+    LogType& m_log;
+    FormatTaskBeginCallbackFunc m_beginTaskFmtCb;
+    FormatTaskEndCallbackFunc m_endTaskFmtCb;
+    FormatTaskAssertCallbackFunc m_assertTaskFmtCb;
+public:
+    Runner(StatusType& status, LogType& log);
+public:
+    ~Runner();
+public:
+    Runner(const Runner<TStatus, TBuffer, 0>& cpy) = delete;
+    Runner(Runner<TStatus, TBuffer, 0>&& mov) = delete;
+public:
+    Runner<TStatus, TBuffer, 0>& 
+        operator=(const Runner<TStatus, TBuffer, 0>& cpy) = delete;
+    Runner<TStatus, TBuffer, 0>& 
+        operator=(Runner<TStatus, TBuffer, 0>&& mov) = delete;
+private:
+    void Initialize();
+private:
+    void Finalize();
+    void Finalize(const std::size_t&, const bool&);
+private:
+    void Clear(const std::size_t&);
+private:
+    void Request(const std::size_t&);
+private:
+    test::sys::Task* GetRequest(const std::size_t&);
+private:
+    void PoolingLogBuffer(const std::size_t& thread_hid);
+public:
+    std::size_t QueueSize() const;
+public:
+    void LogBufferOutput(const std::size_t& thread_hid, const char* msg);
+public:
+    inline void SetBeginTaskFormatCallback(FormatTaskBeginCallbackFunc func);
+public:
+    inline void SetEndTaskFormatCallback(FormatTaskEndCallbackFunc func);
+public:
+    inline void SetAssertTaskFormatCallback(FormatTaskAssertCallbackFunc func);
+public:
+    void Job(test::sys::Task&& task);
+public:
+    void Stop();
+public:
+    void WaitAndStop();
+public:
+    std::size_t IdleCount() const;
+public:
+    std::size_t RunCount() const;
+public:
+    bool IsStart() const;
+public:
+    bool IsStop() const;
+public:
+    bool IsFailed() const;
+public:
+    bool IsFinish() const;
+};
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::MainFunction(void* obj, std::size_t index)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+        "MainFunction(obj=%p, index=%zu)", obj, index);
+
+    Runner<TStatus, TBuffer, N>* runner = (Runner<TStatus, TBuffer, N>*)(obj);
+    const std::size_t thread_hid = DefinitionType::GetThisThreadHID();
+    bool request = false;
+    if (runner == NULL)
+    {
+        SystemType::GetInstance().Error(
+            DefinitionType::Status::sRunnerNullPointer,
+            "Object null pointer");
+        return;
+    }
+
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+        "Wait to Start");
+
+    while(!runner->IsStart()) 
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+    
+    const std::size_t buffer_index = runner->m_key.Index(thread_hid);
+    BufferType* buffer = runner->m_buffers[buffer_index];
+    
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, "Start");
+
+    while(!runner->IsStop())
+    {
+        runner->Request(index);
+        request = true;
+        test::sys::Task* task = NULL;
+        
+        TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+            "Wait new Task");
+
+        while(!runner->IsStop() && 
+            (task = runner->GetRequest(index)) == NULL)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        if (runner->IsStop())
+        {
+            if (task != NULL)
+            {
+                TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+                    "Task(%p) Not running beacuse Runner Stop", task);
+            }
+            else 
+            {    
+                TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+                    "Runner Stop");
+            }
+            
+            runner->Clean(index);
+            task = NULL;
+            break;
+        }
+        TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+            "Task(%p) Start", task);
+        request = false;
+        task->Initialize(std::this_thread::get_id(), index);
+        task->Run();
+        if (task->IsFailed() && !runner->IsFailed() && !runner->IsStop())
+        {
+            runner->m_failed.store(true);
+            TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+                "Task(%p) Failed", task);
+            runner->PoolingLogBuffer(thread_hid);
+            runner->Stop();
+        }
+        task->Finalize();
+        TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+            "Task(%p) Finish", task);
+        runner->Clean(index);
+        buffer->Reset();
+    }
+
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+        "Thread Finish");
+
+    runner->Finalize(index, request);
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+typename Runner<TStatus, TBuffer, N>::KeyType 
+Runner<TStatus, TBuffer, N>::InitializeKey(std::thread::id main_id, 
+    std::thread(&threads)[N], std::size_t(&index)[N + 1])
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, NULL, 
+        "InitializeKey()");
+
+    const std::size_t* key_ref = IndexType::Get(); 
+    constexpr std::size_t size = IndexType::ConstSize();
+    constexpr std::size_t bg_key = IndexType::ConstGetBegin<N>();
+    std::hash<std::thread::id> hash{};
+    std::size_t list_thread_id_hash[N] {};
+    std::size_t main_id_hash = hash(main_id);
+    std::size_t reducer = main_id_hash;
+    std::size_t divisor = 0;
+    for (std::size_t i = 0; i < N; ++i)
+    {
+        list_thread_id_hash[i] = hash(threads[i].get_id());
+        if (reducer > list_thread_id_hash[i])
+        {
+            reducer = list_thread_id_hash[i];
+        }
+    }
+    for (std::size_t i = bg_key; i < size; ++i)
+    {
+        if (i >= size)
+        {
+            break;
+        }
+        bool next = false;
+        divisor = key_ref[i];
+        index[0] = (main_id_hash - reducer) % key_ref[i];
+        for (std::size_t j = 1; j <= N; ++j)
+        {
+            index[j] = (list_thread_id_hash[j - 1] - reducer) % 
+                key_ref[i];
+            for (std::size_t k = 0; k < j; ++k)
+            {
+                if (index[k] == index[j])
+                {
+                    next = true;
+                    break;
+                }
+            }
+            if (next)
+            {
+                break;
+            }
+        }
+        if (!next)
+        {
+            break;
+        }
+    }
+    
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, NULL, 
+        "{reducer=%zu, divisor=%zu}", reducer, divisor);
+    return {reducer, divisor};
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::
+    InitializeBuffer(BufferType**& buffer, const KeyType& key,
+        std::size_t(&index)[N + 1], StatusType& status)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, NULL, 
+        "InitializeBuffer()");
+
+    buffer = (BufferType**)malloc(sizeof(BufferType*) * key.Size());
+    if (buffer != NULL)
+    {
+        memset(buffer, 0, sizeof(BufferType*) * key.Size());
+    } 
+    else
+    {
+        SystemType::GetInstance().
+            Error(DefinitionType::Status::sRunnerAllocationFailed,
+                "Buffer memory allocation failed");
+        return;
+    }
+    for (std::size_t i = 0; i < (N + 1); ++i)
+    {
+        buffer[index[i]] = (BufferType*)malloc(sizeof(BufferType));
+        if (buffer[index[i]] != NULL)
+        {
+            new(buffer[index[i]]) BufferType(status);
+        }
+        else
+        {
+            SystemType::GetInstance().
+            Error(DefinitionType::Status::sRunnerAllocationFailed,
+                "Buffer[%zu] memory allocation failed", i);
+            return;
+        }
+    }
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::
+    FinalizeBuffer(BufferType**& buffer, const KeyType& key,
+        std::size_t(&index)[N + 1])
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, NULL, 
+        "FinalizeBuffer()");
+
+    for (std::size_t i = 0; i < (N + 1); ++i)
+    {
+        if(buffer[index[i]] != NULL)
+        {
+            buffer[index[i]]->~BufferType();
+            free(buffer[index[i]]);
+            buffer[index[i]] = NULL;
+        }   
+    }
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+Runner<TStatus, TBuffer, N>::Runner(StatusType& status, LogType& log) :
+    m_failed(false),
+    m_start(false),
+    m_stop(false),
+    m_done(false),
+    m_status(status),
+    m_log(log),
+    m_idleCount(0),
+    m_runCount(0),
+    m_beginTaskFmtCb(test::sys::Task::DefaultFormatBegin),
+    m_endTaskFmtCb(test::sys::Task::DefaultFormatEnd),
+    m_assertTaskFmtCb(test::sys::Task::DefaultFormatAssert),
+    m_threads{},
+    m_queue{0},
+    m_indexThreads{0},
+    m_queueBegin(0), 
+    m_queueEnd(0),
+    m_queueLock(),
+    m_tasksReady{},
+    m_tasks{},
+    m_buffers{NULL}
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+        "Constructor(status=%p)", status);
+
+    this->Initialize();
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+Runner<TStatus, TBuffer, N>::~Runner()
+{   
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+        "Destructor");
+
+    this->Finalize();
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::Initialize()
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 2, this, 
+        "Initialize()");
+
+    m_indexThreads[0] = 0;
+    for (std::size_t i = 0; i < N; ++i)
+    {
+        m_indexThreads[i + 1] = 0;
+        m_threads[i] = std::thread(MainFunction, this, i);
+        m_tasksReady[i].store(false);
+        m_tasks[i] = NULL;
+        
+        TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+            "Create Thread %zu", DefinitionType::
+            GetThreadHID(m_threads[i].get_id()));
+    }
+    m_key = InitializeKey(std::this_thread::get_id(), m_threads, 
+        m_indexThreads);
+    InitializeBuffer(m_buffers, m_key, m_indexThreads, m_status);
+    
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+        "Start");
+    m_start = true;
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::Finalize()
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+        "Finalize()");
+
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, "Stop");
+    m_stop.store(true);
+    FinalizeBuffer(m_buffers, m_key, m_indexThreads);
+    for (std::size_t i = 0; i < N; ++i)
+    {
+        TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+            "Join Thread %zx", DefinitionType::
+            GetThreadHID(m_threads[i].get_id()));
+
+        m_threads[i].join();
+        if (m_tasks[i] != NULL)
+        {
+            delete m_tasks[i];
+            m_tasks[i] = NULL;
+        }
+    }
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, "Done");
+    m_done = true;
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::
+    Finalize(const std::size_t& index, const bool& request)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+        "Finalize(index=%zu, request=%d)", index, request);
+
+    if (request)
+    {
+        --m_idleCount;
+    }
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::Clean(const std::size_t& index)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+        "Clean(index=%zu)", index);
+
+    m_tasksReady[index].store(false);
+    if (m_tasks[index] == NULL)
+    {
+        return;
+    }
+    typedef test::sys::Task TaskType;
+    m_tasks[index]->~TaskType();
+    free(m_tasks[index]);
+    m_tasks[index] = NULL;
+    --m_runCount;
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::Request(const std::size_t& index)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+        "Request(index=%zu)", index);
+
+    std::lock_guard<std::mutex> guard{m_queueLock};
+    m_tasksReady[index].store(false);
+    const std::size_t last = m_queueEnd;
+    m_queue[last] = index;
+    m_queueEnd = ((last + 1) % (N + 1));
+    ++m_idleCount;
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+test::sys::Task* Runner<TStatus, TBuffer, N>::
+    GetRequest(const std::size_t& index)
+{
+    if (m_tasksReady[index].load())
+    {    
+        TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+            "GetRequest(index=%zu)", index);
+
+        ++m_runCount;
+        --m_idleCount;
+        return m_tasks[index];
+    }
+    return NULL;
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::
+    PoolingLogBuffer(const std::size_t& thread_hid)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+        "PoolingLogBuffer(thread_hid=%zu)", thread_hid);
+    if (m_buffers == NULL)
+    {
+        return;
+    }
+    const std::size_t main_thread_hid = DefinitionType::GetMainThreadHID();
+    const std::size_t main_thread_index = m_key.Index(main_thread_hid);
+    const std::size_t thread_index = m_key.Index(thread_hid);
+    BufferType* main_thread_buffer = m_buffers[main_thread_index];
+    BufferType* thread_buffer = m_buffers[thread_index];
+    std::size_t main_size = main_thread_buffer == NULL ? 0 :
+        main_thread_buffer->Size();
+    std::size_t thread_size = thread_buffer == NULL ? 0 :
+        thread_buffer->Size();
+    std::size_t mi = 0;
+    std::size_t ti = 0;
+    
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+        "main_size %zu thread_size %zu", main_size, thread_size);
+    if (main_size != 0 && thread_size != 0)
+    {
+        for (;main_size != 0 && thread_size != 0;)
+        {
+            if((*main_thread_buffer)[mi].GetTimestamp() <
+                (*thread_buffer)[ti].GetTimestamp())
+            {
+                m_log.Output("%s", 
+                    (*main_thread_buffer)[mi].GetMessage());
+                --main_size;
+                ++mi;
+            }
+            else
+            {
+                m_log.Output("%s", 
+                    (*thread_buffer)[ti].GetMessage());
+                --thread_size;
+                ++ti;
+            }
+        }
+    }
+    if (main_size != 0)
+    {
+        for (;mi < main_size; ++mi)
+        {
+            m_log.Output("%s", (*main_thread_buffer)[mi].GetMessage());
+        }
+    }
+    if (thread_size != 0)
+    {
+        for (;ti < thread_size; ++ti)
+        {
+            m_log.Output("%s", (*thread_buffer)[ti].GetMessage());
+        }
+    }
+
+    if (main_thread_buffer != NULL)
+    {
+        main_thread_buffer->Reset();
+    }
+    if (thread_buffer != NULL)
+    {
+        thread_buffer->Reset();
+    }
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+std::size_t Runner<TStatus, TBuffer, N>::QueueSize() const
+{
+    const std::size_t bg = m_queueBegin;
+    const std::size_t ed = m_queueEnd; 
+    return (bg <= ed ? ed - bg: (ed + (N + 1)) - bg);
+}
+
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::
+    SetBeginTaskFormatCallback(FormatTaskBeginCallbackFunc func)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, 
+        "SetBeginTaskFormatCallback(func=%p)", func);
+
+    m_beginTaskFmtCb = func;
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::
+    SetEndTaskFormatCallback(FormatTaskEndCallbackFunc func)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, 
+        "SetEndTaskFormatCallback(func=%p)", func);
+    
+    m_endTaskFmtCb = func;
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::
+    SetAssertTaskFormatCallback(FormatTaskAssertCallbackFunc func)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, 
+        "SetAssertTaskFormatCallback(func=%p)", func);
+    
+    m_assertTaskFmtCb = func;
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::
+    LogBufferOutput(const std::size_t& thread_hid, const char* msg)
+{
+    const std::size_t thread_index = m_key.Index(thread_hid);
+    BufferType* thread_buffer = m_buffers[thread_index];
+    if (thread_buffer == NULL)
+    {
+        return;
+    }
+    thread_buffer->Output("%s", msg);
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::Job(test::sys::Task&& task)
+{
+    if (IsStop())
+    {
+        TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+            "Job(task=%p) Skip", &task);
+        return;
+    }
+    
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+        "Job(task=%p) Wait", &task);
+    do
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    } 
+    while(QueueSize() == 0);
+    
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+        "Job(task=%p)", &task);
+
+    const std::size_t bg = m_queueBegin;
+    const std::size_t index = m_queue[bg];
+    m_tasks[index] = (test::sys::Task*) malloc(sizeof(test::sys::Task));
+    if (m_tasks[index] == NULL)
+    {
+        SystemType::GetInstance().
+        Error(DefinitionType::Status::sRunnerAllocationFailed,
+            "task[%zu] memory allocation failed", index);
+        return;
+    }
+    new(m_tasks[index]) test::sys::Task(std::move(task));
+
+    m_tasks[index]->SetBeginFormatCallback(m_beginTaskFmtCb);
+    m_tasks[index]->SetEndFormatCallback(m_endTaskFmtCb);
+    m_tasks[index]->SetAssertFormatCallback(m_assertTaskFmtCb);
+    m_queueBegin = (bg + 1) % (N + 1);
+    
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, 
+        "New Task = %p", m_tasks[index]);
+
+    m_tasksReady[index].store(true);
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::Stop()
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, "Stop()");
+
+    return m_stop.store(true);
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::WaitAndStop()
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+        "WaitAndStop()");
+    if (m_done.load())
+    {
+        return;
+    }
+    
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, "Wait");
+    do
+    {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    } 
+    while(m_runCount.load() != 0 || (m_idleCount.load() != 0 ? 
+        m_idleCount.load() != N : m_idleCount.load() != 0) || 
+        QueueSize() != N);
+
+    Stop();
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+std::size_t Runner<TStatus, TBuffer, N>::IdleCount() const
+{
+    return m_idleCount.load();
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+std::size_t Runner<TStatus, TBuffer, N>::RunCount() const
+{
+    return m_runCount.load();
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+bool Runner<TStatus, TBuffer, N>::IsStart() const
+{
+    return m_start.load();
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+bool Runner<TStatus, TBuffer, N>::IsStop() const
+{
+    return m_stop.load();
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+bool Runner<TStatus, TBuffer, N>::IsFinish() const
+{
+    return m_done.load();
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+bool Runner<TStatus, TBuffer, N>::IsFailed() const
+{
+    return m_failed.load();
+}
+
+template<typename TStatus, typename TBuffer>
+Runner<TStatus, TBuffer, 0>::Runner(StatusType& status, LogType& log) :
+    m_failed(false),
+    m_stop(false),
+    m_status(status),
+    m_log(log),
+    m_beginTaskFmtCb(test::sys::Task::DefaultFormatBegin),
+    m_endTaskFmtCb(test::sys::Task::DefaultFormatEnd),
+    m_assertTaskFmtCb(test::sys::Task::DefaultFormatAssert)
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+        "Constructor(status=%p)", &status);
+}
+
+template<typename TStatus, typename TBuffer>
+Runner<TStatus, TBuffer, 0>::~Runner()
+{
+    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+        "Destructor");
+}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::Initialize()
+{}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::Finalize()
+{}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::Finalize(const std::size_t&, const bool&)
+{}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::Clear(const std::size_t&)
+{}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::Request(const std::size_t&)
+{}
+
+template<typename TStatus, typename TBuffer>
+test::sys::Task* Runner<TStatus, TBuffer, 0>::GetRequest(const std::size_t&)
+{
+    return NULL;
+}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::PoolingLogBuffer(const std::size_t&)
+{
+    return;
+}
+
+template<typename TStatus, typename TBuffer>
+std::size_t Runner<TStatus, TBuffer, 0>::QueueSize() const
+{
+    return 0;
+}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::LogBufferOutput(const std::size_t&, 
+    const char* msg)
+{
+    m_log.Output("%s", msg);
+}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::
+    SetBeginTaskFormatCallback(FormatTaskBeginCallbackFunc func)
+{
+    m_beginTaskFmtCb = func;
+}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::
+    SetEndTaskFormatCallback(FormatTaskEndCallbackFunc func)
+{
+    m_endTaskFmtCb = func;
+}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::
+    SetAssertTaskFormatCallback(FormatTaskAssertCallbackFunc func)
+{
+    m_assertTaskFmtCb = func;
+}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::Job(test::sys::Task&& task)
+{
+    if (!m_stop)
+    {
+        TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+            "Job(task=%p)", &task);
+
+        task.Initialize(std::this_thread::get_id(), 0);
+        task.SetBeginFormatCallback(m_beginTaskFmtCb);
+        task.SetEndFormatCallback(m_endTaskFmtCb);
+        task.SetAssertFormatCallback(m_assertTaskFmtCb);
+        task.Run();
+        if (task.IsFailed() && !IsStop())
+        {
+            m_failed = true;
+            TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, NULL, 
+                "Task(%p) Failed", &task);
+            Stop();
+        }
+        task.Finalize();
+    }
+}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::Stop()
+{
+    m_stop = true;
+}
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::WaitAndStop()
+{
+    Stop();
+}
+
+template<typename TStatus, typename TBuffer>
+std::size_t Runner<TStatus, TBuffer, 0>::IdleCount() const
+{
+    return 0;
+}
+
+template<typename TStatus, typename TBuffer>
+std::size_t Runner<TStatus, TBuffer, 0>::RunCount() const
+{
+    return 0;
+}
+
+template<typename TStatus, typename TBuffer>
+bool Runner<TStatus, TBuffer, 0>::IsStart() const
+{
+    return true;
+}
+
+template<typename TStatus, typename TBuffer>
+bool Runner<TStatus, TBuffer, 0>::IsStop() const
+{
+    return m_stop;
+}
+
+template<typename TStatus, typename TBuffer>
+bool Runner<TStatus, TBuffer, 0>::IsFinish() const
+{
+    return true;
+}
+
+template<typename TStatus, typename TBuffer>
+bool Runner<TStatus, TBuffer, 0>::IsFailed() const
+{
+    return m_failed;
+}
+
+} //!sys
+
+} //!test
+
+
+#endif //!TEST_SYS_RUNNER_H_
