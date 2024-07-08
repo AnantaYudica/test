@@ -77,7 +77,7 @@ public:
 public:
     void SetFileOutput(FILE* fout);
 protected:
-    virtual int BufferOutput(char * buffer);
+    virtual int BufferOutput(char * buffer) override;
 };
 
 template<typename TStatus>
