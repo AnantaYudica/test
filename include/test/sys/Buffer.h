@@ -179,7 +179,7 @@ Buffer<TStatus, NLine, NBuffer>::Buffer(StatusType& status) :
     if (m_buffer == NULL)
     {
         SystemType::GetInstance().Error(
-            DefinitionType::Status::sOutBufferAllocationFailed,
+            DefinitionType::Status::sBufferAllocationFailed,
             "buffers allocation failed");
     }
     else
@@ -191,7 +191,7 @@ Buffer<TStatus, NLine, NBuffer>::Buffer(StatusType& status) :
     if (m_records == NULL)
     {
         SystemType::GetInstance().Error(
-            DefinitionType::Status::sOutBufferAllocationFailed,
+            DefinitionType::Status::sBufferAllocationFailed,
             "records allocation failed");
     }
     else
