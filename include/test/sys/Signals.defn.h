@@ -3,7 +3,6 @@
 
 #include "Signal.defn.h"
 #include "Definition.h"
-#include "Interface.h"
 #include "Debug.h"
 
 #include <cstddef>
@@ -50,8 +49,6 @@ class Signals
 {
 private:
     typedef test::sys::Definition DefinitionType;
-    typedef test::sys::Interface SystemType;
-    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
 public:
     typedef TStatus StatusType;
     typedef typename test::sys::Definition::TimestampType TimestampType;

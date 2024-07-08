@@ -19,6 +19,8 @@ Signals<TStatus>::Signals(StatusType& status) :
     m_status(status),
     m_mutex()
 {
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, 
         "Constructor(status=%p)", &status);
     
@@ -28,6 +30,8 @@ Signals<TStatus>::Signals(StatusType& status) :
 template<typename TStatus>
 Signals<TStatus>::~Signals()
 {
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
     TEST_SYS_DEBUG(SystemType, DebugType, 1, this, "Destructor");
     
     for (std::size_t i = 0; i < m_size; ++i)
@@ -43,6 +47,8 @@ Signals<TStatus>::~Signals()
 template<typename TStatus>
 void Signals<TStatus>::Allocation()
 {
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Allocation()");
     
     if (m_list == NULL)
@@ -66,6 +72,8 @@ void Signals<TStatus>::Allocation()
 template<typename TStatus>
 bool Signals<TStatus>::Reallocation()
 {
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Reallocation()");
     
     const std::size_t new_alloc = m_alloc << 1;
@@ -93,6 +101,8 @@ bool Signals<TStatus>::Reallocation()
 template<typename TStatus>
 bool Signals<TStatus>::Insert(SignalType* sig)
 {
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Insert(sig=%p)", sig);
     
     if (m_lastSig != 0 || m_list == NULL || sig == NULL)
@@ -126,6 +136,8 @@ bool Signals<TStatus>::Insert(SignalType* sig)
 template<typename TStatus>
 bool Signals<TStatus>::Remove(SignalType* sig)
 {
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Remove(sig=%p)", sig);
     
     if (m_lastSig != 0 || m_list == NULL || sig == NULL)
@@ -162,6 +174,8 @@ bool Signals<TStatus>::Remove(SignalType* sig)
 template<typename TStatus>
 void Signals<TStatus>::Clear()
 {
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
     TEST_SYS_DEBUG(SystemType, DebugType, 2, this, "Clear()");
     
     if (m_lastSig != 0 || m_list == NULL)
@@ -182,6 +196,8 @@ void Signals<TStatus>::Clear()
 template<typename TStatus>
 std::size_t Signals<TStatus>::Size() const
 {
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Size() const");
     
     return m_size;
@@ -190,6 +206,8 @@ std::size_t Signals<TStatus>::Size() const
 template<typename TStatus>
 void Signals<TStatus>::Raise(int sig)
 {
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Signals<TStatus>> DebugType;
     TEST_SYS_DEBUG(SystemType, DebugType, 3, this, "Raise(sig=%d)", sig);
     
     if (m_lastSig != 0) 

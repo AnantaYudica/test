@@ -98,6 +98,8 @@ inline typename Debug::CStrType& Debug::Name(CStrType& cstr)
 #include "dbg/Value.h"
 #include "dbg/val/Recursive.h"
 #include "dbg/Namespace.h"
+#include "Task.defn.h"
+#include "Definition.h"
 
 #define TEST_SYS_DEBUG_SET_LEVEL(VAL, ...)\
 test::sys::dbg::Type<__VA_ARGS__>::GetInstance().SetLevel(VAL)
@@ -110,6 +112,10 @@ do{\
     static test::sys::Interface& __intf_default__ = test::sys::Interface::DefaultInstance();\
     (__intf_default__).Debug(DEBUG_TYPE::GetInstance(), __VA_ARGS__);\
 } while(false)
+
+#define TEST_SYS_DEBUG_MAIN_THREAD(SYS_TYPE, DEBUG_TYPE, ...)\
+    SYS_TYPE::GetInstance().Debug(test::sys::Definition::GetMainThreadHID(),\
+    DEBUG_TYPE::GetInstance(), __VA_ARGS__)
 
 #define TEST_SYS_DEBUG_NAMESPACE_TYPE(NAME)\
     test::sys::dbg::Namespace<\
@@ -139,5 +145,23 @@ do{\
     
 #define TEST_SYS_DEBUG_VALUE_STR(ID, ...)\
     test::sys::dbg::val::Parameter(test::sys::Debug::GetBufferID<ID>(), __VA_ARGS__).Buffer()
+
+#define TEST_SYS_DEBUG_VALUE_RECURSIVE_STR(ID, ...)\
+    test::sys::dbg::val::Recursive<decltype(__VA_ARGS__)>::\
+        Write(test::sys::Debug::GetBufferID<ID>(), __VA_ARGS__).Buffer()
+
+#define TEST_SYS_TASK_DEBUG(SYS_TYPE, NAME, ...)\
+{\
+    test::sys::Task NAME{#NAME};\
+    NAME.Main([](test::sys::Task& __task)->void\
+
+#define TEST_SYS_TASK_END_DEBUG(NAME)\
+    );\
+    SYS_TYPE::GetInstance().RegisterTask(sttd::move(NAME));\
+}
+
+#define TEST_SYS_TASK_ASSERT(COND, INFO_FORMAT,  ...)\
+    __task.Assert(COND, #COND, __FILE__, __LINE__, INFO_FORMAT, __VA_ARGS__)
+
 
 #endif //!TEST_SYS_DEBUG_H_
