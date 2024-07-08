@@ -1,5 +1,7 @@
+#define TEST_SYS_DEBUG_ENABLE 1
 #include "test/sys/Definition.h"
 
+#include <cstring>
 #include <cassert>
 
 int main()
@@ -8,8 +10,8 @@ int main()
     {
         auto now = test::sys::Definition::GetTimestampNow();
 
-        long long year = 1ll * 1000 * 1000 * 60 * 60 * 24 * 30 * 12;
-        long long month = 1ll * 1000 * 1000 * 60 * 60 * 24 * 30;
+        long long year = 1ll * 1000 * 1000 * 60 * 60 * 24 * 31 * 12;
+        long long month = 1ll * 1000 * 1000 * 60 * 60 * 24 * 31;
         long long day = 1ll * 1000 * 1000 * 60 * 60 * 24;
         long long hour = 5ll * 1000 * 1000 * 60 * 60;
         long long min = 58ll * 1000 * 1000 * 60;
@@ -60,6 +62,16 @@ int main()
         assert(tdur.Milisecond == 521);
         assert(tdur.Microsecond == 251);
         
+    }
+    {
+        typedef test::sys::Definition::Status Status;
+        const char * cstr = test::sys::Definition::GetStatusName(Status::sOk);
+        assert(strncmp(cstr, "sOk", 4) == 0);
+        cstr = test::sys::Definition::GetStatusName(Status::sError);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sUnknown", 8) == 0);
+        TEST_SYS_INFO("%s", cstr);
+
     }
     return 0;
 }
