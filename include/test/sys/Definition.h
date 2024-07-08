@@ -4,8 +4,13 @@
 #include <chrono>
 #include <ctime>
 #include <type_traits>
+#include <thread>
 
 #include <cstdio>
+
+#ifndef TEST_SYS_OUTPUT_BUFFER
+#define TEST_SYS_OUTPUT_BUFFER 1024
+#endif //!TEST_SYS_OUTPUT_BUFFER
 
 #ifndef TEST_ATTRIBUTE
 #ifdef __GNUC__
@@ -116,10 +121,16 @@ struct Definition
         sMemDummyAllocationFailed           = sMemDummy | sError | 0x01,
         sMemDummyReallocationFailed         = sMemDummy | sError | 0x02,
 
-        sTask = 0x0700,
+        sTask                               = 0x0700,
+        sTaskFailed                         = sTask | sError | 0x01,
+        sTaskAllocationFailed               = sTask | sError | 0x02,
 
-        sOutBuffer = 0x0800,
-        sOutBufferAllocationFailed          = sOutBuffer | sError | 0x01,
+        sBuffer                             = 0x0800,
+        sBufferAllocationFailed             = sBuffer | sError | 0x01,
+
+        sRunner                             = 0x1000,
+        sRunnerNullPointer                  = sRunner | sError | 0x01,
+        sRunnerAllocationFailed             = sRunner | sError | 0x01,
 
         sUnknown                            = 0xFFFF
     };
@@ -164,16 +175,28 @@ struct Definition
         "[sys]][mem][Dummy]"
         "sMemDummyAllocationFailed",
         "sMemDummyReallocationFailed",
+
+        "[sys][Task]",
+        "sTaskFailed",
+        "sTaskAllocationFailed",
+
+        "[sys][Buffer]",
+        "sBufferAllocationFailed",
+        
+        "[sys][Runner]",
+        "sRunnerNullPointer",
+        "sRunnerAllocationFailed"
+
     };
 
     static constexpr std::size_t _StatusNamesSize = 
         sizeof(_StatusNames) / sizeof(const char*);
     
-    static constexpr StatusIntegerType StatusTagMax = 6;
+    static constexpr StatusIntegerType StatusTagMax = 10;
 
     static constexpr std::uint8_t _StatusErrorNameMaxIndexs[] = 
     {
-        1, 2, 4, 3, 4, 3, 2, 2
+        1, 2, 4, 3, 4, 3, 2, 2, 2, 1, 2
     };
     static constexpr std::size_t _StatusErrorNameMaxIndexsSize = 
         sizeof(_StatusErrorNameMaxIndexs) / sizeof(std::uint8_t);
@@ -203,6 +226,14 @@ struct Definition
 
     static inline const char* GetStatusName(Status code);
     static inline const char* GetStatusName(StatusIntegerType code);
+
+    static std::size_t MainThreadHID;
+
+    static inline std::size_t GetThisThreadHID();
+
+    static inline std::size_t GetMainThreadHID();
+
+    static inline std::size_t GetThreadHID(const typename std::thread::id& id);
 
 };
 

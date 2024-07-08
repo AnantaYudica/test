@@ -377,6 +377,26 @@ inline const char* Definition::GetStatusName(StatusIntegerType code)
     return StatusNames<>()[name + num_code];
 }
 
+std::size_t Definition::MainThreadHID = Definition::GetMainThreadHID();
+
+inline std::size_t Definition::GetThisThreadHID()
+{
+    return std::hash<std::thread::id>{}(std::this_thread::get_id());
+}
+
+inline std::size_t Definition::GetMainThreadHID()
+{
+    static std::size_t hid = 
+        std::hash<std::thread::id>{}(std::this_thread::get_id());
+    return hid;
+}
+
+inline std::size_t Definition::GetThreadHID(const typename std::thread::id& id)
+{
+    return std::hash<std::thread::id>{}(id);
+}
+
+
 } //!sys
 
 } //!test
