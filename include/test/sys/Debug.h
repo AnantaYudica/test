@@ -150,18 +150,25 @@ do{\
     test::sys::dbg::val::Recursive<decltype(__VA_ARGS__)>::\
         Write(test::sys::Debug::GetBufferID<ID>(), __VA_ARGS__).Buffer()
 
-#define TEST_SYS_TASK_DEBUG(SYS_TYPE, NAME, ...)\
+#define TEST_SYS_TASK_DEBUG(NAME, ...)\
 {\
     test::sys::Task NAME{#NAME};\
     NAME.Main([](test::sys::Task& __task)->void\
 
 #define TEST_SYS_TASK_END_DEBUG(NAME)\
     );\
-    SYS_TYPE::GetInstance().RegisterTask(sttd::move(NAME));\
-}
+    test::sys::Interface::GetInstance().RegisterTask(std::move(NAME));\
+} while(false)
 
 #define TEST_SYS_TASK_ASSERT(COND, INFO_FORMAT,  ...)\
-    __task.Assert(COND, #COND, __FILE__, __LINE__, INFO_FORMAT, __VA_ARGS__)
+    __task.Assert(COND, #COND, __FILE__, __LINE__, INFO_FORMAT, __VA_ARGS__);\
+    if (!COND) return
+
+#define TEST_SYS_TASK_BEGIN_LOGGING\
+    __task.BeginLogging()
+    
+#define TEST_SYS_TASK_END_LOGGING\
+    __task.EndLogging()
 
 
 #endif //!TEST_SYS_DEBUG_H_
