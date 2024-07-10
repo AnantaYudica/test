@@ -307,7 +307,7 @@ inline int Interface::PrefixFormatDebug(char* buffer,
     buff[TEST_SYS_OUTPUT_BUFFER] = '\0';
     if (obj == NULL)
     {   
-        return snprintf(buffer, buffer_size, "[DEBUG]%s[STATIC]", buff);
+        return snprintf(buffer, buffer_size, "[DEBUG]%s[Static]", buff);
     }
     else
     {
@@ -338,8 +338,8 @@ inline int Interface::PrefixFormatThread(char* buffer,
     const std::size_t thread_hid = DefinitionType::GetThisThreadHID();
     if (main_hid == thread_hid)
     {
-        return snprintf(buffer, buffer_size, "[MN][%zx]", 
-            thread_hid);
+        return snprintf(buffer, buffer_size, "[MainThread][%zx]", 
+            main_hid);
     }
     else
     {
