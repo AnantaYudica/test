@@ -100,15 +100,15 @@ struct Test
         r0{status, output},
         r0_1{status, output},
         r1{status, output},
-        r1_1{status, buff_1},
+        r1_1{status, output},
         r2{status, output},
-        r2_1{status, buff_2},
+        r2_1{status, output},
         r4{status, output},
-        r4_1{status, buff_4},
+        r4_1{status, output},
         r16{status, output},
-        r16_1{status, buff_16},
+        r16_1{status, output},
         r32{status, output},
-        r32_1{status, buff_32}
+        r32_1{status, output}
     {}
 
 };
@@ -133,6 +133,7 @@ public:
         TEST_ATTRIBUTE ((__format__ (__printf__, 4, 0)))
     {
         const std::size_t main_hid = test::sys::Definition::GetMainThreadHID();
+        const std::size_t thid = test::sys::Definition::GetThisThreadHID();
         char buffer[1025];
         char msg[1025];
         int res = vsnprintf(buffer, 1024, format, args);
@@ -140,82 +141,162 @@ public:
         res += snprintf(msg, 1024, "%s: %s", prefix, buffer);
         msg[1024] = '\0';
 
-        if (main_hid == thread_hid)
-        {
-            return t.output.Output("%s", msg);
-        }
         if (test_seq.load() == 0)
         {
-            t.r0.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res; 
+            if (!t.r0.IsRun(thid))
+            {
+                return t.output.Output("%s", msg);
+            }
+            else
+            {
+                t.r0.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg);
+                return res;
+            } 
         }
         else if (test_seq.load() == 1)
         {
             
-            t.r0_1.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res; 
+            if (!t.r0_1.IsRun(thid))
+            {
+                return t.output.Output("%s", msg);
+            }
+            else
+            {
+                t.r0_1.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg);
+                return res;
+            } 
         }
-        else if(test_seq.load() == 10)
+        else if(test_seq.load() == 10 || thread_hid == main_hid)
         {
-            t.r1.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r1.IsRun(thid))
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                t.r1.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg);
+                return res;
+            }
         }
         else if(test_seq.load() == 11)
         {
-            t.r1_1.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r1_1.IsRun(thid) || thread_hid == main_hid)
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                if (t.r1_1.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg)) t.buff_1.Output("%s", msg);
+                return res;
+            }
         }
         else if(test_seq.load() == 20)
         {
-            t.r2.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r2.IsRun(thid) || thread_hid == main_hid)
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                t.r2.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg);
+                return res;
+            }
         }
         else if(test_seq.load() == 21)
         {
-            t.r2_1.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r2_1.IsRun(thid) || thread_hid == main_hid)
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                if (t.r2_1.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg)) t.buff_2.Output("%s", msg);
+                return res;
+            }
         }
         else if(test_seq.load() == 40)
         {
-            t.r4.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r4.IsRun(thid) || thread_hid == main_hid)
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                t.r4.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg);
+                return res;
+            }
         }
         else if(test_seq.load() == 41)
         {
-            t.r4_1.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r4_1.IsRun(thid) || thread_hid == main_hid)
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                if (t.r4_1.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg)) t.buff_4.Output("%s", msg);
+                return res;
+            }
         }
         else if(test_seq.load() == 160)
         {
-            t.r16.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r16.IsRun(thid) || thread_hid == main_hid)
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                t.r16.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg);
+                return res;
+            }
         }
         else if(test_seq.load() == 161)
         {
-            t.r16_1.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r16_1.IsRun(thid) || thread_hid == main_hid)
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                if (t.r16_1.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg)) t.buff_16.Output("%s", msg);
+                return res;
+            }
         }
         else if(test_seq.load() == 320)
         {
-            t.r32.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r32.IsRun(thid) || thread_hid == main_hid)
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                t.r32.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(), msg);
+                return res;
+            }
         }
         else if(test_seq.load() == 321)
         {
-            t.r32_1.LogBufferOutput(test::sys::Definition::GetThisThreadHID(),
-                msg);
-            return res;
+            if (!t.r32_1.IsRun(thid) || thread_hid == main_hid)
+            {
+                return t.output.Output("%s", msg);   
+            }
+            else
+            {
+                if (t.r32_1.LogBufferOutput(test::sys::Definition::
+                    GetThisThreadHID(),msg)) t.buff_32.Output("%s", msg);
+                return res;
+            }
         }
         else
         {
@@ -235,15 +316,17 @@ int main()
     Interface1 interface1(tobj);
 
     TEST_SYS_INFO("wait init");
-    std::this_thread::sleep_for(std::chrono::seconds(4));
+    std::this_thread::sleep_for(std::chrono::milliseconds(wait));
 
 
     TEST_SYS_INFO("-- start test seq 0 0---");
     test_seq.store(0);
+    TEST_SYS_INFO("index : %zu", tobj.r0.GetThreadIndex(
+        test::sys::Definition::GetThisThreadHID()));
     tobj.r0.SetBeginTaskFormatCallback(FormatBegin);
     tobj.r0.SetEndTaskFormatCallback(FormatEnd);
     tobj.r0.SetAssertTaskFormatCallback(FormatAssert);
-    assert(tobj.r0.IdleCount() == 0);
+    assert(tobj.r0.IdleCount() == 1);
     assert(tobj.r0.RunCount() == 0);
     {
         for (std::size_t i = 0; i < 10; ++i)
@@ -272,7 +355,7 @@ int main()
         assert(count.load() == 10);
     }
     TEST_SYS_INFO("wait");
-    std::this_thread::sleep_for(std::chrono::seconds(4));
+    std::this_thread::sleep_for(std::chrono::milliseconds(wait));
     
     TEST_SYS_INFO("-- start test seq 0 1---");
     test_seq.store(1);
@@ -280,10 +363,23 @@ int main()
     tobj.r0_1.SetBeginTaskFormatCallback(FormatBegin);
     tobj.r0_1.SetEndTaskFormatCallback(FormatEnd);
     tobj.r0_1.SetAssertTaskFormatCallback(FormatAssert);
+     for (std::size_t i = 0; i < 10; ++i)
+        {
+            test::sys::Task t{"test"};
+            t.Main([](test::sys::Task& task){
+                TEST_SYS_INFO("Test check");
+                const auto random = (std::rand() % 900) + 100;
+                std::this_thread::sleep_for(std::chrono::milliseconds(random));
+            });
+            tobj.r0_1.Job(std::move(t));
+        }
     {
         test::sys::Task t{"test"};
         t.Main([](test::sys::Task& task){
-            TEST_SYS_INFO("test-r0_1-0");
+            TEST_SYS_INFO("test-r0_1-0 1");
+            TEST_SYS_INFO("test-r0_1-0 2");
+            TEST_SYS_INFO("test-r0_1-0 3");
+            TEST_SYS_INFO("test-r0_1-0 4");
             const auto random = (std::rand() % 900) + 100;
             std::this_thread::sleep_for(std::chrono::milliseconds(random));
             task.Assert(true, "true", __FILE__, __LINE__, "test-true");
@@ -292,10 +388,15 @@ int main()
         tobj.r0_1.Job(std::move(t));
     }
 
-    std::this_thread::sleep_for(std::chrono::seconds(4));
+    std::this_thread::sleep_for(std::chrono::milliseconds(wait));
 
     TEST_SYS_INFO("-- start test seq 10 + 0 ---");
     test_seq.store(10);
+    TEST_SYS_INFO("index : %zu", tobj.r1.GetThreadIndex(
+        test::sys::Definition::GetThisThreadHID()));
+    
+    std::this_thread::sleep_for(std::chrono::milliseconds(wait));
+
     tobj.r1.SetBeginTaskFormatCallback(FormatBegin);
     tobj.r1.SetEndTaskFormatCallback(FormatEnd);
     tobj.r1.SetAssertTaskFormatCallback(FormatAssert);
@@ -352,7 +453,12 @@ int main()
             });
             tobj.r1_1.Job(std::move(t));
         }
-
+        while(tobj.r1_1.QueueSize() != 1)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        tobj.buff_1.Reset();
+        TEST_SYS_INFO("idle %zu %zu", tobj.r1_1.IdleCount(), tobj.buff_1.Size());
         test::sys::Task t{"test"};
         t.Main([](test::sys::Task& task){
             TEST_SYS_INFO("check 1234");
@@ -396,6 +502,11 @@ int main()
 
     TEST_SYS_INFO("-- start test seq 20 + 0 ---");
     test_seq.store(20);
+    TEST_SYS_INFO("index : %zu", tobj.r2.GetThreadIndex(
+        test::sys::Definition::GetThisThreadHID()));
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(wait));
+
     tobj.r2.SetBeginTaskFormatCallback(FormatBegin);
     tobj.r2.SetEndTaskFormatCallback(FormatEnd);
     tobj.r2.SetAssertTaskFormatCallback(FormatAssert);
@@ -446,6 +557,11 @@ int main()
             });
             tobj.r2_1.Job(std::move(t));
         }
+        while(tobj.r2_1.QueueSize() != 2)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        tobj.buff_2.Reset();
         test::sys::Task t{"test"};
         t.Main([](test::sys::Task& task){
             TEST_SYS_INFO("check 1");
@@ -506,6 +622,12 @@ int main()
 
     TEST_SYS_INFO("-- start test seq 40 + 0 ---");
     test_seq.store(40);
+
+    TEST_SYS_INFO("index : %zu", tobj.r4.GetThreadIndex(
+        test::sys::Definition::GetThisThreadHID()));
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(wait));
+
     tobj.r4.SetBeginTaskFormatCallback(FormatBegin);
     tobj.r4.SetEndTaskFormatCallback(FormatEnd);
     tobj.r4.SetAssertTaskFormatCallback(FormatAssert);
@@ -553,6 +675,12 @@ int main()
             });
             tobj.r4_1.Job(std::move(t));
         }
+        
+        while(tobj.r4_1.QueueSize() != 4)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        tobj.buff_4.Reset();
         test::sys::Task t{"test"};
         t.Main([](test::sys::Task& task){
             TEST_SYS_INFO("1234");
@@ -614,6 +742,12 @@ int main()
     
     TEST_SYS_INFO("-- start test seq 160 + 0 ---");
     test_seq.store(160);
+
+    TEST_SYS_INFO("index : %zu", tobj.r16.GetThreadIndex(
+        test::sys::Definition::GetThisThreadHID()));
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(wait));
+
     tobj.r16.SetBeginTaskFormatCallback(FormatBegin);
     tobj.r16.SetEndTaskFormatCallback(FormatEnd);
     tobj.r16.SetAssertTaskFormatCallback(FormatAssert);
@@ -647,6 +781,11 @@ int main()
             });
             tobj.r16_1.Job(std::move(t));
         }
+        while(tobj.r16_1.QueueSize() != 16)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        tobj.buff_16.Reset();
         test::sys::Task t{"test"};
         t.Main([](test::sys::Task& task){
             TEST_SYS_INFO("1234");
@@ -708,6 +847,12 @@ int main()
 
     TEST_SYS_INFO("-- start test seq 320 + 0 ---");
     test_seq.store(320);
+
+    TEST_SYS_INFO("index : %zu", tobj.r32.GetThreadIndex(
+        test::sys::Definition::GetThisThreadHID()));
+    
+    std::this_thread::sleep_for(std::chrono::milliseconds(wait));
+
     {
         for (std::size_t i = 0; i < 80; ++i)
         {
@@ -738,6 +883,12 @@ int main()
             });
             tobj.r32_1.Job(std::move(t));
         }
+        
+        while(tobj.r32_1.QueueSize() != 32)
+        {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        }
+        tobj.buff_32.Reset();
         test::sys::Task t{"test"};
         t.Main([](test::sys::Task& task){
             TEST_SYS_INFO("1234");
@@ -794,7 +945,8 @@ int main()
         assert(strncmp(buff[10].GetMessage() + (len1 - n), 
             "2627", 1024) == 0);
     }
-    
+    TEST_SYS_INFO("wait");
+
     std::this_thread::sleep_for(std::chrono::milliseconds(wait));
 
     TEST_SYS_INFO("%d", count.load());
