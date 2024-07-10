@@ -42,6 +42,8 @@ inline Task::Task(const char(&name)[N]) :
     m_name((char*)malloc(N + 1)),
     m_beginTimestamp(0),
     m_endTimestamp(0),
+    m_beginLoggingTimestamp(0),
+    m_endLoggingTimestamp(0),
     m_beginFmtCb(DefaultFormatBegin),
     m_endFmtCb(DefaultFormatEnd),
     m_assertFmtCb(DefaultFormatAssert),
@@ -49,7 +51,7 @@ inline Task::Task(const char(&name)[N]) :
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "Constructor(name=%s)", name);
 
     if (m_name != NULL) 
@@ -74,7 +76,7 @@ inline Task::~Task()
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "Destructor");
 
     if (m_name != NULL)
@@ -94,6 +96,8 @@ inline Task::Task(Task&& mov) :
     m_name(mov.m_name),
     m_beginTimestamp(mov.m_beginTimestamp),
     m_endTimestamp(mov.m_endTimestamp),
+    m_beginLoggingTimestamp(mov.m_beginLoggingTimestamp),
+    m_endLoggingTimestamp(mov.m_endLoggingTimestamp),
     m_beginFmtCb(mov.m_beginFmtCb),
     m_endFmtCb(mov.m_endFmtCb),
     m_assertFmtCb(mov.m_assertFmtCb),
@@ -101,7 +105,7 @@ inline Task::Task(Task&& mov) :
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "Move Constructor(move=%p)", &mov);
 
     mov.m_error = false;
@@ -113,6 +117,8 @@ inline Task::Task(Task&& mov) :
     mov.m_name = NULL;
     mov.m_beginTimestamp = 0;
     mov.m_endTimestamp = 0;
+    mov.m_beginLoggingTimestamp = 0;
+    mov.m_endLoggingTimestamp = 0;
     mov.m_beginFmtCb = DefaultFormatBegin;
     mov.m_endFmtCb = DefaultFormatEnd;
     mov.m_assertFmtCb = DefaultFormatAssert;
@@ -123,7 +129,7 @@ inline Task& Task::operator=(Task&& mov)
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "Move Assignment(move=%p)", &mov);
 
     m_error = mov.m_error;
@@ -135,6 +141,8 @@ inline Task& Task::operator=(Task&& mov)
     m_name = mov.m_name;
     m_beginTimestamp = mov.m_beginTimestamp;
     m_endTimestamp = mov.m_endTimestamp;
+    m_beginLoggingTimestamp = mov.m_beginLoggingTimestamp;
+    m_endLoggingTimestamp = mov.m_endLoggingTimestamp;
     m_beginFmtCb = mov.m_beginFmtCb;
     m_endFmtCb = mov.m_endFmtCb;
     m_assertFmtCb = mov.m_assertFmtCb;
@@ -149,6 +157,8 @@ inline Task& Task::operator=(Task&& mov)
     mov.m_name = NULL;
     mov.m_beginTimestamp = 0;
     mov.m_endTimestamp = 0;
+    mov.m_beginLoggingTimestamp = 0;
+    mov.m_endLoggingTimestamp = 0;
     mov.m_beginFmtCb = DefaultFormatBegin;
     mov.m_endFmtCb = DefaultFormatEnd;
     mov.m_assertFmtCb = DefaultFormatAssert;
@@ -192,7 +202,7 @@ inline void Task::Initialize(typename std::thread::id id,
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, 
         "Initialize(id=%zu, index=%zu)", DefinitionType::GetThreadHID(id),
             index);
 
@@ -204,21 +214,23 @@ inline void Task::Finalize()
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 3, this, "Finalize()");
+    TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, "Finalize()");
 
     m_stop.store(true);
     m_done.store(true);
 }
 
-inline void Task::Run()
+template<typename T, typename... TArgs>
+void Task::Run(T* obj, void(*begin_run)(T*, TArgs&&...),
+    void(*end_run)(T*, TArgs&&...), TArgs&&... args)
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, "Run()");
+    TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, "Run()");
 
     if (m_start.load()) 
     {
-        TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, 
+        TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, 
             "Run when Start");
         return;
     }
@@ -227,7 +239,11 @@ inline void Task::Run()
     {
         m_beginTimestamp = DefinitionType::GetTimestampNow();
         BeforeRun();
+        if (begin_run != NULL && obj != NULL) 
+            begin_run(obj, std::forward<TArgs>(args)...);
         m_func(*this);
+        if (end_run != NULL && obj != NULL) 
+            end_run(obj, std::forward<TArgs>(args)...);
         m_endTimestamp = DefinitionType::GetTimestampNow();
         AfterRun();
     }
@@ -237,7 +253,7 @@ inline void Task::Stop()
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, "Stop()");
+    TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, "Stop()");
 
     if (!m_start.load() && m_stop.load())
     {
@@ -250,7 +266,7 @@ inline void Task::Main(std::function<void(test::sys::Task&)> func)
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, 
         "Main(func=%p)", &func);
 
     if (m_func != nullptr) 
@@ -264,7 +280,7 @@ inline void Task::SetBeginFormatCallback(FormatBeginCallbackFunc func)
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, 
         "SetBeginFormatCallback(func=%p)", func);
 
     if (IsRun())
@@ -282,7 +298,7 @@ inline void Task::SetEndFormatCallback(FormatEndCallbackFunc func)
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, 
         "SetEndFormatCallback(func=%p)", func);
 
     if (IsRun())
@@ -300,7 +316,7 @@ inline void Task::SetAssertFormatCallback(FormatAssertCallbackFunc func)
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 4, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, 
         "SetAssertFormatCallback(func=%p)", func);
 
     if (IsRun())
@@ -371,6 +387,16 @@ inline typename Task::TimestampType Task::GetEndTimeStamp() const
     return m_endTimestamp;
 }
 
+inline typename Task::TimestampType Task::GetBeginLoggingTimeStamp() const
+{
+    return m_beginLoggingTimestamp;
+}
+
+inline typename Task::TimestampType Task::GetEndLoggingTimeStamp() const
+{
+    return m_endLoggingTimestamp;
+}
+
 inline typename Task::TimeDurationType Task::GetRunTimeDuration() const
 {
     return DefinitionType::GetTimeDuration(m_beginTimestamp, m_endTimestamp);
@@ -399,6 +425,17 @@ inline bool Task::IsFinish() const
 inline bool Task::IsFailed() const
 {
     return m_error;
+}
+
+inline void Task::BeginLogging()
+{
+    m_beginLoggingTimestamp = DefinitionType::GetTimestampNow();
+    m_endLoggingTimestamp = 0;
+}
+
+inline void Task::EndLogging()
+{
+    m_endLoggingTimestamp = DefinitionType::GetTimestampNow();
 }
 
 } //!sys

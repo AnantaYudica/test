@@ -67,6 +67,7 @@ private:
     std::size_t m_index;
     char * m_name;
     TimestampType m_beginTimestamp, m_endTimestamp;
+    TimestampType m_beginLoggingTimestamp, m_endLoggingTimestamp;
     FormatBeginCallbackFunc m_beginFmtCb;
     FormatEndCallbackFunc m_endFmtCb;
     FormatAssertCallbackFunc m_assertFmtCb;
@@ -92,7 +93,9 @@ public:
 public:
     inline void Finalize();
 public:
-    inline void Run();
+    template<typename T = void, typename... TArgs>
+    void Run(T* obj = NULL, void(*begin_run)(T*, TArgs&&...) = NULL,
+        void(*end_run)(T*, TArgs&&...) = NULL, TArgs&&...);
 public:
     inline void Stop();
 public:
@@ -121,6 +124,10 @@ public:
 public:
     inline TimestampType GetEndTimeStamp() const;
 public:
+    inline TimestampType GetBeginLoggingTimeStamp() const;
+public:
+    inline TimestampType GetEndLoggingTimeStamp() const;
+public:
     inline TimeDurationType GetRunTimeDuration() const;
 public:
     inline bool IsStart() const;
@@ -132,6 +139,10 @@ public:
     inline bool IsFinish() const;
 public:
     inline bool IsFailed() const;
+public:
+    inline void BeginLogging();
+public:
+    inline void EndLogging();
 };
 
 } //!sys
