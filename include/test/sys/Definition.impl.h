@@ -206,7 +206,7 @@ Definition::GetDateTime(const TimestampType& timestamp)
 #else
         const auto local = std::localtime(&tm);
 #endif
-        const auto local_time = mktime(local);
+        local_time = mktime(local);
 
         result.Year = 1900 + local->tm_year;
         result.Month = local->tm_mon + 1;
