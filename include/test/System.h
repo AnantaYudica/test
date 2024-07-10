@@ -9,6 +9,9 @@
 #include "sys/Memory.h"
 #include "sys/Interface.h"
 #include "sys/Debug.h"
+#include "sys/Task.h"
+#include "sys/Buffer.h"
+#include "sys/Runner.h"
 
 #include <cstddef>
 #include <cstdlib>
@@ -18,10 +21,6 @@
 #include <limits>
 #include <cstring>
 #include <thread>
-
-#ifndef TEST_SYSTEM_THREAD_ID_BUFFER
-#define TEST_SYSTEM_THREAD_ID_BUFFER 4
-#endif //!TEST_SYSTEM_THREAD_ID_BUFFER
 
 #ifndef TEST_SYS_DEF_STATUS
 #define TEST_SYS_DEF_STATUS test::sys::Status
@@ -38,6 +37,24 @@
 "---------------------------------------"
 #endif //!TEST_SYS_DEF_ENTRY_LINE_STR
 
+#ifndef TEST_SYS_DEBUG_BUFFER
+#define TEST_SYS_DEBUG_BUFFER 1024
+#endif //!TEST_SYS_DEBUG_BUFFER
+
+#ifndef TEST_SYS_DEBUG_BUFFER_LINE
+#define TEST_SYS_DEBUG_BUFFER_LINE 1024
+#endif //!TEST_SYS_DEBUG_BUFFER_LINE
+
+#ifndef TEST_SYS_ENABLE_THREAD
+#define TEST_SYS_IS_ENABLE_THREAD true
+#else
+#define TEST_SYS_IS_ENABLE_THREAD false
+#endif //!TEST_SYS_ENABLE_THREAD
+
+#ifndef TEST_SYS_THREAD_SIZE
+#define TEST_SYS_THREAD_SIZE 4
+#endif //!TEST_SYS_THREAD_SIZE
+
 #if TEST_SYS_DEBUG_ENABLE
 
 #define TEST_SYS_DEBUG_SYS_INSTANCE(SYS_INSTANCE, DEBUG_TYPE, ...)\
@@ -48,6 +65,7 @@
 #define TEST_SYS_DEBUG_SYS_INSTANCE(...)
 
 #endif 
+
 namespace test
 {
 class System;
@@ -72,8 +90,19 @@ public:
     typedef test::sys::Debug DebugType;
     typedef test::sys::Memory MemoryType;
     typedef test::sys::Interface InterfaceType;
+    typedef test::sys::Task TaskType;
+    typedef test::sys::Buffer<StatusType, TEST_SYS_DEBUG_BUFFER_LINE,
+        TEST_SYS_DEBUG_BUFFER> BufferType;
+#if TEST_SYS_IS_ENABLE_THREAD
+    typedef test::sys::Runner<StatusType, BufferType, TEST_SYS_THREAD_SIZE>
+        RunnerType;
+#else
+    typedef test::sys::Runner<StatusType, BufferType, 0>
+        RunnerType;
+#endif
+    typedef typename DefinitionType::TimeDurationType TimeDurationType;
 public:
-    static constexpr std::size_t ThreadIDBuffer = TEST_SYSTEM_THREAD_ID_BUFFER;
+    static constexpr std::size_t ThreadIDBuffer = TEST_SYS_THREAD_SIZE;
 public:
     static inline void SignalHandler(int sig);
 public:
@@ -82,20 +111,55 @@ private:
     static inline int EntryFormat(char* buffer, 
         const std::size_t& buffer_size, const StatusType& status, 
         const char* msg);
+private:
+    static inline int InfoPrefixFormat(char* buffer, 
+        const std::size_t& buffer_size, const StatusType& status);
+private:
     static inline int InfoFormat(char* buffer, 
         const std::size_t& buffer_size, const StatusType& status, 
         const char* msg);
+private:
+    static inline int ErrorPrefixFormat(char* buffer, 
+        const std::size_t& buffer_size, const StatusType& status);
+private:
     static inline int ErrorFormat(char* buffer, 
         const std::size_t& buffer_size, const StatusType& status, 
         const char* msg);
+private:
+    static inline int DebugPrefixFormat(char* buffer, 
+        const std::size_t& buffer_size, DebugType& dbg, 
+        std::int8_t level, const void * obj, 
+        const StatusType& status);
+private:
     static inline int DebugFormat(char* buffer, 
         const std::size_t& buffer_size, DebugType& dbg, 
         std::int8_t level, const void * obj, 
         const StatusType& status, 
         const char* msg);
+private:
+    static inline int ThreadFormat(char* buffer,
+        const std::size_t& buffer_size, const std::size_t& hid);
+private:
+    static inline int TimeDurationFormat(char* buffer,
+        const std::size_t& buffer_size, TimeDurationType time_dur);
+private:
+    static inline int LogPrefixFormat(char* buffer, 
+        const std::size_t& buffer_size, const StatusType& status, 
+        const char * tag);
+private:
     static inline int LogFormat(char* buffer, 
         const std::size_t& buffer_size, const StatusType& status, 
         const char* msg, const char * tag);
+private:
+    static inline int TaskBeginFormat(char* buffer, 
+        const std::size_t& buffer_size, TaskType& task);
+private:
+    static inline int TaskEndFormat(char* buffer, 
+        const std::size_t& buffer_size, TaskType& task);
+private:
+    static inline int TaskAssertFormat(char* buffer, 
+        const std::size_t& buffer_size, TaskType& task, const char* cond_str, 
+        const char* file, const int& line, const char* variables);
 private:
     int m_retValue;
     int m_argSize;
@@ -106,8 +170,7 @@ private:
     FILE* m_out;
     char * m_outFilename;
     InterfaceType* m_interface;
-    std::mutex m_logLock;
-    typename std::thread::id m_logIDs[ThreadIDBuffer];
+    RunnerType m_runner;
 private:
     inline System();
 public:
@@ -138,6 +201,28 @@ private:
     inline void Finalization();
 private:
     inline void Termination();
+protected:
+    virtual inline void SetError(Status code) override;
+    virtual inline void SetError(StatusIntegerType code) override;
+public:
+    virtual inline int PrefixFormatInfo(char* buffer, 
+        const std::size_t& buffer_size) override;
+public:
+    virtual inline int PrefixFormatDebug(char* buffer, 
+        const std::size_t& buffer_size, DebugType& dbg, std::int8_t level, 
+        const void * obj) override;
+public:
+    virtual inline int PrefixFormatError(char* buffer, 
+        const std::size_t& buffer_size, Status code) override;
+    virtual inline int PrefixFormatError(char* buffer, 
+        const std::size_t& buffer_size, StatusIntegerType code) override;
+public:
+    virtual inline int PrefixFormatThread(char* buffer, 
+        const std::size_t& buffer_size, const std::size_t& hid) override;
+public:
+    virtual inline int VOutput(const std::size_t& thread_hid, 
+        const char* prefix, const char* format, va_list args) override
+        TEST_ATTRIBUTE ((__format__ (__printf__, 4, 0)));
 public:
     inline bool EntryPoint();
     inline bool EntryPoint(int argc, char *argv[]);
@@ -151,6 +236,8 @@ public:
 public:
     inline void UnregisterSignal(SignalType* signal) override;
 public:
+    inline void RegisterTask(test::sys::Task&& task) override;
+public:
     inline StatusType& GetStatus();
     inline const StatusType& GetStatus() const;
 public:
@@ -160,33 +247,7 @@ public:
     inline bool IsDone() const;
     inline bool IsError() const;
     inline bool IsTerminate() const;
-public:
-    inline int Output(const char* format, ...) override
-        TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
-    inline int VOutput(const char* format, va_list args) override
-        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-public:
-    inline int Info(const char* format, ...) override
-        TEST_ATTRIBUTE((__format__ (__printf__, 2, 3)));
-    inline int VInfo(const char* format, va_list args) override
-        TEST_ATTRIBUTE ((__format__ (__printf__, 2, 0)));
-public:
-    inline int Debug(DebugType& dbg, std::int8_t level, const void * obj,
-        const char* format, ...) override
-        TEST_ATTRIBUTE((__format__ (__printf__, 5, 6)));
-    inline int VDebug(DebugType& dbg, std::int8_t level, const void * obj,
-        const char* format, va_list args) override
-        TEST_ATTRIBUTE ((__format__ (__printf__, 5, 0)));
-public:
-    inline int Error(Status code, const char* format, ...) override
-        TEST_ATTRIBUTE((__format__ (__printf__, 3, 4)));
-    inline int Error(StatusIntegerType code, const char* format, ...) override
-        TEST_ATTRIBUTE((__format__ (__printf__, 3, 4)));
-    inline int VError(Status code, const char* format, va_list args) override
-        TEST_ATTRIBUTE ((__format__ (__printf__, 3, 0)));
-    inline int VError(StatusIntegerType code, const char* format, 
-        va_list args) override 
-        TEST_ATTRIBUTE ((__format__ (__printf__, 3, 0)));
+
 };
 
 } //!test
@@ -224,18 +285,64 @@ inline int System::EntryFormat(char* buffer,
     return snprintf(buffer, buffer_size, "%s", msg);
 }
 
+inline int System::InfoPrefixFormat(char* buffer, 
+    const std::size_t& buffer_size, const StatusType& status)
+{
+    return LogPrefixFormat(buffer, buffer_size, status, "[INFO]");
+}
+
 inline int System::InfoFormat(char* buffer, 
     const std::size_t& buffer_size, const StatusType& status, 
     const char* msg)
 {
-    return LogFormat(buffer, buffer_size, status, msg, "[INFO]");
+    constexpr std::size_t tag_buffsize = TEST_SYS_OUTPUT_BUFFER;
+    char tag[tag_buffsize + 1];
+    InfoPrefixFormat(tag, tag_buffsize, status);
+    tag[TEST_SYS_OUTPUT_BUFFER] = '\0';
+    return LogFormat(buffer, buffer_size, status, msg, tag);
+}
+
+inline int System::ErrorPrefixFormat(char* buffer, 
+    const std::size_t& buffer_size, const StatusType& status)
+{
+    return LogPrefixFormat(buffer, buffer_size, status, "[ERROR]");
 }
 
 inline int System::ErrorFormat(char* buffer, 
     const std::size_t& buffer_size, const StatusType& status, 
     const char* msg)
 {
-    return LogFormat(buffer, buffer_size, status, msg, "[ERROR]");
+    constexpr std::size_t tag_buffsize = TEST_SYS_OUTPUT_BUFFER;
+    char tag[tag_buffsize + 1];
+    ErrorPrefixFormat(tag, tag_buffsize, status);
+    tag[TEST_SYS_OUTPUT_BUFFER] = '\0';
+    return LogFormat(buffer, buffer_size, status, msg, tag);
+}
+
+inline int System::DebugPrefixFormat(char* buffer, 
+    const std::size_t& buffer_size, DebugType& dbg, 
+    std::int8_t level, const void * obj, 
+    const StatusType& status)
+{
+    constexpr std::size_t tag_buffsize = TEST_SYS_OUTPUT_BUFFER;
+    char tag[tag_buffsize + 1];
+    const std::size_t dbg_size = snprintf(tag, tag_buffsize, "[DEBUG]");
+    if (dbg_size >= tag_buffsize)
+    {
+        return LogPrefixFormat(buffer, buffer_size, status, tag);
+    }
+    const std::size_t tsize = dbg.TagName(tag + dbg_size, 
+        tag_buffsize - dbg_size) + dbg_size;
+    if (tsize >= tag_buffsize)
+    {
+        return LogPrefixFormat(buffer, buffer_size, status, tag);
+    }
+    const std::size_t osize = (obj == NULL ?
+        snprintf(tag + tsize, tag_buffsize - tsize, "[Static]") :
+        snprintf(tag + tsize, tag_buffsize - tsize, "[%p]", obj)) + 
+            tsize;
+    
+    return LogPrefixFormat(buffer, buffer_size, status, tag);
 }
 
 inline int System::DebugFormat(char* buffer, 
@@ -244,59 +351,161 @@ inline int System::DebugFormat(char* buffer,
     const StatusType& status, 
     const char* msg)
 {
-    constexpr std::size_t tag_buffsize = TEST_SYS_LOG_OUTPUT_BUFFER + 1;
-    char tag[tag_buffsize];
-    const std::size_t dbg_size = snprintf(tag, tag_buffsize, "[DEBUG]");
-    if (dbg_size == tag_buffsize) return (int)dbg_size;
-    const std::size_t tsize = dbg.TagName(tag + dbg_size, 
-        tag_buffsize - dbg_size) + dbg_size;
-    tag[TEST_SYS_LOG_OUTPUT_BUFFER] = '\0';
-    if (tsize == tag_buffsize) return tag_buffsize;
-    if (obj == NULL)
+    constexpr std::size_t tag_buffsize = TEST_SYS_OUTPUT_BUFFER;
+    char tag[tag_buffsize + 1];
+    DebugPrefixFormat(tag, tag_buffsize, dbg, level, obj, status);
+    tag[TEST_SYS_OUTPUT_BUFFER] = '\0';
+    return LogFormat(buffer, buffer_size, status, msg, tag);
+}
+
+inline int System::ThreadFormat(char* buffer,
+    const std::size_t& buffer_size, const std::size_t&)
+{
+#if TEST_SYS_IS_ENABLE_THREAD
+    const std::size_t main_hid = DefinitionType::GetMainThreadHID();
+    const std::size_t hid = DefinitionType::GetThisThreadHID();
+    SystemType& system = GetInstance();
+    const std::size_t index = system.m_runner.GetThreadIndex(hid);
+    if (main_hid == hid)
     {
-        snprintf(tag + tsize, tag_buffsize - tsize, "[STATIC]");
+        return snprintf(buffer, buffer_size, "[MainThread][%zx]", 
+            hid);
+    }
+    else if(index != (TEST_SYS_THREAD_SIZE + 1))
+    {
+        return snprintf(buffer, buffer_size, "[Thread-%zu][%zx]", 
+            index, hid);
     }
     else
     {
-        snprintf(tag + tsize, tag_buffsize - tsize, "[%p]", obj);
+        return snprintf(buffer, buffer_size, "[%zx]", 
+            hid);
     }
-    tag[TEST_SYS_LOG_OUTPUT_BUFFER] = '\0';
-    return LogFormat(buffer, buffer_size, status, msg, tag);
+#else
+    return 0;
+#endif
+}
+
+inline int System::TimeDurationFormat(char* buffer,
+    const std::size_t& buffer_size, TimeDurationType time_dur)
+{
+    if (time_dur.Day > 0)
+    {
+        return snprintf(buffer, buffer_size, 
+            "%d Days %02d:%02d:%02d.%03d%03d",
+            time_dur.Day, time_dur.Hour, time_dur.Minute, 
+            time_dur.Second, time_dur.Milisecond,
+            time_dur.Microsecond);
+    }
+    else if (time_dur.Hour > 0)
+    {
+        return snprintf(buffer, buffer_size,
+            "%d:%02d:%02d.%03d%03d",
+            time_dur.Hour, time_dur.Minute, time_dur.Second, 
+            time_dur.Milisecond, time_dur.Microsecond);
+    }
+    else if(time_dur.Minute > 0)
+    {
+        return snprintf(buffer, buffer_size,
+            "%d:%02d.%03d%03d",
+            time_dur.Minute, time_dur.Second, time_dur.Milisecond,
+            time_dur.Microsecond);
+    }
+
+    return snprintf(buffer, buffer_size,
+        "%d.%03d%03d",
+        time_dur.Second, time_dur.Milisecond,
+        time_dur.Microsecond);
+}
+
+inline int System::LogPrefixFormat(char* buffer, 
+    const std::size_t& buffer_size, const StatusType& status, 
+    const char * tag)
+{
+    const auto start = status.GetStartTimestamp();
+    if (start == 0)
+    {
+        return 0;
+    }
+    constexpr int time_dur_size = 100;
+    char time_dur[time_dur_size + 1]; 
+    const auto now = test::sys::Definition::GetTimestampNow();
+    const auto dur = test::sys::Definition::GetTimeDuration(start, now);
+    time_dur[time_dur_size] = '\0';
+    TimeDurationFormat(time_dur, time_dur_size, dur);
+    return snprintf(buffer, buffer_size, "[%s]%s", time_dur, tag);
 }
 
 inline int System::LogFormat(char* buffer, 
     const std::size_t& buffer_size, const StatusType& status, 
     const char* msg, const char * tag)
 {
-    const auto start = status.GetStartTimestamp();
-    const auto now = test::sys::Definition::GetTimestampNow();
-    const auto dur = test::sys::Definition::GetTimeDuration(start, now);
-    if (dur.Day > 0)
-    {
-        return snprintf(buffer, buffer_size, 
-            "[%d Days %02d:%02d:%02d.%03d%03d]%s: %s",
-            dur.Day, dur.Hour, dur.Minute, dur.Second, dur.Milisecond,
-            dur.Microsecond, tag, msg);
-    }
-    else if (dur.Hour > 0)
-    {
-        return snprintf(buffer, buffer_size,
-            "[%d:%02d:%02d.%03d%03d]%s: %s",
-            dur.Hour, dur.Minute, dur.Second, dur.Milisecond,
-            dur.Microsecond, tag, msg);
-    }
-    else if(dur.Minute > 0)
-    {
-        return snprintf(buffer, buffer_size,
-            "[%d:%02d.%03d%03d]%s: %s",
-            dur.Minute, dur.Second, dur.Milisecond,
-            dur.Microsecond, tag, msg);
-    }
+    return snprintf(buffer, buffer_size, "%s: %s", tag, msg);
+}
 
-    return snprintf(buffer, buffer_size,
-        "[%d.%03d%03d]%s: %s",
-        dur.Second, dur.Milisecond,
-        dur.Microsecond, tag, msg);
+inline int System::TaskBeginFormat(char* buffer, 
+    const std::size_t& buffer_size, TaskType& task)
+{
+#if TEST_SYS_IS_ENABLE_THREAD
+    SystemType& system = GetInstance();
+    const std::size_t hid = DefinitionType::GetThisThreadHID();
+    const std::size_t index = system.m_runner.GetThreadIndex(hid);
+    return snprintf(buffer, buffer_size, "Task{%s} Start at Thread-%zu(%zx) ...", 
+        task.GetName(), index, hid);
+#else
+    return snprintf(buffer, buffer_size, "Task{%s} Start ...", task.GetName());
+
+#endif
+}
+
+inline int System::TaskEndFormat(char* buffer, 
+    const std::size_t& buffer_size, TaskType& task)
+{
+    constexpr int time_dur_size = 100;
+    char time_dur[time_dur_size + 1]; 
+    const auto start = task.GetBeginTimeStamp();
+    const auto end = task.GetEndTimeStamp();
+
+#if TEST_SYS_IS_ENABLE_THREAD
+
+    SystemType& system = GetInstance();
+    const std::size_t hid = DefinitionType::GetThisThreadHID();
+    const std::size_t index = system.m_runner.GetThreadIndex(hid);
+
+    if (end == 0)
+    {    
+        return snprintf(buffer, buffer_size, "Task{%s} End "
+            "at Thread-%zu(%zx) ...", task.GetName(), index, hid);
+    }
+    const auto dur = test::sys::Definition::GetTimeDuration(start, end);
+    TimeDurationFormat(time_dur, time_dur_size, dur);
+    time_dur[time_dur_size] = '\0';
+    return snprintf(buffer, buffer_size, 
+        "Task{%s} End at Thread-%zu(%zx) ... (Time Duration: %s)", 
+        task.GetName(), index, hid, time_dur);
+#else
+
+    if (end == 0)
+    {    
+        return snprintf(buffer, buffer_size, "Task{%s} End ...", 
+            task.GetName());
+    }
+    const auto dur = test::sys::Definition::GetTimeDuration(start, end);
+    TimeDurationFormat(time_dur, time_dur_size, dur);
+    time_dur[time_dur_size] = '\0';
+    return snprintf(buffer, buffer_size, 
+        "Task{%s} End ... (Time Duration: %s)", 
+        task.GetName(), time_dur);
+#endif
+}
+
+inline int System::TaskAssertFormat(char* buffer, 
+    const std::size_t& buffer_size, TaskType& task, const char* cond_str, 
+    const char* file, const int& line, const char* variables)
+{
+    return snprintf(buffer, buffer_size, 
+        "Assertion \"%s\" failed: file %s, line %zu, info %s",
+        cond_str, file, line, variables);
 }
 
 inline System::System() :
@@ -309,18 +518,10 @@ inline System::System() :
     m_out(NULL),
     m_outFilename(NULL),
     m_interface(&test::sys::Interface::GetInstance()),
-    m_logLock(),
-    m_logIDs()
+    m_runner(m_status, m_log)
 {
     TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 1, this, 
         "Default Constructor");
-    {
-        std::lock_guard<std::mutex> lock(m_logLock);
-        for (std::size_t i = 0; i < ThreadIDBuffer; ++i)
-        {
-            m_logIDs[i] = std::thread::id();
-        }
-    }
     
     Initialization();
 }
@@ -335,43 +536,6 @@ inline System::~System()
     
     Finalization();
     m_retValue = 0;
-}
-
-inline bool System::LockOutput()
-{
-    std::lock_guard<std::mutex> lock(m_logLock);
-    std::size_t index = ThreadIDBuffer;
-    for (std::size_t i = 0; i < ThreadIDBuffer; ++i)
-    {
-        if (m_logIDs[i] == std::this_thread::get_id())
-        {
-            return false;
-        }
-        else if (m_logIDs[i] == std::thread::id() &&
-            index == ThreadIDBuffer)
-        {
-            index = i;
-        }
-    }
-    if (index == ThreadIDBuffer)
-    {
-        return false;
-    }
-    m_logIDs[index] = std::this_thread::get_id();
-    return true;
-}
-
-inline void System::UnlockOutput()
-{
-    std::lock_guard<std::mutex> lock(m_logLock);
-    for (std::size_t i = 0; i < ThreadIDBuffer; ++i)
-    {
-        if (m_logIDs[i] == std::this_thread::get_id())
-        {
-            m_logIDs[i] = std::thread::id();
-            return;
-        }
-    }
 }
 
 inline bool System::SetOutputFile(const char * outFilename)
@@ -422,8 +586,15 @@ inline void System::PrintTitle()
         TEST_SYSTEM_DEF_ENTRY_LINE_STR "\n"
         "Log Test::System\n"
         "Output : %s\n"
-        "Start Timestamp : %d-%d-%d, %02d:%02d:%02d.%03d%03d UTC%+03d:%02d",
-            output, dtime.Year, dtime.Month, dtime.Day, dtime.Hour, 
+#if TEST_SYS_IS_ENABLE_THREAD
+        "Task Thread : %d\n"
+#endif
+        "Start Timestamp : %d-%02d-%02d, %02d:%02d:%02d.%03d%03d "
+            "UTC%+03d:%02d", output, 
+#if TEST_SYS_IS_ENABLE_THREAD
+            TEST_SYS_THREAD_SIZE,
+#endif
+            dtime.Year, dtime.Month, dtime.Day, dtime.Hour, 
             dtime.Minute, dtime.Second, dtime.Milisecond, 
             dtime.Microsecond, dtime.UTC_Hour, dtime.UTC_Minute);
 
@@ -456,7 +627,7 @@ inline void System::PrintFooter()
         end_timestamp);
     m_log.OutputCallback(&EntryFormat, 
         TEST_SYSTEM_DEF_ENTRY_LINE_STR "\n"
-        "End Timestamp : %d-%d-%d, %02d:%02d:%02d.%03d%03d UTC%+03d:%02d\n"
+        "End Timestamp : %d-%02d-%02d, %02d:%02d:%02d.%03d%03d UTC%+03d:%02d\n"
         "Duration : %d Days %02d:%02d:%02d.%03d%03d\n"
         "Retrun Value : %d",
             dtime.Year, dtime.Month, dtime.Day, 
@@ -502,7 +673,7 @@ inline void System::PrintTerminateFooter()
         m_log.OutputCallback(&EntryFormat, 
             TEST_SYSTEM_DEF_ENTRY_LINE_STR "\n"
             "Terminate Timestamp : "
-            "%d-%d-%d, %02d:%02d:%02d.%03d%03d UTC%+03d:%02d\n"
+            "%d-%02d-%02d, %02d:%02d:%02d.%03d%03d UTC%+03d:%02d\n"
             "Duration : %d Days %02d:%02d:%02d.%03d%03d\n"
             "Terminate Signal : %d",
                 dtime.Year, dtime.Month, dtime.Day, 
@@ -517,7 +688,7 @@ inline void System::PrintTerminateFooter()
         m_log.OutputCallback(&EntryFormat, 
             TEST_SYSTEM_DEF_ENTRY_LINE_STR "\n"
             "Terminate Timestamp : "
-            "%d-%d-%d, %02d:%02d:%02d.%03d%03d UTC%+03d:%02d\n"
+            "%d-%02d-%02d, %02d:%02d:%02d.%03d%03d UTC%+03d:%02d\n"
             "Duration : %d Days %02d:%02d:%02d.%03d%03d\n"
             "Terminate Signal : %d (%s)",
                 dtime.Year, dtime.Month, dtime.Day, 
@@ -645,6 +816,91 @@ inline void System::Termination()
     Finalization();
 }
 
+inline void System::SetError(Status code)
+{
+    m_status.Error(code);
+}
+
+inline void System::SetError(StatusIntegerType code)
+{
+    m_status.Error(code);
+}
+
+inline int System::PrefixFormatInfo(char* buffer, 
+    const std::size_t& buffer_size)
+{
+    return InfoPrefixFormat(buffer, buffer_size, m_status);
+}
+
+inline int System::PrefixFormatDebug(char* buffer, 
+    const std::size_t& buffer_size, DebugType& dbg, std::int8_t level, 
+    const void * obj)
+{
+    return DebugPrefixFormat(buffer, buffer_size, dbg, level, obj, m_status);
+}
+
+inline int System::PrefixFormatError(char* buffer, 
+    const std::size_t& buffer_size, Status code)
+{
+    return ErrorPrefixFormat(buffer, buffer_size, m_status);
+}
+
+inline int System::PrefixFormatError(char* buffer, 
+    const std::size_t& buffer_size, StatusIntegerType code)
+{
+    return ErrorPrefixFormat(buffer, buffer_size, m_status);
+}
+
+inline int System::PrefixFormatThread(char* buffer, 
+    const std::size_t& buffer_size, const std::size_t& hid)
+{
+    return ThreadFormat(buffer, buffer_size, hid);
+}
+
+inline int System::VOutput(const std::size_t& thread_hid, 
+    const char* prefix, const char* format, va_list args)
+{
+    const std::size_t main_hid = DefinitionType::GetMainThreadHID();
+    constexpr std::size_t msg_buffsize = TEST_SYS_OUTPUT_BUFFER;
+    char msg[msg_buffsize + 1];
+    vsnprintf(msg, msg_buffsize, format, args);
+    msg[msg_buffsize] = '\0';
+    int res = 0;
+#if TEST_SYS_IS_ENABLE_THREAD
+    if (thread_hid == main_hid || !m_runner.IsRun(thread_hid))
+    {
+        res = m_log.Output("%s: %s", prefix, msg);
+    }
+    else
+    {
+        constexpr std::size_t buffsize = TEST_SYS_OUTPUT_BUFFER;
+        char buff[buffsize + 1];
+        res = snprintf(buff, buffsize, "%s: %s", prefix, msg);
+        buff[buffsize] = '\0';
+        if (!m_runner.LogBufferOutput(DefinitionType::GetThisThreadHID(),
+            buff))
+        {
+            res = m_log.Output("%s: %s", prefix, msg);
+        }
+    }
+#else
+    if (!m_runner.IsRun(thread_hid))
+    {
+        res = m_log.Output("%s: %s", prefix, msg);
+    }
+    else
+    {
+        constexpr std::size_t buffsize = TEST_SYS_OUTPUT_BUFFER;
+        char buff[buffsize + 1];
+        res = snprintf(buff, buffsize, "%s: %s", prefix, msg);
+        buff[buffsize] = '\0';
+        m_runner.LogBufferOutput(DefinitionType::GetThisThreadHID(), buff);
+    }
+
+#endif
+    return res;
+}
+
 inline bool System::EntryPoint()
 {
     TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 2, this, 
@@ -744,6 +1000,11 @@ inline void System::UnregisterSignal(SignalType* signal)
     m_signals.Remove(signal);
 }
 
+inline void System::RegisterTask(test::sys::Task&& task)
+{
+    return m_runner.Job(std::move(task));
+}
+
 inline typename System::StatusType& System::GetStatus()
 {
     TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), 
@@ -798,178 +1059,6 @@ inline bool System::IsTerminate() const
         _DebugType, 3, this, "IsTerminate() const");
     
     return m_status.IsTerminate();
-}
-
-inline int System::Output(const char* format, ...)
-{
-    const bool is_lock = LockOutput();
-    va_list vlist;
-    int res = 0;
-    va_start(vlist, format);
-    if (!is_lock)
-    {
-        res = test::sys::Interface::VOutput(format, vlist);
-    }
-    else
-    {
-        res = m_log.VOutput(format, vlist);
-        UnlockOutput();
-    }
-    va_end(vlist);
-    return res;
-}
-
-inline int System::VOutput(const char* format, va_list args)
-{
-    const bool is_lock = LockOutput();
-    if (!is_lock)
-    {
-        return test::sys::Interface::VOutput(format, args);
-    }
-    const int res = m_log.VOutput(format, args);
-    UnlockOutput();
-    return res;
-}
-
-inline int System::Info(const char* format, ...)
-{
-    const bool is_lock = LockOutput();
-    va_list vlist;
-    int res = 0;
-    va_start(vlist, format);
-    if (!is_lock)
-    {
-        res = test::sys::Interface::VInfo(format, vlist);
-    }
-    else
-    {
-        res = m_log.VOutputCallback(&InfoFormat, format, vlist);
-        UnlockOutput();
-    }
-    va_end(vlist);
-    return res;
-}
-
-inline int System::VInfo(const char* format, va_list args)
-{
-    const bool is_lock = LockOutput();
-    if (!is_lock)
-    {
-        return test::sys::Interface::VInfo(format, args);
-    }
-    const int res = m_log.VOutputCallback(&InfoFormat, format, args);
-    UnlockOutput();
-    return res;
-}
-
-inline int System::Debug(DebugType& dbg, std::int8_t level, const void * obj,
-    const char* format, ...)
-{
-    const bool is_lock = LockOutput();
-    va_list vlist;
-    int res = 0;
-    va_start(vlist, format);
-    if (!is_lock)
-    {
-        res = test::sys::Interface::VDebug(dbg, level, obj, format, vlist);
-    }
-    else if (level > dbg.GetLevel()) 
-    {
-        UnlockOutput();
-    }
-    else
-    {
-        res = m_log.VOutputCallback(&DebugFormat, dbg, level, obj, format, vlist);
-        UnlockOutput();
-    }
-    va_end(vlist);
-    return res;
-}
-
-inline int System::VDebug(DebugType& dbg, std::int8_t level, const void * obj,
-    const char* format, va_list args)
-{
-    const bool is_lock = LockOutput();
-    if (!is_lock)
-    {
-        return test::sys::Interface::VDebug(dbg, level, obj, format, args);
-    }
-    else if (level > dbg.GetLevel()) 
-    {
-        UnlockOutput();
-        return 0;
-    }
-    const int res = m_log.VOutputCallback(&DebugFormat, dbg, level, 
-        obj, format, args);
-    UnlockOutput();
-    return res;
-}
-
-inline int System::Error(Status code, const char* format, ...)
-{
-    const bool is_lock = LockOutput();
-    va_list vlist;
-    int res = 0;
-    va_start(vlist, format);
-    m_status.Error(code);
-    if (!is_lock)
-    {
-        res = test::sys::Interface::VError(code, format, vlist);
-    }
-    else
-    {
-        res = m_log.VOutputCallback(&ErrorFormat, format, vlist);
-        UnlockOutput();
-    }
-    va_end(vlist);
-    return res;
-}
-
-inline int System::Error(StatusIntegerType code, const char* format, ...)
-{
-    const bool is_lock = LockOutput();
-    va_list vlist;
-    int res = 0;
-    va_start(vlist, format);
-    m_status.Error(code);
-    if (!is_lock)
-    {
-        res = test::sys::Interface::VError(code, format, vlist);
-    }
-    else
-    {
-        res = m_log.VOutputCallback(&ErrorFormat, format, vlist);
-        UnlockOutput();
-    }
-    va_end(vlist);
-    return res;
-}
-
-inline int System::VError(Status code, const char* format, va_list args)
-{
-    const bool is_lock = LockOutput();
-    m_status.Error(code);
-    if (!is_lock)
-    {
-        return test::sys::Interface::VError(code, format, args);
-    }
-    const int res = m_log.VOutputCallback(&ErrorFormat, format, args);
-    UnlockOutput();
-    return res;
-}
-
-inline int System::VError(StatusIntegerType code, const char* format, 
-    va_list args)
-{
-    const bool is_lock = LockOutput();
-    m_status.Error(code);
-    if (!is_lock)
-    {
-        return test::sys::Interface::VError(code, format, args);
-    }
-    const int res = m_log.VOutputCallback(&ErrorFormat, format, args);
-    UnlockOutput();
-    return res;
 }
 
 } //!test
