@@ -39,7 +39,7 @@ Interface<TStatus>::Interface(StatusType& status) :
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::out::
         Interface<TStatus>> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "Constructor(status=%p)", status);
 
 }
@@ -50,7 +50,7 @@ Interface<TStatus>::~Interface()
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::out::
         Interface<TStatus>> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "Destructor");
     
 }
@@ -61,7 +61,7 @@ void Interface<TStatus>::SetOutputFormatCallback(FormatCallbackFunc cb)
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::out::
         Interface<TStatus>> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "SetOutputFormatCallback(cb=%p)", cb);
     
     std::lock_guard<std::mutex> guard(m_mutex);
@@ -81,7 +81,7 @@ void Interface<TStatus>::SetInfoFormatCallback(FormatCallbackFunc cb)
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::out::
         Interface<TStatus>> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "SetInfoFormatCallback(cb=%p)", cb);
 
     std::lock_guard<std::mutex> guard(m_mutex);
@@ -101,7 +101,7 @@ void Interface<TStatus>::SetErrorFormatCallback(FormatCallbackFunc cb)
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::out::
         Interface<TStatus>> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "SetErrorFormatCallback(cb=%p)", cb);
     
     std::lock_guard<std::mutex> guard(m_mutex);
@@ -121,7 +121,7 @@ void Interface<TStatus>::SetDebugFormatCallback(FormatDebugCallbackFunc cb)
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::out::
         Interface<TStatus>> _DebugType;
-    TEST_SYS_DEBUG_MAIN_THREAD(SystemType, _DebugType, 1, this, 
+    TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "SetDebugFormatCallback(cb=%p)", cb);
     
     std::lock_guard<std::mutex> guard(m_mutex);
