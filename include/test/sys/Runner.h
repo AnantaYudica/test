@@ -133,8 +133,8 @@ private:
     StatusType& m_status;
     LogType& m_log;
     KeyType m_key;
-    std::atomic_bool m_failed, m_start, m_stop, m_done;
-    std::atomic_size_t m_idleCount, m_runCount;
+    std::atomic_bool m_failed, m_start, m_stop, m_finish;
+    std::atomic_size_t m_idleCount, m_runCount, m_doneCount;
     FormatTaskBeginCallbackFunc m_beginTaskFmtCb;
     FormatTaskEndCallbackFunc m_endTaskFmtCb;
     FormatTaskAssertCallbackFunc m_assertTaskFmtCb;
@@ -179,6 +179,8 @@ public:
 public:
     bool LogBufferOutput(const std::size_t& thread_hid, const char* msg);
 public:
+    bool ClearLogBuffer(const std::size_t& thread_hid);
+public:
     std::size_t GetThreadIndex(const std::size_t& thread_hid);
 public:
     void SetBeginTaskFormatCallback(FormatTaskBeginCallbackFunc func);
@@ -202,6 +204,8 @@ public:
     bool IsStop() const;
 public:
     bool IsFinish() const;
+public:
+    bool IsDone() const;
 public:
     bool IsFailed() const;
 public:
@@ -271,6 +275,8 @@ public:
 public:
     bool LogBufferOutput(const std::size_t& thread_hid, const char* msg);
 public:
+    bool ClearLogBuffer(const std::size_t& thread_hid);
+public:
     std::size_t GetThreadIndex(const std::size_t& thread_hid);
 public:
     inline void SetBeginTaskFormatCallback(FormatTaskBeginCallbackFunc func);
@@ -294,6 +300,8 @@ public:
     bool IsStop() const;
 public:
     bool IsFailed() const;
+public:
+    bool IsDone() const;
 public:
     bool IsFinish() const;
 public:
@@ -331,6 +339,8 @@ void Runner<TStatus, TBuffer, N>::MainFunction(void* obj, std::size_t index)
     BufferType* buffer = runner->m_buffers[buffer_index];
     
     TEST_SYS_DEBUG(SystemType, _DebugType, 4, NULL, "Start");
+
+    runner->m_doneCount++;
 
     while(!runner->IsStop())
     {
@@ -399,6 +409,7 @@ void Runner<TStatus, TBuffer, N>::MainFunction(void* obj, std::size_t index)
         "Thread Finish");
 
     runner->Finalize(index_0, request);
+    runner->m_doneCount--;
 }
 
 template<typename TStatus, typename TBuffer, std::size_t N>
@@ -559,11 +570,12 @@ Runner<TStatus, TBuffer, N>::Runner(StatusType& status, LogType& log) :
     m_failed(false),
     m_start(false),
     m_stop(false),
-    m_done(false),
+    m_finish(false),
     m_status(status),
     m_log(log),
     m_idleCount(0),
     m_runCount(0),
+    m_doneCount(0),
     m_beginTaskFmtCb(test::sys::Task::DefaultFormatBegin),
     m_endTaskFmtCb(test::sys::Task::DefaultFormatEnd),
     m_assertTaskFmtCb(test::sys::Task::DefaultFormatAssert),
@@ -581,7 +593,7 @@ Runner<TStatus, TBuffer, N>::Runner(StatusType& status, LogType& log) :
     m_indexs{NULL}
 {
     TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
-        "Constructor(status=%p)", status);
+        "Constructor(status=%p)", &status);
 
     this->Initialize();
 }
@@ -643,12 +655,14 @@ void Runner<TStatus, TBuffer, N>::Finalize()
         m_threads[i].join();
         if (m_tasks[i] != NULL)
         {
-            delete m_tasks[i];
+            typedef test::sys::Task TaskType;
+            m_tasks[i]->~TaskType();
+            free(m_tasks[i]);
             m_tasks[i] = NULL;
         }
     }
-    TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, "Done");
-    m_done = true;
+    TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, "Finish");
+    m_finish = true;
 }
 
 template<typename TStatus, typename TBuffer, std::size_t N>
@@ -885,6 +899,26 @@ bool Runner<TStatus, TBuffer, N>::
 }
 
 template<typename TStatus, typename TBuffer, std::size_t N>
+bool Runner<TStatus, TBuffer, N>::
+    ClearLogBuffer(const std::size_t& thread_hid)
+{
+    const std::size_t thread_index = m_key.Index(thread_hid);
+    BufferType* thread_buffer = m_buffers[thread_index];
+    const std::size_t index = m_indexs[thread_index];
+    if (thread_buffer == NULL)
+    {
+        return false;
+    }
+    const std::size_t hid = m_hidThreads[index % (N + 1)];
+    if (hid != thread_hid)
+    {
+        return false;
+    }
+    thread_buffer->Reset();
+    return true;
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
 std::size_t Runner<TStatus, TBuffer, N>::
     GetThreadIndex(const std::size_t& thread_hid)
 {
@@ -914,7 +948,14 @@ void Runner<TStatus, TBuffer, N>::Job(test::sys::Task&& task)
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     } 
-    while(QueueSize() == 0);
+    while(QueueSize() == 0 && !IsStop());
+    
+    if (IsStop())
+    {
+        TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, 
+            "Job(task=%p) Skip", &task);
+        return;
+    }
     
     TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, 
         "Job(task=%p)", &task);
@@ -955,7 +996,7 @@ void Runner<TStatus, TBuffer, N>::WaitAndStop()
 {
     TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, 
         "WaitAndStop()");
-    if (m_done.load())
+    if (m_finish.load())
     {
         return;
     }
@@ -999,7 +1040,13 @@ bool Runner<TStatus, TBuffer, N>::IsStop() const
 template<typename TStatus, typename TBuffer, std::size_t N>
 bool Runner<TStatus, TBuffer, N>::IsFinish() const
 {
-    return m_done.load();
+    return m_finish.load();
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+bool Runner<TStatus, TBuffer, N>::IsDone() const
+{
+    return m_doneCount.load() == 0;
 }
 
 template<typename TStatus, typename TBuffer, std::size_t N>
@@ -1146,6 +1193,12 @@ bool Runner<TStatus, TBuffer, 0>::LogBufferOutput(const std::size_t&,
 }
 
 template<typename TStatus, typename TBuffer>
+bool Runner<TStatus, TBuffer, 0>::ClearLogBuffer(const std::size_t&)
+{
+    return m_buffer.Reset();
+}
+
+template<typename TStatus, typename TBuffer>
 std::size_t Runner<TStatus, TBuffer, 0>::
     GetThreadIndex(const std::size_t&)
 {
@@ -1247,7 +1300,13 @@ bool Runner<TStatus, TBuffer, 0>::IsStop() const
 template<typename TStatus, typename TBuffer>
 bool Runner<TStatus, TBuffer, 0>::IsFinish() const
 {
-    return true;
+    return !m_run;
+}
+
+template<typename TStatus, typename TBuffer>
+bool Runner<TStatus, TBuffer, 0>::IsDone() const
+{
+    return !m_run;
 }
 
 template<typename TStatus, typename TBuffer>
