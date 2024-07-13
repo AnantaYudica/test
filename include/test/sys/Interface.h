@@ -89,7 +89,7 @@ private:
 public:
     static inline Interface& DefaultInstance();
 protected:
-    static inline bool SetInstance(Interface* intf);
+    static inline bool SetInstance(Interface* intf, bool is_default = true);
 public:
     static Interface& GetInstance();
 protected:
@@ -239,15 +239,15 @@ inline Interface& Interface::DefaultInstance()
     return value;
 }
 
-inline bool Interface::SetInstance(Interface * intf)
+inline bool Interface::SetInstance(Interface * intf, bool is_default)
 {
     Instance& instance = _GetInstance();
     if (intf == nullptr)
     {
         return false;
     }
-
-    TEST_SYS_DEBUG_SYS_INSTANCE((intf == NULL ? DefaultInstance() : *intf) ,
+    TEST_SYS_DEBUG_SYS_INSTANCE((is_default || intf == NULL ?
+        DefaultInstance() : *intf) ,
         _DebugType, 1, NULL, "SetInstance(intf=%p)", intf);
 
     instance.Set(intf);
@@ -507,6 +507,7 @@ inline int Interface::VDebug(const std::size_t& thread_hid, DebugType& dbg,
     
     PrefixFormatThread(prefix + len, TEST_SYS_OUTPUT_BUFFER - len, 
         thread_hid);
+
     return VOutput(thread_hid, prefix, format, args);
 #else
 
