@@ -108,10 +108,10 @@ public:
     inline void SetAssertFormatCallback(FormatAssertCallbackFunc func);
 public:
     inline void VAssert(const bool& cond, const char* cond_str, 
-        const char* file, const int& line, const char* format, va_list args)
+        const char* file, int line, const char* format, va_list args)
         TEST_ATTRIBUTE((__format__ (__printf__, 6, 0)));
     inline void Assert(const bool& cond, const char* cond_str,
-        const char* file, const int& line, const char* format, ...)
+        const char* file, int line, const char* format, ...)
         TEST_ATTRIBUTE((__format__ (__printf__, 6, 7)));
 public:
     inline const char* GetName() const; 

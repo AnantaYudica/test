@@ -27,7 +27,7 @@ inline int Task::DefaultFormatAssert(char* buffer,
     const char* file, const int& line, const char* variables)
 {
     return snprintf(buffer, buffer_size, 
-        "Assertion \"%s\" failed: file %s, line %zu, info %s",
+        "Assertion \"%s\" failed: file %s, line %i, info %s",
         cond_str, file, line, variables);
 }
 
@@ -247,6 +247,11 @@ void Task::Run(T* obj, void(*begin_run)(T*, TArgs&&...),
         m_endTimestamp = DefinitionType::GetTimestampNow();
         AfterRun();
     }
+    else
+    {
+        TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, 
+            "Task function is null");
+    }
 }
 
 inline void Task::Stop()
@@ -331,7 +336,7 @@ inline void Task::SetAssertFormatCallback(FormatAssertCallbackFunc func)
 }
 
 inline void Task::VAssert(const bool& cond, const char* cond_str,
-    const char* file, const int& line, const char* format, va_list args)
+    const char* file, int line, const char* format, va_list args)
 {
     typedef test::sys::Interface SystemType;
     if (cond == true)
@@ -354,7 +359,7 @@ inline void Task::VAssert(const bool& cond, const char* cond_str,
 }
 
 inline void Task::Assert(const bool& cond, const char* cond_str,
-    const char* file, const int& line, const char* format, ...)
+    const char* file, int line, const char* format, ...)
 {
     va_list vlist;
     va_start(vlist, format);
