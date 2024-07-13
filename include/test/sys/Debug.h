@@ -3,6 +3,19 @@
 
 #include "Debug.defn.h"
 
+#include <atomic>
+#include <mutex>
+
+#ifdef TEST_SYS_THREAD_SIZE
+
+#define TEST_SYS_DEBUG_ID_BUFFER_SIZE (TEST_SYS_THREAD_SIZE + 1)
+
+#else
+
+#define TEST_SYS_DEBUG_ID_BUFFER_SIZE 5
+
+#endif
+
 namespace test
 {
 namespace sys
@@ -25,9 +38,17 @@ inline typename Debug::CStrType& Debug::GetBufferV()
 template<std::size_t ID>
 inline typename Debug::CStrType& Debug::GetBufferID()
 {
-    static CStrType instance;
-    *(instance.Buffer()) = '\0';
-    return instance;
+    static std::mutex lock;
+    static std::atomic_size_t index{0};
+    static CStrType instance[TEST_SYS_DEBUG_ID_BUFFER_SIZE];
+    std::size_t i = 0;
+    {
+        std::lock_guard<std::mutex> g{lock};
+        i = index.load();
+        index.store((i + 1) % TEST_SYS_DEBUG_ID_BUFFER_SIZE);
+    }
+    *(instance[i].Buffer()) = '\0';
+    return instance[i];
 }
 
 inline std::size_t Debug::WriteTagName(char * tag_out, std::size_t n)
@@ -152,7 +173,7 @@ do{\
 
 #define TEST_SYS_TASK_DEBUG(NAME, ...)\
 {\
-    test::sys::Task NAME{#NAME};\
+    test::sys::Task NAME{#NAME __VA_ARGS__};\
     NAME.Main([](test::sys::Task& __task)->void\
 
 #define TEST_SYS_TASK_END_DEBUG(NAME)\
@@ -160,15 +181,19 @@ do{\
     test::sys::Interface::GetInstance().RegisterTask(std::move(NAME));\
 } while(false)
 
-#define TEST_SYS_TASK_ASSERT(COND, INFO_FORMAT,  ...)\
-    __task.Assert(COND, #COND, __FILE__, __LINE__, INFO_FORMAT, __VA_ARGS__);\
-    if (!COND) return
+#define TEST_SYS_TASK_ASSERT(COND, ...)\
+    __task.Assert(COND, #COND, __FILE__, __LINE__, "" __VA_ARGS__);\
+    if (!(COND)) return
 
 #define TEST_SYS_TASK_BEGIN_LOGGING\
     __task.BeginLogging()
     
 #define TEST_SYS_TASK_END_LOGGING\
     __task.EndLogging()
+
+#define TEST_SYS_TASK_CLEAR_LOGGING\
+
+#define TEST_SYS_TASK_STOP_INTERRUPT\
 
 
 #endif //!TEST_SYS_DEBUG_H_
