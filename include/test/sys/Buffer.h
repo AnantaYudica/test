@@ -173,7 +173,7 @@ Buffer<TStatus, NLine, NBuffer>::Buffer(StatusType& status) :
         m_insertRecord(InsertRecordEmpty)
 {
     TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
-        "Constructor(status=%p)", status);
+        "Constructor(status=%p)", &status);
 
     m_buffer = (char*)malloc(NBuffer * (NLine + 1));
     if (m_buffer == NULL)

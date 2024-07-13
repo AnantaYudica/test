@@ -40,7 +40,7 @@ Interface<TStatus>::Interface(StatusType& status) :
     typedef test::sys::dbg::Type<test::sys::out::
         Interface<TStatus>> _DebugType;
     TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
-        "Constructor(status=%p)", status);
+        "Constructor(status=%p)", &status);
 
 }
 
