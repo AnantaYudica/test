@@ -291,6 +291,8 @@ public:
 public:
     void Stop();
 public:
+    void Detach();
+public:
     void WaitAndStop();
 public:
     std::size_t IdleCount() const;
@@ -1313,6 +1315,10 @@ void Runner<TStatus, TBuffer, 0>::Stop()
 {
     m_stop = true;
 }
+
+template<typename TStatus, typename TBuffer>
+void Runner<TStatus, TBuffer, 0>::Detach()
+{}
 
 template<typename TStatus, typename TBuffer>
 void Runner<TStatus, TBuffer, 0>::WaitAndStop()
