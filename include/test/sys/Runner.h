@@ -193,6 +193,8 @@ public:
 public:
     void Stop();
 public:
+    void Detach();
+public:
     void WaitAndStop();
 public:
     std::size_t IdleCount() const;
@@ -381,6 +383,15 @@ void Runner<TStatus, TBuffer, N>::MainFunction(void* obj, std::size_t index)
             &Runner<TStatus, TBuffer, N>::BeginRunTask,
             &Runner<TStatus, TBuffer, N>::EndRunTask, 
                 std::size_t(index_0));
+        if (task->IsDetach())
+        {
+            TEST_SYS_DEBUG(SystemType, _DebugType, 4, NULL, 
+                "Task(%p) Detach", task);
+            typedef test::sys::Task TaskType;
+            task->~TaskType();
+            free(task);
+            return;
+        }
         if (task->IsFailed() && !runner->IsStop())
         {
             runner->m_failed.store(true);
@@ -643,6 +654,11 @@ void Runner<TStatus, TBuffer, N>::Finalize()
     TEST_SYS_DEBUG(SystemType, _DebugType, 1, this, 
         "Finalize()");
 
+    if(m_finish.load())
+    {
+        return;
+    }
+
     TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, "Stop");
     m_stop.store(true);
     FinalizeBuffer(m_buffers, m_indexs, m_key, m_indexThreads);
@@ -652,7 +668,17 @@ void Runner<TStatus, TBuffer, N>::Finalize()
             "Join Thread %zx", DefinitionType::
             GetThreadHID(m_threads[i].get_id()));
 
-        m_threads[i].join();
+        if (m_threads[i].joinable())
+        {
+            m_threads[i].join();
+        }
+        else
+        {
+            m_tasks[i]->Detach();
+            m_tasks[i] = NULL;
+            m_threads[i].detach();
+            --m_doneCount;
+        }
         if (m_tasks[i] != NULL)
         {
             typedef test::sys::Task TaskType;
@@ -989,6 +1015,27 @@ void Runner<TStatus, TBuffer, N>::Stop()
     TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, "Stop()");
 
     return m_stop.store(true);
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::Detach()
+{
+    TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, "Detach()");
+
+    Stop();
+
+    if (m_finish.load()) 
+    {
+        return;
+    }
+    for (std::size_t i = 0; i < N; ++i)
+    {
+        m_tasks[i]->Detach();
+        m_tasks[i] = NULL;
+        m_threads[i].detach();
+        --m_doneCount;
+    }
+    m_finish.store(true);
 }
 
 template<typename TStatus, typename TBuffer, std::size_t N>

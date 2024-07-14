@@ -37,6 +37,7 @@ inline Task::Task(const char(&name)[N]) :
     m_start(false),
     m_stop(false),
     m_done(false),
+    m_detach(false),
     m_threadHID(0),
     m_index(0),
     m_name((char*)malloc(N + 1)),
@@ -91,6 +92,7 @@ inline Task::Task(Task&& mov) :
     m_start(mov.m_start.load()),
     m_stop(mov.m_stop.load()),
     m_done(mov.m_done.load()),
+    m_detach(mov.m_detach.load()),
     m_threadHID(mov.m_threadHID),
     m_index(mov.m_index),
     m_name(mov.m_name),
@@ -112,6 +114,7 @@ inline Task::Task(Task&& mov) :
     mov.m_start = false;
     mov.m_stop = false;
     mov.m_done = false;
+    mov.m_detach = false;
     mov.m_threadHID = 0;
     mov.m_index = 0;
     mov.m_name = NULL;
@@ -136,6 +139,7 @@ inline Task& Task::operator=(Task&& mov)
     m_start = mov.m_start.load();
     m_stop = mov.m_stop.load();
     m_done = mov.m_done.load();
+    m_detach = mov.m_detach.load();
     m_threadHID = mov.m_threadHID;
     m_index = mov.m_index;
     m_name = mov.m_name;
@@ -152,6 +156,7 @@ inline Task& Task::operator=(Task&& mov)
     mov.m_start = false;
     mov.m_stop = false;
     mov.m_done = false;
+    mov.m_detach = false;
     mov.m_threadHID = 0;
     mov.m_index = 0;
     mov.m_name = NULL;
@@ -265,6 +270,15 @@ inline void Task::Stop()
         return;
     }
     m_stop.store(true);
+}
+
+inline void Task::Detach()
+{
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
+    TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, "Detach()");
+
+    m_detach.store(true);
 }
 
 inline void Task::Main(std::function<void(test::sys::Task&)> func)
@@ -430,6 +444,11 @@ inline bool Task::IsFinish() const
 inline bool Task::IsFailed() const
 {
     return m_error;
+}
+
+inline bool Task::IsDetach() const
+{
+    return m_detach.load();
 }
 
 inline void Task::BeginLogging()

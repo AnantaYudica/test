@@ -62,7 +62,7 @@ public:
         const char* file, const int& line, const char* variables);
 private:
     bool m_error;
-    std::atomic_bool m_start, m_stop, m_done;
+    std::atomic_bool m_start, m_stop, m_done, m_detach;
     std::size_t m_threadHID;
     std::size_t m_index;
     char * m_name;
@@ -98,6 +98,8 @@ public:
         void(*end_run)(T*, TArgs&&...) = NULL, TArgs&&...);
 public:
     inline void Stop();
+public:
+    inline void Detach();
 public:
     inline void Main(std::function<void(test::sys::Task&)> func);
 public:
@@ -139,6 +141,8 @@ public:
     inline bool IsFinish() const;
 public:
     inline bool IsFailed() const;
+public:
+    inline bool IsDetach() const;
 public:
     inline void BeginLogging();
 public:
