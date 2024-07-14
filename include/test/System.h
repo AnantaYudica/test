@@ -45,11 +45,15 @@
 #define TEST_SYS_DEBUG_BUFFER_LINE 1024
 #endif //!TEST_SYS_DEBUG_BUFFER_LINE
 
-#ifndef TEST_SYS_ENABLE_THREAD
+#ifndef TEST_SYS_DISABLE_THREAD
+#ifndef TEST_SYS_IS_ENABLE_THREAD
 #define TEST_SYS_IS_ENABLE_THREAD true
+#endif //!TEST_SYS_IS_ENABLE_THREAD
 #else
+#ifndef TEST_SYS_IS_ENABLE_THREAD
 #define TEST_SYS_IS_ENABLE_THREAD false
-#endif //!TEST_SYS_ENABLE_THREAD
+#endif //!TEST_SYS_IS_ENABLE_THREAD
+#endif //!TEST_SYS_DISABLE_THREAD
 
 #ifndef TEST_SYS_THREAD_SIZE
 #define TEST_SYS_THREAD_SIZE 4
@@ -82,6 +86,7 @@ private:
     typedef test::System SystemType;
     typedef test::sys::Definition DefinitionType;
     typedef test::sys::dbg::Type<test::System> _DebugType;
+    typedef test::sys::dbg::Type<test::sys::Task> _TaskDebugType;
 public:
     typedef test::sys::Signal SignalType;
     typedef TEST_SYS_DEF_STATUS StatusType;
@@ -164,6 +169,7 @@ private:
     int m_retValue;
     int m_argSize;
     char** m_argValue;
+    std::atomic_bool m_finalize, m_terminate;
     StatusType m_status;
     LogType m_log;
     test::sys::Signals<StatusType> m_signals;
@@ -195,6 +201,8 @@ private:
 private:
     inline bool CopyArguments(int argc, char *argv[]);
     inline void FreeArguments();
+private:
+    inline void FreeOutput();
 private:
     inline bool Initialization();
 private:
@@ -247,7 +255,8 @@ public:
     inline bool IsDone() const;
     inline bool IsError() const;
     inline bool IsTerminate() const;
-
+public:
+    inline void WaitTaskDone();
 };
 
 } //!test
@@ -270,6 +279,7 @@ inline void System::SignalHandler(int sig)
 
 inline System& System::GetInstance()
 {
+    static auto& task_debug = _TaskDebugType::GetInstance();
     static System instance;
     
     TEST_SYS_DEBUG_SYS_INSTANCE((*(instance.m_interface)), _DebugType, 3, NULL, 
@@ -425,7 +435,7 @@ inline int System::LogPrefixFormat(char* buffer,
     const auto start = status.GetStartTimestamp();
     if (start == 0)
     {
-        return 0;
+        return snprintf(buffer, buffer_size, "%s", tag);
     }
     constexpr int time_dur_size = 100;
     char time_dur[time_dur_size + 1]; 
@@ -504,7 +514,7 @@ inline int System::TaskAssertFormat(char* buffer,
     const char* file, const int& line, const char* variables)
 {
     return snprintf(buffer, buffer_size, 
-        "Assertion \"%s\" failed: file %s, line %zu, info %s",
+        "Assertion \"%s\" failed: file %s, line %i, info %s",
         cond_str, file, line, variables);
 }
 
@@ -512,6 +522,8 @@ inline System::System() :
     m_retValue(0),
     m_argSize(0),
     m_argValue(nullptr),
+    m_finalize(false),
+    m_terminate(false),
     m_status(),
     m_log(m_status),
     m_signals(m_status),
@@ -528,9 +540,6 @@ inline System::System() :
 
 inline System::~System()
 {
-    m_interface = &InterfaceType::DefaultInstance();
-    InterfaceType::SetInstance(m_interface);
-    
     TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 1, this, 
         "Destructor");
     
@@ -625,6 +634,12 @@ inline void System::PrintFooter()
     auto dtime = test::sys::Definition::GetDateTime(end_timestamp);
     auto dur = test::sys::Definition::GetTimeDuration(start_timestamp,
         end_timestamp);
+        
+    if (start_timestamp == 0)
+    {
+        return;
+    }
+    
     m_log.OutputCallback(&EntryFormat, 
         TEST_SYSTEM_DEF_ENTRY_LINE_STR "\n"
         "End Timestamp : %d-%02d-%02d, %02d:%02d:%02d.%03d%03d UTC%+03d:%02d\n"
@@ -646,6 +661,11 @@ inline void System::PrintTerminateFooter()
     auto dtime = test::sys::Definition::GetDateTime(term_timestamp);
     auto dur = test::sys::Definition::GetTimeDuration(start_timestamp,
         term_timestamp);
+
+    if (start_timestamp == 0)
+    {
+        return;
+    }
     
     static const char * signal_names[]
     {
@@ -769,28 +789,11 @@ inline void System::FreeArguments()
     m_argSize = 0;
 }
 
-inline bool System::Initialization()
+inline void System::FreeOutput()
 {
     TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 2, this, 
-        "Initialization()");
-    
-    std::signal(SIGTERM, SignalHandler);
-    std::signal(SIGSEGV, SignalHandler);
-    std::signal(SIGINT, SignalHandler);
-    std::signal(SIGILL, SignalHandler);
-    std::signal(SIGABRT, SignalHandler);
-    std::signal(SIGFPE, SignalHandler);
-    return true;
-}
-
-inline void System::Finalization()
-{
-    TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 2, this, 
-        "Finalization()");
-
-    InterfaceType::SetInstance(&InterfaceType::DefaultInstance());
-    
-    FreeArguments();
+        "FreeOutput()");
+        
     if (m_out != NULL)
     {
         fclose(m_out);
@@ -803,16 +806,81 @@ inline void System::Finalization()
     }
 }
 
+inline bool System::Initialization()
+{
+    TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 2, this, 
+        "Initialization()");
+    
+    std::signal(SIGTERM, SignalHandler);
+    std::signal(SIGSEGV, SignalHandler);
+    std::signal(SIGINT, SignalHandler);
+    std::signal(SIGILL, SignalHandler);
+    std::signal(SIGABRT, SignalHandler);
+    std::signal(SIGFPE, SignalHandler);
+    
+    m_log.SetInfoFormatCallback(InfoFormat);
+    m_log.SetErrorFormatCallback(ErrorFormat);
+    m_log.SetDebugFormatCallback(DebugFormat);
+
+    m_runner.SetAssertTaskFormatCallback(TaskAssertFormat);
+    m_runner.SetBeginTaskFormatCallback(TaskBeginFormat);
+    m_runner.SetEndTaskFormatCallback(TaskEndFormat);
+    
+    InterfaceType::SetInstance(this);
+    m_interface = this;
+    return true;
+}
+
+inline void System::Finalization()
+{
+    TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 2, this, 
+        "Finalization()");
+
+    if (m_finalize.load())
+    {
+        return;
+    }
+    m_finalize.store(true);
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    if (!m_runner.IsFinish())
+    {
+        TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 1, this, 
+            "Wait All Task Stop");
+
+        m_runner.WaitAndStop();
+    }
+
+    if (m_status.IsTerminate())
+    {
+        PrintTerminateFooter();
+    }
+    else
+    {
+        PrintFooter();
+    }
+
+    InterfaceType::SetInstance(&InterfaceType::DefaultInstance());
+
+    FreeArguments();
+    FreeOutput();
+}
+
 inline void System::Termination()
 {
     TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 2, this, 
         "Termination()");
+    if(m_terminate.load())
+    {
+        return;
+    }
+    m_terminate.store(true);
     
     PrintTerminateFooter();
-    
-    m_interface = &InterfaceType::DefaultInstance();
-    InterfaceType::SetInstance(m_interface);
-    
+    InterfaceType::SetInstance(&InterfaceType::DefaultInstance());
+
+    m_runner.Detach();
+
     Finalization();
 }
 
@@ -914,12 +982,6 @@ inline bool System::EntryPoint()
     m_status.Start();
     PrintTitle();
     PrintArguments();
-    
-    m_log.SetInfoFormatCallback(InfoFormat);
-    m_log.SetErrorFormatCallback(ErrorFormat);
-    m_log.SetDebugFormatCallback(DebugFormat);
-    InterfaceType::SetInstance(this);
-    m_interface = this;
 
     return true;
 }
@@ -951,10 +1013,8 @@ inline int System::ReturnPoint()
     
     if (m_status.IsEnd()) return m_retValue;
     m_status.End();
-    
-    FreeArguments();
-    
-    PrintFooter();
+
+    Finalization();
 
     return m_retValue;
 }
@@ -1061,8 +1121,35 @@ inline bool System::IsTerminate() const
     return m_status.IsTerminate();
 }
 
+inline void System::WaitTaskDone()
+{
+    TEST_SYS_DEBUG_SYS_INSTANCE((*(const_cast<System&>(*this).m_interface)), 
+        _DebugType, 2, this, "WaitTaskDone()");
+
+    m_runner.WaitAndStop();
+}
+
 } //!test
 
 #undef TEST_SYS_DEBUG_SYS_INSTANCE
+
+#ifdef TEST_SYS_DEBUG_ENABLE
+
+#define USING_TEST_SYSTEM struct _SystemGuard_ {\
+    test::System& interface;\
+    _SystemGuard_(test::System& ref) :\
+        interface(ref)\
+    {}\
+    ~_SystemGuard_()\
+    {\
+        interface.WaitTaskDone();\
+    }\
+}_system_guard_{test::System::GetInstance()}
+
+#else
+
+#define USING_TEST_SYSTEM struct _NO_USING_TEST_SYSTEM_ {}
+
+#endif 
 
 #endif //!TEST_SYSTEM_H_
