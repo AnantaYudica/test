@@ -174,7 +174,8 @@ do{\
 #define TEST_SYS_TASK_DEBUG(NAME, ...)\
 {\
     test::sys::Task NAME{#NAME __VA_ARGS__};\
-    NAME.Main([](test::sys::Task& __task)->void\
+    NAME.Main([](test::sys::runner::Reference __ref, \
+        test::sys::Task& __task)->void\
 
 #define TEST_SYS_TASK_END_DEBUG(NAME)\
     );\
@@ -192,8 +193,10 @@ do{\
     __task.EndLogging()
 
 #define TEST_SYS_TASK_CLEAR_LOGGING\
+    __ref.Clear()
 
 #define TEST_SYS_TASK_STOP_INTERRUPT\
+    if(__ref.IsStop()) return
 
 
 #endif //!TEST_SYS_DEBUG_H_

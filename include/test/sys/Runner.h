@@ -7,6 +7,7 @@
 #include "Task.h"
 #include "runner/Index.h"
 #include "runner/Key.h"
+#include "runner/Reference.h"
 
 #include <cstdlib>
 #include <thread>
@@ -65,6 +66,7 @@ public:
     typedef TStatus StatusType;
     typedef test::sys::out::Interface<TStatus> LogType;
     typedef TBuffer BufferType;
+    typedef test::sys::runner::Reference ReferenceType;
 public:
     typedef test::sys::Task TaskType;
     typedef typename TaskType::FormatBeginCallbackFunc 
@@ -128,6 +130,9 @@ private:
     static void EndRunTask(Runner<TStatus, TBuffer, N>* runner,
         std::size_t&& index);
 private:
+    static void CallClear(void* ptr);
+    static bool CallIsStop(void* ptr);
+private:
     std::size_t m_queueBegin, m_queueEnd;
     std::size_t m_keyIndex;
     StatusType& m_status;
@@ -138,6 +143,7 @@ private:
     FormatTaskBeginCallbackFunc m_beginTaskFmtCb;
     FormatTaskEndCallbackFunc m_endTaskFmtCb;
     FormatTaskAssertCallbackFunc m_assertTaskFmtCb;
+    ReferenceType m_ref;
     std::thread m_threads[N];
     std::size_t m_queue[N + 1];
     std::size_t m_indexThreads[N + 1];
@@ -570,12 +576,25 @@ void Runner<TStatus, TBuffer, N>::
 {
     runner->m_tasksRun[index % N].store(true);
 }
-    
+
 template<typename TStatus, typename TBuffer, std::size_t N>
 void Runner<TStatus, TBuffer, N>::
     EndRunTask(Runner<TStatus, TBuffer, N>* runner, std::size_t&& index)
 {
     runner->m_tasksRun[index % N].store(false);
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+void Runner<TStatus, TBuffer, N>::CallClear(void* ptr)
+{
+    const std::size_t hid = DefinitionType::GetThisThreadHID();
+    static_cast<Runner<TStatus, TBuffer, N>*>(ptr)->ClearLogBuffer(hid);
+}
+
+template<typename TStatus, typename TBuffer, std::size_t N>
+bool Runner<TStatus, TBuffer, N>::CallIsStop(void* ptr)
+{
+    return static_cast<Runner<TStatus, TBuffer, N>*>(ptr)->IsStop();
 }
 
 template<typename TStatus, typename TBuffer, std::size_t N>
@@ -592,6 +611,7 @@ Runner<TStatus, TBuffer, N>::Runner(StatusType& status, LogType& log) :
     m_beginTaskFmtCb(test::sys::Task::DefaultFormatBegin),
     m_endTaskFmtCb(test::sys::Task::DefaultFormatEnd),
     m_assertTaskFmtCb(test::sys::Task::DefaultFormatAssert),
+    m_ref(this, CallClear, CallIsStop),
     m_threads{},
     m_queue{0},
     m_indexThreads{0},
@@ -1003,6 +1023,7 @@ void Runner<TStatus, TBuffer, N>::Job(test::sys::Task&& task)
     m_tasks[index]->SetBeginFormatCallback(m_beginTaskFmtCb);
     m_tasks[index]->SetEndFormatCallback(m_endTaskFmtCb);
     m_tasks[index]->SetAssertFormatCallback(m_assertTaskFmtCb);
+    m_tasks[index]->SetReference(m_ref);
     m_queueBegin = (bg + 1) % (N + 1);
     
     TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, 
@@ -1055,9 +1076,8 @@ void Runner<TStatus, TBuffer, N>::WaitAndStop()
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
     } 
-    while(m_runCount.load() != 0 || (m_idleCount.load() != 0 ? 
-        m_idleCount.load() != N : m_idleCount.load() != 0) || 
-        QueueSize() != N);
+    while((m_runCount.load() != 0 ? QueueSize() != N : false) || 
+        (m_idleCount.load() != 0 ? m_idleCount.load() != N : false));
 
     Stop();
 }

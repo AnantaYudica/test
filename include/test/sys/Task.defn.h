@@ -4,6 +4,7 @@
 #include "Definition.h"
 #include "Debug.h"
 #include "out/Interface.defn.h"
+#include "runner/Reference.h"
 
 #include <atomic>
 #include <thread>
@@ -44,6 +45,8 @@ public:
     typedef test::sys::Definition DefinitionType;
     typedef typename DefinitionType::TimestampType TimestampType;
     typedef typename DefinitionType::TimeDurationType TimeDurationType;
+    typedef test::sys::runner::Reference ReferenceType;
+    typedef void (MainFuncType)(test::sys::runner::Reference, test::sys::Task&);
 public:
     typedef int(*FormatBeginCallbackFunc)(char* buffer, 
         const std::size_t& buffer_size, Task& task);
@@ -71,7 +74,8 @@ private:
     FormatBeginCallbackFunc m_beginFmtCb;
     FormatEndCallbackFunc m_endFmtCb;
     FormatAssertCallbackFunc m_assertFmtCb;
-    std::function<void(test::sys::Task&)> m_func;
+    ReferenceType m_ref;
+    std::function<MainFuncType> m_func;
 public:
     template<std::size_t N>
     inline Task(const char(&name)[N]);
@@ -101,13 +105,15 @@ public:
 public:
     inline void Detach();
 public:
-    inline void Main(std::function<void(test::sys::Task&)> func);
+    inline void Main(std::function<MainFuncType> func);
 public:
     inline void SetBeginFormatCallback(FormatBeginCallbackFunc func);
 public:
     inline void SetEndFormatCallback(FormatEndCallbackFunc func);
 public:
     inline void SetAssertFormatCallback(FormatAssertCallbackFunc func);
+public:
+    inline void SetReference(const ReferenceType& ref);
 public:
     inline void VAssert(const bool& cond, const char* cond_str, 
         const char* file, int line, const char* format, va_list args)

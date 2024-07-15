@@ -48,6 +48,7 @@ inline Task::Task(const char(&name)[N]) :
     m_beginFmtCb(DefaultFormatBegin),
     m_endFmtCb(DefaultFormatEnd),
     m_assertFmtCb(DefaultFormatAssert),
+    m_ref(),
     m_func(nullptr)
 {
     typedef test::sys::Interface SystemType;
@@ -103,6 +104,7 @@ inline Task::Task(Task&& mov) :
     m_beginFmtCb(mov.m_beginFmtCb),
     m_endFmtCb(mov.m_endFmtCb),
     m_assertFmtCb(mov.m_assertFmtCb),
+    m_ref(std::move(mov.m_ref)),
     m_func(mov.m_func)
 {
     typedef test::sys::Interface SystemType;
@@ -150,6 +152,7 @@ inline Task& Task::operator=(Task&& mov)
     m_beginFmtCb = mov.m_beginFmtCb;
     m_endFmtCb = mov.m_endFmtCb;
     m_assertFmtCb = mov.m_assertFmtCb;
+    m_ref = std::move(mov.m_ref);
     m_func = mov.m_func;
 
     mov.m_error = false;
@@ -246,7 +249,7 @@ void Task::Run(T* obj, void(*begin_run)(T*, TArgs&&...),
         BeforeRun();
         if (begin_run != NULL && obj != NULL) 
             begin_run(obj, std::forward<TArgs>(args)...);
-        m_func(*this);
+        m_func(m_ref, *this);
         if (end_run != NULL && obj != NULL) 
             end_run(obj, std::forward<TArgs>(args)...);
         m_endTimestamp = DefinitionType::GetTimestampNow();
@@ -281,7 +284,7 @@ inline void Task::Detach()
     m_detach.store(true);
 }
 
-inline void Task::Main(std::function<void(test::sys::Task&)> func)
+inline void Task::Main(std::function<MainFuncType> func)
 {
     typedef test::sys::Interface SystemType;
     typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
@@ -347,6 +350,16 @@ inline void Task::SetAssertFormatCallback(FormatAssertCallbackFunc func)
     {
         m_assertFmtCb = func;
     }
+}
+
+inline void Task::SetReference(const ReferenceType& ref)
+{
+    typedef test::sys::Interface SystemType;
+    typedef test::sys::dbg::Type<test::sys::Task> _DebugType;
+    TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, 
+        "SetReference(ref=%p)", &ref);
+
+    m_ref = ref;
 }
 
 inline void Task::VAssert(const bool& cond, const char* cond_str,
