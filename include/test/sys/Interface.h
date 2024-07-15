@@ -13,6 +13,7 @@
 #include <cstdio>
 #include <cstdarg>
 #include <thread>
+#include <cstdlib>
 
 #if TEST_SYS_DEBUG_ENABLE
 
@@ -74,12 +75,17 @@ private:
     private:
         Interface* m_value;
         Interface* m_default;
+        int m_returnValue;
     public:
         inline Instance();
         inline ~Instance();
     public:
         inline void Set(Interface* instance);
         inline Interface* Get();
+    public:
+        inline void SetReturnValue(int val);
+        inline int GetReturnValue();
+
     };
 public:
     typedef test::sys::Signal SignalType;
@@ -92,6 +98,10 @@ private:
     static inline typename Interface::Instance& _GetInstance();
 public:
     static inline Interface& DefaultInstance();
+public:
+    static inline int ReturnValue();
+protected:
+    static inline void SetReturnValue(int val);
 protected:
     static inline bool SetInstance(Interface* intf, bool is_default = true);
 public:
@@ -193,7 +203,8 @@ public:
 
 inline Interface::Instance::Instance() :
     m_value(&Interface::DefaultInstance()),
-    m_default(&Interface::DefaultInstance())
+    m_default(&Interface::DefaultInstance()),
+    m_returnValue(EXIT_SUCCESS)
 {
     TEST_SYS_DEBUG_SYS_INSTANCE((*m_default),
         _DebugType, 1, this, 
@@ -227,6 +238,16 @@ inline Interface* Interface::Instance::Get()
     return m_value;
 }
 
+inline void Interface::Instance::SetReturnValue(int val)
+{
+    m_returnValue = val;
+}
+
+inline int Interface::Instance::GetReturnValue()
+{
+    return m_returnValue;
+}
+
 inline typename Interface::Instance& Interface::_GetInstance()
 {
     static Instance instance;
@@ -241,6 +262,16 @@ inline Interface& Interface::DefaultInstance()
         _DebugType, 1, NULL, "DefaultInstance()");
 
     return value;
+}
+
+inline int Interface::ReturnValue()
+{
+    return _GetInstance().GetReturnValue();
+}
+
+inline void Interface::SetReturnValue(int val)
+{
+    _GetInstance().SetReturnValue(val);
 }
 
 inline bool Interface::SetInstance(Interface * intf, bool is_default)
@@ -288,6 +319,17 @@ inline void Interface::RegisterTask(test::sys::Task&& task)
     TEST_SYS_DEBUG_SYS_INSTANCE(DefaultInstance(),
         _DebugType, 2, this, 
         "Instance::RegisterTask(task=%p)", &task);
+
+    static bool is_failed = false;
+    if (!is_failed)
+    {
+        task.Run();
+        if (task.IsFailed())
+        {
+            is_failed = true;
+            _GetInstance().SetReturnValue(EXIT_FAILURE);
+        }
+    }
 }
 
 inline void Interface::SetError(Status)
