@@ -1,6 +1,22 @@
 #ifndef TEST_SYSTEM_H_
 #define TEST_SYSTEM_H_
 
+#ifdef TEST_SYSTEM_DLEVEL
+#define TEST_SYS_BUFFER_DLEVEL          TEST_SYSTEM_DLEVEL
+#define TEST_SYS_DEFINITION_DLEVEL      TEST_SYSTEM_DLEVEL
+#define TEST_SYS_INTERFACE_DLEVEL       TEST_SYSTEM_DLEVEL
+#define TEST_SYS_LOG_DLEVEL             TEST_SYSTEM_DLEVEL
+#define TEST_SYS_MEMORY_DLEVEL          TEST_SYSTEM_DLEVEL
+#define TEST_SYS_RUNNER_DLEVEL          TEST_SYSTEM_DLEVEL
+#define TEST_SYS_SIGNAL_DLEVEL          TEST_SYSTEM_DLEVEL
+#define TEST_SYS_SIGNALS_DLEVEL         TEST_SYSTEM_DLEVEL
+#define TEST_SYS_STATUS_DLEVEL          TEST_SYSTEM_DLEVEL
+#define TEST_SYS_TASK_DLEVEL            TEST_SYSTEM_DLEVEL
+#define TEST_SYS_OUT_INTERFACE_DLEVEL   TEST_SYSTEM_DLEVEL
+#else
+#define TEST_SYSTEM_DLEVEL              0x2 
+#endif
+
 #include "sys/Definition.h"
 #include "sys/Signal.defn.h"
 #include "sys/Status.h"
@@ -75,7 +91,8 @@ namespace test
 class System;
 }
 
-TEST_SYS_DBG_TYPE_LEVEL_DEFINE(2, "test::System", test::System);
+TEST_SYS_DBG_TYPE_LEVEL_DEFINE(TEST_SYSTEM_DLEVEL, 
+    "test::System", test::System);
 
 namespace test
 {
@@ -542,7 +559,7 @@ inline System::~System()
 {
     TEST_SYS_DEBUG_SYS_INSTANCE((*m_interface), _DebugType, 1, this, 
         "Destructor");
-    
+
     Finalization();
     m_retValue = 0;
 }
@@ -644,7 +661,7 @@ inline void System::PrintFooter()
         TEST_SYSTEM_DEF_ENTRY_LINE_STR "\n"
         "End Timestamp : %d-%02d-%02d, %02d:%02d:%02d.%03d%03d UTC%+03d:%02d\n"
         "Duration : %d Days %02d:%02d:%02d.%03d%03d\n"
-        "Retrun Value : %d",
+        "Return Value : %d",
             dtime.Year, dtime.Month, dtime.Day, 
             dtime.Hour, dtime.Minute, dtime.Second, 
             dtime.Milisecond, dtime.Microsecond, 
@@ -1012,6 +1029,7 @@ inline int System::ReturnPoint()
         "ReturnPoint()");
     
     if (m_status.IsEnd()) return m_retValue;
+    m_runner.WaitAndStop();
     m_status.End();
 
     Finalization();
@@ -1133,7 +1151,7 @@ inline void System::WaitTaskDone()
 
 #undef TEST_SYS_DEBUG_SYS_INSTANCE
 
-#ifdef TEST_SYS_DEBUG_ENABLE
+#if TEST_SYS_DEBUG_ENABLE
 
 #define USING_TEST_SYSTEM struct _SystemGuard_ {\
     test::System& interface;\
@@ -1146,9 +1164,19 @@ inline void System::WaitTaskDone()
     }\
 }_system_guard_{test::System::GetInstance()}
 
+#define TEST_SYSTEM_ENTRY(...)\
+    test::System::GetInstance().EntryPoint(__VA_ARGS__)
+
+#define TEST_SYSTEM_RETURN(...)\
+    return test::System::GetInstance().ReturnPoint()
+
 #else
 
 #define USING_TEST_SYSTEM struct _NO_USING_TEST_SYSTEM_ {}
+
+#define TEST_SYSTEM_ENTRY(...)
+
+#define TEST_SYSTEM_RETURN(...) return test::sys::Interface::ReturnValue()
 
 #endif 
 
