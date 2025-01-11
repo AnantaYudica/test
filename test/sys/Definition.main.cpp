@@ -1,4 +1,5 @@
 #define TEST_SYS_DEBUG_ENABLE 1
+#define TEST_SYS_DEFINITION_DLEVEL 0x02
 #include "test/sys/Definition.h"
 
 #include <cstring>
@@ -71,7 +72,216 @@ int main()
         TEST_SYS_INFO("%s", cstr);
         assert(strncmp(cstr, "sUnknown", 8) == 0);
         TEST_SYS_INFO("%s", cstr);
+        
+        cstr = test::sys::Definition::GetStatusName(Status::sAllocationAgumentsFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sAllocationAgumentsFailed", 25) == 0);
+        
+        cstr = test::sys::Definition::GetStatusName(Status::sUndefined);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sUndefined", 10) == 0);
 
+        cstr = test::sys::Definition::GetStatusName(Status::sSignalsAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sSignalsAllocationFailed", 24) == 0);
+        
+        cstr = test::sys::Definition::GetStatusName(Status::sSignalsReallocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sSignalsReallocationFailed", 26) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sSignalsReallocationOverflow);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sSignalsReallocationOverflow", 28) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sSignalsReallocationOutOfMemory);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sSignalsReallocationOutOfMemory", 31) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemoryNotClearOnFinalize);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemoryNotClearOnFinalize", 25) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemroyAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemroyAllocationFailed", 23) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemroyReallocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemroyReallocationFailed", 25) == 0);
+        
+        cstr = test::sys::Definition::GetStatusName(Status::sMemRecordAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemRecordAllocationFailed", 26) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemRecordDuplicatePointer);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemRecordDuplicatePointer", 26) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemRecordPointerNotFound);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemRecordPointerNotFound", 25) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemRecordSizeOverflow);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemRecordSizeOverflow", 22) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemBlockAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemBlockAllocationFailed", 25) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemBlockReallocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemBlockReallocationFailed", 27) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemBlockReferenceCountOverflow);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemBlockReferenceCountOverflow", 31) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemPointerCastFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemPointerCastFailed", 21) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemPointerIndexOutOfBounds);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemPointerIndexOutOfBounds", 27) == 0);
+        
+        cstr = test::sys::Definition::GetStatusName(Status::sMemDummyAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemDummyAllocationFailed", 25) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sMemDummyReallocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sMemDummyReallocationFailed", 27) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sTaskFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sTaskFailed", 11) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sTaskAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sTaskAllocationFailed", 21) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sBufferAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sBufferAllocationFailed", 23) == 0);
+        
+        cstr = test::sys::Definition::GetStatusName(Status::sRunnerNullPointer);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sRunnerNullPointer", 18) == 0);
+
+        cstr = test::sys::Definition::GetStatusName(Status::sRunnerAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "sRunnerAllocationFailed", 23) == 0);
+    }
+    {
+        typedef test::sys::Definition::Status Status;
+        const char * cstr = test::sys::Definition::GetStatusTagName(Status::sOk);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[System]", 8) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sError);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[System]", 8) == 0);
+        
+        cstr = test::sys::Definition::GetStatusTagName(Status::sAllocationAgumentsFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[System]", 8) == 0);
+        
+        cstr = test::sys::Definition::GetStatusTagName(Status::sUndefined);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[System]", 8) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sSignalsAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Signals]", 14) == 0);
+        
+        cstr = test::sys::Definition::GetStatusTagName(Status::sSignalsReallocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Signals]", 14) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sSignalsReallocationOverflow);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Signals]", 14) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sSignalsReallocationOutOfMemory);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Signals]", 14) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemoryNotClearOnFinalize);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Memory]", 13) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemroyAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Memory]", 13) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemroyReallocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Memory]", 13) == 0);
+        
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemRecordAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][mem][Record]", 18) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemRecordDuplicatePointer);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][mem][Record]", 18) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemRecordPointerNotFound);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][mem][Record]", 18) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemRecordSizeOverflow);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][mem][Record]", 18) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemBlockAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][mem][Block]", 17) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemBlockReallocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][mem][Block]", 17) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemBlockReferenceCountOverflow);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][mem][Block]", 17) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemPointerCastFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][mem][Pointer]", 19) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemPointerIndexOutOfBounds);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][mem][Pointer]", 19) == 0);
+        
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemDummyAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys]][mem][Dummy]", 18) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sMemDummyReallocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys]][mem][Dummy]", 18) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sTaskFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Task]", 11) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sTaskAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Task]", 11) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sBufferAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Buffer]", 13) == 0);
+        
+        cstr = test::sys::Definition::GetStatusTagName(Status::sRunnerNullPointer);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Runner]", 13) == 0);
+
+        cstr = test::sys::Definition::GetStatusTagName(Status::sRunnerAllocationFailed);
+        TEST_SYS_INFO("%s", cstr);
+        assert(strncmp(cstr, "[sys][Runner]", 13) == 0);
     }
     return 0;
 }
