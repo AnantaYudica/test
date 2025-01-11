@@ -128,9 +128,9 @@ struct Definition
         sBuffer                             = 0x0800,
         sBufferAllocationFailed             = sBuffer | sError | 0x01,
 
-        sRunner                             = 0x1000,
+        sRunner                             = 0x0900,
         sRunnerNullPointer                  = sRunner | sError | 0x01,
-        sRunnerAllocationFailed             = sRunner | sError | 0x01,
+        sRunnerAllocationFailed             = sRunner | sError | 0x02,
 
         sUnknown                            = 0xFFFF
     };
@@ -150,7 +150,7 @@ struct Definition
         "sSignalsAllocationFailed",
         "sSignalsReallocationFailed",
         "sSignalsReallocationOverflow",
-        "sSignalsReallocationOutOfMemory"
+        "sSignalsReallocationOutOfMemory",
 
         "[sys][Memory]",
         "sMemoryNotClearOnFinalize",
@@ -168,11 +168,11 @@ struct Definition
         "sMemBlockReallocationFailed",
         "sMemBlockReferenceCountOverflow",
 
-        "[sys][mem][Pointer]"
+        "[sys][mem][Pointer]",
         "sMemPointerCastFailed",
         "sMemPointerIndexOutOfBounds",
 
-        "[sys]][mem][Dummy]"
+        "[sys]][mem][Dummy]",
         "sMemDummyAllocationFailed",
         "sMemDummyReallocationFailed",
 
@@ -196,7 +196,7 @@ struct Definition
 
     static constexpr std::uint8_t _StatusErrorNameMaxIndexs[] = 
     {
-        1, 2, 4, 3, 4, 3, 2, 2, 2, 1, 2
+        0, 1, 2, 4, 3, 4, 3, 2, 2, 2, 1, 2
     };
     static constexpr std::size_t _StatusErrorNameMaxIndexsSize = 
         sizeof(_StatusErrorNameMaxIndexs) / sizeof(std::uint8_t);

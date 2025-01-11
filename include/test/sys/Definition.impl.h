@@ -337,8 +337,12 @@ inline const char* Definition::GetStatusTagName(StatusIntegerType code)
     {
         return StatusNames<>()[1];
     }
-    const std::size_t name = SumStatusNames(tag_code);
-    return StatusNames<>()[name];
+    const std::size_t name = SumStatusNames(tag_code + 1);
+    
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+        "GetStatusTagName{name %zu tag_code %hhu str %s}", 
+        name, tag_code, StatusNames<>()[name - 1]);
+    return StatusNames<>()[name - 1];
 }
 
 inline const char* Definition::GetStatusName(Status code)
@@ -365,16 +369,26 @@ inline const char* Definition::GetStatusName(StatusIntegerType code)
     
     if (tag_code > StatusTagMax || tag_code < 0)
     {
+        TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+            "StatusNames{tag_code %hhu StatusTagMax %hu}", 
+            tag_code, StatusTagMax);
         return StatusNames<>()[2];
     }
     
-    const StatusIntegerType max = StatusErrorNameMaxIndexs<>()[tag_code];
-    if (num_code >= max || num_code == 0)
+    const StatusIntegerType max = StatusErrorNameMaxIndexs<>()[tag_code + 2];
+    if (num_code > max || num_code == 0)
     {
+        TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+            "StatusNames{tag_code %hhu max %hu num_code %hhu}", 
+            tag_code, max, num_code);
         return StatusNames<>()[2];
     }
-    const std::size_t name = SumStatusNames(tag_code);
-    return StatusNames<>()[name + num_code];
+    const std::size_t name = SumStatusNames(tag_code + 1);
+    
+    TEST_SYS_DEBUG(SystemType, DebugType, 2, NULL, 
+        "StatusNames{tag_code %hhu name %zu num_code %hhu str %s}",
+        tag_code, name, num_code, StatusNames<>()[name + num_code - 1]);
+    return StatusNames<>()[name + num_code - 1];
 }
 
 std::size_t Definition::MainThreadHID = Definition::GetMainThreadHID();
