@@ -64,7 +64,7 @@ int FormatAssert(char* buffer, const std::size_t& buffer_size,
     const char* file, const int& line, const char* variables)
 {
     return snprintf(buffer, buffer_size, "Assert Condition (%s) file %s "
-        "line %zu info %s", 
+        "line %i info %s", 
         cond_str, file, line, variables);
 }
 
@@ -332,7 +332,7 @@ int main()
         for (std::size_t i = 0; i < 10; ++i)
         {
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("test-r0-%zu", count.load());
                 count++;
                 const auto random = (std::rand() % 900) + 100;
@@ -345,7 +345,7 @@ int main()
         for (std::size_t i = 0; i < 10; ++i)
         {
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 count++;
                 const auto random = (std::rand() % 900) + 100;
                 std::this_thread::sleep_for(std::chrono::milliseconds(random));
@@ -366,7 +366,7 @@ int main()
      for (std::size_t i = 0; i < 10; ++i)
         {
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("Test check");
                 const auto random = (std::rand() % 900) + 100;
                 std::this_thread::sleep_for(std::chrono::milliseconds(random));
@@ -375,7 +375,7 @@ int main()
         }
     {
         test::sys::Task t{"test"};
-        t.Main([](test::sys::Task& task){
+        t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
             TEST_SYS_INFO("test-r0_1-0 1");
             TEST_SYS_INFO("test-r0_1-0 2");
             TEST_SYS_INFO("test-r0_1-0 3");
@@ -405,7 +405,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check~");
                 count++;
                 const auto random = (std::rand() % 900) + 100;
@@ -425,7 +425,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 count++;
                 const auto random = (std::rand() % 900) + 100;
@@ -446,7 +446,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check %zu", task.GetThreadHID());
                 const auto random = (std::rand() % 900) + 100;
                 std::this_thread::sleep_for(std::chrono::milliseconds(random));
@@ -460,7 +460,7 @@ int main()
         tobj.buff_1.Reset();
         TEST_SYS_INFO("idle %zu %zu", tobj.r1_1.IdleCount(), tobj.buff_1.Size());
         test::sys::Task t{"test"};
-        t.Main([](test::sys::Task& task){
+        t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
             TEST_SYS_INFO("check 1234");
             TEST_SYS_INFO("check 5678");
             TEST_SYS_INFO("check 9011");
@@ -515,7 +515,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 count++;
                 const auto random = (std::rand() % 900) + 100;
@@ -530,7 +530,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 count++;
                 const auto random = (std::rand() % 900) + 100;
@@ -550,7 +550,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 const auto random = (std::rand() % 900) + 100;
                 std::this_thread::sleep_for(std::chrono::milliseconds(random));
@@ -563,7 +563,7 @@ int main()
         }
         tobj.buff_2.Reset();
         test::sys::Task t{"test"};
-        t.Main([](test::sys::Task& task){
+        t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
             TEST_SYS_INFO("check 1");
             TEST_SYS_INFO("check 2");
             TEST_SYS_INFO("check 3");
@@ -636,7 +636,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 count++;
                 const auto random = (std::rand() % 900) + 100;
@@ -650,7 +650,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 count++;
                 const auto random = (std::rand() % 900) + 100;
@@ -668,7 +668,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 const auto random = (std::rand() % 900) + 100;
                 std::this_thread::sleep_for(std::chrono::milliseconds(random));
@@ -682,7 +682,7 @@ int main()
         }
         tobj.buff_4.Reset();
         test::sys::Task t{"test"};
-        t.Main([](test::sys::Task& task){
+        t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
             TEST_SYS_INFO("1234");
             TEST_SYS_INFO("5678");
             TEST_SYS_INFO("9011");
@@ -756,7 +756,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 count++;
                 const auto random = (std::rand() % 900) + 100;
@@ -774,7 +774,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 const auto random = (std::rand() % 900) + 100;
                 std::this_thread::sleep_for(std::chrono::milliseconds(random));
@@ -787,7 +787,7 @@ int main()
         }
         tobj.buff_16.Reset();
         test::sys::Task t{"test"};
-        t.Main([](test::sys::Task& task){
+        t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
             TEST_SYS_INFO("1234");
             TEST_SYS_INFO("5678");
             TEST_SYS_INFO("9011");
@@ -858,7 +858,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 count++;
                 const auto random = (std::rand() % 900) + 100;
@@ -876,7 +876,7 @@ int main()
         {
             TEST_SYS_INFO("int i %zu", i);
             test::sys::Task t{"test"};
-            t.Main([](test::sys::Task& task){
+            t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
                 TEST_SYS_INFO("check");
                 const auto random = (std::rand() % 900) + 100;
                 std::this_thread::sleep_for(std::chrono::milliseconds(random));
@@ -890,7 +890,7 @@ int main()
         }
         tobj.buff_32.Reset();
         test::sys::Task t{"test"};
-        t.Main([](test::sys::Task& task){
+        t.Main([](test::sys::runner::Reference ref, test::sys::Task& task){
             TEST_SYS_INFO("1234");
             TEST_SYS_INFO("5678");
             TEST_SYS_INFO("9011");
