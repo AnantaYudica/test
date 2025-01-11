@@ -372,6 +372,7 @@ void Runner<TStatus, TBuffer, N>::MainFunction(void* obj, std::size_t index)
             {
                 TEST_SYS_DEBUG(SystemType, _DebugType, 4, NULL, 
                     "Task(%p) Not running beacuse Runner Stop", task);
+                runner->Clean(index_0);
             }
             else 
             {    
@@ -379,7 +380,7 @@ void Runner<TStatus, TBuffer, N>::MainFunction(void* obj, std::size_t index)
                     "Runner Stop");
             }
             
-            runner->Clean(index_0);
+            
             task = NULL;
             break;
         }
