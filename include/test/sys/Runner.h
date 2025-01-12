@@ -984,15 +984,17 @@ std::size_t Runner<TStatus, TBuffer, N>::
 template<typename TStatus, typename TBuffer, std::size_t N>
 void Runner<TStatus, TBuffer, N>::Job(test::sys::Task&& task)
 {
+    TEST_SYS_DEBUG(SystemType, _DebugType, 2, this, 
+        "Job(task=%p, name=%s)", &task, task.GetName());
     if (IsStop())
     {
         TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, 
-            "Job(task=%p) Skip", &task);
+            "Job(task=%p, name=%s) Skip", &task, task.GetName());
         return;
     }
     
     TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, 
-        "Job(task=%p) Wait", &task);
+        "Job(task=%p, name=%s) Wait", &task, task.GetName());
     do
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -1002,12 +1004,12 @@ void Runner<TStatus, TBuffer, N>::Job(test::sys::Task&& task)
     if (IsStop())
     {
         TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, 
-            "Job(task=%p) Skip", &task);
+            "Job(task=%p, name=%s) Skip", &task, task.GetName());
         return;
     }
     
     TEST_SYS_DEBUG(SystemType, _DebugType, 3, this, 
-        "Job(task=%p)", &task);
+        "Job(task=%p, name=%s)", &task, task.GetName());
 
     const std::size_t bg = m_queueBegin;
     const std::size_t index = m_queue[bg];
@@ -1072,7 +1074,9 @@ void Runner<TStatus, TBuffer, N>::WaitAndStop()
         return;
     }
     
-    TEST_SYS_DEBUG(SystemType, _DebugType, 4, this, "Wait");
+    TEST_SYS_DEBUG(SystemType, _DebugType, 2, this, 
+        "Wait runCount %zu runner_queueSize %zu idleCount %zu",
+        m_runCount.load(), QueueSize(), m_idleCount.load());
     do
     {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -1080,6 +1084,7 @@ void Runner<TStatus, TBuffer, N>::WaitAndStop()
     while((m_runCount.load() != 0 ? QueueSize() != N : false) || 
         (m_idleCount.load() != 0 ? m_idleCount.load() != N : false));
 
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
     Stop();
 }
 
