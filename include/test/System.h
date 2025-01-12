@@ -2,17 +2,51 @@
 #define TEST_SYSTEM_H_
 
 #ifdef TEST_SYSTEM_DLEVEL
+
+#ifndef TEST_SYS_BUFFER_DLEVEL
 #define TEST_SYS_BUFFER_DLEVEL          TEST_SYSTEM_DLEVEL
+#endif // TEST_SYS_BUFFER_DLEVEL
+
+#ifndef TEST_SYS_DEFINITION_DLEVEL
 #define TEST_SYS_DEFINITION_DLEVEL      TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_DEFINITION_DLEVEL
+
+#ifndef TEST_SYS_INTERFACE_DLEVEL
 #define TEST_SYS_INTERFACE_DLEVEL       TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_INTERFACE_DLEVEL
+
+#ifndef TEST_SYS_LOG_DLEVEL
 #define TEST_SYS_LOG_DLEVEL             TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_LOG_DLEVEL
+
+#ifndef TEST_SYS_MEMORY_DLEVEL
 #define TEST_SYS_MEMORY_DLEVEL          TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_MEMORY_DLEVEL
+
+#ifndef TEST_SYS_RUNNER_DLEVEL
 #define TEST_SYS_RUNNER_DLEVEL          TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_RUNNER_DLEVEL
+
+#ifndef TEST_SYS_SIGNAL_DLEVEL
 #define TEST_SYS_SIGNAL_DLEVEL          TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_SIGNAL_DLEVEL
+
+#ifndef TEST_SYS_SIGNALS_DLEVEL
 #define TEST_SYS_SIGNALS_DLEVEL         TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_SIGNALS_DLEVEL
+
+#ifndef TEST_SYS_STATUS_DLEVEL
 #define TEST_SYS_STATUS_DLEVEL          TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_STATUS_DLEVEL
+
+#ifndef TEST_SYS_TASK_DLEVEL
 #define TEST_SYS_TASK_DLEVEL            TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_TASK_DLEVEL
+
+#ifndef TEST_SYS_OUT_INTERFACE_DLEVEL
 #define TEST_SYS_OUT_INTERFACE_DLEVEL   TEST_SYSTEM_DLEVEL
+#endif //!TEST_SYS_OUT_INTERFACE_DLEVEL
+
 #else
 #define TEST_SYSTEM_DLEVEL              0x2 
 #endif
@@ -181,7 +215,7 @@ private:
 private:
     static inline int TaskAssertFormat(char* buffer, 
         const std::size_t& buffer_size, TaskType& task, const char* cond_str, 
-        const char* file, const int& line, const char* variables);
+        const char* file, const int& line, const char* info);
 private:
     int m_retValue;
     int m_argSize;
@@ -528,11 +562,17 @@ inline int System::TaskEndFormat(char* buffer,
 
 inline int System::TaskAssertFormat(char* buffer, 
     const std::size_t& buffer_size, TaskType& task, const char* cond_str, 
-    const char* file, const int& line, const char* variables)
+    const char* file, const int& line, const char* info)
 {
+    if (info != NULL && info[0] != '\0')
+    {
+        return snprintf(buffer, buffer_size, 
+            "Assertion \"%s\" failed: file %s, line %i, info %s",
+            cond_str, file, line, info);
+    }
     return snprintf(buffer, buffer_size, 
-        "Assertion \"%s\" failed: file %s, line %i, info %s",
-        cond_str, file, line, variables);
+        "Assertion \"%s\" failed: file %s, line %i",
+        cond_str, file, line);
 }
 
 inline System::System() :
